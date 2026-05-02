@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2 Materials | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --marrom:     #967E63;
+      --texto:      #3C3C21;
+
+      /* category accent colors */
+      --cat-gram:   #265B8B;   /* Aspectos Gramaticais   — cobalto  */
+      --cat-func:   #4E551D;   /* Funções Comunicativas  — floresta  */
+      --cat-tema:   #D36D29;   /* Temas e Tópicos        — pitomba   */
+      --cat-gen:    #967E63;   /* Gêneros Textuais       — marrom    */
+      --cat-cult:   #A6B28A;   /* Aspectos Culturais     — erva-doce */
+      --cat-fon:    #FFB94A;   /* Aspectos Fonológicos   — ouro      */
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--cobalto);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── PASSWORD GATE ── */
+    #gate {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--baunilha);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .gate-box {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 20px;
+      padding: 48px 44px;
+      width: 100%; max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(38,91,139,0.10);
+    }
+    .gate-logo img { height: 34px; margin: 0 auto 28px; }
+    .gate-level {
+      display: inline-block;
+      background: var(--cobalto);
+      color: white;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .gate-box h2 { font-size: 24px; color: var(--cobalto); margin-bottom: 6px; }
+    .gate-sub { font-size: 13px; color: #999; margin-bottom: 28px; }
+    .gate-error {
+      display: none; font-size: 12px; color: var(--pitomba);
+      background: #fff0ed; border: 1px solid #f5c0b0;
+      border-radius: 8px; padding: 8px 12px; margin-bottom: 12px;
+    }
+    .gate-input {
+      width: 100%; border: 1.5px solid var(--light-gray); border-radius: 10px;
+      padding: 13px 16px; font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--nanquim); text-align: center;
+      letter-spacing: 0.08em; outline: none; margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .gate-input:focus { border-color: var(--cobalto); }
+    .gate-btn {
+      width: 100%; background: var(--pitomba); color: white; border: none;
+      border-radius: 10px; padding: 14px; font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+    }
+    .gate-btn:hover { opacity: 0.88; }
+    .gate-back { display: block; margin-top: 18px; font-size: 12px; color: #aaa; transition: color 0.2s; }
+    .gate-back:hover { color: var(--cobalto); }
+
+    /* ── MAIN CONTENT ── */
+    #content { display: none; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      background: var(--baunilha);
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-logo img { height: 30px; }
+    .topbar-right { display: flex; align-items: center; gap: 20px; }
+    .topbar-level {
+      background: var(--cobalto); color: white;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      padding: 4px 12px; border-radius: 20px;
+    }
+    .topbar-back { font-size: 12px; color: #aaa; transition: color 0.2s; }
+    .topbar-back:hover { color: var(--cobalto); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--cobalto);
+      padding: 52px 48px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba));
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--erva-doce); margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: white; margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 15px; color: rgba(255,255,255,0.70);
+      max-width: 560px; line-height: 1.7; margin-bottom: 28px;
+    }
+    .hero-stats {
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .hero-stat .num {
+      font-family: 'Trirong', serif; font-size: 28px; font-weight: 300;
+      color: var(--ouro); line-height: 1;
+    }
+    .hero-stat .label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: rgba(255,255,255,0.50); margin-top: 3px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: white;
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 48px;
+      display: flex; align-items: center; gap: 6px;
+      overflow-x: auto;
+    }
+    .filter-btn {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 14px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px; font-weight: 500;
+      color: #888; background: transparent; border: none;
+      border-bottom: 2.5px solid transparent;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { color: var(--cobalto); }
+    .filter-btn.active { color: var(--cobalto); border-bottom-color: var(--cobalto); font-weight: 700; }
+    .filter-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .filter-count {
+      font-size: 11px; font-weight: 700; color: inherit;
+      background: var(--light-gray); border-radius: 10px;
+      padding: 1px 7px;
+    }
+    .filter-btn.active .filter-count { background: var(--cobalto); color: white; }
+
+    /* ── MAIN CONTENT AREA ── */
+    .main { padding: 48px 48px 80px; }
+
+    /* ── SECTION ── */
+    .cat-section { margin-bottom: 48px; }
+
+    .cat-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 1.5px solid var(--light-gray);
+    }
+    .cat-dot {
+      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+    }
+    .cat-header h2 { font-size: 18px; }
+    .cat-header .cat-desc {
+      font-size: 13px; color: #999; margin-top: 2px;
+      font-family: 'Manrope', sans-serif; font-weight: 400;
+    }
+    .cat-count {
+      margin-left: auto;
+      font-size: 12px; font-weight: 700; color: #aaa;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    /* ── MATERIAL CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .mat-card {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex; flex-direction: column;
+      gap: 14px;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
+      text-decoration: none; color: inherit;
+    }
+    .mat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(38,91,139,0.10);
+      border-color: var(--cobalto);
+    }
+
+    .mat-card-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+    }
+
+    .mat-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+
+    .mat-card h3 {
+      font-family: 'Trirong', serif;
+      font-size: 17px; font-weight: 400;
+      color: var(--cobalto); line-height: 1.3;
+      flex: 1;
+    }
+
+    .mat-card p {
+      font-size: 13px; color: #777; line-height: 1.55;
+    }
+
+    .mat-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .tag-gram  { background: rgba(38,91,139,0.10);  color: var(--cat-gram); }
+    .tag-func  { background: rgba(78,85,29,0.10);   color: var(--cat-func); }
+    .tag-tema  { background: rgba(211,109,41,0.10); color: var(--cat-tema); }
+    .tag-gen   { background: rgba(150,126,99,0.12); color: var(--cat-gen);  }
+    .tag-cult  { background: rgba(166,178,138,0.18);color: var(--cat-cult); }
+    .tag-fon   { background: rgba(255,185,74,0.18); color: #9A6F00; }
+
+    .mat-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto; padding-top: 12px;
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .mat-date { font-size: 11px; color: #bbb; }
+
+    .mat-btn {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 700;
+      background: var(--pitomba); color: white;
+      border: none; border-radius: 8px;
+      padding: 7px 16px; cursor: pointer;
+      transition: opacity 0.2s; text-decoration: none;
+    }
+    .mat-btn:hover { opacity: 0.85; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      background: var(--off-white);
+      border: 1.5px dashed var(--light-gray);
+      border-radius: 14px;
+      padding: 32px 24px;
+      text-align: center;
+      color: #bbb;
+    }
+    .empty-state p { font-size: 13px; }
+    .empty-state .coming { font-size: 12px; margin-top: 6px; font-style: italic; }
+
+    /* ── HIDDEN categories ── */
+    .cat-section.hidden { display: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .filter-bar { padding: 0 20px; }
+      .hero-stats { gap: 20px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB">
+    </div>
+    <div class="gate-level">B2 — Intermediário II</div>
+    <h2>Student Materials</h2>
+    <p class="gate-sub">Enter your password to access your materials</p>
+    <p id="gate-error" class="gate-error">Incorrect password. Please try again.</p>
+    <input class="gate-input" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
+    <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
+    <a href="../index.html" class="gate-back">← Back to portal</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:30px;">
+    </a>
+    <div class="topbar-right">
+      <span class="topbar-level">B2 — Intermediário II</span>
+      <a href="../index.html" class="topbar-back">← Portal</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Materials Portal — Nível B2</div>
+    <h1>Intermediário II</h1>
+    <p>Your complete library of B2 materials, organized by communicative function and grammatical inventory — following the Itamaraty/FUNAG curriculum framework.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num" id="stat-total">2</div>
+        <div class="label">Materials available</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">6</div>
+        <div class="label">Curriculum categories</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">B2</div>
+        <div class="label">Your level</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCat('all', this)">
+      <span class="filter-dot" style="background:#265B8B;"></span>
+      All materials
+      <span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('gram', this)">
+      <span class="filter-dot" style="background:var(--cat-gram);"></span>
+      Aspectos Gramaticais
+      <span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('func', this)">
+      <span class="filter-dot" style="background:var(--cat-func);"></span>
+      Funções Comunicativas
+      <span class="filter-count">0</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('tema', this)">
+      <span class="filter-dot" style="background:var(--cat-tema);"></span>
+      Temas e Tópicos
+      <span class="filter-count">0</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('gen', this)">
+      <span class="filter-dot" style="background:var(--cat-gen);"></span>
+      Gêneros Textuais
+      <span class="filter-count">0</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('cult', this)">
+      <span class="filter-dot" style="background:var(--cat-cult);"></span>
+      Aspectos Culturais
+      <span class="filter-count">0</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('fon', this)">
+      <span class="filter-dot" style="background:var(--cat-fon);"></span>
+      Aspectos Fonológicos
+      <span class="filter-count">0</span>
+    </button>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- ── ASPECTOS GRAMATICAIS ── -->
+    <div class="cat-section" data-cat="gram" id="sec-gram">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-gram);"></div>
+        <div>
+          <h2>Aspectos Gramaticais</h2>
+          <div class="cat-desc">Inventário gramatical — categorias semântico-gramaticais da língua-alvo</div>
+        </div>
+        <span class="cat-count">2 materiais</span>
+      </div>
+      <div class="cards-grid">
+
+        <!-- Card 1: Pretérito Perfeito vs. Imperfeito -->
+        <a class="mat-card" href="../exercicios/fim-de-semana-passado.html">
+          <div class="mat-card-top">
+            <div class="mat-icon" style="background:rgba(38,91,139,0.10);">📅</div>
+            <h3>Pretérito Perfeito vs. Imperfeito</h3>
+          </div>
+          <p>Practice distinguishing completed actions (perfeito) from ongoing or habitual past actions (imperfeito) through a real dialogue.</p>
+          <div class="mat-tags">
+            <span class="tag tag-gram">Aspectos perfeito e imperfeito</span>
+            <span class="tag tag-func">Relatar episódio</span>
+            <span class="tag tag-tema">Lazer e diversão</span>
+            <span class="tag tag-gen">Diálogo</span>
+          </div>
+          <div class="mat-footer">
+            <span class="mat-date">Added Apr 2026</span>
+            <span class="mat-btn">Open exercise →</span>
+          </div>
+        </a>
+
+        <!-- Card 2: Expressões com fazer -->
+        <a class="mat-card" href="../exercicios/expressoes-fazer.html">
+          <div class="mat-card-top">
+            <div class="mat-icon" style="background:rgba(38,91,139,0.10);">🔧</div>
+            <h3>Expressões com o verbo <em>fazer</em></h3>
+          </div>
+          <p>Learn five key idiomatic expressions with <em>fazer</em> — fazer falta, fazer questão, fazer as pazes, fazer diferença, fazer sentido — in a professional context.</p>
+          <div class="mat-tags">
+            <span class="tag tag-gram">Verbos locucionais</span>
+            <span class="tag tag-func">Discussão e exposição</span>
+            <span class="tag tag-tema">Trabalho e tecnologia</span>
+            <span class="tag tag-gen">Crônica adaptada</span>
+          </div>
+          <div class="mat-footer">
+            <span class="mat-date">Added Apr 2026</span>
+            <span class="mat-btn">Open exercise →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ── FUNÇÕES COMUNICATIVAS ── -->
+    <div class="cat-section hidden" data-cat="func" id="sec-func">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-func);"></div>
+        <div>
+          <h2>Funções Comunicativas</h2>
+          <div class="cat-desc">6 categorias: juízo/avaliação, persuasão, discussão, pensamento racional, emoções, socialização</div>
+        </div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state">
+        <p>No materials yet in this category.</p>
+        <p class="coming">Materials will appear here as they are added.</p>
+      </div>
+    </div>
+
+    <!-- ── TEMAS E TÓPICOS ── -->
+    <div class="cat-section hidden" data-cat="tema" id="sec-tema">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-tema);"></div>
+        <div>
+          <h2>Temas e Tópicos</h2>
+          <div class="cat-desc">14 temas: identificação pessoal, casa, lazer, viagens, saúde, educação, compras, comunicação digital…</div>
+        </div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state">
+        <p>No materials yet in this category.</p>
+        <p class="coming">Materials will appear here as they are added.</p>
+      </div>
+    </div>
+
+    <!-- ── GÊNEROS TEXTUAIS ── -->
+    <div class="cat-section hidden" data-cat="gen" id="sec-gen">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-gen);"></div>
+        <div>
+          <h2>Gêneros Textuais</h2>
+          <div class="cat-desc">Crônica, e-mail, WhatsApp, convite, cardápio, notícia, redação, entrevista…</div>
+        </div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state">
+        <p>No materials yet in this category.</p>
+        <p class="coming">Materials will appear here as they are added.</p>
+      </div>
+    </div>
+
+    <!-- ── ASPECTOS CULTURAIS ── -->
+    <div class="cat-section hidden" data-cat="cult" id="sec-cult">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-cult);"></div>
+        <div>
+          <h2>Aspectos Culturais</h2>
+          <div class="cat-desc">Sistema de tratamento, valores, alimentação, habitação, cultura e produção artística…</div>
+        </div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state">
+        <p>No materials yet in this category.</p>
+        <p class="coming">Materials will appear here as they are added.</p>
+      </div>
+    </div>
+
+    <!-- ── ASPECTOS FONOLÓGICOS ── -->
+    <div class="cat-section hidden" data-cat="fon" id="sec-fon">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-fon);"></div>
+        <div>
+          <h2>Aspectos Fonológicos</h2>
+          <div class="cat-desc">Acentuação, fonemas vocálicos e consonantais, nasalização, efeito africado…</div>
+        </div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state">
+        <p>No materials yet in this category.</p>
+        <p class="coming">Materials will appear here as they are added.</p>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /content -->
+
+<script>
+  /* ── VALID PASSWORDS for B2 ── */
+  const B2_PASSWORDS = ["marta2026"];
+  // Add new B2 student passwords here as needed
+
+  function unlock() {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    // Clean the hash from the URL without reloading
+    history.replaceState(null, '', window.location.pathname);
+  }
+
+  function checkGate() {
+    const val = document.getElementById("gate-pass").value.trim();
+    if (B2_PASSWORDS.includes(val)) {
+      unlock();
+    } else {
+      document.getElementById("gate-error").style.display = "block";
+      document.getElementById("gate-pass").value = "";
+      document.getElementById("gate-pass").focus();
+    }
+  }
+
+  document.getElementById("gate-pass").addEventListener("keydown", e => {
+    if (e.key === "Enter") checkGate();
+  });
+
+  // Auto-unlock if password came in from the main portal via URL hash
+  (function() {
+    const hash = window.location.hash.slice(1);
+    if (hash && B2_PASSWORDS.includes(hash)) unlock();
+  })();
+
+  /* ── FILTER ── */
+  function filterCat(cat, btn) {
+    // update active button
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // show/hide sections
+    document.querySelectorAll('.cat-section').forEach(sec => {
+      if (cat === 'all') {
+        sec.classList.remove('hidden');
+      } else {
+        if (sec.dataset.cat === cat) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>

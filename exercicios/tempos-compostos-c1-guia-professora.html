@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempos Compostos C1 — Guia da Professora | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --teacher-bg: #F0EBF8; --teacher-accent: #6D43A6;
+      --answer-green: #2E7D52; --answer-bg: #EAF5EE;
+      --g-a: #2E7D52; --g-a-bg: #EAF5EE;
+      --g-b: #265B8B; --g-b-bg: #EBF1F8;
+      --g-c: #8B3A7E; --g-c-bg: #F5EAF3;
+      --g-d: #B8860B; --g-d-bg: #FFF8EC;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--nanquim); color: white; }
+    .badge-teacher { background: var(--teacher-bg); color: var(--teacher-accent); }
+
+    .hero { background: linear-gradient(135deg, #12102a 0%, #1a2030 100%); padding: 48px 40px 44px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(24px, 4vw, 40px); color: #fff; margin-bottom: 10px; }
+    .hero h1 span { color: #b89ed6; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.65; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: #b89ed6; font-weight: 600; }
+
+    .main { max-width: 920px; padding: 48px 40px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; }
+
+    /* OVERVIEW */
+    .overview-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; margin-bottom: 32px; }
+    .overview-box h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 16px; }
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ov-item { font-size: 14px; }
+    .ov-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 4px; }
+    .ov-val { color: var(--nanquim); line-height: 1.55; }
+    .ov-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .ov-chip { border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; color: white; }
+    .ov-chip.ga { background: var(--g-a); }
+    .ov-chip.gb { background: var(--g-b); }
+    .ov-chip.gc { background: var(--g-c); }
+    .ov-chip.gd { background: var(--g-d); }
+
+    /* EXERCISE BLOCK */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-block h2 { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-meta { font-size: 13px; color: #999; margin-bottom: 20px; }
+
+    /* ANSWER TABLE */
+    .answer-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .answer-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    .answer-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); font-size: 14px; vertical-align: top; }
+    .answer-table tr:last-child td { border-bottom: none; }
+    .num { color: #bbb; font-weight: 700; font-size: 13px; min-width: 28px; }
+    .answer-key { color: var(--answer-green); font-weight: 700; }
+    .answer-note { color: #777; font-size: 13px; line-height: 1.5; }
+
+    /* PILLS */
+    .pill { display: inline-block; font-size: 11px; font-weight: 700; color: white; padding: 2px 8px; border-radius: 4px; }
+    .pill.ga { background: var(--g-a); }
+    .pill.gb { background: var(--g-b); }
+    .pill.gc { background: var(--g-c); }
+    .pill.gd { background: var(--g-d); }
+    .ans-pill { display: inline-block; background: var(--answer-bg); color: var(--answer-green); font-weight: 700; border-radius: 6px; padding: 1px 8px; font-size: 13px; }
+
+    /* TEACHER NOTE */
+    .t-note { background: var(--teacher-bg); border-left: 4px solid var(--teacher-accent); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .t-note .t-note-title { font-weight: 700; color: var(--teacher-accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* ALERT */
+    .alert-box { background: #fff8ec; border-left: 4px solid var(--ouro); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .alert-box .alert-title { font-weight: 700; color: #b8860b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* PHONOLOGY */
+    .phono-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .phono-box .phono-title { font-weight: 700; color: var(--cobalto); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* TRANSFORMATION ANSWER */
+    .transf-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .transf-item:last-child { border-bottom: none; }
+    .transf-prompt { font-size: 14px; color: #888; font-style: italic; margin-bottom: 6px; }
+    .transf-answer { font-size: 14px; color: var(--answer-green); font-weight: 700; line-height: 1.65; margin-bottom: 4px; }
+    .transf-note { font-size: 13px; color: #777; line-height: 1.5; }
+
+    /* CONTRAST ANSWER */
+    .contrast-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .contrast-item:last-child { border-bottom: none; }
+    .contrast-pair-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+    .contrast-mini { background: var(--off-white); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--nanquim); line-height: 1.5; }
+
+    /* PRODUCTION GUIDANCE */
+    .prod-block { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; font-size: 14px; }
+    .prod-note { font-size: 13px; color: #777; line-height: 1.55; margin-top: 6px; }
+
+    /* SPANISH TABLE */
+    .es-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
+    .es-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #aaa; padding: 7px 10px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    .es-table td { padding: 9px 10px; border-bottom: 1px solid var(--light-gray); font-size: 13px; vertical-align: top; line-height: 1.55; color: var(--nanquim); }
+    .es-table tr:last-child td { border-bottom: none; }
+
+    hr { border: none; border-top: 1px solid var(--light-gray); margin: 36px 0; }
+
+    @media (max-width: 680px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block { padding: 22px 18px; }
+      .overview-grid, .contrast-pair-mini { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-teacher">🔒 Guia da Professora</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Guia da Professora — Nível C1</div>
+  <h1>Tempos Compostos: <span>Visão Sistêmica</span></h1>
+  <div class="hero-sub">Gabarito completo dos 5 exercícios, notas pedagógicas para C1, interferência do espanhol, ponto fonológico e sugestões para aula online.</div>
+  <div class="hero-note">🔒 Uso exclusivo da professora</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="sec-label">Visão Geral</div>
+  <div class="overview-box">
+    <h2>Perfil do Material</h2>
+    <div class="overview-grid">
+      <div class="ov-item">
+        <div class="ov-label">Nível</div>
+        <div class="ov-val">C1 — Avançado</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Perfil do aluno</div>
+        <div class="ov-val">Falante nativo de espanhol, inglês como L2, perfil business/tech-academia</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Foco</div>
+        <div class="ov-val">Domínio e contraste dos 7 tempos compostos em contextos profissionais autênticos</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Texto base</div>
+        <div class="ov-val"><em>"O erro certo"</em> — perfil jornalístico de empreendedor/professor. Elaborado para fins didáticos.</div>
+      </div>
+      <div class="ov-item" style="grid-column:1/-1;">
+        <div class="ov-label">Os 7 tempos compostos</div>
+        <div class="ov-chips">
+          <span class="ov-chip ga">I1 tem feito</span>
+          <span class="ov-chip ga">I2 tinha feito</span>
+          <span class="ov-chip gb">I3 terá feito</span>
+          <span class="ov-chip gb">I4 teria feito</span>
+          <span class="ov-chip gc">S1 tenha feito</span>
+          <span class="ov-chip gc">S2 tivesse feito</span>
+          <span class="ov-chip gd">S3 tiver feito</span>
+        </div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Ponto crítico C1</div>
+        <div class="ov-val">Distinção S1 vs. S2 (tenha feito / tivesse feito) e uso do I1 em BP vs. espanhol</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Duração sugerida</div>
+        <div class="ov-val">75–90 minutos (material extenso — pode ser dividido em 2 sessões)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 1: GAP FILL -->
+  <div class="sec-label">Exercício 1 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Gap Fill — Context-Driven</h2>
+    <div class="ex-meta">Tarefa: Completar o espaço em branco com a forma composta correta do verbo dado entre parênteses, escolhendo o tempo com base exclusivamente no contexto.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>Verbo</th><th>Forma correta</th><th>Tempo</th><th>Raciocínio e nota</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td>expandir</td>
+          <td><span class="ans-pill">tem expandido</span></td>
+          <td><span class="pill ga">I1</span></td>
+          <td class="answer-note">Marcador <em>"nos últimos dois anos"</em> + ação repetida/contínua até o presente = I1 (Pretérito Perfeito Composto do Indicativo). Clássico gatilho. Sujeito = <em>a empresa</em> → 3ª sg. → <em>tem</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">2a</td>
+          <td>investir</td>
+          <td><span class="ans-pill">tivessem investido</span></td>
+          <td><span class="pill gc">S2</span></td>
+          <td class="answer-note">Condição introduzida por <em>"se"</em> + hipótese irreal sobre o passado = S2 (Pretérito Mais-que-Perfeito do Subjuntivo). Sujeito implícito = <em>eles</em> → 3ª pl. → <em>tivessem</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">2b</td>
+          <td>falhar</td>
+          <td><span class="ans-pill">teria falhado</span></td>
+          <td><span class="pill gb">I4</span></td>
+          <td class="answer-note">Resultado da condição irreal = I4 (Futuro do Pretérito Composto). O par S2 + I4 é o par contrafactual fundamental do C1. Ambas as formas precisam estar corretas. Sujeito = <em>o produto</em> → 3ª sg. → <em>teria</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td>validar</td>
+          <td><span class="ans-pill">tiver validado</span></td>
+          <td><span class="pill gd">S3</span></td>
+          <td class="answer-note">Oração temporal com <em>"quando"</em> + ação que precisa estar concluída antes de evento futuro = S3 (Futuro Composto do Subjuntivo). Voz ativa: a diretoria valida. Sujeito = <em>a diretoria</em> → 3ª sg. → <em>tiver</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td>concluir</td>
+          <td><span class="ans-pill">tenha concluído</span></td>
+          <td><span class="pill gc">S1</span></td>
+          <td class="answer-note">Gatilho <em>"duvido que"</em> = verbo de avaliação com incerteza sobre resultado de ação recente = S1 (Pretérito Perfeito Composto do Subjuntivo). Atenção ao particípio irregular de <em>concluir</em>: <em>concluído</em> (com acento). Sujeito = <em>a equipe</em> → 3ª sg. → <em>tenha</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td>chegar</td>
+          <td><span class="ans-pill">tinham chegado</span></td>
+          <td><span class="pill ga">I2</span></td>
+          <td class="answer-note">Oração temporal com <em>"quando"</em> + ação anterior a evento passado = I2 (Pretérito Mais-que-Perfeito Composto do Indicativo). Estrutura clássica: <em>quando + PPS…, já + mais-que-perfeito.</em> Sujeito = <em>os outros participantes</em> → 3ª pl. → <em>tinham</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td>anunciar</td>
+          <td><span class="ans-pill">terá anunciado</span></td>
+          <td><span class="pill gb">I3</span></td>
+          <td class="answer-note">Marcador temporal <em>"até o final do trimestre"</em> = prazo futuro + ação concluída antes dele = I3 (Futuro do Presente Composto). Sujeito = <em>o CEO</em> → 3ª sg. → <em>terá</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td>contratar</td>
+          <td><span class="ans-pill">tem contratado</span></td>
+          <td><span class="pill ga">I1</span></td>
+          <td class="answer-note">Ação repetida e contínua sem marcador temporal explícito; o contexto implica padrão habitual recente = I1. Exercitar este item sem gatilho adverbial é intencional: o aluno C1 deve reconhecer I1 pelo contexto semântico, não por palavras-chave. Sujeito = <em>a startup</em> → 3ª sg. → <em>tem</em>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Item 2 — par S2 + I4</div>
+      Se o aluno acertar apenas uma das duas formas, explore: o período hipotético contrafactual em português exige S2 na oração condicional E I4 na principal — ambos os tempos compostos. Em espanhol, a estrutura é similar (<em>hubieran invertido / habría fallado</em>), então o aluno hispanófono pode reconhecer o padrão mas precisa dominar a conjugação de TER.
+    </div>
+
+    <div class="t-note" style="margin-top:12px;">
+      <div class="t-note-title">💡 Item 4 — particípio de concluir</div>
+      <em>Concluído</em> leva acento por ser uma palavra com hiato tônico (co-nclú-í-do). Falantes de espanhol frequentemente escrevem <em>concluido</em> sem acento, por analogia com o espanhol. Vale reforçar: em PB, todos os particípios de verbos em <em>-uir</em> levam acento na terminação: <em>distribuído, incluído, excluído</em>.
+    </div>
+  </div>
+
+  <!-- EX 2: GAP FILL -->
+  <div class="sec-label">Exercício 2 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Gap Fill — Choose the Tense and Conjugate</h2>
+    <div class="ex-meta">Tarefa: Escolher o tempo composto correto e conjugar o verbo dado entre parênteses.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>Verbo</th><th>Resposta</th><th>Tense</th><th>Raciocínio</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td>publicar</td>
+          <td><span class="ans-pill">tem publicado</span></td>
+          <td><span class="pill ga">I1</span></td>
+          <td class="answer-note">Ação repetida, contínua ("todos os anos"). Sujeito = <em>o professor</em> → 3ª pessoa sg. → <em>tem</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td>aprovar</td>
+          <td><span class="ans-pill">tiver sido aprovada</span> <em>ou</em> <span class="ans-pill">tiver aprovado</span></td>
+          <td><span class="pill gd">S3</span></td>
+          <td class="answer-note">Oração temporal futura (<em>"quando"</em>). Aceitar as duas formas: passiva (<em>tiver sido aprovada</em>) é mais natural no contexto; ativa (<em>tiver aprovado</em> — sujeito implícito "eles/a banca") também é válida. Elogiar se o aluno usar a passiva — é mais sofisticado.</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td>treinar</td>
+          <td><span class="ans-pill">tinha treinado</span></td>
+          <td><span class="pill ga">I2</span></td>
+          <td class="answer-note">Evento anterior ao momento de saída da empresa (evento passado). Estrutura: <em>antes de + evento passado = tinha + particípio</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td>resolver</td>
+          <td><span class="ans-pill">tenham resolvido</span></td>
+          <td><span class="pill gc">S1</span></td>
+          <td class="answer-note">Gatilho <em>"tomara que"</em> = esperança sobre ação recente = S1. Sujeito = <em>eles</em> → <em>tenham</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td>evitar</td>
+          <td><span class="ans-pill">teria evitado</span></td>
+          <td><span class="pill gb">I4</span></td>
+          <td class="answer-note">Condição implícita (<em>"com um mentor mais experiente"</em>) + resultado hipotético = I4. Particípio regular.</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td>transformar</td>
+          <td><span class="ans-pill">terá transformado</span></td>
+          <td><span class="pill gb">I3</span></td>
+          <td class="answer-note">Marcador <em>"daqui a cinco anos"</em> = prazo futuro concreto. Sujeito = <em>a inteligência artificial</em> → <em>terá</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td>ouvir</td>
+          <td><span class="ans-pill">tivesse ouvido</span></td>
+          <td><span class="pill gc">S2</span></td>
+          <td class="answer-note">Condição irreal no passado: contexto diz que o lançamento <em>fracassou</em>, logo a condição não foi cumprida. Gatilho <em>"se"</em> + S2.</td>
+        </tr>
+        <tr>
+          <td class="num">8</td>
+          <td>sobreviver</td>
+          <td><span class="ans-pill">tenha sobrevivido</span></td>
+          <td><span class="pill gc">S1</span></td>
+          <td class="answer-note">Gatilho <em>"é surpreendente que"</em> = expressão de emoção + fato recente possível = S1. Sujeito = <em>a empresa</em> → <em>tenha</em>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box">
+      <div class="alert-title">⚠️ Item 2 — voz passiva vs. ativa</div>
+      O aluno pode escrever <em>"tiver aprovado"</em> (com sujeito implícito = a diretoria / eles) ou <em>"tiver sido aprovada"</em> (passiva, proposta como sujeito). Ambas são aceitas. Se usar a passiva, é mais natural em BP formal: <em>"Quando a proposta tiver sido aprovada…"</em> é o que se ouvirá numa reunião de negócios. Explore a diferença em sala.
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Gatilhos: mapeamento rápido para o aluno</div>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;">
+        <tr style="border-bottom:1px solid var(--light-gray);"><td style="padding:6px 8px;font-weight:700;color:var(--g-a);">I1</td><td style="padding:6px 8px;color:#555;">ultimamente, nos últimos X meses/anos, sempre, frequentemente</td></tr>
+        <tr style="border-bottom:1px solid var(--light-gray);"><td style="padding:6px 8px;font-weight:700;color:var(--g-a);">I2</td><td style="padding:6px 8px;color:#555;">quando + pretérito perfeito, antes de, depois que, já (evento passado de referência)</td></tr>
+        <tr style="border-bottom:1px solid var(--light-gray);"><td style="padding:6px 8px;font-weight:700;color:var(--g-b);">I3</td><td style="padding:6px 8px;color:#555;">até + data, daqui a X anos, quando + futuro (prazo concreto)</td></tr>
+        <tr style="border-bottom:1px solid var(--light-gray);"><td style="padding:6px 8px;font-weight:700;color:var(--g-b);">I4</td><td style="padding:6px 8px;color:#555;">se tivesse, sem, com mais, caso + tivesse (resultado hipotético)</td></tr>
+        <tr style="border-bottom:1px solid var(--light-gray);"><td style="padding:6px 8px;font-weight:700;color:var(--g-c);">S1</td><td style="padding:6px 8px;color:#555;">espero que, duvido que, é possível que, tomara que, é surpreendente que</td></tr>
+        <tr style="border-bottom:1px solid var(--light-gray);"><td style="padding:6px 8px;font-weight:700;color:var(--g-c);">S2</td><td style="padding:6px 8px;color:#555;">se (condição irreal passada), mesmo que, como se, ainda que + passado</td></tr>
+        <tr><td style="padding:6px 8px;font-weight:700;color:var(--g-d);">S3</td><td style="padding:6px 8px;color:#555;">quando, assim que, depois que, assim que, logo que + evento futuro concluído</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- EX 3: TRANSFORMATION -->
+  <div class="sec-label">Exercício 3 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Sentence Transformation</h2>
+    <div class="ex-meta">Exercício aberto — avalie coerência gramatical e semântica, não apenas a forma. Abaixo, respostas-modelo com variantes aceitas.</div>
+
+    <div class="transf-item">
+      <div class="transf-prompt">1. <span class="pill gd">S3</span> — "Assim que o sistema fica disponível, enviamos o link."</div>
+      <div class="transf-answer">✓ Assim que o sistema tiver ficado disponível, enviaremos / vamos enviar o link para todos os usuários.</div>
+      <div class="transf-note"><strong>Ponto central:</strong> "ficar disponível" → futuro subj. composto = <em>tiver ficado</em>. A oração principal deve estar no futuro (<em>enviaremos</em> ou <em>vamos enviar</em>) — erro comum: deixar o presente (<em>enviamos</em>). Aceitar também: <em>"Assim que o sistema tiver ficado disponível, mandamos o link"</em> (presente com valor de futuro em registros mais informais).</div>
+    </div>
+
+    <div class="transf-item">
+      <div class="transf-prompt">2. <span class="pill gc">S2</span> + <span class="pill gb">I4</span> — "Ele não pediu ajuda e não terminou o projeto."</div>
+      <div class="transf-answer">✓ Se ele tivesse pedido ajuda, teria terminado o projeto.<br>✓ Caso ele tivesse pedido ajuda, teria conseguido terminar / teria completado o projeto.</div>
+      <div class="transf-note"><strong>Ponto central:</strong> par contrafactual clássico. O aluno precisa transformar dois eventos reais negativos em condição irreal (S2) + resultado hipotético positivo (I4). Aceitar variações do verbo principal (<em>terminar, completar, concluir</em>). Verificar: <em>tivesse pedido</em> (não <em>teria pedido</em>) na prótase.</div>
+    </div>
+
+    <div class="transf-item">
+      <div class="transf-prompt">3. <span class="pill ga">I2</span> — "A empresa lançou o produto. Depois, a concorrência respondeu."</div>
+      <div class="transf-answer">✓ Quando a concorrência respondeu, a empresa já tinha lançado o produto.</div>
+      <div class="transf-note"><strong>Ponto central:</strong> sequência temporal passada — lançamento anterior à resposta da concorrência. Estrutura: <em>quando + pretérito perfeito… + já tinha + particípio</em>. O "já" é opcional mas natural. Aceitar também: <em>"Antes de a concorrência responder, a empresa já tinha lançado o produto."</em></div>
+    </div>
+
+    <div class="transf-item">
+      <div class="transf-prompt">4. <span class="pill gc">S1</span> — "Não sei se a cliente recebeu a proposta."</div>
+      <div class="transf-answer">✓ Não tenho certeza se a cliente tenha recebido a proposta.<br>✓ Duvido que ela já tenha recebido a proposta.<br>✓ É possível que ela tenha recebido, mas não confirmou.</div>
+      <div class="transf-note"><strong>Ponto central:</strong> reformular incerteza usando gatilho de S1. <em>"Não sei se"</em> pode ser mantido (o subjuntivo com "se" em contexto de incerteza é avançado e válido). Aceitar qualquer verbo de avaliação/emoção como gatilho. Se o aluno escrever <em>"se ela tivesse recebido"</em>, discuta: isso implica que ela definitivamente não recebeu — mudança de sentido.</div>
+    </div>
+
+    <div class="transf-item">
+      <div class="transf-prompt">5. <span class="pill ga">I1</span> — "Ele está trabalhando muito nas últimas semanas."</div>
+      <div class="transf-answer">✓ Ele tem trabalhado muito nas últimas semanas.<br>✓ Ele tem se dedicado muito ao trabalho ultimamente.</div>
+      <div class="transf-note"><strong>Ponto central:</strong> substituição de estar + gerúndio por I1 para enfatizar a continuidade repetida. Em BP, ambas as formas são aceitas, mas I1 é mais natural com marcadores de período (<em>ultimamente, nas últimas semanas</em>). Explorar: <em>"tem trabalhado"</em> (repetição habitual) vs. <em>"estava trabalhando"</em> (descrição de momento específico no passado).</div>
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Estratégia de correção — Exercício 3</div>
+      Para respostas abertas, peça ao aluno que justifique a escolha do tempo antes de corrigir. A metalinguagem é parte do objetivo C1: o aluno deve ser capaz de dizer <em>"usei S2 aqui porque a condição não foi cumprida"</em>, não apenas produzir a forma correta.
+    </div>
+  </div>
+
+  <!-- EX 4: CONTRAST -->
+  <div class="sec-label">Exercício 4 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Meaning Contrast — What Changes?</h2>
+    <div class="ex-meta">Exercício aberto. Avalie se o aluno compreende a diferença semântica, não apenas formal. Respostas-modelo abaixo.</div>
+
+    <div class="contrast-item">
+      <div class="contrast-pair-mini">
+        <div class="contrast-mini"><strong>A (S1):</strong> "Espero que a equipe já <em>tenha resolvido</em>…"</div>
+        <div class="contrast-mini"><strong>B (S2):</strong> "Se a equipe <em>tivesse resolvido</em>…, não estaríamos nessa situação."</div>
+      </div>
+      <div class="transf-answer">✓ Resposta esperada:</div>
+      <div class="transf-note"><strong>A (S1):</strong> There is still uncertainty — the speaker hopes the team resolved it, but doesn't know for sure. The action may have happened. <strong>B (S2):</strong> The condition was not met — we know for certain that the team did NOT resolve the problem, and the speaker is expressing a counterfactual. The key difference: S1 = uncertainty about the past / S2 = known failure (counterfactual).<br><em>Em português:</em> S1 expressa dúvida (ainda é possível que tenha acontecido); S2 expressa contrafactual (sabemos que não aconteceu).</div>
+    </div>
+
+    <div class="contrast-item">
+      <div class="contrast-pair-mini">
+        <div class="contrast-mini"><strong>A (I1):</strong> "O diretor <em>tem tomado</em> decisões arriscadas ultimamente."</div>
+        <div class="contrast-mini"><strong>B (I2):</strong> "Quando a crise começou, o diretor já <em>tinha tomado</em> diversas decisões arriscadas."</div>
+      </div>
+      <div class="transf-answer">✓ Resposta esperada:</div>
+      <div class="transf-note"><strong>A (I1):</strong> Describes a repeated, ongoing pattern up to the present — the director has been making these decisions repeatedly, and it may still be happening. <strong>B (I2):</strong> Places these decisions before a specific past reference point (the crisis). The action was completed BEFORE another past event. The time orientation is different: A = up to now; B = up to a past moment.<br><em>Conceito-chave:</em> I1 e I2 são os dois "passados anteriores" do BP — I1 anterior ao presente, I2 anterior a outro evento passado.</div>
+    </div>
+
+    <div class="contrast-item">
+      <div class="contrast-pair-mini">
+        <div class="contrast-mini"><strong>A (I3):</strong> "Até dezembro, a startup já <em>terá captado</em> os investimentos."</div>
+        <div class="contrast-mini"><strong>B (S3):</strong> "Assim que a startup <em>tiver captado</em> os investimentos, vamos escalar."</div>
+      </div>
+      <div class="transf-answer">✓ Resposta esperada:</div>
+      <div class="transf-note"><strong>A (I3):</strong> A statement of prediction or certainty — the speaker is projecting that by December, the action will be complete. It's a declarative statement about the future. <strong>B (S3):</strong> A conditional/temporal clause — the scaling depends on the fundraising being completed first. It's not a prediction but a condition for another action. Key: I3 is in the main clause (independent statement); S3 is in the subordinate clause (dependent condition).<br><em>Regra prática:</em> Oração principal = I3. Oração subordinada temporal/condicional = S3.</div>
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 O par I3 / S3 — o mais confundido em C1</div>
+      Muitos alunos avançados confundem I3 e S3 porque ambos expressam "ação concluída antes de evento futuro". A diferença está na função sintática: <strong>I3 fica na oração principal</strong> (<em>"ela terá terminado"</em> — afirmação); <strong>S3 fica na oração subordinada</strong> (<em>"quando ela tiver terminado"</em> — condição). Nunca se usa S3 na oração principal.
+    </div>
+  </div>
+
+  <!-- EX 5: PRODUCTION -->
+  <div class="sec-label">Exercício 5 — Produção Livre</div>
+  <div class="ex-block">
+    <h2>Your Turn — Context and Voice</h2>
+    <div class="ex-meta">Exercício aberto. Avalie uso correto do tempo indicado + coerência discursiva + vocabulário de registro profissional.</div>
+
+    <div class="prod-block">
+      <strong><span class="pill ga">I1</span> Pergunta 1</strong> — O que você tem feito para se desenvolver profissionalmente?
+      <div class="prod-note">Espere formas como <em>tenho participado, tenho lido, tenho dedicado, tenho estudado</em>. Verifique: I1 implica repetição — se o aluno menciona um evento único no passado, corrija para pretérito perfeito simples (<em>fiz, participei</em>). Este é o ponto de interferência com o espanhol — explorar se aparecer.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong><span class="pill gb">I4</span> Pergunta 2</strong> — O que você teria feito diferente?
+      <div class="prod-note">Par S2+I4 esperado: <em>"Se eu tivesse X, teria Y."</em> Avaliar: coerência do par (condição irreal → resultado hipotético). Vocabulário esperado: <em>teria escolhido, teria investido, teria construído, teria evitado, teria aproveitado</em>. Explorar 2 ou 3 respostas oralmente durante a correção — produção oral em I4 é frequentemente mais fraca que a escrita.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong><span class="pill gb">I3</span> Pergunta 3</strong> — O que você terá realizado daqui a dois anos?
+      <div class="prod-note">Contexto profissional/pessoal. Espere marcadores de prazo: <em>daqui a dois anos, até lá, nesse período</em>. Vocabulário esperado: <em>terei publicado, terei concluído, terei construído, teremos lançado, terei consolidado</em>. Esta resposta é boa para conectar com a pergunta 4 (S3) — o que precisa acontecer antes para isso ser possível?</div>
+    </div>
+
+    <div class="prod-block">
+      <strong><span class="pill gd">S3</span> Pergunta 4</strong> — Situação com condição futura.
+      <div class="prod-note">Verificar estrutura: <em>quando/assim que/depois que/logo que + tiver + particípio, [main clause no futuro]</em>. Erros esperados: usar I3 na subordinada (<em>*"quando terá terminado"</em> — incorreto) ou usar presente do subjuntivo simples (<em>*"quando terminar"</em> — correto, mas o exercício pede o composto). Se o aluno usar o futuro simples do subjuntivo, discuta quando cada forma é preferida.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong><span class="pill gc">S1</span> Pergunta 5</strong> — Esperanças e dúvidas com S1.
+      <div class="prod-note">Verificar gatilhos: <em>espero que + tenha, duvido que + tenha, é possível que + tenha</em>. Avaliar: o aluno distingue quando usar S1 (incerteza) vs. S2 (contrafactual)? Se ele escrever S2 aqui, há uma mudança de sentido — discutir.</div>
+    </div>
+  </div>
+
+  <!-- SPANISH INTERFERENCE -->
+  <hr>
+  <div class="sec-label">Interferência do Espanhol — C1</div>
+  <div class="ex-block">
+    <h2>Os 7 Tempos Compostos × Espanhol</h2>
+
+    <table class="es-table">
+      <thead><tr><th>Tempo BP</th><th>Equivalente espanhol</th><th>Diferença crítica / Risco de transferência</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong class="pill ga">I1</strong> tem feito</td>
+          <td style="color:#888;">ha hecho / lleva haciendo</td>
+          <td>⚠️ <strong>O maior risco</strong>. Em espanhol, <em>ha hecho</em> serve para ações únicas recentes (<em>"He viajado a España el mes pasado"</em>). Em BP, I1 exige repetição/continuidade: <em>*"Tenho viajado ao Brasil no mês passado"</em> é erro — use pretérito simples para ação única. Explorar exaustivamente.</td>
+        </tr>
+        <tr>
+          <td><strong class="pill ga">I2</strong> tinha feito</td>
+          <td style="color:#888;">había hecho</td>
+          <td>Estrutura idêntica, uso idêntico. Risco mínimo. Em BP oral, às vezes substituído por <em>"já tinha + particípio"</em> mesmo sem "já" no espanhol.</td>
+        </tr>
+        <tr>
+          <td><strong class="pill gb">I3</strong> terá feito</td>
+          <td style="color:#888;">habrá hecho</td>
+          <td>Estrutura idêntica. Auxiliar <em>ter</em> (nunca <em>haver</em> em BP falado). Particípios irregulares diferem: <em>feito ≠ hecho, dito ≠ dicho, visto = visto ✓</em>.</td>
+        </tr>
+        <tr>
+          <td><strong class="pill gb">I4</strong> teria feito</td>
+          <td style="color:#888;">habría hecho</td>
+          <td>Estrutura idêntica. Erro possível: usar I4 na prótase da condicional (<em>*"se eu teria feito"</em> = interferência do espanhol <em>"si yo habría hecho"</em>, que também é erro em espanhol normativo). Reforce: <em>se + S2</em> na prótase, I4 na apódose.</td>
+        </tr>
+        <tr>
+          <td><strong class="pill gc">S1</strong> tenha feito</td>
+          <td style="color:#888;">haya hecho</td>
+          <td>Estrutura idêntica, gatilhos idênticos. Risco menor. Atenção à conjugação de <em>ter</em> no subj. presente: <em>tenha / tenham</em> (não <em>*tenga / *tengan</em>).</td>
+        </tr>
+        <tr>
+          <td><strong class="pill gc">S2</strong> tivesse feito</td>
+          <td style="color:#888;">hubiera / hubiese hecho</td>
+          <td>BP usa apenas <em>tivesse</em> — não há variante como <em>hubiese</em>. Estrutura idêntica. O risco de transferência negativa é baixo, mas confirmar: prótase = S2, apódose = I4 (em BP e em espanhol normativo).</td>
+        </tr>
+        <tr>
+          <td><strong class="pill gd">S3</strong> tiver feito</td>
+          <td style="color:#888;">hubiere hecho (arcaico)</td>
+          <td>⚠️ <strong>Diferença pragmática importante</strong>. Em espanhol, <em>hubiere hecho</em> é praticamente arcaico (aparece apenas em contratos jurídicos). Em BP, <em>tiver feito</em> é <strong>totalmente vivo e frequente</strong> na conversa cotidiana, profissional e acadêmica. O aluno espanhol pode subestimar este tempo — enfatizar que S3 em BP é produtivo e esperado em C1.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box">
+      <div class="alert-title">⚠️ Erro mais frequente de falantes de espanhol em C1</div>
+      <strong>Usar I1 (tem feito) para ações únicas recentes</strong>, por influência de <em>ha hecho</em>. Exemplo clássico: <em>*"Tenho ido ao Brasil no mês passado"</em> (deveria ser <em>"Fui ao Brasil no mês passado"</em>). Corrija com gentileza, mas seja consistente — este é o ponto que diferencia C1 de B2 em BP.
+    </div>
+  </div>
+
+  <!-- PHONOLOGY -->
+  <div class="ex-block">
+    <h2>Ponto Fonológico — As Formas do Auxiliar TER</h2>
+
+    <div class="phono-box">
+      <div class="phono-title">🎧 Acentuação e ritmo das 7 formas auxiliares</div>
+      Em C1, o aluno precisa reconhecer e produzir todas as formas de <em>ter</em> com acentuação correta, incluindo as formas de <em>nós</em> com acento gráfico obrigatório.
+    </div>
+
+    <table class="es-table" style="margin-top:16px;">
+      <thead><tr><th>Forma (nós)</th><th>Sílaba tônica</th><th>Acento gráfico</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td><em>temos feito</em></td><td>te-</td><td>Não</td><td>Apenas 2 sílabas. Natural.</td></tr>
+        <tr><td><em>tínhamos feito</em></td><td><u>tí</u>-</td><td>Sim ´</td><td>Acento agudo obrigatório.</td></tr>
+        <tr><td><em>teremos feito</em></td><td>-re-</td><td>Não</td><td>Paroxítona sem acento.</td></tr>
+        <tr><td><em>teríamos feito</em></td><td>-rí-</td><td>Sim ´</td><td>Acento agudo obrigatório.</td></tr>
+        <tr><td><em>tenhamos feito</em></td><td>-nha-</td><td>Não</td><td>Raro em uso; mais frequente: tenham.</td></tr>
+        <tr><td><em>tivéssemos feito</em></td><td>-vés-</td><td>Sim ´</td><td>Acento agudo obrigatório. 5 sílabas.</td></tr>
+        <tr><td><em>tivermos feito</em></td><td>-ver-</td><td>Não</td><td>Paroxítona sem acento.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Confusão de pronúncia mais comum — têm vs. tem</div>
+      Para I1 (Pretérito Perfeito Composto), a 3ª pessoa do plural de TER é <strong>têm</strong> (com acento circunflexo, som fechado): <em>"eles têm trabalhado"</em>. O erro de confundir com <em>tem</em> (3ª sg.) não muda o sentido drasticamente mas é marcador de nível. Em leitura oral, peça ao aluno para distinguir: <em>ele tem / eles têm</em>.
+    </div>
+  </div>
+
+  <!-- EX 6: SIMPLES VS COMPOSTO -->
+  <div class="sec-label">Exercício 6 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Simple or Compound? — Simples vs. Composto no Subjuntivo</h2>
+    <div class="ex-meta">Tarefa: Escolher entre a forma simples e a composta do subjuntivo com base no contexto. 6 itens em 3 pares — um par por tempo verbal.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>Par / Tempo</th><th>Resposta</th><th>Por quê — sinal de contexto</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td><span class="pill gc">Presente → simples</span></td>
+          <td><span class="ans-pill">A — aceite</span></td>
+          <td class="answer-note"><em>"daqui a uma hora"</em> = a reunião ainda não aconteceu → a esperança é sobre ação futura, ainda por ocorrer → forma simples.</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td><span class="pill gc">Presente → S1</span></td>
+          <td><span class="ans-pill">B — tenha aceitado</span></td>
+          <td class="answer-note"><em>"já terminou"</em> = a reunião aconteceu → a esperança é sobre algo que pode já ter ocorrido → forma composta (S1). Este é o par mais didático: mesma estrutura, única diferença = se o evento de referência já ocorreu ou não.</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td><span class="pill gc">Imperfeito → simples</span></td>
+          <td><span class="ans-pill">A — investisse</span></td>
+          <td class="answer-note"><em>"em geral"</em> = hipótese genérica, ainda válida → a condição pode ainda ser cumprida → imperfeito simples. Não há sinal de que a condição foi definitivamente não cumprida.</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td><span class="pill gc">Imperfeito → S2</span></td>
+          <td><span class="ans-pill">B — tivesse investido</span></td>
+          <td class="answer-note"><em>"foi descontinuado no ano passado"</em> = sabemos que a condição NÃO foi cumprida → contrafactual no passado → S2. Reforce: S2 é sempre contrafactual — a falha já é um fato estabelecido.</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td><span class="pill gd">Futuro → simples</span></td>
+          <td><span class="ans-pill">A — chegar</span></td>
+          <td class="answer-note">Chegar ao escritório é uma ação instantânea — não há processo de conclusão a enfatizar. O simples é mais natural: <em>"quando chegar"</em> = no momento em que chegar. A forma composta (<em>tiver chegado</em>) seria redundante aqui.</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td><span class="pill gd">Futuro → S3</span></td>
+          <td><span class="ans-pill">B — tiver entregado</span></td>
+          <td class="answer-note"><em>"todos os documentos"</em> + <em>"próxima etapa"</em> = conclusão completa como pré-requisito para avanço → S3 enfatiza a conclusão do processo. Compare com item 5: entregar <em>todos</em> os documentos é um processo que precisa estar totalmente concluído, não apenas iniciado.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Como explorar o exercício em aula</div>
+      O maior valor pedagógico está nos <strong>pares</strong>, especialmente 1&2 e 3&4. Mostre as duas frases lado a lado e pergunte: "O que mudou na frase? Por que isso mudou o tempo verbal?" Em C1, o aluno deve ser capaz de verbalizar essa lógica, não apenas escolher a forma correta. Para o par 5&6, explore a diferença entre ação instantânea (chegar) e processo com conclusão (entregar documentos): o composto é mais natural quando há uma <em>conclusão mensurável</em> que precede outra ação.
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">⚠️ Erro por transferência do espanhol — itens 1 e 2</div>
+      Em espanhol, <em>espero que acepte</em> e <em>espero que haya aceptado</em> existem e funcionam da mesma forma que em português. A vantagem é que a lógica é idêntica — use isso como ponto de apoio. O risco é que o aluno, acostumado a usar apenas o presente do subjuntivo em espanhol cotidiano, negligencie o composto. Reforce: o composto em BP é tão comum quanto o simples nesses contextos.
+    </div>
+  </div>
+
+  <!-- ONLINE TEACHING -->
+  <div class="ex-block">
+    <h2>Sugestões para a Aula Online</h2>
+
+    <div class="prod-block">
+      <strong style="color:var(--teacher-accent);">Antes da aula (pré-tarefa)</strong>
+      <div class="prod-note">Envie o arquivo <strong>tempos-compostos-c1-texto.html</strong> com pelo menos 2 dias de antecedência. Peça que o aluno: (1) leia o texto e identifique os 7 tempos compostos pelos superscripts; (2) responda por escrito às perguntas 1 e 5 de compreensão antes da aula. Isso garante que ele chega à aula já tendo ativado o vocabulário do texto.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong style="color:var(--teacher-accent);">Warm-up (10 min)</strong>
+      <div class="prod-note">Comece pela pergunta 5 de compreensão ("O que você tem feito nos últimos meses…?"). Isso ativa I1 imediatamente em um contexto pessoal e relevante. Ouça sem corrigir — registre internamente o que o aluno já domina e o que precisa de atenção. O output inicial é diagnóstico.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong style="color:var(--teacher-accent);">Core (30–40 min)</strong>
+      <div class="prod-note">Foco nos dois pares mais difíceis para falantes de espanhol: <strong>(1) I1 vs. pretérito simples</strong> (ação repetida vs. ação única) e <strong>(2) S1 vs. S2</strong> (incerteza vs. contrafactual). Use os itens do Exercício 4 como base para discussão. O Exercício 3 pode ser feito oralmente em tempo real — mais eficaz que a escrita para C1.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong style="color:var(--teacher-accent);">Produção oral em tempo real</strong>
+      <div class="prod-note">Para C1, adapte o Exercício 5 para produção oral durante a aula. Selecione 2–3 perguntas e peça respostas de 3–4 frases. Grave (com permissão) e transcreva os erros gramaticais para análise no início da próxima aula. Esse ciclo de feedback é especialmente eficaz neste nível.</div>
+    </div>
+
+    <div class="prod-block">
+      <strong style="color:var(--teacher-accent);">Pós-aula (tarefa)</strong>
+      <div class="prod-note">Envie <strong>tempos-compostos-c1-exercicios-aluno.html</strong> como tarefa. O aluno pode usar o Check automático nos exercícios 1 e 2. Peça que revise os erros e escreva uma justificativa para cada resposta errada — este metacomentário é produtivo em C1. Revise os exercícios 3, 4 e 5 juntos na próxima sessão.</div>
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Estratégia C1 — foco em uso, não em forma</div>
+      Em C1, o aluno geralmente conhece a forma. O que falta é a consciência de uso em contexto. Priorize atividades que coloquem o aluno em situações reais de produção (narrar uma crise profissional, planejar uma negociação futura, refletir sobre uma decisão passada) onde o tempo composto emerge naturalmente da comunicação — não do exercício gramatical.
+    </div>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>

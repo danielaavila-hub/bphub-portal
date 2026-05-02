@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marta — My Materials | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── BPHUB exact palette ── */
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;   /* ONLY for text, never backgrounds */
+      --rosa-cha:   #FFD8C5;
+      --salmon:     #FCA290;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--cobalto);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ────────────────────────────────────────────
+       PASSWORD GATE
+    ──────────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--baunilha);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+
+    .gate-box {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 20px;
+      padding: 48px 44px;
+      width: 100%; max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(38,91,139,0.10);
+    }
+
+    .gate-logo img {
+      height: 34px;
+      width: auto;
+      margin: 0 auto 28px;
+    }
+
+    .gate-box h2 {
+      font-size: 26px;
+      color: var(--cobalto);
+      margin-bottom: 8px;
+    }
+
+    .gate-sub {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    .gate-error {
+      display: none;
+      font-size: 12px;
+      color: var(--pitomba);
+      background: #fff0ed;
+      border: 1px solid #f5c0b0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+    }
+
+    .gate-input {
+      width: 100%;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--nanquim);
+      text-align: center;
+      letter-spacing: 0.08em;
+      outline: none;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .gate-input:focus { border-color: var(--cobalto); }
+
+    .gate-btn {
+      width: 100%;
+      background: var(--pitomba);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .gate-btn:hover { opacity: 0.88; }
+
+    .gate-back {
+      display: block;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+    .gate-back:hover { color: var(--cobalto); }
+
+    /* ────────────────────────────────────────────
+       MAIN CONTENT
+    ──────────────────────────────────────────── */
+    #content { display: none; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      border-bottom: 1px solid var(--light-gray);
+      background: var(--baunilha);
+      position: sticky;
+      top: 0; z-index: 50;
+    }
+
+    .topbar-logo img { height: 30px; width: auto; }
+
+    .topbar-student {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .topbar-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--rosa-cha);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      color: var(--cobalto);
+    }
+
+    .topbar-name {
+      font-size: 13px; font-weight: 500;
+      color: var(--texto);
+    }
+
+    .topbar-back {
+      font-size: 12px;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--cobalto); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--rosa-cha);
+      padding: 60px 48px 52px;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pitomba);
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(30px, 4vw, 48px);
+      color: var(--cobalto);
+      margin-bottom: 10px;
+    }
+
+    .page-hero p {
+      font-size: 15px;
+      color: var(--nanquim);
+      max-width: 560px;
+      line-height: 1.75;
+      opacity: 0.75;
+    }
+
+    .student-meta {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.60);
+      border: 1px solid rgba(255,255,255,0.80);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 12px; font-weight: 500;
+      color: var(--nanquim);
+    }
+
+    .meta-pill .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--pitomba);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      padding: 52px 48px 100px;
+      max-width: 900px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .sec-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .icon-text { background: var(--baunilha2); }
+    .icon-ex   { background: var(--erva-doce); }
+    .icon-conv { background: var(--rosa-cha); }
+
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+
+    .sec-divider {
+      border: none;
+      border-top: 1px solid var(--light-gray);
+      margin: 52px 0;
+    }
+
+    /* ── TEXT READER ── */
+    .text-reader {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 36px 40px;
+    }
+
+    .text-reader .fonte {
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .text-reader .fonte::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--erva-doce);
+      flex-shrink: 0;
+    }
+
+    .text-reader p {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px; font-weight: 400;
+      color: var(--texto);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .text-reader p:last-child { margin-bottom: 0; }
+    .text-reader em { color: var(--cobalto); font-style: italic; }
+
+    /* ── GLOSSARY ── */
+    .glossary {
+      margin-top: 16px;
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 16px 24px;
+      display: flex; gap: 20px; flex-wrap: wrap;
+    }
+
+    .gloss-item {
+      font-size: 13px;
+      color: var(--texto);
+    }
+    .gloss-item strong {
+      color: var(--cobalto);
+      font-weight: 600;
+    }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+    }
+
+    .ex-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .ex-num {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--cobalto);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      color: white; flex-shrink: 0;
+    }
+
+    .ex-header h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--nanquim);
+    }
+    .ex-header p {
+      font-size: 12px; color: #999;
+      margin-top: 2px;
+    }
+
+    .ex-instruction {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 22px;
+      line-height: 1.7;
+    }
+
+    /* Match */
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .match-col h4 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #bbb; margin-bottom: 10px;
+    }
+
+    .match-item {
+      background: var(--off-white);
+      border: 1.5px solid var(--light-gray);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--texto);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .match-item:hover { border-color: var(--cobalto); background: #EBF1F8; }
+    .match-item.selected { border-color: var(--cobalto); background: #EBF1F8; color: var(--cobalto); }
+    .match-item.correct  { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); font-weight: 600; }
+    .match-item.wrong    { border-color: var(--pitomba); background: rgba(211,109,41,0.08); color: var(--pitomba); }
+
+    /* Fill in blank */
+    .word-bank {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .word-chip {
+      background: var(--baunilha2);
+      border: 1px solid rgba(211,109,41,0.25);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 13px; font-weight: 600;
+      color: var(--pitomba);
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+      user-select: none;
+    }
+    .word-chip:hover { background: #FAE4C8; }
+    .word-chip.used  { opacity: 0.35; pointer-events: none; }
+
+    .blanks-list { list-style: none; }
+    .blanks-list li {
+      font-size: 15px;
+      color: var(--texto);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light-gray);
+      display: flex; align-items: center;
+      gap: 8px; flex-wrap: wrap;
+      line-height: 1.6;
+    }
+    .blanks-list li:last-child { border-bottom: none; }
+
+    .blank-input {
+      display: inline-block;
+      border: none;
+      border-bottom: 2px solid var(--ouro);
+      background: transparent;
+      padding: 3px 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--nanquim);
+      min-width: 140px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba);  }
+
+    /* Open text */
+    .open-textarea {
+      width: 100%;
+      background: var(--off-white);
+      border: 1.5px solid var(--light-gray);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--texto);
+      resize: vertical; min-height: 120px;
+      outline: none; line-height: 1.65;
+      transition: border-color 0.2s;
+    }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* Check button */
+    .check-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 18px;
+      padding: 10px 22px; border-radius: 8px;
+      background: var(--cobalto); color: white;
+      border: none;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .check-btn:hover { opacity: 0.85; }
+
+    .result-msg {
+      display: none;
+      margin-top: 14px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+    }
+    .result-msg.good {
+      background: rgba(78,85,29,0.08);
+      border: 1px solid rgba(78,85,29,0.25);
+      color: var(--floresta);
+    }
+    .result-msg.try-again {
+      background: rgba(211,109,41,0.08);
+      border: 1px solid rgba(211,109,41,0.25);
+      color: var(--pitomba);
+    }
+
+    /* ── CONTACT BOX ── */
+    .contact-box {
+      background: var(--baunilha2);
+      border: 1px solid rgba(211,109,41,0.20);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex; align-items: flex-start;
+      gap: 18px; flex-wrap: wrap;
+    }
+    .contact-box p {
+      font-size: 14px;
+      color: var(--texto);
+      line-height: 1.65; flex: 1;
+    }
+    .contact-box a { color: var(--cobalto); text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .match-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB">
+    </div>
+    <h2>Marta's Page</h2>
+    <p class="gate-sub">Enter your password to access your materials</p>
+    <p id="gate-error" class="gate-error">Incorrect password. Please try again.</p>
+    <input class="gate-input" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
+    <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
+    <a href="../index.html" class="gate-back">← Back to main page</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <a href="../index.html">
+        <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB">
+      </a>
+    </div>
+    <div class="topbar-student">
+      <div class="topbar-avatar">M</div>
+      <span class="topbar-name">Marta</span>
+    </div>
+    <a href="../index.html" class="topbar-back">← Main page</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Student Portal</div>
+    <h1>Olá, Marta!</h1>
+    <p>Here are your lesson materials and exercises. Review the text before class and complete the exercises afterwards.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span> Level B2 — Intermediário II</span>
+      <span class="meta-pill"><span class="dot"></span> Technology Professional</span>
+      <span class="meta-pill"><span class="dot"></span> English → Portuguese</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- LESSON TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Lesson Material</h2>
+        <p>Read before your lesson — Expressões com o verbo <em>fazer</em></p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <p>
+        Quando a empresa onde eu trabalhava decidiu migrar todos os processos para uma plataforma nova,
+        ninguém ficou feliz. Durante semanas, não dava para <em>fazer nada de jeito nenhum</em> — o sistema
+        travava, os arquivos sumiam, as reuniões online caíam na metade. A equipe estava frustrada.
+      </p>
+      <p>
+        A diretora <em>fez questão</em> de participar pessoalmente dos treinamentos, o que
+        <em>fez diferença</em> para todo mundo. Ver a liderança envolvida mudou o clima. Aos poucos,
+        a gente foi <em>fazendo as pazes</em> com a nova ferramenta — não porque ficou fácil,
+        mas porque não havia outra saída.
+      </p>
+      <p>
+        Meses depois, um colega que havia saído da empresa mandou mensagem: "Vocês <em>fazem falta</em>
+        aqui. Esse novo time não tem o mesmo jeito." A mensagem chegou num dia difícil e foi boa de receber.
+      </p>
+      <p>
+        Hoje tudo <em>faz sentido</em> — a migração, o esforço, os erros do começo. Às vezes é preciso
+        passar pela confusão para chegar a um lugar melhor.
+      </p>
+    </div>
+
+    <div class="glossary">
+      <span class="gloss-item"><strong>fazer falta</strong> — to be missed</span>
+      <span class="gloss-item"><strong>fazer as pazes</strong> — to make peace / reconcile</span>
+      <span class="gloss-item"><strong>fazer questão</strong> — to make a point of / insist</span>
+      <span class="gloss-item"><strong>fazer diferença</strong> — to make a difference</span>
+      <span class="gloss-item"><strong>fazer sentido</strong> — to make sense</span>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to Daniela</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Matching -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Match the expression to its meaning</h3>
+          <p>Click a card on each side to create a pair</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Match each expression with <em>fazer</em> to its English equivalent.</p>
+
+      <div class="match-grid">
+        <div>
+          <h4>Expression</h4>
+          <div class="match-item" data-pair="a" onclick="selectMatch(this,'left')">fazer falta</div>
+          <div class="match-item" data-pair="b" onclick="selectMatch(this,'left')">fazer questão</div>
+          <div class="match-item" data-pair="c" onclick="selectMatch(this,'left')">fazer as pazes</div>
+          <div class="match-item" data-pair="d" onclick="selectMatch(this,'left')">fazer diferença</div>
+          <div class="match-item" data-pair="e" onclick="selectMatch(this,'left')">fazer sentido</div>
+        </div>
+        <div>
+          <h4>Meaning</h4>
+          <div class="match-item" data-pair="c" onclick="selectMatch(this,'right')">to reconcile / make peace</div>
+          <div class="match-item" data-pair="a" onclick="selectMatch(this,'right')">to be missed</div>
+          <div class="match-item" data-pair="e" onclick="selectMatch(this,'right')">to make sense</div>
+          <div class="match-item" data-pair="b" onclick="selectMatch(this,'right')">to insist on / make a point of</div>
+          <div class="match-item" data-pair="d" onclick="selectMatch(this,'right')">to make a difference</div>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkMatches()">✓ Check answers</button>
+      <div id="match-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 2 — Fill in the blank -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Complete the sentences</h3>
+          <p>Use the correct form of the expression with <em>fazer</em></p>
+        </div>
+      </div>
+      <p class="ex-instruction">Fill in the blanks using the expressions from the word bank. Use each expression once, conjugating if necessary.</p>
+
+      <div class="word-bank" id="word-bank">
+        <span class="word-chip" data-word="fazer questão">fazer questão</span>
+        <span class="word-chip" data-word="fazer falta">fazer falta</span>
+        <span class="word-chip" data-word="fazer as pazes">fazer as pazes</span>
+        <span class="word-chip" data-word="fazer diferença">fazer diferença</span>
+        <span class="word-chip" data-word="fazer sentido">fazer sentido</span>
+      </div>
+
+      <ul class="blanks-list" id="blanks-list">
+        <li>
+          <span>1.</span>
+          <span>Depois de meses de conflito, a equipe finalmente decidiu</span>
+          <input class="blank-input" data-answer="fazer as pazes" placeholder="___________">
+          <span>com o novo gerente.</span>
+        </li>
+        <li>
+          <span>2.</span>
+          <span>Quando você foi embora, o escritório sentiu muito sua ausência — você</span>
+          <input class="blank-input" data-answer="fez falta|fez muita falta" placeholder="___________">
+          <span>para todo mundo.</span>
+        </li>
+        <li>
+          <span>3.</span>
+          <span>Ela</span>
+          <input class="blank-input" data-answer="fez questão" placeholder="___________">
+          <span>de revisar cada linha de código antes do deploy.</span>
+        </li>
+        <li>
+          <span>4.</span>
+          <span>Esse relatório não</span>
+          <input class="blank-input" data-answer="faz sentido" placeholder="___________">
+          <span>— os dados contradizem as conclusões.</span>
+        </li>
+        <li>
+          <span>5.</span>
+          <span>Pequenos ajustes na interface podem</span>
+          <input class="blank-input" data-answer="fazer diferença|fazer uma grande diferença" placeholder="___________">
+          <span>na experiência do usuário.</span>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkBlanks()">✓ Check answers</button>
+      <div id="blanks-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Open production -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Free production</h3>
+          <p>Write 4–6 sentences about your own experience</p>
+        </div>
+      </div>
+      <p class="ex-instruction">
+        Think of a situation at work where technology changed the way you or your team worked.
+        Write 4–6 sentences using at least <strong>three</strong> expressions with <em>fazer</em> from this lesson.
+        Send your text to Daniela before the next class.
+      </p>
+      <textarea class="open-textarea" placeholder="Escreva aqui em português... (4–6 frases)"></textarea>
+      <p style="font-size:13px; color:#999; margin-top:10px; font-style:italic;">
+        Tip: Try to use <em>fazer falta</em>, <em>fazer sentido</em>, and <em>fazer diferença</em> — they come up constantly in Brazilian tech conversations.
+      </p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Contact -->
+    <div class="contact-box">
+      <p>
+        Questions about the material? <strong>Send your Exercise 3 response and any questions</strong> to
+        <a href="mailto:daniela.avila@brazilianportuguesehub.com">daniela.avila@brazilianportuguesehub.com</a>
+        before your next lesson.
+      </p>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /content -->
+
+<script>
+  /* ── GATE ── */
+  const PAGE_PASSWORD = "marta2026";
+
+  function checkGate() {
+    const val = document.getElementById("gate-pass").value.trim();
+    if (val === PAGE_PASSWORD) {
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    } else {
+      document.getElementById("gate-error").style.display = "block";
+      document.getElementById("gate-pass").value = "";
+      document.getElementById("gate-pass").focus();
+    }
+  }
+  document.getElementById("gate-pass").addEventListener("keydown", e => {
+    if (e.key === "Enter") checkGate();
+  });
+
+  /* ── MATCHING ── */
+  let matchLeft = null, matchRight = null;
+  const matchedPairs = new Set();
+
+  function selectMatch(el, side) {
+    if (el.classList.contains("correct") || el.classList.contains("wrong")) return;
+    if (side === "left") {
+      document.querySelectorAll(".match-grid .match-item").forEach(m => {
+        if (!m.classList.contains("correct")) m.classList.remove("selected");
+      });
+      matchLeft = el;
+      el.classList.add("selected");
+    } else {
+      matchRight = el;
+    }
+    if (matchLeft && matchRight) {
+      if (matchLeft.dataset.pair === matchRight.dataset.pair) {
+        matchLeft.classList.remove("selected");
+        matchLeft.classList.add("correct");
+        matchRight.classList.add("correct");
+        matchedPairs.add(matchLeft.dataset.pair);
+      } else {
+        matchLeft.classList.add("wrong");
+        matchRight.classList.add("wrong");
+        setTimeout(() => {
+          if (matchLeft) matchLeft.classList.remove("wrong","selected");
+          if (matchRight) matchRight.classList.remove("wrong");
+        }, 900);
+      }
+      matchLeft = null; matchRight = null;
+    }
+  }
+
+  function checkMatches() {
+    const el = document.getElementById("match-result");
+    el.style.display = "block";
+    if (matchedPairs.size === 5) {
+      el.className = "result-msg good";
+      el.textContent = "✓ Perfect! All 5 pairs matched correctly.";
+    } else {
+      el.className = "result-msg try-again";
+      el.textContent = `${matchedPairs.size} of 5 correct. Keep trying!`;
+    }
+  }
+
+  /* ── FILL-IN-THE-BLANK ── */
+  function norm(str) {
+    return str.trim().toLowerCase()
+      .replace(/[áàã]/g,"a").replace(/[éê]/g,"e").replace(/[í]/g,"i")
+      .replace(/[óôõ]/g,"o").replace(/[ú]/g,"u").replace(/[ç]/g,"c");
+  }
+
+  function checkBlanks() {
+    const inputs = document.querySelectorAll("#blanks-list .blank-input");
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split("|").map(norm);
+      if (accepted.includes(norm(inp.value))) {
+        inp.classList.remove("wrong-input");
+        inp.classList.add("correct-input");
+        correct++;
+      } else {
+        inp.classList.remove("correct-input");
+        inp.classList.add("wrong-input");
+      }
+    });
+    const el = document.getElementById("blanks-result");
+    el.style.display = "block";
+    if (correct === inputs.length) {
+      el.className = "result-msg good";
+      el.textContent = "✓ Excellent! All answers correct.";
+    } else {
+      el.className = "result-msg try-again";
+      el.textContent = `${correct} of ${inputs.length} correct. Review the highlighted answers.`;
+    }
+  }
+</script>
+</body>
+</html>

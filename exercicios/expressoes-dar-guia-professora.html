@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expressões com DAR — Guia da Professora | BPHUB A1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --rosa-cha: #FFD8C5;
+      --floresta: #4E551D; --erva-doce: #A6B28A; --cobalto: #265B8B;
+      --pitomba: #D36D29; --ouro: #FFB94A; --texto: #3C3C21;
+      --erva-dark: #6b7a52;
+      --teacher-bg: #F0EBF8; --teacher-accent: #6D43A6;
+      --answer-green: #2E7D52; --answer-bg: #EAF5EE;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--erva-doce); color: var(--floresta); }
+    .badge-teacher { background: var(--teacher-bg); color: var(--teacher-accent); }
+
+    /* HERO */
+    .hero { background: #2a1a40; padding: 48px 40px 44px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #b89ed6; margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(24px, 4vw, 40px); color: #fff; margin-bottom: 10px; }
+    .hero h1 span { color: #b89ed6; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 540px; line-height: 1.65; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: #b89ed6; font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 900px; padding: 48px 40px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; }
+
+    /* OVERVIEW BOX */
+    .overview-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; margin-bottom: 32px; }
+    .overview-box h2 { font-size: 20px; color: var(--cobalto); margin-bottom: 16px; }
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ov-item { font-size: 14px; }
+    .ov-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 4px; }
+    .ov-val { color: var(--nanquim); line-height: 1.5; }
+    .ov-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .ov-chip { background: var(--off-white); border-radius: 20px; padding: 2px 10px; font-size: 12px; color: var(--nanquim); }
+
+    /* EXERCISE ANSWER BLOCK */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-block h2 { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: var(--cobalto); margin-bottom: 6px; }
+    .ex-meta { font-size: 13px; color: #999; margin-bottom: 20px; }
+
+    /* ANSWER TABLE */
+    .answer-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .answer-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    .answer-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); font-size: 14px; vertical-align: top; }
+    .answer-table tr:last-child td { border-bottom: none; }
+    .answer-table .num { color: #bbb; font-weight: 700; font-size: 13px; min-width: 28px; }
+    .answer-key { color: var(--answer-green); font-weight: 700; }
+    .answer-note { color: #777; font-size: 13px; line-height: 1.5; }
+    .answer-wrong { color: var(--pitomba); font-size: 13px; }
+
+    /* ANSWER PILL */
+    .ans-pill { display: inline-block; background: var(--answer-bg); color: var(--answer-green); font-weight: 700; border-radius: 6px; padding: 1px 8px; font-size: 13px; }
+
+    /* TEACHER NOTE BOX */
+    .t-note { background: var(--teacher-bg); border-left: 4px solid var(--teacher-accent); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .t-note .t-note-title { font-weight: 700; color: var(--teacher-accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* ALERT BOX */
+    .alert-box { background: #fff8ec; border-left: 4px solid var(--ouro); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .alert-box .alert-title { font-weight: 700; color: #b8860b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* PHONOLOGY BOX */
+    .phono-box { background: #EFF5FB; border: 1.5px solid #BDD5EA; border-radius: 14px; padding: 24px 28px; margin-bottom: 28px; }
+    .phono-box h3 { font-size: 16px; color: var(--cobalto); margin-bottom: 14px; }
+    .phono-item { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid rgba(189,213,234,0.5); font-size: 14px; }
+    .phono-item:last-child { border-bottom: none; }
+    .phono-pt { color: var(--cobalto); font-weight: 700; min-width: 180px; }
+    .phono-note { color: var(--nanquim); line-height: 1.5; }
+
+    /* CULTURAL BOX */
+    .cultura-box { background: var(--off-white); border-radius: 14px; padding: 24px 28px; margin-bottom: 28px; }
+    .cultura-box h3 { font-size: 16px; color: var(--floresta); margin-bottom: 12px; }
+    .cultura-item { font-size: 14px; line-height: 1.7; color: var(--nanquim); margin-bottom: 12px; }
+    .cultura-item:last-child { margin-bottom: 0; }
+
+    /* EXPRESSION PEDAGOGY TABLE */
+    .ped-table { width: 100%; border-collapse: collapse; }
+    .ped-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); background: var(--off-white); }
+    .ped-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); font-size: 13px; vertical-align: top; line-height: 1.55; }
+    .ped-table tr:last-child td { border-bottom: none; }
+    .ped-expr { color: var(--cobalto); font-weight: 700; }
+    .ped-warn { color: var(--pitomba); }
+
+    /* PRODUCTION GUIDE */
+    .prod-guide { background: var(--answer-bg); border-radius: 10px; padding: 16px 20px; margin-top: 16px; font-size: 13px; color: var(--nanquim); line-height: 1.7; }
+    .prod-guide .pg-title { font-weight: 700; color: var(--answer-green); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--light-gray); margin: 8px 0 28px; }
+
+    @media (max-width: 640px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block { padding: 24px 20px; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .phono-item { flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-teacher">🔒 Guia da Professora</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Guia da Professora — Nível A1</div>
+  <h1>Expressões com <span>DAR</span></h1>
+  <div class="hero-sub">Gabarito completo, notas pedagógicas, orientações fonológicas e dicas para a aula online.</div>
+  <div class="hero-note">🔒 Não compartilhar com o aluno</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="sec-label">Visão Geral do Material</div>
+  <div class="overview-box">
+    <h2>Sobre este conjunto de materiais</h2>
+    <div class="overview-grid">
+      <div class="ov-item">
+        <div class="ov-label">Nível</div>
+        <div class="ov-val">A1 (Básico I)</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Tema</div>
+        <div class="ov-val">Expressões com o verbo <em>dar</em></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Funções comunicativas</div>
+        <div class="ov-chips">
+          <span class="ov-chip">Descrever resultado</span>
+          <span class="ov-chip">Expressar sensações</span>
+          <span class="ov-chip">Expressar impossibilidade</span>
+          <span class="ov-chip">Interação social</span>
+        </div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Expressões trabalhadas</div>
+        <div class="ov-val">15 expressões distribuídas em 3 grupos temáticos</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Ponto gramatical central</div>
+        <div class="ov-val">Verbo <em>dar</em> irregular + sujeito oracional nas expressões de sensação</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Fluxo recomendado</div>
+        <div class="ov-val">Aluno estuda material antes da aula → exercícios como lição de casa → correção na aula seguinte ou durante a aula</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEDAGOGICAL NOTES PER EXPRESSION -->
+  <div class="sec-label">Notas Pedagógicas — Expressão por Expressão</div>
+  <div class="ex-block">
+    <h2>Orientações para apresentação e prática</h2>
+    <div class="ex-meta">Use a aula para contextualizar, praticar oralmente e corrigir. O material de referência já foi lido pelo aluno.</div>
+
+    <table class="ped-table">
+      <thead>
+        <tr>
+          <th>Expressão</th>
+          <th>Ponto de atenção</th>
+          <th>Erro comum do anglófono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ped-expr">dar certo / dar errado</td>
+          <td>Use <em>deu</em> no passado (<em>deu certo</em>). Lembre: o adjetivo concorda com o sujeito implícito — <em>a reunião deu errada</em>.</td>
+          <td class="ped-warn">Confundir com <em>está certo/errado</em> (estado) vs. <em>deu certo/errado</em> (resultado de processo). Foco: resultado de uma ação.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar tempo</td>
+          <td><em>Dar tempo</em> = haver tempo suficiente. <em>Dá tempo?</em> é a forma de perguntar. No negativo: <em>não dá tempo</em> ou <em>não vai dar tempo</em>.</td>
+          <td class="ped-warn">Traduzir literalmente como <em>give time</em>. Reforçar que é equivalente a <em>there's (enough) time</em>.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar para / não dá</td>
+          <td><em>Dá para</em> + infinitivo = it's possible. <em>Não dá</em> sozinho = not happening / can't / no way. Muito frequente em conversas informais.</td>
+          <td class="ped-warn">Usar <em>posso</em> no lugar de <em>dá para</em> (ambos corretos, mas <em>dá para</em> é mais coloquial e natural).</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar risada</td>
+          <td>Pode ser sujeito = a coisa (<em>o vídeo me deu risada</em>) ou sujeito = a pessoa com pronome reflexivo informal (<em>dei risada</em>). Ambos corretos em diferentes contextos.</td>
+          <td class="ped-warn">Usar <em>rir</em> no lugar de <em>dar risada</em> (correto, mas menos coloquial). Valorize <em>dar risada</em> como forma autêntica do PB falado.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar medo / dar fome / dar sono / dar saudade / dar vontade</td>
+          <td>Nas 5 expressões de sensação, o sujeito gramatical é sempre a coisa, nunca a pessoa. A pessoa aparece como objeto indireto: <em>me dá, te dá, lhe dá</em>. O verbo fica sempre na 3ª pessoa (<em>dá / deu / dava</em>).</td>
+          <td class="ped-warn">Colocar a pessoa como sujeito: ❌ <em>Eu dou medo</em> (no sentido de ter medo). Correto: <em>Esse filme me dá medo.</em></td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar um abraço</td>
+          <td>Literalmente <em>to give a hug</em>. Pode ser imperativo: <em>Dá um abraço nela da minha parte!</em> = Give her a hug from me!</td>
+          <td class="ped-warn">Pronúncia: o <em>r</em> em <em>abraço</em> é o <em>r</em> fricativo do PB — parecido com o <em>h</em> do inglês.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar parabéns</td>
+          <td>Literalmente <em>to congratulate</em>. Muito usado para aniversários mas também promoções, aprovações, conquistas. O plural <em>parabéns</em> é fixo — não existe <em>parabém</em>.</td>
+          <td class="ped-warn">Anglófonos às vezes usam <em>felicidades</em> como <em>parabéns</em> — são expressões diferentes. <em>Felicidades</em> = best wishes, não happy birthday / congratulations.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar tchau</td>
+          <td>Empréstimo do italiano <em>ciao</em>. Extremamente comum no PB falado. Equivalente a <em>say goodbye</em>.</td>
+          <td class="ped-warn">Pronúncia: <em>tchau</em> soa como <em>chow</em> em inglês. Cuidado: <em>ciau</em> é uma grafia alternativa que aparece às vezes.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar uma mão</td>
+          <td><em>Dar uma mão</em> = <em>to lend a hand</em>. Em PB também se diz <em>dar uma ajuda</em> (sinônimo). <em>Dá uma mão?</em> = Can you help me out?</td>
+          <td class="ped-warn">Sem armadilhas maiores. Boa expressão para reforçar a estrutura <em>dar + artigo + substantivo</em>.</td>
+        </tr>
+        <tr>
+          <td class="ped-expr">dar um jeito</td>
+          <td>Uma das expressões mais tipicamente brasileiras. Significa encontrar uma solução criativa ou improvisada. Muito ligada à ideia cultural do "jeitinho brasileiro". <em>Dá um jeito aí!</em> = Figure it out / Make it work!</td>
+          <td class="ped-warn">Não existe equivalente direto em inglês — aproveite para explorar o aspecto cultural. <em>Work it out</em> é a tradução mais próxima em contexto.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXERCISE 1 ANSWERS -->
+  <div class="sec-label">Gabarito — Exercício 1</div>
+  <div class="ex-block">
+    <h2>Matching — Expressions and Meanings</h2>
+    <div class="ex-meta">Objetivo: reconhecimento do significado. Não há variação de resposta.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>Expressão</th><th>Resposta</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1.</td><td>dar certo</td><td class="answer-key"><span class="ans-pill">E</span> — to work out, to succeed</td><td class="answer-note">Resultado positivo de uma ação ou plano.</td></tr>
+        <tr><td class="num">2.</td><td>dar errado</td><td class="answer-key"><span class="ans-pill">C</span> — to go wrong, to fail</td><td class="answer-note">Oposto direto de <em>dar certo</em>.</td></tr>
+        <tr><td class="num">3.</td><td>dar fome</td><td class="answer-key"><span class="ans-pill">G</span> — to make you hungry</td><td class="answer-note">Sujeito = coisa/situação que provoca a fome.</td></tr>
+        <tr><td class="num">4.</td><td>dar sono</td><td class="answer-key"><span class="ans-pill">H</span> — to make you sleepy</td><td class="answer-note">Idem — muito usado para reclamar de reunião ou aula entediante!</td></tr>
+        <tr><td class="num">5.</td><td>dar um jeito</td><td class="answer-key"><span class="ans-pill">D</span> — to find a way, to figure it out</td><td class="answer-note">Expressão cultural — o famoso "jeitinho".</td></tr>
+        <tr><td class="num">6.</td><td>dar uma mão</td><td class="answer-key"><span class="ans-pill">B</span> — to help, to lend a hand</td><td class="answer-note">Reforçar: <em>dar uma ajuda</em> é sinônimo comum.</td></tr>
+        <tr><td class="num">7.</td><td>dar saudade</td><td class="answer-key"><span class="ans-pill">A</span> — to make you miss something/someone</td><td class="answer-note">Boa oportunidade para falar sobre o conceito de <em>saudade</em> em português.</td></tr>
+        <tr><td class="num">8.</td><td>dar vontade</td><td class="answer-key"><span class="ans-pill">F</span> — to make you feel like doing something</td><td class="answer-note">Sempre seguida de infinitivo: <em>dá vontade de comer, de dormir, de sair...</em></td></tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Dica para a aula online</div>
+      Após a correção, pergunte ao aluno: <em>"Qual dessas expressões você acha que vai usar mais no seu dia a dia?"</em> Isso personaliza o vocabulário e cria memória afetiva.
+    </div>
+  </div>
+
+  <!-- EXERCISE 2 ANSWERS -->
+  <div class="sec-label">Gabarito — Exercício 2</div>
+  <div class="ex-block">
+    <h2>Gap Fill — Complete the Sentences</h2>
+    <div class="ex-meta">Objetivo: uso correto das formas verbais. Aceitar variações de forma (ex.: <em>deu / dá / dando</em>) se o contexto for adequado.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>Resposta esperada</th><th>Nota pedagógica</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num">1.</td>
+          <td class="answer-key"><span class="ans-pill">deu certo</span></td>
+          <td class="answer-note">Passado — resultado de uma ação concluída. "O plano deu certo!"</td>
+        </tr>
+        <tr>
+          <td class="num">2.</td>
+          <td class="answer-key"><span class="ans-pill">dá medo</span></td>
+          <td class="answer-note">Frase: <em>"Dá medo assistir o filme de terror sozinho."</em> — sujeito = a situação (assistir sozinho), verbo na 3ª pessoa. Aceitar também <em>"dá muito medo"</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">3.</td>
+          <td class="answer-key"><span class="ans-pill">dou risada</span></td>
+          <td class="answer-note">Frase: <em>"Esse comediante é incrível, sempre dou risada com ele!"</em> — 1ª pessoa do singular. Sujeito = a pessoa que fala. Aceitar <em>"dou muita risada"</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">4.</td>
+          <td class="answer-key"><span class="ans-pill">não dá</span></td>
+          <td class="answer-note"><em>Não dá para ir</em> (com infinitivo) ou simplesmente <em>não dá</em>. Ambos corretos.</td>
+        </tr>
+        <tr>
+          <td class="num">5.</td>
+          <td class="answer-key"><span class="ans-pill">deu errado</span></td>
+          <td class="answer-note">Frase: <em>"Tudo deu errado na viagem — perdemos o voo e a mala."</em> Passado. Contexto mais vívido que a reunião anterior.</td>
+        </tr>
+        <tr>
+          <td class="num">6.</td>
+          <td class="answer-key"><span class="ans-pill">Dá tempo?</span></td>
+          <td class="answer-note">Pergunta. Aceitar também <em>vai dar tempo?</em> (futuro imediato).</td>
+        </tr>
+        <tr>
+          <td class="num">7.</td>
+          <td class="answer-key"><span class="ans-pill">dar parabéns</span></td>
+          <td class="answer-note">Após <em>para</em>, usar infinitivo: <em>ligou para dar parabéns</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">8.</td>
+          <td class="answer-key"><span class="ans-pill">dar tchau</span></td>
+          <td class="answer-note">Após <em>para</em>, usar infinitivo: <em>acenaram para dar tchau</em>. Lindo exemplo de uso natural.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box">
+      <div class="alert-title">⚠️ Ponto de atenção — Item 3</div>
+      Em <em>"dou risada"</em>, o sujeito é a pessoa que fala (eu). É diferente das expressões de sensação como <em>"dá fome/medo/sono"</em> onde o sujeito é a coisa. Aproveite para reforçar essa distinção: <em>"O filme dá medo"</em> (coisa = sujeito) vs. <em>"Dou risada com ele"</em> (pessoa = sujeito).
+    </div>
+  </div>
+
+  <!-- EXERCISE 3 ANSWERS -->
+  <div class="sec-label">Gabarito — Exercício 3</div>
+  <div class="ex-block">
+    <h2>True or False?</h2>
+    <div class="ex-meta">Objetivo: compreensão do significado e produção de correção escrita.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>V / F</th><th>Correção (se falso)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num">1.</td>
+          <td class="answer-key"><span class="ans-pill">V</span></td>
+          <td class="answer-note"><em>"Dar uma mão"</em> = oferecer ajuda. Correto.</td>
+        </tr>
+        <tr>
+          <td class="num">2.</td>
+          <td class="answer-key"><span class="ans-pill">F</span></td>
+          <td class="answer-note">Correção esperada: Quando algo me deixa com saudades, eu digo <strong>"Me deu saudade"</strong> (não <em>vontade</em>). <em>Dar vontade</em> = feeling like doing something.</td>
+        </tr>
+        <tr>
+          <td class="num">3.</td>
+          <td class="answer-key"><span class="ans-pill">V</span></td>
+          <td class="answer-note"><em>"Não dá"</em> expressa impossibilidade, dificuldade ou recusa coloquial. Correto.</td>
+        </tr>
+        <tr>
+          <td class="num">4.</td>
+          <td class="answer-key"><span class="ans-pill">F</span></td>
+          <td class="answer-note">Correção esperada: Para dizer que um projeto foi bem-sucedido, eu digo <strong>"Deu certo!"</strong> (não <em>deu errado</em>).</td>
+        </tr>
+        <tr>
+          <td class="num">5.</td>
+          <td class="answer-key"><span class="ans-pill">V</span></td>
+          <td class="answer-note"><em>"Dar um jeito"</em> = encontrar uma solução, muitas vezes criativa ou improvisada. Correto.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Dica para a aula online</div>
+      No item 2 e 4 (os falsos), peça ao aluno para formular uma frase NOVA usando a expressão correta. Isso transforma a correção em produção ativa, não só identificação do erro.
+    </div>
+  </div>
+
+  <!-- EXERCISE 4 ANSWERS -->
+  <div class="sec-label">Gabarito — Exercício 4</div>
+  <div class="ex-block">
+    <h2>Choose the Right Expression</h2>
+    <div class="ex-meta">Objetivo: compreensão contextual e discriminação de significado. Apenas uma opção correta por item.</div>
+
+    <table class="answer-table">
+      <thead><tr><th>#</th><th>Resposta</th><th>Por que as outras estão erradas</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num">1.</td>
+          <td class="answer-key"><span class="ans-pill">b) deu um jeito</span></td>
+          <td class="answer-note"><em>Deu um abraço</em> = physical hug — fora de contexto. <em>Deu sono</em> = made sleepy — absurdo no contexto.</td>
+        </tr>
+        <tr>
+          <td class="num">2.</td>
+          <td class="answer-key"><span class="ans-pill">c) deu errado</span></td>
+          <td class="answer-note"><em>Deu certo</em> contradiz a situação (problema com projetor). <em>Deu parabéns</em> = congratulated — fora de contexto.</td>
+        </tr>
+        <tr>
+          <td class="num">3.</td>
+          <td class="answer-key"><span class="ans-pill">a) deu tempo</span></td>
+          <td class="answer-note"><em>Deu risada</em> = made laugh — fora de contexto. <em>Deu medo</em> = scared — não se relaciona à fome ou ao trabalho.</td>
+        </tr>
+        <tr>
+          <td class="num">4.</td>
+          <td class="answer-key"><span class="ans-pill">b) dar uma mão</span></td>
+          <td class="answer-note"><em>Dar fome</em> = to make hungry — absurdo no contexto de ajuda profissional. <em>Dar saudade</em> = to miss — fora de contexto.</td>
+        </tr>
+        <tr>
+          <td class="num">5.</td>
+          <td class="answer-key"><span class="ans-pill">c) deu muitas saudades</span></td>
+          <td class="answer-note"><em>Deu tchau</em> = said goodbye. <em>Deu parabéns</em> = congratulated. Ambas fora de contexto. Nota: o natural em PB é <em>"me deu muitas saudades"</em> (plural com artigo), não <em>"me deu saudade muito"</em>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXERCISE 5 GUIDE -->
+  <div class="sec-label">Orientações — Exercício 5</div>
+  <div class="ex-block">
+    <h2>Your Turn — Write About Yourself</h2>
+    <div class="ex-meta">Produção aberta. Não há resposta única — avalie o uso correto da expressão com DAR e a coerência da frase.</div>
+
+    <div class="t-note" style="margin-bottom: 20px;">
+      <div class="t-note-title">📋 O que observar na correção</div>
+      <ul style="margin-left: 16px; margin-top: 6px; font-size: 13px; line-height: 1.8;">
+        <li>O aluno usou a expressão com <em>dar</em> corretamente? (forma verbal + estrutura)</li>
+        <li>Nas expressões de sensação: o sujeito gramatical está correto? (a coisa, não a pessoa)</li>
+        <li>O pronome de objeto está presente quando necessário? (<em>me dá fome / me deu saudade</em>)</li>
+        <li>A resposta é comunicativamente coerente (faz sentido no contexto)?</li>
+      </ul>
+    </div>
+
+    <table class="answer-table">
+      <thead><tr><th>Pergunta</th><th>Modelos de resposta esperada</th><th>Dica de feedback</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-size:13px;">1. <em>Que tipo de comida ou cheiro dá fome em você?</em></td>
+          <td class="answer-note"><em>"O cheiro de café me dá fome de manhã."</em><br><em>"Pizza sempre me dá fome!"</em></td>
+          <td class="answer-note">Verificar: sujeito = coisa, pronome <em>me</em> presente, verbo <em>dá</em> (3ª pessoa).</td>
+        </tr>
+        <tr>
+          <td style="font-size:13px;">2. <em>O que às vezes dá sono?</em></td>
+          <td class="answer-note"><em>"Reunião longa me dá sono."</em><br><em>"Ler relatório à tarde me dá sono."</em></td>
+          <td class="answer-note">Contexto profissional pode trazer respostas engraçadas e autênticas — aproveite para conversar!</td>
+        </tr>
+        <tr>
+          <td style="font-size:13px;">3. <em>Deu certo ou deu errado?</em></td>
+          <td class="answer-note"><em>"O meu projeto de segunda deu certo! O cliente gostou."</em><br><em>"A minha apresentação deu errada — esqueci os slides."</em></td>
+          <td class="answer-note">Atenção à concordância: <em>deu errada</em> (se feminino) vs. <em>deu errado</em> (masculino ou geral). Ambos são aceitos em uso informal.</td>
+        </tr>
+        <tr>
+          <td style="font-size:13px;">4. <em>Que pessoa ou lugar dá saudade?</em></td>
+          <td class="answer-note"><em>"Minha avó me dá muita saudade."</em><br><em>"A minha cidade me dá saudade às vezes."</em></td>
+          <td class="answer-note">Oportunidade de ouro para falar sobre <em>saudade</em> como conceito cultural. Pergunte se há equivalente na língua do aluno.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="prod-guide">
+      <div class="pg-title">✅ Critérios de avaliação rápida</div>
+      <strong>Excelente:</strong> expressão usada corretamente com estrutura gramatical adequada + contexto pessoal autêntico.<br>
+      <strong>Bom:</strong> expressão usada mas com pequeno erro de forma (pronome ausente, concordância). Aceitar e corrigir gentilmente.<br>
+      <strong>A revisar:</strong> expressão usada de forma incompreensível ou trocada com outra. Voltar ao material e praticar oralmente.
+    </div>
+  </div>
+
+  <!-- PHONOLOGY -->
+  <div class="sec-label">Fonologia — Orientações para Anglófonos</div>
+  <div class="phono-box">
+    <h3>🎵 Pontos de atenção fonológica</h3>
+
+    <div class="phono-item">
+      <span class="phono-pt">dar / dá / dão</span>
+      <span class="phono-note">O <em>d</em> inicial antes de vogal anterior (como <em>da</em>) é oclusivo dental em PB — diferente do <em>d</em> do inglês. Não há africação aqui. O <em>ã</em> em <em>dão</em> é vogal nasal: peça ao aluno para não nasalizar demais, como seria em francês.</span>
+    </div>
+    <div class="phono-item">
+      <span class="phono-pt">dar um abraço</span>
+      <span class="phono-note">O <em>r</em> em <em>abraço</em> é o <em>r</em> fricativo do PB — produzido na glote ou faringe, parecido com o <em>h</em> inglês forte. Não é o <em>r</em> americano retroflexo.</span>
+    </div>
+    <div class="phono-item">
+      <span class="phono-pt">dar tchau</span>
+      <span class="phono-note"><em>Tchau</em> soa como <em>chow</em> em inglês (como em "chow mein"). A sequência <em>tch</em> é a africada palatal surda. Pratique em voz alta: <em>tchau, tchau, tchau!</em></span>
+    </div>
+    <div class="phono-item">
+      <span class="phono-pt">dar parabéns</span>
+      <span class="phono-note">A sílaba tônica é <em>béns</em>. O <em>é</em> aberto + <em>ns</em> final forma uma sílaba nasal: <em>pa-ra-BÉNS</em>. O <em>s</em> final é pronunciado /s/, não /z/ como no inglês plurals.</span>
+    </div>
+    <div class="phono-item">
+      <span class="phono-pt">dar um jeito</span>
+      <span class="phono-note">O <em>j</em> em <em>jeito</em> é a fricativa palatal sonora /ʒ/ — como o <em>s</em> em <em>measure</em> ou <em>vision</em> em inglês. O ditongo <em>ei</em> em PB pode ser reduzido para /e/ em fala rápida: <em>jeto</em>.</span>
+    </div>
+    <div class="phono-item">
+      <span class="phono-pt">dar saudade</span>
+      <span class="phono-note">O ditongo <em>au</em> em <em>saudade</em> é pronunciado /aw/. Atenção: a palavra tem 4 síladas: <em>sau-DA-de</em>. Frequentemente pronunciada errada por anglófonos como <em>sa-oo-da-di</em>.</span>
+    </div>
+  </div>
+
+  <!-- CULTURAL NOTES -->
+  <div class="sec-label">Notas Culturais</div>
+  <div class="cultura-box">
+    <h3>🇧🇷 Contexto cultural para explorar em aula</h3>
+
+    <div class="cultura-item">
+      <strong>O "jeitinho brasileiro":</strong> <em>Dar um jeito</em> vai muito além de "resolver um problema". Está ligado ao conceito cultural do <em>jeitinho brasileiro</em> — a capacidade (e criatividade) de encontrar soluções informais em situações difíceis. É um traço de identidade nacional que pode gerar uma discussão rica em aula: <em>"Tem algo parecido na sua cultura?"</em>
+    </div>
+
+    <div class="cultura-item">
+      <strong>Saudade:</strong> A aula sobre <em>dar saudade</em> é uma porta de entrada natural para o conceito de <em>saudade</em>, frequentemente descrito como "intraduzível". Não é apenas nostalgia — é um sentimento de amor misturado com ausência. Pergunte ao aluno se a sua língua tem uma palavra equivalente.
+    </div>
+
+    <div class="cultura-item">
+      <strong>Expressividade afetiva:</strong> <em>Dar um abraço</em> no PB falado vai além do físico — é muito comum dizer <em>"Dá um abraço nela da minha parte"</em> por telefone ou mensagem, como forma de enviar carinho à distância. Reflexo da cultura afetiva brasileira.
+    </div>
+
+    <div class="cultura-item">
+      <strong>Registros e contextos:</strong> Todas as 15 expressões são informais e aparecem no PB falado cotidiano. São perfeitas para conversas com colegas, amigos brasileiros e comunicação profissional casual. Em contextos formais escritos, o aluno pode preferir equivalentes mais formais (<em>ter êxito</em> em vez de <em>dar certo</em>, por exemplo).
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+</body>
+</html>

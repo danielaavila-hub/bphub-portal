@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempos Compostos — Exercícios | BPHUB B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8; --cobalto-dark: #1d4570;
+      --pitomba: #D36D29; --ouro: #FFB94A; --texto: #3C3C21;
+      --green: #2E7D52; --green-bg: #EAF5EE;
+      --red: #C0392B; --red-bg: #FFF0F0;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--cobalto); color: white; }
+    .badge-gram  { background: rgba(38,91,139,0.12); color: var(--cobalto); }
+
+    /* HERO */
+    .hero { background: var(--pitomba); padding: 44px 40px 40px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(24px, 3.5vw, 38px); color: white; margin-bottom: 8px; }
+    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.72); max-width: 560px; line-height: 1.6; }
+    .hero-note { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: rgba(255,255,255,0.9); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 860px; padding: 48px 40px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* EXERCISE CARD */
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+    .ex-number { width: 36px; height: 36px; background: var(--cobalto); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .ex-title { font-family: 'Trirong', serif; font-weight: 300; font-size: 20px; color: var(--cobalto); margin-bottom: 4px; }
+    .ex-instruction { font-size: 13px; color: #666; line-height: 1.55; }
+    .ex-instruction strong { color: var(--nanquim); }
+
+    /* REFERENCE BAND */
+    .ref-band { background: var(--cobalto-light); border-radius: 8px; padding: 10px 16px; margin-bottom: 18px; font-size: 13px; display: flex; gap: 20px; flex-wrap: wrap; }
+    .ref-item { color: var(--cobalto); font-weight: 600; }
+    .ref-item span { color: #888; font-weight: 400; margin-left: 4px; }
+
+    /* GAP ITEMS */
+    .gap-item { display: flex; gap: 14px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { min-width: 24px; color: #bbb; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .gap-text { flex: 1; line-height: 1.9; color: var(--nanquim); }
+    .gap-input { border: none; border-bottom: 2px solid var(--cobalto); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--cobalto); min-width: 160px; width: 160px; outline: none; padding: 0 4px; vertical-align: bottom; }
+    .gap-input:focus { border-color: var(--pitomba); }
+    .gap-input.correct { border-color: var(--green); color: var(--green); }
+    .gap-input.wrong   { border-color: var(--red); color: var(--red); }
+
+    /* CLASSIFY ITEMS */
+    .classify-item { display: flex; gap: 14px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; }
+    .classify-item:last-child { border-bottom: none; }
+    .classify-num { min-width: 24px; color: #bbb; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .classify-sentence { flex: 1; color: var(--nanquim); line-height: 1.6; }
+    .classify-sentence em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .classify-select { border: 2px solid var(--light-gray); border-radius: 8px; padding: 6px 12px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; color: var(--cobalto); background: white; cursor: pointer; outline: none; transition: border-color 0.2s; }
+    .classify-select:focus { border-color: var(--cobalto); }
+    .classify-select.correct { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+    .classify-select.wrong   { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+
+    /* REWRITE ITEMS */
+    .rw-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .rw-item:last-child { border-bottom: none; }
+    .rw-prompt { font-size: 15px; color: var(--nanquim); line-height: 1.65; margin-bottom: 8px; }
+    .rw-prompt .rw-num { color: #bbb; font-size: 13px; font-weight: 700; margin-right: 8px; }
+    .rw-prompt .trigger { background: var(--cobalto-light); color: var(--cobalto); font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 4px; margin-right: 6px; }
+    .rw-textarea { width: 100%; min-height: 52px; background: transparent; border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); resize: vertical; outline: none; }
+    .rw-textarea:focus { border-color: var(--cobalto); }
+
+    /* MATCH ITEMS */
+    .match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .match-col-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 12px; }
+    .match-line { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; }
+    .match-line:last-child { border-bottom: none; }
+    .match-line .num { font-weight: 700; color: var(--pitomba); min-width: 22px; flex-shrink: 0; }
+    .match-line .letter { font-weight: 700; color: var(--cobalto); min-width: 22px; flex-shrink: 0; }
+    .match-input-sm { width: 44px; height: 36px; border: 2px solid var(--cobalto); border-radius: 8px; text-align: center; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--cobalto); background: white; text-transform: uppercase; flex-shrink: 0; outline: none; }
+    .match-input-sm:focus { border-color: var(--pitomba); }
+    .match-input-sm.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+    .match-input-sm.wrong   { background: var(--red-bg);   border-color: var(--red);   color: var(--red); }
+
+    /* PRODUCTION ITEMS */
+    .prod-prompt { background: var(--cobalto-light); border-radius: 10px; padding: 14px 18px; font-size: 14px; color: var(--nanquim); line-height: 1.7; margin-bottom: 10px; }
+    .prod-prompt em { color: var(--cobalto); font-style: normal; font-weight: 600; }
+    .prod-prompt .tense-tag { display: inline-block; font-size: 11px; font-weight: 700; color: white; padding: 2px 8px; border-radius: 4px; margin-left: 6px; }
+    .prod-prompt .tense-tag.fp  { background: var(--cobalto); }
+    .prod-prompt .tense-tag.fpr { background: var(--pitomba); }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 10px 22px; background: var(--cobalto); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .check-btn:hover { background: var(--cobalto-dark); }
+    .reset-link { background: none; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; color: #aaa; cursor: pointer; text-decoration: underline; display: none; margin-left: 10px; }
+    .reset-link.show { display: inline; }
+    .feedback { margin-top: 12px; font-size: 14px; font-weight: 600; display: none; padding: 10px 16px; border-radius: 8px; }
+    .feedback.show { display: block; }
+    .feedback.ok      { background: var(--green-bg); color: var(--green); }
+    .feedback.partial { background: #fff8ec; color: #b8860b; }
+
+    @media (max-width: 640px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card { padding: 22px 18px; }
+      .match-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-gram">Exercícios do Aluno</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Ficha de Exercícios — Nível B2</div>
+  <h1>Tempos Compostos: Terei feito &amp; Teria feito</h1>
+  <div class="hero-sub">Complete all exercises after class. Refer to the grammar material if needed, but try to work from memory first.</div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<div class="main">
+
+  <!-- EXERCISE 1: CLASSIFY -->
+  <div class="sec-label">Exercício 1 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">1</div>
+      <div>
+        <div class="ex-title">Identify and Classify</div>
+        <div class="ex-instruction">Each sentence contains a compound verb form in bold. Use the dropdown to classify it as <strong>FPC</strong> (Futuro do Presente Composto) or <strong>FPRC</strong> (Futuro do Pretérito Composto).</div>
+      </div>
+    </div>
+
+    <div class="classify-item">
+      <span class="classify-num">1.</span>
+      <span class="classify-sentence">Quando você terminar o doutorado, já <em>terá publicado</em> pelo menos três artigos.</span>
+      <select class="classify-select" id="cl1"><option value="">—</option><option value="FPC">FPC</option><option value="FPRC">FPRC</option></select>
+    </div>
+    <div class="classify-item">
+      <span class="classify-num">2.</span>
+      <span class="classify-sentence">Se ela <em>tivesse aceito</em> a bolsa, <em>teria morado</em> dois anos em Paris.</span>
+      <select class="classify-select" id="cl2"><option value="">—</option><option value="FPC">FPC</option><option value="FPRC">FPRC</option></select>
+    </div>
+    <div class="classify-item">
+      <span class="classify-num">3.</span>
+      <span class="classify-sentence">Até sexta-feira, a banca <em>terá avaliado</em> todas as dissertações.</span>
+      <select class="classify-select" id="cl3"><option value="">—</option><option value="FPC">FPC</option><option value="FPRC">FPRC</option></select>
+    </div>
+    <div class="classify-item">
+      <span class="classify-num">4.</span>
+      <span class="classify-sentence">Com mais financiamento, os pesquisadores <em>teriam feito</em> descobertas muito mais importantes.</span>
+      <select class="classify-select" id="cl4"><option value="">—</option><option value="FPC">FPC</option><option value="FPRC">FPRC</option></select>
+    </div>
+    <div class="classify-item">
+      <span class="classify-num">5.</span>
+      <span class="classify-sentence">Quando a conferência terminar, os participantes já <em>terão trocado</em> muitas ideias.</span>
+      <select class="classify-select" id="cl5"><option value="">—</option><option value="FPC">FPC</option><option value="FPRC">FPRC</option></select>
+    </div>
+    <div class="classify-item">
+      <span class="classify-num">6.</span>
+      <span class="classify-sentence">Sem aquela orientadora, eu nunca <em>teria terminado</em> minha pesquisa.</span>
+      <select class="classify-select" id="cl6"><option value="">—</option><option value="FPC">FPC</option><option value="FPRC">FPRC</option></select>
+    </div>
+
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <button class="check-btn" onclick="checkClassify()">✓ Check my answers</button>
+      <button class="reset-link" id="resetCl" onclick="resetClassify()">Reset</button>
+    </div>
+    <div class="feedback" id="fbCl"></div>
+  </div>
+
+  <!-- EXERCISE 2: GAP FILL -->
+  <div class="sec-label">Exercício 2 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">2</div>
+      <div>
+        <div class="ex-title">Gap Fill — Conjugate the Verb</div>
+        <div class="ex-instruction">Complete each sentence with the correct compound tense form of the verb in parentheses. Decide whether to use <strong>FPC</strong> (terei) or <strong>FPRC</strong> (teria) based on context.</div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">1.</span>
+      <span class="gap-text">Quando você se aposentar, <input class="gap-input" id="g1" data-answer="terá orientado" placeholder="___"> (orientar) mais de cem alunos.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">2.</span>
+      <span class="gap-text">Se eu <em>tivesse</em> escolhido Medicina, não <input class="gap-input" id="g2" data-answer="teria feito" placeholder="___"> (fazer) pesquisa em Linguística.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">3.</span>
+      <span class="gap-text">Até o final do semestre, nós <input class="gap-input" id="g3" data-answer="teremos lido" placeholder="___"> (ler) todos os textos do curso.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">4.</span>
+      <span class="gap-text">Sem o apoio da família, ela nunca <input class="gap-input" id="g4" data-answer="teria terminado" placeholder="___"> (terminar) o doutorado.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">5.</span>
+      <span class="gap-text">Quando você chegar à reunião, eu já <input class="gap-input" id="g5" data-answer="terei mandado" placeholder="___"> (mandar) o relatório por e-mail.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">6.</span>
+      <span class="gap-text">Com mais tempo, eu <input class="gap-input" id="g6" data-answer="teria escrito" placeholder="___"> (escrever) um capítulo completamente diferente.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">7.</span>
+      <span class="gap-text">Até amanhã, a comissão <input class="gap-input" id="g7" data-answer="terá tomado" placeholder="___"> (tomar) uma decisão sobre as bolsas.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">8.</span>
+      <span class="gap-text">Se <em>tivéssemos</em> colaborado antes, <input class="gap-input" id="g8" data-answer="teríamos publicado" placeholder="___"> (publicar) muito mais.</span>
+    </div>
+
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <button class="check-btn" onclick="checkGap()">✓ Check my answers</button>
+      <button class="reset-link" id="resetGap" onclick="resetGap()">Reset</button>
+    </div>
+    <div class="feedback" id="fbGap"></div>
+  </div>
+
+  <!-- EXERCISE 3: MATCHING -->
+  <div class="sec-label">Exercício 3 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">3</div>
+      <div>
+        <div class="ex-title">Match Sentence and Meaning</div>
+        <div class="ex-instruction">Match each sentence (1–6) to its English meaning (A–F). Type the letter in the box.</div>
+      </div>
+    </div>
+
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Frase</div>
+        <div class="match-line"><span class="num">1.</span><input class="match-input-sm" id="m1" maxlength="1" autocomplete="off"><span>Até dezembro, <em>teremos concluído</em> a pesquisa.</span></div>
+        <div class="match-line"><span class="num">2.</span><input class="match-input-sm" id="m2" maxlength="1" autocomplete="off"><span>Ela <em>teria aceito</em> o cargo, mas não foi convidada.</span></div>
+        <div class="match-line"><span class="num">3.</span><input class="match-input-sm" id="m3" maxlength="1" autocomplete="off"><span>Quando você ligar, eles já <em>terão saído</em>.</span></div>
+        <div class="match-line"><span class="num">4.</span><input class="match-input-sm" id="m4" maxlength="1" autocomplete="off"><span>Sem aquele erro, o projeto <em>teria dado</em> muito certo.</span></div>
+        <div class="match-line"><span class="num">5.</span><input class="match-input-sm" id="m5" maxlength="1" autocomplete="off"><span>Naquela época, ele já <em>teria publicado</em> uns vinte artigos.</span></div>
+        <div class="match-line"><span class="num">6.</span><input class="match-input-sm" id="m6" maxlength="1" autocomplete="off"><span>Quando o congresso terminar, você <em>terá conhecido</em> pesquisadores do mundo todo.</span></div>
+      </div>
+      <div>
+        <div class="match-col-label">Significado</div>
+        <div class="match-line"><span class="letter">A.</span> They will probably be gone by the time you call.</div>
+        <div class="match-line"><span class="letter">B.</span> By that time, he must/would have published around twenty articles.</div>
+        <div class="match-line"><span class="letter">C.</span> Without that mistake, the project would have worked out very well.</div>
+        <div class="match-line"><span class="letter">D.</span> By December, we will have completed the research.</div>
+        <div class="match-line"><span class="letter">E.</span> She would have accepted the position, but she wasn't invited.</div>
+        <div class="match-line"><span class="letter">F.</span> By the time the conference ends, you will have met researchers from all over the world.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:20px;">
+      <button class="check-btn" onclick="checkMatch()">✓ Check my answers</button>
+      <button class="reset-link" id="resetMatch" onclick="resetMatch()">Reset</button>
+    </div>
+    <div class="feedback" id="fbMatch"></div>
+  </div>
+
+  <!-- EXERCISE 4: ERROR CORRECTION -->
+  <div class="sec-label">Exercício 4 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">4</div>
+      <div>
+        <div class="ex-title">Spot and Correct the Error</div>
+        <div class="ex-instruction">Each sentence has one error in the compound verb form. Identify the mistake and write the corrected sentence in the box.</div>
+      </div>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-prompt"><span class="rw-num">1.</span> <em>"Quando você chegar, eu já <u>tinha mandado</u> o e-mail."</em></div>
+      <textarea class="rw-textarea" placeholder="Correction: ..."></textarea>
+    </div>
+    <div class="rw-item">
+      <div class="rw-prompt"><span class="rw-num">2.</span> <em>"Se eu <em>tivesse</em> estudado mais, <u>terei tirado</u> uma nota melhor."</em></div>
+      <textarea class="rw-textarea" placeholder="Correction: ..."></textarea>
+    </div>
+    <div class="rw-item">
+      <div class="rw-prompt"><span class="rw-num">3.</span> <em>"Até o final do ano, eles <u>teriam concluído</u> todos os experimentos."</em> (no hypothetical condition given)</div>
+      <textarea class="rw-textarea" placeholder="Correction: ..."></textarea>
+    </div>
+    <div class="rw-item">
+      <div class="rw-prompt"><span class="rw-num">4.</span> <em>"Sem você, eu não <u>terei conseguido</u> terminar este projeto."</em></div>
+      <textarea class="rw-textarea" placeholder="Correction: ..."></textarea>
+    </div>
+  </div>
+
+  <!-- EXERCISE 5: PRODUCTION -->
+  <div class="sec-label">Exercício 5 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">5</div>
+      <div>
+        <div class="ex-title">Your Turn — Write About Yourself</div>
+        <div class="ex-instruction">Answer each question in 2–3 sentences in Portuguese. The tense to use is indicated for each item.</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <div class="prod-prompt">1. Pense nos próximos cinco anos da sua carreira. O que você <em>terá realizado</em> até lá? <span class="tense-tag fp">FPC</span></div>
+      <textarea class="rw-textarea" placeholder="Daqui a cinco anos, terei..."></textarea>
+    </div>
+    <div style="margin-bottom:24px;">
+      <div class="prod-prompt">2. Se você <em>tivesse</em> escolhido outra área de estudo, o que <em>teria feito</em> de diferente na sua vida profissional? <span class="tense-tag fpr">FPRC</span></div>
+      <textarea class="rw-textarea" placeholder="Se eu tivesse estudado..., teria..."></textarea>
+    </div>
+    <div style="margin-bottom:24px;">
+      <div class="prod-prompt">3. Pense em uma decisão importante que tomou na vida acadêmica. O que <em>teria acontecido</em> se você tivesse feito uma escolha diferente? <span class="tense-tag fpr">FPRC</span></div>
+      <textarea class="rw-textarea" placeholder="Se eu tivesse..."></textarea>
+    </div>
+    <div>
+      <div class="prod-prompt">4. Quando você terminar este nível de português, o que você já <em>terá aprendido</em>? <span class="tense-tag fp">FPC</span></div>
+      <textarea class="rw-textarea" placeholder="Quando terminar este nível, terei..."></textarea>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  // ---- EXERCISE 1: CLASSIFY ----
+  const clAnswers = { cl1:'FPC', cl2:'FPRC', cl3:'FPC', cl4:'FPRC', cl5:'FPC', cl6:'FPRC' };
+
+  function checkClassify() {
+    let correct = 0; let unanswered = 0;
+    for (const [id, ans] of Object.entries(clAnswers)) {
+      const sel = document.getElementById(id);
+      sel.classList.remove('correct','wrong');
+      if (!sel.value) { unanswered++; continue; }
+      if (sel.value === ans) { sel.classList.add('correct'); correct++; }
+      else sel.classList.add('wrong');
+    }
+    const fb = document.getElementById('fbCl');
+    const rst = document.getElementById('resetCl');
+    fb.classList.add('show'); rst.classList.add('show');
+    if (unanswered) { fb.className='feedback show partial'; fb.textContent='Please classify all sentences first!'; return; }
+    if (correct === 6) { fb.className='feedback show ok'; fb.textContent='🎉 Perfect! All 6 correct!'; }
+    else { fb.className='feedback show partial'; fb.textContent=`${correct} out of 6 correct. Red dropdowns need a different answer.`; }
+  }
+  function resetClassify() {
+    Object.keys(clAnswers).forEach(id => { const s=document.getElementById(id); s.value=''; s.classList.remove('correct','wrong'); });
+    document.getElementById('fbCl').classList.remove('show');
+    document.getElementById('resetCl').classList.remove('show');
+  }
+
+  // ---- EXERCISE 2: GAP FILL ----
+  function normalise(str) { return str.trim().toLowerCase().replace(/\s+/g,' '); }
+
+  function checkGap() {
+    let correct = 0; let total = 8;
+    const ids = ['g1','g2','g3','g4','g5','g6','g7','g8'];
+    ids.forEach(id => {
+      const input = document.getElementById(id);
+      const ans = normalise(input.dataset.answer);
+      const val = normalise(input.value);
+      input.classList.remove('correct','wrong');
+      if (val === ans) { input.classList.add('correct'); correct++; }
+      else input.classList.add('wrong');
+    });
+    const fb = document.getElementById('fbGap');
+    const rst = document.getElementById('resetGap');
+    fb.classList.add('show'); rst.classList.add('show');
+    if (correct === total) { fb.className='feedback show ok'; fb.textContent='🎉 Perfect! All 8 correct!'; }
+    else { fb.className='feedback show partial'; fb.textContent=`${correct} out of ${total} correct. Red fields need a different form — check tense choice and irregular participles.`; }
+  }
+  function resetGap() {
+    ['g1','g2','g3','g4','g5','g6','g7','g8'].forEach(id => { const i=document.getElementById(id); i.value=''; i.classList.remove('correct','wrong'); });
+    document.getElementById('fbGap').classList.remove('show');
+    document.getElementById('resetGap').classList.remove('show');
+  }
+
+  // ---- EXERCISE 3: MATCHING ----
+  const matchAnswers = { m1:'D', m2:'E', m3:'A', m4:'C', m5:'B', m6:'F' };
+
+  function checkMatch() {
+    let correct = 0;
+    for (const [id, ans] of Object.entries(matchAnswers)) {
+      const input = document.getElementById(id);
+      const val = input.value.trim().toUpperCase();
+      input.classList.remove('correct','wrong');
+      if (val === ans) { input.classList.add('correct'); correct++; }
+      else input.classList.add('wrong');
+    }
+    const fb = document.getElementById('fbMatch');
+    const rst = document.getElementById('resetMatch');
+    fb.classList.add('show'); rst.classList.add('show');
+    if (correct === 6) { fb.className='feedback show ok'; fb.textContent='🎉 Perfect! All 6 matched correctly!'; }
+    else { fb.className='feedback show partial'; fb.textContent=`${correct} out of 6 correct. Red boxes need a different letter.`; }
+  }
+  function resetMatch() {
+    Object.keys(matchAnswers).forEach(id => { const i=document.getElementById(id); i.value=''; i.classList.remove('correct','wrong'); });
+    document.getElementById('fbMatch').classList.remove('show');
+    document.getElementById('resetMatch').classList.remove('show');
+  }
+
+  // Auto-advance matching inputs
+  ['m1','m2','m3','m4','m5','m6'].forEach((id,i,arr) => {
+    document.getElementById(id).addEventListener('input', () => {
+      if (document.getElementById(id).value.length===1 && i<arr.length-1)
+        document.getElementById(arr[i+1]).focus();
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expressões com DAR — Exercícios | BPHUB A1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --rosa-cha: #FFD8C5;
+      --floresta: #4E551D; --erva-doce: #A6B28A; --cobalto: #265B8B;
+      --pitomba: #D36D29; --ouro: #FFB94A; --texto: #3C3C21;
+      --erva-dark: #6b7a52;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--erva-doce); color: var(--floresta); }
+    .badge-gram  { background: rgba(166,178,138,0.2); color: var(--erva-dark); }
+
+    /* HERO */
+    .hero { background: var(--erva-doce); padding: 48px 40px 44px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--floresta); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: var(--nanquim); margin-bottom: 10px; }
+    .hero h1 span { color: var(--floresta); }
+    .hero-sub { font-size: 15px; color: rgba(30,29,28,0.65); max-width: 540px; line-height: 1.65; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.5); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--floresta); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 860px; padding: 48px 40px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; }
+
+    /* EXERCISE BLOCK */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-block h2 { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: var(--cobalto); margin-bottom: 6px; }
+    .ex-instruction { font-size: 14px; color: #777; margin-bottom: 24px; line-height: 1.55; }
+    .ex-instruction strong { color: var(--nanquim); font-weight: 600; }
+
+    /* REFERENCE BOX */
+    .ref-box { background: var(--off-white); border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; }
+    .ref-box .ref-title { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .ref-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; padding: 4px 14px; font-size: 13px; color: var(--cobalto); font-weight: 600; cursor: default; }
+
+    /* GAP FILL ITEMS */
+    .gap-item { display: flex; gap: 14px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { min-width: 24px; color: #bbb; font-size: 13px; font-weight: 700; }
+    .gap-text { flex: 1; line-height: 1.9; color: var(--nanquim); }
+    .blank { display: inline-block; min-width: 140px; border-bottom: 2px solid var(--cobalto); height: 22px; vertical-align: bottom; margin: 0 4px; }
+    .gap-input { border: none; border-bottom: 2px solid var(--cobalto); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--cobalto); min-width: 150px; width: 150px; outline: none; padding: 0 4px; vertical-align: bottom; transition: border-color 0.2s; }
+    .gap-input:focus { border-color: var(--pitomba); }
+    .gap-input.correct { border-color: #2E7D52; color: #2E7D52; }
+    .gap-input.wrong   { border-color: #C0392B; color: #C0392B; }
+
+    /* TRUE / FALSE */
+    .tf-vf-wrap { display: inline-flex; gap: 6px; vertical-align: middle; margin-right: 8px; }
+    .tf-btn { width: 36px; height: 36px; border: 2px solid var(--light-gray); border-radius: 8px; background: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #aaa; cursor: pointer; transition: all 0.15s; }
+    .tf-btn:hover { border-color: var(--cobalto); color: var(--cobalto); }
+    .tf-btn.selected-v { background: var(--cobalto); border-color: var(--cobalto); color: white; }
+    .tf-btn.selected-f { background: var(--pitomba); border-color: var(--pitomba); color: white; }
+    .tf-btn.correct { background: #2E7D52; border-color: #2E7D52; color: white; }
+    .tf-btn.wrong   { background: #C0392B; border-color: #C0392B; color: white; }
+    .tf-correction { width: 100%; margin-top: 8px; background: transparent; border: none; border-bottom: 1px solid var(--light-gray); font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); padding: 4px 0; outline: none; resize: none; min-height: 32px; }
+    .tf-correction:focus { border-bottom-color: var(--cobalto); }
+    .tf-correction::placeholder { color: #ccc; font-style: italic; }
+
+    /* MATCHING */
+    .match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .match-col-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 14px; }
+    .match-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; }
+    .match-item:last-child { border-bottom: none; }
+    .match-key { font-weight: 700; color: var(--pitomba); min-width: 22px; flex-shrink: 0; }
+    .match-text { color: var(--nanquim); line-height: 1.5; }
+    .match-input { width: 44px; height: 36px; border: 2px solid var(--cobalto); border-radius: 8px; text-align: center; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--cobalto); background: white; text-transform: uppercase; flex-shrink: 0; outline: none; transition: border-color 0.2s, background 0.2s; }
+    .match-input:focus { border-color: var(--pitomba); box-shadow: 0 0 0 3px rgba(211,109,41,0.15); }
+    .match-input.correct { background: #EAF5EE; border-color: #2E7D52; color: #2E7D52; }
+    .match-input.wrong { background: #FFF0F0; border-color: #C0392B; color: #C0392B; }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 10px 22px; background: var(--cobalto); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+    .check-btn:hover { background: #1e4a72; }
+    .check-btn:active { transform: scale(0.97); }
+    .check-result { margin-top: 14px; font-size: 14px; font-weight: 600; display: none; padding: 10px 16px; border-radius: 8px; }
+    .check-result.show { display: block; }
+    .check-result.all-correct { background: #EAF5EE; color: #2E7D52; }
+    .check-result.partial { background: #fff8ec; color: #b8860b; }
+    .reset-btn { display: none; background: none; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; color: #aaa; cursor: pointer; margin-left: 12px; text-decoration: underline; }
+    .reset-btn.show { display: inline; }
+
+    /* TRUE/FALSE */
+    .tf-item { display: flex; gap: 14px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-num { min-width: 24px; color: #bbb; font-size: 13px; font-weight: 700; padding-top: 2px; }
+    .tf-text { flex: 1; color: var(--nanquim); line-height: 1.6; }
+    .tf-circle { display: inline-block; width: 28px; height: 28px; border: 2px solid var(--light-gray); border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; font-weight: 700; margin-right: 6px; color: #ccc; cursor: default; }
+
+    /* MULTIPLE CHOICE */
+    .mc-item { padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .mc-item:last-child { border-bottom: none; }
+    .mc-q { color: var(--nanquim); line-height: 1.6; margin-bottom: 8px; }
+    .mc-q .mc-num { color: #bbb; font-size: 13px; font-weight: 700; margin-right: 8px; }
+    .mc-options { display: flex; flex-wrap: wrap; gap: 8px; padding-left: 20px; }
+    .mc-opt { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--nanquim); padding: 5px 10px; border-radius: 8px; transition: background 0.2s; }
+    .mc-opt input[type="radio"] { accent-color: var(--cobalto); width: 16px; height: 16px; cursor: pointer; }
+    .mc-opt.correct { background: #EAF5EE; color: #2E7D52; font-weight: 600; }
+    .mc-opt.wrong   { background: #FFF0F0; color: #C0392B; text-decoration: line-through; }
+
+    /* PRODUCTION */
+    .prod-prompt { background: var(--off-white); border-radius: 10px; padding: 16px 20px; font-size: 14px; color: var(--nanquim); line-height: 1.7; margin-bottom: 16px; }
+    .prod-prompt em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .prod-lines { margin-top: 12px; }
+    .prod-line { border-bottom: 1px solid var(--light-gray); height: 36px; margin-bottom: 4px; }
+
+    /* WRITE LINES */
+    .write-area { width: 100%; min-height: 80px; background: transparent; border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); resize: vertical; }
+    .write-area:focus { outline: 2px solid var(--erva-doce); border-color: transparent; }
+
+    /* PROGRESS BAR (decorative) */
+    .progress-bar { display: flex; gap: 6px; margin-bottom: 36px; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--erva-doce); }
+    .progress-dot.active { background: var(--floresta); width: 24px; border-radius: 4px; }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--light-gray); margin: 8px 0 28px; }
+
+    @media (max-width: 640px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block { padding: 24px 20px; }
+      .match-cols { grid-template-columns: 1fr; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-gram">Exercícios do Aluno</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Ficha de Exercícios — Nível A1</div>
+  <h1>Expressões com <span>DAR</span></h1>
+  <div class="hero-sub">Complete the exercises below based on the material you studied before class. Do your best — we'll review everything together!</div>
+  <div class="hero-note">📝 Complete after studying the material</div>
+</div>
+
+<div class="main">
+
+  <!-- PROGRESS DOTS -->
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+
+  <!-- ==================== EXERCISE 1 ==================== -->
+  <div class="sec-label">Exercício 1 de 5</div>
+  <div class="ex-block">
+    <h2>Matching — Expressions and Meanings</h2>
+    <div class="ex-instruction">Match each expression on the left (1–8) with its meaning on the right (A–H). Type the letter in the box next to each expression, then click <strong>Check your answers</strong>.</div>
+
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Expressão</div>
+        <div class="match-item">
+          <span class="match-key">1.</span>
+          <input class="match-input" id="m1" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar certo</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">2.</span>
+          <input class="match-input" id="m2" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar errado</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">3.</span>
+          <input class="match-input" id="m3" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar fome</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">4.</span>
+          <input class="match-input" id="m4" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar sono</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">5.</span>
+          <input class="match-input" id="m5" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar um jeito</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">6.</span>
+          <input class="match-input" id="m6" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar uma mão</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">7.</span>
+          <input class="match-input" id="m7" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar saudade</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">8.</span>
+          <input class="match-input" id="m8" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar vontade</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">9.</span>
+          <input class="match-input" id="m9" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar-se bem</span>
+        </div>
+        <div class="match-item">
+          <span class="match-key">10.</span>
+          <input class="match-input" id="m10" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">deu ruim</span>
+        </div>
+      </div>
+      <div>
+        <div class="match-col-label">Significado</div>
+        <div class="match-item"><span class="match-key">A.</span><span class="match-text">to make you miss something/someone</span></div>
+        <div class="match-item"><span class="match-key">B.</span><span class="match-text">to help, to lend a hand</span></div>
+        <div class="match-item"><span class="match-key">C.</span><span class="match-text">to go wrong, to fail</span></div>
+        <div class="match-item"><span class="match-key">D.</span><span class="match-text">to find a way, to figure it out</span></div>
+        <div class="match-item"><span class="match-key">E.</span><span class="match-text">to work out, to succeed</span></div>
+        <div class="match-item"><span class="match-key">F.</span><span class="match-text">to make you feel like doing something</span></div>
+        <div class="match-item"><span class="match-key">G.</span><span class="match-text">to make you hungry</span></div>
+        <div class="match-item"><span class="match-key">H.</span><span class="match-text">to make you sleepy</span></div>
+        <div class="match-item"><span class="match-key">I.</span><span class="match-text">to get along with someone</span></div>
+        <div class="match-item"><span class="match-key">J.</span><span class="match-text">things went badly — colloquial, invariable</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <button class="check-btn" onclick="checkMatching()">✓ Check your answers</button>
+      <button class="reset-btn" id="resetMatch" onclick="resetMatching()">Reset</button>
+    </div>
+    <div class="check-result" id="matchResult"></div>
+  </div>
+
+  <script>
+    const matchAnswers = { m1:'E', m2:'C', m3:'G', m4:'H', m5:'D', m6:'B', m7:'A', m8:'F', m9:'I', m10:'J' };
+
+    function checkMatching() {
+      let correct = 0;
+      const total = Object.keys(matchAnswers).length;
+      for (const [id, answer] of Object.entries(matchAnswers)) {
+        const input = document.getElementById(id);
+        const val = input.value.trim().toUpperCase();
+        input.classList.remove('correct', 'wrong');
+        if (val === answer) { input.classList.add('correct'); correct++; }
+        else { input.classList.add('wrong'); }
+      }
+      const result = document.getElementById('matchResult');
+      const resetBtn = document.getElementById('resetMatch');
+      result.classList.add('show');
+      resetBtn.classList.add('show');
+      if (correct === total) {
+        result.className = 'check-result show all-correct';
+        result.textContent = '🎉 Perfect! All 10 correct!';
+      } else {
+        result.className = 'check-result show partial';
+        result.textContent = correct + ' out of ' + total + ' correct. The boxes in red need a different letter — try again!';
+      }
+    }
+
+    function resetMatching() {
+      for (const id of Object.keys(matchAnswers)) {
+        const input = document.getElementById(id);
+        input.value = '';
+        input.classList.remove('correct', 'wrong');
+      }
+      const result = document.getElementById('matchResult');
+      const resetBtn = document.getElementById('resetMatch');
+      result.classList.remove('show');
+      resetBtn.classList.remove('show');
+    }
+
+    // Auto-advance to next input on single letter
+    document.querySelectorAll('.match-input').forEach((input, i, arr) => {
+      input.addEventListener('input', () => {
+        if (input.value.length === 1 && i < arr.length - 1) arr[i + 1].focus();
+      });
+    });
+  </script>
+
+  <!-- ==================== EXERCISE 2 ==================== -->
+  <div class="sec-label">Exercício 2 de 5</div>
+  <div class="ex-block">
+    <h2>Gap Fill — Complete the Sentences</h2>
+    <div class="ex-instruction">Choose the correct expression from the box and write it in the blank. Use each expression once. You may need to change the verb form (e.g., <strong>deu, dá, dando</strong>).</div>
+
+    <div class="ref-box">
+      <div class="ref-title">Word Bank</div>
+      <div class="ref-chips">
+        <span class="chip">dar certo</span>
+        <span class="chip">dar errado</span>
+        <span class="chip">dar tempo</span>
+        <span class="chip">não dá</span>
+        <span class="chip">dar risada</span>
+        <span class="chip">dar medo</span>
+        <span class="chip">dar parabéns</span>
+        <span class="chip">dar tchau</span>
+        <span class="chip">dar-se bem</span>
+        <span class="chip">deu ruim</span>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">1.</span>
+      <span class="gap-text">O plano <input class="gap-input" id="g1" autocomplete="off" spellcheck="false" placeholder="___">! Conseguimos o contrato.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">2.</span>
+      <span class="gap-text"><input class="gap-input" id="g2" autocomplete="off" spellcheck="false" placeholder="___"> assistir o filme de terror sozinho.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">3.</span>
+      <span class="gap-text">Esse comediante é incrível, sempre <input class="gap-input" id="g3" autocomplete="off" spellcheck="false" placeholder="___"> com ele!</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">4.</span>
+      <span class="gap-text">Hoje <input class="gap-input" id="g4" autocomplete="off" spellcheck="false" placeholder="___"> para ir à academia — tenho muito trabalho.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">5.</span>
+      <span class="gap-text">Tudo <input class="gap-input" id="g5" autocomplete="off" spellcheck="false" placeholder="___"> na viagem — perdemos o voo e a mala.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">6.</span>
+      <span class="gap-text">Você vai conseguir terminar antes das 18h? <input class="gap-input" id="g6" autocomplete="off" spellcheck="false" placeholder="___">?</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">7.</span>
+      <span class="gap-text">Ela ligou para a mãe para <input class="gap-input" id="g7" autocomplete="off" spellcheck="false" placeholder="___"> pelo aniversário.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">8.</span>
+      <span class="gap-text">As crianças acenaram para <input class="gap-input" id="g8" autocomplete="off" spellcheck="false" placeholder="___"> para o avô.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">9.</span>
+      <span class="gap-text">Eles trabalham juntos há anos e <input class="gap-input" id="g9" autocomplete="off" spellcheck="false" placeholder="___"> muito bem — são quase amigos.</span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">10.</span>
+      <span class="gap-text">A gente foi ao show, mas <input class="gap-input" id="g10" autocomplete="off" spellcheck="false" placeholder="___">: o artista cancelou na última hora.</span>
+    </div>
+
+    <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <button class="check-btn" onclick="checkGapFill()">✓ Check your answers</button>
+      <button class="reset-btn" id="resetGap" onclick="resetGapFill()">Reset</button>
+    </div>
+    <div class="check-result" id="gapResult"></div>
+  </div>
+
+  <script>
+    // Accepted answers (lowercase, trimmed). Arrays allow variant forms.
+    const gapAnswers = {
+      g1: ['deu certo'],
+      g2: ['dá medo', 'dá muito medo'],
+      g3: ['dou risada', 'dou muita risada'],
+      g4: ['não dá'],
+      g5: ['deu errado'],
+      g6: ['dá tempo', 'vai dar tempo'],
+      g7: ['dar parabéns'],
+      g8: ['dar tchau'],
+      g9: ['se dão bem', 'se dão muito bem'],
+      g10: ['deu ruim']
+    };
+
+    function normalise(str) { return str.trim().toLowerCase().replace(/\s+/g, ' '); }
+
+    function checkGapFill() {
+      let correct = 0;
+      const total = Object.keys(gapAnswers).length;
+      for (const [id, accepted] of Object.entries(gapAnswers)) {
+        const input = document.getElementById(id);
+        const val = normalise(input.value);
+        input.classList.remove('correct', 'wrong');
+        if (accepted.includes(val)) { input.classList.add('correct'); correct++; }
+        else { input.classList.add('wrong'); }
+      }
+      const result = document.getElementById('gapResult');
+      const resetBtn = document.getElementById('resetGap');
+      result.classList.add('show');
+      resetBtn.classList.add('show');
+      if (correct === total) {
+        result.className = 'check-result show all-correct';
+        result.textContent = '🎉 Perfect! All 10 correct!';
+      } else {
+        result.className = 'check-result show partial';
+        result.textContent = correct + ' out of ' + total + ' correct. Red fields need a different answer — check the word bank and try again!';
+      }
+    }
+
+    function resetGapFill() {
+      for (const id of Object.keys(gapAnswers)) {
+        const input = document.getElementById(id);
+        input.value = '';
+        input.classList.remove('correct', 'wrong');
+      }
+      const result = document.getElementById('gapResult');
+      const resetBtn = document.getElementById('resetGap');
+      result.classList.remove('show');
+      resetBtn.classList.remove('show');
+    }
+  </script>
+
+  <!-- ==================== EXERCISE 3 ==================== -->
+  <div class="sec-label">Exercício 3 de 5</div>
+  <div class="ex-block">
+    <h2>True or False?</h2>
+    <div class="ex-instruction">Click <strong>V</strong> (verdadeiro / true) or <strong>F</strong> (falso / false) for each statement. If it is false, write the correction in the line below, then click <strong>Check your answers</strong>.</div>
+
+    <div class="tf-item">
+      <span class="tf-num">1.</span>
+      <div class="tf-text">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tf-vf-wrap">
+            <button class="tf-btn" id="tf1v" onclick="selectVF(1,'V')">V</button>
+            <button class="tf-btn" id="tf1f" onclick="selectVF(1,'F')">F</button>
+          </div>
+          <em>"Dar uma mão"</em> significa oferecer ajuda a alguém.
+        </div>
+        <textarea class="tf-correction" id="tc1" rows="1" placeholder="If false, write the correction here..."></textarea>
+      </div>
+    </div>
+
+    <div class="tf-item">
+      <span class="tf-num">2.</span>
+      <div class="tf-text">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tf-vf-wrap">
+            <button class="tf-btn" id="tf2v" onclick="selectVF(2,'V')">V</button>
+            <button class="tf-btn" id="tf2f" onclick="selectVF(2,'F')">F</button>
+          </div>
+          Quando algo me deixa com saudades, eu digo <em>"Me deu vontade."</em>
+        </div>
+        <textarea class="tf-correction" id="tc2" rows="1" placeholder="If false, write the correction here..."></textarea>
+      </div>
+    </div>
+
+    <div class="tf-item">
+      <span class="tf-num">3.</span>
+      <div class="tf-text">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tf-vf-wrap">
+            <button class="tf-btn" id="tf3v" onclick="selectVF(3,'V')">V</button>
+            <button class="tf-btn" id="tf3f" onclick="selectVF(3,'F')">F</button>
+          </div>
+          <em>"Não dá"</em> é uma forma de dizer que algo é impossível ou muito difícil no momento.
+        </div>
+        <textarea class="tf-correction" id="tc3" rows="1" placeholder="If false, write the correction here..."></textarea>
+      </div>
+    </div>
+
+    <div class="tf-item">
+      <span class="tf-num">4.</span>
+      <div class="tf-text">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tf-vf-wrap">
+            <button class="tf-btn" id="tf4v" onclick="selectVF(4,'V')">V</button>
+            <button class="tf-btn" id="tf4f" onclick="selectVF(4,'F')">F</button>
+          </div>
+          Para dizer que um projeto foi bem-sucedido, eu posso dizer <em>"Deu errado!"</em>
+        </div>
+        <textarea class="tf-correction" id="tc4" rows="1" placeholder="If false, write the correction here..."></textarea>
+      </div>
+    </div>
+
+    <div class="tf-item">
+      <span class="tf-num">5.</span>
+      <div class="tf-text">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tf-vf-wrap">
+            <button class="tf-btn" id="tf5v" onclick="selectVF(5,'V')">V</button>
+            <button class="tf-btn" id="tf5f" onclick="selectVF(5,'F')">F</button>
+          </div>
+          <em>"Dar um jeito"</em> significa encontrar uma solução criativa para um problema.
+        </div>
+        <textarea class="tf-correction" id="tc5" rows="1" placeholder="If false, write the correction here..."></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <button class="check-btn" onclick="checkTF()">✓ Check your answers</button>
+      <button class="reset-btn" id="resetTF" onclick="resetTF()">Reset</button>
+    </div>
+    <div class="check-result" id="tfResult"></div>
+  </div>
+
+  <script>
+    const tfSelected = { 1: null, 2: null, 3: null, 4: null, 5: null };
+    const tfCorrect  = { 1: 'V',  2: 'F',  3: 'V',  4: 'F',  5: 'V' };
+
+    function selectVF(num, choice) {
+      tfSelected[num] = choice;
+      const vBtn = document.getElementById('tf' + num + 'v');
+      const fBtn = document.getElementById('tf' + num + 'f');
+      vBtn.className = 'tf-btn' + (choice === 'V' ? ' selected-v' : '');
+      fBtn.className = 'tf-btn' + (choice === 'F' ? ' selected-f' : '');
+    }
+
+    function checkTF() {
+      let correct = 0;
+      let unanswered = 0;
+      for (let i = 1; i <= 5; i++) {
+        const vBtn = document.getElementById('tf' + i + 'v');
+        const fBtn = document.getElementById('tf' + i + 'f');
+        vBtn.className = 'tf-btn';
+        fBtn.className = 'tf-btn';
+        if (!tfSelected[i]) { unanswered++; continue; }
+        const isCorrect = tfSelected[i] === tfCorrect[i];
+        if (isCorrect) {
+          correct++;
+          (tfSelected[i] === 'V' ? vBtn : fBtn).className = 'tf-btn correct';
+        } else {
+          (tfSelected[i] === 'V' ? vBtn : fBtn).className = 'tf-btn wrong';
+          // show correct button
+          (tfCorrect[i] === 'V' ? vBtn : fBtn).className = 'tf-btn correct';
+        }
+      }
+      const result = document.getElementById('tfResult');
+      const resetBtn = document.getElementById('resetTF');
+      result.classList.add('show');
+      resetBtn.classList.add('show');
+      if (unanswered > 0) {
+        result.className = 'check-result show partial';
+        result.textContent = 'Please answer all 5 statements before checking!';
+        return;
+      }
+      if (correct === 5) {
+        result.className = 'check-result show all-correct';
+        result.textContent = '🎉 Perfect! All 5 correct! Remember to write the corrections for the false statements.';
+      } else {
+        result.className = 'check-result show partial';
+        result.textContent = correct + ' out of 5 correct. The correct answers are shown in green. Write the corrections for the false ones!';
+      }
+    }
+
+    function resetTF() {
+      for (let i = 1; i <= 5; i++) {
+        tfSelected[i] = null;
+        document.getElementById('tf' + i + 'v').className = 'tf-btn';
+        document.getElementById('tf' + i + 'f').className = 'tf-btn';
+        document.getElementById('tc' + i).value = '';
+      }
+      const result = document.getElementById('tfResult');
+      const resetBtn = document.getElementById('resetTF');
+      result.classList.remove('show');
+      resetBtn.classList.remove('show');
+    }
+  </script>
+
+  <!-- ==================== EXERCISE 4 ==================== -->
+  <div class="sec-label">Exercício 4 de 5</div>
+  <div class="ex-block">
+    <h2>Choose the Right Expression</h2>
+    <div class="ex-instruction">Choose the expression (a, b, or c) that best completes each mini-dialogue.</div>
+
+    <div class="mc-item">
+      <div class="mc-q"><span class="mc-num">1.</span> <strong>A:</strong> <em>Você conseguiu resolver o problema com o servidor?</em> — <strong>B:</strong> "Sim, a equipe ___."</div>
+      <div class="mc-options" id="mc-opts-1">
+        <label class="mc-opt"><input type="radio" name="q1" value="a"> a) deu um abraço</label>
+        <label class="mc-opt"><input type="radio" name="q1" value="b"> b) deu um jeito</label>
+        <label class="mc-opt"><input type="radio" name="q1" value="c"> c) deu sono</label>
+      </div>
+    </div>
+
+    <div class="mc-item">
+      <div class="mc-q"><span class="mc-num">2.</span> <strong>A:</strong> <em>O que aconteceu com a sua apresentação?</em> — <strong>B:</strong> "Infelizmente ___. O projetor parou de funcionar."</div>
+      <div class="mc-options" id="mc-opts-2">
+        <label class="mc-opt"><input type="radio" name="q2" value="a"> a) deu certo</label>
+        <label class="mc-opt"><input type="radio" name="q2" value="b"> b) deu parabéns</label>
+        <label class="mc-opt"><input type="radio" name="q2" value="c"> c) deu errado</label>
+      </div>
+    </div>
+
+    <div class="mc-item">
+      <div class="mc-q"><span class="mc-num">3.</span> <strong>A:</strong> <em>Por que você não comeu nada ainda?</em> — <strong>B:</strong> "Estava trabalhando e não ___ de parar."</div>
+      <div class="mc-options" id="mc-opts-3">
+        <label class="mc-opt"><input type="radio" name="q3" value="a"> a) deu tempo</label>
+        <label class="mc-opt"><input type="radio" name="q3" value="b"> b) deu risada</label>
+        <label class="mc-opt"><input type="radio" name="q3" value="c"> c) deu medo</label>
+      </div>
+    </div>
+
+    <div class="mc-item">
+      <div class="mc-q"><span class="mc-num">4.</span> <strong>A:</strong> <em>Você pode me ajudar com esse relatório?</em> — <strong>B:</strong> "Claro! Fico feliz em ___."</div>
+      <div class="mc-options" id="mc-opts-4">
+        <label class="mc-opt"><input type="radio" name="q4" value="a"> a) dar fome</label>
+        <label class="mc-opt"><input type="radio" name="q4" value="b"> b) dar uma mão</label>
+        <label class="mc-opt"><input type="radio" name="q4" value="c"> c) dar saudade</label>
+      </div>
+    </div>
+
+    <div class="mc-item">
+      <div class="mc-q"><span class="mc-num">5.</span> <strong>A:</strong> <em>Como você se sentiu quando viu a foto da sua cidade natal?</em> — <strong>B:</strong> "Ah, me ___!"</div>
+      <div class="mc-options" id="mc-opts-5">
+        <label class="mc-opt"><input type="radio" name="q5" value="a"> a) deu tchau</label>
+        <label class="mc-opt"><input type="radio" name="q5" value="b"> b) deu parabéns</label>
+        <label class="mc-opt"><input type="radio" name="q5" value="c"> c) deu muitas saudades</label>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <button class="check-btn" onclick="checkMC()">✓ Check your answers</button>
+      <button class="reset-btn" id="resetMC" onclick="resetMC()">Reset</button>
+    </div>
+    <div class="check-result" id="mcResult"></div>
+  </div>
+
+  <script>
+    const mcAnswers = { 1:'b', 2:'c', 3:'a', 4:'b', 5:'c' };
+
+    function checkMC() {
+      let correct = 0;
+      const total = Object.keys(mcAnswers).length;
+      let unanswered = 0;
+
+      for (const [q, ans] of Object.entries(mcAnswers)) {
+        const opts = document.querySelectorAll(`#mc-opts-${q} .mc-opt`);
+        const selected = document.querySelector(`input[name="q${q}"]:checked`);
+        opts.forEach(label => label.classList.remove('correct', 'wrong'));
+        if (!selected) { unanswered++; continue; }
+        const selectedLabel = selected.closest('.mc-opt');
+        if (selected.value === ans) {
+          selectedLabel.classList.add('correct');
+          correct++;
+        } else {
+          selectedLabel.classList.add('wrong');
+          // also highlight the correct one
+          opts.forEach(label => {
+            const inp = label.querySelector('input');
+            if (inp && inp.value === ans) label.classList.add('correct');
+          });
+        }
+      }
+
+      const result = document.getElementById('mcResult');
+      const resetBtn = document.getElementById('resetMC');
+      result.classList.add('show');
+      resetBtn.classList.add('show');
+
+      if (unanswered > 0) {
+        result.className = 'check-result show partial';
+        result.textContent = 'Please answer all questions before checking!';
+        return;
+      }
+      if (correct === total) {
+        result.className = 'check-result show all-correct';
+        result.textContent = '🎉 Perfect! All 5 correct!';
+      } else {
+        result.className = 'check-result show partial';
+        result.textContent = correct + ' out of ' + total + ' correct. The correct answers are highlighted in green.';
+      }
+    }
+
+    function resetMC() {
+      for (let q = 1; q <= 5; q++) {
+        const radios = document.querySelectorAll(`input[name="q${q}"]`);
+        radios.forEach(r => r.checked = false);
+        const opts = document.querySelectorAll(`#mc-opts-${q} .mc-opt`);
+        opts.forEach(label => label.classList.remove('correct', 'wrong'));
+      }
+      const result = document.getElementById('mcResult');
+      const resetBtn = document.getElementById('resetMC');
+      result.classList.remove('show');
+      resetBtn.classList.remove('show');
+    }
+  </script>
+
+  <!-- ==================== EXERCISE 5 ==================== -->
+  <div class="sec-label">Exercício 5 de 5</div>
+  <div class="ex-block">
+    <h2>Your Turn — Write About Yourself</h2>
+    <div class="ex-instruction">Answer the questions below in Portuguese. Write 1–2 sentences for each. Use an expression with <em>dar</em> in your answer.</div>
+
+    <div style="margin-bottom: 28px;">
+      <div class="prod-prompt">
+        1. Que tipo de comida ou cheiro <em>dá fome</em> em você?
+      </div>
+      <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <div class="prod-prompt">
+        2. Você tem alguma coisa no trabalho ou na vida que às vezes <em>dá sono</em>? O quê?
+      </div>
+      <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <div class="prod-prompt">
+        3. Pense em um projeto ou situação recente. <em>Deu certo</em> ou <em>deu errado</em>? Explique.
+      </div>
+      <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <div class="prod-prompt">
+        4. Você tem uma pessoa ou um lugar que <em>dá saudade</em>? Escreva uma frase sobre essa pessoa ou lugar.
+      </div>
+      <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <div class="prod-prompt">
+        5. Você <em>se dá bem</em> com todos os seus colegas de trabalho? Tem alguém com quem é mais difícil? Escreva 1–2 frases.
+      </div>
+      <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div>
+      <div class="prod-prompt">
+        6. Pense em uma vez que as coisas <em>deram ruim</em> — um plano, uma viagem, um evento. O que aconteceu? Escreva 1–2 frases.
+      </div>
+      <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+</body>
+</html>

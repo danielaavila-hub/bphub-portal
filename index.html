@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Materials | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── EXACT colors from Elementor Kit CSS (post-6.css) ── */
+    :root {
+      --baunilha:    #FCF5EB;   /* body background                   */
+      --baunilha2:   #FDE7C4;   /* warm cream                        */
+      --off-white:   #F2F0E3;   /* very light off-white              */
+      --light-gray:  #EDEDE2;   /* light gray-green                  */
+      --nanquim:     #1E1D1C;   /* near-black                        */
+      --rosa-cha:    #FFD8C5;   /* peach / rosa chá                  */
+      --salmon:      #FCA290;   /* salmon pink                       */
+      --floresta:    #4E551D;   /* dark forest green                 */
+      --erva-doce:   #A6B28A;   /* sage green                        */
+      --cobalto:     #265B8B;   /* cobalt blue (headings)            */
+      --pitomba:     #D36D29;   /* orange (primary CTA)              */
+      --marrom:      #967E63;   /* warm brown                        */
+      --marrom2:     #A1441D;   /* dark orange-brown                 */
+      --ouro:        #FFB94A;   /* amber/gold                        */
+      --texto:       #3C3C21;   /* body text (exact from site)       */
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--cobalto);
+      line-height: 1.25;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── BUTTONS (exact from site: Manrope 15px, radius 10px) ── */
+    .btn {
+      display: inline-block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      border-radius: 10px;
+      padding: 12px 28px;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.15s;
+      text-align: center;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-pitomba  { background: var(--pitomba);  color: #fff; }
+    .btn-floresta { background: var(--floresta);  color: #fff; }
+    .btn-erva     { background: var(--erva-doce); color: #000; }
+    .btn-cobalto  { background: var(--cobalto);   color: #fff; }
+    .btn-outline  {
+      background: transparent;
+      border: 1.5px solid var(--cobalto);
+      color: var(--cobalto);
+    }
+    .btn-rosa     { background: var(--rosa-cha); color: var(--nanquim); }
+
+    /* ─────────────────────────────────────────────────
+       NAVBAR
+       ───────────────────────────────────────────────── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--baunilha);
+      border-bottom: 1px solid rgba(78,85,29,0.12);
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo img {
+      height: 38px;
+      width: auto;
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .navbar-links a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.65px;
+      font-weight: 400;
+      color: #000;
+      transition: color 0.2s;
+    }
+    .navbar-links a:hover { color: var(--pitomba); }
+
+    .navbar-links .btn {
+      font-size: 13.65px;
+      padding: 9px 20px;
+    }
+
+    /* ─────────────────────────────────────────────────
+       HERO
+       ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 88vh;
+      background: var(--baunilha);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 80px 60px;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--floresta) 0%, var(--erva-doce) 40%, var(--ouro) 70%, var(--pitomba) 100%);
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 580px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pitomba);
+      margin-bottom: 18px;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(36px, 4.5vw, 58px);
+      font-weight: 300;
+      color: var(--cobalto);
+      margin-bottom: 22px;
+      line-height: 1.15;
+    }
+
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--pitomba);
+    }
+
+    .hero-text p {
+      font-size: 17px;
+      color: var(--texto);
+      margin-bottom: 36px;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-note {
+      font-size: 13px;
+      color: #888;
+      margin-top: 18px;
+    }
+    .hero-note a { color: var(--cobalto); text-decoration: underline; }
+
+    .hero-visual {
+      flex: 0 0 auto;
+      width: 420px;
+      position: relative;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(38,91,139,0.15);
+    }
+
+    /* decorative badge on hero image */
+    .hero-badge {
+      position: absolute;
+      bottom: -18px;
+      left: -24px;
+      background: var(--rosa-cha);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .hero-badge .badge-num {
+      font-family: 'Trirong', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--cobalto);
+      line-height: 1;
+    }
+    .hero-badge .badge-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--nanquim);
+      margin-top: 2px;
+    }
+
+    /* ─────────────────────────────────────────────────
+       SECTION — ABOUT / WHAT IS THE PORTAL
+       ───────────────────────────────────────────────── */
+    .section-about {
+      background: var(--rosa-cha);
+      padding: 80px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-text h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--nanquim);
+      margin-bottom: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--nanquim);
+    }
+
+    .feature-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pitomba);
+      margin-top: 7px;
+    }
+
+    .about-levels {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .level-group {
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .level-group.a { background: var(--erva-doce); }
+    .level-group.b { background: var(--cobalto); color: white; }
+    .level-group.c { background: var(--pitomba); color: white; }
+
+    .level-badges {
+      display: flex;
+      gap: 8px;
+    }
+
+    .level-badge {
+      font-family: 'Trirong', serif;
+      font-size: 18px;
+      font-weight: 500;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .level-group.a .level-badge { background: rgba(255,255,255,0.55); color: var(--floresta); }
+    .level-group.b .level-badge { background: rgba(255,255,255,0.18); color: white; }
+    .level-group.c .level-badge { background: rgba(255,255,255,0.18); color: white; }
+
+    .level-desc { font-size: 14px; line-height: 1.4; }
+    .level-group.a .level-desc { color: var(--floresta); }
+    .level-group.b .level-desc, .level-group.c .level-desc { color: rgba(255,255,255,0.9); }
+    .level-name { font-weight: 700; font-size: 15px; }
+
+    /* ─────────────────────────────────────────────────
+       SECTION — DISCORD CTA
+       ───────────────────────────────────────────────── */
+    .section-discord {
+      background: var(--floresta);
+      background-image: url('https://brazilianportuguesehub.com/wp-content/uploads/2024/12/bg-verde.png');
+      background-size: cover;
+      background-position: center;
+      padding: 80px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .discord-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .section-discord h2 {
+      color: white;
+      font-size: clamp(28px, 3.5vw, 44px);
+      margin-bottom: 18px;
+    }
+
+    .section-discord p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .discord-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .discord-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 10px;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .discord-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    .discord-btn-primary { background: var(--ouro); color: var(--nanquim); }
+    .discord-btn-secondary { background: rgba(255,255,255,0.15); color: white; border: 2px solid rgba(255,255,255,0.5); }
+    .discord-btn-secondary:hover { background: rgba(255,255,255,0.25); }
+    .discord-btn-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; display: block; margin-bottom: 2px; }
+
+    .discord-icon {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────────────
+       SECTION — STUDENT ACCESS
+       ───────────────────────────────────────────────── */
+    .section-access {
+      background: var(--baunilha2);
+      padding: 80px;
+    }
+
+    .access-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-access h2 {
+      font-size: clamp(26px, 3vw, 38px);
+      margin-bottom: 12px;
+    }
+
+    .section-access p {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 36px;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 40px rgba(38,91,139,0.1);
+    }
+
+    .login-card label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cobalto);
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .login-card input {
+      width: 100%;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--nanquim);
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .login-card input:focus { border-color: var(--cobalto); }
+
+    .login-card .btn { width: 100%; margin-top: 4px; font-size: 15px; padding: 14px; }
+
+    .login-error {
+      display: none;
+      background: #fff0ed;
+      border: 1px solid #f5c0b0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--marrom2);
+      margin-top: 12px;
+      text-align: left;
+    }
+
+    /* ─────────────────────────────────────────────────
+       SECTION — TEAM
+       ───────────────────────────────────────────────── */
+    .section-team {
+      background: var(--off-white);
+      padding: 80px;
+    }
+
+    .section-team .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-team h2 { font-size: clamp(28px, 3vw, 42px); margin-bottom: 14px; }
+
+    .section-team .section-header p {
+      font-size: 16px;
+      color: #666;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .teacher-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(38,91,139,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .teacher-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(38,91,139,0.14);
+    }
+
+    .teacher-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .teacher-info {
+      padding: 18px 20px 20px;
+    }
+
+    .teacher-info h3 {
+      font-family: 'Trirong', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--cobalto);
+      margin-bottom: 4px;
+    }
+
+    .teacher-info .teacher-bio {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    /* ─────────────────────────────────────────────────
+       FOOTER
+       ───────────────────────────────────────────────── */
+    .footer {
+      background: var(--nanquim);
+      color: rgba(255,255,255,0.7);
+      padding: 48px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo img {
+      height: 28px;
+      width: auto;
+      opacity: 0.85;
+      filter: brightness(10);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+    }
+    .footer-links a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ─────────────────────────────────────────────────
+       RESPONSIVE
+       ───────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; padding: 60px 32px 40px; min-height: auto; }
+      .hero-visual { width: 100%; max-width: 400px; margin: 0 auto; }
+      .section-about, .section-discord, .section-access, .section-team { padding: 56px 32px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .navbar { padding: 0 24px; }
+      .footer { padding: 36px 32px; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .navbar-links .nav-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="navbar">
+    <a class="navbar-logo" href="https://brazilianportuguesehub.com" target="_blank">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+    <div class="navbar-links">
+      <a class="nav-link" href="https://brazilianportuguesehub.com" target="_blank">Main Site</a>
+      <a href="#access" class="btn btn-rosa">Student Access</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Brazilian Portuguese Hub &mdash; Student Portal</div>
+      <h1>Your materials,<br><em>always with you.</em></h1>
+      <p>A private space with all the exercises, texts, and resources prepared specially for your lessons. Study at your own pace, review as many times as you need.</p>
+      <div class="hero-actions">
+        <a href="#access" class="btn btn-pitomba">Access My Materials</a>
+        <a href="#discord" class="btn btn-erva">Join Our Community</a>
+      </div>
+      <p class="hero-note">Not a student yet? <a href="https://brazilianportuguesehub.com" target="_blank">Learn more about our lessons</a> on the main site.</p>
+    </div>
+    <div class="hero-visual">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2025/05/Vector-1-2.webp" alt="Student learning Portuguese">
+      <div class="hero-badge">
+        <span class="badge-num">15+</span>
+        <span class="badge-label">Years teaching</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT / LEVELS ─── -->
+  <section class="section-about">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Everything your teacher prepared, in one place</h2>
+        <p>This portal gives you access to your personalized materials — interactive exercises, readings, grammar notes, and conversation guides — organized by your level and lesson plan.</p>
+        <ul class="feature-list">
+          <li>Interactive exercises with instant feedback</li>
+          <li>Authentic Brazilian texts and real-world language</li>
+          <li>Grammar explanations tailored to your level</li>
+          <li>Vocabulary lists and expression guides</li>
+          <li>Accessible from any device, any time</li>
+        </ul>
+      </div>
+      <div class="about-levels">
+        <div class="level-group a">
+          <div class="level-badges">
+            <div class="level-badge">A1</div>
+            <div class="level-badge">A2</div>
+          </div>
+          <div class="level-desc">
+            <div class="level-name">Beginner</div>
+            Foundations of Brazilian Portuguese
+          </div>
+        </div>
+        <div class="level-group b">
+          <div class="level-badges">
+            <div class="level-badge">B1</div>
+            <div class="level-badge">B2</div>
+          </div>
+          <div class="level-desc">
+            <div class="level-name">Intermediate</div>
+            Fluency and authentic communication
+          </div>
+        </div>
+        <div class="level-group c">
+          <div class="level-badges">
+            <div class="level-badge">C1</div>
+            <div class="level-badge">C2</div>
+          </div>
+          <div class="level-desc">
+            <div class="level-name">Advanced</div>
+            Nuance, culture, and native-level expression
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DISCORD ─── -->
+  <section class="section-discord" id="discord">
+    <div class="discord-inner">
+      <h2>Join our community</h2>
+      <p>Whether you're a current student or just passionate about Brazilian Portuguese — there's a place for you in our community.</p>
+      <div class="discord-btns">
+        <a href="https://discord.gg/bfchVeUdYT" class="discord-btn discord-btn-primary" target="_blank">
+          <svg class="discord-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+          </svg>
+          <span>
+            <span class="discord-btn-label">Current students</span>
+            Student Community
+          </span>
+        </a>
+        <a href="https://discord.gg/yDzwF9Aqrq" class="discord-btn discord-btn-secondary" target="_blank">
+          <svg class="discord-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+          </svg>
+          <span>
+            <span class="discord-btn-label">Language enthusiasts</span>
+            Open Community
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STUDENT ACCESS ─── -->
+  <section class="section-access" id="access">
+    <div class="access-inner">
+      <h2>Student Access</h2>
+      <p>Enter your name and the password your teacher shared with you to access your materials.</p>
+      <div class="login-card">
+        <label for="studentName">Your name</label>
+        <input type="text" id="studentName" placeholder="e.g. marta" autocomplete="off">
+        <label for="studentPass">Password</label>
+        <input type="password" id="studentPass" placeholder="••••••••" autocomplete="off">
+        <button class="btn btn-pitomba" onclick="checkLogin()">Access My Materials</button>
+        <div class="login-error" id="loginError">Name or password not recognized. Please check with your teacher.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TEAM ─── -->
+  <section class="section-team">
+    <div class="section-header">
+      <h2>Meet our team</h2>
+      <p>Experienced Brazilian teachers dedicated to helping you speak Portuguese with confidence.</p>
+    </div>
+    <div class="team-grid">
+      <div class="teacher-card">
+        <img src="https://brazilianportuguesehub.com/wp-content/uploads/2025/05/0-Adriana-Forma.webp" alt="Adriana França">
+        <div class="teacher-info">
+          <h3>Adriana França</h3>
+          <p class="teacher-bio">With 12+ years of experience, Adriana offers engaging, personalized lessons in Switzerland, helping students reach their goals with confidence and care.</p>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <img src="https://brazilianportuguesehub.com/wp-content/uploads/2025/05/0-Daniela-Forma.webp" alt="Daniela Avila">
+        <div class="teacher-info">
+          <h3>Daniela Avila</h3>
+          <p class="teacher-bio">With over 15 years of experience and 20,000+ hours of online teaching, Daniela helps professionals master Portuguese through goal-oriented lessons designed for real-world success.</p>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <img src="https://brazilianportuguesehub.com/wp-content/uploads/2025/05/0-Elen-Forma.webp" alt="Elen Santos">
+        <div class="teacher-info">
+          <h3>Elen Santos</h3>
+          <p class="teacher-bio">With 25+ years of experience, Elen offers personalized lessons focused on grammar, writing, and culture, making Portuguese learning dynamic and meaningful.</p>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <img src="https://brazilianportuguesehub.com/wp-content/uploads/2025/05/0-Uiara-Forma.webp" alt="Uiara Nunes">
+        <div class="teacher-info">
+          <h3>Uiara Nunes</h3>
+          <p class="teacher-bio">With 15+ years of experience, Uiara combines academic depth, CELPE-Bras expertise, and a personalized focus on each student's goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/BPHUB-1.png" alt="BPHUB">
+    </div>
+    <div class="footer-links">
+      <a href="https://brazilianportuguesehub.com" target="_blank">Main Site</a>
+      <a href="https://brazilianportuguesehub.com/meet-our-team/" target="_blank">Our Team</a>
+      <a href="mailto:contact@brazilianportuguesehub.com">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Brazilian Portuguese Hub. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const students = {
+      // name → { password, level page }
+      "marta": { password: "marta2026", page: "b2/index.html" }
+      // Add new students here:
+      // "john": { password: "john2026", page: "b1/index.html" }
+    };
+
+    function checkLogin() {
+      const name = document.getElementById('studentName').value.trim().toLowerCase();
+      const pass = document.getElementById('studentPass').value.trim();
+      const err  = document.getElementById('loginError');
+
+      if (students[name] && students[name].password === pass) {
+        err.style.display = 'none';
+        window.location.href = students[name].page + '#' + pass;
+      } else {
+        err.style.display = 'block';
+      }
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('studentPass').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkLogin();
+    });
+    document.getElementById('studentName').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('studentPass').focus();
+    });
+  </script>
+</body>
+</html>

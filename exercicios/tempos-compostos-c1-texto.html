@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempos Compostos — Visão Sistêmica C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8; --cobalto-dark: #1d4570;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      /* 4 highlight groups */
+      --g-a: #2E7D52;      /* tem/tinha — verde */
+      --g-a-bg: #EAF5EE;
+      --g-b: #265B8B;      /* terá/teria — cobalto */
+      --g-b-bg: #EBF1F8;
+      --g-c: #8B3A7E;      /* tenha/tivesse — violeta */
+      --g-c-bg: #F5EAF3;
+      --g-d: #B8860B;      /* tiver — âmbar */
+      --g-d-bg: #FFF8EC;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--nanquim); color: white; }
+    .badge-gram  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 100%); padding: 52px 40px 46px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; padding: 52px 40px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* GRAMMAR BOX */
+    .gram-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 32px; }
+    .gram-box > h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 8px; }
+    .gram-intro { font-size: 14px; color: #777; line-height: 1.65; margin-bottom: 24px; max-width: 680px; }
+
+    /* TENSE MAP — two columns */
+    .tense-map { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+    .tense-col { }
+    .tense-col-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; padding: 6px 14px; border-radius: 6px; display: inline-block; }
+    .tense-col-label.ind { background: rgba(38,91,139,0.1); color: var(--cobalto); }
+    .tense-col-label.sub { background: rgba(139,58,126,0.1); color: var(--g-c); }
+
+    /* TENSE CARD */
+    .tc { border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; position: relative; overflow: hidden; }
+    .tc::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .tc.ga::before { background: var(--g-a); }
+    .tc.gb::before { background: var(--g-b); }
+    .tc.gc::before { background: var(--g-c); }
+    .tc.gd::before { background: var(--g-d); }
+    .tc-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .tc.ga .tc-name { color: var(--g-a); }
+    .tc.gb .tc-name { color: var(--g-b); }
+    .tc.gc .tc-name { color: var(--g-c); }
+    .tc.gd .tc-name { color: var(--g-d); }
+    .tc-form { font-size: 18px; font-family: 'Trirong', serif; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .tc-formula { font-size: 12px; color: #999; margin-bottom: 8px; }
+    .tc-use { font-size: 13px; color: #555; line-height: 1.55; margin-bottom: 6px; }
+    .tc-example { font-size: 13px; font-style: italic; color: #444; background: var(--off-white); border-radius: 6px; padding: 7px 12px; line-height: 1.6; }
+    .tc-example .transl { display: block; font-size: 12px; color: #aaa; font-style: normal; margin-top: 2px; }
+    /* multi-example layout */
+    .tc-examples { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+    .tc-ex-row { display: grid; grid-template-columns: 88px 1fr; gap: 8px; align-items: baseline; background: var(--off-white); border-radius: 6px; padding: 6px 10px; }
+    .tc-trigger { font-size: 11px; font-weight: 700; text-transform: lowercase; flex-shrink: 0; }
+    .tc.ga .tc-trigger { color: var(--g-a); }
+    .tc.gb .tc-trigger { color: var(--g-b); }
+    .tc.gc .tc-trigger { color: var(--g-c); }
+    .tc.gd .tc-trigger { color: var(--g-d); }
+    .tc-ex-text { font-size: 13px; font-style: italic; color: #444; line-height: 1.55; }
+    .tc-ex-transl { font-size: 11px; color: #aaa; font-style: normal; display: block; margin-top: 1px; }
+    .tc-tag { display: inline-block; font-size: 10px; font-weight: 700; color: white; padding: 1px 7px; border-radius: 3px; margin-right: 4px; vertical-align: middle; }
+    .tc-tag.ga { background: var(--g-a); }
+    .tc-tag.gb { background: var(--g-b); }
+    .tc-tag.gc { background: var(--g-c); }
+    .tc-tag.gd { background: var(--g-d); }
+
+    /* TER CONJUGATION REFERENCE TABLE */
+    .conj-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px; }
+    .conj-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    .conj-table th.th-pron { color: #aaa; }
+    .conj-table th.th-ga { color: var(--g-a); }
+    .conj-table th.th-gb { color: var(--g-b); }
+    .conj-table th.th-gc { color: var(--g-c); }
+    .conj-table th.th-gd { color: var(--g-d); }
+    .conj-table td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); color: var(--nanquim); vertical-align: top; }
+    .conj-table tr:last-child td { border-bottom: none; }
+    .conj-table .pron { color: #aaa; font-size: 12px; }
+    .conj-table .ga { color: var(--g-a); font-weight: 700; }
+    .conj-table .gb { color: var(--g-b); font-weight: 700; }
+    .conj-table .gc { color: var(--g-c); font-weight: 700; }
+    .conj-table .gd { color: var(--g-d); font-weight: 700; }
+
+    /* CONTRAST BOX */
+    .contrast-box { background: var(--baunilha2); border-radius: 12px; padding: 20px 24px; margin-top: 20px; }
+    .contrast-box .cb-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pitomba); margin-bottom: 14px; }
+    .contrast-row { display: grid; grid-template-columns: 100px 1fr; gap: 16px; margin-bottom: 10px; align-items: start; }
+    .contrast-row:last-child { margin-bottom: 0; }
+    .cr-badge { font-size: 10px; font-weight: 700; color: white; padding: 3px 8px; border-radius: 4px; text-align: center; margin-top: 3px; }
+    .cr-badge.ga { background: var(--g-a); }
+    .cr-badge.gb { background: var(--g-b); }
+    .cr-badge.gc { background: var(--g-c); }
+    .cr-badge.gd { background: var(--g-d); }
+    .contrast-row .cr-text { font-size: 14px; color: var(--nanquim); line-height: 1.6; }
+    .contrast-row .cr-text em { font-style: italic; color: #555; }
+
+    /* SPANISH NOTE */
+    .es-note { background: #FFF8EC; border: 1.5px solid var(--ouro); border-radius: 12px; padding: 18px 22px; margin-bottom: 32px; }
+    .es-note .es-title { font-weight: 700; color: #b8860b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .es-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .es-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #aaa; padding: 6px 10px; text-align: left; border-bottom: 1px solid #f0d080; }
+    .es-table td { padding: 7px 10px; border-bottom: 1px solid #f8f0d0; font-size: 13px; vertical-align: top; line-height: 1.5; color: var(--nanquim); }
+    .es-table tr:last-child td { border-bottom: none; }
+    .es-table .pt { color: var(--cobalto); font-weight: 700; }
+    .es-table .es { color: #888; }
+    .es-note-text { font-size: 13px; color: #666; line-height: 1.65; margin-top: 12px; }
+
+    /* TEXT CARD */
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 36px 40px; margin-bottom: 32px; }
+    .text-source { font-size: 12px; color: #aaa; font-style: italic; margin-bottom: 20px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 28px; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .text-subtitle { font-size: 14px; color: #777; margin-bottom: 28px; line-height: 1.5; }
+    .text-body { font-size: 15px; line-height: 1.9; color: var(--nanquim); }
+    .text-body p { margin-bottom: 16px; }
+    .text-body p:last-child { margin-bottom: 0; }
+    .text-body strong { font-weight: 700; color: var(--nanquim); }
+
+    /* HIGHLIGHTS */
+    .hl-a { color: var(--g-a); font-weight: 700; background: var(--g-a-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl-b { color: var(--g-b); font-weight: 700; background: var(--g-b-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl-c { color: var(--g-c); font-weight: 700; background: var(--g-c-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl-d { color: var(--g-d); font-weight: 700; background: var(--g-d-bg); padding: 1px 3px; border-radius: 3px; }
+    sup.lb { font-size: 9px; font-weight: 700; vertical-align: super; letter-spacing: 0; margin-left: 1px; }
+    sup.lb.a { color: var(--g-a); }
+    sup.lb.b { color: var(--g-b); }
+    sup.lb.c { color: var(--g-c); }
+    sup.lb.d { color: var(--g-d); }
+
+    /* LEGEND */
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--light-gray); }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .legend-dot.a { background: var(--g-a-bg); border: 1.5px solid var(--g-a); }
+    .legend-dot.b { background: var(--g-b-bg); border: 1.5px solid var(--g-b); }
+    .legend-dot.c { background: var(--g-c-bg); border: 1.5px solid var(--g-c); }
+    .legend-dot.d { background: var(--g-d-bg); border: 1.5px solid var(--g-d); }
+
+    /* QUESTIONS */
+    .questions-box { background: var(--cobalto-light); border-radius: 14px; padding: 24px 28px; margin-bottom: 32px; }
+    .questions-box h3 { font-size: 17px; color: var(--cobalto); margin-bottom: 16px; }
+    .q-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(38,91,139,0.12); font-size: 15px; color: var(--nanquim); line-height: 1.65; }
+    .q-item:last-child { border-bottom: none; }
+    .q-num { color: var(--cobalto); font-weight: 700; font-size: 13px; min-width: 24px; flex-shrink: 0; }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--light-gray); margin: 36px 0; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .tense-map { grid-template-columns: 1fr; }
+      .text-card { padding: 24px 20px; }
+      .contrast-row { grid-template-columns: 80px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-gram">Gramática + Texto</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Material de Aula — Nível C1</div>
+  <h1>Tempos Compostos:<br><em>Visão Sistêmica</em></h1>
+  <div class="hero-sub">Os sete tempos compostos do português brasileiro organizados em um único mapa — indicativo e subjuntivo, padrões de uso e contraste.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">tem feito</span>
+    <span class="hero-tag">tinha feito</span>
+    <span class="hero-tag">terá / teria feito</span>
+    <span class="hero-tag">tenha feito</span>
+    <span class="hero-tag">tivesse feito</span>
+    <span class="hero-tag">tiver feito</span>
+  </div>
+  <div class="hero-note">📖 Leia este material antes da aula</div>
+</div>
+
+<div class="main">
+
+  <!-- GRAMMAR: OVERVIEW -->
+  <div class="sec-label">Mapa Gramatical</div>
+  <div class="gram-box">
+    <h2>Os 7 Tempos Compostos</h2>
+    <p class="gram-intro">Todos os tempos compostos do português brasileiro seguem a mesma fórmula: <strong>TER (auxiliar) + particípio passado</strong>. O tempo verbal de <em>ter</em> é o que muda — e é ele que determina o sentido. Os tempos compostos estão organizados em dois grupos: indicativo e subjuntivo.</p>
+
+    <div class="tense-map">
+
+      <!-- INDICATIVO -->
+      <div class="tense-col">
+        <div class="tense-col-label ind">Indicativo — fatos e projeções</div>
+
+        <div class="tc ga">
+          <div class="tc-name"><span class="tc-tag ga">I1</span> Pretérito Perfeito Composto</div>
+          <div class="tc-form">tenho / têm feito</div>
+          <div class="tc-formula">ter (presente) + particípio</div>
+          <div class="tc-use">Ação <strong>repetida ou contínua</strong> do passado até o presente.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">ultimamente</span><span class="tc-ex-text">Ultimamente, ela <strong>tem trabalhado</strong> muito.<span class="tc-ex-transl">Lately, she has been working a lot.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">nos últimos meses</span><span class="tc-ex-text">Nos últimos meses, a empresa <strong>tem crescido</strong> bastante.<span class="tc-ex-transl">In the last few months, the company has been growing a lot.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">recentemente</span><span class="tc-ex-text">Recentemente, ela <strong>tem lido</strong> muito sobre o assunto.<span class="tc-ex-transl">Recently, she has been reading a lot about the topic.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">neste ano</span><span class="tc-ex-text">Neste ano, <strong>temos tido</strong> muitos desafios.<span class="tc-ex-transl">This year, we have been having many challenges.</span></span></div>
+          </div>
+        </div>
+
+        <div class="tc ga" style="border-top: 1px dashed var(--light-gray);">
+          <div class="tc-name"><span class="tc-tag ga">I2</span> Pretérito Mais-que-Perfeito Composto</div>
+          <div class="tc-form">tinha / tinham feito</div>
+          <div class="tc-formula">ter (imperfeito) + particípio</div>
+          <div class="tc-use">Ação <strong>anterior a outra ação passada</strong>.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">quando</span><span class="tc-ex-text">Quando cheguei, ela já <strong>tinha saído</strong>.<span class="tc-ex-transl">When I arrived, she had already left.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">depois que</span><span class="tc-ex-text">Depois que <strong>tinham assinado</strong> o contrato, surgiu o problema.<span class="tc-ex-transl">After they had signed the contract, the problem came up.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">antes de</span><span class="tc-ex-text">Antes de sair, ele já <strong>tinha enviado</strong> o relatório.<span class="tc-ex-transl">Before leaving, he had already sent the report.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">já</span><span class="tc-ex-text">Quando a reunião começou, eu já <strong>tinha lido</strong> todo o material.<span class="tc-ex-transl">When the meeting started, I had already read all the material.</span></span></div>
+          </div>
+        </div>
+
+        <div class="tc gb">
+          <div class="tc-name"><span class="tc-tag gb">I3</span> Futuro do Presente Composto</div>
+          <div class="tc-form">terei / terão feito</div>
+          <div class="tc-formula">ter (futuro) + particípio</div>
+          <div class="tc-use">Ação <strong>concluída antes de um momento futuro</strong>.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">até + data</span><span class="tc-ex-text">Até sexta, <strong>terei revisado</strong> tudo.<span class="tc-ex-transl">By Friday, I will have reviewed everything.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">quando + futuro</span><span class="tc-ex-text">Quando você chegar, eu já <strong>terei saído</strong>.<span class="tc-ex-transl">When you arrive, I will have already left.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">daqui a X anos</span><span class="tc-ex-text">Daqui a dez anos, <strong>teremos construído</strong> algo sólido.<span class="tc-ex-transl">In ten years, we will have built something solid.</span></span></div>
+          </div>
+        </div>
+
+        <div class="tc gb" style="border-top: 1px dashed var(--light-gray);">
+          <div class="tc-name"><span class="tc-tag gb">I4</span> Futuro do Pretérito Composto</div>
+          <div class="tc-form">teria / teriam feito</div>
+          <div class="tc-formula">ter (futuro do pretérito) + particípio</div>
+          <div class="tc-use">Resultado <strong>hipotético que não ocorreu</strong>.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">se tivesse</span><span class="tc-ex-text">Se tivesse estudado mais, <strong>teria passado</strong>.<span class="tc-ex-transl">If I had studied more, I would have passed.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">sem</span><span class="tc-ex-text">Sem a sua ajuda, não <strong>teria conseguido</strong>.<span class="tc-ex-transl">Without your help, I wouldn't have managed.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">com mais</span><span class="tc-ex-text">Com mais tempo, <strong>teria feito</strong> um trabalho melhor.<span class="tc-ex-transl">With more time, I would have done a better job.</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBJUNTIVO -->
+      <div class="tense-col">
+        <div class="tense-col-label sub">Subjuntivo — dúvida, emoção, condição</div>
+
+        <div class="tc gc">
+          <div class="tc-name"><span class="tc-tag gc">S1</span> Pretérito Perfeito Composto do Subjuntivo</div>
+          <div class="tc-form">tenha / tenham feito</div>
+          <div class="tc-formula">ter (presente do subj.) + particípio</div>
+          <div class="tc-use">Dúvida ou emoção sobre algo que <strong>pode ter acontecido</strong> recentemente.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">espero que</span><span class="tc-ex-text">Espero que ele <strong>tenha enviado</strong> o relatório.<span class="tc-ex-transl">I hope he has sent the report.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">duvido que</span><span class="tc-ex-text">Duvido que eles já <strong>tenham terminado</strong> — são muitas variáveis.<span class="tc-ex-transl">I doubt they have already finished — there are too many variables.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">é possível que</span><span class="tc-ex-text">É possível que ela <strong>tenha esquecido</strong> a reunião.<span class="tc-ex-transl">It's possible she forgot the meeting.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">tomara que</span><span class="tc-ex-text">Tomara que <strong>tenham resolvido</strong> o problema antes de amanhã.<span class="tc-ex-transl">Hopefully they've resolved the problem before tomorrow.</span></span></div>
+          </div>
+        </div>
+
+        <div class="tc gc" style="border-top: 1px dashed var(--light-gray);">
+          <div class="tc-name"><span class="tc-tag gc">S2</span> Pretérito Mais-que-Perfeito do Subjuntivo</div>
+          <div class="tc-form">tivesse / tivessem feito</div>
+          <div class="tc-formula">ter (imperfeito do subj.) + particípio</div>
+          <div class="tc-use">Condição <strong>irreal ou contrafactual no passado</strong>.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">se</span><span class="tc-ex-text">Se <strong>tivesse chegado</strong> antes, teria visto.<span class="tc-ex-transl">If I had arrived earlier, I would have seen it.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">mesmo que</span><span class="tc-ex-text">Mesmo que <strong>tivesse pedido</strong> desculpas, ela não teria voltado.<span class="tc-ex-transl">Even if he had apologized, she wouldn't have come back.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">como se</span><span class="tc-ex-text">Ele falou como se <strong>tivesse trabalhado</strong> no projeto por anos.<span class="tc-ex-transl">He spoke as if he had worked on the project for years.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">ainda que</span><span class="tc-ex-text">Ainda que <strong>tivessem investido</strong> mais, o produto teria falhado.<span class="tc-ex-transl">Even if they had invested more, the product would have failed.</span></span></div>
+          </div>
+        </div>
+
+        <div class="tc gd">
+          <div class="tc-name"><span class="tc-tag gd">S3</span> Futuro Composto do Subjuntivo</div>
+          <div class="tc-form">tiver / tiverem feito</div>
+          <div class="tc-formula">ter (futuro do subj.) + particípio</div>
+          <div class="tc-use">Ação <strong>concluída antes de um evento futuro</strong>, em oração temporal ou condicional.</div>
+          <div class="tc-examples">
+            <div class="tc-ex-row"><span class="tc-trigger">quando</span><span class="tc-ex-text">Quando <strong>tiver terminado</strong>, me avise.<span class="tc-ex-transl">When you have finished, let me know.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">se</span><span class="tc-ex-text">Se <strong>tiver sobrado</strong> tempo, revise o documento.<span class="tc-ex-transl">If there's time left, review the document.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">assim que</span><span class="tc-ex-text">Assim que <strong>tiver chegado</strong>, me manda uma mensagem.<span class="tc-ex-transl">As soon as you've arrived, send me a message.</span></span></div>
+            <div class="tc-ex-row"><span class="tc-trigger">depois que</span><span class="tc-ex-text">Depois que <strong>tiverem aprovado</strong> o projeto, podemos começar.<span class="tc-ex-transl">After they've approved the project, we can start.</span></span></div>
+          </div>
+        </div>
+
+        <!-- spacing note -->
+        <div style="background:rgba(109,67,166,0.06);border-radius:10px;padding:14px 16px;margin-top:10px;">
+          <p style="font-size:12px;color:var(--g-c);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">⚠️ S1 vs. S2 — Distinção crítica</p>
+          <p style="font-size:13px;color:#555;line-height:1.6;"><strong>S1 (tenha feito)</strong> = incerteza sobre algo recente, ainda possível.<br><strong>S2 (tivesse feito)</strong> = condição irreal — sabemos que <em>não aconteceu</em>.</p>
+          <div style="margin-top:8px;font-size:13px;font-style:italic;color:#666;background:white;border-radius:6px;padding:8px 12px;">
+            <em>"Espero que ele <strong>tenha entregado</strong>."</em> — talvez tenha.<br>
+            <em>"Se ele <strong>tivesse entregado</strong>, estaria aprovado."</em> — não entregou.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONJUGATION TABLE: TER in all 7 tenses -->
+    <div class="sec-label" style="margin-top:8px;">Tabela de Referência — TER como Auxiliar</div>
+    <p style="font-size:13px;color:#888;margin-bottom:12px;">A tabela abaixo mostra as formas do auxiliar <em>ter</em> nos 7 tempos compostos. O particípio do verbo principal é sempre o mesmo.</p>
+    <div style="overflow-x:auto;">
+      <table class="conj-table">
+        <thead>
+          <tr>
+            <th class="th-pron">Pronome</th>
+            <th class="th-ga">I1 tem feito</th>
+            <th class="th-ga">I2 tinha feito</th>
+            <th class="th-gb">I3 terá feito</th>
+            <th class="th-gb">I4 teria feito</th>
+            <th class="th-gc">S1 tenha feito</th>
+            <th class="th-gc">S2 tivesse feito</th>
+            <th class="th-gd">S3 tiver feito</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pron">eu</td>
+            <td class="ga">tenho</td>
+            <td class="ga">tinha</td>
+            <td class="gb">terei</td>
+            <td class="gb">teria</td>
+            <td class="gc">tenha</td>
+            <td class="gc">tivesse</td>
+            <td class="gd">tiver</td>
+          </tr>
+          <tr>
+            <td class="pron">você / ele / ela</td>
+            <td class="ga">tem</td>
+            <td class="ga">tinha</td>
+            <td class="gb">terá</td>
+            <td class="gb">teria</td>
+            <td class="gc">tenha</td>
+            <td class="gc">tivesse</td>
+            <td class="gd">tiver</td>
+          </tr>
+          <tr>
+            <td class="pron">a gente</td>
+            <td class="ga">tem</td>
+            <td class="ga">tinha</td>
+            <td class="gb">terá</td>
+            <td class="gb">teria</td>
+            <td class="gc">tenha</td>
+            <td class="gc">tivesse</td>
+            <td class="gd">tiver</td>
+          </tr>
+          <tr>
+            <td class="pron">nós</td>
+            <td class="ga">temos</td>
+            <td class="ga">tí<u>nha</u>mos</td>
+            <td class="gb">teremos</td>
+            <td class="gb">te<u>rí</u>amos</td>
+            <td class="gc">tenhamos</td>
+            <td class="gc">ti<u>vés</u>semos</td>
+            <td class="gd">tivermos</td>
+          </tr>
+          <tr>
+            <td class="pron">vocês / eles / elas</td>
+            <td class="ga">têm</td>
+            <td class="ga">tinham</td>
+            <td class="gb">terão</td>
+            <td class="gb">teriam</td>
+            <td class="gc">tenham</td>
+            <td class="gc">tivessem</td>
+            <td class="gd">tiverem</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:#aaa;margin-top:8px;font-style:italic;">As formas sublinhadas têm acento tônico marcado graficamente. Nas formas de <em>nós</em>, atenção à acentuação: <em>tínhamos, teríamos, tivéssemos.</em></p>
+
+    <!-- CONTRAST BOX -->
+    <div class="contrast-box">
+      <div class="cb-title">⚡ Contrastes fundamentais — a mesma frase, tempos diferentes</div>
+      <div class="contrast-row">
+        <span class="cr-badge ga">I1</span>
+        <span class="cr-text"><em>"Ela <strong>tem revisado</strong> os contratos toda semana."</em> — ação repetida, ainda acontece.</span>
+      </div>
+      <div class="contrast-row">
+        <span class="cr-badge ga">I2</span>
+        <span class="cr-text"><em>"Quando o chefe chegou, ela já <strong>tinha revisado</strong> os contratos."</em> — ação anterior a outro evento passado.</span>
+      </div>
+      <div class="contrast-row">
+        <span class="cr-badge gb">I3</span>
+        <span class="cr-text"><em>"Até amanhã, ela já <strong>terá revisado</strong> os contratos."</em> — ação concluída antes de momento futuro.</span>
+      </div>
+      <div class="contrast-row">
+        <span class="cr-badge gb">I4</span>
+        <span class="cr-text"><em>"Com mais tempo, ela <strong>teria revisado</strong> melhor os contratos."</em> — hipótese não realizada.</span>
+      </div>
+      <div class="contrast-row">
+        <span class="cr-badge gc">S1</span>
+        <span class="cr-text"><em>"Espero que ela já <strong>tenha revisado</strong> os contratos."</em> — dúvida / esperança sobre ação recente.</span>
+      </div>
+      <div class="contrast-row">
+        <span class="cr-badge gc">S2</span>
+        <span class="cr-text"><em>"Se ela <strong>tivesse revisado</strong> os contratos, não teríamos o problema."</em> — condição irreal (não revisou).</span>
+      </div>
+      <div class="contrast-row">
+        <span class="cr-badge gd">S3</span>
+        <span class="cr-text"><em>"Assim que ela <strong>tiver revisado</strong> os contratos, avise-me."</em> — conclusão antes de evento futuro (ainda não aconteceu).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMPLES VS COMPOSTO -->
+  <div class="sec-label">Foco — Dúvida Frequente</div>
+  <div class="gram-box">
+    <h2>Simples vs. Composto no Subjuntivo — o que muda?</h2>
+    <p class="gram-intro">A diferença entre a forma simples e a forma composta de um mesmo tempo do subjuntivo é sempre <strong>temporal</strong>: o composto indica que a ação está <strong>concluída antes do ponto de referência</strong>. A forma simples situa a ação <strong>no mesmo momento ou depois</strong> do ponto de referência. Em outras palavras: composto = anterioridade.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="conj-table" style="margin-bottom:24px;">
+        <thead>
+          <tr>
+            <th class="th-pron" style="min-width:80px;">Tempo</th>
+            <th style="color:#555;min-width:180px;">Forma simples</th>
+            <th style="color:#555;min-width:180px;">Forma composta</th>
+            <th style="color:#555;">O que muda</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:700;font-size:12px;color:var(--g-c);">Presente<br><span style="font-weight:400;color:#aaa;">S1</span></td>
+            <td>
+              <div style="font-weight:700;color:var(--nanquim);font-size:14px;margin-bottom:4px;">faça / resolva</div>
+              <div style="font-size:12px;font-style:italic;color:#666;">"Espero que ele <strong>resolva</strong> o problema."</div>
+              <div style="font-size:11px;color:#aaa;margin-top:3px;">→ O problema ainda não foi resolvido. A esperança é sobre uma ação futura.</div>
+            </td>
+            <td>
+              <div style="font-weight:700;color:var(--g-c);font-size:14px;margin-bottom:4px;">tenha feito / tenha resolvido</div>
+              <div style="font-size:12px;font-style:italic;color:#666;">"Espero que ele já <strong>tenha resolvido</strong> o problema."</div>
+              <div style="font-size:11px;color:#aaa;margin-top:3px;">→ O problema pode já ter sido resolvido. A esperança é sobre algo que talvez já aconteceu.</div>
+            </td>
+            <td style="font-size:13px;color:#555;line-height:1.6;">
+              <strong>Simples:</strong> ação ainda por acontecer.<br>
+              <strong>Composto:</strong> ação que pode já ter acontecido — incerteza sobre o passado recente.
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;font-size:12px;color:var(--g-c);">Imperfeito<br><span style="font-weight:400;color:#aaa;">S2</span></td>
+            <td>
+              <div style="font-weight:700;color:var(--nanquim);font-size:14px;margin-bottom:4px;">fizesse / investisse</div>
+              <div style="font-size:12px;font-style:italic;color:#666;">"Se a empresa <strong>investisse</strong> mais, teria melhores resultados."</div>
+              <div style="font-size:11px;color:#aaa;margin-top:3px;">→ Condição hipotética geral, ainda válida no presente ou no futuro.</div>
+            </td>
+            <td>
+              <div style="font-weight:700;color:var(--g-c);font-size:14px;margin-bottom:4px;">tivesse feito / tivesse investido</div>
+              <div style="font-size:12px;font-style:italic;color:#666;">"Se a empresa <strong>tivesse investido</strong> mais, teria sobrevivido à crise."</div>
+              <div style="font-size:11px;color:#aaa;margin-top:3px;">→ A empresa não investiu — sabemos que a condição não foi cumprida. Contrafactual no passado.</div>
+            </td>
+            <td style="font-size:13px;color:#555;line-height:1.6;">
+              <strong>Simples:</strong> hipótese geral (poderia ainda acontecer).<br>
+              <strong>Composto:</strong> contrafactual — a condição definitivamente não foi cumprida.
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;font-size:12px;color:var(--g-d);">Futuro<br><span style="font-weight:400;color:#aaa;">S3</span></td>
+            <td>
+              <div style="font-weight:700;color:var(--nanquim);font-size:14px;margin-bottom:4px;">fizer / chegar</div>
+              <div style="font-size:12px;font-style:italic;color:#666;">"Quando você <strong>chegar</strong>, me avise."</div>
+              <div style="font-size:11px;color:#aaa;margin-top:3px;">→ A ação (chegar) e o aviso são quase simultâneos. Ênfase no momento em que ocorre.</div>
+            </td>
+            <td>
+              <div style="font-weight:700;color:var(--g-d);font-size:14px;margin-bottom:4px;">tiver feito / tiver chegado</div>
+              <div style="font-size:12px;font-style:italic;color:#666;">"Assim que você <strong>tiver entregado</strong> todos os documentos, o processo avança."</div>
+              <div style="font-size:11px;color:#aaa;margin-top:3px;">→ Ênfase na conclusão completa da ação como pré-requisito para a próxima etapa.</div>
+            </td>
+            <td style="font-size:13px;color:#555;line-height:1.6;">
+              <strong>Simples:</strong> ação futura que ainda vai ocorrer.<br>
+              <strong>Composto:</strong> ação futura que precisa estar <em>totalmente concluída</em> antes da próxima etapa.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="contrast-box">
+      <div class="cb-title">🔑 Regra central</div>
+      <div style="font-size:14px;color:var(--nanquim);line-height:1.8;">
+        <strong>Forma simples</strong> → a ação está no mesmo plano temporal ou depois do ponto de referência.<br>
+        <strong>Forma composta</strong> → a ação está <em>antes</em> do ponto de referência — concluída, ou possivelmente concluída.<br><br>
+        Pergunte a si mesmo: <em>"A ação já aconteceu (ou pode já ter acontecido) em relação ao que estou dizendo?"</em><br>
+        Se sim → use o composto. Se não → use o simples.
+      </div>
+    </div>
+
+    <div style="background:var(--g-d-bg);border-left:4px solid var(--g-d);border-radius:0 10px 10px 0;padding:14px 18px;margin-top:16px;font-size:13px;line-height:1.65;color:var(--nanquim);">
+      <div style="font-weight:700;color:var(--g-d);font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">⚠️ Atenção — futuro do subjuntivo simples vs. composto</div>
+      Em contextos com <em>quando, assim que, depois que</em>, ambas as formas são frequentes em BP. A diferença é de ênfase: o simples foca no <strong>momento</strong> da ação; o composto foca na <strong>conclusão</strong> como pré-requisito. Em muitos casos, as duas formas são intercambiáveis na prática — mas em C1 é esperado que você domine a distinção.
+    </div>
+  </div>
+
+  <!-- SPANISH NOTE -->
+  <div class="sec-label">Nota para Falantes de Espanhol</div>
+  <div class="es-note">
+    <div class="es-title">🇪🇸 Correspondências e divergências-chave</div>
+    <table class="es-table">
+      <thead>
+        <tr><th>Tempo BP</th><th>Equivalente espanhol</th><th>Atenção</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="pt">I1 tem feito</td>
+          <td class="es">ha hecho / lleva haciendo</td>
+          <td>Em BP, indica <strong>repetição/continuidade</strong>, não ação pontual recente. "Fiz ontem" ≠ "tenho feito" — use o pretérito simples para ações únicas no passado.</td>
+        </tr>
+        <tr>
+          <td class="pt">I2 tinha feito</td>
+          <td class="es">había hecho</td>
+          <td>Estrutura idêntica. Em BP oral, às vezes substituído por pretérito simples em frases com "já" ou "antes".</td>
+        </tr>
+        <tr>
+          <td class="pt">I3 terá feito</td>
+          <td class="es">habrá hecho</td>
+          <td>Estrutura idêntica. Auxiliar <strong>ter</strong>, nunca <em>haver</em> em BP falado.</td>
+        </tr>
+        <tr>
+          <td class="pt">I4 teria feito</td>
+          <td class="es">habría hecho</td>
+          <td>Estrutura idêntica. Atenção ao particípio: <em>feito</em> ≠ <em>hecho</em>.</td>
+        </tr>
+        <tr>
+          <td class="pt">S1 tenha feito</td>
+          <td class="es">haya hecho</td>
+          <td>Estrutura idêntica. Mesmos gatilhos emocionais/avaliativos.</td>
+        </tr>
+        <tr>
+          <td class="pt">S2 tivesse feito</td>
+          <td class="es">hubiera / hubiese hecho</td>
+          <td>Estrutura idêntica. BP usa apenas <em>tivesse</em> (não há variante como <em>hubiese</em>).</td>
+        </tr>
+        <tr>
+          <td class="pt">S3 tiver feito</td>
+          <td class="es">hubiere hecho (arcaico)</td>
+          <td><strong>Diferença importante:</strong> em espanhol, <em>hubiere hecho</em> é arcaico e raramente usado. Em BP, <em>tiver feito</em> é <strong>vivo e frequente</strong> na linguagem cotidiana e profissional.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="es-note-text">⚠️ <strong>O ponto mais crítico para falantes de espanhol:</strong> o uso de <strong>I1 (tem feito)</strong>. Em espanhol, "he hecho" pode descrever uma ação única recente ("He viajado a Brasil el mes pasado"). Em BP, <em>tenho feito</em> implica repetição ou continuidade — para uma ação única recente, use o pretérito simples: <em>"Viajei ao Brasil no mês passado."</em></p>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Texto — Leia antes da aula</div>
+  <div class="text-card">
+    <div class="text-source">Texto elaborado para fins didáticos | Estilo: perfil jornalístico | Tema: empreendedorismo e carreira acadêmica</div>
+    <div class="text-title">O erro certo</div>
+    <div class="text-subtitle">Rodrigo Fonseca, professor da PUC-Rio e fundador da DataBridge, fala sobre riscos, aprendizados e o que faria diferente</div>
+
+    <div class="text-body">
+
+      <p>Rodrigo Fonseca, 42 anos, é o tipo de pessoa que <span class="hl-a">tem errado</span><sup class="lb a">I1</sup> com método. Professor de Sistemas de Informação na PUC-Rio e fundador da plataforma de educação em dados DataBridge, ele chegou ao mercado depois de uma trajetória acadêmica que poucos imaginavam que iria abandonar. Mas "abandonar" é a palavra errada. "Eu trouxe a academia comigo", diz, sem hesitar.</p>
+
+      <p>Antes de fundar a DataBridge, em 2019, Rodrigo já <span class="hl-a">tinha trabalhado</span><sup class="lb a">I2</sup> em duas startups que não decolaram. A primeira, desenvolvida ainda durante o doutorado, tentou criar um sistema de recomendação para livrarias físicas. A segunda — uma plataforma de ensino corporativo — chegou a ter oitocentos usuários antes de ser descontinuada. "Quando <span class="hl-a">tinha terminado</span><sup class="lb a">I2</sup> de construir o produto, percebi que <span class="hl-a">tinha resolvido</span><sup class="lb a">I2</sup> o problema errado", conta, com a serenidade de quem já processou o fracasso.</p>
+
+      <p>A virada veio de uma pesquisa. Rodrigo <span class="hl-a">tem dedicado</span><sup class="lb a">I1</sup> boa parte dos últimos anos a estudar como profissionais de carreira média aprendem novas habilidades digitais. Os dados o surpreenderam: 73% dos entrevistados disseram que abandonariam um curso online se não vissem aplicação prática até a terceira semana. "Quando eu <span class="hl-d">tiver validado</span><sup class="lb d">S3</sup> esse modelo em mais contextos, vou publicar os resultados. Mas por ora, ele já virou produto."</p>
+
+      <p>Sobre o futuro, Rodrigo é cauteloso e ao mesmo tempo confiante: "Daqui a dois anos, a DataBridge já <span class="hl-b">terá processado</span><sup class="lb b">I3</sup> milhões de interações de aprendizagem. Isso vai gerar uma base de dados que nenhum competidor <span class="hl-b">terá construído</span><sup class="lb b">I3</sup> em tão pouco tempo. É nossa maior vantagem." Mas ele reconhece que o caminho poderia ter sido diferente. "Se <span class="hl-c">tivesse ficado</span><sup class="lb c">S2</sup> só na academia, <span class="hl-b">teria publicado</span><sup class="lb b">I4</sup> mais artigos. Teria sido outra contribuição — legítima, importante. Mas não <span class="hl-b">teria chegado</span><sup class="lb b">I4</sup> a essas pessoas que a pesquisa nunca alcança sozinha."</p>
+
+      <p>Perguntado sobre a equipe, ele demonstra a confiança de quem aprendeu a delegar. "Não me preocupo mais com cada detalhe. Espero que eles já <span class="hl-c">tenham resolvido</span><sup class="lb c">S1</sup> o problema do servidor que caiu semana passada — não tive tempo de perguntar esta manhã." Ri. "É um bom sinal não saber de tudo."</p>
+
+      <p>Para Rodrigo, o único erro inadmissível é o que não ensina nada. "Fico incomodado quando ouço alguém falar como se <span class="hl-c">tivesse feito</span><sup class="lb c">S2</sup> tudo certo desde o começo. Ninguém fez. A diferença é quem aprendeu com o que não funcionou."</p>
+
+      <p>Antes de encerrar a conversa, ele deixa um recado para quem pensa em sair da academia para empreender: "Vá, mas leve o rigor com você. E lembre: assim que <span class="hl-d">você tiver construído</span><sup class="lb d">S3</sup> algo real, a academia vai querer conversar novamente. Ela sempre quer."</p>
+
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot a"></div> <strong>I1</strong> tem feito / <strong>I2</strong> tinha feito — Pretérito Perfeito / Mais-que-Perfeito Composto</div>
+      <div class="legend-item"><div class="legend-dot b"></div> <strong>I3</strong> terá feito / <strong>I4</strong> teria feito — Futuro do Presente / Pretérito Composto</div>
+      <div class="legend-item"><div class="legend-dot c"></div> <strong>S1</strong> tenha feito / <strong>S2</strong> tivesse feito — Subjuntivo Perfeito / Mais-que-Perfeito</div>
+      <div class="legend-item"><div class="legend-dot d"></div> <strong>S3</strong> tiver feito — Futuro Composto do Subjuntivo</div>
+    </div>
+  </div>
+
+  <!-- COMPREHENSION QUESTIONS -->
+  <div class="sec-label">Perguntas de Compreensão</div>
+  <div class="questions-box">
+    <h3>Responda em português — discutiremos juntos durante a aula</h3>
+    <div class="q-item"><span class="q-num">1.</span> No segundo parágrafo, Rodrigo diz que "tinha resolvido o problema errado". O que isso significa na prática? Você já viveu uma situação parecida — profissional ou pessoal?</div>
+    <div class="q-item"><span class="q-num">2.</span> Rodrigo faz uma escolha explícita usando o futuro do pretérito composto: "teria publicado mais artigos… mas não teria chegado a essas pessoas." O que esse par de frases revela sobre os valores dele?</div>
+    <div class="q-item"><span class="q-num">3.</span> No texto, Rodrigo diz: "Espero que eles já tenham resolvido o problema do servidor." Por que o verbo está no subjuntivo composto e não no pretérito perfeito simples? O que mudaria de sentido se ele dissesse "espero que eles já resolveram"?</div>
+    <div class="q-item"><span class="q-num">4.</span> Identifique no texto os dois exemplos de Futuro Composto do Subjuntivo (S3). Em que contextos aparecem? O que têm em comum?</div>
+    <div class="q-item"><span class="q-num">5.</span> Pensando na sua própria trajetória profissional: o que considera sua maior conquista dos últimos meses? E, olhando para o início da sua carreira, existe algo que você faria de forma diferente se pudesse? Responda em português, usando os tempos compostos que achar mais adequados.</div>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>
