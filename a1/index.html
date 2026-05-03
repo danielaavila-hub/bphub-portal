@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A1 Materials | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha:#FCF5EB; --baunilha2:#FDE7C4; --off-white:#F2F0E3; --light-gray:#EDEDE2;
+      --nanquim:#1E1D1C; --rosa-cha:#FFD8C5; --floresta:#4E551D; --erva-doce:#A6B28A;
+      --cobalto:#265B8B; --pitomba:#D36D29; --ouro:#FFB94A; --marrom:#967E63; --texto:#3C3C21;
+      --level:#4E551D;
+      --cat-gram:#265B8B; --cat-func:#4E551D; --cat-tema:#D36D29; --cat-gen:#967E63; --cat-cult:#A6B28A; --cat-fon:#FFB94A;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--baunilha);color:var(--texto);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.65}
+    h1,h2,h3,h4{font-family:'Trirong',serif;font-weight:300;color:var(--cobalto)}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    #gate{position:fixed;inset:0;z-index:999;background:var(--baunilha);display:flex;align-items:center;justify-content:center;padding:24px}
+    .gate-box{background:white;border:1.5px solid var(--light-gray);border-radius:20px;padding:48px 44px;width:100%;max-width:400px;text-align:center;box-shadow:0 8px 40px rgba(78,85,29,0.12)}
+    .gate-logo img{height:34px;margin:0 auto 28px}
+    .gate-level{display:inline-block;background:var(--level);color:white;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+    .gate-box h2{font-size:24px;color:var(--level);margin-bottom:6px}
+    .gate-sub{font-size:13px;color:#999;margin-bottom:28px}
+    .gate-error{display:none;font-size:12px;color:var(--pitomba);background:#fff0ed;border:1px solid #f5c0b0;border-radius:8px;padding:8px 12px;margin-bottom:12px}
+    .gate-input{width:100%;border:1.5px solid var(--light-gray);border-radius:10px;padding:13px 16px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--nanquim);text-align:center;letter-spacing:.08em;outline:none;margin-bottom:16px;transition:border-color .2s}
+    .gate-input:focus{border-color:var(--level)}
+    .gate-btn{width:100%;background:var(--level);color:white;border:none;border-radius:10px;padding:14px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .2s}
+    .gate-btn:hover{opacity:.88}
+    .gate-back{display:block;margin-top:18px;font-size:12px;color:#aaa;transition:color .2s}
+    .gate-back:hover{color:var(--level)}
+    #content{display:none}
+    .topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:var(--baunilha);border-bottom:1px solid var(--light-gray);position:sticky;top:0;z-index:50}
+    .topbar-logo img{height:30px}
+    .topbar-right{display:flex;align-items:center;gap:20px}
+    .topbar-level{background:var(--level);color:white;font-size:12px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px}
+    .topbar-back{font-size:12px;color:#aaa;transition:color .2s}
+    .topbar-back:hover{color:var(--level)}
+    .hero{background:var(--level);padding:52px 48px 48px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--floresta),var(--erva-doce),var(--ouro),var(--pitomba))}
+    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.70);margin-bottom:12px}
+    .hero h1{font-size:clamp(28px,3.5vw,44px);color:white;margin-bottom:10px}
+    .hero p{font-size:15px;color:rgba(255,255,255,.70);max-width:560px;line-height:1.7;margin-bottom:28px}
+    .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+    .hero-stat .num{font-family:'Trirong',serif;font-size:28px;font-weight:300;color:var(--ouro);line-height:1}
+    .hero-stat .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.50);margin-top:3px}
+    .filter-bar{background:white;border-bottom:1px solid var(--light-gray);padding:0 48px;display:flex;align-items:center;gap:6px;overflow-x:auto}
+    .filter-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;padding:14px 16px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:500;color:#888;background:transparent;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap}
+    .filter-btn:hover{color:var(--level)}
+    .filter-btn.active{color:var(--level);border-bottom-color:var(--level);font-weight:700}
+    .filter-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .filter-count{font-size:11px;font-weight:700;color:inherit;background:var(--light-gray);border-radius:10px;padding:1px 7px}
+    .filter-btn.active .filter-count{background:var(--level);color:white}
+    .main{padding:48px 48px 80px}
+    .cat-section{margin-bottom:48px}
+    .cat-section.hidden{display:none}
+    .cat-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1.5px solid var(--light-gray)}
+    .cat-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+    .cat-header h2{font-size:18px}
+    .cat-header .cat-desc{font-size:13px;color:#999;margin-top:2px;font-family:'Manrope',sans-serif;font-weight:400}
+    .cat-count{margin-left:auto;font-size:12px;font-weight:700;color:#aaa;font-family:'Manrope',sans-serif}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+    .mat-card{background:white;border:1.5px solid var(--light-gray);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .15s,box-shadow .15s,border-color .2s;text-decoration:none;color:inherit}
+    .mat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(78,85,29,0.12);border-color:var(--level)}
+    .mat-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .mat-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .mat-card h3{font-family:'Trirong',serif;font-size:17px;font-weight:400;color:var(--level);line-height:1.3;flex:1}
+    .mat-card p{font-size:13px;color:#777;line-height:1.55}
+    .mat-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+    .tag-gram{background:rgba(38,91,139,.10);color:var(--cat-gram)}
+    .tag-func{background:rgba(78,85,29,.10);color:var(--cat-func)}
+    .tag-tema{background:rgba(211,109,41,.10);color:var(--cat-tema)}
+    .tag-gen{background:rgba(150,126,99,.12);color:var(--cat-gen)}
+    .tag-cult{background:rgba(166,178,138,.18);color:var(--cat-cult)}
+    .tag-fon{background:rgba(255,185,74,.18);color:#9A6F00}
+    .mat-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--light-gray)}
+    .mat-date{font-size:11px;color:#bbb}
+    .mat-btn{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;background:var(--level);color:white;border:none;border-radius:8px;padding:7px 16px;cursor:pointer;transition:opacity .2s}
+    .mat-btn:hover{opacity:.85}
+    .page-footer{text-align:center;padding:24px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--erva-doce);border-top:1px solid var(--light-gray)}
+    @media(max-width:768px){.topbar,.hero,.main{padding-left:20px;padding-right:20px}.filter-bar{padding:0 20px}.cards-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></div>
+    <div class="gate-level">A1 — Iniciante</div>
+    <h2>Student Materials</h2>
+    <p class="gate-sub">Enter your password to access your materials</p>
+    <p id="gate-error" class="gate-error">Incorrect password. Please try again.</p>
+    <input class="gate-input" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
+    <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
+    <a href="../index.html" class="gate-back">← Back to portal</a>
+  </div>
+</div>
+<div id="content">
+  <div class="topbar">
+    <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:30px;"></a>
+    <div class="topbar-right">
+      <span class="topbar-level">A1 — Iniciante</span>
+      <a href="../index.html" class="topbar-back">← Portal</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-eyebrow">Materials Portal — Nível A1</div>
+    <h1>Iniciante</h1>
+    <p>Your library of A1 materials, organized by communicative function and grammatical inventory — following the Itamaraty/FUNAG curriculum framework.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">2</div><div class="label">Materials available</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="label">Curriculum categories</div></div>
+      <div class="hero-stat"><div class="num">A1</div><div class="label">Your level</div></div>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCat('all',this)">
+      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" onclick="filterCat('func',this)">
+      <span class="filter-dot" style="background:var(--cat-func);"></span>Funções Comunicativas<span class="filter-count">2</span>
+    </button>
+  </div>
+  <div class="main">
+    <div class="cat-section" data-cat="func" id="sec-func">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-func);"></div>
+        <div><h2>Funções Comunicativas</h2><div class="cat-desc">Inventário de funções — o que o aluno é capaz de fazer com a língua</div></div>
+        <span class="cat-count">2 materiais</span>
+      </div>
+      <div class="cards-grid">
+        <a class="mat-card" href="../exercicios/expressoes-dar-material.html">
+          <div class="mat-card-top">
+            <div class="mat-icon" style="background:rgba(78,85,29,0.12);">📖</div>
+            <h3>Expressões com o Verbo Dar — Texto e Referência</h3>
+          </div>
+          <p>Reading text and reference guide exploring common expressions with the verb <em>dar</em> in everyday Brazilian Portuguese.</p>
+          <div class="mat-tags">
+            <span class="tag tag-func">Verbo dar</span>
+            <span class="tag tag-gram">Expressões idiomáticas</span>
+            <span class="tag tag-tema">Vida cotidiana</span>
+            <span class="tag tag-gen">Texto didático</span>
+          </div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open material →</span></div>
+        </a>
+        <a class="mat-card" href="../exercicios/expressoes-dar-exercicios-aluno.html">
+          <div class="mat-card-top">
+            <div class="mat-icon" style="background:rgba(78,85,29,0.12);">✏️</div>
+            <h3>Expressões com o Verbo Dar — Exercícios</h3>
+          </div>
+          <p>Practice exercises to consolidate the use of expressions with <em>dar</em> in context.</p>
+          <div class="mat-tags">
+            <span class="tag tag-func">Verbo dar</span>
+            <span class="tag tag-gram">Expressões idiomáticas</span>
+            <span class="tag tag-tema">Vida cotidiana</span>
+          </div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open material →</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-footer">Brazilian Portuguese Hub &nbsp;·&nbsp; brazilianportuguesehub.com</div>
+<script>
+  (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
+  function checkGate(){
+    var val=document.getElementById('gate-pass').value.trim();
+    if(val){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}
+    else{document.getElementById('gate-error').style.display='block';}
+  }
+  document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
+  function filterCat(cat,btn){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    document.querySelectorAll('.cat-section').forEach(function(sec){
+      if(cat==='all'||sec.dataset.cat===cat){sec.classList.remove('hidden');}else{sec.classList.add('hidden');}
+    });
+  }
+</script>
+</body>
+</html>
