@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempos Compostos C1 — Exercícios | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8; --cobalto-dark: #1d4570;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --green: #2E7D52; --green-bg: #EAF5EE;
+      --red: #C0392B; --red-bg: #FFF0F0;
+      --g-a: #2E7D52; --g-a-bg: #EAF5EE;
+      --g-b: #265B8B; --g-b-bg: #EBF1F8;
+      --g-c: #8B3A7E; --g-c-bg: #F5EAF3;
+      --g-d: #B8860B; --g-d-bg: #FFF8EC;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--nanquim); color: white; }
+    .badge-gram  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #2a1a3e 0%, #1a2a3e 100%); padding: 44px 40px 40px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(22px, 3.5vw, 36px); color: white; margin-bottom: 8px; }
+    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.6; }
+    .hero-note { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,185,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 880px; padding: 48px 40px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* REFERENCE BAND */
+    .ref-band { background: var(--off-white); border-radius: 8px; padding: 10px 16px; margin-bottom: 18px; font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .ref-item { font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; color: white; }
+    .ref-item.ga { background: var(--g-a); }
+    .ref-item.gb { background: var(--g-b); }
+    .ref-item.gc { background: var(--g-c); }
+    .ref-item.gd { background: var(--g-d); }
+    .ref-label { color: #888; font-size: 12px; }
+
+    /* EXERCISE CARD */
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+    .ex-number { width: 36px; height: 36px; background: var(--nanquim); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .ex-title { font-family: 'Trirong', serif; font-weight: 300; font-size: 20px; color: var(--nanquim); margin-bottom: 4px; }
+    .ex-instruction { font-size: 13px; color: #666; line-height: 1.55; }
+    .ex-instruction strong { color: var(--nanquim); }
+
+    /* CLASSIFY */
+    .classify-item { display: flex; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .classify-item:last-child { border-bottom: none; }
+    .classify-num { min-width: 24px; color: #bbb; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .classify-sentence { flex: 1; color: var(--nanquim); line-height: 1.65; min-width: 200px; }
+    .classify-sentence em { font-style: normal; font-weight: 700; color: var(--cobalto); }
+    .classify-select { border: 2px solid var(--light-gray); border-radius: 8px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: var(--nanquim); background: white; cursor: pointer; outline: none; min-width: 130px; }
+    .classify-select:focus { border-color: var(--cobalto); }
+    .classify-select.correct { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+    .classify-select.wrong   { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+
+    /* GAP FILL */
+    .gap-item { display: flex; gap: 12px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { min-width: 24px; color: #bbb; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .gap-text { flex: 1; line-height: 1.9; color: var(--nanquim); }
+    .gap-hint { font-size: 12px; color: #aaa; margin-left: 4px; }
+    .gap-input { border: none; border-bottom: 2px solid var(--cobalto); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--cobalto); min-width: 180px; width: 180px; outline: none; padding: 0 4px; vertical-align: bottom; }
+    .gap-input:focus { border-color: var(--pitomba); }
+    .gap-input.correct { border-color: var(--green); color: var(--green); }
+    .gap-input.wrong   { border-color: var(--red); color: var(--red); }
+
+    /* REWRITE */
+    .rw-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .rw-item:last-child { border-bottom: none; }
+    .rw-prompt { font-size: 15px; color: var(--nanquim); line-height: 1.7; margin-bottom: 8px; }
+    .rw-prompt .rw-num { color: #bbb; font-size: 13px; font-weight: 700; margin-right: 8px; }
+    .rw-prompt .tense-tag { display: inline-block; font-size: 11px; font-weight: 700; color: white; padding: 2px 7px; border-radius: 4px; margin: 0 4px; }
+    .rw-prompt .tense-tag.ga { background: var(--g-a); }
+    .rw-prompt .tense-tag.gb { background: var(--g-b); }
+    .rw-prompt .tense-tag.gc { background: var(--g-c); }
+    .rw-prompt .tense-tag.gd { background: var(--g-d); }
+    .rw-textarea { width: 100%; min-height: 52px; background: transparent; border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); resize: vertical; outline: none; }
+    .rw-textarea:focus { border-color: var(--cobalto); }
+
+    /* CONTRAST */
+    .contrast-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .contrast-item:last-child { border-bottom: none; }
+    .contrast-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 10px; }
+    .contrast-sent { background: var(--off-white); border-radius: 8px; padding: 10px 14px; font-size: 14px; color: var(--nanquim); line-height: 1.6; }
+    .contrast-sent em { font-style: normal; font-weight: 700; }
+    .contrast-sent .tag { display: inline-block; font-size: 10px; font-weight: 700; color: white; padding: 1px 6px; border-radius: 3px; margin-right: 4px; }
+    .contrast-sent .tag.ga { background: var(--g-a); }
+    .contrast-sent .tag.gb { background: var(--g-b); }
+    .contrast-sent .tag.gc { background: var(--g-c); }
+    .contrast-sent .tag.gd { background: var(--g-d); }
+    .contrast-question { font-size: 13px; color: #666; font-style: italic; }
+
+    /* PRODUCTION */
+    .prod-prompt { background: var(--off-white); border-radius: 10px; padding: 14px 18px; font-size: 14px; color: var(--nanquim); line-height: 1.7; margin-bottom: 10px; }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .check-btn:hover { background: #333; }
+    .reset-link { background: none; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; color: #aaa; cursor: pointer; text-decoration: underline; display: none; margin-left: 10px; }
+    .reset-link.show { display: inline; }
+    .feedback { margin-top: 12px; font-size: 14px; font-weight: 600; display: none; padding: 10px 16px; border-radius: 8px; }
+    .feedback.show { display: block; }
+    .feedback.ok      { background: var(--green-bg); color: var(--green); }
+    .feedback.partial { background: #fff8ec; color: #b8860b; }
+
+    @media (max-width: 640px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card { padding: 22px 18px; }
+      .contrast-pair { grid-template-columns: 1fr; }
+      .classify-item { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-gram">Exercícios do Aluno</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Ficha de Exercícios — Nível C1</div>
+  <h1>Tempos Compostos — 7 Formas em Contexto</h1>
+  <div class="hero-sub">Complete all exercises after class. Work from memory first — only check the reference material if you get stuck.</div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<div class="main">
+
+  <!-- REFERENCE BAND -->
+  <div class="ref-band">
+    <span class="ref-label">Referência rápida:</span>
+    <span class="ref-item ga">I1 tem feito</span>
+    <span class="ref-item ga">I2 tinha feito</span>
+    <span class="ref-item gb">I3 terá feito</span>
+    <span class="ref-item gb">I4 teria feito</span>
+    <span class="ref-item gc">S1 tenha feito</span>
+    <span class="ref-item gc">S2 tivesse feito</span>
+    <span class="ref-item gd">S3 tiver feito</span>
+  </div>
+
+  <!-- EXERCISE 1: GAP FILL -->
+  <div class="sec-label">Exercício 1 de 6</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">1</div>
+      <div>
+        <div class="ex-title">Gap Fill — Context-Driven</div>
+        <div class="ex-instruction">Complete each sentence with the correct compound form of the verb in parentheses. Choose the tense based entirely on context. <strong>Write the full form</strong> (auxiliary + past participle).</div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">1.</span>
+      <span class="gap-text">A empresa <input class="gap-input" id="e1_1" data-answer="tem expandido" placeholder="___"> (expandir) sua presença internacional nos últimos dois anos.</span>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">2.</span>
+      <span class="gap-text">Se <input class="gap-input" id="e1_2a" data-answer="tivessem investido" placeholder="___"> (investir) mais em infraestrutura, o produto não <input class="gap-input" id="e1_2b" data-answer="teria falhado" placeholder="___"> (falhar) no lançamento.</span>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">3.</span>
+      <span class="gap-text">Quando a diretoria <input class="gap-input" id="e1_3" data-answer="tiver validado" placeholder="___"> (validar) o relatório, podemos divulgar os resultados.</span>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">4.</span>
+      <span class="gap-text">Duvido que a equipe já <input class="gap-input" id="e1_4" data-answer="tenha concluído" placeholder="___"> (concluir) a análise de dados — são muitas variáveis.</span>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">5.</span>
+      <span class="gap-text">Quando cheguei à reunião, todos os outros participantes já <input class="gap-input" id="e1_5" data-answer="tinham chegado" placeholder="___"> (chegar).</span>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">6.</span>
+      <span class="gap-text">Até o final do trimestre, o CEO já <input class="gap-input" id="e1_6" data-answer="terá anunciado" placeholder="___"> (anunciar) a nova estratégia de crescimento.</span>
+    </div>
+
+    <div class="gap-item" style="border-bottom:none;">
+      <span class="gap-num">7.</span>
+      <span class="gap-text">A startup <input class="gap-input" id="e1_7" data-answer="tem contratado" placeholder="___"> (contratar) profissionais de outras áreas para diversificar a perspectiva da equipe.</span>
+    </div>
+
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <button class="check-btn" onclick="checkEx1()">✓ Check my answers</button>
+      <button class="reset-link" id="resetEx1Btn" onclick="resetEx1()">Reset</button>
+    </div>
+    <div class="feedback" id="fbEx1"></div>
+  </div>
+
+  <!-- EXERCISE 2: GAP FILL -->
+  <div class="sec-label">Exercício 2 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">2</div>
+      <div>
+        <div class="ex-title">Gap Fill — Choose the Tense and Conjugate</div>
+        <div class="ex-instruction">Complete each sentence with the correct compound tense of the verb in parentheses. You must decide which of the 7 tenses is appropriate based on context. <strong>Type the full form</strong> (auxiliary + past participle).</div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">1.</span>
+      <span class="gap-text">O professor <input class="gap-input" id="g1" data-answer="tem publicado" placeholder="___"> (publicar) artigos em revistas internacionais todos os anos. <span class="gap-hint">(repetição contínua)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">2.</span>
+      <span class="gap-text">Quando a proposta <input class="gap-input" id="g2" data-answer="tiver sido aprovada|tiver aprovado" placeholder="___"> (aprovar), começamos a executar. <span class="gap-hint">(conclusão antes de evento futuro)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">3.</span>
+      <span class="gap-text">Antes de sair da empresa, ela já <input class="gap-input" id="g3" data-answer="tinha treinado" placeholder="___"> (treinar) todo o time. <span class="gap-hint">(anterior a evento passado)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">4.</span>
+      <span class="gap-text">Tomara que eles <input class="gap-input" id="g4" data-answer="tenham resolvido" placeholder="___"> (resolver) o bug antes da apresentação. <span class="gap-hint">(esperança sobre ação recente)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">5.</span>
+      <span class="gap-text">Com um mentor mais experiente, ele <input class="gap-input" id="g5" data-answer="teria evitado" placeholder="___"> (evitar) muitos erros custosos. <span class="gap-hint">(hipótese não realizada)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">6.</span>
+      <span class="gap-text">Daqui a cinco anos, a inteligência artificial já <input class="gap-input" id="g6" data-answer="terá transformado" placeholder="___"> (transformar) completamente o mercado de trabalho. <span class="gap-hint">(conclusão futura antes de prazo)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">7.</span>
+      <span class="gap-text">Se a diretoria <input class="gap-input" id="g7" data-answer="tivesse ouvido" placeholder="___"> (ouvir) os desenvolvedores, o lançamento não <em>teria fracassado</em>. <span class="gap-hint">(condição irreal no passado)</span></span>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">8.</span>
+      <span class="gap-text">É surpreendente que a empresa <input class="gap-input" id="g8" data-answer="tenha sobrevivido" placeholder="___"> (sobreviver) a três crises econômicas seguidas. <span class="gap-hint">(emoção/surpresa sobre fato recente)</span></span>
+    </div>
+
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <button class="check-btn" onclick="checkGap()">✓ Check my answers</button>
+      <button class="reset-link" id="resetGap" onclick="resetGap()">Reset</button>
+    </div>
+    <div class="feedback" id="fbGap"></div>
+  </div>
+
+  <!-- EXERCISE 3: TRANSFORMATION -->
+  <div class="sec-label">Exercício 3 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">3</div>
+      <div>
+        <div class="ex-title">Sentence Transformation</div>
+        <div class="ex-instruction">Rewrite each sentence using the compound tense indicated by the tag. You may need to adjust other parts of the sentence to make it grammatically coherent.</div>
+      </div>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-prompt">
+        <span class="rw-num">1.</span>
+        <span class="tense-tag gd">S3</span>
+        <em>"Assim que o sistema fica disponível, enviamos o link para todos os usuários."</em>
+      </div>
+      <textarea class="rw-textarea" placeholder="Rewrite the sentence here..."></textarea>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-prompt">
+        <span class="rw-num">2.</span>
+        <span class="tense-tag gc">S2 + I4</span>
+        <em>"Ele não pediu ajuda e, por isso, não terminou o projeto."</em> → Reformule como condição irreal no passado.
+      </div>
+      <textarea class="rw-textarea" placeholder="Rewrite the sentence here..."></textarea>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-prompt">
+        <span class="rw-num">3.</span>
+        <span class="tense-tag ga">I2</span>
+        <em>"A empresa lançou o produto. Depois, a concorrência respondeu."</em> → Una as duas frases em uma só.
+      </div>
+      <textarea class="rw-textarea" placeholder="Rewrite the sentence here..."></textarea>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-prompt">
+        <span class="rw-num">4.</span>
+        <span class="tense-tag gc">S1</span>
+        <em>"Não sei se a cliente recebeu a proposta."</em> → Expresse como dúvida usando um verbo de emoção/avaliação.
+      </div>
+      <textarea class="rw-textarea" placeholder="Rewrite the sentence here..."></textarea>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-prompt">
+        <span class="rw-num">5.</span>
+        <span class="tense-tag ga">I1</span>
+        <em>"Ele está trabalhando muito nas últimas semanas."</em> → Reformule para enfatizar a continuidade.
+      </div>
+      <textarea class="rw-textarea" placeholder="Rewrite the sentence here..."></textarea>
+    </div>
+  </div>
+
+  <!-- EXERCISE 4: CONTRAST -->
+  <div class="sec-label">Exercício 4 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">4</div>
+      <div>
+        <div class="ex-title">Meaning Contrast — What Changes?</div>
+        <div class="ex-instruction">Each pair of sentences uses a different compound tense. In the text box, explain in English (or Portuguese) <strong>what changes in meaning</strong> between sentence A and sentence B.</div>
+      </div>
+    </div>
+
+    <div class="contrast-item">
+      <div class="contrast-pair">
+        <div class="contrast-sent">
+          <span class="tag ga">S1</span>
+          Espero que a equipe já <em>tenha resolvido</em> o problema do servidor.
+        </div>
+        <div class="contrast-sent">
+          <span class="tag gc">S2</span>
+          Se a equipe <em>tivesse resolvido</em> o problema do servidor, não estaríamos nessa situação.
+        </div>
+      </div>
+      <textarea class="rw-textarea" placeholder="A uses S1 because... / B uses S2 because..."></textarea>
+    </div>
+
+    <div class="contrast-item">
+      <div class="contrast-pair">
+        <div class="contrast-sent">
+          <span class="tag ga">I1</span>
+          O diretor <em>tem tomado</em> decisões arriscadas ultimamente.
+        </div>
+        <div class="contrast-sent">
+          <span class="tag ga">I2</span>
+          Quando a crise começou, o diretor já <em>tinha tomado</em> diversas decisões arriscadas.
+        </div>
+      </div>
+      <textarea class="rw-textarea" placeholder="A uses I1 because... / B uses I2 because..."></textarea>
+    </div>
+
+    <div class="contrast-item">
+      <div class="contrast-pair">
+        <div class="contrast-sent">
+          <span class="tag gb">I3</span>
+          Até dezembro, a startup já <em>terá captado</em> os investimentos necessários.
+        </div>
+        <div class="contrast-sent">
+          <span class="tag gd">S3</span>
+          Assim que a startup <em>tiver captado</em> os investimentos, vamos escalar o produto.
+        </div>
+      </div>
+      <textarea class="rw-textarea" placeholder="A uses I3 because... / B uses S3 because..."></textarea>
+    </div>
+  </div>
+
+  <!-- EXERCISE 5: PRODUCTION -->
+  <div class="sec-label">Exercício 5 de 5</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">5</div>
+      <div>
+        <div class="ex-title">Your Turn — Context and Voice</div>
+        <div class="ex-instruction">Answer each prompt in 2–4 sentences in Portuguese. The tag indicates which compound tense your answer should include — you decide the form based on context.</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div class="prod-prompt">
+        1. <strong><span style="background:var(--g-a);color:white;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;">I1</span></strong> How have you been approaching your professional development lately? What has stood out as most challenging?
+      </div>
+      <textarea class="rw-textarea" placeholder="Escreva sua resposta em português..."></textarea>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div class="prod-prompt">
+        2. <strong><span style="background:var(--g-b);color:white;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;">I4</span></strong> Think of a significant professional decision you once made. How might things have unfolded differently if you had had more information or a different set of circumstances at the time?
+      </div>
+      <textarea class="rw-textarea" placeholder="Escreva sua resposta em português..."></textarea>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div class="prod-prompt">
+        3. <strong><span style="background:var(--g-b);color:white;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;">I3</span></strong> Think about the next two years in your career. What will you have accomplished by then? Be specific — think in terms of projects, skills, or milestones.
+      </div>
+      <textarea class="rw-textarea" placeholder="Escreva sua resposta em português..."></textarea>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div class="prod-prompt">
+        4. <strong><span style="background:var(--g-d);color:white;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;">S3</span></strong> Describe a real professional situation where you plan to take action only after a specific condition is met. Use a temporal conjunction to connect the two clauses.
+      </div>
+      <textarea class="rw-textarea" placeholder="Escreva sua resposta em português..."></textarea>
+    </div>
+
+    <div>
+      <div class="prod-prompt">
+        5. <strong><span style="background:var(--g-c);color:white;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;">S1</span></strong> You recently delegated an important task or project to a colleague or team. Express your hopes, doubts, and assumptions about whether they have completed it — without having checked yet.
+      </div>
+      <textarea class="rw-textarea" placeholder="Escreva sua resposta em português..."></textarea>
+    </div>
+  </div>
+
+  <!-- EXERCISE 6: SIMPLES VS COMPOSTO -->
+  <div class="sec-label">Exercício 6 de 6</div>
+  <div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-number">6</div>
+      <div>
+        <div class="ex-title">Simple or Compound? — Choose the Right Form</div>
+        <div class="ex-instruction">Each sentence has two options: a simple subjunctive form (A) and a compound form (B). Choose the one that best fits the context. <strong>Pay attention to the time signals in each sentence.</strong> Items are organized in pairs — notice how a small change in context shifts the tense.</div>
+      </div>
+    </div>
+
+    <div style="background:var(--off-white);border-radius:8px;padding:10px 16px;margin-bottom:20px;font-size:13px;color:#666;">
+      <strong>Reminder:</strong> Simple = action simultaneous with or after the reference point &nbsp;|&nbsp; Compound = action already completed before the reference point
+    </div>
+
+    <!-- PAIR 1: presente subj vs S1 -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--g-c);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--light-gray);">Par 1 — Presente do Subjuntivo vs. S1 (tenha feito)</div>
+
+    <div class="classify-item" style="align-items:flex-start;gap:16px;padding:14px 0;">
+      <span class="classify-num" style="padding-top:2px;">1.</span>
+      <div style="flex:1;">
+        <div style="font-size:14px;color:var(--nanquim);line-height:1.7;margin-bottom:10px;">A reunião de aprovação é daqui a uma hora. Espero que o cliente _______ as condições do contrato antes de chegar.</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r1" value="A" style="accent-color:var(--cobalto);"> <strong>A)</strong> aceite</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r1" value="B" style="accent-color:var(--cobalto);"> <strong>B)</strong> tenha aceitado</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="classify-item" style="align-items:flex-start;gap:16px;padding:14px 0;">
+      <span class="classify-num" style="padding-top:2px;">2.</span>
+      <div style="flex:1;">
+        <div style="font-size:14px;color:var(--nanquim);line-height:1.7;margin-bottom:10px;">A reunião de aprovação já terminou há pouco. Espero que o cliente _______ as condições do contrato.</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r2" value="A" style="accent-color:var(--cobalto);"> <strong>A)</strong> aceite</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r2" value="B" style="accent-color:var(--cobalto);"> <strong>B)</strong> tenha aceitado</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIR 2: imperfeito subj vs S2 -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--g-c);margin-bottom:10px;padding:14px 0 6px;border-top:1px solid var(--light-gray);border-bottom:1px solid var(--light-gray);">Par 2 — Imperfeito do Subjuntivo vs. S2 (tivesse feito)</div>
+
+    <div class="classify-item" style="align-items:flex-start;gap:16px;padding:14px 0;">
+      <span class="classify-num" style="padding-top:2px;">3.</span>
+      <div style="flex:1;">
+        <div style="font-size:14px;color:var(--nanquim);line-height:1.7;margin-bottom:10px;">Em geral, se a empresa _______ mais em treinamento, os resultados seriam melhores.</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r3" value="A" style="accent-color:var(--cobalto);"> <strong>A)</strong> investisse</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r3" value="B" style="accent-color:var(--cobalto);"> <strong>B)</strong> tivesse investido</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="classify-item" style="align-items:flex-start;gap:16px;padding:14px 0;">
+      <span class="classify-num" style="padding-top:2px;">4.</span>
+      <div style="flex:1;">
+        <div style="font-size:14px;color:var(--nanquim);line-height:1.7;margin-bottom:10px;">O produto foi descontinuado no ano passado. Se a empresa _______ mais em treinamento na época, os resultados teriam sido diferentes.</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r4" value="A" style="accent-color:var(--cobalto);"> <strong>A)</strong> investisse</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r4" value="B" style="accent-color:var(--cobalto);"> <strong>B)</strong> tivesse investido</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIR 3: futuro subj vs S3 -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--g-d);margin-bottom:10px;padding:14px 0 6px;border-top:1px solid var(--light-gray);border-bottom:1px solid var(--light-gray);">Par 3 — Futuro do Subjuntivo vs. S3 (tiver feito)</div>
+
+    <div class="classify-item" style="align-items:flex-start;gap:16px;padding:14px 0;">
+      <span class="classify-num" style="padding-top:2px;">5.</span>
+      <div style="flex:1;">
+        <div style="font-size:14px;color:var(--nanquim);line-height:1.7;margin-bottom:10px;">Vou te ligar quando _______ no escritório. <em style="font-size:12px;color:#aaa;">(ação instantânea — o simples ato de chegar já é suficiente)</em></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r5" value="A" style="accent-color:var(--cobalto);"> <strong>A)</strong> chegar</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r5" value="B" style="accent-color:var(--cobalto);"> <strong>B)</strong> tiver chegado</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="classify-item" style="align-items:flex-start;gap:16px;padding:14px 0;border-bottom:none;">
+      <span class="classify-num" style="padding-top:2px;">6.</span>
+      <div style="flex:1;">
+        <div style="font-size:14px;color:var(--nanquim);line-height:1.7;margin-bottom:10px;">Assim que você _______ todos os documentos exigidos, o processo de contratação pode avançar para a próxima etapa. <em style="font-size:12px;color:#aaa;">(conclusão completa como pré-requisito)</em></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r6" value="A" style="accent-color:var(--cobalto);"> <strong>A)</strong> entregar</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 14px;border:2px solid var(--light-gray);border-radius:8px;"><input type="radio" name="r6" value="B" style="accent-color:var(--cobalto);"> <strong>B)</strong> tiver entregado</label>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <button class="check-btn" onclick="checkSimComp()">✓ Check my answers</button>
+      <button class="reset-link" id="resetSC" onclick="resetSimComp()">Reset</button>
+    </div>
+    <div class="feedback" id="fbSC"></div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  // ---- SHARED UTILITY ----
+  function normalise(str) {
+    return str.trim().toLowerCase().replace(/\s+/g,' ')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
+
+  // ---- EXERCISE 1: GAP FILL ----
+  const ex1Ids = ['e1_1','e1_2a','e1_2b','e1_3','e1_4','e1_5','e1_6','e1_7'];
+  function checkEx1() {
+    let correct = 0;
+    ex1Ids.forEach(id => {
+      const input = document.getElementById(id);
+      const answers = input.dataset.answer.split('|').map(normalise);
+      const val = normalise(input.value);
+      input.classList.remove('correct','wrong');
+      if (val && answers.includes(val)) { input.classList.add('correct'); correct++; }
+      else input.classList.add('wrong');
+    });
+    const fb = document.getElementById('fbEx1'); const rst = document.getElementById('resetEx1Btn');
+    fb.classList.add('show'); rst.classList.add('show');
+    if (correct === ex1Ids.length) { fb.className='feedback show ok'; fb.textContent=`🎉 Perfect! All ${ex1Ids.length} correct!`; }
+    else { fb.className='feedback show partial'; fb.textContent=`${correct} out of ${ex1Ids.length} correct. Red fields need a different tense or form.`; }
+  }
+  function resetEx1() {
+    ex1Ids.forEach(id => { const i=document.getElementById(id); i.value=''; i.classList.remove('correct','wrong'); });
+    document.getElementById('fbEx1').classList.remove('show');
+    document.getElementById('resetEx1Btn').classList.remove('show');
+  }
+
+  // ---- EXERCISE 2: GAP FILL ----
+  function checkGap() {
+    const ids = ['g1','g2','g3','g4','g5','g6','g7','g8'];
+    let correct = 0;
+    ids.forEach(id => {
+      const input = document.getElementById(id);
+      const answers = input.dataset.answer.split('|').map(normalise);
+      const val = normalise(input.value);
+      input.classList.remove('correct','wrong');
+      if (answers.includes(val)) { input.classList.add('correct'); correct++; }
+      else input.classList.add('wrong');
+    });
+    const fb = document.getElementById('fbGap'); const rst = document.getElementById('resetGap');
+    fb.classList.add('show'); rst.classList.add('show');
+    if (correct === ids.length) { fb.className='feedback show ok'; fb.textContent=`🎉 Perfect! All ${ids.length} correct!`; }
+    else { fb.className='feedback show partial'; fb.textContent=`${correct} out of ${ids.length} correct. Red fields need a different tense or form.`; }
+  }
+  function resetGap() {
+    ['g1','g2','g3','g4','g5','g6','g7','g8'].forEach(id => { const i=document.getElementById(id); i.value=''; i.classList.remove('correct','wrong'); });
+    document.getElementById('fbGap').classList.remove('show');
+    document.getElementById('resetGap').classList.remove('show');
+  }
+
+  // ---- EXERCISE 6: SIMPLE VS COMPOUND ----
+  const scAnswers = { r1:'A', r2:'B', r3:'A', r4:'B', r5:'A', r6:'B' };
+
+  function checkSimComp() {
+    let correct = 0; let unanswered = 0; const total = Object.keys(scAnswers).length;
+    // Style radio labels
+    for (let i = 1; i <= 6; i++) {
+      const name = 'r' + i;
+      const labels = document.querySelectorAll(`label:has(input[name="${name}"])`);
+      labels.forEach(lbl => { lbl.style.borderColor = ''; lbl.style.background = ''; });
+      const chosen = document.querySelector(`input[name="${name}"]:checked`);
+      if (!chosen) { unanswered++; continue; }
+      const correctVal = scAnswers[name];
+      if (chosen.value === correctVal) {
+        chosen.closest('label').style.borderColor = 'var(--green)';
+        chosen.closest('label').style.background = 'var(--green-bg)';
+        correct++;
+      } else {
+        chosen.closest('label').style.borderColor = 'var(--red)';
+        chosen.closest('label').style.background = 'var(--red-bg)';
+        // Also highlight correct answer in green
+        labels.forEach(lbl => { if (lbl.querySelector('input').value === correctVal) { lbl.style.borderColor = 'var(--green)'; lbl.style.background = 'var(--green-bg)'; } });
+      }
+    }
+    const fb = document.getElementById('fbSC'); const rst = document.getElementById('resetSC');
+    fb.classList.add('show'); rst.classList.add('show');
+    if (unanswered) { fb.className='feedback show partial'; fb.textContent='Please answer all items first!'; return; }
+    if (correct === total) { fb.className='feedback show ok'; fb.textContent=`🎉 Perfect! All ${total} correct!`; }
+    else { fb.className='feedback show partial'; fb.textContent=`${correct} out of ${total} correct. Look at the highlighted pairs — the correct form is shown in green.`; }
+  }
+
+  function resetSimComp() {
+    for (let i = 1; i <= 6; i++) {
+      const name = 'r' + i;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(inp => { inp.checked = false; });
+      document.querySelectorAll(`label:has(input[name="${name}"])`).forEach(lbl => { lbl.style.borderColor = ''; lbl.style.background = ''; });
+    }
+    document.getElementById('fbSC').classList.remove('show');
+    document.getElementById('resetSC').classList.remove('show');
+  }
+</script>
+
+</body>
+</html>

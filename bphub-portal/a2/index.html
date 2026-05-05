@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A2 Materials | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha:#FCF5EB; --baunilha2:#FDE7C4; --off-white:#F2F0E3; --light-gray:#EDEDE2;
+      --nanquim:#1E1D1C; --rosa-cha:#FFD8C5; --floresta:#4E551D; --erva-doce:#A6B28A;
+      --cobalto:#265B8B; --pitomba:#D36D29; --ouro:#FFB94A; --marrom:#967E63; --texto:#3C3C21;
+      --level:#7A5520;
+      --cat-gram:#265B8B; --cat-func:#4E551D; --cat-tema:#D36D29; --cat-gen:#967E63; --cat-cult:#7A9B65; --cat-fon:#C9900A;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--baunilha);color:var(--texto);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.65}
+    h1,h2,h3,h4{font-family:'Trirong',serif;font-weight:300;color:var(--cobalto)}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    #gate{position:fixed;inset:0;z-index:999;background:var(--baunilha);display:flex;align-items:center;justify-content:center;padding:24px}
+    .gate-box{background:white;border:1.5px solid var(--light-gray);border-radius:20px;padding:48px 44px;width:100%;max-width:400px;text-align:center;box-shadow:0 8px 40px rgba(122,85,32,0.12)}
+    .gate-logo img{height:34px;margin:0 auto 28px}
+    .gate-level{display:inline-block;background:var(--level);color:white;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+    .gate-box h2{font-size:24px;color:var(--level);margin-bottom:6px}
+    .gate-sub{font-size:13px;color:#999;margin-bottom:28px}
+    .gate-error{display:none;font-size:12px;color:var(--pitomba);background:#fff0ed;border:1px solid #f5c0b0;border-radius:8px;padding:8px 12px;margin-bottom:12px}
+    .gate-input{width:100%;border:1.5px solid var(--light-gray);border-radius:10px;padding:13px 16px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--nanquim);text-align:center;letter-spacing:.08em;outline:none;margin-bottom:16px;transition:border-color .2s}
+    .gate-input:focus{border-color:var(--level)}
+    .gate-btn{width:100%;background:var(--pitomba);color:white;border:none;border-radius:10px;padding:14px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .2s}
+    .gate-btn:hover{opacity:.88}
+    .gate-back{display:block;margin-top:18px;font-size:12px;color:#aaa;transition:color .2s}
+    .gate-back:hover{color:var(--level)}
+    #content{display:none}
+    .topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:var(--baunilha);border-bottom:1px solid var(--light-gray);position:sticky;top:0;z-index:50}
+    .topbar-logo img{height:30px}
+    .topbar-right{display:flex;align-items:center;gap:20px}
+    .topbar-level{background:var(--level);color:white;font-size:12px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px}
+    .topbar-back{font-size:12px;color:#aaa;transition:color .2s}
+    .topbar-back:hover{color:var(--level)}
+    .hero{background:var(--level);padding:52px 48px 48px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--floresta),var(--erva-doce),var(--ouro),var(--pitomba))}
+    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:12px}
+    .hero h1{font-size:clamp(28px,3.5vw,44px);color:white;margin-bottom:10px}
+    .hero p{font-size:15px;color:rgba(255,255,255,.70);max-width:560px;line-height:1.7;margin-bottom:28px}
+    .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+    .hero-stat .num{font-family:'Trirong',serif;font-size:28px;font-weight:300;color:var(--ouro);line-height:1}
+    .hero-stat .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.50);margin-top:3px}
+    .filter-bar{background:white;border-bottom:1px solid var(--light-gray);padding:0 48px;display:flex;align-items:center;gap:6px;overflow-x:auto}
+    .filter-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;padding:14px 16px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:500;color:#888;background:transparent;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap}
+    .filter-btn:hover{color:var(--level)}
+    .filter-btn.active{color:var(--level);border-bottom-color:var(--level);font-weight:700}
+    .filter-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .filter-count{font-size:11px;font-weight:700;color:inherit;background:var(--light-gray);border-radius:10px;padding:1px 7px}
+    .filter-btn.active .filter-count{background:var(--level);color:white}
+    .filter-spacer{flex:1}
+    .search-wrap{flex-shrink:0;display:flex;align-items:center;gap:7px;background:var(--off-white);border:1.5px solid var(--light-gray);border-radius:8px;padding:6px 12px;margin:8px 0;transition:border-color .2s}
+    .search-wrap:focus-within{border-color:var(--level)}
+    .search-icon{font-size:13px;color:#aaa;flex-shrink:0}
+    .search-input{border:none;background:transparent;font-family:'Manrope',sans-serif;font-size:13px;color:var(--texto);outline:none;width:180px}
+    .search-input::placeholder{color:#bbb}
+    .search-clear{font-size:11px;color:#bbb;cursor:pointer;background:none;border:none;padding:0;display:none}
+    .search-clear:hover{color:var(--pitomba)}
+    .search-banner{display:none;background:var(--baunilha2);border-bottom:1px solid var(--light-gray);padding:10px 48px;font-size:13px;color:var(--texto)}
+    .search-banner strong{color:var(--level)}
+    .main{padding:48px 48px 80px}
+    .cat-section{margin-bottom:48px}
+    .cat-section.hidden{display:none}
+    .cat-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1.5px solid var(--light-gray)}
+    .cat-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+    .cat-header h2{font-size:18px}
+    .cat-header .cat-desc{font-size:13px;color:#999;margin-top:2px;font-family:'Manrope',sans-serif;font-weight:400}
+    .cat-count{margin-left:auto;font-size:12px;font-weight:700;color:#aaa;font-family:'Manrope',sans-serif}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+    .mat-card{background:white;border:1.5px solid var(--light-gray);border-radius:14px;display:flex;flex-direction:row;overflow:hidden;transition:transform .15s,box-shadow .15s,border-color .2s;text-decoration:none;color:inherit}
+    .mat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.10);border-color:var(--level)}
+    .mat-card.hidden{display:none}
+    .mat-card-bar{width:4px;flex-shrink:0}
+    .mat-card-body{padding:20px 20px 18px;display:flex;flex-direction:column;gap:11px;flex:1;min-width:0}
+    .mat-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .mat-card h3{font-family:'Trirong',serif;font-size:16px;font-weight:400;color:var(--level);line-height:1.3}
+    .mat-level{flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1.5px solid}
+    .mat-level-a1{color:#2A4A00;background:#EEF5E5;border-color:#5A7A20}
+    .mat-level-a2{color:#5A3A10;background:#FBF0E5;border-color:var(--pitomba)}
+    .mat-level-b1{color:#7A4F1A;background:#FDF0E0;border-color:#D4953A}
+    .mat-level-b2{color:#163D63;background:#E8F0F9;border-color:var(--cobalto)}
+    .mat-level-c1{color:#6B2010;background:#FBE8E5;border-color:#C04030}
+    .mat-level-c2{color:#1E1D1C;background:#EDEDE2;border-color:#888}
+    .mat-card p{font-size:13px;color:#777;line-height:1.55}
+    .mat-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;line-height:1.5}
+    .tag-pre{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;opacity:.65;margin-right:4px}
+    .tag-gram{background:#EBF0F7;color:#1a3d61}
+    .tag-func{background:#EAEDDE;color:#2e3210}
+    .tag-tema{background:#FAF0E8;color:#7a3a0e}
+    .tag-gen{background:#F3EEE9;color:#5e4d3b}
+    .tag-cult{background:#EFF3EA;color:#3d5b2c}
+    .tag-fon{background:#FDF5E3;color:#7a5500}
+    .mat-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px;border-top:1px solid var(--light-gray)}
+    .mat-date{font-size:11px;color:#bbb}
+    .mat-btn{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;background:var(--pitomba);color:white;border:none;border-radius:8px;padding:7px 14px;cursor:pointer;transition:opacity .2s;text-decoration:none}
+    .mat-btn:hover{opacity:.85}
+    .empty-state{background:var(--off-white);border:1.5px dashed var(--light-gray);border-radius:14px;padding:32px 24px;text-align:center;color:#bbb}
+    .empty-state p{font-size:13px}
+    .empty-state .coming{font-size:12px;margin-top:6px;font-style:italic}
+    #no-results{display:none;text-align:center;padding:64px 24px;color:#bbb}
+    #no-results p{font-size:15px;margin-bottom:8px}
+    #no-results span{font-size:13px}
+    .page-footer{text-align:center;padding:24px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--erva-doce);border-top:1px solid var(--light-gray)}
+    @media(max-width:768px){.topbar,.hero,.main,.search-banner{padding-left:20px;padding-right:20px}.filter-bar{padding:0 20px}.hero-stats{gap:20px}.cards-grid{grid-template-columns:1fr}.search-input{width:120px}}
+  </style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></div>
+    <div class="gate-level">A2 — Básico</div>
+    <h2>Student Materials</h2>
+    <p class="gate-sub">Enter your password to access your materials</p>
+    <p id="gate-error" class="gate-error">Incorrect password. Please try again.</p>
+    <input class="gate-input" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
+    <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
+    <a href="../index.html" class="gate-back">← Back to portal</a>
+  </div>
+</div>
+
+<div id="content">
+  <div class="topbar">
+    <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:30px;"></a>
+    <div class="topbar-right">
+      <span class="topbar-level">A2 — Básico</span>
+      <a href="../index.html" class="topbar-back">← Portal</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Materials Portal — Nível A2</div>
+    <h1>Básico</h1>
+    <p>Your library of A2 materials, organised by communicative dimension — following the Itamaraty/FUNAG curriculum framework.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num" id="stat-total">1</div><div class="label">Materials available</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="label">Curriculum dimensions</div></div>
+      <div class="hero-stat"><div class="num">A2</div><div class="label">Your level</div></div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="filterCat('all',this)">
+      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">1</span>
+    </button>
+    <button class="filter-btn" data-filter="gram" onclick="filterCat('gram',this)">
+      <span class="filter-dot" style="background:var(--cat-gram);"></span>Gramaticais<span class="filter-count" id="fc-gram">-</span>
+    </button>
+    <button class="filter-btn" data-filter="func" onclick="filterCat('func',this)">
+      <span class="filter-dot" style="background:var(--cat-func);"></span>Funções<span class="filter-count" id="fc-func">-</span>
+    </button>
+    <button class="filter-btn" data-filter="tema" onclick="filterCat('tema',this)">
+      <span class="filter-dot" style="background:var(--cat-tema);"></span>Temas<span class="filter-count" id="fc-tema">-</span>
+    </button>
+    <button class="filter-btn" data-filter="gen" onclick="filterCat('gen',this)">
+      <span class="filter-dot" style="background:var(--cat-gen);"></span>Gêneros<span class="filter-count" id="fc-gen">-</span>
+    </button>
+    <button class="filter-btn" data-filter="cult" onclick="filterCat('cult',this)">
+      <span class="filter-dot" style="background:var(--cat-cult);"></span>Culturais<span class="filter-count" id="fc-cult">0</span>
+    </button>
+    <button class="filter-btn" data-filter="fon" onclick="filterCat('fon',this)">
+      <span class="filter-dot" style="background:var(--cat-fon);"></span>Fonológicos<span class="filter-count" id="fc-fon">0</span>
+    </button>
+    <div class="filter-spacer"></div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" id="search-input" placeholder="Search materials…" oninput="handleSearch(this.value)">
+      <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+    </div>
+  </div>
+
+  <div class="search-banner" id="search-banner"></div>
+
+  <div class="main">
+
+    <div class="cat-section" data-cat="gram" id="sec-gram">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-gram);"></div>
+        <div><h2>Aspectos Gramaticais</h2><div class="cat-desc">Inventário gramatical — categorias semântico-gramaticais da língua-alvo</div></div>
+        <span class="cat-count" id="count-gram">1 materiais</span>
+      </div>
+      <div class="cards-grid" id="grid-gram">
+        <a class="mat-card" href="../exercicios/expressoes-fazer.html" data-tags="gram func tema gen" data-search="fazer expressões idiomáticas fazer falta fazer questão fazer as pazes profissional equipe">
+          <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
+          <div class="mat-card-body">
+            <div class="mat-card-top">
+              <h3>Expressões com o Verbo <em>fazer</em></h3>
+              <span class="mat-level mat-level-a2">A2</span>
+            </div>
+            <p>Learn five key idiomatic expressions with <em>fazer</em> — fazer falta, fazer questão, fazer as pazes, fazer diferença, fazer sentido — in a professional context.</p>
+            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Verbos locucionais — fazer</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F5 · Emoções — satisfação e reconciliação</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T5 · Relacionamentos — dinâmica de equipe</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Crônica adaptada</span></div>
+            <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open exercise →</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="cat-section hidden" data-cat="func" id="sec-func">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-func);"></div>
+        <div><h2>Funções Comunicativas</h2><div class="cat-desc">6 categorias: juízo/avaliação, persuasão, discussão, pensamento racional, emoções, socialização</div></div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Materials with a communicative function as their primary focus will appear here.</p></div>
+    </div>
+
+    <div class="cat-section hidden" data-cat="tema" id="sec-tema">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-tema);"></div>
+        <div><h2>Temas e Tópicos</h2><div class="cat-desc">T1 · Identificação pessoal → T14 · Comunicação digital — ordem curricular Itamaraty</div></div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Materials centred on a specific theme will appear here in curricular order.</p></div>
+    </div>
+
+    <div class="cat-section hidden" data-cat="gen" id="sec-gen">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-gen);"></div>
+        <div><h2>Gêneros Textuais</h2><div class="cat-desc">Crônica, e-mail, WhatsApp, convite, cardápio, notícia, redação, entrevista…</div></div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Materials built around a specific text genre will appear here.</p></div>
+    </div>
+
+    <div class="cat-section hidden" data-cat="cult" id="sec-cult">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-cult);"></div>
+        <div><h2>Aspectos Culturais</h2><div class="cat-desc">Sistema de tratamento, valores, alimentação, habitação, cultura e produção artística…</div></div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Materials with a cultural focus will appear here.</p></div>
+    </div>
+
+    <div class="cat-section hidden" data-cat="fon" id="sec-fon">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--cat-fon);"></div>
+        <div><h2>Aspectos Fonológicos</h2><div class="cat-desc">Acentuação, fonemas vocálicos e consonantais, nasalização, efeito africado…</div></div>
+        <span class="cat-count">0 materiais</span>
+      </div>
+      <div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Pronunciation and phonology materials will appear here.</p></div>
+    </div>
+
+    <div id="no-results"><p>No materials found.</p><span>Try a different search term or filter.</span></div>
+  </div>
+</div>
+
+<div class="page-footer">Brazilian Portuguese Hub &nbsp;·&nbsp; brazilianportuguesehub.com</div>
+
+<script>
+  (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
+  function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
+  document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
+  var cf='all',cs='';
+  function filterCat(cat,btn){cf=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
+  function handleSearch(v){cs=v.trim().toLowerCase();document.getElementById('search-clear').style.display=cs?'block':'none';applyFilters();}
+  function clearSearch(){document.getElementById('search-input').value='';cs='';document.getElementById('search-clear').style.display='none';applyFilters();}
+  function applyFilters(){
+    var cards=document.querySelectorAll('.mat-card'),n=0;
+    cards.forEach(function(card){
+      var tags=card.dataset.tags||'';
+      var txt=(card.dataset.search||'')+' '+(card.querySelector('h3')?card.querySelector('h3').textContent:'')+' '+(card.querySelector('p')?card.querySelector('p').textContent:'');
+      var pf=(cf==='all')||tags.split(' ').indexOf(cf)!==-1;
+      var ps=!cs||txt.toLowerCase().indexOf(cs)!==-1;
+      if(pf&&ps){card.classList.remove('hidden');n++;}else{card.classList.add('hidden');}
+    });
+    if(cf==='all'&&!cs){document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.dataset.cat==='gram'?'remove':'add']('hidden');});}
+    else{document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.querySelectorAll('.mat-card:not(.hidden)').length>0?'remove':'add']('hidden');});}
+    var banner=document.getElementById('search-banner');
+    if(cs){banner.style.display='block';banner.innerHTML='Showing <strong>'+n+' result'+(n!==1?'s':'')+'</strong> for "<strong>'+cs+'</strong>"';}else{banner.style.display='none';}
+    document.getElementById('no-results').style.display=(n===0)?'block':'none';
+    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'1':n;
+  }
+</script>
+</body>
+</html>

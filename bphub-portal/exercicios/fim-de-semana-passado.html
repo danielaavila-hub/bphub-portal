@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No fim de semana passado | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --nanquim:    #1A1A1E;
+      --rosa-light: #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36C29;
+      --ouro:       #FFB94A;
+      --texto:      #1A1A1E;
+      --texto-leve: #6A6A6A;
+      --branco:     #FFFFFF;
+      --verde-ok:   #3A7D44;
+      --verde-bg:   #EAF4EC;
+      --vermelho:   #C0392B;
+      --vermelho-bg:#FAECEA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--branco);
+      border-bottom: 1px solid rgba(26,26,30,0.08);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-brand {
+      font-family: 'Trirong', serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--nanquim);
+    }
+    .header-brand span { color: var(--pitomba); }
+    .header-tag {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--erva-doce);
+      background: rgba(78,85,29,0.08);
+      padding: 4px 12px; border-radius: 3px;
+    }
+
+    /* ── MAIN CONTAINER ── */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* ── EXERCISE HEADER ── */
+    .ex-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--pitomba); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ex-label::before {
+      content: ''; display: block;
+      width: 22px; height: 2px; background: var(--pitomba);
+    }
+
+    h1 {
+      font-family: 'Trirong', serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--cobalto);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .ex-subtitle {
+      font-size: 14px; color: var(--texto-leve);
+      margin-bottom: 28px;
+    }
+
+    /* ── CONTEXT BOX ── */
+    .context-box {
+      background: var(--rosa-light);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 32px;
+      border-left: 4px solid var(--pitomba);
+    }
+    .context-box p {
+      font-size: 13px; color: var(--nanquim);
+      font-weight: 500; line-height: 1.6;
+    }
+
+    /* ── INSTRUCTION ── */
+    .instruction {
+      background: var(--baunilha2);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 32px;
+      font-size: 13px; color: var(--nanquim);
+      font-style: italic; line-height: 1.65;
+    }
+
+    /* ── TENSE LEGEND ── */
+    .tense-legend {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .tense-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 20px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .pill-presente  { background: rgba(38,91,139,0.12); color: var(--cobalto); }
+    .pill-perfeito  { background: rgba(211,108,41,0.14); color: var(--pitomba); }
+    .pill-imperfeito{ background: rgba(78,85,29,0.14);   color: var(--floresta); }
+
+    /* ── DIALOGUE ── */
+    .dialogue {
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .turn {
+      display: flex; gap: 14px;
+      padding: 18px 20px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: var(--branco);
+      border: 1px solid rgba(26,26,30,0.06);
+      transition: background 0.2s;
+    }
+
+    .turn-pedro { border-left: 4px solid var(--cobalto); }
+    .turn-ana   { border-left: 4px solid var(--pitomba); }
+
+    .speaker-badge {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Trirong', serif;
+      font-size: 15px; font-weight: 700;
+      margin-top: 2px;
+    }
+    .badge-pedro { background: rgba(38,91,139,0.12); color: var(--cobalto); }
+    .badge-ana   { background: rgba(211,108,41,0.14); color: var(--pitomba); }
+
+    .turn-body {
+      flex: 1;
+    }
+    .speaker-name {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .name-pedro { color: var(--cobalto); }
+    .name-ana   { color: var(--pitomba); }
+
+    .turn-text {
+      font-size: 15px; color: var(--texto);
+      line-height: 1.78;
+    }
+
+    /* Keyword highlight */
+    .kw {
+      font-weight: 700;
+      color: var(--floresta);
+      font-style: italic;
+    }
+
+    /* ── INPUT BLANKS ── */
+    .blank-wrap {
+      display: inline-flex; flex-direction: column;
+      align-items: center;
+      vertical-align: bottom;
+      margin: 0 3px;
+      position: relative;
+    }
+
+    .blank {
+      border: none;
+      border-bottom: 2px solid var(--cobalto);
+      background: transparent;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 600;
+      color: var(--cobalto);
+      text-align: center;
+      outline: none;
+      padding: 2px 6px;
+      width: 120px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .blank:focus {
+      border-bottom-color: var(--pitomba);
+      background: rgba(211,108,41,0.05);
+      border-radius: 4px 4px 0 0;
+    }
+    .blank::placeholder { color: rgba(38,91,139,0.30); font-weight: 300; }
+
+    .blank.correct {
+      border-bottom-color: var(--verde-ok);
+      background: var(--verde-bg);
+      color: var(--verde-ok);
+      border-radius: 4px 4px 0 0;
+    }
+    .blank.wrong {
+      border-bottom-color: var(--vermelho);
+      background: var(--vermelho-bg);
+      color: var(--vermelho);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .blank-hint {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(26,26,30,0.30);
+      margin-top: 2px;
+    }
+    .blank.correct + .blank-hint { color: var(--verde-ok); }
+    .blank.wrong   + .blank-hint { color: var(--vermelho); }
+
+    .answer-shown {
+      font-size: 11px; font-weight: 600;
+      color: var(--verde-ok); margin-top: 3px;
+    }
+
+    /* ── ACTIONS ── */
+    .actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 5px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer; transition: all 0.2s;
+      border: none;
+    }
+    .btn-check {
+      background: var(--pitomba); color: var(--branco);
+    }
+    .btn-check:hover { background: #be5e22; }
+    .btn-reveal {
+      background: transparent; color: var(--floresta);
+      border: 1.5px solid var(--floresta);
+    }
+    .btn-reveal:hover { background: rgba(78,85,29,0.07); }
+    .btn-reset {
+      background: transparent; color: var(--texto-leve);
+      border: 1.5px solid rgba(26,26,30,0.20);
+    }
+    .btn-reset:hover { border-color: var(--nanquim); color: var(--nanquim); }
+
+    /* ── SCORE ── */
+    .score-box {
+      display: none;
+      margin-top: 28px;
+      background: var(--branco);
+      border-radius: 10px;
+      padding: 22px 28px;
+      border: 1px solid rgba(26,26,30,0.08);
+      display: none; align-items: center; gap: 20px;
+    }
+    .score-box.visible { display: flex; }
+    .score-num {
+      font-family: 'Trirong', serif;
+      font-size: 42px; font-weight: 700;
+      line-height: 1; flex-shrink: 0;
+    }
+    .score-num.good   { color: var(--verde-ok); }
+    .score-num.medium { color: var(--ouro); }
+    .score-num.low    { color: var(--vermelho); }
+    .score-msg h4 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--nanquim); margin-bottom: 4px;
+    }
+    .score-msg p { font-size: 13px; color: var(--texto-leve); }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--erva-doce);
+      border-top: 1px solid rgba(26,26,30,0.08);
+      margin-top: 48px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 14px 20px; }
+      .container { padding: 36px 16px 60px; }
+      .turn { padding: 14px 14px; }
+      .blank { width: 90px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">Brazilian Portuguese <span>Hub</span></div>
+  <div class="header-tag">Exercise</div>
+</header>
+
+<div class="container">
+
+  <div class="ex-label">Pretérito Perfeito &amp; Imperfeito</div>
+  <h1>No fim de semana passado</h1>
+  <p class="ex-subtitle">Present, preterite and imperfect — fill in the blanks</p>
+
+  <div class="context-box">
+    <p>Pedro and Ana are chatting about their weekend over coffee on Monday morning.</p>
+  </div>
+
+  <div class="instruction">
+    Complete the sentences with the <strong>presente</strong>, <strong>pretérito perfeito</strong> or <strong>pretérito imperfeito</strong> of the verbs in parentheses.
+  </div>
+
+  <div class="tense-legend">
+    <span class="tense-pill pill-presente">Presente — habit / now</span>
+    <span class="tense-pill pill-perfeito">Perfeito — completed event</span>
+    <span class="tense-pill pill-imperfeito">Imperfeito — ongoing / habitual past</span>
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="dialogue">
+
+    <!-- Pedro 1 -->
+    <div class="turn turn-pedro">
+      <div class="speaker-badge badge-pedro">P</div>
+      <div class="turn-body">
+        <div class="speaker-name name-pedro">Pedro</div>
+        <div class="turn-text">
+          Ei, Ana! Como
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="foi" data-verb="ser">
+            <span class="blank-hint">(ser)</span>
+          </span>
+          seu <strong>fim de semana</strong>?
+        </div>
+      </div>
+    </div>
+
+    <!-- Ana 1 -->
+    <div class="turn turn-ana">
+      <div class="speaker-badge badge-ana">A</div>
+      <div class="turn-body">
+        <div class="speaker-name name-ana">Ana</div>
+        <div class="turn-text">
+          Oi, Pedro! Meu fim de semana
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="foi" data-verb="ser">
+            <span class="blank-hint">(ser)</span>
+          </span>
+          ótimo! No sábado, eu
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fui" data-verb="ir">
+            <span class="blank-hint">(ir)</span>
+          </span>
+          ao parque com alguns amigos e
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="joguei" data-verb="jogar">
+            <span class="blank-hint">(jogar)</span>
+          </span>
+          vôlei.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedro 2 -->
+    <div class="turn turn-pedro">
+      <div class="speaker-badge badge-pedro">P</div>
+      <div class="turn-body">
+        <div class="speaker-name name-pedro">Pedro</div>
+        <div class="turn-text">
+          Que legal! Eu também
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fiz" data-verb="fazer">
+            <span class="blank-hint">(fazer)</span>
+          </span>
+          muitas coisas. No sábado,
+          <span class="kw">enquanto</span>
+          vocês
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="jogavam" data-verb="jogar">
+            <span class="blank-hint">(jogar)</span>
+          </span>
+          vôlei, eu
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fiz" data-verb="fazer">
+            <span class="blank-hint">(fazer)</span>
+          </span>
+          uma trilha na montanha.
+        </div>
+      </div>
+    </div>
+
+    <!-- Ana 2 -->
+    <div class="turn turn-ana">
+      <div class="speaker-badge badge-ana">A</div>
+      <div class="turn-body">
+        <div class="speaker-name name-ana">Ana</div>
+        <div class="turn-text">
+          Nossa, que aventura! E depois da trilha, você
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fez" data-verb="fazer">
+            <span class="blank-hint">(fazer)</span>
+          </span>
+          algo especial?
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedro 3 -->
+    <div class="turn turn-pedro">
+      <div class="speaker-badge badge-pedro">P</div>
+      <div class="turn-body">
+        <div class="speaker-name name-pedro">Pedro</div>
+        <div class="turn-text">
+          Sim,
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fui" data-verb="ir">
+            <span class="blank-hint">(ir)</span>
+          </span>
+          a um restaurante novo na cidade. A comida
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="estava" data-verb="estar">
+            <span class="blank-hint">(estar)</span>
+          </span>
+          deliciosa!
+        </div>
+      </div>
+    </div>
+
+    <!-- Ana 3 -->
+    <div class="turn turn-ana">
+      <div class="speaker-badge badge-ana">A</div>
+      <div class="turn-body">
+        <div class="speaker-name name-ana">Ana</div>
+        <div class="turn-text">
+          Que bom! No domingo, eu
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="visitei" data-verb="visitar">
+            <span class="blank-hint">(visitar)</span>
+          </span>
+          meus avós. Eles sempre
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="preparam" data-verb="preparar">
+            <span class="blank-hint">(preparar)</span>
+          </span>
+          um almoço incrível quando eu
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="vou" data-verb="ir">
+            <span class="blank-hint">(ir)</span>
+          </span>
+          lá.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedro 4 -->
+    <div class="turn turn-pedro">
+      <div class="speaker-badge badge-pedro">P</div>
+      <div class="turn-body">
+        <div class="speaker-name name-pedro">Pedro</div>
+        <div class="turn-text">
+          Adoro almoços em família! Eu
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fiquei" data-verb="ficar">
+            <span class="blank-hint">(ficar)</span>
+          </span>
+          em casa neste domingo e
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="assisti" data-verb="assistir">
+            <span class="blank-hint">(assistir)</span>
+          </span>
+          um filme.
+          <span class="kw">Enquanto</span>
+          eu
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="assistia" data-verb="assistir">
+            <span class="blank-hint">(assistir)</span>
+          </span>
+          ao filme, minha irmã
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="fazia|estava fazendo|fez" data-verb="fazer">
+            <span class="blank-hint">(fazer)</span>
+          </span>
+          um bolo. O cheiro
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="estava" data-verb="estar">
+            <span class="blank-hint">(estar)</span>
+          </span>
+          maravilhoso!
+        </div>
+      </div>
+    </div>
+
+    <!-- Ana 4 -->
+    <div class="turn turn-ana">
+      <div class="speaker-badge badge-ana">A</div>
+      <div class="turn-body">
+        <div class="speaker-name name-ana">Ana</div>
+        <div class="turn-text">
+          Ah, que legal! Acho que no próximo fim de semana vou tentar fazer algo parecido. Você
+          <span class="blank-wrap">
+            <input class="blank" type="text" placeholder="___" data-answers="teve|tem" data-verb="ter">
+            <span class="blank-hint">(ter)</span>
+          </span>
+          uma ótima ideia!
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dialogue -->
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn btn-check" onclick="checkAnswers()">Check answers</button>
+    <button class="btn btn-reveal" onclick="revealAll()">Show answers</button>
+    <button class="btn btn-reset" onclick="resetAll()">Start over</button>
+  </div>
+
+  <!-- SCORE -->
+  <div class="score-box" id="score-box">
+    <div class="score-num" id="score-num"></div>
+    <div class="score-msg">
+      <h4 id="score-title"></h4>
+      <p id="score-text"></p>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="page-footer">Brazilian Portuguese Hub &nbsp;·&nbsp; brazilianportuguesehub.com</div>
+
+<script>
+  function normalize(str) {
+    return str.trim().toLowerCase()
+      .replace(/[áà]/g, 'a').replace(/[ãâ]/g, 'a')
+      .replace(/[éê]/g, 'e').replace(/[í]/g, 'i')
+      .replace(/[óôõ]/g, 'o').replace(/[ú]/g, 'u')
+      .replace(/[ç]/g, 'c');
+  }
+
+  function checkAnswers() {
+    const inputs = document.querySelectorAll('.blank');
+    let correct = 0;
+
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answers.split('|').map(normalize);
+      const val = normalize(inp.value);
+
+      inp.classList.remove('correct', 'wrong');
+      if (!val) return;
+
+      if (accepted.includes(val)) {
+        inp.classList.add('correct');
+        correct++;
+      } else {
+        inp.classList.add('wrong');
+      }
+    });
+
+    const filled = [...inputs].filter(i => i.value.trim()).length;
+    const total  = inputs.length;
+
+    const box   = document.getElementById('score-box');
+    const num   = document.getElementById('score-num');
+    const title = document.getElementById('score-title');
+    const text  = document.getElementById('score-text');
+
+    num.textContent = correct + '/' + total;
+    box.classList.add('visible');
+
+    if (correct === total) {
+      num.className = 'score-num good';
+      title.textContent = 'Excellent work!';
+      text.textContent  = 'All answers correct. Perfect use of pretérito perfeito and imperfeito!';
+    } else if (correct >= total * 0.7) {
+      num.className = 'score-num medium';
+      title.textContent = 'Good job!';
+      text.textContent  = 'Review the highlighted answers and try again.';
+    } else {
+      num.className = 'score-num low';
+      title.textContent = 'Keep going!';
+      text.textContent  = 'Review the tense rules and try the highlighted blanks again.';
+    }
+  }
+
+  function revealAll() {
+    document.querySelectorAll('.blank').forEach(inp => {
+      const first = inp.dataset.answers.split('|')[0];
+      inp.value = first;
+      inp.classList.remove('wrong');
+      inp.classList.add('correct');
+    });
+    checkAnswers();
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.blank').forEach(inp => {
+      inp.value = '';
+      inp.classList.remove('correct', 'wrong');
+    });
+    const box = document.getElementById('score-box');
+    box.classList.remove('visible');
+  }
+
+  // Tab between blanks
+  document.querySelectorAll('.blank').forEach((inp, i, all) => {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (i < all.length - 1) all[i + 1].focus();
+        else checkAnswers();
+      }
+    });
+  });
+</script>
+</body>
+</html>

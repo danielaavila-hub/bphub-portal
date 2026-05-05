@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempos Compostos — Guia da Professora | BPHUB B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --rosa-cha: #FFD8C5;
+      --floresta: #4E551D; --erva-doce: #A6B28A; --cobalto: #265B8B;
+      --cobalto-light: #EBF1F8; --cobalto-dark: #1d4570;
+      --pitomba: #D36D29; --ouro: #FFB94A; --texto: #3C3C21;
+      --teacher-bg: #F0EBF8; --teacher-accent: #6D43A6;
+      --answer-green: #2E7D52; --answer-bg: #EAF5EE;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 26px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--cobalto); color: white; }
+    .badge-teacher { background: var(--teacher-bg); color: var(--teacher-accent); }
+
+    /* HERO */
+    .hero { background: #1a1a2e; padding: 48px 40px 44px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #9a7fd4; margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(24px, 4vw, 40px); color: #fff; margin-bottom: 10px; }
+    .hero h1 span { color: #9a7fd4; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.55); max-width: 560px; line-height: 1.65; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: #9a7fd4; font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 900px; padding: 48px 40px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; }
+
+    /* OVERVIEW BOX */
+    .overview-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; margin-bottom: 32px; }
+    .overview-box h2 { font-size: 20px; color: var(--cobalto); margin-bottom: 16px; }
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ov-item { font-size: 14px; }
+    .ov-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 4px; }
+    .ov-val { color: var(--nanquim); line-height: 1.5; }
+    .ov-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .ov-chip { background: var(--off-white); border-radius: 20px; padding: 2px 10px; font-size: 12px; color: var(--nanquim); }
+
+    /* EXERCISE ANSWER BLOCK */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-block h2 { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: var(--cobalto); margin-bottom: 6px; }
+    .ex-meta { font-size: 13px; color: #999; margin-bottom: 20px; }
+
+    /* ANSWER TABLE */
+    .answer-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .answer-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    .answer-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); font-size: 14px; vertical-align: top; }
+    .answer-table tr:last-child td { border-bottom: none; }
+    .answer-table .num { color: #bbb; font-weight: 700; font-size: 13px; min-width: 28px; }
+    .answer-key { color: var(--answer-green); font-weight: 700; }
+    .answer-note { color: #777; font-size: 13px; line-height: 1.5; }
+    .answer-wrong { color: var(--pitomba); font-size: 13px; }
+
+    /* ANSWER PILL */
+    .ans-pill { display: inline-block; background: var(--answer-bg); color: var(--answer-green); font-weight: 700; border-radius: 6px; padding: 1px 8px; font-size: 13px; }
+    .ans-pill-fpr { display: inline-block; background: #fff0e8; color: var(--pitomba); font-weight: 700; border-radius: 6px; padding: 1px 8px; font-size: 13px; }
+
+    /* TEACHER NOTE */
+    .t-note { background: var(--teacher-bg); border-left: 4px solid var(--teacher-accent); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .t-note .t-note-title { font-weight: 700; color: var(--teacher-accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* ALERT BOX */
+    .alert-box { background: #fff8ec; border-left: 4px solid var(--ouro); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .alert-box .alert-title { font-weight: 700; color: #b8860b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* PHONOLOGY BOX */
+    .phono-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--nanquim); line-height: 1.65; }
+    .phono-box .phono-title { font-weight: 700; color: var(--cobalto); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* SPANISH NOTE */
+    .es-note { background: #FFF8EC; border: 1.5px solid var(--ouro); border-radius: 10px; padding: 14px 18px; margin: 16px 0; font-size: 13px; line-height: 1.65; }
+    .es-note .es-title { font-weight: 700; color: #b8860b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+
+    /* ERROR ITEM */
+    .err-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .err-item:last-child { border-bottom: none; }
+    .err-sentence { font-size: 14px; color: var(--nanquim); margin-bottom: 6px; }
+    .err-wrong { color: var(--pitomba); text-decoration: underline; text-decoration-style: wavy; }
+    .err-arrow { color: #ccc; margin: 0 6px; }
+    .err-correction { font-size: 14px; color: var(--answer-green); font-weight: 700; margin-bottom: 4px; }
+    .err-explain { font-size: 13px; color: #777; line-height: 1.55; }
+
+    /* PRODUCTION GUIDANCE */
+    .prod-block { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; font-size: 14px; }
+    .prod-block .prod-num { font-weight: 700; color: var(--cobalto); margin-right: 6px; }
+    .prod-block .prod-note { font-size: 13px; color: #777; line-height: 1.55; margin-top: 4px; }
+
+    /* TENSE TAG */
+    .tense-tag { display: inline-block; font-size: 11px; font-weight: 700; color: white; padding: 2px 8px; border-radius: 4px; }
+    .tense-tag.fp  { background: var(--cobalto); }
+    .tense-tag.fpr { background: var(--pitomba); }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--light-gray); margin: 36px 0; }
+
+    @media (max-width: 680px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block { padding: 22px 18px; }
+      .overview-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-teacher">🔒 Guia da Professora</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Guia da Professora — Nível B2</div>
+  <h1>Tempos Compostos: <span>Terei feito</span> &amp; <span>Teria feito</span></h1>
+  <div class="hero-sub">Gabarito completo, notas pedagógicas, interferência do espanhol e sugestões para aula online.</div>
+  <div class="hero-note">🔒 Uso exclusivo da professora</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="sec-label">Visão Geral do Material</div>
+  <div class="overview-box">
+    <h2>Perfil da Aula</h2>
+    <div class="overview-grid">
+      <div class="ov-item">
+        <div class="ov-label">Nível</div>
+        <div class="ov-val">B2 — Intermediário Superior</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Duração sugerida</div>
+        <div class="ov-val">60–75 minutos</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Perfil da aluna</div>
+        <div class="ov-val">Professora universitária, falante nativa de espanhol, ensina nos EUA</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Foco gramatical</div>
+        <div class="ov-val">Futuro do Presente Composto (FPC) &amp; Futuro do Pretérito Composto (FPRC)</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Funções comunicativas</div>
+        <div class="ov-chips">
+          <span class="ov-chip">Falar de realizações futuras</span>
+          <span class="ov-chip">Hipóteses contrafactuais</span>
+          <span class="ov-chip">Reflexão sobre carreira</span>
+        </div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Texto base</div>
+        <div class="ov-val"><em>"Cinquenta anos de sala de aula"</em> — entrevista jornalística elaborada para fins didáticos. Tema: carreira acadêmica.</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Particípios irregulares em destaque</div>
+        <div class="ov-chips">
+          <span class="ov-chip">feito</span>
+          <span class="ov-chip">escrito</span>
+          <span class="ov-chip">visto</span>
+          <span class="ov-chip">dito</span>
+          <span class="ov-chip">posto</span>
+          <span class="ov-chip">aberto</span>
+        </div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">Ponto fonológico</div>
+        <div class="ov-val">Formas do auxiliar <em>ter</em>: acento tônico e contraste terei / teria / teríamos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXERCISE 1 -->
+  <div class="sec-label">Exercício 1 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Identify and Classify</h2>
+    <div class="ex-meta">Tarefa: Classificar o tempo verbal em FPC ou FPRC via dropdown.</div>
+
+    <table class="answer-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Frase (forma em destaque)</th>
+          <th>Resposta</th>
+          <th>Nota pedagógica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td>…já <em>terá publicado</em> pelo menos três artigos.</td>
+          <td><span class="ans-pill">FPC</span></td>
+          <td class="answer-note">Completion before future milestone ("quando você terminar"). Classic FPC use.</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td>…<em>teria morado</em> dois anos em Paris.</td>
+          <td><span class="ans-pill-fpr">FPRC</span></td>
+          <td class="answer-note">Hypothetical unfulfilled in the past. Paired with pluperfect subjunctive (<em>tivesse aceito</em>). This item explicitly shows the counterfactual pair — explore in class.</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td>…a banca <em>terá avaliado</em> todas as dissertações.</td>
+          <td><span class="ans-pill">FPC</span></td>
+          <td class="answer-note">Time marker <em>até sexta-feira</em> signals completion before a future deadline — FPC.</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td>…os pesquisadores <em>teriam feito</em> descobertas muito mais importantes.</td>
+          <td><span class="ans-pill-fpr">FPRC</span></td>
+          <td class="answer-note">Counterfactual with <em>com mais financiamento</em> as the implicit condition. Note irregular participle <em>feito</em>.</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td>…os participantes já <em>terão trocado</em> muitas ideias.</td>
+          <td><span class="ans-pill">FPC</span></td>
+          <td class="answer-note">Future event (<em>quando a conferência terminar</em>) as the reference point for completion. FPC.</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td>…eu nunca <em>teria terminado</em> minha pesquisa.</td>
+          <td><span class="ans-pill-fpr">FPRC</span></td>
+          <td class="answer-note">Counterfactual with implicit condition (<em>sem aquela orientadora</em> = "if not for that supervisor"). FPRC without overt <em>se</em> — common structure worth noting.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Nota pedagógica — itens 2 e 6</div>
+      Estes dois itens mostram dois gatilhos distintos para o FPRC: <strong>item 2</strong> usa a condicional explícita (<em>se + pluscuamperfecto</em>); <strong>item 6</strong> usa uma condicional implícita (<em>sem + noun phrase</em>). Se a aluna dominar os dois padrões, o uso do FPRC ficará muito mais natural. Peça a ela que reformule o item 6 com <em>se</em>: <em>"Se não tivesse tido aquela orientadora, eu nunca teria terminado…"</em>
+    </div>
+  </div>
+
+  <!-- EXERCISE 2 -->
+  <div class="sec-label">Exercício 2 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Gap Fill — Conjugate the Verb</h2>
+    <div class="ex-meta">Tarefa: Completar com a forma correta do tempo composto, escolhendo entre FPC e FPRC.</div>
+
+    <table class="answer-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Verbo (infinitivo)</th>
+          <th>Resposta correta</th>
+          <th>Tense choice</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td>orientar</td>
+          <td><span class="ans-pill">terá orientado</span></td>
+          <td><span class="tense-tag fp">FPC</span></td>
+          <td class="answer-note">Future milestone (<em>quando você se aposentar</em>). Regular -ar participle.</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td>fazer</td>
+          <td><span class="ans-pill-fpr">teria feito</span></td>
+          <td><span class="tense-tag fpr">FPRC</span></td>
+          <td class="answer-note">Explicit counterfactual condition (<em>se eu tivesse escolhido</em>). Irregular participle: <strong>feito</strong>. Most likely trouble spot — mark if wrong.</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td>ler</td>
+          <td><span class="ans-pill">teremos lido</span></td>
+          <td><span class="tense-tag fp">FPC</span></td>
+          <td class="answer-note"><em>Até o final do semestre</em> = future deadline. <em>Nós</em> form of FPC. Irregular participle: <strong>lido</strong>.</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td>terminar</td>
+          <td><span class="ans-pill-fpr">teria terminado</span></td>
+          <td><span class="tense-tag fpr">FPRC</span></td>
+          <td class="answer-note">Implicit condition: <em>sem o apoio da família</em>. Regular -ar participle.</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td>mandar</td>
+          <td><span class="ans-pill">terei mandado</span></td>
+          <td><span class="tense-tag fp">FPC</span></td>
+          <td class="answer-note">Action will be completed before the moment of arrival (<em>quando você chegar</em>). First person singular FPC.</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td>escrever</td>
+          <td><span class="ans-pill-fpr">teria escrito</span></td>
+          <td><span class="tense-tag fpr">FPRC</span></td>
+          <td class="answer-note">Hypothetical with explicit condition (<em>com mais tempo</em>). Irregular participle: <strong>escrito</strong>.</td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td>tomar</td>
+          <td><span class="ans-pill">terá tomado</span></td>
+          <td><span class="tense-tag fp">FPC</span></td>
+          <td class="answer-note"><em>Até amanhã</em> = future deadline for a concrete real-world action. FPC.</td>
+        </tr>
+        <tr>
+          <td class="num">8</td>
+          <td>publicar</td>
+          <td><span class="ans-pill-fpr">teríamos publicado</span></td>
+          <td><span class="tense-tag fpr">FPRC</span></td>
+          <td class="answer-note">Explicit condition (<em>se tivéssemos colaborado</em>). <em>Nós</em> form of FPRC: <em>teríamos</em>. Note written accent on the first syllable.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Padrão para a correção</div>
+      Ao corrigir, oriente a aluna a usar dois critérios: (1) <strong>É real ou hipotético?</strong> Se há uma condição (<em>se tivesse…</em>, <em>sem…</em>, <em>com mais…</em>), usa-se FPRC. Se é uma conclusão ou prazo futuro concreto, usa-se FPC. (2) <strong>Qual é o particípio?</strong> Os itens 2 (feito), 3 (lido) e 6 (escrito) testam particípios irregulares diretamente.
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">⚠️ Erro comum — particípios irregulares</div>
+      Falantes de espanhol tendem a regularizar os particípios: <em>*fazido, *escrevido, *lido</em> (este último é correto em BP, mas <em>lerido</em> é erro frequente). Reforce: <strong>fazer → feito, escrever → escrito, ler → lido, ver → visto, abrir → aberto</strong>.
+    </div>
+  </div>
+
+  <!-- EXERCISE 3 -->
+  <div class="sec-label">Exercício 3 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Match Sentence and Meaning</h2>
+    <div class="ex-meta">Tarefa: Associar frases em português (1–6) aos significados em inglês (A–F).</div>
+
+    <table class="answer-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Frase</th>
+          <th>Resposta</th>
+          <th>Ponto a explorar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td>Até dezembro, <em>teremos concluído</em> a pesquisa.</td>
+          <td><span class="ans-pill">D</span></td>
+          <td class="answer-note">Straightforward FPC with deadline. Good anchor item.</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td>Ela <em>teria aceito</em> o cargo, mas não foi convidada.</td>
+          <td><span class="ans-pill-fpr">E</span></td>
+          <td class="answer-note">FPRC expressing unrealized willingness. The "but" clause signals the blocked condition. Ask: <em>por que não usamos teria aceitado aqui?</em> (It's correct — <em>aceitado</em> is also valid; <em>aceito</em> is the shorter irregular form used in BP.)</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td>Quando você ligar, eles já <em>terão saído</em>.</td>
+          <td><span class="ans-pill">A</span></td>
+          <td class="answer-note">FPC expressing probability about a future state. Note the English meaning uses "probably" — this speculative FPC is common in spoken BP.</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td>Sem aquele erro, o projeto <em>teria dado</em> muito certo.</td>
+          <td><span class="ans-pill-fpr">C</span></td>
+          <td class="answer-note">Implicit counterfactual. <em>Dar certo</em> idiom — discuss: "worked out well." Irregular participle: <strong>dado</strong>.</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td>Naquela época, ele já <em>teria publicado</em> uns vinte artigos.</td>
+          <td><span class="ans-pill-fpr">B</span></td>
+          <td class="answer-note">Polite conjecture / estimation about the past. The English equivalent "must have published / would have published" shows the dual value of this FPRC use. Especially relevant for an academic student.</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td>Quando o congresso terminar, você <em>terá conhecido</em> pesquisadores do mundo todo.</td>
+          <td><span class="ans-pill">F</span></td>
+          <td class="answer-note">FPC: completion tied to a future event. Irregular participle: <strong>conhecido</strong> (from <em>conhecer</em>).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Item 2 — aceito vs. aceitado</div>
+      <em>Aceitar</em> tem dois particípios em BP: <strong>aceitado</strong> (forma regular) e <strong>aceito</strong> (forma irregular, mais comum). Com o auxiliar <em>ter</em>, o uso de <em>aceito</em> é completamente natural no Brasil. Se a aluna perguntar, confirme ambas as formas como corretas.
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Item 5 — FPRC como conjectura</div>
+      Este uso do FPRC (<em>naquela época, ele já teria publicado…</em>) é menos óbvio para estudantes. Não há condição explícita — é uma estimativa educada sobre algo passado. Em inglês: <em>"By that time, he would/must have published…"</em> Peça à aluna para criar uma frase similar sobre a carreira de alguém que ela conhece.
+    </div>
+  </div>
+
+  <!-- EXERCISE 4 -->
+  <div class="sec-label">Exercício 4 — Gabarito</div>
+  <div class="ex-block">
+    <h2>Spot and Correct the Error</h2>
+    <div class="ex-meta">Tarefa: Identificar o erro no tempo verbal composto e reescrever a frase correta.</div>
+
+    <div class="err-item">
+      <div class="err-sentence"><strong>1.</strong> <em>"Quando você chegar, eu já <span class="err-wrong">tinha mandado</span> o e-mail."</em></div>
+      <div class="err-correction">✓ Quando você chegar, eu já <strong>terei mandado</strong> o e-mail.</div>
+      <div class="err-explain"><strong>Erro:</strong> <em>tinha mandado</em> é o pretérito mais-que-perfeito composto — tempo que descreve uma ação anterior a outra ação passada. A frase projeta uma conclusão futura (<em>quando você chegar</em>), então o tempo correto é o FPC: <em>terei mandado</em>.<br><strong>Interferência do espanhol:</strong> Em espanhol (<em>cuando llegues, ya habré mandado</em>), a lógica é idêntica — reforçar que <em>había mandado</em> seria errado em espanhol também.</div>
+    </div>
+
+    <div class="err-item">
+      <div class="err-sentence"><strong>2.</strong> <em>"Se eu tivesse estudado mais, <span class="err-wrong">terei tirado</span> uma nota melhor."</em></div>
+      <div class="err-correction">✓ Se eu tivesse estudado mais, <strong>teria tirado</strong> uma nota melhor.</div>
+      <div class="err-explain"><strong>Erro:</strong> O contexto é hipotético-contrafactual (<em>se + pluscuamperfecto del subjuntivo</em>). O resultado de uma condição irreal no passado sempre usa FPRC (<em>teria</em>), nunca FPC (<em>terei</em>). Este é o erro mais frequente na transição B1→B2.<br><strong>Regra de ouro:</strong> <em>se tivesse + verbo</em> → sempre FPRC (<em>teria + particípio</em>).</div>
+    </div>
+
+    <div class="err-item">
+      <div class="err-sentence"><strong>3.</strong> <em>"Até o final do ano, eles <span class="err-wrong">teriam concluído</span> todos os experimentos."</em> (nenhuma condição hipotética mencionada)</div>
+      <div class="err-correction">✓ Até o final do ano, eles <strong>terão concluído</strong> todos os experimentos.</div>
+      <div class="err-explain"><strong>Erro:</strong> Sem condição hipotética, a frase expressa uma conclusão futura concreta antes de um prazo (<em>até o final do ano</em>). O FPRC pressupõe uma condição irreal; aqui, a ação é projetada como real. O tempo correto é FPC (<em>terão</em>).<br><strong>Nota:</strong> Este item testa se a aluna distingue "real future completion" (FPC) de "hypothetical past" (FPRC).</div>
+    </div>
+
+    <div class="err-item">
+      <div class="err-sentence"><strong>4.</strong> <em>"Sem você, eu não <span class="err-wrong">terei conseguido</span> terminar este projeto."</em></div>
+      <div class="err-correction">✓ Sem você, eu não <strong>teria conseguido</strong> terminar este projeto.</div>
+      <div class="err-explain"><strong>Erro:</strong> <em>Sem você</em> funciona como condição contrafactual implícita (= <em>se não fosse por você / se não tivesse te tido</em>). Condição implícita → resultado hipotético → FPRC (<em>teria conseguido</em>).<br><strong>Padrão recorrente:</strong> <em>Sem + noun phrase</em> e <em>com mais + noun phrase</em> são gatilhos implícitos do FPRC. Retome o item 6 do Exercício 1 para mostrar que é o mesmo padrão.</div>
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Estratégia de correção online</div>
+      Ao corrigir no chat ou vídeo, peça à aluna que <strong>identifique o gatilho</strong> antes de corrigir: "Qual palavra ou frase nesta oração indica que é real ou hipotético?" Isso consolida o raciocínio em vez de memorizar formas isoladas.
+    </div>
+  </div>
+
+  <!-- EXERCISE 5 -->
+  <div class="sec-label">Exercício 5 — Produção Livre</div>
+  <div class="ex-block">
+    <h2>Your Turn — Write About Yourself</h2>
+    <div class="ex-meta">Exercício aberto. Avalie o uso do tempo verbal, a coerência do discurso e o vocabulário acadêmico.</div>
+
+    <div class="prod-block">
+      <span class="prod-num">1. <span class="tense-tag fp">FPC</span></span> <em>O que você terá realizado nos próximos cinco anos?</em>
+      <div class="prod-note">Espere formas como: <em>terei publicado, terei concluído, terei orientado, teremos lançado…</em> — Verifique uso correto de FPC (futuro + prazo implícito). Explore: particípios irregulares usados espontaneamente.</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num">2. <span class="tense-tag fpr">FPRC</span></span> <em>Se tivesse escolhido outra área, o que teria feito de diferente?</em>
+      <div class="prod-note">Foco: emparelhamento <em>se tivesse + teria feito</em>. Atenção a particípios irregulares na resposta livre (feito, estudado, escrito). Avalie se a aluna mantém a concordância no plural (<em>teríamos feito</em> se sujeito for <em>nós</em>).</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num">3. <span class="tense-tag fpr">FPRC</span></span> <em>O que teria acontecido se tivesse feito uma escolha diferente?</em>
+      <div class="prod-note">Pergunta mais aberta — avalie a coerência narrativa além do tempo verbal. Vocabulário esperado: <em>teria mudado, teria seguido, teria conhecido, teria perdido…</em> Incentive o uso de pelo menos dois FPRC na resposta.</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num">4. <span class="tense-tag fp">FPC</span></span> <em>Quando terminar este nível, o que já terá aprendido?</em>
+      <div class="prod-note">Retoma o FPC com marcador temporal (<em>quando terminar</em>). Espere reflexão genuína sobre o progresso. Esta resposta pode ser usada como fechamento da aula — é pessoal e motivadora.</div>
+    </div>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Sugestão de acompanhamento</div>
+      Para aulas online, peça que a aluna grave um áudio de 2–3 minutos respondendo a pergunta 5, usando os dois tempos. Isso ativa a fluência oral com o ponto gramatical — mais eficaz do que respostas escritas isoladas.
+    </div>
+  </div>
+
+  <!-- PEDAGOGICAL NOTES -->
+  <hr>
+  <div class="sec-label">Notas Pedagógicas Gerais</div>
+
+  <!-- SPANISH INTERFERENCE -->
+  <div class="ex-block">
+    <h2>Interferência do Espanhol</h2>
+
+    <div class="es-note">
+      <div class="es-title">🇪🇸 Vantagem estrutural</div>
+      Para uma falante nativa de espanhol, a estrutura é uma vantagem enorme: <em>terei feito</em> = <em>habré hecho</em> / <em>teria feito</em> = <em>habría hecho</em>. A lógica condicional e temporal é exatamente a mesma. Use isso como ponto de apoio desde o início.
+    </div>
+
+    <table class="answer-table" style="margin-top:16px;">
+      <thead>
+        <tr>
+          <th>Ponto de atenção</th>
+          <th>Espanhol (esperado)</th>
+          <th>Português BP (correto)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="answer-note">Auxiliar</td>
+          <td class="answer-note"><em>haber: habré, habría</em></td>
+          <td><span class="ans-pill">ter: terei, teria</span> — nunca <em>haver</em> em BP oral</td>
+        </tr>
+        <tr>
+          <td class="answer-note">Particípio de <em>fazer / hacer</em></td>
+          <td class="answer-note"><em>hecho</em></td>
+          <td><span class="ans-pill">feito</span> — forma diferente, memorizar</td>
+        </tr>
+        <tr>
+          <td class="answer-note">Particípio de <em>escrever / escribir</em></td>
+          <td class="answer-note"><em>escrito</em></td>
+          <td><span class="ans-pill">escrito</span> — idêntico ✓</td>
+        </tr>
+        <tr>
+          <td class="answer-note">Particípio de <em>dizer / decir</em></td>
+          <td class="answer-note"><em>dicho</em></td>
+          <td><span class="ans-pill">dito</span> — forma diferente, memorizar</td>
+        </tr>
+        <tr>
+          <td class="answer-note">Particípio de <em>ver / ver</em></td>
+          <td class="answer-note"><em>visto</em></td>
+          <td><span class="ans-pill">visto</span> — idêntico ✓</td>
+        </tr>
+        <tr>
+          <td class="answer-note">Particípio de <em>pôr / poner</em></td>
+          <td class="answer-note"><em>puesto</em></td>
+          <td><span class="ans-pill">posto</span> — semelhante, poucas trocas esperadas</td>
+        </tr>
+        <tr>
+          <td class="answer-note">Uso do <em>haver</em></td>
+          <td class="answer-note"><em>haber: obligatorio como auxiliar</em></td>
+          <td class="answer-note">Em BP, <em>haver</em> como auxiliar é arcaico/formal escrito. Na fala cotidiana e no nível B2, use sempre <strong>ter</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box" style="margin-top:16px;">
+      <div class="alert-title">⚠️ Erro por transferência mais comum</div>
+      A aluna pode produzir <em>*haverei feito</em> ou <em>*haveria feito</em> por analogia com <em>habré / habría</em>. Corrija com gentileza: <em>"Em português falado, usamos sempre 'ter' — 'haverei' existe no dicionário, mas soa antiquado mesmo em contextos formais."</em>
+    </div>
+  </div>
+
+  <!-- PHONOLOGY -->
+  <div class="ex-block">
+    <h2>Ponto Fonológico</h2>
+
+    <div class="phono-box">
+      <div class="phono-title">🎧 Acento tônico nas formas de <em>ter</em></div>
+      As formas do auxiliar <em>ter</em> nesses tempos podem ser confundidas em leitura rápida. Reforce as diferenças:
+    </div>
+
+    <table class="answer-table" style="margin-top:16px;">
+      <thead>
+        <tr>
+          <th>Forma</th>
+          <th>Sílaba tônica</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><em>te<u>rei</u></em></td>
+          <td class="answer-key">-rei</td>
+          <td class="answer-note">Ditongo tônico. Muito diferente de <em>teria</em>. Pronúncia BP: /te-ˈREI/.</td>
+        </tr>
+        <tr>
+          <td><em>te<u>rá</u></em></td>
+          <td class="answer-key">-rá</td>
+          <td class="answer-note">Acento aberto. Falantes de espanhol tendem a reduzir a vogal final — insistir na abertura.</td>
+        </tr>
+        <tr>
+          <td><em>te<u>re</u>mos</em></td>
+          <td class="answer-key">-re-</td>
+          <td class="answer-note">Tônica na penúltima. Sem acento gráfico — contraste com <em>te<u>rí</u>amos</em>.</td>
+        </tr>
+        <tr>
+          <td><em>te<u>rão</u></em></td>
+          <td class="answer-key">-rão</td>
+          <td class="answer-note">Ditongo nasal. Muito comum confundir com <em>teriam</em> em leitura rápida.</td>
+        </tr>
+        <tr>
+          <td><em>te<u>ri</u>a</em></td>
+          <td class="answer-key">-ri-</td>
+          <td class="answer-note">Tônica na antepenúltima. Três sílabas. Contraste com <em>terei</em> (duas sílabas).</td>
+        </tr>
+        <tr>
+          <td><em>te<u>rí</u>amos</em></td>
+          <td class="answer-key">-rí-</td>
+          <td class="answer-note">Acento agudo obrigatório. Cinco sílabas — palavra paroxítona marcada. Leitura mais lenta é normal.</td>
+        </tr>
+        <tr>
+          <td><em>te<u>ri</u>am</em></td>
+          <td class="answer-key">-ri-</td>
+          <td class="answer-note">Sem acento gráfico. Igual a <em>teria</em> no número de sílabas — distinção pela terminação nasal <em>-am</em>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="t-note">
+      <div class="t-note-title">💡 Atividade de pronúncia (2 min)</div>
+      Leia as frases do texto em voz alta e peça que a aluna repita. Foque nos pares <em>terei / teria</em> e <em>teremos / teríamos</em>. Esses contrastes são essenciais para a compreensão oral em podcasts, aulas e apresentações acadêmicas.
+    </div>
+  </div>
+
+  <!-- ONLINE TEACHING TIPS -->
+  <div class="ex-block">
+    <h2>Sugestões para a Aula Online</h2>
+
+    <div class="prod-block">
+      <span class="prod-num" style="color:var(--teacher-accent);">Antes da aula</span>
+      <div class="prod-note">Envie o arquivo <strong>tempos-compostos-texto.html</strong> pelo menos um dia antes. Peça que a aluna leia o texto e tente identificar os tempos verbais destacados em azul (FPC) e laranja (FPRC) antes de entrar na aula.</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num" style="color:var(--teacher-accent);">Warm-up (5–10 min)</span>
+      <div class="prod-note">Comece com a pergunta 5 de compreensão: <em>"Pensando na sua própria carreira: o que você terá realizado quando se aposentar?"</em> Esta pergunta é pessoal, relevante e ativa os dois tempos imediatamente. Não corrija a gramática neste momento — escute e observe o que a aluna já produz.</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num" style="color:var(--teacher-accent);">Durante a aula</span>
+      <div class="prod-note">Prefira trabalhar com 2–3 exercícios em profundidade do que cobrir todos os 5. Os mais produtivos são: <strong>Ex. 2</strong> (escolha de tempo + particípio irregular) e <strong>Ex. 4</strong> (correção de erro — ativa raciocínio metalinguístico). Reserve o <strong>Ex. 5</strong> para produção oral ao vivo.</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num" style="color:var(--teacher-accent);">Pós-aula (tarefa)</span>
+      <div class="prod-note">Envie o arquivo <strong>tempos-compostos-exercicios-aluno.html</strong> como tarefa de casa. A aluna pode usar o <em>Check my answers</em> nos exercícios 1–3 para autocorreção. Revise as respostas abertas (Ex. 4 e 5) na aula seguinte.</div>
+    </div>
+
+    <div class="prod-block">
+      <span class="prod-num" style="color:var(--teacher-accent);">Conexão com o mundo dela</span>
+      <div class="prod-note">Como professora universitária, a aluna convive com publicações, orientações e carreiras acadêmicas. Use o vocabulário do texto (<em>orientar, submeter artigo, banca, pós-graduação, bolsa</em>) para perguntas espontâneas durante a correção. Isso torna o exercício gramatical muito mais significativo.</div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>
