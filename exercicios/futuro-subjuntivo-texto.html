@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Futuro do Subjuntivo — Texto e Perguntas | BPHUB B2</title>
+  <title>Futuro do Subjuntivo — Texto e Gramática | BPHUB B2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,13 +11,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
-      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --rosa-cha: #FFD8C5;
-      --floresta: #4E551D; --erva-doce: #A6B28A; --cobalto: #265B8B;
-      --pitomba: #D36D29; --ouro: #FFB94A; --texto: #3C3C21;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8; --cobalto-dark: #1d4570;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      /* trigger colour groups */
+      --g-se:    #C0392B; --g-se-bg:    #FDECEA;
+      --g-quando:#265B8B; --g-quando-bg:#EBF1F8;
+      --g-assim: #2E7D52; --g-assim-bg: #EAF5EE;
+      --g-sempre:#8B3A7E; --g-sempre-bg:#F5EAF3;
+      --g-enq:   #B8860B; --g-enq-bg:   #FFF8EC;
+      --g-dep:   #4E551D; --g-dep-bg:   #F0F2E6;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
-    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
     a { color: var(--cobalto); }
 
     /* TOPBAR */
@@ -31,90 +39,131 @@
     .topbar-back:hover { color: var(--cobalto); }
 
     /* HERO */
-    .hero { background: var(--cobalto); padding: 44px 40px 40px; }
-    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--erva-doce); margin-bottom: 10px; }
-    .hero h1 { font-size: clamp(26px, 3.5vw, 40px); color: white; margin-bottom: 8px; }
-    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); }
+    .hero { background: linear-gradient(135deg, #0f2940 0%, #265B8B 100%); padding: 52px 40px 46px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.65; }
     .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
-    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.88); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,185,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
 
     /* MAIN */
-    .main { max-width: 820px; padding: 48px 40px 80px; }
+    .main { max-width: 920px; padding: 52px 40px 100px; }
 
     /* SECTION LABEL */
     .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
 
     /* GRAMMAR BOX */
-    .grammar-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
-    .grammar-box h2 { font-size: 20px; margin-bottom: 6px; }
-    .grammar-box .subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+    .gram-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 32px; }
+    .gram-box > h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 8px; }
+    .gram-intro { font-size: 14px; color: #777; line-height: 1.65; margin-bottom: 24px; max-width: 680px; }
 
-    /* RULE CARD */
-    .rule-card { background: var(--baunilha2); border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
-    .rule-card .rule-title { font-size: 13px; font-weight: 700; color: var(--cobalto); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
-    .rule-card p { font-size: 14px; color: var(--nanquim); line-height: 1.6; }
-    .rule-card code { font-family: 'Manrope', monospace; background: rgba(38,91,139,0.1); color: var(--cobalto); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    /* TRIGGER CARDS */
+    .triggers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+    .trig-card { border-radius: 10px; padding: 14px 16px; }
+    .trig-card.se    { background: var(--g-se-bg);     border: 1.5px solid rgba(192,57,43,0.2); }
+    .trig-card.quando{ background: var(--g-quando-bg); border: 1.5px solid rgba(38,91,139,0.2); }
+    .trig-card.assim { background: var(--g-assim-bg);  border: 1.5px solid rgba(46,125,82,0.2); }
+    .trig-card.sempre{ background: var(--g-sempre-bg); border: 1.5px solid rgba(139,58,126,0.2); }
+    .trig-card.enq   { background: var(--g-enq-bg);    border: 1.5px solid rgba(184,134,11,0.2); }
+    .trig-card.dep   { background: var(--g-dep-bg);    border: 1.5px solid rgba(78,85,29,0.2); }
+    .trig-word { font-family: 'Trirong', serif; font-size: 18px; font-weight: 400; margin-bottom: 2px; }
+    .trig-card.se     .trig-word { color: var(--g-se); }
+    .trig-card.quando .trig-word { color: var(--g-quando); }
+    .trig-card.assim  .trig-word { color: var(--g-assim); }
+    .trig-card.sempre .trig-word { color: var(--g-sempre); }
+    .trig-card.enq    .trig-word { color: var(--g-enq); }
+    .trig-card.dep    .trig-word { color: var(--g-dep); }
+    .trig-transl { font-size: 12px; color: #999; font-style: italic; margin-bottom: 8px; }
+    .trig-ex { font-size: 13px; color: var(--nanquim); line-height: 1.55; font-style: italic; }
+    .trig-ex-transl { font-size: 11px; color: #aaa; font-style: normal; display: block; margin-top: 2px; }
+    .trig-highlight { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+    .trig-card.se     .trig-highlight { color: var(--g-se); }
+    .trig-card.quando .trig-highlight { color: var(--g-quando); }
+    .trig-card.assim  .trig-highlight { color: var(--g-assim); }
+    .trig-card.sempre .trig-highlight { color: var(--g-sempre); }
+    .trig-card.enq    .trig-highlight { color: var(--g-enq); }
+    .trig-card.dep    .trig-highlight { color: var(--g-dep); }
 
     /* CONJUGATION TABLE */
-    .conj-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
-    .conj-table th { background: var(--cobalto); color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
-    .conj-table td { padding: 8px 12px; border-bottom: 1px solid var(--light-gray); }
+    .conj-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .conj-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 9px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    .conj-table th.th-pron { color: #aaa; }
+    .conj-table th.th-reg  { color: var(--g-assim); }
+    .conj-table th.th-irr  { color: var(--g-se); }
+    .conj-table td { padding: 8px 12px; border-bottom: 1px solid var(--light-gray); color: var(--nanquim); }
     .conj-table tr:last-child td { border-bottom: none; }
-    .conj-table tr:nth-child(even) td { background: var(--off-white); }
-    .highlight-form { color: var(--pitomba); font-weight: 700; }
-    .reg-label { font-size: 11px; color: #aaa; font-style: italic; }
+    .conj-table .pron { color: #aaa; font-size: 13px; }
+    .conj-table .reg { color: var(--g-assim); font-weight: 600; }
+    .conj-table .irr { color: var(--g-se); font-weight: 600; }
 
-    /* TRIGGERS BOX */
-    .triggers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-    .trigger-item { background: var(--off-white); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 14px; }
-    .trigger-item .trigger-word { font-weight: 700; color: var(--cobalto); font-size: 14px; }
-    .trigger-item .trigger-ex { font-size: 12px; color: #666; margin-top: 3px; font-style: italic; }
-    .trigger-item .trigger-en { font-size: 11px; color: #aaa; }
+    /* IRREGULAR REFERENCE */
+    .irr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 6px; }
+    .irr-card { background: var(--g-se-bg); border: 1.5px solid rgba(192,57,43,0.15); border-radius: 8px; padding: 10px 14px; }
+    .irr-inf { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .irr-forms { font-size: 14px; font-family: 'Trirong', serif; color: var(--g-se); font-weight: 400; line-height: 1.5; }
+    .irr-note { font-size: 12px; color: #999; margin-top: 3px; line-height: 1.4; }
 
-    /* PRONUNCIATION BOX */
-    .phon-box { background: var(--rosa-cha); border-radius: 10px; padding: 18px 22px; margin-top: 16px; }
-    .phon-box h3 { font-size: 14px; font-family: 'Manrope', sans-serif; font-weight: 700; color: var(--nanquim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
-    .phon-items { display: flex; flex-direction: column; gap: 8px; }
-    .phon-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; }
-    .phon-item .form { font-weight: 700; color: var(--cobalto); min-width: 80px; }
-    .phon-item .pron { color: var(--nanquim); }
-    .phon-item .note { color: #666; font-style: italic; }
-    .phon-warning { background: rgba(211,109,41,0.1); border: 1px solid rgba(211,109,41,0.2); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--pitomba); margin-top: 12px; }
+    /* FORMULA BOX */
+    .formula-row { display: flex; align-items: center; gap: 10px; background: var(--cobalto-light); border-radius: 10px; padding: 14px 20px; margin-bottom: 20px; }
+    .formula-piece { font-size: 13px; color: var(--cobalto); font-weight: 600; }
+    .formula-plus { font-size: 16px; color: #aaa; }
+    .formula-note { font-size: 12px; color: #888; margin-left: auto; font-style: italic; }
 
-    /* TEXT READER */
-    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; margin-bottom: 28px; }
-    .text-fonte { font-size: 11px; color: #aaa; letter-spacing: 0.04em; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
-    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--erva-doce); flex-shrink: 0; }
-    .text-card p { font-size: 16px; color: var(--texto); line-height: 1.85; margin-bottom: 16px; }
-    .text-card p:last-child { margin-bottom: 0; }
-    .fs { color: var(--pitomba); font-weight: 700; }  /* futuro do subjuntivo highlight */
-    blockquote { border-left: 3px solid var(--erva-doce); padding-left: 16px; margin: 12px 0; font-style: italic; color: #555; }
+    /* CONTRAST / ALERT BOX */
+    .alert-box { border-left: 4px solid var(--pitomba); background: #FFF8F4; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 24px; }
+    .alert-box .alert-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pitomba); margin-bottom: 8px; }
+    .alert-box p { font-size: 14px; color: var(--nanquim); line-height: 1.6; }
+    .alert-box p + p { margin-top: 8px; }
+    .ok { color: var(--g-assim); font-weight: 700; }
+    .no { color: var(--g-se); font-weight: 700; }
 
-    /* COMPREHENSION */
-    .questions-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 24px; }
-    .questions-card h2 { font-size: 20px; margin-bottom: 6px; }
-    .questions-card .q-note { font-size: 13px; color: #888; margin-bottom: 22px; }
-    .question-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
-    .question-item:last-child { border-bottom: none; }
-    .q-num { font-size: 11px; font-weight: 700; color: var(--pitomba); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
-    .q-text { font-size: 15px; color: var(--nanquim); line-height: 1.55; }
-    .q-type { display: inline-block; font-size: 10px; font-weight: 700; color: #aaa; background: var(--off-white); padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
+    /* TEXT DISPLAY */
+    .text-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 36px 40px; margin-bottom: 32px; }
+    .text-box .fonte { font-size: 11px; color: #aaa; margin-bottom: 20px; }
+    .text-body { font-family: 'Trirong', serif; font-size: 17px; line-height: 1.85; color: var(--nanquim); }
+    .text-body p + p { margin-top: 1.2em; }
 
-    /* VOCAB BOX */
-    .vocab-box { background: var(--off-white); border-radius: 10px; padding: 20px 24px; margin: 24px 0; }
-    .vocab-box h3 { font-size: 14px; font-family: 'Manrope',sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cobalto); margin-bottom: 14px; }
-    .vocab-items { display: flex; flex-direction: column; gap: 10px; }
-    .vocab-item { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; }
-    .vocab-item strong { color: var(--cobalto); min-width: 160px; font-weight: 700; }
-    .vocab-item span { color: var(--texto); }
+    /* COLOUR-CODED HIGHLIGHTS IN TEXT */
+    .hl { font-weight: 700; border-radius: 3px; padding: 0 2px; }
+    .hl-se     { background: var(--g-se-bg);     color: var(--g-se); }
+    .hl-quando { background: var(--g-quando-bg); color: var(--g-quando); }
+    .hl-assim  { background: var(--g-assim-bg);  color: var(--g-assim); }
+    .hl-sempre { background: var(--g-sempre-bg); color: var(--g-sempre); }
+    .hl-enq    { background: var(--g-enq-bg);    color: var(--g-enq); }
+    .hl-dep    { background: var(--g-dep-bg);    color: var(--g-dep); }
+
+    /* LEGEND */
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--nanquim); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ANNOTATIONS BELOW TEXT */
+    .annot-list { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .annot-item { display: grid; grid-template-columns: 90px 1fr; gap: 12px; align-items: baseline; }
+    .annot-trigger { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .annot-text { font-size: 13px; color: #555; line-height: 1.55; }
+    .annot-item.se .annot-trigger     { color: var(--g-se); }
+    .annot-item.quando .annot-trigger { color: var(--g-quando); }
+    .annot-item.assim .annot-trigger  { color: var(--g-assim); }
+    .annot-item.sempre .annot-trigger { color: var(--g-sempre); }
+    .annot-item.enq .annot-trigger    { color: var(--g-enq); }
+    .annot-item.dep .annot-trigger    { color: var(--g-dep); }
+
+    /* NAV LINK */
+    .next-link { display: inline-flex; align-items: center; gap: 10px; background: var(--cobalto); color: white; font-weight: 600; font-size: 14px; padding: 14px 26px; border-radius: 10px; text-decoration: none; transition: background 0.2s; }
+    .next-link:hover { background: var(--cobalto-dark); color: white; }
 
     /* DIVIDER */
     hr { border: none; border-top: 1px solid var(--light-gray); margin: 36px 0; }
 
     @media (max-width: 640px) {
       .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
-      .triggers-grid { grid-template-columns: 1fr; }
-      .text-card { padding: 24px 20px; }
+      .triggers-grid { grid-template-columns: 1fr 1fr; }
+      .irr-grid { grid-template-columns: 1fr 1fr; }
+      .gram-box { padding: 22px 18px; }
+      .text-box { padding: 24px 20px; }
     }
   </style>
 </head>
@@ -124,234 +173,276 @@
   <a href="../b2/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
   <div class="topbar-meta">
     <span class="badge badge-level">B2</span>
-    <span class="badge badge-gram">Aspectos Gramaticais</span>
+    <span class="badge badge-gram">Gramática + Texto</span>
   </div>
   <a href="../b2/index.html" class="topbar-back">← Back to B2 materials</a>
 </div>
 
 <div class="hero">
-  <div class="hero-eyebrow">Texto e Perguntas — Nível B2</div>
-  <h1>Futuro do Subjuntivo</h1>
-  <div class="hero-sub">Read the text and study the grammar box before class. The comprehension questions will be discussed together during class.</div>
+  <div class="hero-eyebrow">Gramática — Nível B2</div>
+  <h1>Futuro do <em>Subjuntivo</em></h1>
+  <div class="hero-sub">A complete grammar reference with conjugation rules, the six key triggers, and an authentic Brazilian text — read before doing the exercises.</div>
   <div class="hero-tags">
-    <span class="hero-tag">Aspectos Gramaticais</span>
-    <span class="hero-tag">Funções Comunicativas: expor condição</span>
-    <span class="hero-tag">Tema: trabalho e tecnologia</span>
-    <span class="hero-tag">Gênero: entrevista jornalística</span>
+    <span class="hero-tag">Tema: Inteligência Artificial e Trabalho</span>
+    <span class="hero-tag">Texto base: Agência Brasil, 2024</span>
+    <span class="hero-tag">Modo: Subjuntivo</span>
   </div>
+  <div class="hero-note">📖 Read this page first — then do the exercise sheet</div>
 </div>
 
 <div class="main">
 
-  <!-- GRAMMAR REFERENCE -->
-  <div class="sec-label">Referência Gramatical</div>
-  <div class="grammar-box">
-    <h2>Futuro do Subjuntivo</h2>
-    <div class="subtitle">When to use it, how to form it, and how to say it</div>
+  <!-- ===================== SECTION 1: WHAT IS IT ===================== -->
+  <div class="sec-label">O que é o Futuro do Subjuntivo?</div>
+  <div class="gram-box">
+    <h2>The Futuro do Subjuntivo</h2>
+    <p class="gram-intro">In English, you'd say <em>"when you arrive"</em> or <em>"if it works"</em> — and those verbs feel like present tense. In Brazilian Portuguese, whenever the situation is future and hypothetical, the verb must shift into the <strong>Futuro do Subjuntivo</strong>. It's one of the most common structures in formal and professional speech.</p>
 
-    <!-- THE RULE -->
-    <div class="rule-card">
-      <div class="rule-title">The Golden Rule — Formation</div>
-      <p>Take the <strong>3rd person plural of the Pretérito Perfeito</strong> and remove <code>-am</code>. The result is already the futuro do subjuntivo form for <em>eu / você / ele / ela / a gente</em>.</p>
-      <br>
-      <p><strong>Example:</strong> <em>falar</em> → falar<del>am</del> → <strong>falar</strong> ✓ (eu / você / ele / ela / a gente)</p>
-      <br>
-      <p>Then add the plural endings to that same stem:</p>
-      <p><code>+ -mos</code> → falar<strong>mos</strong> &nbsp;·&nbsp; <code>+ -em</code> → falar<strong>em</strong></p>
-      <br>
-      <p>⚠️ For <strong>regular verbs</strong>, the singular form is identical to the infinitive: <em>falar, comer, partir</em>. For <strong>irregular verbs</strong>, it won't match the infinitive — that's how you know it's irregular: <em>tiver, fizer, for, puder</em>.</p>
+    <div class="formula-row">
+      <span class="formula-piece">Trigger word</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-piece">Futuro do Subjuntivo</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-piece">main clause (future / imperative)</span>
+      <span class="formula-note">The trigger always comes first</span>
     </div>
 
-    <!-- CONJUGATION TABLE -->
+    <div class="alert-box">
+      <div class="alert-title">⚠️ Common mistake for English speakers</div>
+      <p><span class="no">✗</span> <em>"Quando você chega, a gente conversa."</em> — This uses <em>presente</em>, which sounds like a habitual truth ("Every time you arrive…"), not a future event.</p>
+      <p><span class="ok">✓</span> <em>"Quando você <strong>chegar</strong>, a gente conversa."</em> — The subjuntivo signals: this hasn't happened yet, it's a future condition.</p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 2: TRIGGERS ===================== -->
+  <div class="sec-label">Os gatilhos — The six key triggers</div>
+  <div class="gram-box">
+    <h2>Trigger words that require the Futuro do Subjuntivo</h2>
+    <p class="gram-intro">These six connectors introduce a future condition. They always require the futuro do subjuntivo in the subordinate clause — no exceptions.</p>
+
+    <div class="triggers-grid">
+      <div class="trig-card se">
+        <div class="trig-word">se</div>
+        <div class="trig-transl">if</div>
+        <div class="trig-ex"><span class="trig-highlight">Se</span> o sistema <span class="trig-highlight">falhar</span>, o cliente vai reclamar.
+          <span class="trig-ex-transl">If the system fails, the customer will complain.</span>
+        </div>
+      </div>
+      <div class="trig-card quando">
+        <div class="trig-word">quando</div>
+        <div class="trig-transl">when (future)</div>
+        <div class="trig-ex"><span class="trig-highlight">Quando</span> eu <span class="trig-highlight">tiver</span> os dados, mando o relatório.
+          <span class="trig-ex-transl">When I have the data, I'll send the report.</span>
+        </div>
+      </div>
+      <div class="trig-card assim">
+        <div class="trig-word">assim que / logo que</div>
+        <div class="trig-transl">as soon as</div>
+        <div class="trig-ex"><span class="trig-highlight">Assim que</span> o código <span class="trig-highlight">estiver</span> pronto, fazemos o deploy.
+          <span class="trig-ex-transl">As soon as the code is ready, we'll deploy.</span>
+        </div>
+      </div>
+      <div class="trig-card sempre">
+        <div class="trig-word">sempre que</div>
+        <div class="trig-transl">whenever</div>
+        <div class="trig-ex"><span class="trig-highlight">Sempre que</span> <span class="trig-highlight">houver</span> dúvida, consulte a documentação.
+          <span class="trig-ex-transl">Whenever there's a doubt, consult the documentation.</span>
+        </div>
+      </div>
+      <div class="trig-card enq">
+        <div class="trig-word">enquanto</div>
+        <div class="trig-transl">while / as long as</div>
+        <div class="trig-ex"><span class="trig-highlight">Enquanto</span> <span class="trig-highlight">houver</span> regulação fraca, os riscos persistirão.
+          <span class="trig-ex-transl">As long as regulation is weak, risks will persist.</span>
+        </div>
+      </div>
+      <div class="trig-card dep">
+        <div class="trig-word">depois que</div>
+        <div class="trig-transl">after</div>
+        <div class="trig-ex"><span class="trig-highlight">Depois que</span> a lei <span class="trig-highlight">for</span> aprovada, as empresas terão 6 meses.
+          <span class="trig-ex-transl">After the law is approved, companies will have 6 months.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 3: CONJUGATION ===================== -->
+  <div class="sec-label">Conjugação</div>
+  <div class="gram-box">
+    <h2>How to form the Futuro do Subjuntivo</h2>
+    <p class="gram-intro">Start from the 3rd person plural of the <em>pretérito perfeito</em> (they-form). Drop the <strong>-ram</strong> ending. Add the personal endings below. For regular verbs, this is perfectly predictable.</p>
+
+    <div class="formula-row" style="margin-bottom:24px;">
+      <span class="formula-piece">Eles <strong>falar</strong>am</span>
+      <span class="formula-plus">→</span>
+      <span class="formula-piece">fala<strong>r</strong></span>
+      <span class="formula-plus">→</span>
+      <span class="formula-piece">falar / falares / falar / falarmos / falardes / falarem</span>
+    </div>
+
     <table class="conj-table">
-      <tr>
-        <th>Infinitivo</th>
-        <th>3ª pl. Perfeito → remove -am</th>
-        <th>eu / você / ele / ela / a gente</th>
-        <th>nós</th>
-        <th>vocês / eles / elas</th>
-      </tr>
-      <tr>
-        <td><strong>ser / ir</strong></td>
-        <td>for<span class="highlight-form">am</span></td>
-        <td class="highlight-form">for</td>
-        <td class="highlight-form">formos</td>
-        <td class="highlight-form">forem</td>
-      </tr>
-      <tr>
-        <td><strong>ter</strong></td>
-        <td>tiver<span class="highlight-form">am</span></td>
-        <td class="highlight-form">tiver</td>
-        <td class="highlight-form">tivermos</td>
-        <td class="highlight-form">tiverem</td>
-      </tr>
-      <tr>
-        <td><strong>fazer</strong></td>
-        <td>fizer<span class="highlight-form">am</span></td>
-        <td class="highlight-form">fizer</td>
-        <td class="highlight-form">fizermos</td>
-        <td class="highlight-form">fizerem</td>
-      </tr>
-      <tr>
-        <td><strong>poder</strong></td>
-        <td>puder<span class="highlight-form">am</span></td>
-        <td class="highlight-form">puder</td>
-        <td class="highlight-form">pudermos</td>
-        <td class="highlight-form">puderem</td>
-      </tr>
-      <tr>
-        <td><strong>querer</strong></td>
-        <td>quiser<span class="highlight-form">am</span></td>
-        <td class="highlight-form">quiser</td>
-        <td class="highlight-form">quisermos</td>
-        <td class="highlight-form">quiserem</td>
-      </tr>
-      <tr>
-        <td><strong>vir</strong></td>
-        <td>vier<span class="highlight-form">am</span></td>
-        <td class="highlight-form">vier</td>
-        <td class="highlight-form">viermos</td>
-        <td class="highlight-form">vierem</td>
-      </tr>
-      <tr>
-        <td><strong>estar</strong></td>
-        <td>estiver<span class="highlight-form">am</span></td>
-        <td class="highlight-form">estiver</td>
-        <td class="highlight-form">estivermos</td>
-        <td class="highlight-form">estiverem</td>
-      </tr>
-      <tr>
-        <td><strong>haver</strong></td>
-        <td>houver<span class="highlight-form">am</span></td>
-        <td class="highlight-form">houver</td>
-        <td class="highlight-form">houvermos</td>
-        <td class="highlight-form">houverem</td>
-      </tr>
-      <tr>
-        <td><strong>regular: falar</strong></td>
-        <td>falar<span class="highlight-form">am</span></td>
-        <td class="highlight-form">falar <span class="reg-label">(= infinitivo)</span></td>
-        <td class="highlight-form">falarmos</td>
-        <td class="highlight-form">falarem</td>
-      </tr>
+      <thead>
+        <tr>
+          <th class="th-pron">Pronome</th>
+          <th class="th-reg">-ar  (falar)</th>
+          <th class="th-reg">-er  (fazer → fizer)</th>
+          <th class="th-reg">-ir  (partir)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="pron">eu</td><td class="reg">falar</td><td class="reg">fizer</td><td class="reg">partir</td></tr>
+        <tr><td class="pron">você / ele / ela</td><td class="reg">falar</td><td class="reg">fizer</td><td class="reg">partir</td></tr>
+        <tr><td class="pron">nós</td><td class="reg">falarmos</td><td class="reg">fizermos</td><td class="reg">partirmos</td></tr>
+        <tr><td class="pron">vocês / eles / elas</td><td class="reg">falarem</td><td class="reg">fizerem</td><td class="reg">partirem</td></tr>
+      </tbody>
     </table>
 
+    <p style="font-size:13px;color:#888;margin-bottom:20px;">Note: <em>eu</em> and <em>você/ele/ela</em> share the same form — no accent needed. The <em>nós</em> form adds <strong>-mos</strong>, the <em>vocês/eles</em> form adds <strong>-em</strong>.</p>
 
-    <!-- TRIGGERS -->
-    <br>
-    <div class="rule-title" style="font-size:13px; font-weight:700; color:var(--cobalto); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;">Common Triggers</div>
-    <div class="triggers-grid">
-      <div class="trigger-item">
-        <div class="trigger-word">se</div>
-        <div class="trigger-ex">Se <span class="fs">tiver</span> tempo, reviso o código.</div>
-        <div class="trigger-en">If (I have time)</div>
+    <h3 style="font-size:16px;color:var(--g-se);margin-bottom:12px;">Irregular verbs — memorise these</h3>
+    <p style="font-size:13px;color:#888;margin-bottom:16px;">These come from highly irregular perfeito forms. They appear very frequently in professional contexts.</p>
+
+    <div class="irr-grid">
+      <div class="irr-card">
+        <div class="irr-inf">ser / ir</div>
+        <div class="irr-forms">for · fores · for<br>formos · forem</div>
+        <div class="irr-note">Both verbs share the same forms</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">quando</div>
-        <div class="trigger-ex">Quando a IA <span class="fs">for</span> regulada, o mercado muda.</div>
-        <div class="trigger-en">When (it is regulated)</div>
+      <div class="irr-card">
+        <div class="irr-inf">ter</div>
+        <div class="irr-forms">tiver · tiveres · tiver<br>tivermos · tiverem</div>
+        <div class="irr-note">Very common: "quando tiver…"</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">assim que / logo que</div>
-        <div class="trigger-ex">Assim que o sistema <span class="fs">estiver</span> pronto, testamos.</div>
-        <div class="trigger-en">As soon as (it is ready)</div>
+      <div class="irr-card">
+        <div class="irr-inf">estar</div>
+        <div class="irr-forms">estiver · estiveres · estiver<br>estivermos · estiverem</div>
+        <div class="irr-note">State / condition trigger</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">enquanto</div>
-        <div class="trigger-ex">Enquanto <span class="fs">houver</span> regulação, crescemos.</div>
-        <div class="trigger-en">While / As long as</div>
+      <div class="irr-card">
+        <div class="irr-inf">fazer</div>
+        <div class="irr-forms">fizer · fizeres · fizer<br>fizermos · fizerem</div>
+        <div class="irr-note">Very frequent in contracts</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">onde</div>
-        <div class="trigger-ex">Vou trabalhar onde <span class="fs">tiver</span> oportunidade.</div>
-        <div class="trigger-en">Wherever (there is)</div>
+      <div class="irr-card">
+        <div class="irr-inf">vir</div>
+        <div class="irr-forms">vier · vieres · vier<br>viermos · vierem</div>
+        <div class="irr-note">"quando vier" = when (s)he comes</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">sempre que</div>
-        <div class="trigger-ex">Sempre que <span class="fs">puder</span>, participo da reunião.</div>
-        <div class="trigger-en">Whenever (I can)</div>
+      <div class="irr-card">
+        <div class="irr-inf">querer</div>
+        <div class="irr-forms">quiser · quiseres · quiser<br>quisermos · quiserem</div>
+        <div class="irr-note">Option / choice contexts</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">depois que</div>
-        <div class="trigger-ex">Depois que o sistema <span class="fs">estiver</span> atualizado, testamos tudo.</div>
-        <div class="trigger-en">After (it is updated)</div>
+      <div class="irr-card">
+        <div class="irr-inf">poder</div>
+        <div class="irr-forms">puder · puderes · puder<br>pudermos · puderem</div>
+        <div class="irr-note">"se puder" = if (you) can</div>
       </div>
-      <div class="trigger-item">
-        <div class="trigger-word">a/o + que</div>
-        <div class="trigger-ex">A empresa que <span class="fs">descumprir</span> será punida.</div>
-        <div class="trigger-en">whoever/whichever + action</div>
+      <div class="irr-card">
+        <div class="irr-inf">haver</div>
+        <div class="irr-forms">houver · houveres · houver<br>houvermos · houverem</div>
+        <div class="irr-note">"se houver" = if there is/are</div>
       </div>
     </div>
   </div>
 
-  <!-- TEXT -->
+  <!-- ===================== SECTION 4: AUTHENTIC TEXT ===================== -->
   <div class="sec-label">Texto Autêntico</div>
-  <div class="text-card">
-    <div class="text-fonte">Fonte: Sabrina Craide, Agência Brasil, 01/05/2024 — Licença EBC (republicação gratuita com citação da fonte)</div>
+  <div class="text-box">
+    <div class="fonte">Fonte: Agência Brasil / Sabrina Craide — <em>IA e o mundo do trabalho: Brasil precisa de regulação urgente</em>, 2024. Adaptado para fins didáticos. Licença: Creative Commons BY.</div>
 
-    <p>O Brasil precisa fazer um debate sobre a regulamentação da inteligência artificial, para que as novas tecnologias não provoquem um "estrago inimaginável" no mercado de trabalho. A preocupação é do ministro do Trabalho e Emprego, Luiz Marinho.</p>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--g-se)"></span> <strong>se</strong></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--g-quando)"></span> <strong>quando</strong></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--g-assim)"></span> <strong>assim que / logo que</strong></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--g-sempre)"></span> <strong>sempre que</strong></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--g-enq)"></span> <strong>enquanto</strong></span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--g-dep)"></span> <strong>depois que</strong></span>
+    </div>
 
-    <blockquote>"<span class="fs">Se não for regulada</span>, a inteligência artificial vai provocar um estrago inimaginável no mercado de trabalho. Seja na comunicação, na tradução, no trabalho do teatro, do cinema, da educação. Na advocacia, no mundo judiciário, tudo isso vai ser atingido pela inteligência artificial, <span class="fs">se não for regulado</span>."</blockquote>
+    <div class="text-body">
+      <p>A inteligência artificial está transformando o mercado de trabalho em velocidade sem precedentes. Especialistas alertam que, <span class="hl hl-se">se</span> o Brasil não <span class="hl hl-se">criar</span> um marco regulatório robusto nos próximos anos, trabalhadores de setores inteiros poderão ficar sem proteção legal adequada.</p>
 
-    <p>Marinho cita como exemplo os serviços de autoatendimento nos supermercados e a substituição dos bancários pelo atendimento automático. "Hoje em dia, você entra no mercado e já tem as maquininhas de autopagamento. Cada vez que você usa, você está prestando o serviço para a empresa. Mas quantos empregos você eliminou?"</p>
+      <p>"<span class="hl hl-quando">Quando</span> uma empresa <span class="hl hl-quando">adotar</span> sistemas de IA para substituir funções humanas, ela precisará demonstrar que tomou medidas para requalificar sua equipe", afirmou a pesquisadora Ana Cláudia Moreira, do Instituto de Pesquisas Econômicas Aplicadas (Ipea). Segundo ela, <span class="hl hl-se">se</span> não <span class="hl hl-se">houver</span> essa exigência na legislação, as demissões tenderão a se concentrar entre trabalhadores de menor renda.</p>
 
-    <p>Ele lembra que, há cerca de duas décadas, o Brasil tomou uma decisão importante: a de não substituir o trabalho de frentistas e de cobradores de ônibus por soluções tecnológicas. "Pensar o emprego, o mercado de trabalho, as tecnologias e toda essa inovação tecnológica de forma regulada me parece o melhor caminho."</p>
+      <p><span class="hl hl-assim">Assim que</span> o Projeto de Lei 2.338/2023 <span class="hl hl-assim">for</span> votado no Congresso, o Brasil poderá ter um dos marcos legais mais avançados do mundo em regulação de IA. O texto prevê que empresas que <span class="hl hl-sempre">utilizarem</span> algoritmos em decisões que afetem trabalhadores serão obrigadas a explicar os critérios utilizados — o chamado "direito à explicabilidade".</p>
 
-    <p>Um dos temas que já está em debate no país é a regulamentação do trabalho de motoristas por aplicativo. Segundo Marinho, o governo admite mudanças no projeto de lei, desde que garanta os direitos dos profissionais. A empresa que <span class="fs">descumprir</span> a determinação será fiscalizada e punida.</p>
+      <p>No setor de tecnologia, a expectativa é positiva. "<span class="hl hl-dep">Depois que</span> a lei <span class="hl hl-dep">estiver</span> em vigor, teremos regras claras para inovar com responsabilidade", disse a CEO de uma startup de automação. <span class="hl hl-sempre">Sempre que</span> <span class="hl hl-sempre">houver</span> incerteza jurídica, o investimento recua."</p>
 
-    <blockquote>"Posso garantir que, se aprovado do jeito que está, sem mudar nenhuma vírgula, com a remuneração mínima você vai levar mais dinheiro para casa com a jornada que você faz."</blockquote>
+      <p><span class="hl hl-enq">Enquanto</span> o debate legislativo não <span class="hl hl-enq">chegar</span> a uma conclusão, sindicatos e empresas travam uma batalha sobre quem arcará com os custos da transição. O que parece consenso é que, <span class="hl hl-se">se</span> o país <span class="hl hl-se">quiser</span> se posicionar como referência global em IA ética, precisará agir com mais rapidez.</p>
+    </div>
+
+    <ul class="annot-list">
+      <li class="annot-item se">
+        <span class="annot-trigger">se + criar / houver / quiser</span>
+        <span class="annot-text">Hypothetical conditions about the future. Notice the futuro do subjuntivo in the subordinate clause and a future (or conditional) meaning in the main clause.</span>
+      </li>
+      <li class="annot-item quando">
+        <span class="annot-trigger">quando + adotar</span>
+        <span class="annot-text"><em>"When a company adopts…"</em> — sounds like present in English, but Portuguese requires futuro do subjuntivo because it's a future, unconfirmed event.</span>
+      </li>
+      <li class="annot-item assim">
+        <span class="annot-trigger">assim que + for</span>
+        <span class="annot-text"><em>"As soon as the bill is voted on"</em> — <em>for</em> is the futuro do subjuntivo of both <em>ser</em> and <em>ir</em>. Context tells you which one: here it's <em>ser votado</em> (passive).</span>
+      </li>
+      <li class="annot-item sempre">
+        <span class="annot-trigger">sempre que + utilizarem / houver</span>
+        <span class="annot-text"><em>"Whenever companies use…"</em> / <em>"Whenever there is uncertainty"</em> — habitual future situations. Note: <em>houver</em> = singular; <em>houverem</em> = plural (rarely used).</span>
+      </li>
+      <li class="annot-item dep">
+        <span class="annot-trigger">depois que + estiver</span>
+        <span class="annot-text"><em>"After the law is in force"</em> — <em>estiver</em> is the futuro do subjuntivo of <em>estar</em>. Sequence of future events: first the law enters force, then companies will have clarity.</span>
+      </li>
+      <li class="annot-item enq">
+        <span class="annot-trigger">enquanto + chegar</span>
+        <span class="annot-text"><em>"While the debate has not concluded"</em> — <em>enquanto … não</em> expresses duration into a future point. The futuro do subjuntivo marks that the conclusion hasn't happened yet.</span>
+      </li>
+    </ul>
   </div>
 
-  <!-- VOCABULARY -->
-  <div class="vocab-box">
-    <h3>Vocabulário em Contexto</h3>
-    <div class="vocab-items">
-      <div class="vocab-item"><strong>estrago inimaginável</strong><span>unimaginable damage / devastating impact</span></div>
-      <div class="vocab-item"><strong>regulamentação</strong><span>regulation (noun); regulamentar = to regulate</span></div>
-      <div class="vocab-item"><strong>frentista</strong><span>gas station attendant — Brazil has human attendants at gas stations, unlike most countries</span></div>
-      <div class="vocab-item"><strong>cobrador de ônibus</strong><span>bus fare collector — a uniquely Brazilian role, now disappearing</span></div>
-      <div class="vocab-item"><strong>descumprir</strong><span>to fail to comply with / to violate (a rule or law)</span></div>
-      <div class="vocab-item"><strong>tramitar</strong><span>to be in progress through the legislative system (a bill "tramita" in Congress)</span></div>
-    </div>
+  <!-- ===================== SECTION 5: QUICK REFERENCE ===================== -->
+  <div class="sec-label">Resumo Visual</div>
+  <div class="gram-box">
+    <h2>Quick reference: Present vs. Futuro do Subjuntivo</h2>
+    <p class="gram-intro">The hardest part for English speakers is resisting the urge to use <em>presente</em> after trigger words. Here's the contrast at a glance.</p>
+
+    <table class="conj-table" style="margin-top:12px;">
+      <thead>
+        <tr>
+          <th style="color:#aaa;">Context</th>
+          <th style="color:var(--g-se);">Presente do Indicativo</th>
+          <th style="color:var(--g-quando);">Futuro do Subjuntivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-size:13px;color:#888;">Meaning</td>
+          <td>Habitual truth / general fact</td>
+          <td>Specific future condition</td>
+        </tr>
+        <tr>
+          <td style="font-size:13px;color:#888;">Example</td>
+          <td style="font-style:italic;">Quando chove, o tráfego piora.<br><span style="font-size:12px;color:#aaa;">Whenever it rains, traffic gets worse.</span></td>
+          <td style="font-style:italic;">Quando <span style="color:var(--g-quando);font-weight:700;">chover</span> amanhã, o tráfego vai piorar.<br><span style="font-size:12px;color:#aaa;">When it rains tomorrow, traffic will get worse.</span></td>
+        </tr>
+        <tr>
+          <td style="font-size:13px;color:#888;">Example 2</td>
+          <td style="font-style:italic;">Sempre que trabalho até tarde, fico cansado.<br><span style="font-size:12px;color:#aaa;">Whenever I work late, I get tired. (habit)</span></td>
+          <td style="font-style:italic;">Sempre que <span style="color:var(--g-quando);font-weight:700;">você precisar</span> de ajuda, me chame.<br><span style="font-size:12px;color:#aaa;">Whenever you need help (in the future), call me.</span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <hr>
 
-  <!-- COMPREHENSION QUESTIONS -->
-  <div class="sec-label">Perguntas de Interpretação</div>
-  <div class="questions-card">
-    <h2>Perguntas de Interpretação</h2>
-    <div class="q-note">Responda em português, com frases completas.</div>
-
-    <div class="question-item">
-      <div class="q-num">Pergunta 1 — Compreensão literal</div>
-      <div class="q-text">De acordo com o ministro Marinho, quais setores seriam afetados pela IA sem regulamentação? Cite pelo menos quatro mencionados no texto.</div>
-      <span class="q-type">Compreensão literal</span>
-    </div>
-
-    <div class="question-item">
-      <div class="q-num">Pergunta 2 — Compreensão literal</div>
-      <div class="q-text">Que decisão o Brasil tomou há cerca de duas décadas em relação aos frentistas e cobradores de ônibus? Por que o ministro usa esse exemplo?</div>
-      <span class="q-type">Compreensão literal</span>
-    </div>
-
-    <div class="question-item">
-      <div class="q-num">Pergunta 3 — Interpretação</div>
-      <div class="q-text">O ministro afirma que o governo aceita mudanças no projeto de lei dos motoristas de aplicativo "desde que garanta os direitos dos profissionais." O que essa condição revela sobre as prioridades do governo?</div>
-      <span class="q-type">Interpretação</span>
-    </div>
-
-    <div class="question-item">
-      <div class="q-num">Pergunta 4 — Consciência gramatical</div>
-      <div class="q-text">Encontre os usos do futuro do subjuntivo no texto (marcados em laranja). Para cada um, identifique: (a) a palavra que funciona como gatilho e (b) o infinitivo do qual a forma vem.</div>
-      <span class="q-type">Consciência gramatical</span>
-    </div>
-
-    <div class="question-item">
-      <div class="q-num">Pergunta 5 — Produção pessoal</div>
-      <div class="q-text">Na sua experiência na área de tecnologia, você já viu a IA substituir alguma função no trabalho? Você acha que a regulamentação é necessária? Escreva 3 ou 4 frases em português.</div>
-      <span class="q-type">Produção pessoal</span>
-    </div>
+  <!-- NAV TO EXERCISES -->
+  <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+    <p style="font-size:14px;color:#888;">Ready? Apply what you've read:</p>
+    <a class="next-link" href="futuro-subjuntivo-exercicios-aluno.html">
+      Go to Exercise Sheet →
+    </a>
+    <a href="futuro-subjuntivo-conversacao.html" style="font-size:13px;color:var(--cobalto);margin-top:4px;">Also: Conversation Guide →</a>
   </div>
 
 </div>
