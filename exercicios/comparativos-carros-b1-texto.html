@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carros Grandes, Carros Pequenos | B1 — Comparativos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cobalto: #265B8B;
+      --cobalto-light: #EAF2FA;
+      --pitomba: #D36D29;
+      --pitomba-light: #FDF0E7;
+      --dark: #1A1A2E;
+      --mid: #4A5568;
+      --light: #F7F9FC;
+      --border: #DDE3ED;
+      --green: #2D7D46;
+      --green-light: #E8F5EE;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+    .top-nav { background: var(--cobalto); padding: 12px 32px; display: flex; align-items: center; gap: 16px; }
+    .top-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; }
+    .top-nav a:hover { color: white; }
+    .top-nav .sep { color: rgba(255,255,255,0.35); }
+    .top-nav .current { color: white; font-weight: 600; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--cobalto) 0%, #1a3f63 100%);
+      color: white; padding: 48px 32px 40px; text-align: center;
+    }
+    .nivel-badge {
+      display: inline-block; background: var(--pitomba); color: white;
+      font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 20px; margin-bottom: 16px;
+    }
+    .hero h1 { font-family: 'Trirong', serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 10px; }
+    .hero .subtitle { font-size: 1rem; opacity: 0.85; max-width: 560px; margin: 0 auto 18px; }
+    .tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 12px; padding: 4px 12px; border-radius: 12px; }
+
+    .container { max-width: 880px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    .section { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 28px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+    .section-num { background: var(--cobalto); color: white; font-size: 12px; font-weight: 700; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-header h2 { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 600; color: var(--cobalto); }
+
+    /* ===== ADS ===== */
+    .ads-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    @media(max-width:700px){ .ads-grid { grid-template-columns: 1fr; } }
+
+    .car-ad { border-radius: 10px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+
+    .ad-mobi { background: #e8001d; color: white; }
+    .ad-mobi .ad-top { background: linear-gradient(160deg,#e8001d,#c0001a); padding: 22px 16px 12px; text-align: center; }
+    .ad-mobi .car-icon { font-size: 52px; display: block; }
+    .ad-mobi .ad-body { padding: 14px 16px 18px; background: #cc0018; }
+    .ad-mobi .brand { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
+    .ad-mobi .model { font-size: 24px; font-weight: 800; line-height: 1; margin: 3px 0 8px; }
+    .ad-mobi .slogan { font-size: 12px; font-style: italic; opacity: 0.9; line-height: 1.5; margin-bottom: 12px; }
+    .ad-mobi .specs { list-style: none; font-size: 11px; }
+    .ad-mobi .specs li { padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.15); display: flex; justify-content: space-between; }
+    .ad-mobi .specs li:last-child { border-bottom: none; }
+    .ad-mobi .price { background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px; margin-top: 10px; text-align: center; }
+    .ad-mobi .price .from { font-size: 10px; opacity: 0.8; }
+    .ad-mobi .price .val { font-size: 16px; font-weight: 800; }
+
+    .ad-onix { background: white; border: 2px solid #e0e0e0; }
+    .ad-onix .ad-top { background: linear-gradient(160deg,#0a2342,#1a3a60); padding: 18px 16px; text-align: center; min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .ad-onix .brand { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+    .ad-onix .model { font-size: 26px; font-weight: 800; color: white; letter-spacing: -1px; }
+    .ad-onix .award { background: #FFD700; color: #1a1a1a; font-size: 9px; font-weight: 800; padding: 3px 10px; border-radius: 12px; margin-top: 8px; text-transform: uppercase; }
+    .ad-onix .ad-body { padding: 14px 16px 18px; }
+    .ad-onix .headline { font-size: 13px; font-weight: 700; color: var(--cobalto); margin-bottom: 10px; line-height: 1.4; }
+    .ad-onix .specs { list-style: none; font-size: 11px; color: var(--mid); }
+    .ad-onix .specs li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; }
+    .ad-onix .specs li:last-child { border-bottom: none; }
+    .ad-onix .specs li span:last-child { font-weight: 600; color: var(--dark); }
+    .ad-onix .price { background: var(--cobalto-light); border-radius: 6px; padding: 8px; margin-top: 10px; text-align: center; }
+    .ad-onix .price .from { font-size: 10px; color: var(--mid); }
+    .ad-onix .price .val { font-size: 16px; font-weight: 800; color: var(--cobalto); }
+
+    .ad-f150 { background: #1c1c1c; color: white; }
+    .ad-f150 .ad-top { background: linear-gradient(160deg,#2c2c2c,#111); padding: 18px 16px; text-align: center; min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .ad-f150 .flag { font-size: 20px; margin-bottom: 4px; }
+    .ad-f150 .brand { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .ad-f150 .model { font-size: 24px; font-weight: 900; color: #c5a028; letter-spacing: 1px; }
+    .ad-f150 .tagline { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+    .ad-f150 .ad-body { padding: 14px 16px 18px; }
+    .ad-f150 .headline { font-size: 13px; font-weight: 700; color: #c5a028; margin-bottom: 10px; line-height: 1.4; }
+    .ad-f150 .specs { list-style: none; font-size: 11px; color: rgba(255,255,255,0.7); }
+    .ad-f150 .specs li { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; }
+    .ad-f150 .specs li:last-child { border-bottom: none; }
+    .ad-f150 .specs li span:last-child { font-weight: 700; color: white; }
+    .ad-f150 .price { background: rgba(197,160,40,0.15); border: 1px solid rgba(197,160,40,0.3); border-radius: 6px; padding: 8px; margin-top: 10px; text-align: center; }
+    .ad-f150 .price .from { font-size: 10px; color: rgba(255,255,255,0.5); }
+    .ad-f150 .price .val { font-size: 16px; font-weight: 800; color: #c5a028; }
+
+    .ads-note { font-size: 11px; color: var(--mid); font-style: italic; text-align: center; margin-top: 10px; }
+
+    /* ===== CULTURAL BOXES ===== */
+    .cultural-box { border-left: 4px solid var(--pitomba); background: var(--pitomba-light); border-radius: 0 8px 8px 0; padding: 18px 20px; margin-bottom: 16px; }
+    .cultural-box.blue { border-left-color: var(--cobalto); background: var(--cobalto-light); }
+    .cultural-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--pitomba); margin-bottom: 8px; }
+    .cultural-box.blue .cultural-label { color: var(--cobalto); }
+    .cultural-box p { font-size: 14px; line-height: 1.75; }
+
+    /* ===== GRAMMAR ===== */
+    .grammar-intro { text-align: center; margin-bottom: 28px; }
+    .grammar-intro p { font-size: 14px; color: var(--mid); }
+
+    /* Visual comparison (big car vs small car) */
+    .visual-compare {
+      display: flex; align-items: flex-end; justify-content: center;
+      gap: 0; background: var(--light); border-radius: 12px;
+      padding: 24px 16px 16px; margin-bottom: 28px; border: 1px solid var(--border);
+      position: relative;
+    }
+    .vc-item { text-align: center; }
+    .vc-car-big { font-size: 80px; line-height: 1; display: block; }
+    .vc-car-small { font-size: 36px; line-height: 1; display: block; }
+    .vc-label { font-size: 12px; font-weight: 700; margin-top: 6px; color: var(--mid); }
+    .vc-arrow { font-size: 24px; align-self: center; color: var(--border); padding: 0 12px; }
+    .vc-badges { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+    .vc-badge { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+    .vc-badge.maior { background: var(--cobalto); color: white; }
+    .vc-badge.menor { background: #e2eaf5; color: var(--cobalto); }
+
+    /* Grammar blocks */
+    .gram-block { margin-bottom: 24px; }
+    .gram-block-title {
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: white; background: var(--cobalto);
+      padding: 6px 16px; border-radius: 6px 6px 0 0; display: inline-block;
+    }
+    .gram-block-title.orange { background: var(--pitomba); }
+    .gram-block-title.green { background: var(--green); }
+    .gram-block-body {
+      background: var(--cobalto-light); border: 1px solid #b8d4ea;
+      border-radius: 0 8px 8px 8px; padding: 18px 20px;
+    }
+    .gram-block-body.orange { background: var(--pitomba-light); border-color: #e8c4a0; }
+    .gram-block-body.green { background: var(--green-light); border-color: #a8d5b8; }
+
+    .formula-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .formula-pill {
+      font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+      background: var(--cobalto); color: white;
+    }
+    .formula-pill.orange { background: var(--pitomba); }
+    .formula-pill.green { background: var(--green); }
+    .formula-pill.gray { background: var(--mid); }
+    .formula-plus { font-size: 16px; font-weight: 700; color: var(--mid); }
+    .formula-alt { font-size: 12px; color: var(--mid); font-style: italic; }
+
+    .example-list { list-style: none; margin-top: 10px; }
+    .example-list li {
+      font-size: 14px; padding: 6px 0 6px 18px; border-bottom: 1px solid rgba(0,0,0,0.06);
+      position: relative; line-height: 1.6;
+    }
+    .example-list li:last-child { border-bottom: none; }
+    .example-list li::before { content: "→"; position: absolute; left: 0; color: var(--mid); font-size: 12px; top: 8px; }
+    .example-list li strong { color: var(--cobalto); }
+    .example-list.orange li strong { color: var(--pitomba); }
+    .example-list.green li strong { color: var(--green); }
+
+    /* Irregular table */
+    .irreg-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;
+    }
+    @media(max-width:500px){ .irreg-grid { grid-template-columns: 1fr; } }
+    .irreg-card {
+      background: white; border-radius: 8px; padding: 12px 14px;
+      border: 1px solid #b8d4ea; display: flex; align-items: center; gap: 10px;
+    }
+    .irreg-base { font-size: 13px; color: var(--mid); }
+    .irreg-arrow { color: var(--border); }
+    .irreg-result { font-size: 15px; font-weight: 700; color: var(--cobalto); }
+    .irreg-example { font-size: 11px; color: var(--mid); font-style: italic; margin-top: 3px; }
+
+    /* Discussion */
+    .discussion-list { list-style: none; }
+    .discussion-list li {
+      padding: 11px 0 11px 30px; border-bottom: 1px solid var(--border);
+      font-size: 14.5px; line-height: 1.6; position: relative;
+    }
+    .discussion-list li:last-child { border-bottom: none; }
+    .discussion-list li::before { content: "💬"; position: absolute; left: 0; top: 11px; font-size: 14px; }
+
+    .gdocs-note {
+      background: #f0f7ff; border: 1px dashed #b8d4ea; border-radius: 8px;
+      padding: 12px 16px; font-size: 13px; color: var(--mid);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .gdocs-note .icon { font-size: 20px; flex-shrink: 0; }
+
+    .page-footer { text-align: center; padding: 24px; font-size: 12px; color: var(--mid); border-top: 1px solid var(--border); }
+    .page-footer a { color: var(--cobalto); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../index.html">Portal</a>
+  <span class="sep">›</span>
+  <a href="../b1/index.html">B1 — Intermediário I</a>
+  <span class="sep">›</span>
+  <span class="current">Carros Grandes, Carros Pequenos</span>
+</nav>
+
+<div class="hero">
+  <span class="nivel-badge">B1 · Intermediário I</span>
+  <h1>Carros Grandes, Carros Pequenos</h1>
+  <p class="subtitle">O que as propagandas de carros revelam sobre a cultura brasileira e americana.</p>
+  <div class="tags">
+    <span class="tag">📢 Propaganda</span>
+    <span class="tag">⚖️ Comparar e contrastar</span>
+    <span class="tag">🇧🇷 Cultura automotiva</span>
+    <span class="tag">📐 Comparativos</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== PARTE 1: ADS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Read the advertisements</h2>
+    </div>
+
+    <div class="ads-grid">
+      <div class="car-ad ad-mobi">
+        <div class="ad-top"><span class="car-icon">🚗</span></div>
+        <div class="ad-body">
+          <p class="brand">Fiat</p>
+          <p class="model">MOBI</p>
+          <p class="slogan">"Pequeno por fora.<br>Enorme por dentro.<br>Impossível não amar."</p>
+          <ul class="specs">
+            <li><span>Comprimento</span><span>3.671 mm</span></li>
+            <li><span>Motor / Potência</span><span>1.0 · 75 cv</span></li>
+            <li><span>Consumo</span><span>15,6 km/l</span></li>
+            <li><span>Peso</span><span>881 kg</span></li>
+          </ul>
+          <div class="price"><p class="from">a partir de</p><p class="val">R$ 72.990</p></div>
+        </div>
+      </div>
+
+      <div class="car-ad ad-onix">
+        <div class="ad-top">
+          <p class="brand">Chevrolet</p>
+          <p class="model">ONIX</p>
+          <span class="award">🏆 Mais vendido do Brasil</span>
+        </div>
+        <div class="ad-body">
+          <p class="headline">"O carro que conquista o Brasil todo — todo ano."</p>
+          <ul class="specs">
+            <li><span>Comprimento</span><span>3.930 mm</span></li>
+            <li><span>Motor / Potência</span><span>1.0 · 101 cv</span></li>
+            <li><span>Consumo</span><span>14,2 km/l</span></li>
+            <li><span>Peso</span><span>1.082 kg</span></li>
+          </ul>
+          <div class="price"><p class="from">a partir de</p><p class="val">R$ 94.990</p></div>
+        </div>
+      </div>
+
+      <div class="car-ad ad-f150">
+        <div class="ad-top">
+          <span class="flag">🇺🇸</span>
+          <p class="brand">Ford</p>
+          <p class="model">F-150</p>
+          <p class="tagline">Built Ford Tough</p>
+        </div>
+        <div class="ad-body">
+          <p class="headline">"A caminhonete mais vendida dos EUA — por mais de 40 anos."</p>
+          <ul class="specs">
+            <li><span>Comprimento</span><span>5.884 mm</span></li>
+            <li><span>Motor / Potência</span><span>V8 5.0 · 405 cv</span></li>
+            <li><span>Consumo</span><span>6,8 km/l</span></li>
+            <li><span>Peso</span><span>1.990 kg</span></li>
+          </ul>
+          <div class="price"><p class="from">a partir de</p><p class="val">R$ 519.990</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="ads-note">Texto elaborado para fins didáticos com dados técnicos reais (2024).</p>
+  </div>
+
+  <!-- ===== PARTE 2: CULTURAL ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Cultura automotiva: Brasil × EUA</h2>
+    </div>
+
+    <div class="cultural-box">
+      <p class="cultural-label">🇧🇷 No Brasil</p>
+      <p>Os carros compactos dominam o mercado brasileiro. As cidades têm ruas mais estreitas, vagas de garagem menores e combustível mais caro do que nos EUA. Por isso, os brasileiros preferem carros menores, mais econômicos e mais baratos de manter. O <strong>carro popular</strong> — com motor 1.0 — é uma categoria muito importante no Brasil que praticamente não existe nos EUA. O Chevrolet Onix é o carro <strong>mais vendido</strong> do Brasil há anos.</p>
+    </div>
+    <div class="cultural-box blue">
+      <p class="cultural-label">🇺🇸 Nos EUA</p>
+      <p>Nos EUA, as <em>pickup trucks</em> como a Ford F-150 são os veículos <strong>mais vendidos do país</strong> há mais de quatro décadas. As estradas americanas são mais largas, as garagens são maiores e a gasolina é mais barata que no Brasil. Um F-150 custa <strong>mais de meio milhão de reais</strong> no Brasil — um preço muito mais alto que o Fiat Mobi!</p>
+    </div>
+  </div>
+
+  <!-- ===== PARTE 3: GRAMÁTICA ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Fazendo Comparações</h2>
+    </div>
+
+    <!-- Visual -->
+    <div class="visual-compare">
+      <div class="vc-badges">
+        <span class="vc-badge menor">menor ↓</span>
+        <span class="vc-badge maior">↑ MAIOR</span>
+      </div>
+      <div class="vc-item">
+        <span class="vc-car-small">🚗</span>
+        <p class="vc-label">Fiat Mobi<br>3.671 mm</p>
+      </div>
+      <div class="vc-arrow">↔</div>
+      <div class="vc-item">
+        <span class="vc-car-big">🚛</span>
+        <p class="vc-label">Ford F-150<br>5.884 mm</p>
+      </div>
+    </div>
+
+    <!-- 1. Desigualdade -->
+    <div class="gram-block">
+      <span class="gram-block-title">1. Comparações de Desigualdade</span>
+      <div class="gram-block-body">
+        <div class="formula-row">
+          <span class="formula-pill">mais</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill gray">adjetivo</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill">que</span>
+          <span class="formula-alt">ou</span>
+          <span class="formula-pill">do que</span>
+          <span class="formula-alt">(ambas corretas!)</span>
+        </div>
+        <div class="formula-row">
+          <span class="formula-pill">menos</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill gray">adjetivo</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill">que</span>
+          <span class="formula-alt">ou</span>
+          <span class="formula-pill">do que</span>
+        </div>
+        <ul class="example-list">
+          <li>O F-150 é <strong>mais caro que</strong> o Onix. / O F-150 é <strong>mais caro do que</strong> o Onix.</li>
+          <li>O Mobi é <strong>menos pesado que</strong> o F-150. / O Mobi é <strong>menos pesado do que</strong> o F-150.</li>
+          <li>O Onix tem <strong>mais potência que</strong> o Mobi.</li>
+          <li>O F-150 consome <strong>mais combustível do que</strong> os carros brasileiros.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. Casos especiais -->
+    <div class="gram-block">
+      <span class="gram-block-title orange">2. Casos Especiais (Irregulares)</span>
+      <div class="gram-block-body orange">
+        <div class="irreg-grid">
+          <div class="irreg-card">
+            <div>
+              <p class="irreg-base">grande →</p>
+              <p class="irreg-result">maior (que / do que)</p>
+              <p class="irreg-example">O F-150 é <em>maior que</em> o Mobi.</p>
+            </div>
+          </div>
+          <div class="irreg-card">
+            <div>
+              <p class="irreg-base">pequeno →</p>
+              <p class="irreg-result">menor (que / do que)</p>
+              <p class="irreg-example">O Mobi é <em>menor do que</em> o F-150.</p>
+            </div>
+          </div>
+          <div class="irreg-card">
+            <div>
+              <p class="irreg-base">bom / bem →</p>
+              <p class="irreg-result">melhor (que / do que)</p>
+              <p class="irreg-example">O Mobi tem <em>melhor</em> consumo <em>que</em> o F-150.</p>
+            </div>
+          </div>
+          <div class="irreg-card">
+            <div>
+              <p class="irreg-base">mau / ruim / mal →</p>
+              <p class="irreg-result">pior (que / do que)</p>
+              <p class="irreg-example">O F-150 tem consumo <em>pior do que</em> o Onix.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Igualdade -->
+    <div class="gram-block">
+      <span class="gram-block-title green">3. Comparações de Igualdade</span>
+      <div class="gram-block-body green">
+
+        <p style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">3.1 Intensidade — adjetivos</p>
+        <div class="formula-row">
+          <span class="formula-pill green">tão</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill gray">adjetivo</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill green">quanto</span>
+          <span class="formula-alt">ou</span>
+          <span class="formula-pill green">como</span>
+          <span class="formula-alt">(ambas corretas!)</span>
+        </div>
+        <ul class="example-list green">
+          <li>O Onix é <strong>tão popular quanto</strong> o Mobi no Brasil.</li>
+          <li>O clima de São Paulo é <strong>tão quente como</strong> o do Rio.</li>
+          <li>Este restaurante é <strong>tão bom quanto</strong> aquele.</li>
+        </ul>
+
+        <hr style="border:none;border-top:1px solid #a8d5b8;margin:16px 0">
+
+        <p style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">3.2 Quantidade — substantivos</p>
+        <div class="formula-row">
+          <span class="formula-pill green">tanto(s) / tanta(s)</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill gray">substantivo</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill green">quanto</span>
+        </div>
+        <ul class="example-list green">
+          <li>O F-150 tem <strong>tantos cavalos quanto</strong> uma caminhonete americana.</li>
+          <li>O Brasil não tem <strong>tantas pickups quanto</strong> os EUA.</li>
+          <li>O Mobi usa <strong>tanta gasolina quanto</strong> o Onix? Não — muito menos!</li>
+        </ul>
+
+        <hr style="border:none;border-top:1px solid #a8d5b8;margin:16px 0">
+
+        <p style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">3.3 Ações — verbos</p>
+        <div class="formula-row">
+          <span class="formula-pill gray">verbo</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill green">tanto quanto</span>
+        </div>
+        <ul class="example-list green">
+          <li>Um Onix não gasta <strong>tanto quanto</strong> um F-150.</li>
+          <li>Eu dirijo <strong>tanto quanto</strong> meu colega.</li>
+          <li>Ela trabalha <strong>tanto quanto</strong> ele.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. Superlativo -->
+    <div class="gram-block">
+      <span class="gram-block-title">4. Superlativo</span>
+      <div class="gram-block-body">
+        <div class="formula-row">
+          <span class="formula-pill">o / a</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill">mais / menos</span>
+          <span class="formula-plus">+</span>
+          <span class="formula-pill gray">adjetivo</span>
+          <span class="formula-alt">(+ de todos / do grupo)</span>
+        </div>
+        <ul class="example-list">
+          <li>O F-150 é <strong>o mais caro</strong> dos três.</li>
+          <li>O Mobi é <strong>o mais econômico</strong> e <strong>o menor</strong> dos três.</li>
+          <li>O Onix é <strong>o mais vendido</strong> do Brasil.</li>
+          <li>O F-150 tem <strong>a maior</strong> potência dos três.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== PARTE 4: CONVERSAÇÃO ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Vamos conversar</h2>
+    </div>
+
+    <div class="gdocs-note">
+      <span class="icon">📝</span>
+      <span>Prepare your answers in your <strong>Google Docs</strong> before the lesson — you can write notes and bring them to the conversation.</span>
+    </div>
+
+    <ul class="discussion-list">
+      <li>Você tem carro? Se sim, compare o seu carro com um dos carros das propagandas. Use pelo menos três comparativos.</li>
+      <li>O que é mais importante para você num carro: o preço, o tamanho, a potência ou o consumo? Por quê?</li>
+      <li>Na sua cidade, as ruas são mais largas ou mais estreitas que no Brasil? Como isso influencia o tipo de carro que as pessoas compram?</li>
+      <li>Você acha que carros elétricos têm um consumo melhor ou pior que carros a gasolina? O que mais você sabe sobre eles?</li>
+      <li>Nos EUA, as pickups são tão populares quanto os carros? E no seu país?</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <p>Dados técnicos: Fiat, Chevrolet, Ford (2024) · Texto elaborado para fins didáticos ·
+    <a href="../b1/index.html">← Voltar para B1</a> &nbsp;·&nbsp;
+    <a href="comparativos-carros-b1-exercicios-aluno.html">Ir para os exercícios →</a>
+  </p>
+</footer>
+
+</body>
+</html>
