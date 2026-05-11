@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios — Comparativos | B1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cobalto: #265B8B;
+      --cobalto-light: #EAF2FA;
+      --pitomba: #D36D29;
+      --pitomba-light: #FDF0E7;
+      --dark: #1A1A2E;
+      --mid: #4A5568;
+      --light: #F7F9FC;
+      --border: #DDE3ED;
+      --green: #2D7D46;
+      --green-light: #E8F5EE;
+      --red: #C0392B;
+      --red-light: #FDECEA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+    .top-nav { background: var(--cobalto); padding: 12px 32px; display: flex; align-items: center; gap: 16px; }
+    .top-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; }
+    .top-nav a:hover { color: white; }
+    .top-nav .sep { color: rgba(255,255,255,0.35); }
+    .top-nav .current { color: white; font-weight: 600; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--pitomba) 0%, #b55a1e 100%);
+      color: white; padding: 40px 32px 36px; text-align: center;
+    }
+    .nivel-badge { display: inline-block; background: rgba(0,0,0,0.2); color: white; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 14px; }
+    .hero h1 { font-family: 'Trirong', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; }
+    .hero .subtitle { font-size: 0.95rem; opacity: 0.9; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 36px 24px 60px; }
+
+    /* REF TABLE */
+    .ref-box { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; }
+    .ref-box h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--mid); margin-bottom: 14px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ref-table th { background: var(--cobalto); color: white; padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; }
+    .ref-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-table tr:nth-child(even) td { background: var(--light); }
+
+    /* EXERCISE BLOCKS */
+    .exercise { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+    .ex-num { background: var(--pitomba); color: white; font-size: 13px; font-weight: 800; min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ex-meta { flex: 1; }
+    .ex-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--pitomba); margin-bottom: 3px; }
+    .ex-type.open { color: var(--cobalto); }
+    .ex-instruction { font-size: 14.5px; font-weight: 500; color: var(--dark); line-height: 1.5; }
+    .ex-note { font-size: 12px; color: var(--mid); font-style: italic; margin-top: 4px; }
+    .ex-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+    .ex-badge.auto { background: var(--green-light); color: var(--green); border: 1px solid #a8d5b8; }
+    .ex-badge.gdocs { background: var(--cobalto-light); color: var(--cobalto); border: 1px solid #b8d4ea; }
+
+    /* BUTTONS */
+    .btn { border: none; cursor: pointer; font-family: 'Manrope', sans-serif; font-weight: 700; border-radius: 8px; padding: 9px 20px; font-size: 13px; transition: opacity .15s; }
+    .btn:hover { opacity: .85; }
+    .btn-check { background: var(--green); color: white; }
+    .btn-retry { background: var(--border); color: var(--mid); }
+    .btn-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+    /* SCORE */
+    .score-bar { display: none; background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 14px; font-weight: 600; text-align: center; }
+    .score-bar.visible { display: block; }
+    .score-bar.perfect { background: var(--green-light); border-color: #a8d5b8; color: var(--green); }
+    .score-bar.good { background: #FFF8E1; border-color: #FFD54F; color: #856404; }
+    .score-bar.retry { background: var(--red-light); border-color: #e8a09a; color: var(--red); }
+
+    /* ===== EX 1 — GAP FILL ===== */
+    .gap-list { list-style: none; counter-reset: item; }
+    .gap-list li {
+      counter-increment: item; padding: 12px 0 12px 36px; border-bottom: 1px solid var(--border);
+      font-size: 14.5px; line-height: 2; position: relative;
+    }
+    .gap-list li:last-child { border-bottom: none; }
+    .gap-list li::before { content: counter(item) "."; position: absolute; left: 8px; top: 13px; font-weight: 700; color: var(--pitomba); font-size: 13px; }
+    .gap-input {
+      display: inline-block; min-width: 150px; border: none;
+      border-bottom: 2px solid var(--border); padding: 2px 6px;
+      font-size: 14px; font-family: 'Manrope', sans-serif;
+      background: transparent; outline: none; color: var(--dark);
+      transition: border-color .2s;
+    }
+    .gap-input:focus { border-bottom-color: var(--pitomba); }
+    .gap-input.correct { border-bottom-color: var(--green); background: var(--green-light); border-radius: 4px 4px 0 0; color: var(--green); font-weight: 700; }
+    .gap-input.wrong { border-bottom-color: var(--red); background: var(--red-light); border-radius: 4px 4px 0 0; color: var(--red); }
+    .feedback-msg { font-size: 12px; font-weight: 700; margin-left: 6px; }
+    .feedback-msg.ok { color: var(--green); }
+    .feedback-msg.no { color: var(--red); }
+    .correct-ans { font-size: 12px; color: var(--green); font-weight: 700; margin-left: 4px; font-style: italic; }
+
+    /* ===== EX 2 — MULTIPLE CHOICE ===== */
+    .mc-list { list-style: none; counter-reset: mcitem; }
+    .mc-item { counter-increment: mcitem; padding: 14px 0 14px 36px; border-bottom: 1px solid var(--border); position: relative; }
+    .mc-item:last-child { border-bottom: none; }
+    .mc-item::before { content: counter(mcitem) "."; position: absolute; left: 8px; top: 16px; font-weight: 700; color: var(--pitomba); font-size: 13px; }
+    .mc-q { font-size: 14.5px; margin-bottom: 10px; line-height: 1.6; }
+    .mc-options { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mc-opt {
+      border: 2px solid var(--border); border-radius: 8px; padding: 7px 16px;
+      font-size: 13.5px; cursor: pointer; background: white; font-family: 'Manrope', sans-serif;
+      font-weight: 500; transition: all .15s; color: var(--dark);
+    }
+    .mc-opt:hover { border-color: var(--pitomba); background: var(--pitomba-light); }
+    .mc-opt.selected-correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; cursor: default; }
+    .mc-opt.selected-wrong { background: var(--red-light); border-color: var(--red); color: var(--red); cursor: default; }
+    .mc-opt.show-correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; }
+    .mc-opt.disabled { cursor: default; opacity: .6; }
+    .mc-feedback { font-size: 12px; font-weight: 700; margin-top: 8px; }
+    .mc-feedback.ok { color: var(--green); }
+    .mc-feedback.no { color: var(--red); }
+
+    /* ===== EX 3 — TRUE / FALSE ===== */
+    .tf-list { list-style: none; counter-reset: tfitem; }
+    .tf-item { counter-increment: tfitem; padding: 14px 0 14px 36px; border-bottom: 1px solid var(--border); position: relative; }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-item::before { content: counter(tfitem) "."; position: absolute; left: 8px; top: 16px; font-weight: 700; color: var(--pitomba); font-size: 13px; }
+    .tf-sentence { font-size: 14.5px; margin-bottom: 10px; line-height: 1.6; font-style: italic; }
+    .tf-sentence strong { font-style: normal; color: var(--cobalto); }
+    .tf-buttons { display: flex; gap: 10px; align-items: center; }
+    .tf-btn {
+      border: 2px solid var(--border); border-radius: 8px; padding: 6px 20px;
+      font-size: 14px; font-weight: 700; cursor: pointer; background: white;
+      font-family: 'Manrope', sans-serif; transition: all .15s;
+    }
+    .tf-btn.v:hover { border-color: var(--green); background: var(--green-light); color: var(--green); }
+    .tf-btn.f:hover { border-color: var(--red); background: var(--red-light); color: var(--red); }
+    .tf-btn.correct-pick { background: var(--green-light); border-color: var(--green); color: var(--green); cursor: default; }
+    .tf-btn.wrong-pick { background: var(--red-light); border-color: var(--red); color: var(--red); cursor: default; }
+    .tf-btn.show-correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+    .tf-btn.disabled { cursor: default; opacity: .5; }
+    .tf-feedback { font-size: 12px; font-weight: 700; margin-left: 4px; }
+    .tf-feedback.ok { color: var(--green); }
+    .tf-feedback.no { color: var(--red); }
+    .tf-correction { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 6px; background: var(--green-light); border-radius: 6px; padding: 6px 10px; display: none; }
+    .tf-correction.visible { display: block; }
+
+    /* ===== EX 4 — WORD MATCHING ===== */
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media(max-width:500px){ .match-grid { grid-template-columns: 1fr; } }
+    .match-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px; background: var(--light); }
+    .match-base { font-size: 14px; color: var(--mid); margin-bottom: 8px; }
+    .match-base strong { color: var(--dark); }
+    .match-select {
+      width: 100%; border: 2px solid var(--border); border-radius: 6px;
+      padding: 7px 10px; font-size: 13.5px; font-family: 'Manrope', sans-serif;
+      background: white; color: var(--dark); outline: none; cursor: pointer;
+      transition: border-color .2s;
+    }
+    .match-select:focus { border-color: var(--pitomba); }
+    .match-select.correct { border-color: var(--green); background: var(--green-light); color: var(--green); font-weight: 700; }
+    .match-select.wrong { border-color: var(--red); background: var(--red-light); }
+
+    /* ===== EX 5 — OPEN (GOOGLE DOCS) ===== */
+    .gdocs-banner {
+      background: var(--cobalto-light); border: 1px solid #b8d4ea; border-radius: 10px;
+      padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
+    }
+    .gdocs-banner .icon { font-size: 28px; flex-shrink: 0; }
+    .gdocs-banner p { font-size: 14px; line-height: 1.6; }
+    .gdocs-banner strong { color: var(--cobalto); }
+    .open-prompts { list-style: none; counter-reset: op; }
+    .open-prompt { counter-increment: op; padding: 14px 0 14px 36px; border-bottom: 1px solid var(--border); font-size: 14.5px; line-height: 1.65; position: relative; }
+    .open-prompt:last-child { border-bottom: none; }
+    .open-prompt::before { content: counter(op) "."; position: absolute; left: 8px; top: 14px; font-weight: 700; color: var(--cobalto); font-size: 13px; }
+
+    .page-footer { text-align: center; padding: 24px; font-size: 12px; color: var(--mid); border-top: 1px solid var(--border); }
+    .page-footer a { color: var(--cobalto); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../index.html">Portal</a>
+  <span class="sep">›</span>
+  <a href="../b1/index.html">B1 — Intermediário I</a>
+  <span class="sep">›</span>
+  <a href="comparativos-carros-b1-texto.html">Carros Grandes, Carros Pequenos</a>
+  <span class="sep">›</span>
+  <span class="current">Exercícios</span>
+</nav>
+
+<div class="hero">
+  <span class="nivel-badge">B1 · Exercícios</span>
+  <h1>Comparativos — Exercícios</h1>
+  <p class="subtitle">Carros Grandes, Carros Pequenos</p>
+</div>
+
+<div class="container">
+
+  <!-- REF TABLE -->
+  <div class="ref-box">
+    <h3>📋 Dados para referência</h3>
+    <table class="ref-table">
+      <thead>
+        <tr><th>Carro</th><th>Comprimento</th><th>Potência</th><th>Consumo</th><th>Preço (R$)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>🇧🇷 Fiat Mobi</strong></td><td>3.671 mm</td><td>75 cv</td><td>15,6 km/l</td><td>72.990</td></tr>
+        <tr><td><strong>🇧🇷 Chevrolet Onix</strong></td><td>3.930 mm</td><td>101 cv</td><td>14,2 km/l</td><td>94.990</td></tr>
+        <tr><td><strong>🇺🇸 Ford F-150</strong></td><td>5.884 mm</td><td>405 cv</td><td>6,8 km/l</td><td>519.990</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== EXERCÍCIO 1 — GAP FILL ===== -->
+  <div class="exercise" id="ex1">
+    <div class="ex-header">
+      <div class="ex-num">1</div>
+      <div class="ex-meta">
+        <p class="ex-type">Complete as frases</p>
+        <p class="ex-instruction">Fill in the blanks with the correct comparative form.</p>
+        <p class="ex-note">Use the data in the reference table. Remember: <em>que</em> and <em>do que</em> are both correct!</p>
+      </div>
+      <span class="ex-badge auto">✓ Auto-check</span>
+    </div>
+
+    <ol class="gap-list" id="gapList">
+      <li data-answers="maior que,maior do que">
+        O Ford F-150 é <input class="gap-input" type="text" placeholder="(grande)"> o Fiat Mobi.
+        <span class="feedback-msg"></span><span class="correct-ans"></span>
+      </li>
+      <li data-answers="mais caro que,mais caro do que">
+        O Chevrolet Onix é <input class="gap-input" type="text" placeholder="(caro)"> o Fiat Mobi.
+        <span class="feedback-msg"></span><span class="correct-ans"></span>
+      </li>
+      <li data-answers="maior que,maior do que,pior que,pior do que">
+        O F-150 tem um consumo de combustível <input class="gap-input" type="text" placeholder="(grande/ruim)"> o Onix.
+        <span class="feedback-msg"></span><span class="correct-ans"></span>
+      </li>
+      <li data-answers="mais potente que,mais potente do que">
+        O F-150 é muito <input class="gap-input" type="text" placeholder="(potente)"> o Mobi — 405 cv contra 75 cv!
+        <span class="feedback-msg"></span><span class="correct-ans"></span>
+      </li>
+      <li data-answers="menor que,menor do que">
+        O Mobi é <input class="gap-input" type="text" placeholder="(pequeno)"> o Onix.
+        <span class="feedback-msg"></span><span class="correct-ans"></span>
+      </li>
+      <li data-answers="melhor que,melhor do que">
+        O consumo do Mobi é <input class="gap-input" type="text" placeholder="(bom)"> o do F-150.
+        <span class="feedback-msg"></span><span class="correct-ans"></span>
+      </li>
+    </ol>
+
+    <div class="btn-actions">
+      <button class="btn btn-check" onclick="checkGapFill()">Verificar respostas</button>
+      <button class="btn btn-retry" onclick="resetGapFill()">Tentar de novo</button>
+    </div>
+    <div class="score-bar" id="ex1Score"></div>
+  </div>
+
+  <!-- ===== EXERCÍCIO 2 — MULTIPLE CHOICE ===== -->
+  <div class="exercise" id="ex2">
+    <div class="ex-header">
+      <div class="ex-num">2</div>
+      <div class="ex-meta">
+        <p class="ex-type">Escolha a opção correta</p>
+        <p class="ex-instruction">Choose the correct option to complete each sentence. Click to check your answer immediately.</p>
+      </div>
+      <span class="ex-badge auto">✓ Auto-check</span>
+    </div>
+
+    <ol class="mc-list">
+      <li class="mc-item">
+        <p class="mc-q">O Fiat Mobi é _____ o Ford F-150.</p>
+        <div class="mc-options">
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">mais barato que</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">mais caro que</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">tão caro quanto</button>
+        </div>
+        <p class="mc-feedback"></p>
+      </li>
+      <li class="mc-item">
+        <p class="mc-q">O Brasil não tem _____ pickups _____ os EUA.</p>
+        <div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">tão ... quanto</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">mais ... do que</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">tantas ... quanto</button>
+        </div>
+        <p class="mc-feedback"></p>
+      </li>
+      <li class="mc-item">
+        <p class="mc-q">O clima do Rio de Janeiro é _____ quente _____ o de Miami.</p>
+        <div class="mc-options">
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">tão ... quanto</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">mais ... do que</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">tanto ... como</button>
+        </div>
+        <p class="mc-feedback"></p>
+      </li>
+      <li class="mc-item">
+        <p class="mc-q">O F-150 é _____ dos três carros.</p>
+        <div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">o mais barato</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">o mais econômico</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">o mais caro</button>
+        </div>
+        <p class="mc-feedback"></p>
+      </li>
+      <li class="mc-item">
+        <p class="mc-q">O Mobi consome _____ combustível que o F-150.</p>
+        <div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">mais</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">menos</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">tanto</button>
+        </div>
+        <p class="mc-feedback"></p>
+      </li>
+    </ol>
+    <div class="btn-actions">
+      <button class="btn btn-retry" onclick="resetMC()">Tentar de novo</button>
+    </div>
+  </div>
+
+  <!-- ===== EXERCÍCIO 3 — TRUE / FALSE ===== -->
+  <div class="exercise" id="ex3">
+    <div class="ex-header">
+      <div class="ex-num">3</div>
+      <div class="ex-meta">
+        <p class="ex-type">Verdadeiro ou Falso?</p>
+        <p class="ex-instruction">Read each sentence and click V (verdadeiro) or F (falso). If false, the correct version appears.</p>
+      </div>
+      <span class="ex-badge auto">✓ Auto-check</span>
+    </div>
+
+    <ol class="tf-list">
+      <li class="tf-item">
+        <p class="tf-sentence">O Fiat Mobi é <strong>mais caro do que</strong> o Chevrolet Onix.</p>
+        <div class="tf-buttons">
+          <button class="tf-btn v" data-correct="F" onclick="checkTF(this, 'V')">V</button>
+          <button class="tf-btn f" data-correct="F" onclick="checkTF(this, 'F')">F</button>
+          <span class="tf-feedback"></span>
+        </div>
+        <div class="tf-correction">✓ Correto: O Fiat Mobi é <strong>menos caro do que</strong> o Chevrolet Onix. (R$72.990 &lt; R$94.990)</div>
+      </li>
+      <li class="tf-item">
+        <p class="tf-sentence">O Mobi tem um consumo de combustível <strong>melhor</strong> que o F-150.</p>
+        <div class="tf-buttons">
+          <button class="tf-btn v" data-correct="V" onclick="checkTF(this, 'V')">V</button>
+          <button class="tf-btn f" data-correct="V" onclick="checkTF(this, 'F')">F</button>
+          <span class="tf-feedback"></span>
+        </div>
+        <div class="tf-correction"></div>
+      </li>
+      <li class="tf-item">
+        <p class="tf-sentence">O Chevrolet Onix é <strong>o mais vendido</strong> do Brasil.</p>
+        <div class="tf-buttons">
+          <button class="tf-btn v" data-correct="V" onclick="checkTF(this, 'V')">V</button>
+          <button class="tf-btn f" data-correct="V" onclick="checkTF(this, 'F')">F</button>
+          <span class="tf-feedback"></span>
+        </div>
+        <div class="tf-correction"></div>
+      </li>
+      <li class="tf-item">
+        <p class="tf-sentence">O F-150 é <strong>tão barato quanto</strong> o Fiat Mobi.</p>
+        <div class="tf-buttons">
+          <button class="tf-btn v" data-correct="F" onclick="checkTF(this, 'V')">V</button>
+          <button class="tf-btn f" data-correct="F" onclick="checkTF(this, 'F')">F</button>
+          <span class="tf-feedback"></span>
+        </div>
+        <div class="tf-correction">✓ Correto: O F-150 é muito <strong>mais caro do que</strong> o Fiat Mobi. (R$519.990 vs R$72.990!)</div>
+      </li>
+      <li class="tf-item">
+        <p class="tf-sentence">O Mobi pesa <strong>mais do que</strong> o F-150.</p>
+        <div class="tf-buttons">
+          <button class="tf-btn v" data-correct="F" onclick="checkTF(this, 'V')">V</button>
+          <button class="tf-btn f" data-correct="F" onclick="checkTF(this, 'F')">F</button>
+          <span class="tf-feedback"></span>
+        </div>
+        <div class="tf-correction">✓ Correto: O Mobi pesa <strong>menos do que</strong> o F-150. (881 kg vs 1.990 kg)</div>
+      </li>
+    </ol>
+    <div class="btn-actions">
+      <button class="btn btn-retry" onclick="resetTF()">Tentar de novo</button>
+    </div>
+  </div>
+
+  <!-- ===== EXERCÍCIO 4 — MATCHING (IRREGULAR FORMS) ===== -->
+  <div class="exercise" id="ex4">
+    <div class="ex-header">
+      <div class="ex-num">4</div>
+      <div class="ex-meta">
+        <p class="ex-type">Forme as comparações</p>
+        <p class="ex-instruction">Select the correct comparative form for each adjective.</p>
+        <p class="ex-note">Careful — these are the irregular forms!</p>
+      </div>
+      <span class="ex-badge auto">✓ Auto-check</span>
+    </div>
+
+    <div class="match-grid" id="matchGrid">
+      <div class="match-card">
+        <p class="match-base"><strong>bom</strong> — O café da minha mãe é _____ o café deste restaurante.</p>
+        <select class="match-select" data-correct="melhor que / melhor do que" onchange="checkMatchSelect(this)">
+          <option value="">— escolha —</option>
+          <option>mais bom que</option>
+          <option>melhor que / melhor do que</option>
+          <option>bom como</option>
+        </select>
+      </div>
+      <div class="match-card">
+        <p class="match-base"><strong>ruim</strong> — O consumo do F-150 é _____ o do Mobi.</p>
+        <select class="match-select" data-correct="pior que / pior do que" onchange="checkMatchSelect(this)">
+          <option value="">— escolha —</option>
+          <option>mais ruim que</option>
+          <option>pior que / pior do que</option>
+          <option>menos bom do que</option>
+        </select>
+      </div>
+      <div class="match-card">
+        <p class="match-base"><strong>grande</strong> — O F-150 é _____ o Mobi.</p>
+        <select class="match-select" data-correct="maior que / maior do que" onchange="checkMatchSelect(this)">
+          <option value="">— escolha —</option>
+          <option>mais grande que</option>
+          <option>maior que / maior do que</option>
+          <option>grandão do que</option>
+        </select>
+      </div>
+      <div class="match-card">
+        <p class="match-base"><strong>pequeno</strong> — O Mobi é _____ o Onix.</p>
+        <select class="match-select" data-correct="menor que / menor do que" onchange="checkMatchSelect(this)">
+          <option value="">— escolha —</option>
+          <option>mais pequeno que</option>
+          <option>menor que / menor do que</option>
+          <option>menos grande do que</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-actions">
+      <button class="btn btn-retry" onclick="resetMatch()">Tentar de novo</button>
+    </div>
+    <div class="score-bar" id="ex4Score"></div>
+  </div>
+
+  <!-- ===== EXERCÍCIO 5 — OPEN PRODUCTION (GOOGLE DOCS) ===== -->
+  <div class="exercise" id="ex5">
+    <div class="ex-header">
+      <div class="ex-num">5</div>
+      <div class="ex-meta">
+        <p class="ex-type open">Produção livre</p>
+        <p class="ex-instruction">Write your answers in your Google Docs. Use at least 3 different comparative structures in each task.</p>
+      </div>
+      <span class="ex-badge gdocs">📝 Google Docs</span>
+    </div>
+
+    <div class="gdocs-banner">
+      <span class="icon">📄</span>
+      <p>These exercises have <strong>personal answers</strong> — open your <strong>Google Docs</strong> and write your responses there so you can save and revisit them anytime.</p>
+    </div>
+
+    <ol class="open-prompts">
+      <li class="open-prompt">
+        Compare um carro que você conhece bem com um dos três carros das propagandas. Escreva 4–5 frases usando: <em>mais...que, menos...do que, tão...quanto, maior/menor</em>.
+      </li>
+      <li class="open-prompt">
+        Compare duas cidades que você conhece — use pelo menos 4 comparativos. Fale sobre o trânsito, o tamanho, o clima e o custo de vida.
+      </li>
+      <li class="open-prompt">
+        Na sua opinião, o carro ideal é maior ou menor? É mais econômico ou mais potente? Escreva um parágrafo descrevendo o carro perfeito para você, usando comparativos.
+      </li>
+    </ol>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <p><a href="comparativos-carros-b1-texto.html">← Voltar ao texto</a> &nbsp;·&nbsp;
+  <a href="../b1/index.html">B1 — Intermediário I</a> &nbsp;·&nbsp;
+  Texto elaborado para fins didáticos · Brazilian Portuguese Hub</p>
+</footer>
+
+<script>
+  // ===== NORMALIZE: strip accents + lowercase + trim for flexible matching =====
+  function norm(s) {
+    return s.trim().toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/\s+/g, ' ');
+  }
+
+  // ===== EXERCISE 1 — GAP FILL =====
+  function checkGapFill() {
+    const items = document.querySelectorAll('#ex1 .gap-list li');
+    let correct = 0;
+    items.forEach(li => {
+      const input = li.querySelector('.gap-input');
+      const fb = li.querySelector('.feedback-msg');
+      const ca = li.querySelector('.correct-ans');
+      const answers = li.dataset.answers.split(',');
+      const userVal = norm(input.value);
+      const isOk = answers.some(a => norm(a) === userVal);
+
+      input.classList.remove('correct','wrong');
+      if (isOk) {
+        input.classList.add('correct');
+        fb.className = 'feedback-msg ok';
+        fb.textContent = '✓';
+        ca.textContent = '';
+        correct++;
+      } else if (input.value.trim() === '') {
+        fb.className = 'feedback-msg no';
+        fb.textContent = '⚠ não preenchido';
+        ca.textContent = '→ ' + answers[0];
+        input.classList.add('wrong');
+      } else {
+        input.classList.add('wrong');
+        fb.className = 'feedback-msg no';
+        fb.textContent = '✗';
+        ca.textContent = '→ ' + answers[0];
+      }
+    });
+    const score = document.getElementById('ex1Score');
+    score.className = 'score-bar visible ' + (correct === items.length ? 'perfect' : correct >= items.length/2 ? 'good' : 'retry');
+    score.textContent = correct === items.length
+      ? '🎉 Perfeito! ' + correct + '/' + items.length + ' corretas!'
+      : correct + '/' + items.length + ' corretas — tente de novo!';
+  }
+
+  function resetGapFill() {
+    document.querySelectorAll('#ex1 .gap-input').forEach(i => { i.value = ''; i.className = 'gap-input'; });
+    document.querySelectorAll('#ex1 .feedback-msg').forEach(f => f.textContent = '');
+    document.querySelectorAll('#ex1 .correct-ans').forEach(c => c.textContent = '');
+    const score = document.getElementById('ex1Score');
+    score.className = 'score-bar';
+    score.textContent = '';
+  }
+
+  // ===== EXERCISE 2 — MULTIPLE CHOICE =====
+  function checkMC(btn) {
+    const group = btn.closest('.mc-item');
+    if (group.querySelector('.selected-correct, .selected-wrong')) return; // already answered
+    const allOpts = group.querySelectorAll('.mc-opt');
+    const fb = group.querySelector('.mc-feedback');
+    const isCorrect = btn.dataset.correct === 'true';
+
+    allOpts.forEach(o => o.classList.add('disabled'));
+
+    if (isCorrect) {
+      btn.classList.add('selected-correct');
+      fb.className = 'mc-feedback ok';
+      fb.textContent = '✓ Correto!';
+    } else {
+      btn.classList.add('selected-wrong');
+      fb.className = 'mc-feedback no';
+      fb.textContent = '✗ Tente de novo depois — veja a resposta correta abaixo:';
+      allOpts.forEach(o => { if (o.dataset.correct === 'true') o.classList.add('show-correct'); });
+    }
+  }
+
+  function resetMC() {
+    document.querySelectorAll('.mc-opt').forEach(o => {
+      o.className = 'mc-opt';
+      o.onclick = function(){ checkMC(this); };
+    });
+    document.querySelectorAll('.mc-feedback').forEach(f => { f.textContent = ''; f.className = 'mc-feedback'; });
+  }
+
+  // ===== EXERCISE 3 — TRUE / FALSE =====
+  function checkTF(btn, picked) {
+    const item = btn.closest('.tf-item');
+    if (item.querySelector('.correct-pick, .wrong-pick')) return; // already answered
+    const allBtns = item.querySelectorAll('.tf-btn');
+    const fb = item.querySelector('.tf-feedback');
+    const correction = item.querySelector('.tf-correction');
+    const correct = btn.dataset.correct;
+    const isOk = picked === correct;
+
+    allBtns.forEach(b => b.classList.add('disabled'));
+
+    if (isOk) {
+      btn.classList.add('correct-pick');
+      fb.className = 'tf-feedback ok';
+      fb.textContent = '✓ Correto!';
+    } else {
+      btn.classList.add('wrong-pick');
+      fb.className = 'tf-feedback no';
+      fb.textContent = '✗';
+      allBtns.forEach(b => { if (b.dataset.correct === correct && !b.classList.contains('wrong-pick')) b.classList.add('show-correct'); });
+      if (correction && correction.textContent.trim()) correction.classList.add('visible');
+    }
+  }
+
+  function resetTF() {
+    document.querySelectorAll('.tf-btn').forEach(b => {
+      b.className = 'tf-btn ' + (b.textContent === 'V' ? 'v' : 'f');
+      b.onclick = function(){ checkTF(this, this.textContent); };
+    });
+    document.querySelectorAll('.tf-feedback').forEach(f => { f.textContent = ''; f.className = 'tf-feedback'; });
+    document.querySelectorAll('.tf-correction').forEach(c => c.classList.remove('visible'));
+  }
+
+  // ===== EXERCISE 4 — SELECT MATCHING =====
+  function checkMatchSelect(sel) {
+    const isOk = sel.value === sel.dataset.correct;
+    sel.classList.remove('correct','wrong');
+    sel.classList.add(isOk ? 'correct' : 'wrong');
+
+    // Show score
+    const all = document.querySelectorAll('#matchGrid .match-select');
+    const filled = [...all].filter(s => s.value !== '');
+    if (filled.length === all.length) {
+      const corrects = [...all].filter(s => s.classList.contains('correct')).length;
+      const score = document.getElementById('ex4Score');
+      score.className = 'score-bar visible ' + (corrects === all.length ? 'perfect' : corrects >= all.length/2 ? 'good' : 'retry');
+      score.textContent = corrects === all.length
+        ? '🎉 Perfeito! Todos os irregulares corretos!'
+        : corrects + '/' + all.length + ' corretos — revise os irregulares no texto!';
+    }
+  }
+
+  function resetMatch() {
+    document.querySelectorAll('#matchGrid .match-select').forEach(s => {
+      s.value = '';
+      s.className = 'match-select';
+    });
+    const score = document.getElementById('ex4Score');
+    score.className = 'score-bar';
+    score.textContent = '';
+  }
+</script>
+
+</body>
+</html>
