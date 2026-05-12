@@ -230,6 +230,11 @@
           <input class="match-input" id="m10" maxlength="1" autocomplete="off" spellcheck="false">
           <span class="match-text">deu ruim</span>
         </div>
+        <div class="match-item">
+          <span class="match-key">11.</span>
+          <input class="match-input" id="m11" maxlength="1" autocomplete="off" spellcheck="false">
+          <span class="match-text">dar um toque</span>
+        </div>
       </div>
       <div>
         <div class="match-col-label">Significado</div>
@@ -243,6 +248,7 @@
         <div class="match-item"><span class="match-key">H.</span><span class="match-text">to make you sleepy</span></div>
         <div class="match-item"><span class="match-key">I.</span><span class="match-text">to get along with someone</span></div>
         <div class="match-item"><span class="match-key">J.</span><span class="match-text">things went badly — colloquial, invariable</span></div>
+        <div class="match-item"><span class="match-key">K.</span><span class="match-text">to give someone a quick call or message</span></div>
       </div>
     </div>
 
@@ -254,7 +260,7 @@
   </div>
 
   <script>
-    const matchAnswers = { m1:'E', m2:'C', m3:'G', m4:'H', m5:'D', m6:'B', m7:'A', m8:'F', m9:'I', m10:'J' };
+    const matchAnswers = { m1:'E', m2:'C', m3:'G', m4:'H', m5:'D', m6:'B', m7:'A', m8:'F', m9:'I', m10:'J', m11:'K' };
 
     function checkMatching() {
       let correct = 0;
@@ -272,7 +278,7 @@
       resetBtn.classList.add('show');
       if (correct === total) {
         result.className = 'check-result show all-correct';
-        result.textContent = '🎉 Perfect! All 10 correct!';
+        result.textContent = '🎉 Perfect! All 11 correct!';
       } else {
         result.className = 'check-result show partial';
         result.textContent = correct + ' out of ' + total + ' correct. The boxes in red need a different letter — try again!';
@@ -318,6 +324,7 @@
         <span class="chip">dar tchau</span>
         <span class="chip">dar-se bem</span>
         <span class="chip">deu ruim</span>
+        <span class="chip">dar um toque</span>
       </div>
     </div>
 
@@ -361,6 +368,10 @@
       <span class="gap-num">10.</span>
       <span class="gap-text">A gente foi ao show, mas <input class="gap-input" id="g10" autocomplete="off" spellcheck="false" placeholder="___">: o artista cancelou na última hora.</span>
     </div>
+    <div class="gap-item">
+      <span class="gap-num">11.</span>
+      <span class="gap-text">Estou saindo agora. Pode me <input class="gap-input" id="g11" autocomplete="off" spellcheck="false" placeholder="___"> quando chegar ao restaurante?</span>
+    </div>
 
     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
       <button class="check-btn" onclick="checkGapFill()">✓ Check your answers</button>
@@ -381,7 +392,8 @@
       g7: ['dar parabéns'],
       g8: ['dar tchau'],
       g9: ['se dão bem', 'se dão muito bem'],
-      g10: ['deu ruim']
+      g10: ['deu ruim'],
+      g11: ['dar um toque', 'me dar um toque']
     };
 
     function normalise(str) { return str.trim().toLowerCase().replace(/\s+/g, ' '); }
@@ -402,10 +414,11 @@
       resetBtn.classList.add('show');
       if (correct === total) {
         result.className = 'check-result show all-correct';
-        result.textContent = '🎉 Perfect! All 10 correct!';
+        result.textContent = '🎉 Perfect! All 11 correct!';
       } else {
         result.className = 'check-result show partial';
         result.textContent = correct + ' out of ' + total + ' correct. Red fields need a different answer — check the word bank and try again!';
+
       }
     }
 
@@ -619,6 +632,15 @@
       </div>
     </div>
 
+    <div class="mc-item">
+      <div class="mc-q"><span class="mc-num">6.</span> <strong>A:</strong> <em>Você sabe onde fica a entrada do evento?</em> — <strong>B:</strong> "Ainda não. Você pode me ___ quando encontrar?"</div>
+      <div class="mc-options" id="mc-opts-6">
+        <label class="mc-opt"><input type="radio" name="q6" value="a"> a) dar um abraço</label>
+        <label class="mc-opt"><input type="radio" name="q6" value="b"> b) dar um toque</label>
+        <label class="mc-opt"><input type="radio" name="q6" value="c"> c) dar sono</label>
+      </div>
+    </div>
+
     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
       <button class="check-btn" onclick="checkMC()">✓ Check your answers</button>
       <button class="reset-btn" id="resetMC" onclick="resetMC()">Reset</button>
@@ -627,7 +649,7 @@
   </div>
 
   <script>
-    const mcAnswers = { 1:'b', 2:'c', 3:'a', 4:'b', 5:'c' };
+    const mcAnswers = { 1:'b', 2:'c', 3:'a', 4:'b', 5:'c', 6:'b' };
 
     function checkMC() {
       let correct = 0;
@@ -665,7 +687,7 @@
       }
       if (correct === total) {
         result.className = 'check-result show all-correct';
-        result.textContent = '🎉 Perfect! All 5 correct!';
+        result.textContent = '🎉 Perfect! All 6 correct!';
       } else {
         result.className = 'check-result show partial';
         result.textContent = correct + ' out of ' + total + ' correct. The correct answers are highlighted in green.';
@@ -673,7 +695,7 @@
     }
 
     function resetMC() {
-      for (let q = 1; q <= 5; q++) {
+      for (let q = 1; q <= 6; q++) {
         const radios = document.querySelectorAll(`input[name="q${q}"]`);
         radios.forEach(r => r.checked = false);
         const opts = document.querySelectorAll(`#mc-opts-${q} .mc-opt`);
