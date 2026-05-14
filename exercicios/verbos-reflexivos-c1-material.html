@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbos Reflexivos em Contexto — C1 | BPHUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Trirong:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --profundo:  #1B3E52;
+  --agua:      #2D6E87;
+  --ouro:      #C5973A;
+  --giz:       #F5F0E8;
+  --carvao:    #1A1A2C;
+  --cobre:     #A85A35;
+  --nevoa:     #EBF3F6;
+  --cinza:     #6A6A7A;
+  --verde-ok:  #2E6E4A;
+  --vermelho:  #A83228;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--giz); color: var(--carvao); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.75; }
+
+header { background: var(--profundo); padding: 28px 48px; display: flex; align-items: center; gap: 24px; }
+.header-text h1 { font-family: 'Trirong', serif; font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 2px; }
+.header-text p  { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: #F5F0E8; }
+
+.level-bar { background: var(--agua); padding: 10px 48px; display: flex; gap: 28px; align-items: center; }
+.level-bar span { font-family: 'Trirong', serif; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.75); }
+.level-bar strong { color: #F5F0E8; font-weight: 700; }
+
+.hero { background: linear-gradient(135deg, var(--profundo) 0%, #0F2535 100%); padding: 48px 48px 40px; color: var(--giz); }
+.hero-label { font-family: 'Trirong', serif; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 12px; }
+.hero h2 { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.3; margin-bottom: 14px; }
+.hero p { font-size: 15px; color: rgba(245,240,232,.78); max-width: 600px; line-height: 1.7; }
+.objectives { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+.obj-tag { background: rgba(197,151,58,.18); border: 1px solid rgba(197,151,58,.4); color: var(--ouro); font-family: 'Trirong', serif; font-size: 12px; padding: 5px 14px; border-radius: 20px; }
+
+main { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.section-title { font-family: 'Trirong', serif; font-weight: 800; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ouro); margin: 44px 0 18px; display: flex; align-items: center; gap: 12px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--ouro); opacity: .3; }
+
+.card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(26,26,44,.07); }
+
+/* Cultural note */
+.cultural-note { background: var(--nevoa); border-left: 3px solid var(--agua); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 22px; font-size: 14px; color: var(--cinza); font-style: italic; line-height: 1.6; }
+.cultural-note strong { font-style: normal; color: var(--profundo); font-weight: 700; display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* Dialogue */
+.dialogue-line { display: flex; gap: 16px; padding: 11px 0; border-bottom: 1px solid #f0ebe0; font-size: 15.5px; align-items: flex-start; }
+.dialogue-line:last-child { border-bottom: none; }
+.speaker { font-family: 'Trirong', serif; font-weight: 700; font-size: 13px; color: var(--profundo); min-width: 72px; padding-top: 2px; }
+.stage-dir { font-style: italic; color: var(--cinza); font-size: 13.5px; border-bottom: 1px solid #f0ebe0; padding: 8px 0; }
+
+/* Highlighted reflexive verb */
+mark.rv { background: rgba(197,151,58,.18); color: var(--cobre); font-weight: 600; border-radius: 3px; padding: 1px 3px; text-decoration: none; cursor: default; }
+sup.n { font-size: 10px; color: var(--agua); font-weight: 700; vertical-align: super; }
+
+/* Verb note cards */
+.vn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media(max-width:640px){ .vn-grid { grid-template-columns: 1fr; } }
+.vn-card { background: white; border-radius: 10px; padding: 20px 22px; box-shadow: 0 2px 10px rgba(26,26,44,.06); border-top: 3px solid var(--ouro); }
+.vn-num { font-family: 'Trirong', serif; font-size: 10px; font-weight: 800; color: var(--ouro); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 4px; }
+.vn-verb { font-size: 17px; font-weight: 700; color: var(--profundo); margin-bottom: 6px; }
+.vn-quote { font-style: italic; font-size: 13.5px; color: var(--cobre); background: #fdf8f0; border-radius: 4px; padding: 5px 10px; margin-bottom: 10px; }
+.vn-note { font-size: 13.5px; color: #444; line-height: 1.6; }
+.vn-note .contrast { display: inline-block; margin-top: 8px; font-size: 13px; background: var(--nevoa); border-radius: 4px; padding: 4px 10px; color: var(--cinza); }
+
+/* Meaning-shift pairs */
+.ms-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 10px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 2px 10px rgba(26,26,44,.07); }
+.ms-side { padding: 20px 22px; }
+.ms-left  { background: var(--nevoa); border-right: 2px solid #dde8ec; }
+.ms-right { background: #fdf6ee; }
+.ms-label { font-family: 'Trirong', serif; font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 6px; }
+.ms-left  .ms-label { color: var(--profundo); }
+.ms-right .ms-label { color: var(--cobre); }
+.ms-verb  { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.ms-left  .ms-verb  { color: var(--profundo); }
+.ms-right .ms-verb  { color: var(--cobre); }
+.ms-en    { font-family: 'Trirong', serif; font-size: 13px; color: var(--cinza); margin-bottom: 8px; font-style: italic; }
+.ms-ex    { font-size: 13.5px; color: #333; line-height: 1.55; }
+.ms-ex em { color: var(--cobre); font-style: normal; font-weight: 600; }
+@media(max-width:560px){ .ms-pair { grid-template-columns: 1fr; } .ms-left { border-right: none; border-bottom: 2px solid #dde8ec; } }
+
+/* Register notes */
+.reg-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.reg-table th { background: var(--profundo); color: var(--giz); font-family: 'Trirong', serif; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 10px 16px; text-align: left; }
+.reg-table td { padding: 12px 16px; border-bottom: 1px solid #eee; vertical-align: top; }
+.reg-table tr:last-child td { border-bottom: none; }
+.reg-table tr:nth-child(even) td { background: #fafaf6; }
+.ok  { color: var(--verde-ok); font-weight: 600; }
+.err { color: var(--vermelho); text-decoration: line-through; }
+.note-sm { font-size: 12.5px; color: var(--cinza); font-style: italic; margin-top: 4px; display: block; }
+
+/* Quick ref */
+.qr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.qr-item { background: white; border-radius: 8px; padding: 12px 16px; box-shadow: 0 1px 6px rgba(26,26,44,.06); display: flex; gap: 10px; align-items: flex-start; }
+.qr-verb { font-weight: 700; font-size: 14px; color: var(--profundo); }
+.qr-en   { font-family: 'Trirong', serif; font-size: 12.5px; color: var(--cinza); font-style: italic; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-text">
+    <h1>Brazilian Portuguese Hub</h1>
+    <p>Verbos Reflexivos em Contexto</p>
+  </div>
+</header>
+
+<div class="level-bar">
+  <span>Nível <strong>C1</strong></span>
+  <span>·</span>
+  <span>Gênero <strong>Diálogo situacional</strong></span>
+  <span>·</span>
+  <span>Tema <strong>Vida cotidiana · Academia</strong></span>
+</div>
+
+<div class="hero">
+  <div class="hero-label">Material de Referência</div>
+  <h2>Verbos Reflexivos em Contexto</h2>
+  <p>No nível C1, o desafio não é saber que os verbos reflexivos existem — é usá-los com precisão: perceber quando o pronome muda o sentido, quando ele cai no registro informal, e quando o inglês simplesmente não tem equivalente direto.</p>
+  <div class="objectives">
+    <span class="obj-tag">Usar reflexivos com precisão de registro</span>
+    <span class="obj-tag">Distinguir verbos que mudam de sentido</span>
+    <span class="obj-tag">Reconhecer usos idiomáticos brasileiros</span>
+    <span class="obj-tag">Contraste: reflexivo ≠ body part</span>
+  </div>
+</div>
+
+<main>
+
+  <p class="section-title">O Texto — Na Academia</p>
+
+  <div class="card">
+    <div class="cultural-note">
+      <strong>Contexto cultural</strong>
+      A academia de ginástica é um espaço central da vida urbana brasileira — especialmente nas grandes cidades. Para muitos brasileiros, ir à academia não é só exercício: é rotina social, conversa, identidade. A relação com o personal trainer costuma ser próxima e informal, misturando instrução técnica com conversa cotidiana. Este diálogo se passa numa academia de bairro em São Paulo, sábado de manhã.
+    </div>
+
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Rodrigo, bom dia! Você <mark class="rv">se animou</mark><sup class="n">¹</sup> hoje — chegou mais cedo que de costume.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span><mark class="rv">Me animei</mark><sup class="n">¹</sup>, sim. Tive uma semana pesada no trabalho e preciso <mark class="rv">me desligar</mark><sup class="n">²</sup> um pouco.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Ótimo. Vamos começar com agachamento. Você consegue <mark class="rv">se agachar</mark><sup class="n">³</sup> sem sentir dor nos joelhos?</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Hoje sim. Semana passada eu machuquei o joelho na esteira — pisou errado. Mas já <mark class="rv">me recuperei</mark><sup class="n">⁴</sup>.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Cuidado pra não <mark class="rv">se machucar</mark><sup class="n">⁴</sup> de novo. <mark class="rv">Agacha</mark><sup class="n">³</sup> devagar, peso no calcanhar.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Quando <mark class="rv">me concentro</mark><sup class="n">⁵</sup> na técnica, fica mais fácil.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Exato. Seis repetições. E não <mark class="rv">se esqueça</mark><sup class="n">⁶</sup> de respirar.</span></div>
+    <div class="stage-dir">[depois das repetições]</div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Pronto. Não <mark class="rv">me cansei</mark><sup class="n">⁷</sup> tanto quanto semana passada.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Você está <mark class="rv">se saindo</mark><sup class="n">⁸</sup> muito bem. Evoluiu bastante em três semanas.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Obrigado. Preciso <mark class="rv">me cuidar</mark><sup class="n">⁹</sup> mais — tenho <mark class="rv">me descuidado</mark><sup class="n">⁹</sup> muito por causa do trabalho.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>A academia ajuda nisso. Muita gente <mark class="rv">se arrepende</mark><sup class="n">¹⁰</sup> de não ter começado antes. Vamos pro alongamento — <mark class="rv">se deita</mark><sup class="n">¹¹</sup> ali no colchonete.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span><mark class="rv">Me levanto</mark><sup class="n">¹¹</sup> antes?</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Não precisa. Deita direto. [pausa] Agora <mark class="rv">se vira</mark><sup class="n">¹²</sup> pro lado direito. Isso. Segura 30 segundos.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Bê, você <mark class="rv">se vê</mark><sup class="n">¹³</sup> como personal pra sempre, ou quer <mark class="rv">se especializar</mark><sup class="n">¹³</sup> em outra área?</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>Penso em <mark class="rv">me especializar</mark><sup class="n">¹³</sup> em reabilitação. Quero <mark class="rv">me dedicar</mark><sup class="n">¹⁴</sup> a quem <mark class="rv">se machucou</mark><sup class="n">⁴</sup> e precisa <mark class="rv">se recuperar</mark><sup class="n">⁴</sup> com acompanhamento.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Você <mark class="rv">se dá bem</mark><sup class="n">¹⁵</sup> com os alunos — dá pra perceber.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span><mark class="rv">Me esforcei</mark><sup class="n">¹⁶</sup> muito pra chegar aqui. Não foi fácil — <mark class="rv">me separei</mark><sup class="n">★</sup> do meu sócio no ano passado e fui tocar o negócio sozinha. Mas <mark class="rv">me virei</mark><sup class="n">¹⁷</sup>.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Não sabia disso. E conseguiu <mark class="rv">se estabilizar</mark><sup class="n">¹⁴</sup>?</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span><mark class="rv">Me mudei</mark><sup class="n">★</sup> pra um espaço menor, cortei custos. Hoje <mark class="rv">me arrependo</mark><sup class="n">¹⁰</sup> de ter demorado tanto pra tomar essa decisão.</span></div>
+    <div class="dialogue-line"><span class="speaker">Rodrigo</span><span>Admiro isso. No meu setor, as pessoas <mark class="rv">se aproveitam</mark><sup class="n">★</sup> das crises. É difícil não <mark class="rv">se deixar</mark><sup class="n">¹⁸</sup> afetar por esse ambiente.</span></div>
+    <div class="dialogue-line"><span class="speaker">Beatriz</span><span>[ri] Entendo. Mas foca no treino — não <mark class="rv">se disperse</mark><sup class="n">¹⁸</sup> agora!</span></div>
+
+    <p style="margin-top:16px;font-size:12.5px;color:var(--cinza);font-style:italic;">★ = verbo que muda de sentido com o reflexivo — ver seção específica abaixo.</p>
+  </div>
+
+
+  <p class="section-title">Os Verbos em Contexto</p>
+
+  <div class="vn-grid">
+
+    <div class="vn-card">
+      <div class="vn-num">¹</div>
+      <div class="vn-verb">animar-se</div>
+      <div class="vn-quote">«Você se animou hoje» / «Me animei, sim.»</div>
+      <div class="vn-note">To get excited, motivated, or energized. Very common in informal Brazilian Portuguese for getting in the mood to do something. <span class="contrast">✦ Ele animou a festa. (to liven up the party — not reflexive)</span></div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">²</div>
+      <div class="vn-verb">desligar-se</div>
+      <div class="vn-quote">«Preciso me desligar um pouco.»</div>
+      <div class="vn-note">To switch off mentally, to disconnect from stress. Highly idiomatic — English often uses "unplug" or "switch off." The non-reflexive <em>desligar</em> means to turn off a device. <span class="contrast">✦ Desliga a luz. (turn off the light)</span></div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">³</div>
+      <div class="vn-verb">agachar-se / agacha (comando)</div>
+      <div class="vn-quote">«Você consegue se agachar?» / «Agacha devagar.»</div>
+      <div class="vn-note">In informal commands, the reflexive pronoun drops: <em>agacha</em>, not <em>se agacha</em>. Both convey the same meaning — the pronoun loss is a BP informal pattern, not a grammar error.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">⁴</div>
+      <div class="vn-verb">machucar-se / recuperar-se</div>
+      <div class="vn-quote">«Machuquei o joelho» vs. «não se machucar»</div>
+      <div class="vn-note">Key contrast: when a body part is specified, the verb is <strong>not</strong> reflexive. <span class="contrast">✦ Ele se machucou. (no body part = reflexive) ✦ Ele machucou o joelho. (body part = not reflexive)</span></div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">⁵</div>
+      <div class="vn-verb">concentrar-se</div>
+      <div class="vn-quote">«Quando me concentro na técnica…»</div>
+      <div class="vn-note">To focus, to concentrate. Always reflexive when meaning "to focus oneself." The pronoun is placed <em>before</em> the verb in BP: <em>me concentro</em>, not <em>concentro-me</em> (European Portuguese).</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">⁶</div>
+      <div class="vn-verb">esquecer-se de</div>
+      <div class="vn-quote">«Não se esqueça de respirar.»</div>
+      <div class="vn-note">The reflexive <em>esquecer-se de</em> is slightly more emphatic and formal than the non-reflexive <em>esquecer</em> + object. Both are correct in BP. <span class="contrast">✦ Não esquece de respirar. (informal — equally natural)</span></div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">⁷–⁹</div>
+      <div class="vn-verb">cansar-se · cuidar-se · descuidar-se</div>
+      <div class="vn-quote">«Não me cansei» / «preciso me cuidar» / «tenho me descuidado»</div>
+      <div class="vn-note">Three reflexives that describe self-directed states or habits. <em>Descuidar-se</em> is particularly expressive — it implies neglecting oneself, often due to external demands. Very common in Brazilian personal and professional conversation.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹⁰</div>
+      <div class="vn-verb">arrepender-se de</div>
+      <div class="vn-quote">«Muita gente se arrepende» / «Hoje me arrependo…»</div>
+      <div class="vn-note">Always reflexive — there is no non-reflexive <em>arrepender</em>. This is a <strong>pronominal verb</strong> (verbo pronominal): it only exists in its reflexive form. Other examples: <em>atrever-se</em>, <em>abster-se</em>.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹¹</div>
+      <div class="vn-verb">deitar-se · levantar-se</div>
+      <div class="vn-quote">«Se deita ali» / «Me levanto antes?»</div>
+      <div class="vn-note">In Beatriz's command, the pronoun <em>stays</em> here: <em>se deita</em> (because the instruction is addressed to someone else, and the sentence-initial position requires the pronoun). Compare with <em>agacha</em> above — register and sentence position matter.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹²</div>
+      <div class="vn-verb">virar-se (intransitive)</div>
+      <div class="vn-quote">«Se vira pro lado direito.»</div>
+      <div class="vn-note">Here, <em>se virar</em> = to turn one's body. But as a standalone phrase, <em>se virar</em> also means <em>to manage / to figure it out</em> — one of the most Brazilian expressions in the language. Context disambiguates.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹³–¹⁴</div>
+      <div class="vn-verb">ver-se como · especializar-se · dedicar-se</div>
+      <div class="vn-quote">«Você se vê como personal?»</div>
+      <div class="vn-note">Three reflexives used in professional/life-planning contexts. <em>Ver-se como</em> = to see oneself as (self-image). These are highly productive at C1 — they appear constantly in interviews, career conversations, and self-reflection.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹⁵–¹⁶</div>
+      <div class="vn-verb">dar-se bem · esforçar-se</div>
+      <div class="vn-quote">«Você se dá bem com os alunos» / «Me esforcei muito»</div>
+      <div class="vn-note"><em>Dar-se bem</em> = to get along well with someone; to do well in a situation. <em>Esforçar-se</em> is always reflexive (pronominal verb). <span class="contrast">✦ Ela se deu mal no exame. (she did poorly) ✦ A gente se dá bem. (we get along well)</span></div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹⁷</div>
+      <div class="vn-verb">virar-se (idiomatic)</div>
+      <div class="vn-quote">«Mas me virei.»</div>
+      <div class="vn-note">One of the most distinctively Brazilian expressions: <em>se virar</em> = to manage on your own, to figure it out, to make do. Untranslatable in a single English word. <em>Ela se virou sozinha.</em> = She managed on her own. / She figured it out.</div>
+    </div>
+
+    <div class="vn-card">
+      <div class="vn-num">¹⁸</div>
+      <div class="vn-verb">deixar-se · dispersar-se</div>
+      <div class="vn-quote">«Não se deixar afetar» / «não se disperse»</div>
+      <div class="vn-note"><em>Deixar-se</em> + infinitive = to allow oneself to be affected. A sophisticated construction: it implies passive surrender to an external force. <em>Dispersar-se</em> = to lose focus, to get distracted — common in coaching, education, and work contexts.</div>
+    </div>
+
+  </div>
+
+
+  <p class="section-title">Quando o Reflexivo Muda o Sentido ★</p>
+
+  <p style="font-size:14.5px;color:var(--cinza);margin-bottom:24px;line-height:1.6;">Estes são os verbos que aparecem no diálogo com sentido diferente do esperado. O reflexivo não é decorativo — ele muda o significado de forma substantiva.</p>
+
+  <div class="ms-pair">
+    <div class="ms-side ms-left">
+      <div class="ms-label">Sem reflexivo</div>
+      <div class="ms-verb">separar</div>
+      <div class="ms-en">to separate (something from something)</div>
+      <div class="ms-ex">Separa os documentos por categoria.<br><em>Separate the documents by category.</em></div>
+    </div>
+    <div class="ms-side ms-right">
+      <div class="ms-label">Com reflexivo ★</div>
+      <div class="ms-verb">separar-se (de)</div>
+      <div class="ms-en">to split up / to part ways (with someone)</div>
+      <div class="ms-ex"><em>Me separei do meu sócio no ano passado.</em><br>I parted ways with my business partner last year.</div>
+    </div>
+  </div>
+
+  <div class="ms-pair">
+    <div class="ms-side ms-left">
+      <div class="ms-label">Sem reflexivo</div>
+      <div class="ms-verb">mudar</div>
+      <div class="ms-en">to change (something)</div>
+      <div class="ms-ex">Ela mudou o plano na última hora.<br><em>She changed the plan at the last minute.</em></div>
+    </div>
+    <div class="ms-side ms-right">
+      <div class="ms-label">Com reflexivo ★</div>
+      <div class="ms-verb">mudar-se</div>
+      <div class="ms-en">to move (to a new place)</div>
+      <div class="ms-ex"><em>Me mudei pra um espaço menor.</em><br>I moved to a smaller space.</div>
+    </div>
+  </div>
+
+  <div class="ms-pair">
+    <div class="ms-side ms-left">
+      <div class="ms-label">Sem reflexivo</div>
+      <div class="ms-verb">aproveitar</div>
+      <div class="ms-en">to enjoy / to make the most of</div>
+      <div class="ms-ex">Aproveitamos o fim de semana no sítio.<br><em>We enjoyed the weekend at the farm.</em></div>
+    </div>
+    <div class="ms-side ms-right">
+      <div class="ms-label">Com reflexivo ★</div>
+      <div class="ms-verb">aproveitar-se (de)</div>
+      <div class="ms-en">to take advantage of (opportunistically)</div>
+      <div class="ms-ex"><em>As pessoas se aproveitam das crises.</em><br>People take advantage of crises.</div>
+    </div>
+  </div>
+
+  <div class="ms-pair">
+    <div class="ms-side ms-left">
+      <div class="ms-label">Sem reflexivo</div>
+      <div class="ms-verb">divertir</div>
+      <div class="ms-en">to entertain (someone else)</div>
+      <div class="ms-ex">O palhaço divertiu as crianças a tarde toda.<br><em>The clown entertained the children all afternoon.</em></div>
+    </div>
+    <div class="ms-side ms-right">
+      <div class="ms-label">Com reflexivo ★</div>
+      <div class="ms-verb">divertir-se</div>
+      <div class="ms-en">to have fun / to enjoy oneself</div>
+      <div class="ms-ex"><em>Nos divertimos muito na festa.</em><br>We had a lot of fun at the party.</div>
+    </div>
+  </div>
+
+  <div class="ms-pair">
+    <div class="ms-side ms-left">
+      <div class="ms-label">Sem reflexivo</div>
+      <div class="ms-verb">despedir</div>
+      <div class="ms-en">to fire (someone from a job)</div>
+      <div class="ms-ex">A empresa despediu trinta funcionários.<br><em>The company fired thirty employees.</em></div>
+    </div>
+    <div class="ms-side ms-right">
+      <div class="ms-label">Com reflexivo ★</div>
+      <div class="ms-verb">despedir-se (de)</div>
+      <div class="ms-en">to say goodbye to</div>
+      <div class="ms-ex"><em>Ela se despediu dos colegas com um abraço.</em><br>She said goodbye to her colleagues with a hug.</div>
+    </div>
+  </div>
+
+
+  <p class="section-title">Observações de Registro</p>
+
+  <div class="card">
+    <table class="reg-table">
+      <thead>
+        <tr><th>Situação</th><th>Português Europeu / Formal</th><th>Português Brasileiro / Informal</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pronome em comandos informais</td>
+          <td><span class="err">Agache-se devagar.</span><span class="note-sm">Soa formal ou europeu</span></td>
+          <td><span class="ok">Agacha devagar.</span><span class="note-sm">Natural no Brasil — pronome cai em comandos informais</span></td>
+        </tr>
+        <tr>
+          <td>Posição do pronome</td>
+          <td><span class="err">Concentro-me na técnica.</span><span class="note-sm">Próclise impossível no início de frase no PE</span></td>
+          <td><span class="ok">Me concentro na técnica.</span><span class="note-sm">Próclise padrão no PB — pronome sempre antes do verbo conjugado</span></td>
+        </tr>
+        <tr>
+          <td>Verbo pronominal (sempre reflexivo)</td>
+          <td colspan="2"><span class="ok">arrepender-se · esforçar-se · atrever-se · abster-se</span><span class="note-sm">Não existem sem o pronome reflexivo — não há *arrepender, *esforçar sem se/me/te/nos</span></td>
+        </tr>
+        <tr>
+          <td>Reflexivo com parte do corpo</td>
+          <td colspan="2"><span class="err">Ela se machucou o joelho.</span> → <span class="ok">Ela machucou o joelho.</span><span class="note-sm">Quando a parte do corpo é especificada, o verbo não é reflexivo</span></td>
+        </tr>
+        <tr>
+          <td>Se virar — uso idiomático</td>
+          <td colspan="2"><span class="ok">«Me virei sozinha.»</span> = I managed on my own / I figured it out.<span class="note-sm">Um dos usos mais brasileiros da língua — não tem equivalente direto em inglês ou PE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <p class="section-title">Referência Rápida — Verbos do Diálogo</p>
+
+  <div class="qr-grid">
+    <div class="qr-item"><div><div class="qr-verb">animar-se</div><div class="qr-en">to get excited / motivated</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">desligar-se</div><div class="qr-en">to switch off / unplug mentally</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">agachar-se</div><div class="qr-en">to squat / bend down</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">machucar-se</div><div class="qr-en">to hurt oneself (no body part)</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">recuperar-se</div><div class="qr-en">to recover</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">concentrar-se</div><div class="qr-en">to focus / concentrate</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">esquecer-se de</div><div class="qr-en">to forget (to do sth)</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">cansar-se</div><div class="qr-en">to get tired</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">sair-se bem</div><div class="qr-en">to do well / perform well</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">cuidar-se</div><div class="qr-en">to take care of oneself</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">descuidar-se</div><div class="qr-en">to neglect oneself</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">arrepender-se de</div><div class="qr-en">to regret (always reflexive)</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">deitar-se</div><div class="qr-en">to lie down</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">levantar-se</div><div class="qr-en">to get up</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">virar-se</div><div class="qr-en">to turn over / to manage</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">ver-se como</div><div class="qr-en">to see oneself as</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">especializar-se</div><div class="qr-en">to specialize</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">dedicar-se a</div><div class="qr-en">to devote oneself to</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">dar-se bem</div><div class="qr-en">to get along / do well</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">esforçar-se</div><div class="qr-en">to make an effort (always reflexive)</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">separar-se de ★</div><div class="qr-en">to split up / part ways</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">mudar-se ★</div><div class="qr-en">to move (to a new place)</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">aproveitar-se de ★</div><div class="qr-en">to take advantage of</div></div></div>
+    <div class="qr-item"><div><div class="qr-verb">deixar-se afetar</div><div class="qr-en">to let oneself be affected</div></div></div>
+  </div>
+
+  <p style="margin-top:32px;font-size:12.5px;color:var(--cinza);text-align:center;">Material elaborado para fins didáticos · Brazilian Portuguese Hub · brazilianportuguesehub.com</p>
+
+</main>
+</body>
+</html>

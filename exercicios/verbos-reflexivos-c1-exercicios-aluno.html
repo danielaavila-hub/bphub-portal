@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbos Reflexivos C1 — Exercícios | BPHUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Trirong:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --profundo:  #1B3E52;
+  --agua:      #2D6E87;
+  --ouro:      #C5973A;
+  --giz:       #F5F0E8;
+  --carvao:    #1A1A2C;
+  --cobre:     #A85A35;
+  --nevoa:     #EBF3F6;
+  --cinza:     #6A6A7A;
+  --verde:     #2E6E4A;
+  --verde-bg:  #EBF5EF;
+  --vermelho:  #A83228;
+  --verm-bg:   #FAEAEA;
+  --ouro-bg:   #FDF6E8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--giz); color: var(--carvao); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.75; }
+
+header { background: var(--profundo); padding: 28px 48px; display: flex; align-items: center; gap: 24px; }
+.header-text h1 { font-family: 'Trirong', serif; font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 2px; }
+.header-text p  { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: #F5F0E8; }
+.level-bar { background: var(--agua); padding: 10px 48px; display: flex; gap: 28px; align-items: center; }
+.level-bar span { font-family: 'Trirong', serif; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.75); }
+.level-bar strong { color: #F5F0E8; }
+
+main { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+
+.context-box { background: white; border-left: 4px solid var(--agua); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 32px; font-style: italic; font-size: 14.5px; color: #444; line-height: 1.6; }
+.context-box strong { font-family: 'Trirong', serif; font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--profundo); display: block; margin-bottom: 5px; }
+
+.exercise { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 2px 12px rgba(26,26,44,.07); }
+.ex-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+.ex-num { background: var(--ouro); color: white; font-family: 'Trirong', serif; font-weight: 800; font-size: 13px; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ex-title { font-family: 'Trirong', serif; font-weight: 700; font-size: 15px; color: var(--profundo); }
+.ex-subtitle { font-family: 'Trirong', serif; font-size: 13px; color: var(--cobre); margin-top: 2px; }
+.instructions { font-family: 'Trirong', serif; font-size: 13px; color: #555; background: var(--giz); border-radius: 6px; padding: 10px 14px; margin-bottom: 18px; line-height: 1.55; }
+
+/* Matching */
+.match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 16px; }
+@media(max-width:580px){ .match-cols { grid-template-columns: 1fr; } }
+.match-col-label { font-family: 'Trirong', serif; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--cinza); margin-bottom: 10px; }
+.match-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0ebe0; font-size: 14.5px; }
+.match-row:last-child { border-bottom: none; }
+.match-key { font-family: 'Trirong', serif; font-weight: 700; color: var(--profundo); min-width: 22px; font-size: 13px; }
+.match-sel { font-family: 'Trirong', serif; font-size: 13px; padding: 5px 8px; border: 2px solid #ddd; border-radius: 6px; background: white; cursor: pointer; min-width: 40px; transition: border-color .2s; }
+.match-sel:focus { outline: none; border-color: var(--agua); }
+.match-sel.correct { border-color: var(--verde); background: var(--verde-bg); color: var(--verde); }
+.match-sel.wrong   { border-color: var(--vermelho); background: var(--verm-bg); }
+.match-fb { font-size: 12px; min-width: 16px; }
+
+/* Contextual choice */
+.choice-item { padding: 14px 0; border-bottom: 1px solid #f0ebe0; font-size: 15px; display: flex; flex-direction: column; gap: 10px; }
+.choice-item:last-child { border-bottom: none; }
+.choice-sent { line-height: 1.6; color: #333; }
+.choice-opts { display: flex; gap: 12px; flex-wrap: wrap; }
+.choice-btn { font-family: 'Trirong', serif; font-size: 13.5px; padding: 7px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; transition: all .18s; }
+.choice-btn:hover { border-color: var(--agua); color: var(--profundo); }
+.choice-btn.correct { border-color: var(--verde); background: var(--verde-bg); color: var(--verde); font-weight: 700; }
+.choice-btn.wrong   { border-color: var(--vermelho); background: var(--verm-bg); color: var(--vermelho); }
+.choice-exp { font-family: 'Trirong', serif; font-size: 13px; color: var(--cinza); font-style: italic; display: none; margin-top: 2px; }
+.choice-exp.show { display: block; }
+
+/* Gap fill */
+.gap-line { padding: 12px 0; border-bottom: 1px solid #f0ebe0; font-size: 15px; line-height: 1.7; }
+.gap-line:last-child { border-bottom: none; }
+.gap-input { border: none; border-bottom: 2px solid #c5b8a0; background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--carvao); min-width: 150px; padding: 0 4px 1px; outline: none; transition: border-color .2s; }
+.gap-input:focus { border-color: var(--agua); }
+.gap-input.correct { border-color: var(--verde); color: var(--verde); font-weight: 600; }
+.gap-input.wrong   { border-color: var(--vermelho); color: var(--vermelho); }
+
+/* Error correction */
+.err-item { padding: 14px 0; border-bottom: 1px solid #f0ebe0; }
+.err-item:last-child { border-bottom: none; }
+.err-sentence { font-size: 15px; color: var(--vermelho); font-style: italic; margin-bottom: 8px; }
+.err-label { font-family: 'Trirong', serif; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); margin-bottom: 6px; display: block; }
+.err-input { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14.5px; padding: 9px 13px; border: 2px solid #ddd; border-radius: 7px; background: white; outline: none; transition: border-color .2s; }
+.err-input:focus { border-color: var(--agua); }
+.err-input.correct { border-color: var(--verde); background: var(--verde-bg); }
+.err-input.wrong   { border-color: var(--vermelho); background: var(--verm-bg); }
+.err-fb { font-family: 'Trirong', serif; font-size: 13px; margin-top: 6px; display: none; }
+.err-fb.show { display: block; }
+
+/* Production */
+.prod-area { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14.5px; padding: 14px 16px; border: 2px solid #ddd; border-radius: 10px; background: white; outline: none; resize: vertical; min-height: 180px; line-height: 1.7; transition: border-color .2s; }
+.prod-area:focus { border-color: var(--agua); }
+.prod-hints { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.hint-chip { font-family: 'Trirong', serif; font-size: 12.5px; font-style: italic; padding: 4px 12px; background: var(--nevoa); border-radius: 14px; color: var(--profundo); }
+
+/* Check button */
+.check-btn { background: var(--profundo); color: white; border: none; font-family: 'Trirong', serif; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 11px 26px; border-radius: 8px; cursor: pointer; margin-top: 16px; transition: background .18s; }
+.check-btn:hover { background: var(--agua); }
+.reset-btn { background: transparent; color: var(--cinza); border: 1.5px solid #ccc; font-family: 'Trirong', serif; font-size: 12px; padding: 9px 18px; border-radius: 8px; cursor: pointer; margin-top: 16px; margin-left: 10px; }
+.ex-score { font-family: 'Trirong', serif; font-size: 13.5px; margin-top: 14px; padding: 10px 16px; border-radius: 7px; display: none; }
+.ex-score.show { display: block; }
+.ex-score.pass { background: var(--verde-bg); color: var(--verde); }
+.ex-score.partial { background: var(--ouro-bg); color: var(--cobre); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-text">
+    <h1>Brazilian Portuguese Hub</h1>
+    <p>Verbos Reflexivos — Exercícios C1</p>
+  </div>
+</header>
+<div class="level-bar">
+  <span>Nível <strong>C1</strong></span>
+  <span>·</span>
+  <span>Tema <strong>Verbos Reflexivos — Uso e Nuance</strong></span>
+</div>
+
+<main>
+
+<div class="context-box">
+  <strong>Context</strong>
+  These exercises are based on the dialogue between Beatriz (personal trainer) and Rodrigo (executive) at a São Paulo gym. Review the material before completing these tasks. Exercises 1–4 are interactive. Exercise 5 is open-ended production.
+</div>
+
+
+<!-- EXERCISE 1: MATCHING -->
+<div class="exercise" id="ex1">
+  <div class="ex-header">
+    <div class="ex-num">1</div>
+    <div><div class="ex-title">Matching — Verbo e Contexto</div><div class="ex-subtitle">What does each reflexive express in context?</div></div>
+  </div>
+  <div class="instructions">Match each verb (left) with the best description of its contextual meaning (right). Type the letter in the box.</div>
+
+  <div class="match-cols">
+    <div>
+      <div class="match-col-label">Verbo</div>
+      <div class="match-row"><span class="match-key">1.</span><span class="match-text">me desligar</span><select class="match-sel" id="m1"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf1"></span></div>
+      <div class="match-row"><span class="match-key">2.</span><span class="match-text">me virei</span><select class="match-sel" id="m2"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf2"></span></div>
+      <div class="match-row"><span class="match-key">3.</span><span class="match-text">se dá bem</span><select class="match-sel" id="m3"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf3"></span></div>
+      <div class="match-row"><span class="match-key">4.</span><span class="match-text">se arrepende</span><select class="match-sel" id="m4"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf4"></span></div>
+      <div class="match-row"><span class="match-key">5.</span><span class="match-text">me descuidado</span><select class="match-sel" id="m5"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf5"></span></div>
+      <div class="match-row"><span class="match-key">6.</span><span class="match-text">me separei de</span><select class="match-sel" id="m6"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf6"></span></div>
+      <div class="match-row"><span class="match-key">7.</span><span class="match-text">me aproveitei de</span><select class="match-sel" id="m7"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf7"></span></div>
+      <div class="match-row"><span class="match-key">8.</span><span class="match-text">me mudei</span><select class="match-sel" id="m8"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select><span class="match-fb" id="mf8"></span></div>
+    </div>
+    <div>
+      <div class="match-col-label">Significado</div>
+      <div style="font-size:14px;line-height:2;padding-top:4px;">
+        <div><strong>A</strong> — to move to a new place</div>
+        <div><strong>B</strong> — to switch off mentally; stop thinking about stress</div>
+        <div><strong>C</strong> — to get along well with someone</div>
+        <div><strong>D</strong> — to regret something (always reflexive)</div>
+        <div><strong>E</strong> — to take advantage of a situation opportunistically</div>
+        <div><strong>F</strong> — to have been neglecting oneself</div>
+        <div><strong>G</strong> — to part ways with a partner / split up</div>
+        <div><strong>H</strong> — to manage on one's own; to figure things out</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="check-btn" onclick="checkMatch()">Check answers</button>
+  <button class="reset-btn" onclick="resetMatch()">Reset</button>
+  <div class="ex-score" id="score1"></div>
+</div>
+
+
+<!-- EXERCISE 2: CONTEXTUAL CHOICE -->
+<div class="exercise" id="ex2">
+  <div class="ex-header">
+    <div class="ex-num">2</div>
+    <div><div class="ex-title">Escolha Contextual</div><div class="ex-subtitle">Reflexive or not? Choose the correct form.</div></div>
+  </div>
+  <div class="instructions">In each sentence, choose the form that fits the context. Pay attention to meaning — the difference is not always grammatical, but semantic.</div>
+
+  <div id="choice-container"></div>
+  <div class="ex-score" id="score2"></div>
+</div>
+
+
+<!-- EXERCISE 3: GAP FILL — NEW CONTEXT -->
+<div class="exercise" id="ex3">
+  <div class="ex-header">
+    <div class="ex-num">3</div>
+    <div><div class="ex-title">Preencha — Novo Contexto</div><div class="ex-subtitle">A different scene, same reflexive precision.</div></div>
+  </div>
+  <div class="instructions">Fill in each blank with the correct reflexive verb form from the box. Conjugate as needed. Each verb is used once.</div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px;background:var(--profundo);border-radius:8px;margin-bottom:20px;">
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">dedicar-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">despedir-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">divertir-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">mudar-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">recuperar-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">esforçar-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">concentrar-se</span>
+    <span style="background:rgba(245,240,232,.15);color:var(--giz);font-family:'Trirong',serif;font-size:13px;font-style:italic;padding:4px 12px;border-radius:12px;">animar-se</span>
+  </div>
+
+  <div id="gap-container"></div>
+
+  <button class="check-btn" onclick="checkGap()">Check answers</button>
+  <button class="reset-btn" onclick="resetGap()">Reset</button>
+  <div class="ex-score" id="score3"></div>
+</div>
+
+
+<!-- EXERCISE 4: ERROR CORRECTION -->
+<div class="exercise" id="ex4">
+  <div class="ex-header">
+    <div class="ex-num">4</div>
+    <div><div class="ex-title">Correção de Erros</div><div class="ex-subtitle">Each sentence has exactly one error. Rewrite it correctly.</div></div>
+  </div>
+  <div class="instructions">These are errors typical of C1 learners — reflexive/non-reflexive confusion, body part rule violations, or European Portuguese patterns. Identify and correct the error in each sentence.</div>
+  <div id="err-container"></div>
+  <button class="check-btn" onclick="checkErr()">Check answers</button>
+  <button class="reset-btn" onclick="resetErr()">Reset</button>
+  <div class="ex-score" id="score4"></div>
+</div>
+
+
+<!-- EXERCISE 5: PRODUCTION -->
+<div class="exercise" id="ex5">
+  <div class="ex-header">
+    <div class="ex-num">5</div>
+    <div><div class="ex-title">Produção</div><div class="ex-subtitle">Write a dialogue using at least 8 reflexive verbs.</div></div>
+  </div>
+  <div class="instructions">Write a 10–14 line dialogue between two people in a situation of your choice — a doctor's appointment, a job interview, a conversation between friends planning a trip. Include at least 8 reflexive verbs from this material. Underline or <strong>bold</strong> each reflexive verb you use. Aim for natural, idiomatic Brazilian Portuguese.</div>
+
+  <div class="prod-hints">
+    <span class="hint-chip">animar-se</span>
+    <span class="hint-chip">concentrar-se</span>
+    <span class="hint-chip">se virar</span>
+    <span class="hint-chip">arrepender-se de</span>
+    <span class="hint-chip">dedicar-se a</span>
+    <span class="hint-chip">dar-se bem</span>
+    <span class="hint-chip">mudar-se ★</span>
+    <span class="hint-chip">despedir-se ★</span>
+    <span class="hint-chip">divertir-se ★</span>
+    <span class="hint-chip">descuidar-se</span>
+  </div>
+
+  <textarea class="prod-area" id="prod1" placeholder="Escreva o seu diálogo aqui…"></textarea>
+</div>
+
+
+<p style="margin-top:24px;font-size:12.5px;color:var(--cinza);text-align:center;">Material elaborado para fins didáticos · Brazilian Portuguese Hub · brazilianportuguesehub.com</p>
+
+</main>
+
+<script>
+// ── EXERCISE 1: MATCHING ──
+const matchAnswers = { m1:'B', m2:'H', m3:'C', m4:'D', m5:'F', m6:'G', m7:'E', m8:'A' };
+
+function checkMatch() {
+  let correct = 0;
+  for (let k in matchAnswers) {
+    const sel = document.getElementById(k);
+    const fb  = document.getElementById('mf' + k.slice(1));
+    if (sel.value === matchAnswers[k]) { sel.className='match-sel correct'; fb.textContent='✓'; correct++; }
+    else if (sel.value === '') { fb.textContent=''; }
+    else { sel.className='match-sel wrong'; fb.textContent='✗'; }
+  }
+  const sc = document.getElementById('score1');
+  sc.className = 'ex-score show ' + (correct === 8 ? 'pass' : 'partial');
+  sc.textContent = correct === 8 ? '🎉 Perfect! All 8 correct.' : `${correct}/8 correct. Review the ones marked ✗ and try again.`;
+}
+
+function resetMatch() {
+  for (let k in matchAnswers) {
+    document.getElementById(k).className = 'match-sel';
+    document.getElementById(k).value = '';
+    document.getElementById('mf' + k.slice(1)).textContent = '';
+  }
+  const sc = document.getElementById('score1'); sc.className = 'ex-score'; sc.textContent='';
+}
+
+// ── EXERCISE 2: CONTEXTUAL CHOICE ──
+const choiceData = [
+  { sent: 'A empresa ___ da falta de regulamentação para cobrar preços abusivos.', opts: ['aproveitou', 'se aproveitou'], correct: 1, exp: '<em>Aproveitou-se de</em> = to take advantage of (opportunistically). <em>Aproveitar</em> (without reflexive) = to enjoy/make use of — not negative.' },
+  { sent: 'A diretora ___ de todos os funcionários ao encerrar o projeto.', opts: ['despediu', 'se despediu'], correct: 1, exp: '<em>Despediu-se de</em> = said goodbye to. <em>Despediu</em> = fired them — a very different meaning!' },
+  { sent: 'A empresa ___ cinco funcionários por justa causa.', opts: ['despediu', 'se despediu'], correct: 0, exp: '<em>Despedir</em> (non-reflexive) = to fire. <em>Despedir-se</em> = to say goodbye.' },
+  { sent: 'Ela caiu da bicicleta e ___ o tornozelo.', opts: ['se machucou', 'machucou'], correct: 1, exp: 'Body part specified (tornozelo) → verb is NOT reflexive. <em>Machucou o tornozelo</em> is correct.' },
+  { sent: 'Depois de três semanas de repouso, ele finalmente ___.', opts: ['recuperou', 'se recuperou'], correct: 1, exp: 'No body part = reflexive. <em>Se recuperou</em> = he recovered (himself). <em>Recuperou</em> alone needs an object: <em>recuperou os arquivos</em>.' },
+  { sent: 'Meu irmão ___ pra Florianópolis no mês passado.', opts: ['mudou', 'se mudou'], correct: 1, exp: '<em>Mudou-se</em> = moved (to a new place). <em>Mudou</em> alone = changed something: <em>mudou de ideia</em> (changed his mind).' },
+  { sent: 'Você ___ muito na última entrevista — foi convincente.', opts: ['saiu bem', 'se saiu bem'], correct: 1, exp: '<em>Se sair bem</em> = to perform well, to do well in a situation. <em>Sair</em> alone = to leave.' },
+  { sent: 'O palhaço ___ as crianças com mágicas a tarde toda.', opts: ['divertiu', 'se divertiu'], correct: 0, exp: '<em>Divertiu</em> = entertained someone else. <em>Divertiu-se</em> = had fun himself.' },
+];
+
+function buildChoices() {
+  const c = document.getElementById('choice-container');
+  choiceData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'choice-item';
+    div.innerHTML = `<div class="choice-sent">${item.sent.replace('___','<strong style="color:var(--agua)">___</strong>')}</div>
+      <div class="choice-opts">
+        ${item.opts.map((o,j)=>`<button class="choice-btn" onclick="selectChoice(${i},${j},this)">${o}</button>`).join('')}
+      </div>
+      <div class="choice-exp" id="cexp${i}">${item.exp}</div>`;
+    c.appendChild(div);
+  });
+}
+
+let choiceScore = 0; let choiceAnswered = 0;
+function selectChoice(i, j, btn) {
+  const item = choiceData[i];
+  const parent = btn.closest('.choice-item');
+  if (parent.querySelector('.correct') || parent.querySelector('.wrong')) return;
+  if (j === item.correct) { btn.className = 'choice-btn correct'; choiceScore++; }
+  else {
+    btn.className = 'choice-btn wrong';
+    parent.querySelectorAll('.choice-btn')[item.correct].className = 'choice-btn correct';
+  }
+  document.getElementById('cexp'+i).className = 'choice-exp show';
+  choiceAnswered++;
+  if (choiceAnswered === choiceData.length) {
+    const sc = document.getElementById('score2');
+    sc.className = 'ex-score show ' + (choiceScore === choiceData.length ? 'pass' : 'partial');
+    sc.textContent = choiceScore === choiceData.length ? '🎉 Excellent! All 8 correct.' : `${choiceScore}/${choiceData.length} correct. Read the explanations in green.`;
+  }
+}
+
+// ── EXERCISE 3: GAP FILL ──
+const gapData = [
+  { text: 'Depois da cirurgia, o atleta levou semanas para ___ completamente.', answers: ['se recuperar','recuperar-se'] },
+  { text: 'Na festa de despedida, ela ___ de cada colega com um abraço.', answers: ['se despediu','despediu-se'] },
+  { text: 'Ele ___ muito no apresentação — chegou a decorar cada slide.', answers: ['se esforçou','esforçou-se'] },
+  { text: 'Minha sócia ___ pra Recife e agora trabalhamos à distância.', answers: ['se mudou','mudou-se'] },
+  { text: 'Todo mundo ___ no show do Criolo — foi uma noite incrível.', answers: ['se divertiu','divertiu-se'] },
+  { text: 'Você consegue ___ nos estudos com tanto barulho?', answers: ['se concentrar','concentrar-se'] },
+  { text: 'Ela tem ___ tanto ao projeto que mal tem tempo pra dormir.', answers: ['se dedicado','dedicado-se'] },
+  { text: 'Quando soube que ia viajar pro Brasil, ele ___ de vez.', answers: ['se animou','animou-se'] },
+];
+
+function buildGap() {
+  const c = document.getElementById('gap-container');
+  gapData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'gap-line';
+    const sent = item.text.replace('___', `<input class="gap-input" id="g${i}" placeholder="…" autocomplete="off" autocorrect="off">`);
+    div.innerHTML = `<span style="font-family:'Trirong',serif;font-weight:700;font-size:12px;color:var(--cinza);margin-right:6px;">${i+1}.</span>${sent}`;
+    c.appendChild(div);
+  });
+}
+
+function normalise(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+function checkGap() {
+  let correct = 0;
+  gapData.forEach((item, i) => {
+    const inp = document.getElementById('g'+i);
+    const val = inp.value;
+    const ok = item.answers.some(a => normalise(a) === normalise(val));
+    inp.className = 'gap-input ' + (ok ? 'correct' : 'wrong');
+    if (ok) correct++;
+  });
+  const sc = document.getElementById('score3');
+  sc.className = 'ex-score show ' + (correct === gapData.length ? 'pass' : 'partial');
+  sc.textContent = correct === gapData.length ? '🎉 All 8 correct!' : `${correct}/8 correct. Answers in red — check the verb bank and try again.`;
+}
+
+function resetGap() {
+  gapData.forEach((_,i) => { const inp = document.getElementById('g'+i); inp.className='gap-input'; inp.value=''; });
+  const sc = document.getElementById('score3'); sc.className='ex-score'; sc.textContent='';
+}
+
+// ── EXERCISE 4: ERROR CORRECTION ──
+const errData = [
+  { wrong: 'Ela caiu e se machucou o ombro na queda.', correct: ['ela caiu e machucou o ombro na queda','ela se machucou na queda'], explanation: 'Body part (ombro) specified → NOT reflexive. Correct: <em>machucou o ombro</em>. OR remove the body part: <em>se machucou na queda</em>.' },
+  { wrong: 'Quando acordei, concentro-me na lista de tarefas do dia.', correct: ['quando acordei, me concentro na lista de tarefas do dia','me concentro na lista'], explanation: 'In Brazilian Portuguese, the pronoun comes BEFORE the verb: <em>me concentro</em>, not <em>concentro-me</em> (that is European Portuguese).' },
+  { wrong: 'Os dois sócios separaram depois de uma discussão séria.', correct: ['os dois socios se separaram depois de uma discussao seria','se separaram'], explanation: '<em>Separar</em> without reflexive = to separate things/objects. To split up (people) = <em>separar-se</em>: <em>Os dois sócios se separaram.</em>' },
+  { wrong: 'Aproveitei-me muito do fim de semana na praia.', correct: ['aproveitei muito o fim de semana na praia', 'me aproveitei do desconto'], explanation: '<em>Aproveitar</em> (enjoyment, positive) = NOT reflexive: <em>aproveitei o fim de semana</em>. The reflexive <em>aproveitar-se de</em> implies taking advantage opportunistically.' },
+  { wrong: 'Preciso se desligar do trabalho nas férias.', correct: ['preciso me desligar do trabalho nas ferias'], explanation: 'The reflexive pronoun must agree with the subject. Subject = <em>eu</em> → pronoun = <em>me</em>: <em>preciso me desligar</em>.' },
+  { wrong: 'Ela esforçou muito para conseguir a promoção.', correct: ['ela se esforcou muito para conseguir a promocao','ela se esforçou muito'], explanation: '<em>Esforçar</em> is a pronominal verb — it only exists with a reflexive pronoun: <em>esforçar-se</em>. <em>*Esforçar</em> without pronoun is incorrect.' },
+];
+
+function buildErr() {
+  const c = document.getElementById('err-container');
+  errData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'err-item';
+    div.innerHTML = `<div class="err-sentence">"${item.wrong}"</div>
+      <span class="err-label">Corrected sentence:</span>
+      <input class="err-input" id="ei${i}" placeholder="Type the corrected sentence…" autocomplete="off">
+      <div class="err-fb" id="ef${i}"></div>`;
+    c.appendChild(div);
+  });
+}
+
+function checkErr() {
+  let correct = 0;
+  errData.forEach((item, i) => {
+    const inp = document.getElementById('ei'+i);
+    const fb  = document.getElementById('ef'+i);
+    const ok  = item.correct.some(a => normalise(inp.value).includes(normalise(a)));
+    inp.className = 'err-input ' + (ok ? 'correct' : 'wrong');
+    fb.className  = 'err-fb show';
+    fb.style.color = ok ? 'var(--verde)' : 'var(--cobre)';
+    fb.innerHTML   = ok ? `✓ Correct!` : `Note: ${item.explanation}`;
+    if (ok) correct++;
+  });
+  const sc = document.getElementById('score4');
+  sc.className = 'ex-score show ' + (correct === errData.length ? 'pass' : 'partial');
+  sc.textContent = correct === errData.length ? '🎉 All 6 correct!' : `${correct}/6 correct. Read the notes on the ones in red.`;
+}
+
+function resetErr() {
+  errData.forEach((_,i) => {
+    document.getElementById('ei'+i).className = 'err-input';
+    document.getElementById('ei'+i).value = '';
+    const fb = document.getElementById('ef'+i); fb.className='err-fb'; fb.innerHTML='';
+  });
+  const sc = document.getElementById('score4'); sc.className='ex-score'; sc.textContent='';
+}
+
+// ── INIT ──
+buildChoices();
+buildGap();
+buildErr();
+</script>
+</body>
+</html>
