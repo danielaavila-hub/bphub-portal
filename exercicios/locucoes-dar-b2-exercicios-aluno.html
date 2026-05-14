@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locuções com DAR — Exercícios B2 | BPHUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Trirong:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --baunilha:   #FCF5EB;
+  --baunilha2:  #FDE7C4;
+  --off-white:  #F2F0E3;
+  --light-gray: #EDEDE2;
+  --nanquim:    #1E1D1C;
+  --floresta:   #4E551D;
+  --erva-doce:  #A6B28A;
+  --cobalto:    #265B8B;
+  --pitomba:    #D36D29;
+  --ouro:       #C4953A;
+  --ouro-lt:    #FDF3E0;
+  --marrom:     #967E63;
+  --texto:      #3C3C21;
+  --cinza:      #6E6A5A;
+  --verde-ok:   #2E6B3E;
+  --vermelho:   #A83030;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.75; }
+
+header { background: var(--cobalto); padding: 28px 48px; }
+.header-text h1 { font-family: 'Trirong', serif; font-weight: 700; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--baunilha2); margin-bottom: 2px; opacity: .85; }
+.header-text p  { font-family: 'Trirong', serif; font-weight: 300; font-size: 24px; color: #fff; }
+
+.level-bar { background: var(--floresta); padding: 10px 48px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.level-bar span { font-family: 'Trirong', serif; font-size: 12px; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: rgba(252,245,235,.75); }
+.level-bar strong { color: #fff; font-weight: 700; }
+
+main { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.section-title { font-family: 'Trirong', serif; font-weight: 700; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--cobalto); margin: 44px 0 18px; display: flex; align-items: center; gap: 12px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--cobalto); opacity: .25; }
+
+.exercise-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+.ex-title { font-family: 'Trirong', serif; font-weight: 700; font-size: 15px; color: var(--floresta); margin-bottom: 6px; }
+.ex-instructions { font-size: 14px; color: var(--cinza); margin-bottom: 22px; font-style: italic; line-height: 1.6; }
+
+/* ── Matching exercise ── */
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 580px) { .match-grid { grid-template-columns: 1fr; } }
+.match-col h4 { font-family: 'Trirong', serif; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cinza); margin-bottom: 12px; }
+.match-item { background: var(--off-white); border-radius: 8px; padding: 9px 14px; margin-bottom: 8px; font-size: 14.5px; display: flex; align-items: center; gap: 10px; }
+.match-letter { font-family: 'Trirong', serif; font-weight: 700; color: var(--cobalto); min-width: 22px; }
+.match-answer { display: inline-block; border: none; background: transparent; border-bottom: 2px solid var(--erva-doce); width: 46px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--cobalto); font-weight: 700; text-align: center; outline: none; padding: 2px 4px; cursor: text; }
+.match-answer:focus { border-bottom-color: var(--cobalto); }
+.match-answer.correct { border-bottom-color: var(--verde-ok); color: var(--verde-ok); }
+.match-answer.wrong   { border-bottom-color: var(--vermelho); color: var(--vermelho); }
+
+/* ── Multiple choice ── */
+.mc-item { margin-bottom: 20px; }
+.mc-question { font-size: 15px; color: var(--texto); margin-bottom: 9px; line-height: 1.6; }
+.mc-options { display: flex; flex-direction: column; gap: 6px; }
+.mc-option { display: flex; align-items: flex-start; gap: 10px; padding: 9px 14px; border-radius: 8px; border: 1.5px solid var(--light-gray); cursor: pointer; transition: border-color .15s, background .15s; font-size: 14.5px; }
+.mc-option:hover { border-color: var(--erva-doce); background: var(--off-white); }
+.mc-option input { margin-top: 3px; accent-color: var(--cobalto); cursor: pointer; }
+.mc-option.correct { border-color: var(--verde-ok); background: #EEF7F1; color: var(--verde-ok); font-weight: 600; }
+.mc-option.wrong   { border-color: var(--vermelho); background: #FEF0F0; color: var(--vermelho); }
+.mc-option.show-correct { border-color: var(--verde-ok); background: #EEF7F1; }
+.mc-feedback { font-size: 13.5px; margin-top: 6px; padding: 7px 14px; border-radius: 6px; display: none; line-height: 1.55; }
+.mc-feedback.visible { display: block; }
+.mc-feedback.ok  { background: #EEF7F1; color: var(--verde-ok); }
+.mc-feedback.err { background: #FEF0F0; color: var(--vermelho); }
+
+/* ── Gap fill / Formation ── */
+.form-item { margin-bottom: 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 15px; }
+.form-verb { font-family: 'Trirong', serif; font-weight: 700; color: var(--floresta); min-width: 100px; }
+.form-arrow { color: var(--erva-doce); }
+.form-prefix { color: var(--cinza); }
+.form-input { display: inline-block; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Trirong', serif; font-size: 15px; font-weight: 700; color: var(--cobalto); outline: none; min-width: 130px; padding: 1px 6px; }
+.form-input:focus { border-bottom-color: var(--cobalto); }
+.form-input.correct { border-bottom-color: var(--verde-ok); color: var(--verde-ok); }
+.form-input.wrong   { border-bottom-color: var(--vermelho); color: var(--vermelho); }
+.form-hint { font-size: 12px; color: var(--cinza); font-style: italic; }
+
+/* ── Buttons ── */
+.btn-row { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+.btn { font-family: 'Trirong', serif; font-weight: 700; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; padding: 10px 22px; border-radius: 8px; border: none; cursor: pointer; transition: opacity .15s; }
+.btn:hover { opacity: .85; }
+.btn-check  { background: var(--cobalto); color: white; }
+.btn-reset  { background: var(--off-white); color: var(--cobalto); border: 1.5px solid var(--erva-doce); }
+
+/* ── Score badge ── */
+.score-badge { display: none; background: var(--off-white); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 18px; font-size: 14px; color: var(--cobalto); font-weight: 600; margin-top: 14px; }
+.score-badge.visible { display: block; }
+
+/* ── Production task ── */
+.prod-box { background: var(--off-white); border-radius: 12px; padding: 24px 28px; }
+.prod-item { margin-bottom: 20px; }
+.prod-item:last-child { margin-bottom: 0; }
+.prod-label { font-family: 'Trirong', serif; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cobalto); display: block; margin-bottom: 6px; }
+.prod-scenario { font-size: 14.5px; line-height: 1.65; color: var(--texto); margin-bottom: 10px; }
+.prod-area { width: 100%; min-height: 120px; border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.65; color: var(--texto); resize: vertical; outline: none; background: white; }
+.prod-area:focus { border-color: var(--cobalto); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-text">
+    <h1>Brazilian Portuguese Hub</h1>
+    <p>Locuções com <em>DAR</em> — Exercícios</p>
+  </div>
+</header>
+
+<div class="level-bar">
+  <span>Nível <strong>B2</strong></span>
+  <span>·</span>
+  <span>Locuções verbais com <strong>DAR</strong></span>
+</div>
+
+<main>
+
+  <p class="section-title">Exercício 1 — Significado das Locuções</p>
+
+  <div class="exercise-card" id="ex1">
+    <div class="ex-title">Match the locution with its English equivalent</div>
+    <p class="ex-instructions">Write the letter of the correct meaning next to each locution. Each letter is used only once.</p>
+
+    <div class="match-grid">
+      <div class="match-col">
+        <h4>Locuções</h4>
+        <div class="match-item"><span class="match-letter">1.</span> dar uma olhada <input class="match-answer" id="m1" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">2.</span> dar uma passada <input class="match-answer" id="m2" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">3.</span> dar uma ligada <input class="match-answer" id="m3" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">4.</span> dar uma pensada <input class="match-answer" id="m4" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">5.</span> dar uma lida <input class="match-answer" id="m5" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">6.</span> dar uma volta <input class="match-answer" id="m6" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">7.</span> dar uma checada <input class="match-answer" id="m7" maxlength="1" placeholder="—"></div>
+        <div class="match-item"><span class="match-letter">8.</span> dar uma pausa <input class="match-answer" id="m8" maxlength="1" placeholder="—"></div>
+      </div>
+      <div class="match-col">
+        <h4>Meanings</h4>
+        <div class="match-item"><span class="match-letter">A.</span> give a call</div>
+        <div class="match-item"><span class="match-letter">B.</span> take a look</div>
+        <div class="match-item"><span class="match-letter">C.</span> stop by / pop in</div>
+        <div class="match-item"><span class="match-letter">D.</span> read through</div>
+        <div class="match-item"><span class="match-letter">E.</span> take a break / pause</div>
+        <div class="match-item"><span class="match-letter">F.</span> think it over</div>
+        <div class="match-item"><span class="match-letter">G.</span> go for a walk / ride</div>
+        <div class="match-item"><span class="match-letter">H.</span> check / verify</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn btn-reset" onclick="resetMatch()">Reset</button>
+    </div>
+    <div class="score-badge" id="match-score"></div>
+  </div>
+
+  <p class="section-title">Exercício 2 — Escolha a Locução Correta</p>
+
+  <div class="exercise-card" id="ex2">
+    <div class="ex-title">Choose the most natural locução for each context</div>
+    <p class="ex-instructions">Read each message and choose the locução with DAR that best completes it.</p>
+
+    <div id="mc-container">
+
+      <div class="mc-item" id="mc1">
+        <p class="mc-question">1. — <em>Eu preciso decidir sobre a proposta mas ainda não tenho certeza. Vou ___ antes de responder.</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc1" value="a"> dar uma passada</label>
+          <label class="mc-option"><input type="radio" name="mc1" value="b"> dar uma pensada</label>
+          <label class="mc-option"><input type="radio" name="mc1" value="c"> dar uma dormida</label>
+        </div>
+        <div class="mc-feedback" id="fb1"></div>
+      </div>
+
+      <div class="mc-item" id="mc2">
+        <p class="mc-question">2. — <em>O relatório está quase pronto. Você pode ___ antes que eu mande pro cliente?</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc2" value="a"> dar uma volta</label>
+          <label class="mc-option"><input type="radio" name="mc2" value="b"> dar uma pausa</label>
+          <label class="mc-option"><input type="radio" name="mc2" value="c"> dar uma lida</label>
+        </div>
+        <div class="mc-feedback" id="fb2"></div>
+      </div>
+
+      <div class="mc-item" id="mc3">
+        <p class="mc-question">3. — <em>Oi! Estou perto do seu bairro. Posso ___ aí depois do trabalho?</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc3" value="a"> dar uma passada</label>
+          <label class="mc-option"><input type="radio" name="mc3" value="b"> dar uma pesquisada</label>
+          <label class="mc-option"><input type="radio" name="mc3" value="c"> dar uma checada</label>
+        </div>
+        <div class="mc-feedback" id="fb3"></div>
+      </div>
+
+      <div class="mc-item" id="mc4">
+        <p class="mc-question">4. — <em>Estou cansada de trabalhar. Preciso ___ e tomar um café.</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc4" value="a"> dar uma ligada</label>
+          <label class="mc-option"><input type="radio" name="mc4" value="b"> dar uma pausa</label>
+          <label class="mc-option"><input type="radio" name="mc4" value="c"> dar uma lida</label>
+        </div>
+        <div class="mc-feedback" id="fb4"></div>
+      </div>
+
+      <div class="mc-item" id="mc5">
+        <p class="mc-question">5. — <em>Ainda não confirmei se vou à festa. Você pode ___ pra mim no Gabriel?</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc5" value="a"> dar uma olhada</label>
+          <label class="mc-option"><input type="radio" name="mc5" value="b"> dar uma ligada</label>
+          <label class="mc-option"><input type="radio" name="mc5" value="c"> dar uma dormida</label>
+        </div>
+        <div class="mc-feedback" id="fb5"></div>
+      </div>
+
+      <div class="mc-item" id="mc6">
+        <p class="mc-question">6. — <em>Antes de comprar o apartamento, vou ___ nos preços do bairro.</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc6" value="a"> dar uma pesquisada</label>
+          <label class="mc-option"><input type="radio" name="mc6" value="b"> dar uma descansada</label>
+          <label class="mc-option"><input type="radio" name="mc6" value="c"> dar uma volta</label>
+        </div>
+        <div class="mc-feedback" id="fb6"></div>
+      </div>
+
+      <div class="mc-item" id="mc7">
+        <p class="mc-question">7. — <em>O servidor pode estar com problema. Você consegue ___ nos logs do sistema?</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc7" value="a"> dar uma dormida</label>
+          <label class="mc-option"><input type="radio" name="mc7" value="b"> dar uma pensada</label>
+          <label class="mc-option"><input type="radio" name="mc7" value="c"> dar uma checada</label>
+        </div>
+        <div class="mc-feedback" id="fb7"></div>
+      </div>
+
+      <div class="mc-item" id="mc8">
+        <p class="mc-question">8. — <em>Precisava de ar fresco, então fui ___ no parque com o cachorro.</em></p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="mc8" value="a"> dar uma volta</label>
+          <label class="mc-option"><input type="radio" name="mc8" value="b"> dar uma lida</label>
+          <label class="mc-option"><input type="radio" name="mc8" value="c"> dar uma pausa</label>
+        </div>
+        <div class="mc-feedback" id="fb8"></div>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMC()">Check answers</button>
+      <button class="btn btn-reset" onclick="resetMC()">Reset</button>
+    </div>
+    <div class="score-badge" id="mc-score"></div>
+  </div>
+
+  <p class="section-title">Exercício 3 — Forme a Locução</p>
+
+  <div class="exercise-card" id="ex3">
+    <div class="ex-title">Build the locution from the verb given</div>
+    <p class="ex-instructions">You are given a base verb. Write the deverbal noun (the -ada / -ida form) to complete each locution. The first one is done as an example.</p>
+
+    <div class="form-item">
+      <span class="form-verb">olhar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input correct" value="olhada" disabled>
+      <span class="form-hint">← example</span>
+    </div>
+    <div class="form-item">
+      <span class="form-verb">ligar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f1" placeholder="…">
+    </div>
+    <div class="form-item">
+      <span class="form-verb">pesquisar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f2" placeholder="…">
+    </div>
+    <div class="form-item">
+      <span class="form-verb">passar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f3" placeholder="…">
+    </div>
+    <div class="form-item">
+      <span class="form-verb">checar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f4" placeholder="…">
+    </div>
+    <div class="form-item">
+      <span class="form-verb">descansar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f5" placeholder="…">
+    </div>
+    <div class="form-item">
+      <span class="form-verb">dormir</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f6" placeholder="…">
+    </div>
+    <div class="form-item">
+      <span class="form-verb">espiar</span>
+      <span class="form-arrow">→</span>
+      <span class="form-prefix">dar uma</span>
+      <input class="form-input" id="f7" placeholder="…">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkForm()">Check answers</button>
+      <button class="btn btn-reset" onclick="resetForm()">Reset</button>
+    </div>
+    <div class="score-badge" id="form-score"></div>
+  </div>
+
+  <p class="section-title">Exercício 4 — Escrita Livre</p>
+
+  <div class="exercise-card">
+    <div class="ex-title">Use the locutions in your own context</div>
+    <p class="ex-instructions">Write a short WhatsApp message (3–5 sentences) for each situation below. Use at least one locução com DAR in each message. Try to make them sound natural and informal, as if you were texting a Brazilian friend or colleague.</p>
+
+    <div class="prod-box">
+
+      <div class="prod-item">
+        <span class="prod-label">Situation 1</span>
+        <p class="prod-scenario">You're messaging a friend to say you'll stop by their house later and want them to give you a call when they're home.</p>
+        <textarea class="prod-area" placeholder="Escreva aqui…"></textarea>
+      </div>
+
+      <div class="prod-item">
+        <span class="prod-label">Situation 2</span>
+        <p class="prod-scenario">A colleague sends you a report they wrote. You want to say you'll read it quickly and get back to them with your thoughts.</p>
+        <textarea class="prod-area" placeholder="Escreva aqui…"></textarea>
+      </div>
+
+      <div class="prod-item">
+        <span class="prod-label">Situation 3</span>
+        <p class="prod-scenario">You've been working non-stop. Message a friend saying you need a break, you're going for a walk, and you'll think about their invitation and let them know.</p>
+        <textarea class="prod-area" placeholder="Escreva aqui…"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── Exercise 1: Matching ──
+const matchKey = { m1:'B', m2:'C', m3:'A', m4:'F', m5:'D', m6:'G', m7:'H', m8:'E' };
+
+function normalise(s) { return s.trim().toUpperCase().replace(/[^A-Z]/g,''); }
+
+function checkMatch() {
+  let correct = 0;
+  Object.keys(matchKey).forEach(id => {
+    const inp = document.getElementById(id);
+    inp.classList.remove('correct','wrong');
+    const val = normalise(inp.value);
+    if (val === matchKey[id]) { inp.classList.add('correct'); correct++; }
+    else if (val) { inp.classList.add('wrong'); }
+  });
+  const badge = document.getElementById('match-score');
+  badge.textContent = correct + ' / 8 correct' + (correct === 8 ? ' 🎉 Perfeito!' : ' — Review the marked answers.');
+  badge.classList.add('visible');
+}
+
+function resetMatch() {
+  Object.keys(matchKey).forEach(id => {
+    const inp = document.getElementById(id);
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  document.getElementById('match-score').classList.remove('visible');
+}
+
+// ── Exercise 2: Multiple choice ──
+const mcKey = { mc1:'b', mc2:'c', mc3:'a', mc4:'b', mc5:'b', mc6:'a', mc7:'c', mc8:'a' };
+const mcFeedback = {
+  mc1: { ok: '✓ Correto! <em>Dar uma pensada</em> = to think it over — exactly right for a decision you\'re not sure about yet.', err: 'Which locution means "to think something over" before deciding?' },
+  mc2: { ok: '✓ Correto! <em>Dar uma lida</em> = to read through — perfect before sending to a client.', err: 'The context is about reading a document before sending it. Which locution fits?' },
+  mc3: { ok: '✓ Correto! <em>Dar uma passada</em> = to stop by — perfect for a brief visit.', err: 'You\'re near someone\'s neighbourhood and want to visit briefly. Which locution means "to stop by"?' },
+  mc4: { ok: '✓ Correto! <em>Dar uma pausa</em> = to take a break — very natural when tired of working.', err: 'You\'re tired and want to rest with a coffee. Which locution means "to take a break"?' },
+  mc5: { ok: '✓ Correto! <em>Dar uma ligada</em> = to give a call — you\'re asking someone to phone Gabriel for you.', err: 'You want someone to phone Gabriel. Which locution means "to give a call"?' },
+  mc6: { ok: '✓ Correto! <em>Dar uma pesquisada</em> = to look into / research — ideal before a big purchase.', err: 'Before buying property you want to investigate prices. Which locution means "to do some research"?' },
+  mc7: { ok: '✓ Correto! <em>Dar uma checada</em> = to check / verify — very natural in a tech context.', err: 'Someone needs to verify server logs. Which locution means "to check"?' },
+  mc8: { ok: '✓ Correto! <em>Dar uma volta</em> = to go for a walk / ride — natural with "no parque".', err: 'You went to the park with the dog for fresh air. Which locution means "to go for a walk"?' }
+};
+
+function checkMC() {
+  let correct = 0;
+  for (let i = 1; i <= 8; i++) {
+    const key = 'mc' + i;
+    const selected = document.querySelector('input[name="' + key + '"]:checked');
+    const fb = document.getElementById('fb' + i);
+    document.querySelectorAll('input[name="' + key + '"]').forEach(r => {
+      r.parentElement.classList.remove('correct','wrong','show-correct');
+    });
+    fb.classList.remove('visible','ok','err');
+    if (selected) {
+      if (selected.value === mcKey[key]) {
+        selected.parentElement.classList.add('correct');
+        fb.innerHTML = mcFeedback[key].ok;
+        fb.classList.add('visible','ok');
+        correct++;
+      } else {
+        selected.parentElement.classList.add('wrong');
+        fb.innerHTML = mcFeedback[key].err;
+        fb.classList.add('visible','err');
+        document.querySelector('input[name="' + key + '"][value="' + mcKey[key] + '"]')
+          .parentElement.classList.add('show-correct');
+      }
+    }
+  }
+  const badge = document.getElementById('mc-score');
+  badge.textContent = correct + ' / 8 correct' + (correct === 8 ? ' 🎉 Excelente!' : '');
+  badge.classList.add('visible');
+}
+
+function resetMC() {
+  for (let i = 1; i <= 8; i++) {
+    const key = 'mc' + i;
+    document.querySelectorAll('input[name="' + key + '"]').forEach(r => {
+      r.checked = false;
+      r.parentElement.classList.remove('correct','wrong','show-correct');
+    });
+    const fb = document.getElementById('fb' + i);
+    fb.classList.remove('visible','ok','err');
+  }
+  document.getElementById('mc-score').classList.remove('visible');
+}
+
+// ── Exercise 3: Formation ──
+const formKey = { f1:['ligada'], f2:['pesquisada'], f3:['passada'], f4:['checada'], f5:['descansada'], f6:['dormida'], f7:['espiada'] };
+
+function normaliseForm(s) {
+  return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z]/g,'');
+}
+
+function checkForm() {
+  let correct = 0;
+  Object.keys(formKey).forEach(id => {
+    const inp = document.getElementById(id);
+    const val = normaliseForm(inp.value);
+    inp.classList.remove('correct','wrong');
+    if (formKey[id].some(a => normaliseForm(a) === val)) {
+      inp.classList.add('correct'); correct++;
+    } else if (val) { inp.classList.add('wrong'); }
+  });
+  const badge = document.getElementById('form-score');
+  badge.textContent = correct + ' / 7 correct' + (correct === 7 ? ' 🎉 Perfeito!' : ' — Check the red ones and try again.');
+  badge.classList.add('visible');
+}
+
+function resetForm() {
+  Object.keys(formKey).forEach(id => {
+    const inp = document.getElementById(id);
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  document.getElementById('form-score').classList.remove('visible');
+}
+</script>
+
+</body>
+</html>
