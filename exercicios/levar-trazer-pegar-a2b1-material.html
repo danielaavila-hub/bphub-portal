@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levar, Trazer e Pegar — Material A2/B1 | BPHUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Trirong:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --laranja:  #C8651A;
+  --ouro:     #E0980A;
+  --creme:    #F7F1E6;
+  --terra:    #6E3010;
+  --escuro:   #1E2830;
+  --cinza:    #6A6A7A;
+  --verde:    #2E7A50;
+  --nevoa:    #FDF6EE;
+  --azul-wpp: #075E54;
+  --verde-wpp:#25D366;
+  --bg-wpp:   #e5ddd5;
+  --bubble-in:#ffffff;
+  --bubble-out:#dcf8c6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--creme); color: var(--escuro); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.75; }
+
+header { background: var(--escuro); padding: 28px 48px; display: flex; align-items: center; gap: 24px; }
+.header-text h1 { font-family: 'Trirong', serif; font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 2px; }
+.header-text p  { font-family: 'Trirong', serif; font-weight: 300; font-size: 22px; color: #F7F1E6; }
+
+.level-bar { background: var(--laranja); padding: 10px 48px; display: flex; gap: 28px; align-items: center; }
+.level-bar span { font-family: 'Trirong', serif; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(247,241,230,.8); }
+.level-bar strong { color: #fff; font-weight: 700; }
+
+.hero { background: linear-gradient(135deg, var(--escuro) 0%, #2E1A08 100%); padding: 48px 48px 40px; color: var(--creme); }
+.hero-label { font-family: 'Trirong', serif; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ouro); margin-bottom: 12px; }
+.hero h2 { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.3; margin-bottom: 14px; }
+.hero p { font-size: 15px; color: rgba(247,241,230,.78); max-width: 600px; line-height: 1.7; }
+.objectives { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+.obj-tag { background: rgba(224,152,10,.18); border: 1px solid rgba(224,152,10,.4); color: var(--ouro); font-family: 'Trirong', serif; font-size: 12px; padding: 5px 14px; border-radius: 20px; }
+
+main { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.section-title { font-family: 'Trirong', serif; font-weight: 800; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--laranja); margin: 44px 0 18px; display: flex; align-items: center; gap: 12px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--laranja); opacity: .3; }
+
+.card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,40,48,.07); }
+
+.cultural-note { background: var(--nevoa); border-left: 3px solid var(--laranja); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 22px; font-size: 14px; color: var(--cinza); font-style: italic; line-height: 1.6; }
+.cultural-note strong { font-style: normal; color: var(--terra); font-weight: 700; display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ── WhatsApp replica ── */
+.wpp-phone { background: var(--bg-wpp); border-radius: 16px; overflow: hidden; max-width: 420px; margin: 0 auto; box-shadow: 0 4px 24px rgba(0,0,0,.18); font-family: 'Helvetica Neue', Arial, sans-serif; }
+.wpp-header { background: var(--azul-wpp); padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+.wpp-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--verde-wpp); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.wpp-info { color: white; }
+.wpp-info .name { font-weight: 700; font-size: 15px; }
+.wpp-info .sub  { font-size: 12px; opacity: .8; }
+.wpp-body { padding: 12px 10px; display: flex; flex-direction: column; gap: 4px; max-height: 520px; overflow-y: auto; }
+.wpp-msg { max-width: 82%; border-radius: 8px; padding: 7px 10px 5px; position: relative; font-size: 14px; line-height: 1.45; }
+.wpp-in  { background: var(--bubble-in); border-radius: 0 8px 8px 8px; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,.13); }
+.wpp-out { background: var(--bubble-out); border-radius: 8px 0 8px 8px; align-self: flex-end; box-shadow: 0 1px 2px rgba(0,0,0,.13); }
+.wpp-sender { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+.wpp-meta { font-size: 11px; color: #aaa; text-align: right; margin-top: 2px; }
+.wpp-out .wpp-meta { color: #77a97c; }
+.wpp-date { text-align: center; margin: 6px 0; }
+.wpp-date span { background: rgba(255,255,255,.75); font-size: 12px; padding: 3px 10px; border-radius: 8px; color: #555; }
+mark.rv { background: rgba(200,101,26,.2); color: var(--terra); font-weight: 700; border-radius: 3px; padding: 1px 2px; }
+
+/* ── Verb explanation panels ── */
+.verb-panel { border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(30,40,48,.08); }
+.verb-panel-header { padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
+.verb-panel-header.levar  { background: #1B3E6E; }
+.verb-panel-header.trazer { background: #1E5C3A; }
+.verb-panel-header.pegar  { background: #6E3010; }
+.verb-icon { font-size: 28px; }
+.verb-name { font-family: 'Trirong', serif; font-size: 22px; font-weight: 700; color: white; }
+.verb-en   { font-family: 'Trirong', serif; font-size: 14px; font-style: italic; color: rgba(255,255,255,.75); }
+.verb-panel-body { background: white; padding: 20px 24px; }
+.verb-rule { font-size: 15px; color: #333; line-height: 1.65; margin-bottom: 16px; border-left: 3px solid; padding-left: 14px; }
+.verb-rule.levar  { border-color: #1B3E6E; }
+.verb-rule.trazer { border-color: #1E5C3A; }
+.verb-rule.pegar  { border-color: #6E3010; }
+.example-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.example-list li { font-size: 14.5px; line-height: 1.55; padding: 10px 14px; background: var(--nevoa); border-radius: 8px; }
+.example-list li strong { color: var(--terra); }
+.example-list li em { color: var(--cinza); font-size: 13px; display: block; margin-top: 2px; }
+
+/* ── Contrast table ── */
+.contrast-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.contrast-table th { padding: 12px 16px; text-align: left; font-family: 'Trirong', serif; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.contrast-table th:nth-child(1) { background: #e8e0f0; color: #4A3070; }
+.contrast-table th:nth-child(2) { background: #1B3E6E; color: white; }
+.contrast-table th:nth-child(3) { background: #1E5C3A; color: white; }
+.contrast-table th:nth-child(4) { background: #6E3010; color: white; }
+.contrast-table td { padding: 12px 16px; border-bottom: 1px solid #eee; vertical-align: top; }
+.contrast-table tr:last-child td { border-bottom: none; }
+.contrast-table tr:nth-child(even) td { background: #fafaf6; }
+.contrast-table td:nth-child(1) { color: var(--cinza); font-style: italic; font-size: 14px; }
+.contrast-table td:nth-child(2) { color: #1B3E6E; font-weight: 600; }
+.contrast-table td:nth-child(3) { color: #1E5C3A; font-weight: 600; }
+.contrast-table td:nth-child(4) { color: #6E3010; font-weight: 600; }
+
+/* ── Warning box ── */
+.warning-box { background: #FFF8E6; border: 1.5px solid #E0980A; border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+.warning-box .w-title { font-family: 'Trirong', serif; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--ouro); margin-bottom: 8px; }
+.warning-box ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.warning-box li { font-size: 14.5px; line-height: 1.55; padding-left: 20px; position: relative; }
+.warning-box li::before { content: '⚠'; position: absolute; left: 0; font-size: 12px; top: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-text">
+    <h1>Brazilian Portuguese Hub</h1>
+    <p>Levar, Trazer e Pegar</p>
+  </div>
+</header>
+
+<div class="level-bar">
+  <span>Nível <strong>A2 / B1</strong></span>
+  <span>·</span>
+  <span>Gênero <strong>Conversa de WhatsApp</strong></span>
+  <span>·</span>
+  <span>Função <strong>F6 · Fazer pedidos e combinar tarefas</strong></span>
+</div>
+
+<div class="hero">
+  <div class="hero-label">Material de Referência</div>
+  <h2>Levar, Trazer e Pegar</h2>
+  <p>These three verbs are among the most common in Brazilian daily life — and among the most confusing for English speakers. "Take," "bring," and "get" don't map directly onto <em>levar</em>, <em>trazer</em>, and <em>pegar</em>. This material will help you understand how Brazilians actually use them.</p>
+  <div class="objectives">
+    <span class="obj-tag">Distinguish levar vs. trazer (direction of movement)</span>
+    <span class="obj-tag">Understand the many uses of pegar</span>
+    <span class="obj-tag">Avoid the most common English-speaker errors</span>
+  </div>
+</div>
+
+<main>
+
+  <p class="section-title">O Texto — Grupo de WhatsApp</p>
+
+  <div class="card">
+    <div class="cultural-note">
+      <strong>Contexto cultural</strong>
+      O WhatsApp é o principal meio de comunicação no Brasil — ultrapassa e-mail, SMS e ligação na maioria das famílias e grupos de amigos. Grupos de família para organizar festas, compras e compromissos são absolutíssimamente comuns. Este grupo está organizando o aniversário da avó de Ana, Lucas e Beatriz — e os três verbos aparecem de forma natural ao longo da conversa.
+    </div>
+
+    <div class="wpp-phone">
+      <div class="wpp-header">
+        <div class="wpp-avatar">🎂</div>
+        <div class="wpp-info">
+          <div class="name">Aniversário da Vovó 🎉</div>
+          <div class="sub">Ana, Lucas, Beatriz, Marcos</div>
+        </div>
+      </div>
+      <div class="wpp-body">
+        <div class="wpp-date"><span>Hoje</span></div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#c0392b;">Lucas</div>
+          Gente, quem vai <mark class="rv">pegar</mark> o bolo na confeitaria? Fecha às 18h ⏰
+          <div class="wpp-meta">09:14 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-out">
+          <div class="wpp-sender" style="color:#27ae60;">Ana</div>
+          Eu posso <mark class="rv">pegar</mark>! Vou passar lá às 17h
+          <div class="wpp-meta">09:16 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#2980b9;">Marcos</div>
+          Ana, você pode <mark class="rv">levar</mark> a Júlia pra escola antes? Eu tenho reunião às 8h
+          <div class="wpp-meta">09:18 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-out">
+          <div class="wpp-sender" style="color:#27ae60;">Ana</div>
+          Tá bom. E as bebidas? Alguém <mark class="rv">traz</mark>?
+          <div class="wpp-meta">09:19 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#c0392b;">Lucas</div>
+          Já <mark class="rv">peguei</mark> os refrigerantes no mercado ontem. Mas falta gelo 🧊
+          <div class="wpp-meta">09:21 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#2980b9;">Marcos</div>
+          Eu <mark class="rv">pego</mark> o gelo na hora. Bê, você <mark class="rv">traz</mark> a salada de frutas?
+          <div class="wpp-meta">09:23 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#8e44ad;">Beatriz</div>
+          <mark class="rv">Trago</mark> sim! Vou <mark class="rv">trazer</mark> também aquele queijo que a vovó adora 🧀
+          <div class="wpp-meta">09:25 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-out">
+          <div class="wpp-sender" style="color:#27ae60;">Ana</div>
+          Perfeito 💚 Alguém pode <mark class="rv">levar</mark> a vovó pra cá? Ela não tem carro
+          <div class="wpp-meta">09:27 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#c0392b;">Lucas</div>
+          Eu busco ela às 15h. Ah, alguém <mark class="rv">traz</mark> guardanapos? Acabou aqui em casa
+          <div class="wpp-meta">09:29 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#2980b9;">Marcos</div>
+          <mark class="rv">Pego</mark> no caminho. A que horas começa?
+          <div class="wpp-meta">09:30 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-out">
+          <div class="wpp-sender" style="color:#27ae60;">Ana</div>
+          16h! Não esquece de <mark class="rv">trazer</mark> o presente, Marcos 😅
+          <div class="wpp-meta">09:31 ✓✓</div>
+        </div>
+
+        <div class="wpp-msg wpp-in">
+          <div class="wpp-sender" style="color:#2980b9;">Marcos</div>
+          Não esqueci não! Já comprei. Vou <mark class="rv">levar</mark> tudo no carro 😄
+          <div class="wpp-meta">09:33 ✓✓</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <p class="section-title">Os Três Verbos — Regras e Contextos</p>
+
+  <!-- LEVAR -->
+  <div class="verb-panel">
+    <div class="verb-panel-header levar">
+      <div class="verb-icon">→</div>
+      <div>
+        <div class="verb-name">levar</div>
+        <div class="verb-en">to take (away from here, towards there)</div>
+      </div>
+    </div>
+    <div class="verb-panel-body">
+      <p class="verb-rule levar"><strong>Levar</strong> = movement <strong>away from the speaker</strong> towards another place. Think of it as "take away." The speaker is not at the destination.</p>
+      <ul class="example-list">
+        <li><strong>Você pode levar a Júlia pra escola?</strong><em>Can you take Júlia to school? (you are here, school is elsewhere)</em></li>
+        <li><strong>Vou levar tudo no carro.</strong><em>I'll take everything in the car. (taking things away from here)</em></li>
+        <li><strong>Ela levou a vovó para a festa.</strong><em>She took grandma to the party. (from grandma's place → party)</em></li>
+        <li><strong>Não leva guarda-chuva — não vai chover.</strong><em>Don't take an umbrella — it's not going to rain.</em></li>
+        <li><strong>O time levou o troféu pra casa.</strong><em>The team took the trophy home.</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TRAZER -->
+  <div class="verb-panel">
+    <div class="verb-panel-header trazer">
+      <div class="verb-icon">←</div>
+      <div>
+        <div class="verb-name">trazer</div>
+        <div class="verb-en">to bring (towards the speaker, towards here)</div>
+      </div>
+    </div>
+    <div class="verb-panel-body">
+      <p class="verb-rule trazer"><strong>Trazer</strong> = movement <strong>towards the speaker's location</strong>. Think of it as "bring here." The speaker is at the destination, or is asking someone to come to them.</p>
+      <ul class="example-list">
+        <li><strong>Trago a salada de frutas.</strong><em>I'll bring the fruit salad. (bringing it to the party = to where everyone will be)</em></li>
+        <li><strong>Você traz guardanapos?</strong><em>Can you bring napkins? (to here, where I am)</em></li>
+        <li><strong>Trouxe presentes do Brasil.</strong><em>I brought presents from Brazil. (brought here, to where you are now)</em></li>
+        <li><strong>Pode trazer a conta?</strong><em>Can you bring the bill? (at a restaurant — the waiter comes to you)</em></li>
+        <li><strong>Traz aquele queijo que a vovó adora.</strong><em>Bring that cheese grandma loves. (bring it to the party)</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PEGAR -->
+  <div class="verb-panel">
+    <div class="verb-panel-header pegar">
+      <div class="verb-icon">✋</div>
+      <div>
+        <div class="verb-name">pegar</div>
+        <div class="verb-en">to grab / pick up / get / take / catch</div>
+      </div>
+    </div>
+    <div class="verb-panel-body">
+      <p class="verb-rule pegar"><strong>Pegar</strong> is not about direction — it's about <strong>obtaining, grabbing, or picking something up</strong>. It has several uses that English covers with different verbs.</p>
+      <ul class="example-list">
+        <li><strong>Vou pegar o bolo na confeitaria.</strong><em>I'll pick up the cake at the bakery. (go get it)</em></li>
+        <li><strong>Peguei os refrigerantes no mercado.</strong><em>I got / picked up the sodas at the supermarket.</em></li>
+        <li><strong>Pego o gelo na hora.</strong><em>I'll grab the ice on the way / at the time.</em></li>
+        <li><strong>Pega as chaves na gaveta.</strong><em>Grab the keys from the drawer.</em></li>
+        <li><strong>Vou pegar um Uber.</strong><em>I'll take / get an Uber. (use transportation)</em></li>
+        <li><strong>Pega o ônibus na esquina.</strong><em>Take the bus at the corner. (board transportation)</em></li>
+        <li><strong>Peguei um resfriado.</strong><em>I caught a cold. (contract an illness)</em></li>
+        <li><strong>Você pode pegar as crianças na escola?</strong><em>Can you pick the kids up from school?</em></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <p class="section-title">Comparação — Inglês vs. Português</p>
+
+  <div class="card">
+    <p style="font-size:14.5px;color:var(--cinza);margin-bottom:18px;line-height:1.6;">The same English verb can require different Portuguese verbs depending on the direction of movement or the type of action.</p>
+    <table class="contrast-table">
+      <thead>
+        <tr>
+          <th>Situação em inglês</th>
+          <th>levar</th>
+          <th>trazer</th>
+          <th>pegar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Take the kids to school"</td>
+          <td>Leva as crianças pra escola ✓</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>"Bring something to the party"</td>
+          <td>—</td>
+          <td>Traz alguma coisa pra festa ✓</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>"Take / get an Uber"</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Pega um Uber ✓</td>
+        </tr>
+        <tr>
+          <td>"Pick up the cake"</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Pega o bolo ✓</td>
+        </tr>
+        <tr>
+          <td>"Pick up the kids from school"</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Pega as crianças na escola ✓</td>
+        </tr>
+        <tr>
+          <td>"Bring the bill" (at a restaurant)</td>
+          <td>—</td>
+          <td>Traz a conta ✓</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>"Take the umbrella" (leaving home)</td>
+          <td>Leva o guarda-chuva ✓</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>"Catch a cold"</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Pegar um resfriado ✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <p class="section-title">Atenção — Erros Comuns</p>
+
+  <div class="warning-box">
+    <div class="w-title">⚠ Cuidado</div>
+    <ul>
+      <li><strong>"Bring" is not always trazer.</strong> When you take something <em>away</em> from where you are, use <em>levar</em>: "I'll bring my car" (= I'll bring it to you) → <em>Vou levar o meu carro</em> (not trazer, if you're driving away to meet someone).</li>
+      <li><strong>"Take" is not always levar.</strong> "Take the bus" → <em>pegar o ônibus</em> (not levar — you're boarding, not transporting the bus).</li>
+      <li><strong>"Get" is almost always pegar.</strong> "Get a taxi," "get the groceries," "get a cold" → <em>pegar um táxi</em>, <em>pegar as compras</em>, <em>pegar um resfriado</em>.</li>
+      <li><strong>Levar vs. trazer depends on YOUR position.</strong> If you're at the party asking someone to come: <em>traz guardanapos</em>. If you're at home about to leave: <em>levo guardanapos</em>.</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:32px;font-size:12.5px;color:var(--cinza);text-align:center;">Material elaborado para fins didáticos · Brazilian Portuguese Hub · brazilianportuguesehub.com</p>
+
+</main>
+</body>
+</html>
