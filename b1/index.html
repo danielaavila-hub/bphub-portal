@@ -389,7 +389,8 @@
 
 <script>
   (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
-  function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
+  (function(){if(localStorage.getItem('bphub_auth')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
+  function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){localStorage.setItem('bphub_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
   document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
   var cf='all',cs='';
   function filterCat(cat,btn){cf=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
