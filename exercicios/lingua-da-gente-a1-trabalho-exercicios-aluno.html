@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="version" content="1.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Você trabalha em que? | Iniciante 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --giz:#FCF5EB; --baunilha:#FDE7C4; --musgo:#3C3C21; --floresta:#4E551D;
+      --terracota:#D36D29; --telha:#A1441D; --rosa-cha:#FFD8C5; --goiaba:#FCA290;
+      --ouro:#FFB94A; --erva-doce:#A6B28A; --pitomba:#967E63; --nanquim:#000;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);font-size:15px;line-height:1.6}
+    .portal-header{background:var(--floresta);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .portal-header .logo{height:34px;display:block}
+    .portal-header .back{color:#fff;text-decoration:none;font-size:13px;font-weight:700;opacity:.8;transition:opacity .2s}
+    .portal-header .back:hover{opacity:1}
+    .level-bar{background:var(--musgo);color:#fff;padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    .badge{background:var(--terracota);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em}
+    .container{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+    .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .intro-card{background:var(--floresta);color:#fff}
+    .intro-card h1{font-size:1.7rem;font-weight:800;margin-bottom:6px}
+    .fonte{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:8px}
+    .section-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin:28px 0 10px}
+    .card-title{font-size:.9rem;font-weight:800;color:var(--floresta);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
+    .instr{background:var(--baunilha);border-radius:8px;padding:12px 16px;font-size:.85rem;margin-bottom:14px;color:#555}
+    .audio-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+    .audio-embed iframe{width:100%;border-radius:10px;border:none;display:block}
+    .audio-link{font-size:.8rem;color:#999;margin-top:6px}
+    .audio-link a{color:var(--terracota);font-weight:600;text-decoration:none}
+    .phon-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:12px 16px;font-size:.85rem;margin-top:16px;color:#444}
+    .dialogue-box{background:var(--giz);border-radius:10px;padding:16px 20px;margin:14px 0}
+    .dialogue-line{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+    .dialogue-line:last-child{margin-bottom:0}
+    .speaker{font-weight:800;color:var(--terracota);min-width:28px;font-size:.9rem}
+    .line-pt{font-weight:600;font-size:.95rem}
+    .line-en{font-size:.8rem;color:#888;font-style:italic}
+    .cult-box{background:#fff8ee;border:1px solid var(--ouro);border-radius:8px;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#555}
+    .cult-box strong{color:var(--terracota)}
+    .gram-box{background:#eef3fb;border-left:4px solid #5a8fc0;border-radius:0 8px 8px 0;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#333}
+    .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+    .gram-box th{background:#265B8B;color:#fff;padding:6px 10px;text-align:left;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase}
+    .gram-box td{padding:7px 10px;border-bottom:1px solid #dde6f3}
+    .gram-box tr:last-child td{border-bottom:none}
+    .gram-box .label{font-weight:700;color:#265B8B}
+    .gram-box .no{color:#b71c1c;text-decoration:line-through}
+    .gram-box .yes{color:#2e7d32;font-weight:700}
+
+    .ex-block{margin-bottom:20px}
+    .gap-sent{margin-bottom:10px;font-size:.95rem;line-height:2.2}
+    .gap-input{border:none;border-bottom:2px solid var(--terracota);background:transparent;font-family:'Manrope',sans-serif;font-size:.95rem;width:160px;padding:2px 4px;color:var(--nanquim);outline:none}
+    .gap-input:focus{border-bottom-color:var(--floresta)}
+    .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;padding:12px;background:var(--baunilha);border-radius:8px}
+    .word-bank span{background:#fff;border:1px solid var(--erva-doce);border-radius:20px;padding:4px 12px;font-size:.85rem;font-weight:600;cursor:default}
+    .check-btn{background:var(--floresta);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:8px;transition:background .2s}
+    .check-btn:hover{background:var(--musgo)}
+    .feedback{font-size:.85rem;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:6px;display:none}
+    .feedback.ok{background:#e8f5e9;color:#2e7d32}
+    .feedback.err{background:#fdecea;color:#b71c1c}
+    .match-table{width:100%;border-collapse:collapse;margin:10px 0}
+    .match-table td{padding:8px 10px;font-size:.9rem;vertical-align:middle}
+    .match-table .col-a{font-weight:700;color:var(--musgo);white-space:nowrap;padding-right:16px}
+    .match-table select{font-family:'Manrope',sans-serif;font-size:.85rem;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;min-width:160px}
+    .radio-group{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+    .radio-group label{display:flex;align-items:center;gap:10px;font-size:.9rem;cursor:pointer;padding:8px 12px;border-radius:8px;border:1.5px solid #ddd;transition:border-color .2s}
+    .radio-group label:hover{border-color:var(--terracota)}
+    .radio-group input[type=radio]{accent-color:var(--terracota)}
+    .prod-box{background:var(--giz);border-radius:10px;padding:16px;margin:12px 0}
+    .prod-box p{font-size:.9rem;margin-bottom:10px;color:#444}
+    .prod-box textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px;font-family:'Manrope',sans-serif;font-size:.9rem;resize:vertical;min-height:80px;color:var(--nanquim)}
+    .page-footer{text-align:center;padding:28px 24px;background:var(--musgo)}
+    .page-footer a{display:inline-block;opacity:.85;transition:opacity .2s}
+    .page-footer a:hover{opacity:1}
+    .series-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+    .series-name{font-size:.82rem;color:var(--floresta);font-weight:600;letter-spacing:.02em}
+    .ep-badge{background:var(--terracota);color:#fff;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  </style>
+</head>
+<body>
+
+<header class="portal-header">
+  <img class="logo" src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+  <a class="back" href="../a1/index.html">← Iniciante 1</a>
+</header>
+<div class="level-bar">
+  <span>Iniciante 1 — A1</span>
+  <span class="badge">Episódio 9</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Você trabalha em que?</h1>
+    <div class="series-row">
+      <span class="series-name">Língua da Gente</span>
+      <span class="ep-badge">Episódio 9</span>
+    </div>
+    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin</div>
+  </div>
+
+  <!-- AUDIO -->
+  <p class="section-title">🎧 Listen</p>
+  <div class="card">
+    <div class="card-title">Podcast Episode</div>
+    <div class="audio-label">Lesson Audio</div>
+    <div class="audio-embed">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/beginning-09-what-do-you-do-for-work/id862545884?i=1000347351592"></iframe>
+    </div>
+    <p class="audio-link">Can't hear it? <a href="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-beg09-lesson.mp3" target="_blank">Download MP3 ↗</a></p>
+  </div>
+
+  <!-- DIALOGUE -->
+  <p class="section-title">💬 Dialogue</p>
+  <div class="card">
+    <div class="card-title">Você trabalha em que?</div>
+    <div class="instr">Read through the dialogue. Then listen again and follow along.</div>
+    <div class="dialogue-box">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Paulo, você trabalha em que?</div>
+          <div class="line-en">Paulo, what do you do for work?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Sou espião do governo.</div>
+          <div class="line-en">I'm a government spy.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Você não é jornalista, não?</div>
+          <div class="line-en">You aren't a journalist, are you?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Cuidado, vou ter que te matar.</div>
+          <div class="line-en">Careful — I might have to kill you.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grammar: SER + profissão -->
+    <div class="gram-box">
+      📌 <strong>SER + profissão — no article!</strong><br>
+      In Brazilian Portuguese, you state your profession with <em>ser</em> — but <strong>without</strong> an indefinite article:
+      <table>
+        <tr><th>English</th><th class="no">❌ Wrong in BP</th><th class="yes">✅ Correct in BP</th></tr>
+        <tr><td>I'm a spy.</td><td class="no">Sou <u>um</u> espião.</td><td class="yes">Sou espião.</td></tr>
+        <tr><td>I'm a journalist.</td><td class="no">Sou <u>uma</u> jornalista.</td><td class="yes">Sou jornalista.</td></tr>
+        <tr><td>She's a doctor.</td><td class="no">Ela é <u>uma</u> médica.</td><td class="yes">Ela é médica.</td></tr>
+        <tr><td>He's a lawyer.</td><td class="no">Ele é <u>um</u> advogado.</td><td class="yes">Ele é advogado.</td></tr>
+      </table>
+      The article <em>um/uma</em> only appears if you add a qualifier: <em>"Ele é <strong>um</strong> bom advogado."</em> (He's a <em>good</em> lawyer.)
+    </div>
+
+    <!-- Grammar: Você trabalha em que? -->
+    <div class="gram-box" style="margin-top:14px">
+      📌 <strong>Two ways to ask about profession:</strong>
+      <table>
+        <tr><th>Expression</th><th>Meaning</th><th>Register</th></tr>
+        <tr><td class="label">Você trabalha em que?</td><td>What do you do for work?</td><td>Informal, very common</td></tr>
+        <tr><td class="label">O que você faz?</td><td>What do you do?</td><td>Neutral / everyday</td></tr>
+        <tr><td class="label">Qual é a sua profissão?</td><td>What is your profession?</td><td>More formal</td></tr>
+      </table>
+    </div>
+
+    <!-- Grammar: Negation dupla -->
+    <div class="gram-box" style="margin-top:14px">
+      📌 <strong>Double negative: "Você não é X, não?"</strong><br>
+      Brazilian Portuguese often uses a tag <em>"não?"</em> at the end of a negative sentence to seek confirmation — similar to "right?" or "are you?" in English. The "não" appears twice but it's not a mistake:<br><br>
+      <em>"Você <strong>não</strong> é jornalista, <strong>não</strong>?"</em> = You aren't a journalist, are you?<br><br>
+      You also hear: <em>"Você <strong>não</strong> trabalha aqui, <strong>não é</strong>?"</em> — same idea, slightly softer.
+    </div>
+
+    <div class="phon-box">
+      🗣️ <strong>Ponto fonológico — "trabalha em que":</strong> In connected speech, the phrase runs together: <em>tra-ba-lha-em-que</em> can sound like <em>trabalhem que</em> or even <em>trabalh'em que</em> as the final vowel of <em>trabalha</em> blends with the <em>e</em> of <em>em</em>. Listen for this linking between words — it's very typical of natural Brazilian speech.
+    </div>
+
+    <div class="cult-box" style="margin-top:14px">
+      💼 <strong>Profissão no Brasil:</strong> Asking someone <em>"Você trabalha em que?"</em> is very natural in Brazil — not rude at all. Brazilians often identify themselves closely with their profession. Note that <em>espião</em> (spy) is Paulo's joke here — the real lesson is how to say your actual profession simply: <em>Sou engenheiro. Sou professora. Sou médico. Sou advogada.</em> No fuss, no article.
+    </div>
+  </div>
+
+  <!-- EXERCISES -->
+  <p class="section-title">✏️ Exercises</p>
+
+  <!-- Ex 1: True / False -->
+  <div class="card">
+    <div class="card-title">Exercise 1 — True or False?</div>
+    <div class="instr">Based on the dialogue, choose the correct answer.</div>
+    <div class="ex-block">
+
+      <p style="font-size:.9rem;margin-bottom:8px"><strong>1.</strong> Person A asks Paulo where he lives.</p>
+      <div class="radio-group" id="tf1">
+        <label><input type="radio" name="tf1" value="T"> True</label>
+        <label><input type="radio" name="tf1" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>2.</strong> Paulo says he is a government spy (as a joke).</p>
+      <div class="radio-group" id="tf2">
+        <label><input type="radio" name="tf2" value="T"> True</label>
+        <label><input type="radio" name="tf2" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>3.</strong> Person A thinks Paulo might be a journalist.</p>
+      <div class="radio-group" id="tf3">
+        <label><input type="radio" name="tf3" value="T"> True</label>
+        <label><input type="radio" name="tf3" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>4.</strong> Paulo says he will have to call someone.</p>
+      <div class="radio-group" id="tf4">
+        <label><input type="radio" name="tf4" value="T"> True</label>
+        <label><input type="radio" name="tf4" value="F"> False</label>
+      </div>
+
+      <button class="check-btn" onclick="checkTF()">Check answers</button>
+      <div class="feedback" id="fb-tf"></div>
+    </div>
+  </div>
+
+  <!-- Ex 2: Gap fill -->
+  <div class="card">
+    <div class="card-title">Exercise 2 — Fill in the blanks</div>
+    <div class="instr">Complete each sentence with the correct word or expression from the word bank.</div>
+    <div class="word-bank">
+      <span>trabalha em que</span><span>sou</span><span>não é</span><span>cuidado</span><span>vou ter que</span>
+    </div>
+    <div class="ex-block">
+      <div class="gap-sent">1. Paula, você <input class="gap-input" id="g1" type="text" autocomplete="off" placeholder="…">?</div>
+      <div class="gap-sent">2. <input class="gap-input" id="g2" type="text" autocomplete="off" placeholder="…"> médica.</div>
+      <div class="gap-sent">3. Você <input class="gap-input" id="g3" type="text" autocomplete="off" placeholder="…"> advogado, não?</div>
+      <div class="gap-sent">4. <input class="gap-input" id="g4" type="text" autocomplete="off" placeholder="…">, essa rua é perigosa!</div>
+      <div class="gap-sent">5. <input class="gap-input" id="g5" type="text" autocomplete="off" placeholder="…"> trabalhar amanhã cedo.</div>
+      <button class="check-btn" onclick="checkGaps()">Check answers</button>
+      <div class="feedback" id="fb-gaps"></div>
+    </div>
+  </div>
+
+  <!-- Ex 3: SER + profissão — article or no article? -->
+  <div class="card">
+    <div class="card-title">Exercise 3 — "Sou médico" or "Sou um médico"?</div>
+    <div class="instr">Choose the correct sentence in Brazilian Portuguese. Remember: no article when stating your profession — unless you add a qualifier!</div>
+    <div class="ex-block">
+
+      <p style="font-size:.9rem;margin-bottom:8px"><strong>1.</strong> I'm a doctor.</p>
+      <div class="radio-group" id="p1">
+        <label><input type="radio" name="p1" value="A"> Sou um médico.</label>
+        <label><input type="radio" name="p1" value="B"> Sou médico.</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>2.</strong> She's a really good lawyer. (qualifier present)</p>
+      <div class="radio-group" id="p2">
+        <label><input type="radio" name="p2" value="A"> Ela é uma boa advogada.</label>
+        <label><input type="radio" name="p2" value="B"> Ela é boa advogada.</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>3.</strong> He's an engineer.</p>
+      <div class="radio-group" id="p3">
+        <label><input type="radio" name="p3" value="A"> Ele é um engenheiro.</label>
+        <label><input type="radio" name="p3" value="B"> Ele é engenheiro.</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>4.</strong> I'm a journalist.</p>
+      <div class="radio-group" id="p4">
+        <label><input type="radio" name="p4" value="A"> Sou uma jornalista.</label>
+        <label><input type="radio" name="p4" value="B"> Sou jornalista.</label>
+      </div>
+
+      <button class="check-btn" onclick="checkProfession()">Check answers</button>
+      <div class="feedback" id="fb-prof"></div>
+    </div>
+  </div>
+
+  <!-- Ex 4: Production -->
+  <div class="card">
+    <div class="card-title">Exercise 4 — Your turn</div>
+    <div class="instr">Answer in Portuguese. Use the vocabulary from this episode.</div>
+    <div class="prod-box">
+      <p><strong>1.</strong> What do you do for work? Answer using <em>Sou ___</em>. (No article!)</p>
+      <textarea placeholder="Sou ___."></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>2.</strong> Write a mini-dialogue asking a colleague what they do. Use <em>"Você trabalha em que?"</em> and <em>"Sou ___"</em> in the reply (at least 3 lines).</p>
+      <textarea placeholder="A: Você trabalha em que?\nB: Sou…\nA: …"></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>3.</strong> Use the double negative tag <em>"Você não é ___, não?"</em> in a sentence about someone you know or a fictional person.</p>
+      <textarea placeholder="Você não é ___, não?"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <a href="https://brazilianportuguesehub.com" target="_blank">
+    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub" style="height:32px">
+  </a>
+</footer>
+
+<script>
+  function norm(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+  function checkTF(){
+    const ans = {tf1:'F', tf2:'T', tf3:'T', tf4:'F'};
+    let ok = 0;
+    for(const name in ans){
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      if(sel && sel.value === ans[name]) ok++;
+    }
+    const fb = document.getElementById('fb-tf');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ Perfect! All 4 correct.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4 correct. Read the dialogue again and try once more.`; }
+  }
+
+  function checkGaps(){
+    const ans = {
+      g1:'trabalha em que', g2:'sou', g3:'nao e', g4:'cuidado', g5:'vou ter que'
+    };
+    let ok = 0;
+    for(const id in ans){ if(norm(document.getElementById(id).value)===ans[id]) ok++; }
+    const fb = document.getElementById('fb-gaps');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ All correct! Great work.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5 correct. Try again!`; }
+  }
+
+  function checkProfession(){
+    // 1: B (no article), 2: A (qualifier present = article OK), 3: B (no article), 4: B (no article)
+    const ans = {p1:'B', p2:'A', p3:'B', p4:'B'};
+    let ok = 0;
+    for(const name in ans){
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      if(sel && sel.value === ans[name]) ok++;
+    }
+    const fb = document.getElementById('fb-prof');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ All correct! Remember: article only appears with a qualifier (bom, ótimo, etc.).'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4. Tip: professions drop the article — unless you add a word like "bom" or "ótima".`; }
+  }
+</script>
+
+</body>
+</html>
