@@ -794,7 +794,13 @@
       if (students[name] && students[name].password === pass) {
         err.style.display = 'none';
         localStorage.setItem('bphub_auth','1');
-        window.location.href = students[name].page + '#' + pass;
+        localStorage.setItem('bphub_student_name', name);
+        // Teachers go directly to their portal; students go to level-selection home
+        if (students[name].page.startsWith('professora/')) {
+          window.location.href = students[name].page;
+        } else {
+          window.location.href = 'student-home.html';
+        }
       } else {
         err.style.display = 'block';
       }
