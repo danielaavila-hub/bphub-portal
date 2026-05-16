@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="version" content="1.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vamos ao cinema? | Iniciante 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --giz:#FCF5EB; --baunilha:#FDE7C4; --musgo:#3C3C21; --floresta:#4E551D;
+      --terracota:#D36D29; --telha:#A1441D; --rosa-cha:#FFD8C5; --goiaba:#FCA290;
+      --ouro:#FFB94A; --erva-doce:#A6B28A; --pitomba:#967E63; --nanquim:#000;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);font-size:15px;line-height:1.6}
+    .portal-header{background:var(--floresta);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .portal-header .logo{height:34px;display:block}
+    .portal-header .back{color:#fff;text-decoration:none;font-size:13px;font-weight:700;opacity:.8;transition:opacity .2s}
+    .portal-header .back:hover{opacity:1}
+    .level-bar{background:var(--musgo);color:#fff;padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    .badge{background:var(--terracota);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em}
+    .container{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+    .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .intro-card{background:var(--floresta);color:#fff}
+    .intro-card h1{font-size:1.7rem;font-weight:800;margin-bottom:6px}
+    .subtitle{font-size:.85rem;color:var(--erva-doce);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+    .fonte{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:8px}
+    .fonte em{font-style:italic}
+    .section-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin:28px 0 10px}
+    .card-title{font-size:.9rem;font-weight:800;color:var(--floresta);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
+    .instr{background:var(--baunilha);border-radius:8px;padding:12px 16px;font-size:.85rem;margin-bottom:14px;color:#555}
+    .audio-section{margin:16px 0}
+    .audio-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+    .audio-embed iframe{width:100%;border-radius:10px;border:none;display:block}
+    .audio-link{font-size:.8rem;color:#999;margin-top:6px}
+    .audio-link a{color:var(--terracota);font-weight:600;text-decoration:none}
+    .phon-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:12px 16px;font-size:.85rem;margin-top:16px;color:#444}
+    .dialogue-box{background:var(--giz);border-radius:10px;padding:16px 20px;margin:14px 0}
+    .dialogue-line{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+    .dialogue-line:last-child{margin-bottom:0}
+    .speaker{font-weight:800;color:var(--terracota);min-width:28px;font-size:.9rem}
+    .line-pt{font-weight:600;font-size:.95rem}
+    .line-en{font-size:.8rem;color:#888;font-style:italic}
+    .cult-box{background:#fff8ee;border:1px solid var(--ouro);border-radius:8px;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#555}
+    .cult-box strong{color:var(--terracota)}
+
+    /* Exercises */
+    .ex-block{margin-bottom:20px}
+    .ex-title{font-weight:800;font-size:.85rem;color:var(--musgo);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+    .gap-sent{margin-bottom:10px;font-size:.95rem;line-height:2}
+    .gap-input{border:none;border-bottom:2px solid var(--terracota);background:transparent;font-family:'Manrope',sans-serif;font-size:.95rem;width:130px;padding:2px 4px;color:var(--nanquim);outline:none}
+    .gap-input:focus{border-bottom-color:var(--floresta)}
+    .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;padding:12px;background:var(--baunilha);border-radius:8px}
+    .word-bank span{background:#fff;border:1px solid var(--erva-doce);border-radius:20px;padding:4px 12px;font-size:.85rem;font-weight:600;cursor:default}
+    .check-btn{background:var(--floresta);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:8px;transition:background .2s}
+    .check-btn:hover{background:var(--musgo)}
+    .feedback{font-size:.85rem;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:6px;display:none}
+    .feedback.ok{background:#e8f5e9;color:#2e7d32}
+    .feedback.err{background:#fdecea;color:#b71c1c}
+
+    /* Matching */
+    .match-table{width:100%;border-collapse:collapse;margin:10px 0}
+    .match-table td{padding:8px 10px;font-size:.9rem;vertical-align:middle}
+    .match-table .col-a{font-weight:700;color:var(--musgo);white-space:nowrap}
+    .match-table select{font-family:'Manrope',sans-serif;font-size:.85rem;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;min-width:220px}
+
+    /* IR table */
+    .verb-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+    .verb-table th{background:var(--floresta);color:#fff;padding:8px 12px;text-align:left;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+    .verb-table td{padding:8px 12px;border-bottom:1px solid #eee}
+    .verb-table tr:last-child td{border-bottom:none}
+    .verb-table .pronoun{font-weight:700;color:var(--musgo)}
+    .verb-input{border:none;border-bottom:2px solid var(--terracota);background:transparent;font-family:'Manrope',sans-serif;font-size:.9rem;width:90px;padding:2px 4px;color:var(--nanquim);outline:none}
+
+    /* Production */
+    .prod-box{background:var(--giz);border-radius:10px;padding:16px;margin:12px 0}
+    .prod-box p{font-size:.9rem;margin-bottom:10px;color:#444}
+    .prod-box textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px;font-family:'Manrope',sans-serif;font-size:.9rem;resize:vertical;min-height:90px;color:var(--nanquim)}
+
+    .page-footer{text-align:center;padding:28px 24px;background:var(--musgo)}
+    .page-footer a{display:inline-block;opacity:.85;transition:opacity .2s}
+    .page-footer a:hover{opacity:1}
+    .series-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+    .series-name{font-size:.82rem;color:var(--floresta);font-weight:600;letter-spacing:.02em}
+    .ep-badge{background:var(--terracota);color:#fff;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="portal-header">
+  <img class="logo" src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+  <a class="back" href="../a1/index.html">← Iniciante 1</a>
+</header>
+<div class="level-bar">
+  <span>Iniciante 1 — A1</span>
+  <span class="badge">Episódio 6</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO CARD -->
+  <div class="card intro-card">
+    <h1>Vamos ao cinema?</h1>
+    <div class="series-row">
+      <span class="series-name">Língua da Gente</span>
+      <span class="ep-badge">Episódio 6</span>
+    </div>
+    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin</div>
+  </div>
+
+  <!-- AUDIO -->
+  <p class="section-title">🎧 Listen</p>
+  <div class="card">
+    <div class="card-title">Podcast Episode</div>
+    <div class="audio-section">
+      <div class="audio-label">Lesson Audio</div>
+      <div class="audio-embed">
+        <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/beginning-06-going-to-the-movies/id862545884?i=1000347351608"></iframe>
+      </div>
+      <p class="audio-link">Can't hear it? <a href="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-beg06-lesson.mp3" target="_blank">Download MP3 ↗</a></p>
+    </div>
+  </div>
+
+  <!-- DIALOGUE -->
+  <p class="section-title">💬 Dialogue</p>
+  <div class="card">
+    <div class="card-title">Vamos ao cinema?</div>
+    <div class="instr">Read through the dialogue. Then listen again and follow along.</div>
+    <div class="dialogue-box">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Quando vocês vão ao cinema?</div>
+          <div class="line-en">When are you (all) going to the movies?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Daqui a pouco, você quer ir?</div>
+          <div class="line-en">Pretty soon — do you want to go?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Não sei, a Susana também vai?</div>
+          <div class="line-en">I don't know — is Susana going too?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Vai sim.</div>
+          <div class="line-en">Yes, she is.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Ah, então eu também vou.</div>
+          <div class="line-en">Oh, then I'll go too.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phon-box">
+      🗣️ <strong>Ponto fonológico — Nasal "-ão":</strong> Notice how <em>vão</em> and <em>então</em> end in a nasal sound that doesn't exist in English. Say it slowly: <em>vã-oo</em> with your mouth nearly closed. It's the same vowel in <em>não, irmão, pão</em>.
+    </div>
+
+    <div class="cult-box" style="margin-top:14px">
+      🎬 <strong>Cinema no Brasil:</strong> Going to the movies (<em>ir ao cinema</em>) is very popular in Brazil's big cities. Cinemas usually show international films dubbed (<em>dublado</em>) or subtitled (<em>legendado</em>) — Brazilians often have a strong preference for one or the other! Snacks include <em>pipoca</em> (popcorn) and <em>refrigerante</em> (soda), just like everywhere else.
+    </div>
+  </div>
+
+  <!-- EXERCISE 1: Comprehension -->
+  <p class="section-title">✏️ Exercises</p>
+  <div class="card">
+    <div class="card-title">Exercise 1 — What does it mean?</div>
+    <div class="instr">Match each Portuguese phrase to its English meaning.</div>
+    <div class="ex-block">
+      <table class="match-table">
+        <tr>
+          <td class="col-a">1. Quando vocês vão?</td>
+          <td><select id="m1">
+            <option value="">— choose —</option>
+            <option value="a">Yes, she is.</option>
+            <option value="b">Pretty soon.</option>
+            <option value="c">When are you (all) going?</option>
+            <option value="d">Do you want to go?</option>
+            <option value="e">Then I'll go too.</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">2. Daqui a pouco.</td>
+          <td><select id="m2">
+            <option value="">— choose —</option>
+            <option value="a">Yes, she is.</option>
+            <option value="b">Pretty soon.</option>
+            <option value="c">When are you (all) going?</option>
+            <option value="d">Do you want to go?</option>
+            <option value="e">Then I'll go too.</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">3. Você quer ir?</td>
+          <td><select id="m3">
+            <option value="">— choose —</option>
+            <option value="a">Yes, she is.</option>
+            <option value="b">Pretty soon.</option>
+            <option value="c">When are you (all) going?</option>
+            <option value="d">Do you want to go?</option>
+            <option value="e">Then I'll go too.</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">4. Vai sim.</td>
+          <td><select id="m4">
+            <option value="">— choose —</option>
+            <option value="a">Yes, she is.</option>
+            <option value="b">Pretty soon.</option>
+            <option value="c">When are you (all) going?</option>
+            <option value="d">Do you want to go?</option>
+            <option value="e">Then I'll go too.</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">5. Então eu também vou.</td>
+          <td><select id="m5">
+            <option value="">— choose —</option>
+            <option value="a">Yes, she is.</option>
+            <option value="b">Pretty soon.</option>
+            <option value="c">When are you (all) going?</option>
+            <option value="d">Do you want to go?</option>
+            <option value="e">Then I'll go too.</option>
+          </select></td>
+        </tr>
+      </table>
+      <button class="check-btn" onclick="checkMatch()">Check answers</button>
+      <div class="feedback" id="fb-match"></div>
+    </div>
+  </div>
+
+  <!-- EXERCISE 2: Verb IR -->
+  <div class="card">
+    <div class="card-title">Exercise 2 — The verb IR (to go)</div>
+    <div class="instr">Complete the table with the correct form of <em>ir</em>. Use the word bank below.</div>
+    <div class="word-bank">
+      <span>vou</span><span>vai</span><span>vamos</span><span>vão</span>
+    </div>
+    <div class="ex-block">
+      <table class="verb-table">
+        <tr><th>Pronoun</th><th>IR</th><th>Example</th></tr>
+        <tr><td class="pronoun">eu</td><td><input class="verb-input" id="v1" type="text" autocomplete="off"></td><td>Eu <em>___ </em>ao cinema.</td></tr>
+        <tr><td class="pronoun">você / ele / ela</td><td><input class="verb-input" id="v2" type="text" autocomplete="off"></td><td>A Susana também <em>___</em>.</td></tr>
+        <tr><td class="pronoun">nós</td><td><input class="verb-input" id="v3" type="text" autocomplete="off"></td><td>Nós <em>___</em> juntos.</td></tr>
+        <tr><td class="pronoun">vocês / eles / elas</td><td><input class="verb-input" id="v4" type="text" autocomplete="off"></td><td>Quando vocês <em>___</em>?</td></tr>
+      </table>
+      <button class="check-btn" onclick="checkVerb()">Check answers</button>
+      <div class="feedback" id="fb-verb"></div>
+    </div>
+  </div>
+
+  <!-- EXERCISE 3: Gap fill -->
+  <div class="card">
+    <div class="card-title">Exercise 3 — Fill in the blanks</div>
+    <div class="instr">Complete the sentences with the words from the word bank. Each word is used once.</div>
+    <div class="word-bank">
+      <span>daqui a pouco</span><span>também</span><span>então</span><span>não sei</span><span>vai sim</span>
+    </div>
+    <div class="ex-block">
+      <div class="gap-sent">1. — Você vem à festa? — <input class="gap-input" id="g1" type="text" autocomplete="off" placeholder="…">, talvez.</div>
+      <div class="gap-sent">2. A Maria vai ao show e eu <input class="gap-input" id="g2" type="text" autocomplete="off" placeholder="…"> vou.</div>
+      <div class="gap-sent">3. — Quando você chega? — <input class="gap-input" id="g3" type="text" autocomplete="off" placeholder="…">.</div>
+      <div class="gap-sent">4. — A Susana vai? — <input class="gap-input" id="g4" type="text" autocomplete="off" placeholder="…">.</div>
+      <div class="gap-sent">5. Ela vai, <input class="gap-input" id="g5" type="text" autocomplete="off" placeholder="…"> eu também vou!</div>
+      <button class="check-btn" onclick="checkGaps()">Check answers</button>
+      <div class="feedback" id="fb-gaps"></div>
+    </div>
+  </div>
+
+  <!-- EXERCISE 4: Production -->
+  <div class="card">
+    <div class="card-title">Exercise 4 — Your turn</div>
+    <div class="instr">Answer the questions in Portuguese. Use the verb <em>ir</em> and the expressions from this episode.</div>
+    <div class="prod-box">
+      <p><strong>1.</strong> Você quer ir ao cinema? Quando?</p>
+      <textarea placeholder="Quero ir ao cinema… / Não sei se vou… / Vou daqui a pouco…"></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>2.</strong> Quem você quer convidar? (invite) Use: <em>Você quer ir?</em></p>
+      <textarea placeholder="Eu quero convidar… / [nome] também vai…"></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>3.</strong> Você prefere cinema <em>dublado</em> ou <em>legendado</em>? Por quê?</p>
+      <textarea placeholder="Eu prefiro… porque…"></textarea>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer class="page-footer">
+  <a href="https://brazilianportuguesehub.com" target="_blank">
+    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub" style="height:32px">
+  </a>
+</footer>
+
+<script>
+  function norm(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+  function checkMatch(){
+    const ans = {m1:'c', m2:'b', m3:'d', m4:'a', m5:'e'};
+    let ok = 0;
+    for(const id in ans){ if(document.getElementById(id).value===ans[id]) ok++; }
+    const fb = document.getElementById('fb-match');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ Perfect! All 5 correct.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5 correct. Try again!`; }
+  }
+
+  function checkVerb(){
+    const ans = {v1:'vou', v2:'vai', v3:'vamos', v4:'vão'};
+    let ok = 0;
+    for(const id in ans){ if(norm(document.getElementById(id).value)===ans[id]) ok++; }
+    const fb = document.getElementById('fb-verb');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ Great! All forms correct.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4 correct. Check your forms and try again.`; }
+  }
+
+  function checkGaps(){
+    const ans = {
+      g1: 'nao sei',
+      g2: 'tambem',
+      g3: 'daqui a pouco',
+      g4: 'vai sim',
+      g5: 'entao'
+    };
+    let ok = 0;
+    for(const id in ans){ if(norm(document.getElementById(id).value)===ans[id]) ok++; }
+    const fb = document.getElementById('fb-gaps');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ All correct! Well done.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5 correct. Try again!`; }
+  }
+</script>
+
+</body>
+</html>
