@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="version" content="1.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Você tem o celular do Carlos? | Iniciante 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --giz:#FCF5EB; --baunilha:#FDE7C4; --musgo:#3C3C21; --floresta:#4E551D;
+      --terracota:#D36D29; --telha:#A1441D; --rosa-cha:#FFD8C5; --goiaba:#FCA290;
+      --ouro:#FFB94A; --erva-doce:#A6B28A; --pitomba:#967E63; --nanquim:#000;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);font-size:15px;line-height:1.6}
+    .portal-header{background:var(--floresta);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .portal-header .logo{height:34px;display:block}
+    .portal-header .back{color:#fff;text-decoration:none;font-size:13px;font-weight:700;opacity:.8;transition:opacity .2s}
+    .portal-header .back:hover{opacity:1}
+    .level-bar{background:var(--musgo);color:#fff;padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    .badge{background:var(--terracota);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em}
+    .container{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+    .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .intro-card{background:var(--floresta);color:#fff}
+    .intro-card h1{font-size:1.7rem;font-weight:800;margin-bottom:6px}
+    .fonte{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:8px}
+    .section-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin:28px 0 10px}
+    .card-title{font-size:.9rem;font-weight:800;color:var(--floresta);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
+    .instr{background:var(--baunilha);border-radius:8px;padding:12px 16px;font-size:.85rem;margin-bottom:14px;color:#555}
+    .audio-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+    .audio-embed iframe{width:100%;border-radius:10px;border:none;display:block}
+    .audio-link{font-size:.8rem;color:#999;margin-top:6px}
+    .audio-link a{color:var(--terracota);font-weight:600;text-decoration:none}
+    .phon-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:12px 16px;font-size:.85rem;margin-top:16px;color:#444}
+    .dialogue-box{background:var(--giz);border-radius:10px;padding:16px 20px;margin:14px 0}
+    .dialogue-line{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+    .dialogue-line:last-child{margin-bottom:0}
+    .speaker{font-weight:800;color:var(--terracota);min-width:28px;font-size:.9rem}
+    .line-pt{font-weight:600;font-size:.95rem}
+    .line-en{font-size:.8rem;color:#888;font-style:italic}
+    .cult-box{background:#fff8ee;border:1px solid var(--ouro);border-radius:8px;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#555}
+    .cult-box strong{color:var(--terracota)}
+    .gram-box{background:#eef3fb;border-left:4px solid #5a8fc0;border-radius:0 8px 8px 0;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#333}
+    .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+    .gram-box th{background:#265B8B;color:#fff;padding:6px 10px;text-align:left;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase}
+    .gram-box td{padding:7px 10px;border-bottom:1px solid #dde6f3}
+    .gram-box tr:last-child td{border-bottom:none}
+    .gram-box .label{font-weight:700;color:#265B8B}
+
+    .ex-block{margin-bottom:20px}
+    .ex-title{font-weight:800;font-size:.85rem;color:var(--musgo);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+    .gap-sent{margin-bottom:10px;font-size:.95rem;line-height:2.2}
+    .gap-input{border:none;border-bottom:2px solid var(--terracota);background:transparent;font-family:'Manrope',sans-serif;font-size:.95rem;width:140px;padding:2px 4px;color:var(--nanquim);outline:none}
+    .gap-input:focus{border-bottom-color:var(--floresta)}
+    .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;padding:12px;background:var(--baunilha);border-radius:8px}
+    .word-bank span{background:#fff;border:1px solid var(--erva-doce);border-radius:20px;padding:4px 12px;font-size:.85rem;font-weight:600;cursor:default}
+    .check-btn{background:var(--floresta);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:8px;transition:background .2s}
+    .check-btn:hover{background:var(--musgo)}
+    .feedback{font-size:.85rem;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:6px;display:none}
+    .feedback.ok{background:#e8f5e9;color:#2e7d32}
+    .feedback.err{background:#fdecea;color:#b71c1c}
+    .match-table{width:100%;border-collapse:collapse;margin:10px 0}
+    .match-table td{padding:8px 10px;font-size:.9rem;vertical-align:middle}
+    .match-table .col-a{font-weight:700;color:var(--musgo);white-space:nowrap;padding-right:16px}
+    .match-table select{font-family:'Manrope',sans-serif;font-size:.85rem;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;min-width:120px}
+    .radio-group{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+    .radio-group label{display:flex;align-items:center;gap:10px;font-size:.9rem;cursor:pointer;padding:8px 12px;border-radius:8px;border:1.5px solid #ddd;transition:border-color .2s}
+    .radio-group label:hover{border-color:var(--terracota)}
+    .radio-group input[type=radio]{accent-color:var(--terracota)}
+    .prod-box{background:var(--giz);border-radius:10px;padding:16px;margin:12px 0}
+    .prod-box p{font-size:.9rem;margin-bottom:10px;color:#444}
+    .prod-box textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px;font-family:'Manrope',sans-serif;font-size:.9rem;resize:vertical;min-height:80px;color:var(--nanquim)}
+    .page-footer{text-align:center;padding:28px 24px;background:var(--musgo)}
+    .page-footer a{display:inline-block;opacity:.85;transition:opacity .2s}
+    .page-footer a:hover{opacity:1}
+    .series-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+    .series-name{font-size:.82rem;color:var(--floresta);font-weight:600;letter-spacing:.02em}
+    .ep-badge{background:var(--terracota);color:#fff;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+    .contr-pill{display:inline-block;background:#265B8B;color:#fff;border-radius:4px;padding:2px 8px;font-size:.82rem;font-weight:700;margin:0 2px}
+  </style>
+</head>
+<body>
+
+<header class="portal-header">
+  <img class="logo" src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+  <a class="back" href="../a1/index.html">← Iniciante 1</a>
+</header>
+<div class="level-bar">
+  <span>Iniciante 1 — A1</span>
+  <span class="badge">Episódio 8</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Você tem o celular do Carlos?</h1>
+    <div class="series-row">
+      <span class="series-name">Língua da Gente</span>
+      <span class="ep-badge">Episódio 8</span>
+    </div>
+    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin</div>
+  </div>
+
+  <!-- AUDIO -->
+  <p class="section-title">🎧 Listen</p>
+  <div class="card">
+    <div class="card-title">Podcast Episode</div>
+    <div class="audio-label">Lesson Audio</div>
+    <div class="audio-embed">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/beginning-08-do-you-have-his-mobile-number/id862545884?i=1000347351614"></iframe>
+    </div>
+    <p class="audio-link">Can't hear it? <a href="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-beg08-lesson.mp3" target="_blank">Download MP3 ↗</a></p>
+  </div>
+
+  <!-- DIALOGUE -->
+  <p class="section-title">💬 Dialogue</p>
+  <div class="card">
+    <div class="card-title">Você tem o celular do Carlos?</div>
+    <div class="instr">Read through the dialogue. Then listen again and follow along.</div>
+    <div class="dialogue-box">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Você tem o celular do Carlos?</div>
+          <div class="line-en">Do you have Carlos' cell?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Peraí, tenho sim. É 4805-1265.</div>
+          <div class="line-en">Wait a second, yes I do. It's 4805-1265.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Aqui do Rio, não é?</div>
+          <div class="line-en">Here in Rio, right?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">É.</div>
+          <div class="line-en">Yeah.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grammar highlight -->
+    <div class="gram-box">
+      📌 <strong>Contraction: de + o = "do"</strong><br>
+      In Portuguese, the preposition <em>de</em> (of/from) always contracts with the definite article <em>o/a</em>:
+      <table>
+        <tr><th>de + …</th><th>Result</th><th>Example from dialogue</th></tr>
+        <tr><td class="label">de + o →</td><td><strong>do</strong></td><td>o celular <em>do</em> Carlos &nbsp;(Carlos' phone)</td></tr>
+        <tr><td class="label">de + a →</td><td><strong>da</strong></td><td>o número <em>da</em> Ana &nbsp;(Ana's number)</td></tr>
+        <tr><td class="label">de + os →</td><td><strong>dos</strong></td><td>os amigos <em>dos</em> alunos</td></tr>
+        <tr><td class="label">de + as →</td><td><strong>das</strong></td><td>os nomes <em>das</em> ruas</td></tr>
+      </table>
+      Also notice: <em>"Aqui <strong>do</strong> Rio"</em> = "Here in Rio" — literally "here from/of Rio." The same contraction applies.
+    </div>
+
+    <div class="phon-box">
+      🗣️ <strong>Ponto fonológico — "Peraí":</strong> This is a highly contracted form of <em>"Pera aí"</em>, which itself comes from <em>"Espera aí"</em> (wait there). In everyday Brazilian speech it runs together into one word: <em>pe-ra-í</em>. The <strong>"r"</strong> between vowels is a soft tap — nothing like the English "r". Practice saying it fast: <em>peraí, peraí, peraí.</em>
+    </div>
+
+    <div class="cult-box" style="margin-top:14px">
+      📱 <strong>Celular no Brasil:</strong> Brazilians use <em>celular</em> for all types of mobile phones — there's no distinction between "cell" and "mobile." Phone numbers in Brazil have 8 digits (landlines) and 9 digits (cell phones, with a 9 in front). Brazilians say them in two chunks: <em>4805 · 1265</em>. And above all: <strong>WhatsApp</strong> is king — asking for someone's <em>celular</em> almost always means asking for their WhatsApp number.
+    </div>
+  </div>
+
+  <!-- EXERCISES -->
+  <p class="section-title">✏️ Exercises</p>
+
+  <!-- Ex 1: True / False -->
+  <div class="card">
+    <div class="card-title">Exercise 1 — True or False?</div>
+    <div class="instr">Based on the dialogue, choose the correct answer.</div>
+    <div class="ex-block">
+
+      <p style="font-size:.9rem;margin-bottom:8px"><strong>1.</strong> Person A asks for Carlos' home phone number.</p>
+      <div class="radio-group" id="tf1">
+        <label><input type="radio" name="tf1" value="T"> True</label>
+        <label><input type="radio" name="tf1" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>2.</strong> Person B has Carlos' number.</p>
+      <div class="radio-group" id="tf2">
+        <label><input type="radio" name="tf2" value="T"> True</label>
+        <label><input type="radio" name="tf2" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>3.</strong> The number given is 4805-1265.</p>
+      <div class="radio-group" id="tf3">
+        <label><input type="radio" name="tf3" value="T"> True</label>
+        <label><input type="radio" name="tf3" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>4.</strong> Carlos lives in São Paulo.</p>
+      <div class="radio-group" id="tf4">
+        <label><input type="radio" name="tf4" value="T"> True</label>
+        <label><input type="radio" name="tf4" value="F"> False</label>
+      </div>
+
+      <button class="check-btn" onclick="checkTF()">Check answers</button>
+      <div class="feedback" id="fb-tf"></div>
+    </div>
+  </div>
+
+  <!-- Ex 2: Gap fill -->
+  <div class="card">
+    <div class="card-title">Exercise 2 — Fill in the blanks</div>
+    <div class="instr">Complete each sentence with the correct word or expression from the word bank.</div>
+    <div class="word-bank">
+      <span>peraí</span><span>tenho sim</span><span>celular</span><span>do</span><span>não é</span>
+    </div>
+    <div class="ex-block">
+      <div class="gap-sent">1. Você tem o ___ <input class="gap-input" id="g1" type="text" autocomplete="off" placeholder="…"> do Carlos?</div>
+      <div class="gap-sent">2. ___ <input class="gap-input" id="g2" type="text" autocomplete="off" placeholder="…">, tenho sim. É 4805-1265.</div>
+      <div class="gap-sent">3. Aqui ___ <input class="gap-input" id="g3" type="text" autocomplete="off" placeholder="…"> Rio, não é?</div>
+      <div class="gap-sent">4. Você mora no Rio, ___ <input class="gap-input" id="g4" type="text" autocomplete="off" placeholder="…">?</div>
+      <div class="gap-sent">5. — Você tem o número? — ___ <input class="gap-input" id="g5" type="text" autocomplete="off" placeholder="…">. É 2130-4500.</div>
+      <button class="check-btn" onclick="checkGaps()">Check answers</button>
+      <div class="feedback" id="fb-gaps"></div>
+    </div>
+  </div>
+
+  <!-- Ex 3: Contractions do / da -->
+  <div class="card">
+    <div class="card-title">Exercise 3 — "do" or "da"?</div>
+    <div class="instr">Choose the correct contraction (de + o = <strong>do</strong> / de + a = <strong>da</strong>) to complete each phrase.</div>
+    <div class="ex-block">
+      <table class="match-table">
+        <tr>
+          <td class="col-a">1. o celular ___ Carlos</td>
+          <td><select id="s1">
+            <option value="">— choose —</option>
+            <option value="do">do</option>
+            <option value="da">da</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">2. o número ___ professora</td>
+          <td><select id="s2">
+            <option value="">— choose —</option>
+            <option value="do">do</option>
+            <option value="da">da</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">3. o telefone ___ hotel</td>
+          <td><select id="s3">
+            <option value="">— choose —</option>
+            <option value="do">do</option>
+            <option value="da">da</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">4. o endereço ___ Ana</td>
+          <td><select id="s4">
+            <option value="">— choose —</option>
+            <option value="do">do</option>
+            <option value="da">da</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">5. o email ___ escritório</td>
+          <td><select id="s5">
+            <option value="">— choose —</option>
+            <option value="do">do</option>
+            <option value="da">da</option>
+          </select></td>
+        </tr>
+      </table>
+      <button class="check-btn" onclick="checkSelect()">Check answers</button>
+      <div class="feedback" id="fb-sel"></div>
+    </div>
+  </div>
+
+  <!-- Ex 4: Production -->
+  <div class="card">
+    <div class="card-title">Exercise 4 — Your turn</div>
+    <div class="instr">Answer in Portuguese. Use the vocabulary from this episode.</div>
+    <div class="prod-box">
+      <p><strong>1.</strong> Write your phone number in Portuguese, the Brazilian way — in two groups of 4 digits. Example: <em>"É 9834-5678."</em></p>
+      <textarea placeholder="É ___ - ___."></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>2.</strong> Write a mini-dialogue asking a friend for someone's phone number. Use <em>Peraí</em> and <em>tenho sim</em> in the reply (at least 3 lines).</p>
+      <textarea placeholder="A: Você tem o celular da…?\nB: Peraí, tenho sim. É…\nA: …"></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>3.</strong> Use the tag question <em>"não é?"</em> in a sentence about your city or neighborhood. Example: <em>"Aqui do Centro, não é muito longe, não é?"</em></p>
+      <textarea placeholder="…não é?"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <a href="https://brazilianportuguesehub.com" target="_blank">
+    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub" style="height:32px">
+  </a>
+</footer>
+
+<script>
+  function norm(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+  function checkTF(){
+    const ans = {tf1:'F', tf2:'T', tf3:'T', tf4:'F'};
+    let ok = 0;
+    for(const name in ans){
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      if(sel && sel.value === ans[name]) ok++;
+    }
+    const fb = document.getElementById('fb-tf');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ Perfect! All 4 correct.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4 correct. Read the dialogue again and try once more.`; }
+  }
+
+  function checkGaps(){
+    const ans = {
+      g1:'celular', g2:'perai', g3:'do', g4:'nao e', g5:'tenho sim'
+    };
+    let ok = 0;
+    for(const id in ans){ if(norm(document.getElementById(id).value)===ans[id]) ok++; }
+    const fb = document.getElementById('fb-gaps');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ All correct! Great work.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5 correct. Try again!`; }
+  }
+
+  function checkSelect(){
+    const correct = ['do','da','do','da','do'];
+    let ok = 0;
+    for(let i=1;i<=5;i++){
+      if(document.getElementById('s'+i).value === correct[i-1]) ok++;
+    }
+    const fb = document.getElementById('fb-sel');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ All correct! Masculine nouns → do, feminine nouns → da.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5. Tip: masculine nouns take "do", feminine nouns take "da".`; }
+  }
+</script>
+
+</body>
+</html>
