@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="version" content="1.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vamos pegar o metrô? | Iniciante 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --giz:#FCF5EB; --baunilha:#FDE7C4; --musgo:#3C3C21; --floresta:#4E551D;
+      --terracota:#D36D29; --telha:#A1441D; --rosa-cha:#FFD8C5; --goiaba:#FCA290;
+      --ouro:#FFB94A; --erva-doce:#A6B28A; --pitomba:#967E63; --nanquim:#000;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);font-size:15px;line-height:1.6}
+    .portal-header{background:var(--floresta);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .portal-header .logo{height:34px;display:block}
+    .portal-header .back{color:#fff;text-decoration:none;font-size:13px;font-weight:700;opacity:.8;transition:opacity .2s}
+    .portal-header .back:hover{opacity:1}
+    .level-bar{background:var(--musgo);color:#fff;padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    .badge{background:var(--terracota);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em}
+    .container{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+    .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .intro-card{background:var(--floresta);color:#fff}
+    .intro-card h1{font-size:1.7rem;font-weight:800;margin-bottom:6px}
+    .fonte{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:8px}
+    .section-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin:28px 0 10px}
+    .card-title{font-size:.9rem;font-weight:800;color:var(--floresta);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
+    .instr{background:var(--baunilha);border-radius:8px;padding:12px 16px;font-size:.85rem;margin-bottom:14px;color:#555}
+    .audio-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+    .audio-embed iframe{width:100%;border-radius:10px;border:none;display:block}
+    .audio-link{font-size:.8rem;color:#999;margin-top:6px}
+    .audio-link a{color:var(--terracota);font-weight:600;text-decoration:none}
+    .phon-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:12px 16px;font-size:.85rem;margin-top:16px;color:#444}
+    .dialogue-box{background:var(--giz);border-radius:10px;padding:16px 20px;margin:14px 0}
+    .dialogue-line{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+    .dialogue-line:last-child{margin-bottom:0}
+    .speaker{font-weight:800;color:var(--terracota);min-width:28px;font-size:.9rem}
+    .line-pt{font-weight:600;font-size:.95rem}
+    .line-en{font-size:.8rem;color:#888;font-style:italic}
+    .cult-box{background:#fff8ee;border:1px solid var(--ouro);border-radius:8px;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#555}
+    .cult-box strong{color:var(--terracota)}
+    .gram-box{background:#eef3fb;border-left:4px solid #5a8fc0;border-radius:0 8px 8px 0;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#333}
+    .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+    .gram-box th{background:#265B8B;color:#fff;padding:6px 10px;text-align:left;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase}
+    .gram-box td{padding:7px 10px;border-bottom:1px solid #dde6f3}
+    .gram-box tr:last-child td{border-bottom:none}
+    .gram-box .label{font-weight:700;color:#265B8B}
+
+    .ex-block{margin-bottom:20px}
+    .gap-sent{margin-bottom:10px;font-size:.95rem;line-height:2.2}
+    .gap-input{border:none;border-bottom:2px solid var(--terracota);background:transparent;font-family:'Manrope',sans-serif;font-size:.95rem;width:150px;padding:2px 4px;color:var(--nanquim);outline:none}
+    .gap-input:focus{border-bottom-color:var(--floresta)}
+    .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;padding:12px;background:var(--baunilha);border-radius:8px}
+    .word-bank span{background:#fff;border:1px solid var(--erva-doce);border-radius:20px;padding:4px 12px;font-size:.85rem;font-weight:600;cursor:default}
+    .check-btn{background:var(--floresta);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:8px;transition:background .2s}
+    .check-btn:hover{background:var(--musgo)}
+    .feedback{font-size:.85rem;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:6px;display:none}
+    .feedback.ok{background:#e8f5e9;color:#2e7d32}
+    .feedback.err{background:#fdecea;color:#b71c1c}
+    .match-table{width:100%;border-collapse:collapse;margin:10px 0}
+    .match-table td{padding:8px 10px;font-size:.9rem;vertical-align:middle}
+    .match-table .col-a{font-weight:700;color:var(--musgo);white-space:nowrap;padding-right:16px}
+    .match-table select{font-family:'Manrope',sans-serif;font-size:.85rem;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;min-width:180px}
+    .radio-group{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+    .radio-group label{display:flex;align-items:center;gap:10px;font-size:.9rem;cursor:pointer;padding:8px 12px;border-radius:8px;border:1.5px solid #ddd;transition:border-color .2s}
+    .radio-group label:hover{border-color:var(--terracota)}
+    .radio-group input[type=radio]{accent-color:var(--terracota)}
+    .prod-box{background:var(--giz);border-radius:10px;padding:16px;margin:12px 0}
+    .prod-box p{font-size:.9rem;margin-bottom:10px;color:#444}
+    .prod-box textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px;font-family:'Manrope',sans-serif;font-size:.9rem;resize:vertical;min-height:80px;color:var(--nanquim)}
+    .page-footer{text-align:center;padding:28px 24px;background:var(--musgo)}
+    .page-footer a{display:inline-block;opacity:.85;transition:opacity .2s}
+    .page-footer a:hover{opacity:1}
+    .series-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+    .series-name{font-size:.82rem;color:var(--floresta);font-weight:600;letter-spacing:.02em}
+    .ep-badge{background:var(--terracota);color:#fff;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  </style>
+</head>
+<body>
+
+<header class="portal-header">
+  <img class="logo" src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+  <a class="back" href="../a1/index.html">← Iniciante 1</a>
+</header>
+<div class="level-bar">
+  <span>Iniciante 1 — A1</span>
+  <span class="badge">Episódio 12</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Vamos pegar o metrô?</h1>
+    <div class="series-row">
+      <span class="series-name">Língua da Gente</span>
+      <span class="ep-badge">Episódio 12</span>
+    </div>
+    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" style="color:rgba(255,255,255,.6);text-decoration:underline;font-size:.75rem">CC BY 4.0</a></div>
+  </div>
+
+  <!-- AUDIO -->
+  <p class="section-title">🎧 Listen</p>
+  <div class="card">
+    <div class="card-title">Podcast Episode</div>
+    <div class="audio-label">Lesson Audio</div>
+    <div class="audio-embed">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/beginning-12-lets-take-the-subway/id1020665354?i=1000371652019"></iframe>
+    </div>
+    <p class="audio-link">Can't hear it? <a href="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-beg12-lesson.mp3" target="_blank">Download MP3 ↗</a></p>
+  </div>
+
+  <!-- DIALOGUE -->
+  <p class="section-title">💬 Dialogue</p>
+  <div class="card">
+    <div class="card-title">Vamos pegar o metrô?</div>
+    <div class="instr">Read through the dialogue. Then listen again and follow along.</div>
+    <div class="dialogue-box">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Vamos pegar o metrô?</div>
+          <div class="line-en">Let's take the subway?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Essa hora não, está muito lotado.</div>
+          <div class="line-en">Not at this hour — it's really crowded.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Eu sei, mas é mais rápido.</div>
+          <div class="line-en">I know, but it's faster.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Tá bom, vamos.</div>
+          <div class="line-en">OK, let's go.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grammar: Vamos + infinitive -->
+    <div class="gram-box">
+      📌 <strong>"Vamos + infinitivo" — Let's…!</strong><br>
+      <em>Vamos</em> is the 1st person plural of <em>ir</em> (to go), but it also works as "let's" to suggest doing something together:
+      <table>
+        <tr><th>Structure</th><th>Example</th><th>Meaning</th></tr>
+        <tr><td class="label">Vamos + inf?</td><td>Vamos <em>pegar</em> o metrô?</td><td>Let's take the subway? / Shall we take the subway?</td></tr>
+        <tr><td class="label">Vamos + inf?</td><td>Vamos <em>almoçar</em>?</td><td>Shall we have lunch?</td></tr>
+        <tr><td class="label">Vamos! (alone)</td><td>Tá bom, <em>vamos</em>.</td><td>OK, let's go!</td></tr>
+        <tr><td class="label">Vamos + inf?</td><td>Vamos <em>trabalhar</em>?</td><td>Shall we get to work?</td></tr>
+      </table>
+      The rising question intonation turns it into a suggestion. <em>Vamos!</em> alone means "let's go!" — one of the most energetic expressions in Brazilian Portuguese.
+    </div>
+
+    <!-- Grammar: mais + adjective (comparativo) -->
+    <div class="gram-box" style="margin-top:14px">
+      📌 <strong>Comparativo: mais + adjetivo</strong><br>
+      To compare in Portuguese, just put <em>mais</em> (more) before the adjective — no irregular forms for most adjectives:
+      <table>
+        <tr><th>Adjective</th><th>Comparative</th><th>Example</th></tr>
+        <tr><td>rápido (fast)</td><td class="label">mais rápido</td><td>O metrô é mais rápido.</td></tr>
+        <tr><td>caro (expensive)</td><td class="label">mais caro</td><td>O táxi é mais caro.</td></tr>
+        <tr><td>barato (cheap)</td><td class="label">mais barato</td><td>O ônibus é mais barato.</td></tr>
+        <tr><td>longe (far)</td><td class="label">mais longe</td><td>A estação é mais longe.</td></tr>
+        <tr><td>fácil (easy)</td><td class="label">mais fácil</td><td>Isso é mais fácil.</td></tr>
+      </table>
+      To complete the comparison: <em>mais rápido <strong>do que</strong> o táxi</em> (faster than the taxi).
+    </div>
+
+    <div class="phon-box">
+      🗣️ <strong>Ponto fonológico — "Vamos":</strong> The <strong>V</strong> in Portuguese is a true labiodental fricative — top teeth on lower lip, producing air friction, just like English. This is very different from Spanish, where <em>v</em> and <em>b</em> can merge. In Brazilian Portuguese, <em>vamos</em> and <em>bamos</em> are never confused. Practice the contrast: <em>vamos / bolo / você / bem</em> — feel the difference between lip-to-lip (b) and teeth-to-lip (v).
+    </div>
+
+    <div class="cult-box" style="margin-top:14px">
+      🚇 <strong>Metrô no Brasil:</strong> São Paulo has one of Latin America's largest metro systems — but it's notoriously crowded during rush hour (<em>horário de pico</em>). Rio de Janeiro also has a metro, smaller but expanding. The verb <em>pegar</em> (literally "to grab/catch") is the everyday word for taking public transport: <em>pegar o metrô, pegar o ônibus, pegar o trem</em> — never <em>tomar</em> (which exists but is less common in São Paulo speech).
+    </div>
+  </div>
+
+  <!-- EXERCISES -->
+  <p class="section-title">✏️ Exercises</p>
+
+  <!-- Ex 1: True / False -->
+  <div class="card">
+    <div class="card-title">Exercise 1 — True or False?</div>
+    <div class="instr">Based on the dialogue, choose the correct answer.</div>
+    <div class="ex-block">
+
+      <p style="font-size:.9rem;margin-bottom:8px"><strong>1.</strong> Person A suggests taking the subway.</p>
+      <div class="radio-group" id="tf1">
+        <label><input type="radio" name="tf1" value="T"> True</label>
+        <label><input type="radio" name="tf1" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>2.</strong> Person B says the subway is empty.</p>
+      <div class="radio-group" id="tf2">
+        <label><input type="radio" name="tf2" value="T"> True</label>
+        <label><input type="radio" name="tf2" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>3.</strong> Person A says the subway is faster.</p>
+      <div class="radio-group" id="tf3">
+        <label><input type="radio" name="tf3" value="T"> True</label>
+        <label><input type="radio" name="tf3" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>4.</strong> In the end, they decide NOT to take the subway.</p>
+      <div class="radio-group" id="tf4">
+        <label><input type="radio" name="tf4" value="T"> True</label>
+        <label><input type="radio" name="tf4" value="F"> False</label>
+      </div>
+
+      <button class="check-btn" onclick="checkTF()">Check answers</button>
+      <div class="feedback" id="fb-tf"></div>
+    </div>
+  </div>
+
+  <!-- Ex 2: Gap fill -->
+  <div class="card">
+    <div class="card-title">Exercise 2 — Fill in the blanks</div>
+    <div class="instr">Complete each sentence with the correct word or expression from the word bank.</div>
+    <div class="word-bank">
+      <span>vamos pegar</span><span>essa hora</span><span>lotado</span><span>eu sei</span><span>mais rápido</span>
+    </div>
+    <div class="ex-block">
+      <div class="gap-sent">1. <input class="gap-input" id="g1" type="text" autocomplete="off" placeholder="…"> o ônibus?</div>
+      <div class="gap-sent">2. <input class="gap-input" id="g2" type="text" autocomplete="off" placeholder="…"> não, está chovendo muito.</div>
+      <div class="gap-sent">3. O metrô está muito <input class="gap-input" id="g3" type="text" autocomplete="off" placeholder="…"> nesse horário.</div>
+      <div class="gap-sent">4. <input class="gap-input" id="g4" type="text" autocomplete="off" placeholder="…">, mas é mais barato.</div>
+      <div class="gap-sent">5. O trem é <input class="gap-input" id="g5" type="text" autocomplete="off" placeholder="…"> do que o ônibus.</div>
+      <button class="check-btn" onclick="checkGaps()">Check answers</button>
+      <div class="feedback" id="fb-gaps"></div>
+    </div>
+  </div>
+
+  <!-- Ex 3: Comparativo mais + adj -->
+  <div class="card">
+    <div class="card-title">Exercise 3 — Comparativo: "mais ___"</div>
+    <div class="instr">Choose the correct comparative to complete each sentence.</div>
+    <div class="ex-block">
+      <table class="match-table">
+        <tr>
+          <td class="col-a">1. O táxi é ___ do que o metrô.</td>
+          <td><select id="s1">
+            <option value="">— choose —</option>
+            <option value="mais caro">mais caro (more expensive)</option>
+            <option value="mais barato">mais barato (cheaper)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">2. O metrô é ___ do que o táxi.</td>
+          <td><select id="s2">
+            <option value="">— choose —</option>
+            <option value="mais rapido">mais rápido (faster)</option>
+            <option value="mais lento">mais lento (slower)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">3. A estação fica ___ do que pensei.</td>
+          <td><select id="s3">
+            <option value="">— choose —</option>
+            <option value="mais longe">mais longe (farther)</option>
+            <option value="mais perto">mais perto (closer)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">4. O ônibus é ___ do que o metrô.</td>
+          <td><select id="s4">
+            <option value="">— choose —</option>
+            <option value="mais barato">mais barato (cheaper)</option>
+            <option value="mais caro">mais caro (more expensive)</option>
+          </select></td>
+        </tr>
+      </table>
+      <p style="font-size:.8rem;color:#999;margin-top:8px;font-style:italic">Note: more than one answer may be reasonable in real life — choose the most logical option based on general Brazilian reality.</p>
+      <button class="check-btn" onclick="checkSelect()">Check answers</button>
+      <div class="feedback" id="fb-sel"></div>
+    </div>
+  </div>
+
+  <!-- Ex 4: Production -->
+  <div class="card">
+    <div class="card-title">Exercise 4 — Your turn</div>
+    <div class="instr">Answer in Portuguese. Use the vocabulary from this episode.</div>
+    <div class="prod-box">
+      <p><strong>1.</strong> Suggest an activity using <em>"Vamos + infinitivo?"</em> — something you'd say to a friend or colleague.</p>
+      <textarea placeholder="Vamos…?"></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>2.</strong> Write a short dialogue (4 lines) between two people deciding on transport. Use <em>Vamos pegar…?, Essa hora não…, Eu sei mas…,</em> and <em>Tá bom, vamos.</em></p>
+      <textarea placeholder="A: Vamos pegar…?\nB: Essa hora não, está…\nA: Eu sei, mas é…\nB: Tá bom, vamos."></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>3.</strong> Compare two things from your city or daily life using <em>"X é mais ___ do que Y."</em> Write 2 sentences.</p>
+      <textarea placeholder="O metrô é mais rápido do que o ônibus.\n___ é mais ___ do que ___."></textarea>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <a href="https://brazilianportuguesehub.com" target="_blank">
+    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub" style="height:32px">
+  </a>
+</footer>
+
+<script>
+  function norm(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+  function checkTF(){
+    const ans = {tf1:'T', tf2:'F', tf3:'T', tf4:'F'};
+    let ok = 0;
+    for(const name in ans){
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      if(sel && sel.value === ans[name]) ok++;
+    }
+    const fb = document.getElementById('fb-tf');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ Perfect! All 4 correct.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4 correct. Read the dialogue again and try once more.`; }
+  }
+
+  function checkGaps(){
+    const ans = {
+      g1:'vamos pegar', g2:'essa hora', g3:'lotado', g4:'eu sei', g5:'mais rapido'
+    };
+    let ok = 0;
+    for(const id in ans){ if(norm(document.getElementById(id).value)===ans[id]) ok++; }
+    const fb = document.getElementById('fb-gaps');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ All correct! Great work.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5 correct. Try again!`; }
+  }
+
+  function checkSelect(){
+    const correct = ['mais caro','mais rapido','mais longe','mais barato'];
+    let ok = 0;
+    for(let i=1;i<=4;i++){
+      if(norm(document.getElementById('s'+i).value)===correct[i-1]) ok++;
+    }
+    const fb = document.getElementById('fb-sel');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ All correct! Mais + adjective works for almost any comparison in Portuguese.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4. Think about general Brazilian urban reality for each comparison.`; }
+  }
+</script>
+
+</body>
+</html>
