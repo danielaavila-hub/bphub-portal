@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="version" content="1.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quantos anos você tem? | Iniciante 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --giz:#FCF5EB; --baunilha:#FDE7C4; --musgo:#3C3C21; --floresta:#4E551D;
+      --terracota:#D36D29; --telha:#A1441D; --rosa-cha:#FFD8C5; --goiaba:#FCA290;
+      --ouro:#FFB94A; --erva-doce:#A6B28A; --pitomba:#967E63; --nanquim:#000;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);font-size:15px;line-height:1.6}
+    .portal-header{background:var(--floresta);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .portal-header .logo{height:34px;display:block}
+    .portal-header .back{color:#fff;text-decoration:none;font-size:13px;font-weight:700;opacity:.8;transition:opacity .2s}
+    .portal-header .back:hover{opacity:1}
+    .level-bar{background:var(--musgo);color:#fff;padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    .badge{background:var(--terracota);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em}
+    .container{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+    .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .intro-card{background:var(--floresta);color:#fff}
+    .intro-card h1{font-size:1.7rem;font-weight:800;margin-bottom:6px}
+    .fonte{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:8px}
+    .section-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin:28px 0 10px}
+    .card-title{font-size:.9rem;font-weight:800;color:var(--floresta);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
+    .instr{background:var(--baunilha);border-radius:8px;padding:12px 16px;font-size:.85rem;margin-bottom:14px;color:#555}
+    .audio-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+    .audio-embed iframe{width:100%;border-radius:10px;border:none;display:block}
+    .audio-link{font-size:.8rem;color:#999;margin-top:6px}
+    .audio-link a{color:var(--terracota);font-weight:600;text-decoration:none}
+    .phon-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:12px 16px;font-size:.85rem;margin-top:16px;color:#444}
+    .dialogue-box{background:var(--giz);border-radius:10px;padding:16px 20px;margin:14px 0}
+    .dialogue-line{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+    .dialogue-line:last-child{margin-bottom:0}
+    .speaker{font-weight:800;color:var(--terracota);min-width:28px;font-size:.9rem}
+    .line-pt{font-weight:600;font-size:.95rem}
+    .line-en{font-size:.8rem;color:#888;font-style:italic}
+    .cult-box{background:#fff8ee;border:1px solid var(--ouro);border-radius:8px;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#555}
+    .cult-box strong{color:var(--terracota)}
+    .gram-box{background:#eef3fb;border-left:4px solid #5a8fc0;border-radius:0 8px 8px 0;padding:14px 16px;font-size:.85rem;margin:14px 0;color:#333}
+    .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+    .gram-box th{background:#265B8B;color:#fff;padding:6px 10px;text-align:left;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase}
+    .gram-box td{padding:7px 10px;border-bottom:1px solid #dde6f3}
+    .gram-box tr:last-child td{border-bottom:none}
+    .gram-box .label{font-weight:700;color:#265B8B}
+
+    .ex-block{margin-bottom:20px}
+    .ex-title{font-weight:800;font-size:.85rem;color:var(--musgo);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+    .gap-sent{margin-bottom:10px;font-size:.95rem;line-height:2.2}
+    .gap-input{border:none;border-bottom:2px solid var(--terracota);background:transparent;font-family:'Manrope',sans-serif;font-size:.95rem;width:140px;padding:2px 4px;color:var(--nanquim);outline:none}
+    .gap-input:focus{border-bottom-color:var(--floresta)}
+    .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;padding:12px;background:var(--baunilha);border-radius:8px}
+    .word-bank span{background:#fff;border:1px solid var(--erva-doce);border-radius:20px;padding:4px 12px;font-size:.85rem;font-weight:600;cursor:default}
+    .check-btn{background:var(--floresta);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:8px;transition:background .2s}
+    .check-btn:hover{background:var(--musgo)}
+    .feedback{font-size:.85rem;font-weight:700;margin-top:10px;padding:8px 12px;border-radius:6px;display:none}
+    .feedback.ok{background:#e8f5e9;color:#2e7d32}
+    .feedback.err{background:#fdecea;color:#b71c1c}
+    .match-table{width:100%;border-collapse:collapse;margin:10px 0}
+    .match-table td{padding:8px 10px;font-size:.9rem;vertical-align:middle}
+    .match-table .col-a{font-weight:700;color:var(--musgo);white-space:nowrap}
+    .match-table select{font-family:'Manrope',sans-serif;font-size:.85rem;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;min-width:230px}
+    .radio-group{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+    .radio-group label{display:flex;align-items:center;gap:10px;font-size:.9rem;cursor:pointer;padding:8px 12px;border-radius:8px;border:1.5px solid #ddd;transition:border-color .2s}
+    .radio-group label:hover{border-color:var(--terracota)}
+    .radio-group input[type=radio]{accent-color:var(--terracota)}
+    .prod-box{background:var(--giz);border-radius:10px;padding:16px;margin:12px 0}
+    .prod-box p{font-size:.9rem;margin-bottom:10px;color:#444}
+    .prod-box textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px;font-family:'Manrope',sans-serif;font-size:.9rem;resize:vertical;min-height:80px;color:var(--nanquim)}
+    .page-footer{text-align:center;padding:28px 24px;background:var(--musgo)}
+    .page-footer a{display:inline-block;opacity:.85;transition:opacity .2s}
+    .page-footer a:hover{opacity:1}
+    .series-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+    .series-name{font-size:.82rem;color:var(--floresta);font-weight:600;letter-spacing:.02em}
+    .ep-badge{background:var(--terracota);color:#fff;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  </style>
+</head>
+<body>
+
+<header class="portal-header">
+  <img class="logo" src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+  <a class="back" href="../a1/index.html">← Iniciante 1</a>
+</header>
+<div class="level-bar">
+  <span>Iniciante 1 — A1</span>
+  <span class="badge">Episódio 7</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Quantos anos você tem?</h1>
+    <div class="series-row">
+      <span class="series-name">Língua da Gente</span>
+      <span class="ep-badge">Episódio 7</span>
+    </div>
+    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin</div>
+  </div>
+
+  <!-- AUDIO -->
+  <p class="section-title">🎧 Listen</p>
+  <div class="card">
+    <div class="card-title">Podcast Episode</div>
+    <div class="audio-label">Lesson Audio</div>
+    <div class="audio-embed">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/beginning-07-how-old-are-you/id862545884?i=1000347351613"></iframe>
+    </div>
+    <p class="audio-link">Can't hear it? <a href="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-beg07-lesson.mp3" target="_blank">Download MP3 ↗</a></p>
+  </div>
+
+  <!-- DIALOGUE -->
+  <p class="section-title">💬 Dialogue</p>
+  <div class="card">
+    <div class="card-title">Quantos anos você tem?</div>
+    <div class="instr">Read through the dialogue. Then listen again and follow along.</div>
+    <div class="dialogue-box">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Quantos anos você tem, Paulo?</div>
+          <div class="line-en">How old are you, Paulo?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Adivinha.</div>
+          <div class="line-en">Take a guess.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">27 ou 29, por aí.</div>
+          <div class="line-en">Around 27 or 29.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Acertou, estou com 27 anos.</div>
+          <div class="line-en">You got it — I'm 27 years old.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grammar highlight -->
+    <div class="gram-box">
+      📌 <strong>TER vs. ESTAR COM for age</strong><br>
+      In Brazilian Portuguese there are two ways to say your age:
+      <table>
+        <tr><th>Form</th><th>Example</th><th>Note</th></tr>
+        <tr><td class="label">TER + anos</td><td>Quantos anos você <em>tem</em>?</td><td>Most common in questions</td></tr>
+        <tr><td class="label">ESTAR COM + anos</td><td>Estou <em>com</em> 27 anos.</td><td>Very natural in speech</td></tr>
+      </table>
+      Both are correct. <em>Estar com</em> literally means "to be with" — Brazilians "are with" their years, not "have" them!
+    </div>
+
+    <div class="phon-box">
+      🗣️ <strong>Ponto fonológico — "tô" vs. "estou":</strong> In informal speech, Brazilians almost always shorten <em>estou</em> → <em>tô</em>. So <em>"Estou com 27 anos"</em> sounds like <em>"Tô com 27 anos."</em> You'll hear this reduction constantly — with all <em>estar</em> forms: <em>está → tá, estamos → tamo, estão → tão.</em>
+    </div>
+
+    <div class="cult-box" style="margin-top:14px">
+      🎂 <strong>Idade no Brasil:</strong> Brazilians tend to be more open about age than people in some other cultures — asking someone's age is generally quite natural, especially among friends. The phrase <em>"Adivinha!"</em> (take a guess!) is a playful, very common way to dodge the question. You'll also hear <em>"por aí"</em> a lot — it means "around / about" and is used constantly for approximate numbers, places, and ideas.
+    </div>
+  </div>
+
+  <!-- EXERCISES -->
+  <p class="section-title">✏️ Exercises</p>
+
+  <!-- Ex 1: True / False -->
+  <div class="card">
+    <div class="card-title">Exercise 1 — True or False?</div>
+    <div class="instr">Based on the dialogue, choose the correct answer.</div>
+    <div class="ex-block">
+
+      <p style="font-size:.9rem;margin-bottom:8px"><strong>1.</strong> Person A asks Paulo how old he is.</p>
+      <div class="radio-group" id="tf1">
+        <label><input type="radio" name="tf1" value="T"> True</label>
+        <label><input type="radio" name="tf1" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>2.</strong> Paulo tells his age immediately.</p>
+      <div class="radio-group" id="tf2">
+        <label><input type="radio" name="tf2" value="T"> True</label>
+        <label><input type="radio" name="tf2" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>3.</strong> Person A guesses Paulo is around 30.</p>
+      <div class="radio-group" id="tf3">
+        <label><input type="radio" name="tf3" value="T"> True</label>
+        <label><input type="radio" name="tf3" value="F"> False</label>
+      </div>
+
+      <p style="font-size:.9rem;margin:14px 0 8px"><strong>4.</strong> Paulo is 27 years old.</p>
+      <div class="radio-group" id="tf4">
+        <label><input type="radio" name="tf4" value="T"> True</label>
+        <label><input type="radio" name="tf4" value="F"> False</label>
+      </div>
+
+      <button class="check-btn" onclick="checkTF()">Check answers</button>
+      <div class="feedback" id="fb-tf"></div>
+    </div>
+  </div>
+
+  <!-- Ex 2: Gap fill -->
+  <div class="card">
+    <div class="card-title">Exercise 2 — Fill in the blanks</div>
+    <div class="instr">Complete each sentence with the correct word or expression from the word bank.</div>
+    <div class="word-bank">
+      <span>adivinha</span><span>por aí</span><span>acertou</span><span>estou com</span><span>quantos anos</span>
+    </div>
+    <div class="ex-block">
+      <div class="gap-sent">1. — <input class="gap-input" id="g1" type="text" autocomplete="off" placeholder="…"> você tem? — Tenho 34.</div>
+      <div class="gap-sent">2. — Quantos anos ela tem? — Não sei, uns 30 <input class="gap-input" id="g2" type="text" autocomplete="off" placeholder="…">.</div>
+      <div class="gap-sent">3. — Tenho 40 anos! — <input class="gap-input" id="g3" type="text" autocomplete="off" placeholder="…">! Parece menos.</div>
+      <div class="gap-sent">4. — Quantos anos você tem? — <input class="gap-input" id="g4" type="text" autocomplete="off" placeholder="…">!</div>
+      <div class="gap-sent">5. <input class="gap-input" id="g5" type="text" autocomplete="off" placeholder="…"> 29 anos.</div>
+      <button class="check-btn" onclick="checkGaps()">Check answers</button>
+      <div class="feedback" id="fb-gaps"></div>
+    </div>
+  </div>
+
+  <!-- Ex 3: TER vs ESTAR COM -->
+  <div class="card">
+    <div class="card-title">Exercise 3 — TER or ESTAR COM?</div>
+    <div class="instr">Choose the form that completes each sentence naturally.</div>
+    <div class="ex-block">
+      <table class="match-table">
+        <tr>
+          <td class="col-a">1. Quantos anos você ___?</td>
+          <td><select id="s1">
+            <option value="">— choose —</option>
+            <option value="tem">tem (TER)</option>
+            <option value="esta com">está com (ESTAR COM)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">2. Eu ___ 32 anos.</td>
+          <td><select id="s2">
+            <option value="">— choose —</option>
+            <option value="tenho">tenho (TER)</option>
+            <option value="estou com">estou com (ESTAR COM)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">3. Ela ___ 45 anos.</td>
+          <td><select id="s3">
+            <option value="">— choose —</option>
+            <option value="tem">tem (TER)</option>
+            <option value="esta com">está com (ESTAR COM)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="col-a">4. Você ___ quantos anos?</td>
+          <td><select id="s4">
+            <option value="">— choose —</option>
+            <option value="esta com">está com (ESTAR COM)</option>
+            <option value="tem">tem (TER)</option>
+          </select></td>
+        </tr>
+      </table>
+      <p style="font-size:.8rem;color:#999;margin-top:8px;font-style:italic">Note: both options are often interchangeable — this exercise focuses on recognising each pattern.</p>
+      <button class="check-btn" onclick="checkSelect()">Check answers</button>
+      <div class="feedback" id="fb-sel"></div>
+    </div>
+  </div>
+
+  <!-- Ex 4: Production -->
+  <div class="card">
+    <div class="card-title">Exercise 4 — Your turn</div>
+    <div class="instr">Answer in Portuguese. Use the vocabulary from this episode.</div>
+    <div class="prod-box">
+      <p><strong>1.</strong> Quantos anos você tem? Answer using both forms: <em>Tenho…</em> and <em>Estou com…</em></p>
+      <textarea placeholder="Tenho ___ anos. / Estou com ___ anos."></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>2.</strong> Ask a friend or colleague their age — write the mini-dialogue (at least 3 lines).</p>
+      <textarea placeholder="A: Quantos anos você tem?\nB: Adivinha!\nA: …"></textarea>
+    </div>
+    <div class="prod-box">
+      <p><strong>3.</strong> Describe someone you know using age + "por aí". Example: <em>Meu chefe tem uns 50 anos, por aí.</em></p>
+      <textarea placeholder="…tem uns ___ anos, por aí."></textarea>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <a href="https://brazilianportuguesehub.com" target="_blank">
+    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub" style="height:32px">
+  </a>
+</footer>
+
+<script>
+  function norm(s){ return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+  function checkTF(){
+    const ans = {tf1:'T', tf2:'F', tf3:'F', tf4:'T'};
+    let ok = 0;
+    for(const name in ans){
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      if(sel && sel.value === ans[name]) ok++;
+    }
+    const fb = document.getElementById('fb-tf');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ Perfect! All 4 correct.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4 correct. Read the dialogue again and try once more.`; }
+  }
+
+  function checkGaps(){
+    const ans = {
+      g1:'quantos anos', g2:'por ai', g3:'acertou', g4:'adivinha', g5:'estou com'
+    };
+    let ok = 0;
+    for(const id in ans){ if(norm(document.getElementById(id).value)===ans[id]) ok++; }
+    const fb = document.getElementById('fb-gaps');
+    fb.style.display='block';
+    if(ok===5){ fb.className='feedback ok'; fb.textContent='✓ All correct! Great work.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/5 correct. Try again!`; }
+  }
+
+  function checkSelect(){
+    // Both TER and ESTAR COM are correct — accept either for sentences 2, 3, 4
+    // For sentence 1 (question), TER is the canonical form
+    let ok = 0;
+    const v = [
+      document.getElementById('s1').value,
+      document.getElementById('s2').value,
+      document.getElementById('s3').value,
+      document.getElementById('s4').value,
+    ];
+    if(v[0]==='tem') ok++;
+    if(v[1]==='tenho'||v[1]==='estou com') ok++;
+    if(v[2]==='tem'||v[2]==='esta com') ok++;
+    if(v[3]==='tem'||v[3]==='esta com') ok++;
+    const fb = document.getElementById('fb-sel');
+    fb.style.display='block';
+    if(ok===4){ fb.className='feedback ok'; fb.textContent='✓ All correct! Remember: both forms are natural in Brazilian Portuguese.'; }
+    else { fb.className='feedback err'; fb.textContent=`${ok}/4. Check item 1 — the question form uses TER.`; }
+  }
+</script>
+
+</body>
+</html>
