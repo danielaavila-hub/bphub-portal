@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tempos Compostos B2 | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --terracota:#D36D29;--telha:#A1441D;--rosa-cha:#FFD8C5;
+    --pitomba:#967E63;--nanquim:#2B2B1E;--goiaba:#FCA290;
+    --b2:#4E551D;--b2-bg:#e8eedc;--b2-mid:#b8c98c;
+    --comp1:#D36D29;--comp1-bg:#fce8d6;   /* perfeito composto */
+    --comp2:#2E6896;--comp2-bg:#dceaf8;   /* mais-que-perfeito */
+    --comp3:#7B3FA0;--comp3-bg:#efe0f7;   /* futuro composto */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.7}
+  .portal-header{background:var(--rosa-cha);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .portal-header .logo{height:34px;filter:brightness(0)}
+  .level-bar{background:var(--b2);padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .crumb{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.06em;text-transform:uppercase}
+  .sep{color:rgba(255,255,255,.4)}
+  .badge{background:rgba(255,255,255,.2);color:#fff;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.04em}
+  .container{max-width:820px;margin:0 auto;padding:28px 16px 64px}
+  /* HERO */
+  .hero{background:#fff;border-top:5px solid var(--b2);padding:24px 26px 20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:8px}
+  .hero-meta{font-size:.75rem;font-weight:700;color:var(--b2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+  .hero h1{font-family:'Trirong',serif;font-size:1.6rem;font-weight:700;color:var(--nanquim);margin-bottom:4px}
+  .hero .sub{font-size:.85rem;color:var(--pitomba)}
+  /* TIMING PILL */
+  .timing{display:inline-flex;align-items:center;gap:5px;background:var(--b2);color:#fff;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:12px;margin-bottom:12px}
+  /* SECTION HEADERS */
+  .section-header{display:flex;align-items:center;gap:12px;margin:28px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--b2-bg)}
+  .section-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+  .section-header h2{font-family:'Trirong',serif;font-size:1.1rem;font-weight:700;color:var(--musgo)}
+  /* BLOCKS */
+  .block{background:#fff;border-radius:12px;padding:20px 22px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .block-label{font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:12px}
+  /* KEY EXPRESSIONS */
+  .expr-box{border-radius:8px;padding:14px 16px;margin:10px 0;font-size:.87rem}
+  .expr-row{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+  .expr-row:last-child{margin-bottom:0}
+  .expr-pt{font-weight:700;color:var(--musgo);font-style:italic}
+  .expr-arrow{color:var(--pitomba);font-size:.8rem}
+  .expr-en{color:var(--pitomba);font-size:.82rem}
+  /* QUESTIONS */
+  .q-list{list-style:none;padding:0}
+  .q-list li{padding:8px 0 8px 28px;position:relative;font-size:.88rem;border-bottom:1px solid var(--b2-bg);line-height:1.6}
+  .q-list li:last-child{border-bottom:none}
+  .q-list li::before{content:attr(data-n);position:absolute;left:0;top:9px;background:var(--b2);color:#fff;width:20px;height:20px;border-radius:50%;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-style:normal}
+  /* TEACHER NOTE */
+  .t-note{background:#fffbe6;border-left:4px solid #f0c040;border-radius:0 8px 8px 0;padding:12px 16px;margin-top:12px;font-size:.82rem;color:#5a4a00;line-height:1.7}
+  .t-note strong{color:#7a6000}
+  /* GRAMMAR TABLE */
+  .gram-table{width:100%;border-collapse:collapse;font-size:.84rem;margin:12px 0}
+  .gram-table th{padding:9px 12px;text-align:left;font-weight:700;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase}
+  .gram-table td{padding:9px 12px;border-bottom:1px solid var(--b2-bg);vertical-align:top;line-height:1.5}
+  .gram-table tr:last-child td{border-bottom:none}
+  .gram-table .ex{font-style:italic;color:var(--musgo)}
+  .gram-table .en{font-size:.78rem;color:var(--pitomba)}
+  /* ROLE-PLAY */
+  .rp-box{background:var(--b2-bg);border-radius:10px;padding:16px 20px;font-size:.87rem}
+  .rp-box h4{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--floresta);margin-bottom:10px}
+  .rp-task{display:flex;gap:10px;margin-bottom:8px;line-height:1.6}
+  .rp-task:last-child{margin-bottom:0}
+  .rp-num{background:var(--b2);color:#fff;min-width:22px;height:22px;border-radius:50%;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .phrase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chip{background:#fff;border:1.5px solid var(--b2-mid);border-radius:6px;padding:3px 10px;font-size:.78rem;font-weight:700;color:var(--floresta);font-style:italic}
+  /* CONTRAST TAG */
+  .tag1{background:var(--comp1-bg);color:var(--comp1);font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:4px;white-space:nowrap}
+  .tag2{background:var(--comp2-bg);color:var(--comp2);font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:4px;white-space:nowrap}
+  .tag3{background:var(--comp3-bg);color:var(--comp3);font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:4px;white-space:nowrap}
+  .tag0{background:#e8e4de;color:#555;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:4px;white-space:nowrap}
+  @media print{.portal-header,.level-bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  @media(max-width:600px){.gram-table{font-size:.78rem}}
+</style>
+</head>
+<body>
+
+<div class="portal-header">
+  <img class="logo" src="data:image/png;base64,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yXu38wVLaWkpSJIU8Dq+QxAEKC4uhj///BMWL15cp0yr1dogXXfu3AkulwsQQlBZWX1lW2ZmJnAcBwghKCkpqVeWPyUlJb6olNX0qK+swRySJFVbVj5t2jTweDyAEAKPxwO+8Xd/du/eDQ6Ho8HXEgQB/LuDfed5noerV69Wu8bly5dv2CvYblMfZrO5VnsBXA/Wx7LsLT1/WVlZwPP8jUnQtS3H91FeXg4cx0FJSQm8/vrrDbpOMLz//vuQkZEBNpvNvyy47/92ux0yMjJg9erVQck7d+4cuN1usNls4NuosD4KCgqAZVmw2+1w6tSpetMfPXoUbDYbsCwLOTm3vnXNd999B5cuXap2j/2P/Px82LNnDzzwwAMNlr1p0ybIysoCt9tdq+yioiI4cOAAPProowBw/bvDsiwEsxJ44sSJcOjQITCbzbXK9t2zVatW1Svr7bffhoqKCuA4rsGH1WqFP/74o1a527Ztq7P8paWlcOjQIagrtlJWVhY4nc4G68WybMBv49mzZ6GyshIcDgc4HA6w2WyQn59fr5186Wse9bF48WI4ceJEwHvlcrkgKysLtmzZAoMHD74lHWo7KioqIC8vD44fPw7bt28P/sG9Te7YrNItW7aAf5hpq9Ua1CqJrVu3gsFguNFt5fF44OzZszBv3rw6823cuBHCw8PBNylSFEXIz8+HZ599ts58K1asgCZNmgBN09XOP/jgg3fKNAoK/1/wxBNPQFRUFFitVoiOjobLly/D1q2306n2v8OwYcPg4YcfBp1OB7t374aNGzf+pbIHDhwIcXFxsHv3bvBNxP2reOmll+C+++6Dc+fOwbZt2+DMmTN32Xp107t3bxgyZAgkJibCkSNHYPny5X+3SgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/SP4f0J/rfDUAMCIAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjYtMDUtMTZUMDI6NTc6NDUrMDA6MDCxdTBCAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI2LTA1LTE2VDAyOjU3OjQ1KzAwOjAwwCiI/gAAAC10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgQXJ0aWZleCBTb2Z0d2FyZSAyMDExCLrFtAAAADF0RVh0aWNjOmRlc2NyaXB0aW9uAEFydGlmZXggU29mdHdhcmUgc1JHQiBJQ0MgUHJvZmlsZRMMAYYAAAAfdEVYdFNvZnR3YXJlAEdQTCBHaG9zdHNjcmlwdCA5LjU1LjDyGIEvAAAAAElFTkSuQmCC" alt="Brazilian Portuguese Hub">
+</div>
+
+<div class="level-bar">
+  <span class="crumb">Roteiro de Conversação</span>
+  <span class="sep">›</span>
+  <span class="badge">B2 · Intermediário II</span>
+  <span class="badge">Tempos Compostos</span>
+  <span class="badge">Profissional de Tecnologia</span>
+</div>
+
+<div class="container">
+
+<div class="hero">
+  <div class="hero-meta">Roteiro de Conversação · 50 min</div>
+  <h1>Tempos Compostos: conversando com amigos</h1>
+  <div class="sub">Perfeito Composto · Mais-que-Perfeito · Futuro Composto — em contexto oral e informal</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="block" style="margin-top:20px">
+  <div class="block-label" style="color:var(--b2)">Visão geral da aula</div>
+  <table class="gram-table">
+    <thead>
+      <tr style="background:var(--b2-bg)">
+        <th>Bloco</th><th>Tempo verbal</th><th>Contexto</th><th>Duração</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Warm-up</td>
+        <td>—</td>
+        <td>Retomada, perguntas abertas</td>
+        <td>5 min</td>
+      </tr>
+      <tr>
+        <td><span class="tag1">Bloco 1</span></td>
+        <td><strong>Pretérito Perfeito Composto</strong><br><span class="ex">tenho feito, tenho trabalhado</span></td>
+        <td>O que você tem feito ultimamente?</td>
+        <td>10 min</td>
+      </tr>
+      <tr>
+        <td><span class="tag2">Bloco 2</span></td>
+        <td><strong>Mais-que-Perfeito Composto</strong><br><span class="ex">tinha feito, havia chegado</span></td>
+        <td>Contando histórias e anedotas de trabalho</td>
+        <td>10 min</td>
+      </tr>
+      <tr>
+        <td><span class="tag3">Bloco 3</span></td>
+        <td><strong>Futuro do Presente Composto</strong><br><span class="ex">terei feito, terei terminado</span></td>
+        <td>Planos e metas futuras</td>
+        <td>5 min</td>
+      </tr>
+      <tr>
+        <td>Role-play</td>
+        <td>Todos os três</td>
+        <td>Jantar com amigos brasileiros</td>
+        <td>10 min</td>
+      </tr>
+      <tr>
+        <td>Foco na língua</td>
+        <td>Revisão + contraste</td>
+        <td>Tabela comparativa e correção</td>
+        <td>5 min</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- WARM-UP -->
+<div class="section-header">
+  <div class="section-dot" style="background:var(--b2)"></div>
+  <h2>Warm-up</h2>
+  <span class="timing">⏱ 5 min</span>
+</div>
+
+<div class="block">
+  <div class="block-label" style="color:var(--b2)">Perguntas de abertura</div>
+  <p style="font-size:.83rem;color:var(--pitomba);margin-bottom:12px">These questions naturally contain compound tenses. Ask them conversationally — let the student respond freely before any grammar focus.</p>
+  <ul class="q-list">
+    <li data-n="1">O que você <strong>tem feito</strong> de diferente ultimamente — no trabalho e fora dele?</li>
+    <li data-n="2">Você <strong>tem saído</strong> muito com amigos ultimamente? Com que frequência vocês se encontram?</li>
+    <li data-n="3"><strong>Tem acontecido</strong> alguma coisa interessante na sua empresa nos últimos meses?</li>
+  </ul>
+  <div class="t-note">
+    📝 <strong>Nota:</strong> Observe como o aluno responde. Ele usa o perfeito composto espontaneamente ou recorre ao simples para tudo? Não corrija ainda — anote os casos para retomar no Foco na Língua.
+  </div>
+</div>
+
+<!-- BLOCO 1 -->
+<div class="section-header">
+  <div class="section-dot" style="background:var(--comp1)"></div>
+  <h2>Bloco 1 — Pretérito Perfeito Composto</h2>
+  <span class="timing" style="background:var(--comp1)">⏱ 10 min</span>
+</div>
+
+<div class="block" style="border-left:4px solid var(--comp1)">
+  <div class="block-label" style="color:var(--comp1)">Estrutura &amp; uso</div>
+  <p style="font-size:.86rem;margin-bottom:10px"><strong>ter (presente) + particípio</strong> — ações <em>repetidas ou em andamento</em> desde o passado até o presente</p>
+
+  <div class="expr-box" style="background:var(--comp1-bg)">
+    <div class="expr-row">
+      <span class="expr-pt">Ultimamente, tenho trabalhado muito em home office.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">Lately, I've been working a lot from home.</span>
+    </div>
+    <div class="expr-row">
+      <span class="expr-pt">Não tenho dormido bem esta semana.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">I haven't been sleeping well this week.</span>
+    </div>
+    <div class="expr-row">
+      <span class="expr-pt">Minha equipe tem lançado muitas atualizações.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">My team has been releasing a lot of updates.</span>
+    </div>
+  </div>
+
+  <div class="block-label" style="color:var(--comp1);margin-top:16px">Perguntas para discussão</div>
+  <ul class="q-list">
+    <li data-n="1">O que você <strong>tem trabalhado</strong> ultimamente? Tem algum projeto novo em andamento?</li>
+    <li data-n="2">Você <strong>tem conseguido</strong> descansar? <strong>Tem dormido</strong> bem?</li>
+    <li data-n="3">Seus amigos <strong>têm falado</strong> sobre trabalho remoto? O que eles <strong>têm achado</strong>?</li>
+    <li data-n="4">Você <strong>tem aprendido</strong> alguma tecnologia nova ultimamente? Por quê?</li>
+  </ul>
+
+  <div class="t-note">
+    📝 <strong>Atenção (BR x PT):</strong> Em português brasileiro, o perfeito composto indica <em>ação repetida ou contínua</em> — nunca uma ação única já concluída. <br><br>
+    ✅ <em>"Tenho enviado relatórios toda semana."</em> (repetido)<br>
+    ❌ <em>"Tenho enviado o relatório ontem."</em> → corrija: <strong>"Enviei o relatório ontem."</strong> (único, concluído)<br><br>
+    Se o aluno usar o composto para ações pontuais, aproveite para contrastar: <em>"Você fez isso uma vez ou tem feito sempre?"</em>
+  </div>
+</div>
+
+<!-- BLOCO 2 -->
+<div class="section-header">
+  <div class="section-dot" style="background:var(--comp2)"></div>
+  <h2>Bloco 2 — Pretérito Mais-que-Perfeito Composto</h2>
+  <span class="timing" style="background:var(--comp2)">⏱ 10 min</span>
+</div>
+
+<div class="block" style="border-left:4px solid var(--comp2)">
+  <div class="block-label" style="color:var(--comp2)">Estrutura &amp; uso</div>
+  <p style="font-size:.86rem;margin-bottom:10px"><strong>tinha / havia + particípio</strong> — passado anterior a outro passado; essencial para contar histórias</p>
+
+  <div class="expr-box" style="background:var(--comp2-bg)">
+    <div class="expr-row">
+      <span class="expr-pt">Quando cheguei na reunião, a equipe já tinha tomado a decisão.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">When I arrived at the meeting, the team had already made the decision.</span>
+    </div>
+    <div class="expr-row">
+      <span class="expr-pt">Antes de sair da empresa, eu já havia aceito a nova proposta.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">Before leaving the company, I had already accepted the new offer.</span>
+    </div>
+    <div class="expr-row">
+      <span class="expr-pt">Quando o cliente ligou, o deploy ainda não tinha sido feito.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">When the client called, the deploy hadn't been done yet.</span>
+    </div>
+  </div>
+
+  <div class="block-label" style="color:var(--comp2);margin-top:16px">Perguntas para discussão</div>
+  <ul class="q-list">
+    <li data-n="1">Pense em uma reunião importante. Quando você chegou, o que já <strong>tinha acontecido</strong>?</li>
+    <li data-n="2">Você já chegou em algum lugar e tudo já <strong>tinha terminado</strong>? Conta a história.</li>
+    <li data-n="3">Antes de aceitar seu emprego atual, o que você já <strong>tinha feito</strong> na carreira?</li>
+    <li data-n="4">Pense em um bug sério que aconteceu. O que a equipe já <strong>tinha tentado</strong> antes de resolver?</li>
+  </ul>
+
+  <div class="t-note">
+    📝 <strong>Padrão-chave para storytelling:</strong><br>
+    <em>Quando + [perfeito simples], + já tinha + [particípio]</em><br><br>
+    A linha do tempo: o mais-que-perfeito sempre ocorre <em>antes</em> do perfeito simples na história. Ajude o aluno a visualizar isso: <strong>"O que veio primeiro na história?"</strong><br><br>
+    Se o aluno travar, sugira o scaffold:<br>
+    <em>"Quando [evento A aconteceu], [sujeito] já tinha [evento B]."</em><br>
+    Ex: "Quando o cliente ligou, eu já tinha enviado os arquivos."
+  </div>
+</div>
+
+<!-- BLOCO 3 -->
+<div class="section-header">
+  <div class="section-dot" style="background:var(--comp3)"></div>
+  <h2>Bloco 3 — Futuro do Presente Composto</h2>
+  <span class="timing" style="background:var(--comp3)">⏱ 5 min</span>
+</div>
+
+<div class="block" style="border-left:4px solid var(--comp3)">
+  <div class="block-label" style="color:var(--comp3)">Estrutura &amp; uso</div>
+  <p style="font-size:.86rem;margin-bottom:10px"><strong>terá + particípio</strong> — ação que estará concluída antes de um ponto futuro</p>
+
+  <div class="expr-box" style="background:var(--comp3-bg)">
+    <div class="expr-row">
+      <span class="expr-pt">Até sexta, eu terei terminado o projeto.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">By Friday, I will have finished the project.</span>
+    </div>
+    <div class="expr-row">
+      <span class="expr-pt">Daqui a um ano, espero que já terei lançado meu app.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">In a year, I hope I will have launched my app.</span>
+    </div>
+    <div class="expr-row">
+      <span class="expr-pt">Quando você chegar, eu já terei mandado o código.</span>
+      <span class="expr-arrow">→</span>
+      <span class="expr-en">By the time you arrive, I will have sent the code.</span>
+    </div>
+  </div>
+
+  <div class="block-label" style="color:var(--comp3);margin-top:16px">Perguntas para discussão</div>
+  <ul class="q-list">
+    <li data-n="1">Até o final do ano, o que você espera <strong>ter conquistado</strong> na carreira?</li>
+    <li data-n="2">Daqui a 5 anos, onde você espera estar? O que você já <strong>terá feito</strong>?</li>
+    <li data-n="3">Antes do próximo sprint, o que você <strong>terá terminado</strong> no trabalho?</li>
+  </ul>
+
+  <div class="t-note">
+    📝 <strong>Registro:</strong> O futuro composto é mais formal e mais comum na escrita. Na conversa informal, os brasileiros costumam preferir <em>"vou ter feito"</em> (perifrástico composto). Ambas as formas são corretas em B2 — vale mencionar a diferença de registro:<br><br>
+    <strong>Formal / escrito:</strong> <em>"Até sexta, terei entregado o relatório."</em><br>
+    <strong>Informal / falado:</strong> <em>"Até sexta, vou ter entregado o relatório."</em>
+  </div>
+</div>
+
+<!-- ROLE-PLAY -->
+<div class="section-header">
+  <div class="section-dot" style="background:var(--musgo)"></div>
+  <h2>Role-play final — os três tempos em ação</h2>
+  <span class="timing">⏱ 10 min</span>
+</div>
+
+<div class="block">
+  <div class="rp-box">
+    <h4>📍 Cenário</h4>
+    <p style="font-size:.87rem;margin-bottom:14px">You're having dinner with two Brazilian friends you haven't seen in two months. During the conversation, use all three compound tenses naturally.</p>
+    <div class="rp-task">
+      <div class="rp-num">1</div>
+      <div><strong>Perfeito Composto</strong> — Tell your friends what you've been up to lately: work, projects, habits, social life. Use <em>ultimamente, nos últimos meses, esta semana</em>.</div>
+    </div>
+    <div class="rp-task">
+      <div class="rp-num">2</div>
+      <div><strong>Mais-que-Perfeito</strong> — Tell a story from work in the past month. Include what had already happened before the main event: a meeting, a deadline, a decision, a technical problem.</div>
+    </div>
+    <div class="rp-task">
+      <div class="rp-num">3</div>
+      <div><strong>Futuro Composto</strong> — Share a professional goal: something you will have accomplished or launched by a specific future date.</div>
+    </div>
+    <div class="phrase-chips" style="margin-top:14px">
+      <span class="chip">ultimamente tenho...</span>
+      <span class="chip">quando cheguei..., já tinha...</span>
+      <span class="chip">antes de..., eu havia...</span>
+      <span class="chip">até [prazo], terei...</span>
+      <span class="chip">não tenho tido tempo para...</span>
+      <span class="chip">daqui a um ano, espero ter...</span>
+    </div>
+  </div>
+  <div class="t-note" style="margin-top:12px">
+    📝 <strong>Durante o role-play, observe:</strong> O aluno transita entre os três tempos de forma natural? Usa o perfeito composto para ações únicas por engano? Confunde a ordem do mais-que-perfeito? Anote e retome no Foco na Língua.
+  </div>
+</div>
+
+<!-- FOCO NA LÍNGUA -->
+<div class="section-header">
+  <div class="section-dot" style="background:var(--musgo)"></div>
+  <h2>Foco na língua — revisão e contraste</h2>
+  <span class="timing">⏱ 5 min</span>
+</div>
+
+<div class="block">
+  <div class="block-label" style="color:var(--musgo)">Tabela comparativa</div>
+  <table class="gram-table">
+    <thead>
+      <tr style="background:var(--b2-bg)">
+        <th>Tempo</th><th>Estrutura</th><th>Quando usar</th><th>Exemplo tech</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag0">Perfeito Simples</span></td>
+        <td><strong>fiz / enviei</strong></td>
+        <td>Ação única, concluída no passado</td>
+        <td class="ex">Enviei o e-mail ontem.</td>
+      </tr>
+      <tr>
+        <td><span class="tag1">Perfeito Composto</span></td>
+        <td><strong>tenho feito</strong></td>
+        <td>Ação repetida ou em andamento até o presente</td>
+        <td class="ex">Tenho trabalhado 12h por dia essa semana.</td>
+      </tr>
+      <tr>
+        <td><span class="tag2">Mais-que-Perfeito</span></td>
+        <td><strong>tinha feito</strong></td>
+        <td>Passado anterior a outro passado</td>
+        <td class="ex">Quando o cliente ligou, eu já tinha feito o deploy.</td>
+      </tr>
+      <tr>
+        <td><span class="tag3">Futuro Composto</span></td>
+        <td><strong>terei feito</strong></td>
+        <td>Ação concluída antes de um ponto futuro</td>
+        <td class="ex">Até dezembro, terei lançado a versão 2.0.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="block-label" style="color:var(--musgo);margin-top:16px">Perguntas rápidas para consolidar</div>
+  <ul class="q-list">
+    <li data-n="1">Você tem trabalhado em algum projeto pessoal? (perfeito composto — resposta esperada)</li>
+    <li data-n="2">O que você já tinha feito antes de entrar para sua empresa atual? (mais-que-perfeito)</li>
+    <li data-n="3">Até o fim de 2025, o que você espera ter feito? (futuro composto)</li>
+  </ul>
+
+  <div class="t-note">
+    📝 <strong>Erros frequentes de anglófonos:</strong><br>
+    • Usar o composto para ações únicas: <em>"Tenho mandado o e-mail"</em> → <strong>"Mandei o e-mail"</strong><br>
+    • Inverter a ordem no mais-que-perfeito: a ação com <em>tinha</em> veio primeiro na realidade, mas aparece depois na frase<br>
+    • Confundir <em>tinha feito</em> (mais-que-perf.) com <em>tenho feito</em> (perf. composto) — atenção à forma do auxiliar: <em>tinha</em> vs. <em>tenho</em>
+  </div>
+</div>
+
+</div><!-- end container -->
+</body>
+</html>
