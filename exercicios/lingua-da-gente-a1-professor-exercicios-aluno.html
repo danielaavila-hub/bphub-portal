@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Conhecendo seu professor | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+    --nanquim:    #000000;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+
+  /* ── HEADER ─────────────────────────────── */
+  .portal-header {
+    background: var(--floresta);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .portal-header .logo { display: block; line-height: 0; }
+  .portal-header .back {
+    color: rgba(255,255,255,.8);
+    text-decoration: none;
+    font-size: .85rem;
+    margin-left: auto;
+  }
+  .portal-header .back:hover { color: #fff; }
+
+  /* ── LEVEL BAR ───────────────────────────── */
+  .level-bar {
+    background: var(--baunilha);
+    color: var(--musgo);
+    padding: 8px 28px;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge {
+    background: var(--terracota);
+    color: #fff;
+    border-radius: 20px;
+    padding: 2px 12px;
+    font-size: .75rem;
+  }
+
+  /* ── CONTAINER ───────────────────────────── */
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 48px; }
+
+  /* ── CARDS ───────────────────────────────── */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(60,60,33,.07);
+  }
+  .intro-card { padding:28px 32px; }
+  .intro-card h1 {
+    font-family: 'Trirong', serif;
+    font-size: 1.9rem;
+    color: var(--musgo);
+    margin-bottom: 6px;
+  }
+
+  /* ── SECTION TITLE ───────────────────────── */
+  .section-title {
+    font-family: 'Trirong', serif;
+    font-size: 1.05rem;
+    color: var(--floresta);
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin: 32px 0 10px;
+    padding-left: 12px;
+    border-left: 3px solid var(--terracota);
+  }
+
+  /* ── CARD TITLE ──────────────────────────── */
+  .card-title {
+    font-family: 'Trirong', serif;
+    font-size: 1.1rem;
+    color: var(--terracota);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  /* ── INSTRUCTIONS ────────────────────────── */
+  .instr {
+    background: var(--baunilha);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: .87rem;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .instr strong { color: var(--terracota); }
+
+  /* ── AUDIO ───────────────────────────────── */
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+
+  /* ── DIALOGUE ────────────────────────────── */
+  .dialogue { margin: 16px 0; }
+  .dialogue-line {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--giz);
+    align-items: baseline;
+  }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker {
+    font-weight: 700;
+    color: var(--floresta);
+    font-size: .85rem;
+    min-width: 28px;
+    text-transform: uppercase;
+  }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+
+  /* ── GRAMMAR TABLE ───────────────────────── */
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th {
+    background: var(--floresta);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Trirong', serif;
+    font-weight: 600;
+  }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .gram-table .hl { color: var(--telha); font-weight: 700; }
+
+  /* ── PHONOLOGY BOX ───────────────────────── */
+  .phon-box {
+    background: var(--rosa-cha);
+    border-left: 4px solid var(--goiaba);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: .9rem;
+  }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+
+  /* ── CULTURE BOX ─────────────────────────── */
+  .cult-box {
+    background: #EEF4EC;
+    border-left: 4px solid var(--floresta);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: .9rem;
+  }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+
+  /* ── EXERCISES ───────────────────────────── */
+  .ex-num {
+    display: inline-block;
+    background: var(--terracota);
+    color: #fff;
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    text-align: center;
+    line-height: 26px;
+    font-size: .8rem;
+    font-weight: 700;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .ex-title {
+    font-family: 'Trirong', serif;
+    font-size: 1rem;
+    color: var(--musgo);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .fill-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    line-height: 2;
+    font-size: .97rem;
+  }
+  .fill-line input {
+    border: none;
+    border-bottom: 2px solid var(--erva-doce);
+    background: transparent;
+    font-family: 'Manrope', sans-serif;
+    font-size: .97rem;
+    color: var(--musgo);
+    padding: 2px 6px;
+    width: 160px;
+    text-align: center;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+
+  /* ── WORD CHOICE BUTTONS ─────────────────── */
+  .word-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border: 1.5px solid var(--erva-doce);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .word-item .pt-word { font-weight: 700; font-size: 1.05rem; color: var(--musgo); min-width: 160px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn {
+    background: var(--giz);
+    border: 1.5px solid var(--erva-doce);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--musgo);
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+
+  /* ── MATCHING ────────────────────────────── */
+  .match-select {
+    width: 100%;
+    border: 2px solid var(--erva-doce);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .9rem;
+    color: var(--musgo);
+    background: #fff;
+    outline: none;
+    transition: border-color .2s;
+    cursor: pointer;
+  }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+
+  /* ── PRODUCTION ──────────────────────────── */
+  .prod-textarea {
+    width: 100%;
+    border: 2px solid var(--erva-doce);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .95rem;
+    color: var(--musgo);
+    resize: vertical;
+    min-height: 110px;
+    outline: none;
+    transition: border-color .2s;
+    margin-top: 10px;
+  }
+  .prod-textarea:focus { border-color: var(--terracota); }
+
+  /* ── BUTTONS & SCORE ─────────────────────── */
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check {
+    background: var(--terracota);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset {
+    background: transparent;
+    color: var(--pitomba);
+    border: 1.5px solid var(--pitomba);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: var(--baunilha);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--musgo);
+  }
+  .score-badge.visible { display: inline-flex; }
+
+  /* ── FOOTER ─────────────────────────────── */
+  .site-footer {
+    background: var(--musgo);
+    padding: 24px 32px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .site-footer .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: .02em;
+  }
+  .site-footer .footer-copy a {
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .site-footer .footer-copy a:hover { color: #fff; }
+
+  @media(max-width:600px) {
+    .card { padding: 20px 18px; }
+    .word-item { flex-direction: column; align-items: flex-start; }
+  }
+  .series-row { display:flex; align-items:center; gap:10px; margin:8px 0 12px; flex-wrap:wrap; }
+  .series-name { font-size:.82rem; color:var(--floresta); font-weight:600; letter-spacing:.02em; }
+  .ep-badge { background:var(--terracota); color:#fff; font-size:.72rem; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+  .a1plus-badge { background:var(--pitomba); color:#fff; font-size:.68rem; font-weight:800; padding:2px 7px; border-radius:3px; letter-spacing:.06em; white-space:nowrap; }
+  .fonte { font-size:.78rem; color:var(--pitomba); margin-top:4px; }
+  .fonte em { font-style:italic; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="portal-header">
+  <img src="data:image/png;base64,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" alt="Brazilian Portuguese Hub" style="height:34px;display:block;">
+  <a class="back" href="../a1/index.html">← Back to A1</a>
+</div>
+<div class="level-bar">
+  <span class="badge">A1</span>
+  Iniciante I · Apresentações · Conhecendo seu professor
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Conhecendo seu professor</h1>
+    <div class="series-row">
+      <span class="series-name">Língua da Gente</span>
+      <span class="ep-badge">Episódio 23</span>
+      <span class="a1plus-badge">A1+</span>
+    </div>
+    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" style="color:var(--terracota);text-decoration:none;font-weight:600">CC BY 4.0</a></div>
+  </div>
+
+  <!-- STEP 1: LISTEN -->
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+
+    <div class="instr">
+      <strong>First listen:</strong> Just listen and relax. What is the situation? Who are the speakers? What do you understand?
+    </div>
+
+    <div class="audio-label">Língua da Gente · Episode 23</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0"
+        height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/beginning-23-meeting-your-new-professor/id1020665354?i=1000371652041">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/beginning-23-meeting-your-new-professor/id1020665354?i=1000371652041" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <!-- STEP 2: DIALOGUE -->
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+
+    <div class="instr">
+      <strong>Listen again</strong> while reading. Notice the expressions used to introduce yourself and ask to enter a room.
+    </div>
+
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Com licença, o Professor João está aqui?</div>
+          <div class="line-en">Excuse me, is Professor João here?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Sou eu, em que eu posso ajudar?</div>
+          <div class="line-en">That's me. How can I help you?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Bom dia, meu nome é Daniela, sou nova aluna em sua aula.</div>
+          <div class="line-en">Hi, I'm Daniela, a new student in your class.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Ah é, prazer, pode entrar, senta.</div>
+          <div class="line-en">Ah yes, good to meet you, come on in and take a seat.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: LANGUAGE FOCUS -->
+  <p class="section-title">Step 3 — Language Focus</p>
+  <div class="card">
+    <div class="card-title">📖 Key Expressions — Greetings &amp; Introductions</div>
+
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">This short dialogue is packed with useful everyday expressions. Here are the key phrases and what they mean:</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Portuguese</th>
+        <th>English</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><span class="pt">Com licença</span></td>
+        <td><span class="en">Excuse me</span></td>
+        <td><span class="note">Used to ask permission before entering a room or interrupting someone</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">O Professor João está aqui?</span></td>
+        <td><span class="en">Is Professor João here?</span></td>
+        <td><span class="note">Asking if someone is present — <em>estar</em> = to be (location)</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Sou eu.</span></td>
+        <td><span class="en">That's me. / It's me.</span></td>
+        <td><span class="note">Literally "I am I" — very common Brazilian response to "Is X here?"</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Em que eu posso ajudar?</span></td>
+        <td><span class="en">How can I help you?</span></td>
+        <td><span class="note">Polite, professional. <em>Posso</em> = I can (<em>poder</em>)</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Meu nome é ___.</span></td>
+        <td><span class="en">My name is ___.</span></td>
+        <td><span class="note">Standard way to introduce yourself formally</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Sou nova aluna em sua aula.</span></td>
+        <td><span class="en">I'm a new student in your class.</span></td>
+        <td><span class="note"><em>Sou</em> + role — using <em>ser</em> to identify yourself</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Prazer.</span></td>
+        <td><span class="en">Nice to meet you. / Pleased to meet you.</span></td>
+        <td><span class="note">Short for <em>Muito prazer</em> — very common in Brazil</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Pode entrar.</span></td>
+        <td><span class="en">Come on in. / You may enter.</span></td>
+        <td><span class="note"><em>Pode</em> + infinitive = you can / you may</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Senta.</span></td>
+        <td><span class="en">Take a seat. / Sit down.</span></td>
+        <td><span class="note">Informal imperative — very natural and warm in Brazilian speech</span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box" style="margin-top:20px;">
+      <strong>🇧🇷 Culture Note — "Com licença" vs. "Desculpa"</strong>
+      In Brazil, <strong>com licença</strong> is used <em>before</em> doing something that requires permission — like entering a room, walking past someone, or interrupting a conversation. It is NOT an apology. If you step on someone's foot or make a mistake, you'd say <strong>desculpa</strong> (sorry) instead. English speakers often mix these up at first!
+    </div>
+
+    <div style="margin-top:20px;">
+      <div class="card-title" style="font-size:.95rem;">🔍 Grammar Spotlight — <em>Sou eu</em></div>
+      <p style="font-size:.9rem;color:#666;margin-bottom:12px;">When the professor answers <em>Sou eu</em>, he's using a very Brazilian structure. The verb <strong>ser</strong> (to be) is used here to <em>identify</em> — "I am the one." Notice: there is no word for "That's" — Portuguese just puts the verb first: <em>Sou eu</em> (literally: "Am I.").</p>
+      <p style="font-size:.9rem;color:#666;">You can use this pattern to confirm your own identity too: <strong>Sou eu.</strong> — "It's me." / "That's me."</p>
+    </div>
+
+    <div class="phon-box" style="margin-top:20px;">
+      <strong>🔊 Phonology Note — "Licença" and the letter Ç</strong>
+      The word <em>licença</em> contains a <strong>ç (c-cedilha)</strong>. This letter always sounds like the English <strong>s</strong> — never like <em>k</em>. So <em>licença</em> is pronounced approximately <em>"lee-SEN-sa"</em>. Brazilian Portuguese also tends to reduce unstressed vowels, so the final <em>-a</em> is short and light. Practice: say <em>com li-CEN-ça</em> three times, stressing the middle syllable.
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <p class="section-title">Step 4 — Practice</p>
+
+  <!-- EXERCISE 1 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> What does it mean? — Expression Quiz</div>
+    <div class="instr">
+      Each expression below comes from the dialogue. Choose the correct English meaning by clicking your answer.
+    </div>
+
+    <!-- 1: Com licença -->
+    <div class="word-item" id="w1">
+      <span class="pt-word">Com licença</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','a')">Excuse me</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','a')">Sorry</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','a')">Goodbye</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Com licença</em> is used to ask permission or attention — not to apologize. For "sorry," Brazilians say <em>desculpa</em>.</span>
+    </div>
+
+    <!-- 2: Sou eu -->
+    <div class="word-item" id="w2">
+      <span class="pt-word">Sou eu.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','b')">I don't know.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','b')">That's me. / It's me.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','b')">I'm not here.</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Sou eu</em> — the professor is confirming his identity. Literally "I am I" — a very natural Brazilian response.</span>
+    </div>
+
+    <!-- 3: Prazer -->
+    <div class="word-item" id="w3">
+      <span class="pt-word">Prazer.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','c')">You're welcome.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','c')">Thank you.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','c')">Nice to meet you.</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Prazer</em> (or <em>Muito prazer</em>) = Nice to meet you. You'll hear this all the time in Brazil when meeting someone new.</span>
+    </div>
+
+    <!-- 4: Pode entrar -->
+    <div class="word-item" id="w4">
+      <span class="pt-word">Pode entrar.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','b')">Please wait outside.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','b')">Come on in.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','b')">Can you enter?</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Pode entrar</em> = Come on in / You may enter. <em>Pode</em> + infinitive is a warm and common way to give permission in Brazilian Portuguese.</span>
+    </div>
+
+    <!-- 5: Senta -->
+    <div class="word-item" id="w5">
+      <span class="pt-word">Senta.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w5','a','b')">Are you sitting?</button>
+        <button class="choice-btn" onclick="checkChoice('w5','b','b')">Take a seat.</button>
+        <button class="choice-btn" onclick="checkChoice('w5','c','b')">The seat is taken.</button>
+      </div>
+      <span class="feedback" id="fb5">✅ Correct! <em>Senta</em> is the informal imperative of <em>sentar</em> — "to sit." It sounds direct but is actually warm and hospitable in Brazil.</span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 2 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks to reconstruct the dialogue from memory. Type the missing word or phrase.<br>
+      <strong>Word bank:</strong> <em>licença · Sou eu · prazer · senta · meu nome é · posso ajudar</em>
+    </div>
+
+    <div class="fill-line">— Com <input type="text" id="f1" placeholder="___">, o Professor João está aqui?
+    </div>
+    <div class="fill-line">— <input type="text" id="f2" placeholder="___">, em que eu posso ajudar?
+    </div>
+    <div class="fill-line">— Bom dia, <input type="text" id="f3" placeholder="___"> Daniela, sou nova aluna em sua aula.
+    </div>
+    <div class="fill-line">— Ah é, <input type="text" id="f4" placeholder="___">, pode entrar, <input type="text" id="f5" placeholder="___">.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 3 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> Match the expression to its use</div>
+    <div class="instr">
+      What is each expression used for? Match each phrase to its communicative function.
+    </div>
+
+    <div style="display:grid;gap:12px;margin-top:8px;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.9rem;font-weight:700;min-width:240px;color:var(--musgo);">Com licença</span>
+        <select class="match-select" id="ms1" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">Introducing yourself</option>
+          <option value="b">Asking permission to enter</option>
+          <option value="c">Greeting someone for the first time</option>
+          <option value="d">Inviting someone to sit down</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.9rem;font-weight:700;min-width:240px;color:var(--musgo);">Meu nome é Daniela.</span>
+        <select class="match-select" id="ms2" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">Introducing yourself</option>
+          <option value="b">Asking permission to enter</option>
+          <option value="c">Greeting someone for the first time</option>
+          <option value="d">Inviting someone to sit down</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.9rem;font-weight:700;min-width:240px;color:var(--musgo);">Prazer.</span>
+        <select class="match-select" id="ms3" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">Introducing yourself</option>
+          <option value="b">Asking permission to enter</option>
+          <option value="c">Greeting someone for the first time</option>
+          <option value="d">Inviting someone to sit down</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.9rem;font-weight:700;min-width:240px;color:var(--musgo);">Senta.</span>
+        <select class="match-select" id="ms4" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">Introducing yourself</option>
+          <option value="b">Asking permission to enter</option>
+          <option value="c">Greeting someone for the first time</option>
+          <option value="d">Inviting someone to sit down</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 4 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Introduce Yourself</div>
+    <div class="instr">
+      Write a short dialogue (4–5 lines) where you go to meet your new professor at a Brazilian university. Use the expressions from the episode: <strong>com licença, meu nome é, sou novo/a aluno/a, prazer</strong>. Use your own name and profession!
+    </div>
+    <textarea class="prod-textarea" placeholder="Example:&#10;A: Com licença, a Professora Ana está aqui?&#10;B: Sou eu. Em que posso ajudar?&#10;A: Bom dia! Meu nome é David, sou novo aluno em sua aula.&#10;B: Ah, prazer, David! Pode entrar, senta."></textarea>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <p class="footer-copy">
+    Material developed for Brazilian Portuguese Hub ·
+    Podcast <em>Língua da Gente</em> by Orlando R. Kelm ·
+    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> ·
+    <a href="https://www.brazilianportuguesehub.com" target="_blank">brazilianportuguesehub.com</a>
+  </p>
+</div>
+
+<script>
+  /* ── EXERCISE 1: expression quiz ── */
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var val = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(val && val[1] === chosen) {
+        b.classList.add(chosen === correct ? 'correct' : 'wrong');
+      }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      var correctBtn = item.querySelector('[onclick*="\''+correct+'\'"]');
+      fb.textContent = '❌ Not quite. The correct answer is: "' + (correctBtn ? correctBtn.textContent : correct) + '".';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  /* ── EXERCISE 2: gap fill ── */
+  var fillAnswers = {
+    f1: 'licença|licenca',
+    f2: 'sou eu',
+    f3: 'meu nome é|meu nome e',
+    f4: 'prazer',
+    f5: 'senta'
+  };
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/[''´`]/g,"'"); }
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  /* ── EXERCISE 3: matching ── */
+  var matchAnswers = { ms1:'b', ms2:'a', ms3:'c', ms4:'d' };
+  function checkMatch(){
+    var score = 0;
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+</body>
+</html>
