@@ -476,20 +476,23 @@
 
       <div style="margin-bottom:16px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">1. Onde fica a praça?</label>
-        <textarea class="open-textarea" placeholder="A praça fica..."></textarea>
+        <textarea class="open-textarea" id="comp1" placeholder="Escreva sua resposta em português..."></textarea>
       </div>
       <div style="margin-bottom:16px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">2. O que a padaria vende?</label>
-        <textarea class="open-textarea" placeholder="A padaria vende..."></textarea>
+        <textarea class="open-textarea" id="comp2" placeholder="Escreva sua resposta em português..."></textarea>
       </div>
       <div style="margin-bottom:16px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">3. Onde a amiga trabalha?</label>
-        <textarea class="open-textarea" placeholder="Ela trabalha..."></textarea>
+        <textarea class="open-textarea" id="comp3" placeholder="Escreva sua resposta em português..."></textarea>
       </div>
-      <div>
+      <div style="margin-bottom:16px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">4. Onde as duas amigas se encontram?</label>
-        <textarea class="open-textarea" placeholder="Elas se encontram..."></textarea>
+        <textarea class="open-textarea" id="comp4" placeholder="Escreva sua resposta em português..."></textarea>
       </div>
+
+      <button class="check-btn" onclick="checkComp()">✓ Check answers</button>
+      <div id="comp-result" class="result-msg" style="max-height:160px; overflow-y:auto;"></div>
     </div>
 
     <!-- Exercise 2 — Combine sentences -->
@@ -517,7 +520,7 @@
           </div>
           <input class="combine-input" type="text"
             data-answer="eu tenho um amigo que fala portugues muito bem"
-            placeholder="Eu tenho um amigo que...">
+            placeholder="Escreva as duas frases combinadas com 'que'...">
         </li>
         <li class="combine-item">
           <div class="combine-pair">
@@ -527,7 +530,7 @@
           </div>
           <input class="combine-input" type="text"
             data-answer="ela comprou uma mochila que e vermelha"
-            placeholder="Ela comprou uma mochila que...">
+            placeholder="Escreva as duas frases combinadas com 'que'...">
         </li>
         <li class="combine-item">
           <div class="combine-pair">
@@ -537,7 +540,7 @@
           </div>
           <input class="combine-input" type="text"
             data-answer="nos fomos a um restaurante que fica no centro"
-            placeholder="Nós fomos a um restaurante que...">
+            placeholder="Escreva as duas frases combinadas com 'que'...">
         </li>
         <li class="combine-item">
           <div class="combine-pair">
@@ -547,7 +550,7 @@
           </div>
           <input class="combine-input" type="text"
             data-answer="ele tem um gato que dorme o dia todo"
-            placeholder="Ele tem um gato que...">
+            placeholder="Escreva as duas frases combinadas com 'que'...">
         </li>
         <li class="combine-item">
           <div class="combine-pair">
@@ -557,7 +560,7 @@
           </div>
           <input class="combine-input" type="text"
             data-answer="eu conheco uma professora que e muito divertida"
-            placeholder="Eu conheço uma professora que...">
+            placeholder="Escreva as duas frases combinadas com 'que'...">
         </li>
       </ul>
 
@@ -670,31 +673,31 @@
       <ul class="prod-list">
         <li class="prod-item">
           <p class="prod-prompt">1. Eu tenho um/uma _________ <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu tenho um/uma ___ que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
         <li class="prod-item">
           <p class="prod-prompt">2. Eu moro em um lugar <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu moro em um lugar que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
         <li class="prod-item">
           <p class="prod-prompt">3. Eu tenho um/uma amigo/a <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu tenho um/uma amigo/a que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
         <li class="prod-item">
           <p class="prod-prompt">4. Eu trabalho em um lugar <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu trabalho em um lugar que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
         <li class="prod-item">
           <p class="prod-prompt">5. Eu tenho um objeto <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu tenho um objeto que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
         <li class="prod-item">
           <p class="prod-prompt">6. Eu conheço uma pessoa <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu conheço uma pessoa que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
         <li class="prod-item">
           <p class="prod-prompt">7. Eu gosto de um/uma _________ <span class="que-anchor">que</span></p>
-          <input class="prod-input" type="text" placeholder="Eu gosto de um/uma ___ que...">
+          <input class="prod-input" type="text" placeholder="Continue a frase...">
         </li>
       </ul>
     </div>
@@ -715,6 +718,35 @@
       .normalize('NFD').replace(/[̀-ͯ]/g,'')
       .replace(/[^a-z0-9\s]/g,'')
       .replace(/\s+/g,' ');
+  }
+
+  /* ── EX 1: Comprehension check ── */
+  function checkComp() {
+    // key words expected in each answer (accent-insensitive)
+    var keys = [
+      ['centro'],
+      ['pao de queijo', 'queijo'],
+      ['livraria'],
+      ['cafe']
+    ];
+    var ids = ['comp1','comp2','comp3','comp4'];
+    var correct = 0;
+    ids.forEach(function(id, i) {
+      var el = document.getElementById(id);
+      var val = norm(el.value);
+      var ok = el.value.trim().length > 0 && keys[i].some(function(k){ return val.includes(norm(k)); });
+      el.style.borderColor = el.value.trim().length === 0 ? '' : (ok ? 'var(--floresta)' : 'var(--pitomba)');
+      if (ok) correct++;
+    });
+    var el = document.getElementById('comp-result');
+    el.style.display = 'block';
+    if (correct === 4) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ All 4 answers correct! Great reading!';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 4 correct. Check the highlighted answers and re-read the text.';
+    }
   }
 
   /* ── EX 2: Combine sentences ── */
