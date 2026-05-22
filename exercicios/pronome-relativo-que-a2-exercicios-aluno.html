@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronome Relativo QUE | A2 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px; line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300; color: var(--cobalto); line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      border-bottom: 1px solid var(--light-gray);
+      background: var(--baunilha);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-logo img { height: 30px; width: auto; }
+    .topbar-student { display: flex; align-items: center; gap: 10px; }
+    .topbar-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--erva-doce);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: white;
+    }
+    .topbar-name { font-size: 13px; font-weight: 500; color: var(--texto); }
+    .topbar-back { font-size: 12px; color: #aaa; transition: color 0.2s; }
+    .topbar-back:hover { color: var(--cobalto); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--erva-doce); padding: 60px 48px 52px; }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--floresta); margin-bottom: 14px;
+    }
+    .page-hero h1 { font-size: clamp(28px,4vw,44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.85); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.40);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 500; color: white;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: 0.7; }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .icon-gram  { background: #EEF4FB; }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── LANGUAGE NOTE ── */
+    .lang-note {
+      background: #EEF4FB;
+      border: 1.5px solid rgba(38,91,139,0.18);
+      border-radius: 14px; padding: 28px 32px; margin-bottom: 24px;
+    }
+    .lang-note-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--cobalto); margin-bottom: 12px;
+    }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 14px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+
+    /* QUE highlight */
+    .que-word {
+      display: inline-block;
+      background: var(--cobalto);
+      color: white; font-weight: 700;
+      padding: 1px 7px; border-radius: 4px;
+      font-size: 0.95em; letter-spacing: 0.04em;
+    }
+
+    /* examples table */
+    .examples-table {
+      width: 100%; border-collapse: collapse;
+      margin: 20px 0; border-radius: 10px; overflow: hidden;
+      border: 1.5px solid var(--light-gray);
+    }
+    .examples-table thead th {
+      padding: 10px 16px; text-align: left;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #999; background: var(--off-white);
+      border-bottom: 1.5px solid var(--light-gray);
+    }
+    .examples-table thead th:last-child {
+      background: rgba(38,91,139,0.08);
+      color: var(--cobalto);
+    }
+    .examples-table tbody td {
+      padding: 10px 16px; font-size: 14px;
+      border-top: 1px solid var(--light-gray);
+    }
+    .examples-table tbody td:first-child { color: #777; font-style: italic; }
+    .examples-table tbody td:last-child { color: var(--cobalto); font-weight: 600; }
+
+    /* formation tip */
+    .tip-box {
+      background: var(--baunilha2);
+      border-left: 3px solid var(--pitomba);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px; margin-top: 20px;
+      font-size: 13px; color: var(--texto); line-height: 1.75;
+    }
+    .tip-box strong { color: var(--pitomba); }
+
+    /* ── TEXT READER ── */
+    .text-reader {
+      background: white; border: 1.5px solid var(--light-gray);
+      border-radius: 14px; padding: 36px 40px;
+    }
+    .text-fonte {
+      font-size: 11px; color: #aaa;
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .text-fonte::before {
+      content: ''; display: block;
+      width: 24px; height: 1.5px;
+      background: var(--erva-doce); flex-shrink: 0;
+    }
+    .text-reader p {
+      font-size: 16px; color: var(--texto);
+      line-height: 2; margin-bottom: 0;
+    }
+    .text-reader p em {
+      color: var(--cobalto); font-style: normal; font-weight: 700;
+    }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block {
+      background: white; border: 1.5px solid var(--light-gray);
+      border-radius: 14px; padding: 32px 36px; margin-bottom: 20px;
+    }
+    .ex-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; padding-bottom: 18px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .ex-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--cobalto);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .ex-header h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700; color: var(--nanquim);
+    }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction {
+      font-size: 14px; color: #666; font-style: italic;
+      margin-bottom: 22px; line-height: 1.7;
+    }
+
+    /* open textarea */
+    .open-textarea {
+      width: 100%; background: var(--off-white);
+      border: 1.5px solid var(--light-gray); border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--texto);
+      resize: vertical; min-height: 80px;
+      outline: none; line-height: 1.65;
+      transition: border-color 0.2s; display: block; margin-bottom: 14px;
+    }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* combine list (Ex 2) */
+    .combine-list { list-style: none; }
+    .combine-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .combine-item:last-child { border-bottom: none; }
+    .combine-pair {
+      font-size: 14px; color: #777; margin-bottom: 10px; line-height: 1.75;
+    }
+    .combine-pair span { display: block; }
+    .combine-pair .plus {
+      display: inline-block; color: var(--erva-doce);
+      font-weight: 700; margin: 2px 0;
+    }
+    .combine-input {
+      width: 100%; border: none;
+      border-bottom: 2px solid var(--ouro);
+      background: transparent; padding: 4px 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--texto);
+      outline: none; transition: border-color 0.2s;
+    }
+    .combine-input:focus { border-bottom-color: var(--cobalto); }
+    .combine-input.ok  { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .combine-input.err { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+
+    /* example box */
+    .example-box {
+      background: #EEF4FB;
+      border: 1px solid rgba(38,91,139,0.2);
+      border-radius: 8px; padding: 12px 16px;
+      font-size: 13px; color: var(--texto);
+      margin-bottom: 20px; line-height: 1.7;
+    }
+    .example-box strong { color: var(--cobalto); }
+
+    /* word bank */
+    .word-bank {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 22px; padding: 16px;
+      background: var(--off-white);
+      border-radius: 10px;
+      border: 1.5px solid var(--light-gray);
+    }
+    .word-chip {
+      background: var(--baunilha2);
+      border: 1.5px solid rgba(211,109,41,0.25);
+      border-radius: 6px; padding: 6px 14px;
+      font-size: 13px; font-weight: 600;
+      color: var(--pitomba); cursor: pointer;
+      transition: all 0.15s; user-select: none;
+    }
+    .word-chip:hover { background: #FAE4C8; border-color: var(--pitomba); }
+    .word-chip.used  { opacity: 0.30; pointer-events: none; }
+
+    /* blanks for word bank exercise */
+    .wb-list { list-style: none; }
+    .wb-item {
+      font-size: 15px; color: var(--texto);
+      padding: 13px 0; border-bottom: 1px solid var(--light-gray);
+      display: flex; align-items: center;
+      gap: 8px; flex-wrap: wrap; line-height: 1.6;
+    }
+    .wb-item:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .wb-blank {
+      display: inline-block; min-width: 130px;
+      border-bottom: 2px solid var(--ouro);
+      padding: 3px 8px; cursor: pointer;
+      font-size: 15px; font-weight: 600;
+      color: var(--pitomba); transition: all 0.15s;
+      background: transparent;
+    }
+    .wb-blank.active { border-bottom-color: var(--cobalto); background: var(--baunilha2); border-radius: 4px 4px 0 0; }
+    .wb-blank.correct-b { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .wb-blank.wrong-b   { border-bottom-color: var(--pitomba);  color: var(--pitomba); background: rgba(211,109,41,0.06); }
+
+    /* production list */
+    .prod-list { list-style: none; }
+    .prod-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .prod-item:last-child { border-bottom: none; }
+    .prod-prompt {
+      font-size: 15px; color: var(--texto);
+      margin-bottom: 10px; line-height: 1.65;
+    }
+    .prod-prompt .que-anchor {
+      color: var(--cobalto); font-weight: 700;
+    }
+    .prod-input {
+      width: 100%; border: none;
+      border-bottom: 2px solid var(--ouro);
+      background: transparent; padding: 4px 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--texto);
+      outline: none; transition: border-color 0.2s;
+    }
+    .prod-input:focus { border-bottom-color: var(--cobalto); }
+
+    /* check button */
+    .check-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 18px; padding: 10px 22px; border-radius: 8px;
+      background: var(--cobalto); color: white; border: none;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg {
+      display: none; margin-top: 14px;
+      padding: 10px 16px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+    }
+    .result-msg.good {
+      background: rgba(78,85,29,0.08);
+      border: 1px solid rgba(78,85,29,0.25); color: var(--floresta);
+    }
+    .result-msg.try-again {
+      background: rgba(211,109,41,0.08);
+      border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba);
+    }
+
+    /* contact box */
+    .contact-box {
+      background: var(--baunilha2);
+      border: 1px solid rgba(211,109,41,0.20);
+      border-radius: 12px; padding: 28px 32px;
+    }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="content">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <a href="../index.html">
+        <img src="../assets/logo-giz.png" alt="BPHUB" onerror="this.style.display='none'">
+      </a>
+    </div>
+    <div class="topbar-student">
+      <div class="topbar-avatar">A2</div>
+      <span class="topbar-name">Iniciante II</span>
+    </div>
+    <a href="../index.html" class="topbar-back">← Main page</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Student Portal — Iniciante II</div>
+    <h1>Pronome Relativo<br><em style="font-family:'Trirong',serif; font-weight:300; color:rgba(255,255,255,0.75);">QUE</em></h1>
+    <p>Review the grammar note and the text before your lesson. Complete the exercises afterwards as homework.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Level A2 — Iniciante II</span>
+      <span class="meta-pill"><span class="dot"></span>Grammar &amp; Reading</span>
+      <span class="meta-pill"><span class="dot"></span>who · that · which</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: LANGUAGE NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Note</h2>
+        <p>The relative pronoun QUE in Brazilian Portuguese</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 What is QUE?</div>
+      <p>
+        In English, we use words like <em>"who,"</em> <em>"that,"</em> or <em>"which"</em> to connect two ideas about the same person or thing. In Portuguese, the most common word is <span class="que-word">QUE</span> — used for people, objects, and places.
+      </p>
+      <p>
+        <span class="que-word">QUE</span> recovers a noun already mentioned and connects it to a new idea — letting you say more in one sentence instead of two:
+      </p>
+      <p style="padding: 12px 20px; background: white; border-radius: 8px; border: 1.5px solid var(--light-gray); font-size: 15px; line-height: 2;">
+        Eu li um livro. + Esse livro era interessante.<br>
+        = Eu li um livro <span class="que-word">QUE</span> era interessante.
+      </p>
+    </div>
+
+    <table class="examples-table">
+      <thead>
+        <tr>
+          <th>English</th>
+          <th>Portuguese</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>the city that I love</td>
+          <td>a cidade <span class="que-word">que</span> eu amo</td>
+        </tr>
+        <tr>
+          <td>the teacher who explains well</td>
+          <td>o professor <span class="que-word">que</span> explica bem</td>
+        </tr>
+        <tr>
+          <td>the recipe that my mom makes</td>
+          <td>a receita <span class="que-word">que</span> minha mãe faz</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <strong>Key point:</strong> In Portuguese, <strong>QUE</strong> works for people, things, and places — no need to choose between "who," "that," or "which." It's always <em>que</em>.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read carefully — notice every QUE in the text</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-fonte">Texto elaborado para fins didáticos · Brazilian Portuguese Hub</div>
+      <p>
+        Minha cidade tem uma praça <em>que</em> fica no centro. Na praça, tem uma padaria <em>que</em> vende um pão de queijo delicioso. Eu tenho uma amiga <em>que</em> mora perto dessa praça. Ela trabalha numa livraria <em>que</em> fica na rua principal. Toda semana, a gente se encontra num café <em>que</em> fica entre a padaria e a livraria.
+      </p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Reading comprehension — Compreensão do texto</h3>
+          <p>Answer in Portuguese based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Responda em português.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">1. Onde fica a praça?</label>
+        <textarea class="open-textarea" placeholder="A praça fica..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">2. O que a padaria vende?</label>
+        <textarea class="open-textarea" placeholder="A padaria vende..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">3. Onde a amiga trabalha?</label>
+        <textarea class="open-textarea" placeholder="Ela trabalha..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">4. Onde as duas amigas se encontram?</label>
+        <textarea class="open-textarea" placeholder="Elas se encontram..."></textarea>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Combine sentences -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Combine as frases — Join the sentences</h3>
+          <p>Use QUE to connect the two sentences into one</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Join the two sentences into one using <strong>QUE</strong>. Follow the example.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> Eu li um livro. + O livro era interessante.<br>
+        → <strong>Eu li um livro <span class="que-word">que</span> era interessante.</strong>
+      </div>
+
+      <ul class="combine-list" id="combine-list">
+        <li class="combine-item">
+          <div class="combine-pair">
+            <span>Eu tenho um amigo.</span>
+            <span class="plus">+</span>
+            <span>O amigo fala português muito bem.</span>
+          </div>
+          <input class="combine-input" type="text"
+            data-answer="eu tenho um amigo que fala portugues muito bem"
+            placeholder="Eu tenho um amigo que...">
+        </li>
+        <li class="combine-item">
+          <div class="combine-pair">
+            <span>Ela comprou uma mochila.</span>
+            <span class="plus">+</span>
+            <span>A mochila é vermelha.</span>
+          </div>
+          <input class="combine-input" type="text"
+            data-answer="ela comprou uma mochila que e vermelha"
+            placeholder="Ela comprou uma mochila que...">
+        </li>
+        <li class="combine-item">
+          <div class="combine-pair">
+            <span>Nós fomos a um restaurante.</span>
+            <span class="plus">+</span>
+            <span>O restaurante fica no centro.</span>
+          </div>
+          <input class="combine-input" type="text"
+            data-answer="nos fomos a um restaurante que fica no centro"
+            placeholder="Nós fomos a um restaurante que...">
+        </li>
+        <li class="combine-item">
+          <div class="combine-pair">
+            <span>Ele tem um gato.</span>
+            <span class="plus">+</span>
+            <span>O gato dorme o dia todo.</span>
+          </div>
+          <input class="combine-input" type="text"
+            data-answer="ele tem um gato que dorme o dia todo"
+            placeholder="Ele tem um gato que...">
+        </li>
+        <li class="combine-item">
+          <div class="combine-pair">
+            <span>Eu conheço uma professora.</span>
+            <span class="plus">+</span>
+            <span>A professora é muito divertida.</span>
+          </div>
+          <input class="combine-input" type="text"
+            data-answer="eu conheco uma professora que e muito divertida"
+            placeholder="Eu conheço uma professora que...">
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkCombine()">✓ Check answers</button>
+      <div id="combine-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Word bank -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Complete as frases</h3>
+          <p>Click a word from the box, then click the blank to fill it</p>
+        </div>
+      </div>
+      <p class="ex-instruction">
+        Click a phrase from the word bank below, then click the blank where it belongs. Each phrase is used only once.
+      </p>
+
+      <div class="word-bank" id="word-bank">
+        <span class="word-chip" data-val="que fica" onclick="selectChip(this)">que fica</span>
+        <span class="word-chip" data-val="que fala" onclick="selectChip(this)">que fala</span>
+        <span class="word-chip" data-val="que vende" onclick="selectChip(this)">que vende</span>
+        <span class="word-chip" data-val="que tem" onclick="selectChip(this)">que tem</span>
+        <span class="word-chip" data-val="que assisti" onclick="selectChip(this)">que assisti</span>
+        <span class="word-chip" data-val="que estuda" onclick="selectChip(this)">que estuda</span>
+        <span class="word-chip" data-val="que trabalha" onclick="selectChip(this)">que trabalha</span>
+        <span class="word-chip" data-val="que mora" onclick="selectChip(this)">que mora</span>
+      </div>
+
+      <ul class="wb-list" id="wb-list">
+        <li class="wb-item">
+          <span class="item-num">1.</span>
+          <span>Eu tenho uma vizinha</span>
+          <span class="wb-blank" data-answer="que tem" onclick="fillBlank(this)">________</span>
+          <span>três cachorros.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">2.</span>
+          <span>Meu bairro tem uma farmácia</span>
+          <span class="wb-blank" data-answer="que fica" onclick="fillBlank(this)">________</span>
+          <span>na esquina.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">3.</span>
+          <span>O mercado</span>
+          <span class="wb-blank" data-answer="que vende" onclick="fillBlank(this)">________</span>
+          <span>frutas frescas é muito bom.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">4.</span>
+          <span>Ela é a única pessoa</span>
+          <span class="wb-blank" data-answer="que fala" onclick="fillBlank(this)">________</span>
+          <span>árabe na minha família.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">5.</span>
+          <span>O filme</span>
+          <span class="wb-blank" data-answer="que assisti" onclick="fillBlank(this)">________</span>
+          <span>é mais antigo.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">6.</span>
+          <span>Ele tem um colega</span>
+          <span class="wb-blank" data-answer="que estuda" onclick="fillBlank(this)">________</span>
+          <span>medicina na USP.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">7.</span>
+          <span>Minha amiga</span>
+          <span class="wb-blank" data-answer="que mora" onclick="fillBlank(this)">________</span>
+          <span>no centro da cidade tem um apartamento bonito.</span>
+        </li>
+        <li class="wb-item">
+          <span class="item-num">8.</span>
+          <span>O professor</span>
+          <span class="wb-blank" data-answer="que trabalha" onclick="fillBlank(this)">________</span>
+          <span>na escola perto de casa é muito paciente.</span>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkWordBank()">✓ Check answers</button>
+      <div id="wb-result" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Exercise 4 — Production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Escreva sobre você</h2>
+        <p>Use QUE to describe your own life</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Complete with your own ideas</h3>
+          <p>Write true sentences about your life using QUE</p>
+        </div>
+      </div>
+      <p class="ex-instruction">
+        Complete each sentence with your own ideas. Write about things that are true for you!
+      </p>
+
+      <ul class="prod-list">
+        <li class="prod-item">
+          <p class="prod-prompt">1. Eu tenho um/uma _________ <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu tenho um/uma ___ que...">
+        </li>
+        <li class="prod-item">
+          <p class="prod-prompt">2. Eu moro em um lugar <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu moro em um lugar que...">
+        </li>
+        <li class="prod-item">
+          <p class="prod-prompt">3. Eu tenho um/uma amigo/a <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu tenho um/uma amigo/a que...">
+        </li>
+        <li class="prod-item">
+          <p class="prod-prompt">4. Eu trabalho em um lugar <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu trabalho em um lugar que...">
+        </li>
+        <li class="prod-item">
+          <p class="prod-prompt">5. Eu tenho um objeto <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu tenho um objeto que...">
+        </li>
+        <li class="prod-item">
+          <p class="prod-prompt">6. Eu conheço uma pessoa <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu conheço uma pessoa que...">
+        </li>
+        <li class="prod-item">
+          <p class="prod-prompt">7. Eu gosto de um/uma _________ <span class="que-anchor">que</span></p>
+          <input class="prod-input" type="text" placeholder="Eu gosto de um/uma ___ que...">
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your production exercise carefully and give you personalized feedback to help you improve your Portuguese.
+      </p>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /content -->
+
+<script>
+  function norm(str) {
+    return str.trim().toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9\s]/g,'')
+      .replace(/\s+/g,' ');
+  }
+
+  /* ── EX 2: Combine sentences ── */
+  function checkCombine() {
+    const inputs = document.querySelectorAll('#combine-list .combine-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      if (!inp.value.trim()) return;
+      const userN = norm(inp.value);
+      const ansN  = norm(inp.dataset.answer);
+      // Accept if key words are present (flexible match)
+      const keyWords = ansN.split(' ').filter(w => w.length > 3);
+      const ok = keyWords.every(w => userN.includes(w)) && userN.includes('que');
+      inp.classList.toggle('ok',  ok);
+      inp.classList.toggle('err', !ok);
+      if (ok) correct++;
+    });
+    const el = document.getElementById('combine-result');
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ All 5 sentences combined correctly!';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 5 correct. Make sure you used QUE in each sentence.';
+    }
+  }
+
+  /* ── EX 3: Word bank ── */
+  let selectedChip = null;
+
+  function selectChip(el) {
+    if (el.classList.contains('used')) return;
+    document.querySelectorAll('.word-chip').forEach(c => c.style.outline = '');
+    selectedChip = el;
+    el.style.outline = '2px solid var(--cobalto)';
+  }
+
+  function fillBlank(el) {
+    // If blank already has a value, return the chip
+    const current = el.dataset.current;
+    if (current) {
+      const chips = document.querySelectorAll('.word-chip');
+      chips.forEach(c => { if (c.dataset.val === current) c.classList.remove('used'); });
+      el.dataset.current = '';
+      el.textContent = '________';
+      el.classList.remove('active','correct-b','wrong-b');
+    }
+    if (selectedChip) {
+      el.textContent = selectedChip.dataset.val;
+      el.dataset.current = selectedChip.dataset.val;
+      el.classList.add('active');
+      el.classList.remove('correct-b','wrong-b');
+      selectedChip.classList.add('used');
+      selectedChip.style.outline = '';
+      selectedChip = null;
+    }
+  }
+
+  function checkWordBank() {
+    const blanks = document.querySelectorAll('#wb-list .wb-blank');
+    let correct = 0, filled = 0;
+    blanks.forEach(b => {
+      const val = b.dataset.current;
+      if (!val) return;
+      filled++;
+      const ok = norm(val) === norm(b.dataset.answer);
+      b.classList.remove('active','correct-b','wrong-b');
+      b.classList.add(ok ? 'correct-b' : 'wrong-b');
+      if (ok) correct++;
+    });
+    const el = document.getElementById('wb-result');
+    el.style.display = 'block';
+    if (correct === 8) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All 8 blanks correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + filled + ' filled blanks correct. Try again!';
+    }
+  }
+</script>
+</body>
+</html>
