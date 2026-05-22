@@ -324,8 +324,9 @@
     .check-btn:hover { opacity: 0.85; }
     .result-msg {
       display: none; margin-top: 14px;
-      padding: 10px 16px; border-radius: 8px;
+      padding: 14px 18px; border-radius: 8px;
       font-size: 13px; font-weight: 600;
+      max-height: 260px; overflow-y: auto;
     }
     .result-msg.good {
       background: rgba(78,85,29,0.08);
@@ -492,7 +493,7 @@
       </div>
 
       <button class="check-btn" onclick="checkComp()">✓ Check answers</button>
-      <div id="comp-result" class="result-msg" style="max-height:160px; overflow-y:auto;"></div>
+      <div id="comp-result" class="result-msg"></div>
     </div>
 
     <!-- Exercise 2 — Combine sentences -->
@@ -722,57 +723,68 @@
 
   /* ── EX 1: Comprehension check ── */
   function checkComp() {
-    // key words expected in each answer (accent-insensitive)
-    var keys = [
-      ['centro'],
-      ['pao de queijo', 'queijo'],
-      ['livraria'],
-      ['cafe']
+    var data = [
+      { id:'comp1', words:['centro'],                            answer:'A praça fica no centro.' },
+      { id:'comp2', words:['pao de queijo','queijo'],            answer:'A padaria vende pão de queijo delicioso.' },
+      { id:'comp3', words:['livraria'],                          answer:'Ela trabalha numa livraria que fica na rua principal.' },
+      { id:'comp4', words:['cafe'],                              answer:'Elas se encontram num café entre a padaria e a livraria.' }
     ];
-    var ids = ['comp1','comp2','comp3','comp4'];
     var correct = 0;
-    ids.forEach(function(id, i) {
-      var el = document.getElementById(id);
+    var html = '';
+    data.forEach(function(q, i) {
+      var el = document.getElementById(q.id);
+      var filled = el.value.trim().length > 0;
       var val = norm(el.value);
-      var ok = el.value.trim().length > 0 && keys[i].some(function(k){ return val.includes(norm(k)); });
-      el.style.borderColor = el.value.trim().length === 0 ? '' : (ok ? 'var(--floresta)' : 'var(--pitomba)');
+      var ok = filled && q.words.some(function(k){ return val.includes(norm(k)); });
+      el.style.borderColor = filled ? (ok ? 'var(--floresta)' : 'var(--pitomba)') : '';
       if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;">'
+            + '<strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + q.answer + '</div>';
     });
-    var el = document.getElementById('comp-result');
-    el.style.display = 'block';
-    if (correct === 4) {
-      el.className = 'result-msg good';
-      el.textContent = '✓ All 4 answers correct! Great reading!';
-    } else {
-      el.className = 'result-msg try-again';
-      el.textContent = correct + ' of 4 correct. Check the highlighted answers and re-read the text.';
-    }
+    var res = document.getElementById('comp-result');
+    var allOk = correct === 4;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All 4 correct!' : correct + ' of 4 correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
   }
 
   /* ── EX 2: Combine sentences ── */
+  var combineDisplay = [
+    'Eu tenho um amigo que fala português muito bem.',
+    'Ela comprou uma mochila que é vermelha.',
+    'Nós fomos a um restaurante que fica no centro.',
+    'Ele tem um gato que dorme o dia todo.',
+    'Eu conheço uma professora que é muito divertida.'
+  ];
   function checkCombine() {
-    const inputs = document.querySelectorAll('#combine-list .combine-input');
-    let correct = 0;
-    inputs.forEach(inp => {
-      if (!inp.value.trim()) return;
-      const userN = norm(inp.value);
-      const ansN  = norm(inp.dataset.answer);
-      // Accept if key words are present (flexible match)
-      const keyWords = ansN.split(' ').filter(w => w.length > 3);
-      const ok = keyWords.every(w => userN.includes(w)) && userN.includes('que');
+    var inputs = document.querySelectorAll('#combine-list .combine-input');
+    var correct = 0;
+    var html = '';
+    inputs.forEach(function(inp, i) {
+      var filled = inp.value.trim().length > 0;
+      var userN = norm(inp.value);
+      var ansN  = norm(inp.dataset.answer);
+      var keyWords = ansN.split(' ').filter(function(w){ return w.length > 3; });
+      var ok = filled && keyWords.every(function(w){ return userN.includes(w); }) && userN.includes('que');
       inp.classList.toggle('ok',  ok);
-      inp.classList.toggle('err', !ok);
+      inp.classList.toggle('err', filled && !ok);
       if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;">'
+            + '<strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + combineDisplay[i] + '</div>';
     });
-    const el = document.getElementById('combine-result');
-    el.style.display = 'block';
-    if (correct === inputs.length) {
-      el.className = 'result-msg good';
-      el.textContent = '✓ All 5 sentences combined correctly!';
-    } else {
-      el.className = 'result-msg try-again';
-      el.textContent = correct + ' of 5 correct. Make sure you used QUE in each sentence.';
-    }
+    var res = document.getElementById('combine-result');
+    var allOk = correct === inputs.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All 5 correct!' : correct + ' of 5 correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
   }
 
   /* ── EX 3: Word bank ── */
@@ -807,26 +819,28 @@
   }
 
   function checkWordBank() {
-    const blanks = document.querySelectorAll('#wb-list .wb-blank');
-    let correct = 0, filled = 0;
-    blanks.forEach(b => {
-      const val = b.dataset.current;
-      if (!val) return;
-      filled++;
-      const ok = norm(val) === norm(b.dataset.answer);
+    var blanks = document.querySelectorAll('#wb-list .wb-blank');
+    var correct = 0;
+    var html = '';
+    blanks.forEach(function(b, i) {
+      var val = b.dataset.current;
+      var hasVal = val && val.length > 0;
+      var ok = hasVal && norm(val) === norm(b.dataset.answer);
       b.classList.remove('active','correct-b','wrong-b');
-      b.classList.add(ok ? 'correct-b' : 'wrong-b');
+      if (hasVal) b.classList.add(ok ? 'correct-b' : 'wrong-b');
       if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;">'
+            + '<strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' <span style="color:var(--cobalto);font-weight:700;">' + b.dataset.answer + '</span></div>';
     });
-    const el = document.getElementById('wb-result');
-    el.style.display = 'block';
-    if (correct === 8) {
-      el.className = 'result-msg good';
-      el.textContent = '✓ Perfect! All 8 blanks correct.';
-    } else {
-      el.className = 'result-msg try-again';
-      el.textContent = correct + ' of ' + filled + ' filled blanks correct. Try again!';
-    }
+    var res = document.getElementById('wb-result');
+    var allOk = correct === 8;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ Perfect! All 8 correct.' : correct + ' of 8 correct — correct answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
   }
 </script>
 </body>
