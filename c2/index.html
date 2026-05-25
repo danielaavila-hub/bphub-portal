@@ -142,7 +142,7 @@
     <h1>Avançado II</h1>
     <p>Your library of C2 materials, organised by communicative dimension — following the Itamaraty/FUNAG curriculum framework.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num" id="stat-total">0</div><div class="label">Materials available</div></div>
+      <div class="hero-stat"><div class="num" id="stat-total">1</div><div class="label">Materials available</div></div>
       <div class="hero-stat"><div class="num">6</div><div class="label">Curriculum dimensions</div></div>
       <div class="hero-stat"><div class="num">C2</div><div class="label">Your level</div></div>
     </div>
@@ -150,19 +150,19 @@
 
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all" onclick="filterCat('all',this)">
-      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">0</span>
+      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">1</span>
     </button>
     <button class="filter-btn" data-filter="gram" onclick="filterCat('gram',this)">
       <span class="filter-dot" style="background:var(--cat-gram);"></span>Gramaticais<span class="filter-count" id="fc-gram">-</span>
     </button>
     <button class="filter-btn" data-filter="func" onclick="filterCat('func',this)">
-      <span class="filter-dot" style="background:var(--cat-func);"></span>Funções<span class="filter-count" id="fc-func">-</span>
+      <span class="filter-dot" style="background:var(--cat-func);"></span>Funções<span class="filter-count" id="fc-func">1</span>
     </button>
     <button class="filter-btn" data-filter="tema" onclick="filterCat('tema',this)">
-      <span class="filter-dot" style="background:var(--cat-tema);"></span>Temas<span class="filter-count" id="fc-tema">-</span>
+      <span class="filter-dot" style="background:var(--cat-tema);"></span>Temas<span class="filter-count" id="fc-tema">1</span>
     </button>
     <button class="filter-btn" data-filter="gen" onclick="filterCat('gen',this)">
-      <span class="filter-dot" style="background:var(--cat-gen);"></span>Gêneros<span class="filter-count" id="fc-gen">-</span>
+      <span class="filter-dot" style="background:var(--cat-gen);"></span>Gêneros<span class="filter-count" id="fc-gen">1</span>
     </button>
     <button class="filter-btn" data-filter="cult" onclick="filterCat('cult',this)">
       <span class="filter-dot" style="background:var(--cat-cult);"></span>Culturais<span class="filter-count" id="fc-cult">0</span>
@@ -182,7 +182,7 @@
 
   <div class="main">
 
-    <div class="cat-section" data-cat="gram" id="sec-gram">
+    <div class="cat-section hidden" data-cat="gram" id="sec-gram">
       <div class="cat-header">
         <div class="cat-dot" style="background:var(--cat-gram);"></div>
         <div><h2>Aspectos Gramaticais</h2><div class="cat-desc">Inventário gramatical — categorias semântico-gramaticais da língua-alvo</div></div>
@@ -205,7 +205,7 @@
       <div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Materials with a communicative function as their primary focus will appear here.</p></div>
     </div>
 
-    <div class="cat-section hidden" data-cat="tema" id="sec-tema">
+    <div class="cat-section" data-cat="tema" id="sec-tema">
       <div class="cat-header">
         <div class="cat-dot" style="background:var(--cat-tema);"></div>
         <div><h2>Temas e Tópicos</h2><div class="cat-desc">T1 · Identificação pessoal → T14 · Comunicação digital — ordem curricular Itamaraty</div></div>
@@ -284,12 +284,12 @@
       var ps=!cs||txt.toLowerCase().indexOf(cs)!==-1;
       if(pf&&ps){card.classList.remove('hidden');n++;}else{card.classList.add('hidden');}
     });
-    if(cf==='all'&&!cs){document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.dataset.cat==='gram'?'remove':'add']('hidden');});}
+    if(cf==='all'&&!cs){document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.querySelectorAll('.mat-card').length>0?'remove':'add']('hidden');});}
     else{document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.querySelectorAll('.mat-card:not(.hidden)').length>0?'remove':'add']('hidden');});}
     var banner=document.getElementById('search-banner');
     if(cs){banner.style.display='block';banner.innerHTML='Showing <strong>'+n+' result'+(n!==1?'s':'')+'</strong> for "<strong>'+cs+'</strong>"';}else{banner.style.display='none';}
     document.getElementById('no-results').style.display=(n===0)?'block':'none';
-    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'0':n;
+    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'1':n;
   }
 </script>
 </body>
