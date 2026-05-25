@@ -605,7 +605,6 @@
       <div class="sec-icon icon-text">📖</div>
       <div>
         <h2>Leitura</h2>
-        <p>Read the text carefully before your lesson</p>
       </div>
     </div>
 
@@ -673,6 +672,9 @@
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">5. O que elas fizeram no domingo de manhã?</label>
         <textarea class="open-textarea" placeholder="No domingo de manhã, elas..."></textarea>
       </div>
+
+      <button class="check-btn" onclick="checkComp()">✓ Check answers (model)</button>
+      <div id="comp-result" class="result-msg"></div>
     </div>
 
     <!-- Exercise 2 — Identify verbs -->
@@ -685,13 +687,13 @@
         </div>
       </div>
       <p class="ex-instruction">
-        The verbs in pretérito perfeito from the text are listed below. Write the infinitive form and the verb group (<em>-ar</em>, <em>-er</em>, or <em>-ir</em>) for each one. The first row is done for you.
+        Write the infinitive form and the verb group (<em>-ar</em>, <em>-er</em>, or <em>-ir</em>) for each verb. The first row is done for you.
       </p>
 
       <table class="verb-id-table" id="verb-table">
         <thead>
           <tr>
-            <th>Verb in the text</th>
+            <th>Verb (pretérito perfeito)</th>
             <th>Infinitive</th>
             <th>Group (-ar / -er / -ir)</th>
           </tr>
@@ -703,9 +705,29 @@
             <td class="given">-ar</td>
           </tr>
           <tr>
+            <td>bebemos</td>
+            <td><input type="text" data-answer="beber" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-er" placeholder="group..." class="verb-grp"></td>
+          </tr>
+          <tr>
+            <td>partimos</td>
+            <td><input type="text" data-answer="partir" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-ir" placeholder="group..." class="verb-grp"></td>
+          </tr>
+          <tr>
             <td>chegamos</td>
             <td><input type="text" data-answer="chegar" placeholder="infinitive..." class="verb-inf"></td>
             <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
+          </tr>
+          <tr>
+            <td>vendi</td>
+            <td><input type="text" data-answer="vender" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-er" placeholder="group..." class="verb-grp"></td>
+          </tr>
+          <tr>
+            <td>abri</td>
+            <td><input type="text" data-answer="abrir" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-ir" placeholder="group..." class="verb-grp"></td>
           </tr>
           <tr>
             <td>alugamos</td>
@@ -713,9 +735,14 @@
             <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
           </tr>
           <tr>
-            <td>pedalamos</td>
-            <td><input type="text" data-answer="pedalar" placeholder="infinitive..." class="verb-inf"></td>
-            <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
+            <td>correu</td>
+            <td><input type="text" data-answer="correr" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-er" placeholder="group..." class="verb-grp"></td>
+          </tr>
+          <tr>
+            <td>dormiram</td>
+            <td><input type="text" data-answer="dormir" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-ir" placeholder="group..." class="verb-grp"></td>
           </tr>
           <tr>
             <td>caminhamos</td>
@@ -723,34 +750,14 @@
             <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
           </tr>
           <tr>
-            <td>visitamos</td>
-            <td><input type="text" data-answer="visitar" placeholder="infinitive..." class="verb-inf"></td>
-            <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
+            <td>recebeu</td>
+            <td><input type="text" data-answer="receber" placeholder="infinitive..." class="verb-inf"></td>
+            <td><input type="text" data-answer="-er" placeholder="group..." class="verb-grp"></td>
           </tr>
           <tr>
-            <td>provei</td>
-            <td><input type="text" data-answer="provar" placeholder="infinitive..." class="verb-inf"></td>
-            <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
-          </tr>
-          <tr>
-            <td>comprei</td>
-            <td><input type="text" data-answer="comprar" placeholder="infinitive..." class="verb-inf"></td>
-            <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
-          </tr>
-          <tr>
-            <td>gastou</td>
-            <td><input type="text" data-answer="gastar" placeholder="infinitive..." class="verb-inf"></td>
-            <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
-          </tr>
-          <tr>
-            <td>assistimos</td>
-            <td><input type="text" data-answer="assistir" placeholder="infinitive..." class="verb-inf"></td>
+            <td>decidiu</td>
+            <td><input type="text" data-answer="decidir" placeholder="infinitive..." class="verb-inf"></td>
             <td><input type="text" data-answer="-ir" placeholder="group..." class="verb-grp"></td>
-          </tr>
-          <tr>
-            <td>voltamos</td>
-            <td><input type="text" data-answer="voltar" placeholder="infinitive..." class="verb-inf"></td>
-            <td><input type="text" data-answer="-ar" placeholder="group..." class="verb-grp"></td>
           </tr>
         </tbody>
       </table>
@@ -849,7 +856,7 @@
         </div>
       </div>
       <p class="ex-instruction">
-        Find the error in each sentence and write the corrected version on the line below. The error is <span style="background:rgba(211,109,41,0.12); color:var(--pitomba); padding:1px 5px; border-radius:4px; font-weight:600;">highlighted</span>.
+        Each sentence has one error in the pretérito perfeito — it is <span style="background:rgba(211,109,41,0.12); color:var(--pitomba); padding:1px 5px; border-radius:4px; font-weight:600;">highlighted</span>. Write the corrected sentence on the line below.
       </p>
 
       <ul class="error-list" id="error-list">
@@ -942,7 +949,7 @@
 </div><!-- /content -->
 
 <script>
-  /* ── NORMALIZE for checking (strips accents, trims, lowercase) ── */
+  /* ── NORMALIZE (strips accents, trims, lowercase) ── */
   function norm(str) {
     return str.trim().toLowerCase()
       .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -950,86 +957,135 @@
       .replace(/\s+/g, ' ');
   }
 
-  function accept(input, ans) {
-    const accepted = ans.split('|').map(norm);
-    return accepted.some(a => norm(input) === a || norm(input).includes(a));
+  /* ── EX 1: Comprehension — show model answers ── */
+  function checkComp() {
+    var models = [
+      'Elas saíram de São Paulo.',
+      'No primeiro dia, elas alugaram uma bicicleta e pedalaram até a Lagoa da Conceição.',
+      'Ana Luiza provou um peixe grelhado e comprou presentes para a família.',
+      'Cláudia comprou peças de cerâmica de uma artesã.',
+      'No domingo de manhã, elas assistiram ao nascer do sol na Praia do Campeche e entraram no mar.'
+    ];
+    var html = '<div style="font-weight:700;margin-bottom:10px;">Model answers:</div>';
+    models.forEach(function(m, i) {
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> ' + m + '</div>';
+    });
+    var el = document.getElementById('comp-result');
+    el.className = 'result-msg good';
+    el.innerHTML = html;
+    el.style.display = 'block';
   }
 
   /* ── EX 2: Verb identification ── */
+  var verbRows = [
+    { form: 'bebemos',   inf: 'beber',   grp: '-er' },
+    { form: 'partimos',  inf: 'partir',  grp: '-ir' },
+    { form: 'chegamos',  inf: 'chegar',  grp: '-ar' },
+    { form: 'vendi',     inf: 'vender',  grp: '-er' },
+    { form: 'abri',      inf: 'abrir',   grp: '-ir' },
+    { form: 'alugamos',  inf: 'alugar',  grp: '-ar' },
+    { form: 'correu',    inf: 'correr',  grp: '-er' },
+    { form: 'dormiram',  inf: 'dormir',  grp: '-ir' },
+    { form: 'caminhamos',inf: 'caminhar',grp: '-ar' },
+    { form: 'recebeu',   inf: 'receber', grp: '-er' },
+    { form: 'decidiu',   inf: 'decidir', grp: '-ir' }
+  ];
+
   function checkVerbs() {
-    const infs = document.querySelectorAll('#verb-table .verb-inf');
-    const grps = document.querySelectorAll('#verb-table .verb-grp');
-    let correct = 0, total = 0;
-    infs.forEach(inp => {
+    var infs = document.querySelectorAll('#verb-table .verb-inf');
+    var grps = document.querySelectorAll('#verb-table .verb-grp');
+    var correct = 0, total = 0;
+    var html = '';
+
+    infs.forEach(function(inp, i) {
       total++;
-      const ok = norm(inp.value) === norm(inp.dataset.answer);
+      var ok = norm(inp.value) === norm(inp.dataset.answer);
       inp.classList.toggle('ok', ok);
       inp.classList.toggle('err', !ok && inp.value.trim() !== '');
       if (ok) correct++;
     });
-    grps.forEach(inp => {
+    grps.forEach(function(inp) {
       total++;
-      const ok = norm(inp.value) === norm(inp.dataset.answer) || norm(inp.value) === norm(inp.dataset.answer.replace('-',''));
+      var ans = inp.dataset.answer;
+      var ok = norm(inp.value) === norm(ans) || norm(inp.value) === norm(ans.replace('-',''));
       inp.classList.toggle('ok', ok);
       inp.classList.toggle('err', !ok && inp.value.trim() !== '');
       if (ok) correct++;
     });
-    const el = document.getElementById('verbs-result');
+
+    var allOk = correct === total;
+    html += '<div style="font-weight:700;margin-bottom:10px;">'
+          + (allOk ? '✓ All ' + total + ' fields correct!' : correct + ' of ' + total + ' correct — model answers:')
+          + '</div>';
+    verbRows.forEach(function(r) {
+      html += '<div style="margin-bottom:6px;font-weight:400;"><strong>' + r.form + '</strong> → ' + r.inf + ' (' + r.grp + ')</div>';
+    });
+
+    var el = document.getElementById('verbs-result');
+    el.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    el.innerHTML = html;
     el.style.display = 'block';
-    if (correct === total) {
-      el.className = 'result-msg good';
-      el.textContent = '✓ Excellent! All ' + total + ' fields correct.';
-    } else {
-      el.className = 'result-msg try-again';
-      el.textContent = correct + ' of ' + total + ' correct. Review the highlighted fields.';
-    }
   }
 
   /* ── EX 3: Fill in blank ── */
   function checkBlanks() {
-    const inputs = document.querySelectorAll('#blanks-list .blank-input');
-    let correct = 0;
-    inputs.forEach(inp => {
-      const accepted = inp.dataset.answer.split('|').map(norm);
-      const ok = accepted.includes(norm(inp.value));
+    var inputs = document.querySelectorAll('#blanks-list .blank-input');
+    var correct = 0;
+    inputs.forEach(function(inp) {
+      var accepted = inp.dataset.answer.split('|').map(norm);
+      var ok = accepted.includes(norm(inp.value));
       inp.classList.toggle('correct-input', ok);
       inp.classList.toggle('wrong-input', !ok);
       if (ok) correct++;
     });
-    const el = document.getElementById('blanks-result');
+    var el = document.getElementById('blanks-result');
+    var allOk = correct === inputs.length;
+    var html = '<div style="font-weight:700;margin-bottom:10px;">'
+             + (allOk ? '✓ Perfect! All ' + inputs.length + ' answers correct.' : correct + ' of ' + inputs.length + ' correct — model answers:')
+             + '</div>';
+    var labels = ['visitei','almoçamos','comprou','assistiram','comi','viajaram','encontrou','chegamos','gostou','acordei / caminhei'];
+    labels.forEach(function(lbl, i) {
+      html += '<div style="margin-bottom:6px;font-weight:400;"><strong>' + (i + 1) + '.</strong> ' + lbl + '</div>';
+    });
+    el.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    el.innerHTML = html;
     el.style.display = 'block';
-    if (correct === inputs.length) {
-      el.className = 'result-msg good';
-      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
-    } else {
-      el.className = 'result-msg try-again';
-      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
-    }
   }
 
   /* ── EX 4: Error correction ── */
+  var errorAnswers = [
+    { display: 'Ontem eu viajei para o Rio e ela <strong>viajou</strong> também.' },
+    { display: 'Nós comemos pizza e depois <strong>assistimos</strong> a um filme.' },
+    { display: 'Eles chegaram cedo, mas eu <strong>cheguei</strong> tarde.' },
+    { display: 'Você <strong>gostou</strong> da praia?' },
+    { display: 'A gente <strong>visitou</strong> três cidades em uma semana.' }
+  ];
+
   function checkErrors() {
-    const inputs = document.querySelectorAll('#error-list .correction-input');
-    let correct = 0;
-    inputs.forEach(inp => {
+    var inputs = document.querySelectorAll('#error-list .correction-input');
+    var correct = 0;
+    inputs.forEach(function(inp) {
       if (!inp.value.trim()) return;
-      const userNorm = norm(inp.value);
-      const ansNorm = norm(inp.dataset.answer);
-      // Accept if normalized versions match or if the key corrected word is present
-      const ok = userNorm === ansNorm || ansNorm.split(' ').every(w => w.length < 3 || userNorm.includes(w));
+      var userNorm = norm(inp.value);
+      var ansNorm  = norm(inp.dataset.answer);
+      var ok = userNorm === ansNorm || ansNorm.split(' ').every(function(w){ return w.length < 3 || userNorm.includes(w); });
       inp.classList.toggle('ok', ok);
       inp.classList.toggle('err', !ok);
       if (ok) correct++;
     });
-    const el = document.getElementById('errors-result');
+
+    var allOk = correct === inputs.length;
+    var html = '<div style="font-weight:700;margin-bottom:10px;">'
+             + (allOk ? '✓ All 5 sentences corrected!' : correct + ' of ' + inputs.length + ' correct — model answers:')
+             + '</div>';
+    errorAnswers.forEach(function(a, i) {
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> ' + a.display + '</div>';
+    });
+
+    var el = document.getElementById('errors-result');
+    el.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    el.innerHTML = html;
     el.style.display = 'block';
-    if (correct === inputs.length) {
-      el.className = 'result-msg good';
-      el.textContent = '✓ All 5 sentences corrected!';
-    } else {
-      el.className = 'result-msg try-again';
-      el.textContent = correct + ' of ' + inputs.length + ' correct. Check the highlighted sentences.';
-    }
   }
 </script>
 </body>
