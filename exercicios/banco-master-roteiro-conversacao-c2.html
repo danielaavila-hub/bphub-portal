@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Caso Banco Master — Roteiro de Conversação | C2 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha:   #FCF5EB;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level-color: #1E1D1C;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--nanquim); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; border-bottom: 1px solid var(--light-gray); background: var(--baunilha); position: sticky; top: 0; z-index: 50; }
+    .topbar-logo img { height: 30px; }
+    .topbar-right { display: flex; align-items: center; gap: 20px; }
+    .topbar-level { background: var(--level-color); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; }
+    .topbar-back { font-size: 12px; color: #aaa; transition: color 0.2s; }
+    .topbar-back:hover { color: var(--pitomba); }
+
+    /* PAGE HERO */
+    .page-hero { background: var(--level-color); padding: 60px 48px 52px; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(26px, 3.8vw, 42px); color: white; margin-bottom: 12px; font-weight: 300; }
+    .page-hero > p { font-size: 15px; color: rgba(255,255,255,0.85); max-width: 600px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.30); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* SECTION HEADER */
+    .sec-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--light-gray); margin-top: 52px; }
+    .sec-header:first-of-type { margin-top: 0; }
+    .sec-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--level-color); color: white; font-size: 17px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .sec-header-text h2 { font-size: 1.1rem; color: var(--texto); font-weight: 700; font-family: 'Manrope', sans-serif; }
+    .sec-header-text .sec-sub { font-size: 13px; color: #888; margin-top: 3px; }
+
+    /* VIDEO BOX */
+    .video-box { background: var(--off-white); border: 1px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 14px; }
+    .video-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .video-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 5px; line-height: 1.4; }
+    .video-meta { font-size: 12px; color: #888; margin-bottom: 14px; }
+    .video-link { display: inline-flex; align-items: center; gap: 8px; background: var(--level-color); color: white; font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: 8px; transition: opacity 0.2s; }
+    .video-link:hover { opacity: 0.82; }
+    .video-note { font-size: 13px; color: #777; margin-top: 12px; line-height: 1.55; font-style: italic; }
+
+    /* VOCAB GRID */
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 8px; }
+    .vocab-card { background: white; border: 1px solid var(--light-gray); border-left: 4px solid var(--level-color); border-radius: 8px; padding: 14px 16px; }
+    .vocab-term { font-weight: 700; font-size: 14px; color: var(--nanquim); margin-bottom: 4px; }
+    .vocab-def { font-size: 13px; color: #555; line-height: 1.55; }
+    .vocab-eg { font-size: 12px; color: #888; margin-top: 6px; font-style: italic; line-height: 1.5; }
+
+    /* QUESTION BLOCK */
+    .q-block { background: white; border: 1px solid var(--light-gray); border-radius: 12px; padding: 22px 26px; margin-bottom: 12px; }
+    .q-num { display: inline-flex; align-items: center; justify-content: center; width: 27px; height: 27px; border-radius: 50%; background: var(--level-color); color: white; font-size: 12px; font-weight: 700; margin-right: 10px; flex-shrink: 0; vertical-align: middle; }
+    .q-text { font-size: 15.5px; color: var(--nanquim); line-height: 1.65; font-family: 'Trirong', serif; font-weight: 400; }
+    .q-cue { font-size: 13px; color: #888; margin-top: 10px; margin-left: 37px; font-style: italic; line-height: 1.5; }
+
+    /* EXPR LIST */
+    .expr-list { background: var(--off-white); border: 1px solid var(--light-gray); border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; }
+    .expr-list-title { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 14px; }
+    .expr-item { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); }
+    .expr-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .expr-pt { font-weight: 700; font-size: 14px; color: var(--nanquim); min-width: 210px; flex-shrink: 0; font-style: italic; }
+    .expr-en { font-size: 13px; color: #555; line-height: 1.55; }
+
+    /* BLOCK LABEL */
+    .block-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--nanquim); background: var(--light-gray); display: inline-block; padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; }
+
+    /* DEBATE BOX */
+    .debate-box { background: var(--nanquim); color: white; border-radius: 14px; padding: 30px 32px; margin-bottom: 14px; }
+    .debate-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ouro); margin-bottom: 12px; }
+    .debate-prompt { font-family: 'Trirong', serif; font-size: 1.1rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.90); margin-bottom: 20px; }
+    .debate-note { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+    .debate-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .role-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 16px 18px; }
+    .role-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ouro); margin-bottom: 8px; }
+    .role-desc { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.55; }
+
+    /* LANG FOCUS */
+    .lang-focus { background: white; border: 1px solid var(--light-gray); border-left: 5px solid var(--ouro); border-radius: 10px; padding: 20px 24px; margin-bottom: 14px; }
+    .lang-focus-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+    .lang-focus-title { font-size: 14px; font-weight: 700; color: var(--nanquim); margin-bottom: 10px; }
+    .lang-focus p { font-size: 14px; color: #444; line-height: 1.65; }
+    .lang-example { background: var(--off-white); border-radius: 6px; padding: 12px 16px; margin-top: 10px; font-size: 13px; color: var(--nanquim); line-height: 1.7; }
+
+    /* READING */
+    .reading-box { background: var(--off-white); border: 1px solid var(--light-gray); border-radius: 12px; padding: 24px 28px; }
+    .reading-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .reading-item:first-child { padding-top: 0; }
+    .reading-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .reading-source { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .reading-title { font-size: 14px; font-weight: 600; color: var(--nanquim); }
+    .reading-note { font-size: 13px; color: #666; margin-top: 3px; font-style: italic; }
+    .reading-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--pitomba); margin-top: 6px; border-bottom: 1px dashed var(--pitomba); }
+    .reading-link:hover { opacity: 0.7; }
+
+    /* CONTACT */
+    .contact-wrap { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+    .contact-inner { background: var(--off-white); border: 1px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .contact-text h3 { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 300; color: var(--nanquim); margin-bottom: 3px; }
+    .contact-text p { font-size: 13px; color: #777; }
+    .contact-btn { background: var(--level-color); color: white; font-size: 13px; font-weight: 600; padding: 11px 22px; border-radius: 8px; white-space: nowrap; transition: opacity 0.2s; }
+    .contact-btn:hover { opacity: 0.85; }
+
+    @media (max-width: 640px) {
+      .topbar { padding: 0 20px; }
+      .page-hero { padding: 40px 20px 36px; }
+      .main { padding: 36px 20px 80px; }
+      .debate-roles { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: 1fr; }
+      .contact-wrap { padding: 0 20px 60px; }
+      .expr-pt { min-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">C2 — Avançado II</span>
+    <a href="../c2/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-eyebrow">C2 · Avançado II · Roteiro de Conversação</div>
+  <h1>O Caso Banco Master</h1>
+  <p>Regulação financeira, risco sistêmico e democracia no Brasil. Um escândalo que expõe as entranhas do sistema financeiro, do Judiciário e do poder político brasileiro.</p>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Atualidades &amp; Debate de Ideias</span>
+    <span class="meta-pill"><span class="dot"></span>Aula de 60 min</span>
+    <span class="meta-pill"><span class="dot"></span>Economia / Finanças</span>
+    <span class="meta-pill"><span class="dot"></span>C2 Avançado II</span>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- 1. VÍDEOS -->
+  <div class="sec-header">
+    <div class="sec-icon">▶</div>
+    <div class="sec-header-text">
+      <h2>Before the lesson — Watch these videos</h2>
+      <p class="sec-sub">Watch both and note any words or ideas you'd like to explore in class.</p>
+    </div>
+  </div>
+
+  <div class="video-box">
+    <div class="video-label">Vídeo 1 · Jornal Nacional · Globo</div>
+    <div class="video-title">Prisão do dono do Banco Master evidencia fraude financeira estimada em R$ 12 bilhões</div>
+    <div class="video-meta">Jornal Nacional · Novembro de 2025</div>
+    <a class="video-link" href="https://www.youtube.com/watch?v=TarEskFZpm0" target="_blank" rel="noopener">▶ Assistir no YouTube</a>
+    <p class="video-note">O Jornal Nacional cobre o momento da prisão de Daniel Vorcaro no Aeroporto de Guarulhos e contextualiza as irregularidades do banco. Linguagem jornalística padrão — bom ponto de entrada para o tema.</p>
+  </div>
+
+  <div class="video-box">
+    <div class="video-label">Vídeo 2 · CNN Brasil · Bastidores</div>
+    <div class="video-title">Caso Master: o que o escândalo revela sobre as estratégias da direita e da esquerda</div>
+    <div class="video-meta">CNN Brasil — Bastidores · 2025</div>
+    <a class="video-link" href="https://www.youtube.com/watch?v=4gOKjWo_-n8" target="_blank" rel="noopener">▶ Assistir no YouTube</a>
+    <p class="video-note">Análise política e econômica mais aprofundada. Observe como os comentaristas enquadram o mesmo fato a partir de perspectivas ideológicas distintas — isso será central na nossa conversa.</p>
+  </div>
+
+  <br>
+
+  <!-- 2. VOCABULÁRIO -->
+  <div class="sec-header">
+    <div class="sec-icon">📖</div>
+    <div class="sec-header-text">
+      <h2>Vocabulário essencial</h2>
+      <p class="sec-sub">Key terms you will need to discuss this case with precision in Portuguese.</p>
+    </div>
+  </div>
+
+  <div class="vocab-grid">
+    <div class="vocab-card">
+      <div class="vocab-term">risco moral</div>
+      <div class="vocab-def">Incentivo perverso criado por uma garantia — quem assume o risco não arca com as consequências.</div>
+      <div class="vocab-eg">"A garantia do FGC criou risco moral: o banco tomava riscos excessivos sabendo que os cotistas seriam ressarcidos."</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">risco sistêmico</div>
+      <div class="vocab-def">Risco de colapso em cadeia em todo o sistema financeiro, não apenas numa única instituição.</div>
+      <div class="vocab-eg">"O tamanho da carteira do Master ameaçava contaminar outros bancos — daí a preocupação com o risco sistêmico."</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">precatório</div>
+      <div class="vocab-def">Ordem judicial que obriga o governo a pagar uma dívida reconhecida em sentença. Altamente ilíquido no Brasil.</div>
+      <div class="vocab-eg">"O banco comprava precatórios com desconto e os registrava como ativos no balanço."</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">FGC — Fundo Garantidor de Créditos</div>
+      <div class="vocab-def">Fundo privado que garante depósitos bancários de até R$ 250 mil por CPF por instituição. Financiado pelos próprios bancos.</div>
+      <div class="vocab-eg">"O FGC desembolsará cerca de R$ 41 bilhões — o maior resgate de sua história."</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">liquidação extrajudicial</div>
+      <div class="vocab-def">Intervenção do Banco Central que encerra as atividades de uma instituição financeira sem processo judicial.</div>
+      <div class="vocab-eg">"O BC decretou a liquidação extrajudicial ao constatar 'grave deterioração econômico-financeira'."</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">captura regulatória</div>
+      <div class="vocab-def">Fenômeno em que o regulador passa a servir aos interesses dos regulados em vez do interesse público.</div>
+      <div class="vocab-eg">"Fala-se em captura regulatória: como o Banco Central não identificou os riscos por tanto tempo?"</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">supervisão prudencial</div>
+      <div class="vocab-def">Fiscalização preventiva para garantir que os bancos mantenham solidez financeira e liquidez adequadas.</div>
+      <div class="vocab-eg">"A falha de supervisão prudencial é a questão central: por que o BC demorou tanto a agir?"</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">conflito de interesses</div>
+      <div class="vocab-def">Situação em que interesses pessoais interferem na isenção de quem exerce função pública.</div>
+      <div class="vocab-eg">"O contrato milionário do escritório da esposa de Moraes com o banco evidencia grave conflito de interesses."</div>
+    </div>
+    <div class="vocab-card">
+      <div class="vocab-term">passivo exigível</div>
+      <div class="vocab-def">Conjunto de obrigações financeiras que uma instituição deve honrar — dívidas de curto e longo prazo.</div>
+      <div class="vocab-eg">"O passivo exigível cresceu de forma explosiva, muito além da capacidade dos ativos de cobri-lo."</div>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- 3. AQUECIMENTO -->
+  <div class="sec-header">
+    <div class="sec-icon">💬</div>
+    <div class="sec-header-text">
+      <h2>Aquecimento — 10 min</h2>
+      <p class="sec-sub">Open the conversation. No right or wrong answers — the goal is to activate what you already know.</p>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <span class="q-num">1</span>
+    <span class="q-text">Antes de assistir aos vídeos, você já havia acompanhado o Caso Banco Master? O que você sabia sobre o escândalo — e o que te surpreendeu ao assistir?</span>
+  </div>
+  <div class="q-block">
+    <span class="q-num">2</span>
+    <span class="q-text">Na sua experiência como economista, casos de risco moral no sistema financeiro são comuns? Você já analisou situações semelhantes em outros países?</span>
+    <p class="q-cue">Think of: Silicon Valley Bank (EUA, 2023), Lehman Brothers (2008), crises bancárias argentinas.</p>
+  </div>
+  <div class="q-block">
+    <span class="q-num">3</span>
+    <span class="q-text">Uma frase que circulou muito na imprensa foi: <em>"o banco cresceu artificialmente"</em>. O que você entende por crescimento artificial no contexto de uma instituição financeira?</span>
+  </div>
+
+  <br>
+
+  <!-- 4. TEMA CENTRAL -->
+  <div class="sec-header">
+    <div class="sec-icon">🔍</div>
+    <div class="sec-header-text">
+      <h2>Tema central — 25 min</h2>
+      <p class="sec-sub">Four thematic blocks. Go deep — express nuance, disagree, qualify your claims.</p>
+    </div>
+  </div>
+
+  <div class="expr-list">
+    <div class="block-label">Bloco A · Regulação e Supervisão</div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">4</span>
+      <span class="q-text">Em 2019, o patrimônio líquido do Banco Master era de R$ 219 milhões. Em 2024, chegou a R$ 4,7 bilhões — crescimento de mais de 2.000% em cinco anos. O que esse ritmo deveria ter sinalizado para os reguladores?</span>
+      <p class="q-cue">Consider: Basel III indicators, capital adequacy ratios, liquidity coverage ratio.</p>
+    </div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">5</span>
+      <span class="q-text">O banco captava R$ 50 bilhões em CDBs com rendimentos acima do mercado, lastreados em precatórios e participações em empresas em dificuldades. Isso é um modelo de negócio viável ou uma pirâmide disfarçada de banco?</span>
+      <p class="q-cue">Use: <em>na minha leitura do caso… / há quem argumente que… / o que os dados indicam é que…</em></p>
+    </div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">6</span>
+      <span class="q-text">Que reformas você proporia para o sistema de supervisão prudencial no Brasil a fim de evitar casos semelhantes no futuro?</span>
+    </div>
+  </div>
+
+  <div class="expr-list">
+    <div class="block-label">Bloco B · Risco Moral e o Papel do FGC</div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">7</span>
+      <span class="q-text">O FGC garante depósitos de até R$ 250 mil. O Banco Master vendeu CDBs de alto risco ao varejo usando esse escudo. Isso é um problema de design do sistema de garantias ou de fiscalização — ou dos dois?</span>
+      <p class="q-cue">Think about: who bears the cost? Who benefited? Is the FGC the right instrument for this?</p>
+    </div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">8</span>
+      <span class="q-text">O resgate custará cerca de R$ 41 bilhões — pagos pelos bancos associados ao FGC, que repassarão o custo indiretamente aos clientes. Quem é o verdadeiro pagador da conta? Isso é justo?</span>
+      <p class="q-cue">Compare with: FDIC bailouts in the US, European bank resolution frameworks.</p>
+    </div>
+  </div>
+
+  <div class="expr-list">
+    <div class="block-label">Bloco C · Judiciário, Poder e Democracia</div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">9</span>
+      <span class="q-text">O ministro Dias Toffoli avocou o caso para o STF e impôs sigilo total. O escritório da esposa do ministro Alexandre de Moraes tinha contrato de até R$ 129 milhões com o banco. O que esses fatos revelam sobre a relação entre o Judiciário brasileiro e o sistema financeiro?</span>
+      <p class="q-cue">Separate: (a) what is legally established, (b) what is alleged, (c) what it suggests about institutional design.</p>
+    </div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">10</span>
+      <span class="q-text">Casos como o Banco Master minam a confiança nas instituições. Qual é o custo econômico de longo prazo da percepção de que o Estado de Direito pode ser capturado por interesses privados?</span>
+      <p class="q-cue">Think about: risk premium, foreign investment, cost of capital, rule-of-law indices, sovereign ratings.</p>
+    </div>
+  </div>
+
+  <div class="expr-list">
+    <div class="block-label">Bloco D · Desigualdade e Sistema Financeiro</div>
+    <div class="q-block" style="border:none; background:transparent; padding: 8px 0; margin-bottom:0;">
+      <span class="q-num">11</span>
+      <span class="q-text">O economista Eduardo Moreira disse que o caso pode <em>"desvendar o funcionamento da Faria Lima"</em>. O que você lê nessa afirmação? Há algo estruturalmente opaco no mercado financeiro brasileiro que esse escândalo ilumina?</span>
+      <p class="q-cue">Consider: who has access to information, who sets interest rates, who lobbies the central bank, who benefits from Brazil's high real interest rates.</p>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- 5. EXPRESSÕES -->
+  <div class="sec-header">
+    <div class="sec-icon">🗣</div>
+    <div class="sec-header-text">
+      <h2>Expressões para o debate</h2>
+      <p class="sec-sub">Use these to argue, qualify, concede, and push back — in formal Brazilian Portuguese.</p>
+    </div>
+  </div>
+
+  <div class="expr-list">
+    <div class="expr-list-title">Argumentar e posicionar</div>
+    <div class="expr-item">
+      <span class="expr-pt">O que os dados indicam é que…</span>
+      <span class="expr-en">What the data suggests is that… <em>(data-grounded claim)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Na minha leitura do caso…</span>
+      <span class="expr-en">In my reading of the case… <em>(signals personal analysis)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Há quem argumente que… mas essa visão ignora…</span>
+      <span class="expr-en">Some argue that… but this view overlooks… <em>(counter-argument structure)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Sem prejulgar, o que me parece evidente é…</span>
+      <span class="expr-en">Without prejudging, what seems clear to me is… <em>(cautious assertion)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Convém distinguir entre… e…</span>
+      <span class="expr-en">It's worth distinguishing between… and… <em>(analytical precision)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Em última análise, a questão se resume a…</span>
+      <span class="expr-en">Ultimately, the issue comes down to… <em>(synthesis move)</em></span>
+    </div>
+  </div>
+
+  <div class="expr-list">
+    <div class="expr-list-title">Ceder terreno / qualificar</div>
+    <div class="expr-item">
+      <span class="expr-pt">Concedo que… no entanto…</span>
+      <span class="expr-en">I grant that… however… <em>(concession + rebuttal)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Isso é verdade até certo ponto, mas…</span>
+      <span class="expr-en">That's true to an extent, but… <em>(partial agreement)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Não se pode negar que… ao mesmo tempo em que…</span>
+      <span class="expr-en">One cannot deny that… at the same time… <em>(balanced framing)</em></span>
+    </div>
+    <div class="expr-item">
+      <span class="expr-pt">Guardadas as devidas proporções…</span>
+      <span class="expr-en">With appropriate caveats / All due comparisons being made… <em>(qualification)</em></span>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- 6. DEBATE -->
+  <div class="sec-header">
+    <div class="sec-icon">⚖</div>
+    <div class="sec-header-text">
+      <h2>Debate — 10 min</h2>
+      <p class="sec-sub">Choose a side — even if it's not your own view. The goal is to argue convincingly in Portuguese.</p>
+    </div>
+  </div>
+
+  <div class="debate-box">
+    <div class="debate-label">Proposição para debate</div>
+    <div class="debate-prompt">"O Estado não deveria resgatar os credores do Banco Master. Quem buscou rentabilidade acima do mercado assumiu conscientemente o risco — e deve arcar com as consequências. Socializar as perdas é injusto e cria incentivos perversos para o futuro."</div>
+    <p class="debate-note">Discuta por 5 minutos cada lado. Depois, troque de posição e defenda o argumento contrário.</p>
+    <div class="debate-roles">
+      <div class="role-card">
+        <div class="role-title">🔴 A favor da proposição</div>
+        <div class="role-desc">Defenda que o resgate cria risco moral, penaliza bancos responsáveis e onera indiretamente os correntistas de outros bancos. O FGC não foi criado para este fim.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-title">🔵 Contra a proposição</div>
+        <div class="role-desc">Argumente que o FGC é contratual — a garantia existia e os credores confiaram nela. Não resgatar poderia gerar corrida bancária e risco sistêmico muito maior do que o custo do resgate.</div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- 7. FOCO LINGUÍSTICO -->
+  <div class="sec-header">
+    <div class="sec-icon">🎯</div>
+    <div class="sec-header-text">
+      <h2>Foco linguístico — 5 min</h2>
+      <p class="sec-sub">Precision points for C2-level analytical Portuguese.</p>
+    </div>
+  </div>
+
+  <div class="lang-focus">
+    <div class="lang-focus-label">Registro formal de análise</div>
+    <div class="lang-focus-title">Nominalização: transformando verbos em substantivos para ganhar densidade argumentativa</div>
+    <p>No discurso econômico formal, preferimos substantivos a verbos — isso confere precisão e distanciamento analítico.</p>
+    <div class="lang-example">
+      ❌ Informal: <em>"O banco cresceu muito rápido e o BC não fiscalizou direito."</em><br><br>
+      ✅ Formal: <em>"O <strong>crescimento acelerado</strong> da instituição não foi acompanhado de <strong>supervisão prudencial</strong> adequada por parte do regulador."</em><br><br>
+      Pratique com: <em>a captação · o endividamento · a deterioração · a inadimplência · a intervenção · o ressarcimento · a liquidação · a exposição · o colapso</em>
+    </div>
+  </div>
+
+  <div class="lang-focus">
+    <div class="lang-focus-label">Marcadores discursivos de argumentação</div>
+    <div class="lang-focus-title">Introduzir um contra-argumento sem perder o fio da meada</div>
+    <p>Em debate formal, o contra-argumento é introduzido com marcadores que sinalizam reconhecimento antes da refutação:</p>
+    <div class="lang-example">
+      <em>Embora</em> se possa argumentar que o FGC cumpriu seu papel contratual, <em>não se pode ignorar</em> que o modelo de captação do Master foi deliberadamente exploratório.<br><br>
+      <em>Por mais que</em> a autonomia do Banco Central seja um avanço institucional, <em>ela não prescinde</em> de mecanismos robustos de prestação de contas.
+    </div>
+  </div>
+
+  <div class="lang-focus">
+    <div class="lang-focus-label">Collocations econômicas</div>
+    <div class="lang-focus-title">Combinações que soam naturais em português econômico-financeiro</div>
+    <div class="lang-example">
+      <em>decretar</em> a liquidação &nbsp;·&nbsp; <em>incorrer em</em> risco excessivo &nbsp;·&nbsp; <em>comprometer</em> a solvência &nbsp;·&nbsp; <em>mitigar</em> o risco sistêmico &nbsp;·&nbsp; <em>onerar</em> o contribuinte &nbsp;·&nbsp; <em>perpetrar</em> uma fraude &nbsp;·&nbsp; <em>acionar</em> o FGC &nbsp;·&nbsp; <em>sanar</em> as irregularidades &nbsp;·&nbsp; <em>lastrear</em> um título &nbsp;·&nbsp; <em>deteriorar-se</em> (o balanço se deteriorou)
+    </div>
+  </div>
+
+  <br>
+
+  <!-- 8. LEITURAS -->
+  <div class="sec-header">
+    <div class="sec-icon">📚</div>
+    <div class="sec-header-text">
+      <h2>Para ir além</h2>
+      <p class="sec-sub">Optional reading for those who want to explore further before or after class.</p>
+    </div>
+  </div>
+
+  <div class="reading-box">
+    <div class="reading-item">
+      <div class="reading-source">Transparência Internacional · Brasil</div>
+      <div class="reading-title">O Caso Master</div>
+      <div class="reading-note">Síntese clara e bem documentada — cronologia completa, envolvidos e implicações institucionais.</div>
+      <a class="reading-link" href="https://transparenciainternacional.org.br/posts/o-caso-master/" target="_blank" rel="noopener">Ler o artigo ↗</a>
+    </div>
+    <div class="reading-item">
+      <div class="reading-source">Agência Pública · Jornalismo investigativo</div>
+      <div class="reading-title">BRB, rombo bilionário e a questão: o que Ibaneis Rocha tem a ver com a crise do Banco Master</div>
+      <div class="reading-note">Investigação sobre as conexões políticas entre o governo do DF e o banco — útil para o Bloco C.</div>
+      <a class="reading-link" href="https://apublica.org/2026/02/brb-como-ibaneis-rocha-esta-ligado-a-crise-do-banco-master/" target="_blank" rel="noopener">Ler o artigo ↗</a>
+    </div>
+    <div class="reading-item">
+      <div class="reading-source">Wikipedia · Português</div>
+      <div class="reading-title">Escândalo do Banco Master</div>
+      <div class="reading-note">Linha do tempo detalhada com fontes verificáveis — ideal para contextualizar a cronologia completa.</div>
+      <a class="reading-link" href="https://pt.wikipedia.org/wiki/Esc%C3%A2ndalo_do_Banco_Master" target="_blank" rel="noopener">Ler o artigo ↗</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- CONTACT -->
+<div class="contact-wrap">
+  <div class="contact-inner">
+    <div class="contact-text">
+      <h3>Dúvidas ou sugestões?</h3>
+      <p>Entre em contato com a professora Daniela.</p>
+    </div>
+    <a class="contact-btn" href="mailto:daniela.avila@brazilianportuguesehub.com">Enviar mensagem</a>
+  </div>
+</div>
+
+</body>
+</html>
