@@ -480,6 +480,32 @@
       color: var(--cobalto);
     }
 
+    /* show model answer button */
+    .show-model-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin: 6px 0 8px;
+      padding: 6px 14px; border-radius: 6px;
+      background: transparent;
+      border: 1.5px solid var(--erva-doce);
+      color: var(--floresta);
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .show-model-btn:hover { background: rgba(166,178,138,0.15); }
+
+    /* inline model answer panel */
+    .model-ans {
+      display: none;
+      background: rgba(78,85,29,0.07);
+      border-left: 3px solid var(--erva-doce);
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      font-size: 14px; color: var(--floresta);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
     /* contact box */
     .contact-box {
       background: var(--baunilha2);
@@ -524,7 +550,6 @@
     <h1>Pretérito Perfeito<br><em style="font-family:'Trirong',serif; font-weight:300; color:rgba(255,255,255,0.75);">Verbos Regulares</em></h1>
     <p>Review the grammar note and the text before your lesson. Complete the exercises afterwards as homework.</p>
     <div class="student-meta">
-      <span class="meta-pill"><span class="dot"></span>Level A2 — Iniciante II</span>
       <span class="meta-pill"><span class="dot"></span>Grammar &amp; Reading</span>
       <span class="meta-pill"><span class="dot"></span>Past tense — regular verbs</span>
     </div>
@@ -609,9 +634,8 @@
     </div>
 
     <div class="text-reader">
-      <div class="fonte">Ana Luiza Mendes — blog <em>Janela da Janela</em></div>
       <div class="text-title">De mala e cuia: um fim de semana em Florianópolis</div>
-      <div class="text-byline">por Ana Luiza Mendes</div>
+      <div class="text-byline">por Ana Luiza Mendes — publicado no blog <em>Janela da Janela</em></div>
 
       <p>
         Na semana passada, eu e minha amiga Cláudia <em>viajamos</em> para Florianópolis. <em>Saímos</em> de São Paulo na sexta à noite e <em>chegamos</em> cedo no sábado de manhã.
@@ -652,29 +676,36 @@
       </div>
       <p class="ex-instruction">Answer each question in a complete sentence in Portuguese.</p>
 
-      <div style="margin-bottom:16px;">
+      <div style="margin-bottom:4px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">1. De qual cidade Ana Luiza e Cláudia saíram?</label>
         <textarea class="open-textarea" placeholder="Elas saíram de..."></textarea>
+        <button class="show-model-btn" onclick="showModel(1)">Show model answer</button>
+        <div class="model-ans" id="model-1">Elas saíram de São Paulo.</div>
       </div>
-      <div style="margin-bottom:16px;">
+      <div style="margin-bottom:4px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">2. Como elas se locomoveram no primeiro dia?</label>
         <textarea class="open-textarea" placeholder="No primeiro dia, elas..."></textarea>
+        <button class="show-model-btn" onclick="showModel(2)">Show model answer</button>
+        <div class="model-ans" id="model-2">No primeiro dia, elas alugaram uma bicicleta e pedalaram até a Lagoa da Conceição.</div>
       </div>
-      <div style="margin-bottom:16px;">
+      <div style="margin-bottom:4px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">3. O que Ana Luiza fez no Mercado Público?</label>
         <textarea class="open-textarea" placeholder="No Mercado Público, Ana Luiza..."></textarea>
+        <button class="show-model-btn" onclick="showModel(3)">Show model answer</button>
+        <div class="model-ans" id="model-3">Ana Luiza provou um peixe grelhado e comprou presentes para a família.</div>
       </div>
-      <div style="margin-bottom:16px;">
+      <div style="margin-bottom:4px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">4. O que Cláudia comprou no mercado?</label>
         <textarea class="open-textarea" placeholder="Cláudia comprou..."></textarea>
+        <button class="show-model-btn" onclick="showModel(4)">Show model answer</button>
+        <div class="model-ans" id="model-4">Cláudia comprou peças de cerâmica de uma artesã.</div>
       </div>
-      <div>
+      <div style="margin-bottom:4px;">
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">5. O que elas fizeram no domingo de manhã?</label>
         <textarea class="open-textarea" placeholder="No domingo de manhã, elas..."></textarea>
+        <button class="show-model-btn" onclick="showModel(5)">Show model answer</button>
+        <div class="model-ans" id="model-5">No domingo de manhã, elas assistiram ao nascer do sol na Praia do Campeche e entraram no mar.</div>
       </div>
-
-      <button class="check-btn" onclick="checkComp()">✓ Check answers (model)</button>
-      <div id="comp-result" class="result-msg"></div>
     </div>
 
     <!-- Exercise 2 — Identify verbs -->
@@ -957,23 +988,12 @@
       .replace(/\s+/g, ' ');
   }
 
-  /* ── EX 1: Comprehension — show model answers ── */
-  function checkComp() {
-    var models = [
-      'Elas saíram de São Paulo.',
-      'No primeiro dia, elas alugaram uma bicicleta e pedalaram até a Lagoa da Conceição.',
-      'Ana Luiza provou um peixe grelhado e comprou presentes para a família.',
-      'Cláudia comprou peças de cerâmica de uma artesã.',
-      'No domingo de manhã, elas assistiram ao nascer do sol na Praia do Campeche e entraram no mar.'
-    ];
-    var html = '<div style="font-weight:700;margin-bottom:10px;">Model answers:</div>';
-    models.forEach(function(m, i) {
-      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> ' + m + '</div>';
-    });
-    var el = document.getElementById('comp-result');
-    el.className = 'result-msg good';
-    el.innerHTML = html;
-    el.style.display = 'block';
+  /* ── EX 1: Comprehension — reveal individual model answers ── */
+  function showModel(n) {
+    var panel = document.getElementById('model-' + n);
+    var btn = panel.previousElementSibling;
+    panel.style.display = 'block';
+    btn.style.display = 'none';
   }
 
   /* ── EX 2: Verb identification ── */
