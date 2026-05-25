@@ -27,44 +27,6 @@
   }
   body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
 
-  /* ── HEADER ─────────────────────────────── */
-  .portal-header {
-    background: var(--floresta);
-    padding: 14px 28px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .portal-header .logo { display: block; line-height: 0; }
-  .portal-header .back {
-    color: rgba(255,255,255,.8);
-    text-decoration: none;
-    font-size: .85rem;
-    margin-left: auto;
-  }
-  .portal-header .back:hover { color: #fff; }
-
-  /* ── LEVEL BAR ───────────────────────────── */
-  .level-bar {
-    background: var(--baunilha);
-    color: var(--musgo);
-    padding: 8px 28px;
-    font-size: .8rem;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .badge {
-    background: var(--terracota);
-    color: #fff;
-    border-radius: 20px;
-    padding: 2px 12px;
-    font-size: .75rem;
-  }
-
   /* ── CONTAINER ───────────────────────────── */
   .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 48px; }
 
@@ -341,26 +303,6 @@
   }
   .score-badge.visible { display: inline-flex; }
 
-  /* ── FOOTER ─────────────────────────────── */
-  .site-footer {
-    background: var(--musgo);
-    padding: 24px 32px;
-    text-align: center;
-    margin-top: 48px;
-  }
-  .site-footer .footer-copy {
-    font-size: 12px;
-    color: rgba(255,255,255,.55);
-    font-family: 'Manrope', sans-serif;
-    letter-spacing: .02em;
-  }
-  .site-footer .footer-copy a {
-    color: rgba(255,255,255,.75);
-    text-decoration: none;
-    transition: color .2s;
-  }
-  .site-footer .footer-copy a:hover { color: #fff; }
-
   @media(max-width:600px) {
     .card { padding: 20px 18px; }
     .word-item { flex-direction: column; align-items: flex-start; }
@@ -371,19 +313,52 @@
   .a1plus-badge { background:var(--pitomba); color:#fff; font-size:.68rem; font-weight:800; padding:2px 7px; border-radius:3px; letter-spacing:.06em; white-space:nowrap; }
   .fonte { font-size:.78rem; color:var(--pitomba); margin-top:4px; }
   .fonte em { font-style:italic; }
+  /* ── TOPBAR ─────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--giz);
+    border-bottom: 1px solid #e0ddc8;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; height: 58px;
+  }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 30px; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level {
+    background: var(--floresta); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+  }
+  .topbar-back {
+    font-size: 12px; color: #999; text-decoration: none; transition: color .2s;
+  }
+  .topbar-back:hover { color: var(--floresta); }
+  .own-answers-note {
+    margin-top: 24px; padding: 18px 24px;
+    background: #f4f2eb; border-radius: 10px;
+    border-left: 3px solid var(--floresta);
+    font-size: .88rem; line-height: 1.75; color: #666;
+    font-family: 'Manrope', sans-serif;
+  }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="portal-header">
-  <img src="data:image/png;base64,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" alt="Brazilian Portuguese Hub" style="height:34px;display:block;">
-  <a class="back" href="../a1/index.html">← Back to A1</a>
-</div>
-<div class="level-bar">
-  <span class="badge">A1</span>
-  Iniciante I · Apresentações · Conhecendo seu professor
-</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Básico I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
 
 <div class="container">
 
@@ -698,14 +673,6 @@
 </div>
 
 <!-- FOOTER -->
-<div class="site-footer">
-  <p class="footer-copy">
-    Material developed for Brazilian Portuguese Hub ·
-    Podcast <em>Língua da Gente</em> by Orlando R. Kelm ·
-    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> ·
-    <a href="https://www.brazilianportuguesehub.com" target="_blank">brazilianportuguesehub.com</a>
-  </p>
-</div>
 
 <script>
   /* ── EXERCISE 1: expression quiz ── */
