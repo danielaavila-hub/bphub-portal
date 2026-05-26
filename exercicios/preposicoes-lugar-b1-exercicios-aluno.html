@@ -177,6 +177,7 @@
     }
     .gap-list li:last-child { border-bottom: none; }
     .gap-input {
+      color: #1E1D1C;
       border: 2px solid var(--cinza-claro);
       border-radius: 6px;
       padding: 4px 10px;
@@ -592,7 +593,13 @@
       </div>
 
       <div class="btn-actions">
+        <button class="btn btn-check" onclick="checkAllMC()">✓ Verificar respostas</button>
         <button class="btn btn-reset" onclick="resetMC()">↺ Recomeçar</button>
+      </div>
+      <div class="score-bar" id="score2" style="display:none">
+        <span class="score-label">Resultado:</span>
+        <div class="score-track"><div class="score-fill" id="fill2"></div></div>
+        <span class="score-text" id="txt2"></span>
       </div>
     </div>
   </div>
@@ -615,7 +622,7 @@
         Based on the Rubem Braga text, decide if each statement is true (<em>Verdadeiro</em>) or false (<em>Falso</em>). If false, you'll see the correction.
       </div>
 
-      <div class="tf-item">
+      <div class="tf-item" data-correct="F">
         <div class="tf-enunciado">1. O apartamento 903 fica <em>acima</em> do apartamento 1003.</div>
         <div class="tf-btns">
           <button class="tf-btn" onclick="checkTF(this, 'V', 'F')">Verdadeiro</button>
@@ -624,7 +631,7 @@
         <div class="tf-correction">✏️ O apartamento 903 fica <strong>abaixo</strong> do 1003 — o narrador está no décimo andar, o senhor 903 está no nono.</div>
       </div>
 
-      <div class="tf-item">
+      <div class="tf-item" data-correct="V">
         <div class="tf-enunciado">2. O oceano Atlântico serve de "fronteira" ao sul do apartamento 1003.</div>
         <div class="tf-btns">
           <button class="tf-btn" onclick="checkTF(this, 'V', 'V')">Verdadeiro</button>
@@ -633,7 +640,7 @@
         <div class="tf-correction"></div>
       </div>
 
-      <div class="tf-item">
+      <div class="tf-item" data-correct="F">
         <div class="tf-enunciado">3. O apartamento 1001 está <em>à direita</em> do apartamento 1003 — a leste.</div>
         <div class="tf-btns">
           <button class="tf-btn" onclick="checkTF(this, 'V', 'F')">Verdadeiro</button>
@@ -642,7 +649,7 @@
         <div class="tf-correction">✏️ O 1001 está a <strong>oeste</strong> — não a leste. O 1005 é que está a leste do 1003.</div>
       </div>
 
-      <div class="tf-item">
+      <div class="tf-item" data-correct="V">
         <div class="tf-enunciado">4. <em>Entre</em> os dois andares existe apenas uma laje fina.</div>
         <div class="tf-btns">
           <button class="tf-btn" onclick="checkTF(this, 'V', 'V')">Verdadeiro</button>
@@ -651,7 +658,7 @@
         <div class="tf-correction"></div>
       </div>
 
-      <div class="tf-item">
+      <div class="tf-item" data-correct="F">
         <div class="tf-enunciado">5. O teto do apartamento 903 e o chão do apartamento 1003 são coisas diferentes.</div>
         <div class="tf-btns">
           <button class="tf-btn" onclick="checkTF(this, 'V', 'F')">Verdadeiro</button>
@@ -661,7 +668,13 @@
       </div>
 
       <div class="btn-actions">
+        <button class="btn btn-check" onclick="checkAllTF()">✓ Verificar respostas</button>
         <button class="btn btn-reset" onclick="resetTF()">↺ Recomeçar</button>
+      </div>
+      <div class="score-bar" id="score3" style="display:none">
+        <span class="score-label">Resultado:</span>
+        <div class="score-track"><div class="score-fill" id="fill3"></div></div>
+        <span class="score-text" id="txt3"></span>
       </div>
     </div>
   </div>
@@ -753,6 +766,7 @@
         <span class="score-text" id="txt4"></span>
       </div>
       <div class="btn-actions">
+        <button class="btn btn-check" onclick="checkAllMatch()">✓ Verificar respostas</button>
         <button class="btn btn-reset" onclick="resetMatch()">↺ Recomeçar</button>
       </div>
     </div>
@@ -978,6 +992,87 @@
     document.querySelectorAll('#ex4 .match-icon').forEach(i => i.textContent = '');
     document.getElementById('score4').style.display = 'none';
     document.getElementById('fill4').style.width = '0%';
+  }
+
+  // ─────────────────────────────────────────────
+  // EX 2 — CHECK ALL MC
+  // ─────────────────────────────────────────────
+  function checkAllMC() {
+    const items = document.querySelectorAll('#ex2 .mc-item');
+    let total = items.length, correct = 0;
+    items.forEach(item => {
+      const btns = item.querySelectorAll('.mc-btn');
+      const alreadyAnswered = [...btns].some(b => b.classList.contains('correct') || b.classList.contains('wrong'));
+      if (!alreadyAnswered) {
+        btns.forEach(b => { b.disabled = true; });
+        const correctBtn = item.querySelector('[data-correct="true"]');
+        correctBtn.classList.add('reveal');
+        const fb = item.querySelector('.mc-feedback');
+        fb.className = 'mc-feedback err';
+        fb.textContent = '❌ Não respondida — resposta correta destacada.';
+      } else {
+        if ([...btns].some(b => b.classList.contains('correct'))) correct++;
+      }
+    });
+    const bar = document.getElementById('score2');
+    bar.style.display = 'flex';
+    const pct = Math.round((correct / total) * 100);
+    document.getElementById('fill2').style.width = pct + '%';
+    document.getElementById('txt2').textContent = correct + '/' + total;
+  }
+
+  // ─────────────────────────────────────────────
+  // EX 3 — CHECK ALL V/F
+  // ─────────────────────────────────────────────
+  function checkAllTF() {
+    const items = document.querySelectorAll('#ex3 .tf-item');
+    let total = items.length, correct = 0;
+    items.forEach(item => {
+      const btns = item.querySelectorAll('.tf-btn');
+      const alreadyAnswered = [...btns].some(b => b.classList.contains('correct') || b.classList.contains('wrong'));
+      const correctAns = item.dataset.correct;
+      if (!alreadyAnswered) {
+        btns.forEach(b => {
+          b.disabled = true;
+          const picked = b.textContent.startsWith('V') ? 'V' : 'F';
+          if (picked === correctAns) b.classList.add('reveal');
+        });
+        const corr = item.querySelector('.tf-correction');
+        if (corr && corr.textContent.trim()) corr.classList.add('visible');
+      } else {
+        if ([...btns].some(b => b.classList.contains('correct'))) correct++;
+      }
+    });
+    const bar = document.getElementById('score3');
+    bar.style.display = 'flex';
+    const pct = Math.round((correct / total) * 100);
+    document.getElementById('fill3').style.width = pct + '%';
+    document.getElementById('txt3').textContent = correct + '/' + total;
+  }
+
+  // ─────────────────────────────────────────────
+  // EX 4 — CHECK ALL MATCH
+  // ─────────────────────────────────────────────
+  function checkAllMatch() {
+    const sels = document.querySelectorAll('#ex4 .match-sel');
+    let total = sels.length, correct = 0;
+    sels.forEach(s => {
+      const icon = s.closest('.match-item').querySelector('.match-icon');
+      if (s.value === '') {
+        // Reveal correct answer
+        s.value = s.dataset.correct;
+        s.classList.add('correct');
+        icon.textContent = '✅';
+        correct++;
+      } else if (s.value === s.dataset.correct) {
+        correct++;
+      }
+    });
+    const bar = document.getElementById('score4');
+    bar.style.display = 'flex';
+    const pct = Math.round((correct / total) * 100);
+    document.getElementById('fill4').style.width = pct + '%';
+    document.getElementById('txt4').textContent = correct + '/' + total;
   }
 </script>
 
