@@ -454,11 +454,14 @@
   var totalCards=document.querySelectorAll('.mat-card').length;
   document.getElementById('stat-total').textContent=totalCards;
   document.getElementById('fc-all').textContent=totalCards;
-  // Auto-count section badges
+  // Auto-count section badges and filter button counts
   ['gram','func','tema','gen','cult','fon'].forEach(function(cat){
     var el=document.getElementById('count-'+cat);
     var grid=document.getElementById('grid-'+cat);
     if(el&&grid){var n=grid.querySelectorAll('.mat-card').length;el.textContent=n+(n===1?' material':' materiais');}
+    // count cards tagged with this category across ALL sections
+    var fc=document.getElementById('fc-'+cat);
+    if(fc){var n=0;document.querySelectorAll('.mat-card').forEach(function(c){if((c.dataset.tags||'').split(' ').indexOf(cat)!==-1)n++;});fc.textContent=n;}
   });
 </script>
 </body>
