@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronomes Demonstrativos — BPHUB A1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --areia:      #E5E0D0;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --marrom:     #967E63;
+      --marrom2:    #A1441D;
+      --goiaba:     #FCA290;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --card-bg:    #FFFFFF;
+      --radius:     12px;
+
+      /* A1 — Iniciante I */
+      --level-color: #4E551D;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--texto); }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--baunilha);
+      border-bottom: 1px solid var(--areia);
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 24px;
+    }
+    .topbar-logo img { height: 36px; display: block; }
+    .topbar-student { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+    .topbar-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--level-color); color: #fff;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .topbar-name  { font-size: 13px; color: #555; font-family: sans-serif; }
+    .topbar-back  { font-size: 12px; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .topbar-back:hover { color: var(--level-color); }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      background: var(--level-color); color: #fff;
+      padding: 48px 40px 40px; text-align: left;
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
+      margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300; line-height: 1.25; margin-bottom: 14px;
+      color: var(--baunilha2);
+    }
+    .page-hero > p {
+      font-size: 15px; opacity: .85; max-width: 620px;
+      margin: 0 0 20px; font-family: 'Manrope', sans-serif; line-height: 1.6;
+    }
+    .student-meta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
+    .meta-pill {
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; font-family: 'Manrope', sans-serif;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); display: inline-block; }
+
+    /* ── Main ── */
+    .main { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    /* ── Section header ── */
+    .sec-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 40px; margin-bottom: 20px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--areia);
+    }
+    .sec-header.first { margin-top: 0; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--level-color); color: #fff; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sec-header h2 { font-size: 1.1rem; color: var(--texto); }
+    .sec-header p  { font-size: 13px; color: #666; font-family: 'Manrope', sans-serif; margin-top: 2px; }
+
+    /* ── Grammar box ── */
+    .grammar-box {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--areia); padding: 28px; margin-bottom: 24px;
+    }
+    .grammar-box p { margin-bottom: 14px; font-size: 15px; }
+    .grammar-box p:last-child { margin-bottom: 0; }
+
+    /* ── Tables ── */
+    .gram-table {
+      width: 100%; border-collapse: collapse;
+      margin: 18px 0; font-size: 14px; font-family: 'Manrope', sans-serif;
+    }
+    .gram-table th {
+      background: var(--level-color); color: #fff;
+      padding: 10px 12px; text-align: left; font-weight: 600;
+    }
+    .gram-table th:first-child { border-radius: 6px 0 0 0; }
+    .gram-table th:last-child  { border-radius: 0 6px 0 0; }
+    .gram-table td { padding: 10px 12px; border-bottom: 1px solid var(--areia); vertical-align: middle; }
+    .gram-table tr:last-child td { border-bottom: none; }
+    .gram-table tr:nth-child(even) td { background: var(--off-white); }
+    .loc-tag {
+      display: inline-block; border-radius: 4px;
+      padding: 2px 8px; font-size: 12px; font-weight: 700;
+    }
+    .loc-aqui { background: var(--erva-doce);  color: #2a2e0a; }
+    .loc-ai   { background: var(--cobalto);    color: #fff; }
+    .loc-la   { background: var(--marrom);     color: #fff; }
+
+    /* ── Callout ── */
+    .callout {
+      background: rgba(78,85,29,.07); border-left: 4px solid var(--erva-doce);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 18px 0;
+      font-size: 14px; line-height: 1.7;
+    }
+    .callout strong { color: var(--level-color); }
+
+    /* ── WhatsApp replica ── */
+    .wapp-outer { margin-bottom: 8px; display: flex; justify-content: center; }
+    .whatsapp-wrap {
+      background: #e5ddd5; padding: 20px 16px; border-radius: 14px;
+      width: 100%; max-width: 420px;
+      font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px;
+    }
+    .wapp-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .wapp-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; flex-shrink: 0;
+    }
+    .wapp-name   { font-weight: 700; font-size: 14px; }
+    .wapp-status { font-size: 12px; color: #666; }
+    .msg-received {
+      background: #fff; border-radius: 0 8px 8px 8px;
+      padding: 8px 12px; margin-bottom: 8px; max-width: 84%;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+    .msg-sent {
+      background: #dcf8c6; border-radius: 8px 0 8px 8px;
+      padding: 8px 12px; margin-bottom: 8px; max-width: 84%; margin-left: auto;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+    .msg-time { font-size: 11px; color: #999; float: right; margin-left: 12px; margin-top: 4px; }
+    .msg-text { margin: 0; line-height: 1.45; }
+    .hl { font-weight: 700; color: #2d5a0e; background: rgba(45,90,14,.13); padding: 0 3px; border-radius: 3px; }
+    .wapp-fonte { font-size: 11px; color: #888; text-align: center; margin-top: 6px; font-style: italic; }
+
+    /* ── Exercise block ── */
+    .exercise-block {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--areia); padding: 28px 28px 24px; margin-bottom: 28px;
+    }
+    .ex-label {
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--level-color); font-family: 'Manrope', sans-serif; font-weight: 700; margin-bottom: 6px;
+    }
+    .ex-title   { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .ex-instruction { font-size: 14px; color: #555; margin-bottom: 20px; font-family: 'Manrope', sans-serif; line-height: 1.6; }
+
+    .ex-item { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+    .ex-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--level-color); color: #fff;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .ex-text { font-size: 14px; line-height: 1.7; flex: 1; }
+
+    /* ── Inputs ── */
+    select, input[type=text] {
+      border: 1.5px solid var(--areia); border-radius: 6px;
+      padding: 6px 10px; font-size: 14px; font-family: 'Manrope', sans-serif;
+      background: #fff; cursor: pointer;
+    }
+    select { min-width: 130px; }
+    input[type=text] { width: 150px; }
+    select:focus, input[type=text]:focus { outline: none; border-color: var(--level-color); }
+    .correct { border-color: var(--floresta) !important; background: rgba(78,85,29,.06) !important; }
+    .wrong   { border-color: var(--pitomba)  !important; background: rgba(211,109,41,.06) !important; }
+
+    textarea {
+      border: 1.5px solid var(--areia); border-radius: 8px;
+      padding: 12px; font-size: 14px; font-family: 'Manrope', sans-serif;
+      width: 100%; min-height: 110px; resize: vertical; background: #fff; margin-top: 8px;
+    }
+    textarea:focus { outline: none; border-color: var(--level-color); }
+
+    .check-btn {
+      background: var(--level-color); color: #fff;
+      border: none; border-radius: 6px;
+      padding: 10px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; margin-top: 16px; font-family: 'Manrope', sans-serif;
+    }
+    .check-btn:hover { opacity: .88; }
+
+    .result-msg {
+      display: none; margin-top: 14px; padding: 14px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      max-height: 260px; overflow-y: auto;
+    }
+    .result-msg.good      { background: rgba(78,85,29,.08);   border: 1px solid rgba(78,85,29,.25);   color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,.08); border: 1px solid rgba(211,109,41,.25); color: var(--pitomba); }
+
+    /* ── Contact box ── */
+    .contact-box {
+      margin-top: 48px; background: var(--baunilha2); border-radius: var(--radius);
+      border: 1px solid rgba(78,85,29,.18);
+      padding: 24px 28px; text-align: left;
+      font-family: 'Manrope', sans-serif; font-size: 14px; color: #5a4a30;
+    }
+    .contact-box strong { color: var(--texto); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .topbar  { padding: 8px 16px; }
+      .page-hero { padding: 32px 20px 28px; }
+      .main    { padding: 24px 16px 48px; }
+      .exercise-block { padding: 20px 16px; }
+      .gram-table { font-size: 12px; }
+      .gram-table th, .gram-table td { padding: 7px 8px; }
+      select { min-width: 100px; }
+      input[type=text] { width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png"
+           alt="BPHUB" onerror="this.outerHTML='<span style=\'font-family:Trirong,serif;font-weight:500;font-size:20px;color:#4E551D;letter-spacing:0.04em;\'>BPHUB</span>'">
+    </a>
+  </div>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← A1 materials</a>
+</div>
+
+<!-- ══ PAGE HERO ══ -->
+<div class="page-hero">
+  <div class="page-eyebrow">Materials Portal</div>
+  <h1>Demonstrative Pronouns<br>
+    <em style="font-style:italic;font-weight:300;color:var(--baunilha2);">esse · isso · aquela</em>
+  </h1>
+  <p>Learn how to point to things near you, near the other person, or far away — and make them agree with the noun in gender and number.</p>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Grammar &amp; Communication</span>
+    <span class="meta-pill"><span class="dot"></span>este · esse · aquele + aqui · aí · lá</span>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+
+  <!-- ─ GRAMMAR NOTE ─ -->
+  <div class="sec-header first">
+    <div class="sec-icon" style="background:var(--level-color);">📖</div>
+    <div>
+      <h2>Grammar Note</h2>
+      <p>Read this before doing the exercises.</p>
+    </div>
+  </div>
+
+  <div class="grammar-box">
+    <p>In Portuguese, demonstrative pronouns tell you <strong>how far something is</strong> from the speaker and the listener. There are three distances — and they must <strong>agree in gender and number</strong> with the noun they describe.</p>
+
+    <table class="gram-table">
+      <thead>
+        <tr>
+          <th>Distance</th>
+          <th>Masc. sing.</th>
+          <th>Fem. sing.</th>
+          <th>Masc. pl.</th>
+          <th>Fem. pl.</th>
+          <th>Location word</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Near me</strong> (speaker)</td>
+          <td>este</td>
+          <td>esta</td>
+          <td>estes</td>
+          <td>estas</td>
+          <td><span class="loc-tag loc-aqui">aqui</span> — here</td>
+        </tr>
+        <tr>
+          <td><strong>Near you</strong> (listener)</td>
+          <td>esse</td>
+          <td>essa</td>
+          <td>esses</td>
+          <td>essas</td>
+          <td><span class="loc-tag loc-ai">aí</span> — there</td>
+        </tr>
+        <tr>
+          <td><strong>Far from both</strong></td>
+          <td>aquele</td>
+          <td>aquela</td>
+          <td>aqueles</td>
+          <td>aquelas</td>
+          <td><span class="loc-tag loc-la">lá / ali</span> — over there</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Remember:</strong> match the demonstrative with the noun's gender.<br>
+      <em>este livro</em> (masc. sing.) &nbsp;·&nbsp; <em>esta casa</em> (fem. sing.)<br>
+      <em>esses livros</em> (masc. pl.) &nbsp;·&nbsp; <em>essas casas</em> (fem. pl.)
+    </div>
+
+    <div class="callout" style="border-left-color:var(--ouro);background:rgba(255,185,74,0.10);margin-top:0;">
+      <strong>🗣️ How Brazilians actually speak:</strong> In everyday spoken Brazilian Portuguese, people tend to use <em>esse / essa / isso</em> for <strong>both</strong> speaker and listener — the strict three-way distinction is more common in formal writing. So if you ask <em>"O que é isso na sua mão?"</em> and a Brazilian responds <em>"Isso é minha garrafa"</em>, that is completely natural, even though the object is right next to the speaker. You will not be wrong for using the full system, but don't be surprised when native speakers use <em>esse / isso</em> interchangeably for anything within reach.
+    </div>
+
+    <p><strong>Neutral forms</strong> — use when you don't name the noun (e.g., you don't know what something is, or you're pointing without saying the noun):</p>
+
+    <table class="gram-table">
+      <thead>
+        <tr>
+          <th>Distance</th>
+          <th>Neutral form</th>
+          <th>Example in context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Near me</td>
+          <td><strong>isto</strong></td>
+          <td><em>— O que é isto aqui?</em> — What is this here?</td>
+        </tr>
+        <tr>
+          <td>Near you</td>
+          <td><strong>isso</strong></td>
+          <td><em>— Isso aí é seu?</em> — Is that yours?</td>
+        </tr>
+        <tr>
+          <td>Far from both</td>
+          <td><strong>aquilo</strong></td>
+          <td><em>— Aquilo lá é o Pão de Açúcar!</em> — That over there is Pão de Açúcar!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─ ANCHOR TEXT ─ -->
+  <div class="sec-header">
+    <div class="sec-icon" style="background:var(--cobalto);">💬</div>
+    <div>
+      <h2>Read the conversation</h2>
+      <p>Ana just moved to a new apartment and is sending photos to Mariana on WhatsApp. Notice the highlighted words.</p>
+    </div>
+  </div>
+
+  <div class="wapp-outer">
+    <div class="whatsapp-wrap">
+      <div class="wapp-header">
+        <div class="wapp-avatar">M</div>
+        <div>
+          <div class="wapp-name">Mariana</div>
+          <div class="wapp-status">online</div>
+        </div>
+      </div>
+
+      <div class="msg-sent">
+        <p class="msg-text">Oi! Estou no apartamento novo! 🏠</p>
+        <span class="msg-time">10:02 ✓✓</span>
+      </div>
+
+      <div class="msg-received">
+        <p class="msg-text">Que emoção! Como é?</p>
+        <span class="msg-time">10:03 ✓✓</span>
+      </div>
+
+      <div class="msg-sent">
+        <p class="msg-text"><span class="hl">Este</span> quarto aqui é muito grande! 😍</p>
+        <span class="msg-time">10:04 ✓✓</span>
+      </div>
+
+      <div class="msg-sent">
+        <p class="msg-text">E <span class="hl">esta</span> janela tem uma vista linda da cidade!</p>
+        <span class="msg-time">10:04 ✓✓</span>
+      </div>
+
+      <div class="msg-received">
+        <p class="msg-text">Que incrível! <span class="hl">Esse</span> sofá vermelho aí é seu?</p>
+        <span class="msg-time">10:05 ✓✓</span>
+      </div>
+
+      <div class="msg-sent">
+        <p class="msg-text">Não! <span class="hl">Esse</span> sofá já estava aqui — é do apartamento.</p>
+        <span class="msg-time">10:06 ✓✓</span>
+      </div>
+
+      <div class="msg-sent">
+        <p class="msg-text">Mas <span class="hl">aquela</span> mesa lá no canto é minha! 😄</p>
+        <span class="msg-time">10:06 ✓✓</span>
+      </div>
+
+      <div class="msg-received">
+        <p class="msg-text">Perfeito! Você vai adorar morar lá! ❤️</p>
+        <span class="msg-time">10:07 ✓✓</span>
+      </div>
+    </div>
+  </div>
+  <p class="wapp-fonte">Texto elaborado para fins didáticos.</p>
+
+  <!-- ─ EXERCISES ─ -->
+  <div class="sec-header">
+    <div class="sec-icon" style="background:var(--marrom);">✏️</div>
+    <div>
+      <h2>Exercises</h2>
+      <p>Practice the demonstratives — check your answers when you're done.</p>
+    </div>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 1 — Choose</div>
+    <div class="ex-title">Select the correct demonstrative.</div>
+    <div class="ex-instruction">Look at the location word in bold (<em>aqui, aí, lá</em>) and at the noun's gender to pick the right form.</div>
+
+    <div class="ex-item">
+      <span class="ex-num">1</span>
+      <div class="ex-text">
+        <select id="e1q1"><option value="">—</option><option>Este</option><option>Esse</option><option>Aquele</option></select>
+        &nbsp;livro <strong>aqui</strong> é meu.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">2</span>
+      <div class="ex-text">
+        <select id="e1q2"><option value="">—</option><option>Esta</option><option>Essa</option><option>Aquela</option></select>
+        &nbsp;caneta <strong>aí</strong> é sua?
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">3</span>
+      <div class="ex-text">
+        <select id="e1q3"><option value="">—</option><option>Este</option><option>Esse</option><option>Aquele</option></select>
+        &nbsp;carro <strong>lá</strong> é muito caro!
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">4</span>
+      <div class="ex-text">
+        <select id="e1q4"><option value="">—</option><option>Estes</option><option>Esses</option><option>Aqueles</option></select>
+        &nbsp;óculos <strong>aqui</strong> são confortáveis.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">5</span>
+      <div class="ex-text">
+        <select id="e1q5"><option value="">—</option><option>Esta</option><option>Essa</option><option>Aquela</option></select>
+        &nbsp;cidade <strong>lá</strong> é muito bonita!
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 2 — Fill in</div>
+    <div class="ex-title">Type the correct demonstrative.</div>
+    <div class="ex-instruction">Read the context clue in italics, then write the correct demonstrative form. Pay attention to the noun's gender.</div>
+
+    <div class="ex-item">
+      <span class="ex-num">1</span>
+      <div class="ex-text">
+        O livro está <em>aqui</em>, perto de mim. &nbsp;
+        <input type="text" id="e2q1" placeholder="Escreva aqui...">
+        livro é interessante.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">2</span>
+      <div class="ex-text">
+        A bolsa está <em>aí</em>, perto de você. &nbsp;
+        <input type="text" id="e2q2" placeholder="Escreva aqui...">
+        bolsa é bonita?
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">3</span>
+      <div class="ex-text">
+        O museu está <em>lá</em>, longe de nós. &nbsp;
+        <input type="text" id="e2q3" placeholder="Escreva aqui...">
+        museu é muito famoso.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">4</span>
+      <div class="ex-text">
+        A praia está <em>aqui</em>, perto de mim. &nbsp;
+        <input type="text" id="e2q4" placeholder="Escreva aqui...">
+        praia é linda!
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">5</span>
+      <div class="ex-text">
+        Os sapatos estão <em>aí</em>, perto de você. &nbsp;
+        <input type="text" id="e2q5" placeholder="Escreva aqui...">
+        sapatos são seus?
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 3 — Neutral forms</div>
+    <div class="ex-title">Choose isto, isso, or aquilo.</div>
+    <div class="ex-instruction">Use the location word as your guide: <em>aqui → isto · aí → isso · lá → aquilo</em>.</div>
+
+    <div class="ex-item">
+      <span class="ex-num">1</span>
+      <div class="ex-text">
+        — O que é
+        <select id="e3q1"><option value="">—</option><option>isto</option><option>isso</option><option>aquilo</option></select>
+        <strong>aqui</strong>? &nbsp;— É o meu passaporte.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">2</span>
+      <div class="ex-text">
+        —
+        <select id="e3q2"><option value="">—</option><option>Isto</option><option>Isso</option><option>Aquilo</option></select>
+        <strong>aí</strong> é seu? &nbsp;— Sim, é o meu celular.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">3</span>
+      <div class="ex-text">
+        — Olha!
+        <select id="e3q3"><option value="">—</option><option>Isto</option><option>Isso</option><option>Aquilo</option></select>
+        <strong>lá</strong> é o Pão de Açúcar! &nbsp;— Que lindo!
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <span class="ex-num">4</span>
+      <div class="ex-text">
+        — O que é
+        <select id="e3q4"><option value="">—</option><option>isto</option><option>isso</option><option>aquilo</option></select>
+        <strong>aqui</strong>? &nbsp;— É uma tapioca! 🥞
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 4 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 4 — Write</div>
+    <div class="ex-title">Describe your space.</div>
+    <div class="ex-instruction">
+      Look around where you are right now — your desk, room, or home. Write <strong>4 sentences</strong> using demonstratives to describe what you see.<br><br>
+      <em>Example: "Este computador aqui é meu. Essa cadeira aí é confortável. Aquela janela lá tem uma vista bonita."</em>
+    </div>
+    <textarea id="e4response" placeholder="Escreva suas 4 frases aqui..."></textarea>
+  </div>
+
+  <!-- ─ CONTACT BOX ─ -->
+  <div class="contact-box">
+    <p>When you're done, <strong>send your answers to your teacher.</strong> She will give you personalized feedback on your progress.</p>
+    <p style="margin-top:8px;">Entre em contato com <strong>sua professora</strong> se tiver dúvidas. 💬</p>
+  </div>
+
+</div><!-- /.main -->
+
+<script>
+  function norm(s) {
+    return s.toLowerCase().trim()
+      .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+      .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+      .replace(/ç/g,'c').replace(/\s+/g,' ');
+  }
+
+  /* ── Exercise 1 ── */
+  var e1 = [
+    { id:'e1q1', key:'Este',   display:'Este — near speaker, masc. sing.' },
+    { id:'e1q2', key:'Essa',   display:'Essa — near listener, fem. sing.' },
+    { id:'e1q3', key:'Aquele', display:'Aquele — far from both, masc. sing.' },
+    { id:'e1q4', key:'Estes',  display:'Estes — near speaker, masc. pl.' },
+    { id:'e1q5', key:'Aquela', display:'Aquela — far from both, fem. sing.' }
+  ];
+  function checkEx1() {
+    var html = ''; var correct = 0;
+    e1.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex1-result');
+    var allOk = correct === e1.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e1.length + ' correct!'
+               : correct + ' of ' + e1.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* ── Exercise 2 ── */
+  var e2 = [
+    { id:'e2q1', key:'este',   display:'Este — near me (aqui), masc.' },
+    { id:'e2q2', key:'essa',   display:'Essa — near you (aí), fem.' },
+    { id:'e2q3', key:'aquele', display:'Aquele — far (lá), masc.' },
+    { id:'e2q4', key:'esta',   display:'Esta — near me (aqui), fem.' },
+    { id:'e2q5', key:'esses',  display:'Esses — near you (aí), masc. pl.' }
+  ];
+  function checkEx2() {
+    var html = ''; var correct = 0;
+    e2.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var filled = el.value.trim().length > 0;
+      var ok = filled && norm(el.value) === norm(a.key);
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', filled && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex2-result');
+    var allOk = correct === e2.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e2.length + ' correct!'
+               : correct + ' of ' + e2.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* ── Exercise 3 ── */
+  var e3 = [
+    { id:'e3q1', key:'isto',   display:'isto — neutral, near speaker (aqui)' },
+    { id:'e3q2', key:'Isso',   display:'Isso — neutral, near listener (aí)' },
+    { id:'e3q3', key:'Aquilo', display:'Aquilo — neutral, far from both (lá)' },
+    { id:'e3q4', key:'isto',   display:'isto — neutral, near speaker (aqui)' }
+  ];
+  function checkEx3() {
+    var html = ''; var correct = 0;
+    e3.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = norm(el.value) === norm(a.key);
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex3-result');
+    var allOk = correct === e3.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e3.length + ' correct!'
+               : correct + ' of ' + e3.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+</script>
+</body>
+</html>
