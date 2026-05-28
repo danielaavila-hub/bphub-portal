@@ -386,6 +386,9 @@
   function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){localStorage.setItem('bphub_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
   document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
   var cf='all',cs='';
+  var totalCards=document.querySelectorAll('.mat-card').length;
+  document.getElementById('stat-total').textContent=totalCards;
+  document.getElementById('fc-all').textContent=totalCards;
   function filterCat(cat,btn){cf=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
   function handleSearch(v){cs=v.trim().toLowerCase();document.getElementById('search-clear').style.display=cs?'block':'none';applyFilters();}
   function clearSearch(){document.getElementById('search-input').value='';cs='';document.getElementById('search-clear').style.display='none';applyFilters();}
@@ -403,7 +406,7 @@
     var banner=document.getElementById('search-banner');
     if(cs){banner.style.display='block';banner.innerHTML='Showing <strong>'+n+' result'+(n!==1?'s':'')+'</strong> for "<strong>'+cs+'</strong>"';}else{banner.style.display='none';}
     document.getElementById('no-results').style.display=(n===0)?'block':'none';
-    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'1':n;
+    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?totalCards:n;
   }
 </script>
 </body>
