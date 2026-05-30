@@ -407,6 +407,37 @@
       .choice-options { flex-direction: column; }
     }
   
+    /* ── MODEL ANSWERS ── */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item {
+      margin-bottom:14px;
+      background: rgba(150,126,99,.07);
+      border-left: 3px solid #967E63;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+    }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: #967E63; margin-bottom: 4px;
+    }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 20px;
+      background: transparent;
+      border: 1.5px solid #967E63;
+      color: #967E63;
+      border-radius: 8px;
+      padding: 9px 18px;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif;
+      transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
     /* ── TOPBAR B1 standard ── */
     .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:64px; border-bottom:1px solid #EDEDE2; background:#FCF5EB; position:sticky; top:0; z-index:50; }
     .topbar > a img { height:30px; display:block; }
@@ -555,9 +586,8 @@
     </div>
 
     <div class="text-reader">
-      <div class="text-fonte">Flávia Drummond — Revista Trajetórias, edição de abril</div>
       <div class="text-title">"Cada passo foi uma escolha": a trajetória de Renata Souza</div>
-      <div class="text-byline">por Flávia Drummond</div>
+      <div class="text-byline">por Flávia Drummond — <em>Revista Trajetórias</em>, edição de abril</div>
 
       <p class="interview-q">Renata, você <em>tem trabalhado</em> com inovação social há quase dez anos. Como tudo começou?</p>
       <p class="interview-a">Tudo começou de forma bem inesperada, na verdade. Eu trabalhava numa multinacional, tinha um salário bom, mas sentia que faltava algo. Aí, em 2015, pedi demissão e fui fazer um voluntariado em Belém. Foi lá que percebi que queria trabalhar com pessoas, com comunidades. Desde então, <em>tenho aprendido</em> muito mais do que nos dez anos anteriores.</p>
@@ -620,6 +650,35 @@
       <div>
         <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">6. O que ela tem dito para jovens que querem seguir um caminho parecido?</label>
         <textarea class="open-textarea" placeholder="Ela tem dito..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this)">👁 See model answers</button>
+
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item">
+          <div class="model-label">Question 1 — model answer</div>
+          <p>Em 2015.</p>
+        </div>
+        <div class="model-answer-item">
+          <div class="model-label">Question 2 — model answer</div>
+          <p>Ela decidiu mudar porque sentia que faltava algo no trabalho na multinacional e queria trabalhar com pessoas e com comunidades. O voluntariado em Belém foi o ponto de virada.</p>
+        </div>
+        <div class="model-answer-item">
+          <div class="model-label">Question 3 — model answer</div>
+          <p>Ela tem passado a maior parte do tempo em Belém nos últimos três anos.</p>
+        </div>
+        <div class="model-answer-item">
+          <div class="model-label">Question 4 — model answer</div>
+          <p>A organização tem oferecido cursos, mentorias e rodas de conversa para lideranças comunitárias.</p>
+        </div>
+        <div class="model-answer-item">
+          <div class="model-label">Question 5 — model answer</div>
+          <p>Conceição Evaristo e Sueli Carneiro têm sido fundamentais para ela.</p>
+        </div>
+        <div class="model-answer-item">
+          <div class="model-label">Question 6 — model answer</div>
+          <p>Ela tem dito para não esperar o momento perfeito — errar faz parte e cada erro ensina algo. A trajetória não é uma linha reta.</p>
+        </div>
       </div>
     </div>
 
@@ -874,6 +933,13 @@
   </div><!-- /main -->
 
 <script>
+  /* ── EX 1: Toggle model answers ── */
+  function toggleAnswers(btn) {
+    const block = document.getElementById('ex1-answers');
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
   function norm(str) {
     return str.trim().toLowerCase()
       .normalize('NFD').replace(/[̀-ͯ]/g,'')
