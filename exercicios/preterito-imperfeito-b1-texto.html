@@ -95,6 +95,11 @@
     .q-num { font-size: 11px; font-weight: 700; color: var(--pitomba); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
     .q-text { font-size: 15px; color: var(--nanquim); line-height: 1.55; }
     .q-type { display: inline-block; font-size: 10px; font-weight: 700; color: #aaa; background: var(--off-white); padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
+    .model-answer { display: none; margin-top: 10px; background: rgba(150,126,99,.07); border-left: 3px solid var(--b1); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 14px; color: var(--texto); line-height: 1.7; }
+    .model-answer.visible { display: block; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--b1); margin-bottom: 4px; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 20px; padding: 9px 20px; border-radius: 8px; background: var(--b1); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+    .see-answers-btn:hover { opacity: .85; }
 
     /* EXERCISE BLOCK */
     .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
@@ -296,24 +301,40 @@
       <div class="q-num">Question 1 — Literal</div>
       <div class="q-text">O que o narrador e seu pai faziam toda manhã? Como cada um se comportava durante esse passeio?</div>
       <span class="q-type">Compreensão literal</span>
+      <div class="model-answer" id="ma1">
+        <div class="model-label">Model answer</div>
+        Todo dia de manhã, o narrador e seu pai desciam até a beira do rio. O pai caminhava devagar, fumava um cigarro e ficava em silêncio. O narrador corria na frente, saltava entre as pedras e assustava os passarinhos que bebiam água na margem.
+      </div>
     </div>
 
     <div class="question-item">
       <div class="q-num">Question 2 — Literal</div>
       <div class="q-text">O que aconteceu naquela segunda-feira? O que o narrador fez de diferente naquele dia?</div>
       <span class="q-type">Compreensão literal</span>
+      <div class="model-answer" id="ma2">
+        <div class="model-label">Model answer</div>
+        Na segunda-feira, um cavalo branco apareceu na porta de casa, sem dono e sem explicação. Diferente dos outros dias, o narrador não dormiu depois do almoço — ficou acordado, pensando no cavalo e em por onde ele havia vindo.
+      </div>
     </div>
 
     <div class="question-item">
       <div class="q-num">Question 3 — Interpretation</div>
       <div class="q-text">O narrador diz que sua mãe olhava para o cavalo "como se o esperasse há muito tempo." O que essa frase sugere sobre ela?</div>
       <span class="q-type">Interpretação</span>
+      <div class="model-answer" id="ma3">
+        <div class="model-label">Model answer</div>
+        A frase sugere que a mãe tinha uma ligação misteriosa com o cavalo — como se a chegada dele fosse algo esperado ou inevitável. Pode indicar que ela carregava um desejo antigo, um segredo, ou uma memória que o narrador não conhecia.
+      </div>
     </div>
 
     <div class="question-item">
       <div class="q-num">Question 4 — Grammar awareness</div>
       <div class="q-text">Look at paragraph 2. Why are all the verbs in the imperfeito? What do they have in common?</div>
       <span class="q-type">Consciência gramatical</span>
+      <div class="model-answer" id="ma4">
+        <div class="model-label">Model answer</div>
+        All the verbs in paragraph 2 (caminhava, fumava, ficava, corria, saltava, assustava, bebiam) describe habitual, repeated actions or ongoing states — things that happened regularly, every morning. The imperfeito is used because none of them is a single, completed event; they are background description of routine.
+      </div>
     </div>
 
     <div class="question-item">
@@ -321,6 +342,8 @@
       <div class="q-text">Você tem uma lembrança clara da sua infância — um lugar, um ritual, uma pessoa? Escreva 2 ou 3 frases usando o imperfeito.</div>
       <span class="q-type">Produção pessoal</span>
     </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers(this)">👁 See model answers</button>
   </div>
 
   <hr>
@@ -407,9 +430,39 @@
     <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
   </div>
 
+  <hr>
+
+  <!-- TEXT REPEAT -->
+  <div class="sec-label">Texto para Consulta</div>
+  <div class="text-card">
+    <div class="text-fonte">Rubem Braga, "O menino e o rio" — adaptado para fins didáticos</div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--b1);"></div><span style="font-size:13px;">pretérito imperfeito</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cobalto);"></div><span style="font-size:13px;">pretérito perfeito</span></div>
+    </div>
+
+    <p>Quando eu <span class="imp">era</span> menino, <span class="imp">morava</span> numa pequena cidade do interior do Espírito Santo. A casa da minha família <span class="imp">ficava</span> perto do rio, e <span class="imp">havia</span> sempre um cheiro de terra molhada e goiabas maduras no ar.</p>
+
+    <p>Todo dia de manhã, antes que o sol esquentasse muito, eu <span class="imp">descia</span> até a beira do rio com meu pai. Ele <span class="imp">caminhava</span> devagar, <span class="imp">fumava</span> um cigarro e <span class="imp">ficava</span> em silêncio. Eu <span class="imp">corria</span> na frente, <span class="imp">saltava</span> entre as pedras e <span class="imp">assustava</span> os passarinhos que <span class="imp">bebiam</span> água na margem.</p>
+
+    <p><span class="imp">Era</span> segunda-feira quando <span class="perf">aconteceu</span> a coisa mais estranha daquele verão: um cavalo branco <span class="perf">apareceu</span> na porta de casa, sem dono, sem explicação. Minha mãe <span class="imp">olhava</span> para o animal e <span class="imp">sorria</span>, como se o <span class="imp">esperasse</span> há muito tempo.</p>
+
+    <p>Naquela época, as tardes <span class="imp">eram</span> longas e quentes. Normalmente eu <span class="imp">dormia</span> um pouco depois do almoço, como <span class="imp">mandava</span> o costume da casa. Mas naquele dia <span class="perf">fiquei</span> acordado, pensando no cavalo branco e em por onde ele <span class="perf">havia</span> vindo.</p>
+
+    <p>Muita coisa eu <span class="perf">esqueci</span> dos meus anos de menino. Mas aquele cavalo <span class="perf">ficou</span>, quieto e bonito, no fundo da memória — como <span class="imp">ficam</span> as coisas que a gente não entende mas nunca esquece.</p>
+  </div>
+
 </div><!-- /main -->
 
 <script>
+  function toggleAnswers(btn) {
+    const answers = document.querySelectorAll('.model-answer');
+    const showing = answers[0].classList.contains('visible');
+    answers.forEach(a => a.classList.toggle('visible', !showing));
+    btn.textContent = showing ? '👁 See model answers' : '🙈 Hide model answers';
+  }
+
   function normalise(str) {
     return str.trim().toLowerCase().replace(/\s+/g,' ')
       .normalize('NFD').replace(/[̀-ͯ]/g,'');
