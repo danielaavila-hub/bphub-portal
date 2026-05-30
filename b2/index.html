@@ -19,7 +19,7 @@
       --rosa-cha:   #FFD8C5;
       --floresta:   #4E551D;
       --erva-doce:  #A6B28A;
-      --cobalto:    #D36D29;
+      --cobalto:    #265B8B;
       --pitomba:    #D36D29;
       --ouro:       #FFB94A;
       --marrom:     #967E63;
@@ -854,6 +854,20 @@
   var currentFilter = 'all';
   var currentSearch = '';
 
+  // ── Dynamic counts on load ──
+  (function initCounts() {
+    var total = document.querySelectorAll('.mat-card').length;
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('fc-all').textContent = total;
+    ['gram','func','tema','gen','cult','fon'].forEach(function(cat) {
+      var n = document.querySelectorAll('#sec-' + cat + ' .mat-card').length;
+      var el = document.getElementById('fc-' + cat);
+      if(el) el.textContent = n;
+      var cnt = document.getElementById('count-' + cat);
+      if(cnt) cnt.textContent = n + (n === 1 ? ' material' : ' materiais');
+    });
+  })();
+
   function filterCat(cat, btn) {
     currentFilter = cat;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -938,7 +952,7 @@
     document.getElementById('no-results').style.display = (visibleCount === 0) ? 'block' : 'none';
 
     // Update stat
-    document.getElementById('stat-total').textContent = currentFilter === 'all' && !currentSearch ? '7' : visibleCount;
+    document.getElementById('stat-total').textContent = currentFilter === 'all' && !currentSearch ? document.querySelectorAll('.mat-card').length : visibleCount;
   }
 </script>
 
