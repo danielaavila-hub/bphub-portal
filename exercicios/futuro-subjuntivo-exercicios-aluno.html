@@ -23,7 +23,7 @@
     /* TOPBAR */
     .topbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
     .topbar img { height: 26px; }
-    .topbar-meta { display: flex; align-items: center; gap: 12px; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
     .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
     .badge-level { background: var(--cobalto); color: white; }
     .badge-gram  { background: rgba(38,91,139,0.1); color: var(--cobalto); }
@@ -119,11 +119,11 @@
 
 <div class="topbar">
   <a href="../b2/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
-  <div class="topbar-meta">
+  <div class="topbar-right">
     <span class="badge badge-level">B2</span>
     <span class="badge badge-gram">Ficha de Exercícios</span>
+    <a href="../b2/index.html" class="topbar-back">← Voltar para os materiais B2</a>
   </div>
-  <a href="../b2/index.html" class="topbar-back">← Voltar para os materiais B2</a>
 </div>
 
 <div class="hero">
@@ -306,25 +306,27 @@
       <div class="ex-item">
         <span class="item-num">1. [quando]</span>
         <em>A regulamentação vai ser aprovada. Depois disso, as empresas terão mais responsabilidades.</em>
-        <textarea class="rewrite-box" placeholder="Quando a regulamentação..."></textarea>
+        <textarea class="rewrite-box" id="e3_1" placeholder="Quando a regulamentação..."></textarea>
         <div class="rewrite-prompt">Tip: "quando" triggers Futuro do Subjuntivo when referring to a future event.</div>
       </div>
       <div class="ex-item">
         <span class="item-num">2. [se]</span>
         <em>A empresa não cumprir as regras → pagará uma multa.</em>
-        <textarea class="rewrite-box" placeholder="Se a empresa..."></textarea>
+        <textarea class="rewrite-box" id="e3_2" placeholder="Se a empresa..."></textarea>
       </div>
       <div class="ex-item">
         <span class="item-num">3. [sempre que]</span>
         <em>Toda vez que há uma atualização no sistema, eu recebo um e-mail automático.</em>
-        <textarea class="rewrite-box" placeholder="Sempre que..."></textarea>
+        <textarea class="rewrite-box" id="e3_3" placeholder="Sempre que..."></textarea>
       </div>
       <div class="ex-item">
         <span class="item-num">4. [assim que]</span>
         <em>O sistema vai estar pronto amanhã. Depois disso, vamos fazer os testes de segurança.</em>
-        <textarea class="rewrite-box" placeholder="Assim que..."></textarea>
+        <textarea class="rewrite-box" id="e3_4" placeholder="Assim que..."></textarea>
       </div>
     </div>
+    <button class="check-btn" onclick="checkEx3()">Verificar respostas</button>
+    <div class="feedback-row" id="fb3"></div>
   </div>
 
   <!-- EXERCISE 4: ERROR CORRECTION -->
@@ -342,28 +344,30 @@
       <div class="ex-item">
         <span class="item-num">1. Incorrect sentence:</span>
         <em>"Se a IA <u>será</u> bem regulamentada, o mercado de trabalho ficará mais seguro."</em>
-        <textarea class="rewrite-box" placeholder="Correction: ..."></textarea>
+        <textarea class="rewrite-box" id="e4_1" placeholder="Correction: ..."></textarea>
         <div class="rewrite-prompt">Hint: What tense follows "se" when talking about a future condition in Portuguese?</div>
       </div>
       <div class="ex-item">
         <span class="item-num">2. Incorrect sentence:</span>
         <em>"Quando você <u>terminar</u> o projeto, manda pra mim." &nbsp; — wait, is this one actually wrong? Why or why not?</em>
-        <textarea class="rewrite-box" placeholder="Write your analysis: ..."></textarea>
+        <textarea class="rewrite-box" id="e4_2" placeholder="Write your analysis: ..."></textarea>
         <div class="rewrite-prompt">This is a critical thinking question. Think carefully before answering.</div>
       </div>
       <div class="ex-item">
         <span class="item-num">3. Incorrect sentence:</span>
         <em>"A empresa que <u>descumpriu</u> o contrato será penalizada."</em>
-        <textarea class="rewrite-box" placeholder="Correction: ..."></textarea>
+        <textarea class="rewrite-box" id="e4_3" placeholder="Correction: ..."></textarea>
         <div class="rewrite-prompt">Hint: Is the action of breaking the contract in the past or still open/future?</div>
       </div>
       <div class="ex-item">
         <span class="item-num">4. Incorrect sentence:</span>
         <em>"Quando o sistema <u>vai ficar</u> pronto, eu te aviso."</em>
-        <textarea class="rewrite-box" placeholder="Correction: ..."></textarea>
+        <textarea class="rewrite-box" id="e4_4" placeholder="Correction: ..."></textarea>
         <div class="rewrite-prompt">Hint: "quando" referring to a future event does NOT use the future indicative in Portuguese.</div>
       </div>
     </div>
+    <button class="check-btn" onclick="checkEx4()">Verificar respostas</button>
+    <div class="feedback-row" id="fb4"></div>
   </div>
 
   <!-- EXERCISE 5: OPEN PRODUCTION -->
@@ -384,6 +388,70 @@
 </div><!-- /main -->
 
 <script>
+  function checkEx3() {
+    const checks = [
+      { id: 'e3_1', key: 'for' },
+      { id: 'e3_2', key: 'cumprir' },
+      { id: 'e3_3', key: 'houver' },
+      { id: 'e3_4', key: 'estiver' }
+    ];
+    let correct = 0;
+    checks.forEach(({ id, key }) => {
+      const ta = document.getElementById(id);
+      const val = ta.value.trim().toLowerCase();
+      if (val.includes(key)) {
+        ta.style.borderColor = '#2e7d32';
+        ta.style.background = '#f0f7f0';
+        correct++;
+      } else if (val !== '') {
+        ta.style.borderColor = 'var(--pitomba)';
+        ta.style.background = '#fff8f5';
+      }
+    });
+    const fb = document.getElementById('fb3');
+    if (correct === 4) {
+      fb.className = 'feedback-row show ok';
+      fb.textContent = '✓ Ótimo! Todos os verbos no Futuro do Subjuntivo estão corretos.';
+    } else {
+      fb.className = 'feedback-row show partial';
+      fb.textContent = correct + ' de 4 corretos. Verifique se usou o verbo correto no Futuro do Subjuntivo em cada frase.';
+    }
+  }
+
+  function checkEx4() {
+    let correct = 0;
+    // 1. "será" → "for"
+    const ta1 = document.getElementById('e4_1');
+    const v1 = ta1.value.trim().toLowerCase();
+    if (v1.includes('for')) { ta1.style.borderColor = '#2e7d32'; ta1.style.background = '#f0f7f0'; correct++; }
+    else if (v1) { ta1.style.borderColor = 'var(--pitomba)'; ta1.style.background = '#fff8f5'; }
+    // 2. Trick — "terminar" IS correct (already Futuro do Subjuntivo)
+    const ta2 = document.getElementById('e4_2');
+    const v2 = ta2.value.trim().toLowerCase();
+    const ok2 = ['corret', 'certa', 'certo', 'não há erro', 'não tem erro', 'terminar', 'está certa', 'está correto'].some(k => v2.includes(k));
+    if (ok2) { ta2.style.borderColor = '#2e7d32'; ta2.style.background = '#f0f7f0'; correct++; }
+    else if (v2) { ta2.style.borderColor = 'var(--pitomba)'; ta2.style.background = '#fff8f5'; }
+    // 3. "descumpriu" → "descumprir"
+    const ta3 = document.getElementById('e4_3');
+    const v3 = ta3.value.trim().toLowerCase();
+    if (v3.includes('descumprir')) { ta3.style.borderColor = '#2e7d32'; ta3.style.background = '#f0f7f0'; correct++; }
+    else if (v3) { ta3.style.borderColor = 'var(--pitomba)'; ta3.style.background = '#fff8f5'; }
+    // 4. "vai ficar" → "ficar"
+    const ta4 = document.getElementById('e4_4');
+    const v4 = ta4.value.trim().toLowerCase();
+    if (v4.includes('ficar')) { ta4.style.borderColor = '#2e7d32'; ta4.style.background = '#f0f7f0'; correct++; }
+    else if (v4) { ta4.style.borderColor = 'var(--pitomba)'; ta4.style.background = '#fff8f5'; }
+
+    const fb = document.getElementById('fb4');
+    if (correct === 4) {
+      fb.className = 'feedback-row show ok';
+      fb.textContent = '✓ Perfeito! Você identificou todos os erros corretamente.';
+    } else {
+      fb.className = 'feedback-row show partial';
+      fb.textContent = correct + ' de 4 corretos. Revise as respostas destacadas.';
+    }
+  }
+
   function checkEx1() {
     const answers = {
       e1_1: 'for', e1_2: 'estiver', e1_3: 'fizer', e1_4: 'garantir',
