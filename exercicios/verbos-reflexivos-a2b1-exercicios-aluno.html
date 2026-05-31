@@ -152,11 +152,11 @@
 
 <div class="page-hero">
   <div class="page-eyebrow">Materials Portal</div>
-  <h1>Verbos Reflexivos<br><em style="font-family:'Trirong',serif;font-weight:300;color:#FFB94A;">— se levantar · se sentir</em></h1>
+  <h1>Verbos <em style="color:#FFB94A;font-style:normal;">Reflexivos</em></h1>
   <p>Reflexive verbs describe actions you do to yourself. This exercise focuses on pronoun placement — the rule that most English speakers need to practise.</p>
   <div class="student-meta">
-    <span class="meta-pill"><span class="dot"></span>Pronomes reflexivos</span>
     <span class="meta-pill"><span class="dot"></span>Posição do pronome</span>
+    <span class="meta-pill"><span class="dot"></span>Memorização</span>
   </div>
 </div>
 
@@ -657,6 +657,51 @@
 <div class="send-box" style="max-width:760px; margin:0 auto 48px;">
   When you're done, <strong>send your text to your teacher.</strong> She will read it carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This is one of the best ways to grow as a writer in a new language!
 </div>
+
+
+  <!-- CONTEXTUAL EXERCISE -->
+  <div class="cx-block">
+    <div class="cx-label">Exercício contextual</div>
+    <div class="cx-title">Uma semana agitada</div>
+    <div class="cx-instr">Read the story and choose the correct verb form for each blank. The context will tell you whether the verb acts on someone else or on the subject itself.</div>
+
+    <div class="cx-story">
+      <p>Era segunda-feira quando o diretor decidiu <span class="cx-inline"><select class="cx-select" data-answer="despedir"><option value="">▾</option><option value="despedir">despedir</option><option value="se despedir">se despedir</option></select><span class="cx-fb"></span></span> dois analistas do time. Na sexta, todo o departamento <span class="cx-inline"><select class="cx-select" data-answer="se despediu"><option value="">▾</option><option value="despediu">despediu</option><option value="se despediu">se despediu</option></select><span class="cx-fb"></span></span> deles com um almoço na cantina.</p>
+
+      <p>Naquela mesma semana, Lucas <span class="cx-inline"><select class="cx-select" data-answer="se mudou"><option value="">▾</option><option value="mudou">mudou</option><option value="se mudou">se mudou</option></select><span class="cx-fb"></span></span> para um apartamento novo, mais perto do escritório. Antes de sair, <span class="cx-inline"><select class="cx-select" data-answer="separou"><option value="">▾</option><option value="separou">separou</option><option value="se separou">se separou</option></select><span class="cx-fb"></span></span> as caixas por cômodo e pediu ajuda para carregar tudo.</p>
+
+      <p>No sábado, foi a festa de confraternização da empresa. O DJ <span class="cx-inline"><select class="cx-select" data-answer="divertiu"><option value="">▾</option><option value="divertiu">divertiu</option><option value="se divertiu">se divertiu</option></select><span class="cx-fb"></span></span> todo mundo por três horas. Lucas <span class="cx-inline"><select class="cx-select" data-answer="se divertiu"><option value="">▾</option><option value="divertiu">divertiu</option><option value="se divertiu">se divertiu</option></select><span class="cx-fb"></span></span> muito — foi a primeira vez que sorriu em semanas.</p>
+
+      <p>Na volta para casa, ele pensou: algumas empresas <span class="cx-inline"><select class="cx-select" data-answer="se aproveitam"><option value="">▾</option><option value="aproveitam">aproveitam</option><option value="se aproveitam">se aproveitam</option></select><span class="cx-fb"></span></span> de momentos difíceis para lucrar. Mas ele tinha decidido <span class="cx-inline"><select class="cx-select" data-answer="aproveitar"><option value="">▾</option><option value="aproveitar">aproveitar</option><option value="se aproveitar">se aproveitar</option></select><span class="cx-fb"></span></span> o recomeço da melhor forma possível.</p>
+    </div>
+
+    <button class="cx-check" onclick="checkCx()">Check answers</button>
+    <div class="cx-result" id="cxResult"></div>
+  </div>
+
+  <script>
+  function checkCx() {
+    const selects = document.querySelectorAll('.cx-select');
+    let correct = 0, total = selects.length;
+    selects.forEach(sel => {
+      const fb = sel.nextElementSibling;
+      sel.classList.remove('correct','wrong');
+      fb.classList.remove('show','ok','err');
+      if (!sel.value) { fb.textContent = '← choose'; fb.classList.add('show','err'); return; }
+      if (sel.value === sel.dataset.answer) {
+        sel.classList.add('correct'); fb.textContent = '✓'; fb.classList.add('show','ok'); correct++;
+      } else {
+        sel.classList.add('wrong'); fb.textContent = '✗ → ' + sel.dataset.answer; fb.classList.add('show','err');
+      }
+    });
+    const res = document.getElementById('cxResult');
+    res.style.display = 'block';
+    res.className = correct === total ? 'cx-result good' : 'cx-result try-again';
+    res.textContent = correct === total
+      ? '✓ ' + correct + '/' + total + ' — excellent! You understand the meaning shift.'
+      : correct + '/' + total + ' — review the pairs in the reference material and try again.';
+  }
+  </script>
 
 </body>
 </html>
