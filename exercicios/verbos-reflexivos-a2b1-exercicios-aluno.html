@@ -107,6 +107,19 @@
     .write-area { width: 100%; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: white; resize: vertical; min-height: 72px; outline: none; transition: border-color 0.2s; }
     .write-area:focus { border-color: var(--cobalto); }
 
+    /* CONTEXTUAL NARRATIVE (exercise 5 internals) */
+    .cx-story { font-size: 15px; line-height: 2.1; color: var(--nanquim); margin-bottom: 20px; }
+    .cx-story p { margin-bottom: 14px; }
+    .cx-story p:last-child { margin-bottom: 0; }
+    .cx-inline { display: inline; white-space: nowrap; }
+    .cx-select { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--cobalto); border: none; border-bottom: 2px solid var(--cobalto); background: transparent; cursor: pointer; padding: 0 4px; outline: none; vertical-align: baseline; transition: border-color 0.2s; }
+    .cx-select:focus { border-color: var(--pitomba); }
+    .cx-select.correct { border-color: #2E7D52; color: #2E7D52; }
+    .cx-select.wrong   { border-color: #C0392B; color: #C0392B; }
+    .cx-fb { font-size: 12px; font-weight: 700; margin-left: 4px; display: none; vertical-align: baseline; }
+    .cx-fb.show.ok  { display: inline; color: #2E7D52; }
+    .cx-fb.show.err { display: inline; color: #C0392B; }
+
     @media(max-width:640px){
       .hero{padding:36px 24px 32px;} .hero h1{font-size:26px;}
       .content{padding:28px 16px 60px;}
@@ -626,10 +639,9 @@
   <!-- ===== EXERCISE 5 — CONTEXTUAL ===== -->
   <div class="sec-label">Exercício 5 de 6</div>
 
-  <div class="cx-block">
-    <div class="cx-label">Exercício contextual</div>
-    <div class="cx-title">Uma semana agitada</div>
-    <div class="cx-instr">Read the story and choose the correct verb form for each blank. The context will tell you whether the verb acts on someone else or on the subject itself.</div>
+  <div class="ex-block">
+    <h2>Uma semana agitada</h2>
+    <div class="ex-instruction">Read the story and choose the correct verb form for each blank. The context will tell you whether the verb acts on someone else or on the subject itself.</div>
 
     <div class="cx-story">
       <p>Era segunda-feira quando o diretor decidiu <span class="cx-inline"><select class="cx-select" data-answer="despedir"><option value="">▾</option><option value="despedir">despedir</option><option value="se despedir">se despedir</option></select><span class="cx-fb"></span></span> dois analistas do time. Na sexta, todo o departamento <span class="cx-inline"><select class="cx-select" data-answer="se despediu"><option value="">▾</option><option value="despediu">despediu</option><option value="se despediu">se despediu</option></select><span class="cx-fb"></span></span> deles com um almoço na cantina.</p>
@@ -641,8 +653,10 @@
       <p>Na volta para casa, ele pensou: algumas empresas <span class="cx-inline"><select class="cx-select" data-answer="se aproveitam"><option value="">▾</option><option value="aproveitam">aproveitam</option><option value="se aproveitam">se aproveitam</option></select><span class="cx-fb"></span></span> de momentos difíceis para lucrar. Mas ele tinha decidido <span class="cx-inline"><select class="cx-select" data-answer="aproveitar"><option value="">▾</option><option value="aproveitar">aproveitar</option><option value="se aproveitar">se aproveitar</option></select><span class="cx-fb"></span></span> o recomeço da melhor forma possível.</p>
     </div>
 
-    <button class="cx-check" onclick="checkCx()">Check answers</button>
-    <div class="cx-result" id="cxResult"></div>
+    <div style="margin-top:20px;">
+      <button class="check-btn" onclick="checkCx()">✓ Check answers</button>
+    </div>
+    <div class="check-result" id="cxResult"></div>
   </div>
 
   <script>
@@ -661,11 +675,10 @@
       }
     });
     const res = document.getElementById('cxResult');
-    res.style.display = 'block';
-    res.className = correct === total ? 'cx-result good' : 'cx-result try-again';
+    res.className = correct === total ? 'check-result show all-correct' : 'check-result show partial';
     res.textContent = correct === total
-      ? '✓ ' + correct + '/' + total + ' — excellent! You understand the meaning shift.'
-      : correct + '/' + total + ' — review the pairs in the reference material and try again.';
+      ? '🎉 ' + correct + '/' + total + ' — excellent! You understand the meaning shift.'
+      : correct + '/' + total + ' correct. Review the verb pairs in the reference material and try again.';
   }
   </script>
   <!-- ===== EXERCISE 6 — PRODUCTION ===== -->
