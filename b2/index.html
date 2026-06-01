@@ -9,917 +9,206 @@
   <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --baunilha:   #FCF5EB;
-      --baunilha2:  #FDE7C4;
-      --off-white:  #F2F0E3;
-      --light-gray: #EDEDE2;
-      --nanquim:    #1E1D1C;
-      --rosa-cha:   #FFD8C5;
-      --floresta:   #4E551D;
-      --erva-doce:  #A6B28A;
-      --cobalto:    #D36D29;
-      --pitomba:    #D36D29;
-      --ouro:       #FFB94A;
-      --marrom:     #967E63;
-      --texto:      #3C3C21;
-
-      --cat-gram:   #265B8B;
-      --cat-func:   #4E551D;
-      --cat-tema:   #D36D29;
-      --cat-gen:    #967E63;
-      --cat-cult:   #7A9B65;
-      --cat-fon:    #C9900A;
+      --baunilha:#FCF5EB; --baunilha2:#FDE7C4; --off-white:#F2F0E3; --light-gray:#EDEDE2;
+      --nanquim:#1E1D1C; --rosa-cha:#FFD8C5; --floresta:#4E551D; --erva-doce:#A6B28A;
+      --cobalto:#265B8B; --pitomba:#D36D29; --ouro:#FFB94A; --marrom:#967E63; --texto:#3C3C21;
+      --cat-gram:#265B8B; --cat-func:#4E551D; --cat-tema:#D36D29; --cat-gen:#967E63; --cat-cult:#7A9B65; --cat-fon:#C9900A;
     }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--baunilha);
-      color: var(--texto);
-      font-family: 'Manrope', sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Trirong', serif;
-      font-weight: 300;
-      color: var(--cobalto);
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    /* ── PASSWORD GATE ── */
-    #gate {
-      position: fixed; inset: 0; z-index: 999;
-      background: var(--baunilha);
-      display: flex; align-items: center; justify-content: center;
-      padding: 24px;
-    }
-    .gate-box {
-      background: white;
-      border: 1.5px solid var(--light-gray);
-      border-radius: 20px;
-      padding: 48px 44px;
-      width: 100%; max-width: 400px;
-      text-align: center;
-      box-shadow: 0 8px 40px rgba(38,91,139,0.10);
-    }
-    .gate-logo img { height: 34px; margin: 0 auto 28px; }
-    .gate-level {
-      display: inline-block;
-      background: var(--cobalto); color: white;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 5px 14px; border-radius: 20px;
-      margin-bottom: 16px;
-    }
-    .gate-box h2 { font-size: 24px; color: var(--cobalto); margin-bottom: 6px; }
-    .gate-sub { font-size: 13px; color: #999; margin-bottom: 28px; }
-    .gate-error {
-      display: none; font-size: 12px; color: var(--pitomba);
-      background: #fff0ed; border: 1px solid #f5c0b0;
-      border-radius: 8px; padding: 8px 12px; margin-bottom: 12px;
-    }
-    .gate-input {
-      width: 100%; border: 1.5px solid var(--light-gray); border-radius: 10px;
-      padding: 13px 16px; font-family: 'Manrope', sans-serif;
-      font-size: 15px; color: var(--nanquim); text-align: center;
-      letter-spacing: 0.08em; outline: none; margin-bottom: 16px;
-      transition: border-color 0.2s;
-    }
-    .gate-input:focus { border-color: var(--cobalto); }
-    .gate-btn {
-      width: 100%; background: var(--pitomba); color: white; border: none;
-      border-radius: 10px; padding: 14px; font-family: 'Manrope', sans-serif;
-      font-size: 15px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
-    }
-    .gate-btn:hover { opacity: 0.88; }
-    .gate-back { display: block; margin-top: 18px; font-size: 12px; color: #aaa; transition: color 0.2s; }
-    .gate-back:hover { color: var(--cobalto); }
-
-    /* ── MAIN CONTENT ── */
-    #content { display: none; }
-
-    /* ── TOPBAR ── */
-    .topbar {
-      height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px;
-      background: var(--baunilha);
-      border-bottom: 1px solid var(--light-gray);
-      position: sticky; top: 0; z-index: 50;
-    }
-    .topbar-logo img { height: 40px; }
-    .topbar-right { display: flex; align-items: center; gap: 20px; }
-    .topbar-level {
-      background: var(--cobalto); color: white;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
-      padding: 4px 12px; border-radius: 20px;
-    }
-    .topbar-back { font-size: 12px; color: #aaa; transition: color 0.2s; }
-    .topbar-back:hover { color: var(--cobalto); }
-
-    /* ── HERO ── */
-    .hero {
-      background: var(--cobalto);
-      padding: 52px 48px 48px;
-      position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba));
-    }
-    .hero-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 12px;
-    }
-    .hero h1 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: white; margin-bottom: 10px; }
-    .hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.7; margin-bottom: 28px; }
-    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
-    .hero-stat .num {
-      font-family: 'Trirong', serif; font-size: 22px; font-weight: 400;
-      color: var(--ouro); line-height: 1;
-    }
-    .hero-stat .label {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: rgba(255,255,255,0.68); margin-top: 3px;
-    }
-
-    /* ── FILTER + SEARCH BAR ── */
-    .filter-bar {
-      background: white;
-      border-bottom: 1px solid var(--light-gray);
-      padding: 0 48px;
-      display: flex; align-items: center; gap: 6px;
-      overflow-x: auto;
-    }
-    .filter-btn {
-      flex-shrink: 0;
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 14px 16px;
-      font-family: 'Manrope', sans-serif;
-      font-size: 13px; font-weight: 500;
-      color: #888; background: transparent; border: none;
-      border-bottom: 2.5px solid transparent;
-      cursor: pointer; transition: color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-    }
-    .filter-btn:hover { color: var(--cobalto); }
-    .filter-btn.active { color: var(--cobalto); border-bottom-color: var(--cobalto); font-weight: 700; }
-    .filter-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .filter-count {
-      font-size: 11px; font-weight: 700; color: inherit;
-      background: var(--light-gray); border-radius: 10px;
-      padding: 1px 7px;
-    }
-    .filter-btn.active .filter-count { background: var(--cobalto); color: white; }
-    .filter-spacer { flex: 1; }
-    .search-wrap {
-      flex-shrink: 0;
-      display: flex; align-items: center; gap: 7px;
-      background: var(--off-white);
-      border: 1.5px solid var(--light-gray);
-      border-radius: 8px;
-      padding: 6px 12px;
-      margin: 8px 0;
-      transition: border-color 0.2s;
-    }
-    .search-wrap:focus-within { border-color: var(--cobalto); }
-    .search-icon { font-size: 13px; color: #aaa; flex-shrink: 0; }
-    .search-input {
-      border: none; background: transparent;
-      font-family: 'Manrope', sans-serif; font-size: 13px;
-      color: var(--texto); outline: none; width: 180px;
-    }
-    .search-input::placeholder { color: #bbb; }
-    .search-clear {
-      font-size: 11px; color: #bbb; cursor: pointer;
-      background: none; border: none; padding: 0;
-      display: none;
-    }
-    .search-clear:hover { color: var(--pitomba); }
-
-    /* ── SEARCH RESULTS BANNER ── */
-    .search-banner {
-      display: none;
-      background: var(--baunilha2);
-      border-bottom: 1px solid var(--light-gray);
-      padding: 10px 48px;
-      font-size: 13px; color: var(--texto);
-    }
-    .search-banner strong { color: var(--cobalto); }
-
-    /* ── MAIN ── */
-    .main { padding: 48px 48px 80px; }
-
-    /* ── SECTION ── */
-    .cat-section { margin-bottom: 48px; }
-    .cat-header {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 20px; padding-bottom: 14px;
-      border-bottom: 1.5px solid var(--light-gray);
-    }
-    .cat-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-    .cat-header h2 { font-size: 18px; color: #265B8B; }
-    .cat-header .cat-desc {
-      font-size: 13px; color: #999; margin-top: 2px;
-      font-family: 'Manrope', sans-serif; font-weight: 400;
-    }
-    .cat-count {
-      margin-left: auto;
-      font-size: 12px; font-weight: 700; color: #aaa;
-      font-family: 'Manrope', sans-serif;
-    }
-
-    /* ── CARDS GRID ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
-    }
-
-    /* ── MATERIAL CARD ── */
-    .mat-card {
-      background: white;
-      border: 1.5px solid var(--light-gray);
-      border-radius: 14px;
-      display: flex; flex-direction: row; overflow: hidden;
-      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
-      text-decoration: none; color: inherit;
-    }
-
-    .mat-type-chip { display:inline-flex; align-items:center; background:rgba(211,109,41,.08); color:var(--pitomba); border:1px solid rgba(211,109,41,.22); border-radius:12px; font-size:11px; font-weight:600; padding:3px 10px; margin-bottom:8px; }
-    .mat-type-chip.ref { background:rgba(38,91,139,.08); color:#265B8B; border-color:rgba(38,91,139,.22); }
-    .mat-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(38,91,139,0.10);
-    }
-    .mat-card.hidden { display: none; }
-
-    .mat-card-bar {
-      width: 4px; flex-shrink: 0;
-    }
-
-    .mat-card-body {
-      padding: 20px 20px 18px;
-      display: flex; flex-direction: column; gap: 11px;
-      flex: 1; min-width: 0;
-    }
-
-    .mat-card-top {
-      display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 10px;
-    }
-
-    .mat-card h3 {
-      font-family: 'Trirong', serif;
-      font-size: 16px; font-weight: 400;
-      color: var(--cobalto); line-height: 1.3;
-    }
-
-    /* ── LEVEL BADGE ── */
-    .mat-level {
-      flex-shrink: 0;
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 0.10em; text-transform: uppercase;
-      padding: 3px 9px; border-radius: 20px;
-      border: 1.5px solid;
-    }
-    .mat-level-b1 { color: #7A4F1A; background: #FDF0E0; border-color: #D4953A; }
-    .mat-level-b2 { color: #163D63; background: #E8F0F9; border-color: var(--cobalto); }
-    .mat-level-c1 { color: #2D4A1A; background: #EBF2E2; border-color: #4E7A2A; }
-    .mat-level-a2 { color: #7A2020; background: #FAEAEA; border-color: #C04040; }
-
-    .mat-card p { font-size: 13px; color: #777; line-height: 1.55; }
-
-    /* ── TAGS ── */
-    .mat-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    .tag {
-      display: inline-flex; align-items: center; gap: 0;
-      font-size: 11px; font-weight: 600;
-      padding: 3px 9px; border-radius: 20px;
-      line-height: 1.5;
-    }
-    .tag-pre {
-      font-size: 9px; font-weight: 700;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      opacity: 0.65; margin-right: 4px;
-    }
-    .tag-gram  { background: #EBF0F7; color: #1a3d61; }
-    .tag-func  { background: #EAEDDE; color: #2e3210; }
-    .tag-tema  { background: #FAF0E8; color: #7a3a0e; }
-    .tag-gen   { background: #F3EEE9; color: #5e4d3b; }
-    .tag-cult  { background: #EFF3EA; color: #3d5b2c; }
-    .tag-fon   { background: #FDF5E3; color: #7a5500; }
-
-    /* ── ANCHOR LINE ── */
-    .mat-anchor {
-      font-size: 11px; font-weight: 600;
-      color: var(--pitomba); margin-top: -4px;
-    }
-
-    /* ── FOOTER ── */
-    .mat-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: auto; padding-top: 10px;
-      border-top: 1px solid var(--light-gray);
-    }
-    .mat-date { font-size: 11px; color: #bbb; }
-    .mat-btn {
-      font-family: 'Manrope', sans-serif;
-      font-size: 12px; font-weight: 700;
-      background: var(--pitomba); color: white;
-      border: none; border-radius: 8px;
-      padding: 7px 14px; cursor: pointer;
-      transition: opacity 0.2s; text-decoration: none;
-    }
-    .mat-btn:hover { opacity: 0.85; }
-
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      background: var(--off-white);
-      border: 1.5px dashed var(--light-gray);
-      border-radius: 14px; padding: 32px 24px;
-      text-align: center; color: #bbb;
-    }
-    .empty-state p { font-size: 13px; }
-    .empty-state .coming { font-size: 12px; margin-top: 6px; font-style: italic; }
-
-    /* ── NO RESULTS ── */
-    #no-results {
-      display: none;
-      text-align: center; padding: 64px 24px;
-      color: #bbb;
-    }
-    #no-results p { font-size: 15px; margin-bottom: 8px; }
-    #no-results span { font-size: 13px; }
-
-    /* ── HIDDEN ── */
-    .cat-section.hidden { display: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .topbar, .hero, .main, .search-banner { padding-left: 20px; padding-right: 20px; }
-      .filter-bar { padding: 0 20px; }
-      .hero-stats { gap: 20px; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .search-input { width: 120px; }
-    }
-  
-    .page-footer{text-align:center;padding:28px 24px;background:#D36D29;border-top:none}.page-footer a{display:inline-block;opacity:.85;transition:opacity .2s}.page-footer a:hover{opacity:1}
+    html{scroll-behavior:smooth}
+    body{background:var(--baunilha);color:var(--texto);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.65}
+    h1,h2,h3,h4{font-family:'Trirong',serif;font-weight:300;color:var(--cobalto)}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    #gate{position:fixed;inset:0;z-index:999;background:var(--baunilha);display:flex;align-items:center;justify-content:center;padding:24px}
+    .gate-box{background:white;border:1.5px solid var(--light-gray);border-radius:20px;padding:48px 44px;width:100%;max-width:400px;text-align:center;box-shadow:0 8px 40px rgba(38,91,139,0.10)}
+    .gate-logo img{height:34px;margin:0 auto 28px}
+    .gate-level{display:inline-block;background:var(--cobalto);color:white;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+    .gate-box h2{font-size:24px;color:var(--cobalto);margin-bottom:6px}
+    .gate-sub{font-size:13px;color:#999;margin-bottom:28px}
+    .gate-error{display:none;font-size:12px;color:var(--pitomba);background:#fff0ed;border:1px solid #f5c0b0;border-radius:8px;padding:8px 12px;margin-bottom:12px}
+    .gate-input{width:100%;border:1.5px solid var(--light-gray);border-radius:10px;padding:13px 16px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--nanquim);text-align:center;letter-spacing:.08em;outline:none;margin-bottom:16px;transition:border-color .2s}
+    .gate-input:focus{border-color:var(--cobalto)}
+    .gate-btn{width:100%;background:var(--pitomba);color:white;border:none;border-radius:10px;padding:14px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .2s}
+    .gate-btn:hover{opacity:.88}
+    .gate-back{display:block;margin-top:18px;font-size:12px;color:#aaa;transition:color .2s}
+    .gate-back:hover{color:var(--cobalto)}
+    #content{display:none}
+    .topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:var(--baunilha);border-bottom:1px solid var(--light-gray);position:sticky;top:0;z-index:50}
+    .topbar-logo img{height:38px}
+    .topbar-right{display:flex;align-items:center;gap:20px}
+    .topbar-level{background:var(--cobalto);color:white;font-size:12px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:20px}
+    .topbar-back{font-size:12px;color:#aaa;transition:color .2s}
+    .topbar-back:hover{color:var(--cobalto)}
+    .hero{background:var(--cobalto);padding:52px 48px 48px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--floresta),var(--erva-doce),var(--ouro),var(--pitomba))}
+    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--erva-doce);margin-bottom:12px}
+    .hero h1{font-size:clamp(28px,3.5vw,44px);color:white;margin-bottom:10px}
+    .hero p{font-size:15px;color:rgba(255,255,255,.70);max-width:560px;line-height:1.7;margin-bottom:28px}
+    .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+    .hero-stat .num{font-family:'Trirong',serif;font-size:28px;font-weight:300;color:var(--ouro);line-height:1}
+    .hero-stat .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.50);margin-top:3px}
+    .filter-bar{background:white;border-bottom:1px solid var(--light-gray);padding:0 48px;display:flex;align-items:center;gap:6px;overflow-x:auto}
+    .filter-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;padding:14px 16px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:500;color:#888;background:transparent;border:none;border-bottom:2.5px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap}
+    .filter-btn:hover{color:var(--cobalto)}
+    .filter-btn.active{color:var(--cobalto);border-bottom-color:var(--cobalto);font-weight:700}
+    .filter-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .filter-count{font-size:11px;font-weight:700;color:inherit;background:var(--light-gray);border-radius:10px;padding:1px 7px}
+    .filter-btn.active .filter-count{background:var(--cobalto);color:white}
+    .filter-spacer{flex:1}
+    .search-wrap{flex-shrink:0;display:flex;align-items:center;gap:7px;background:var(--off-white);border:1.5px solid var(--light-gray);border-radius:8px;padding:6px 12px;margin:8px 0;transition:border-color .2s}
+    .search-wrap:focus-within{border-color:var(--cobalto)}
+    .search-icon{font-size:13px;color:#aaa;flex-shrink:0}
+    .search-input{border:none;background:transparent;font-family:'Manrope',sans-serif;font-size:13px;color:var(--texto);outline:none;width:180px}
+    .search-input::placeholder{color:#bbb}
+    .search-clear{font-size:11px;color:#bbb;cursor:pointer;background:none;border:none;padding:0;display:none}
+    .search-clear:hover{color:var(--pitomba)}
+    .search-banner{display:none;background:var(--baunilha2);border-bottom:1px solid var(--light-gray);padding:10px 48px;font-size:13px;color:var(--texto)}
+    .search-banner strong{color:var(--cobalto)}
+    .main{padding:48px 48px 80px}
+    .cat-section{margin-bottom:48px}.cat-section.hidden{display:none}
+    .cat-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1.5px solid var(--light-gray)}
+    .cat-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+    .cat-header h2{font-size:18px}
+    .cat-header .cat-desc{font-size:13px;color:#999;margin-top:2px;font-family:'Manrope',sans-serif;font-weight:400}
+    .cat-count{margin-left:auto;font-size:12px;font-weight:700;color:#aaa;font-family:'Manrope',sans-serif}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+    .mat-card{background:white;border:1.5px solid var(--light-gray);border-radius:14px;display:flex;flex-direction:row;overflow:hidden;transition:transform .15s,box-shadow .15s,border-color .2s;text-decoration:none;color:inherit}
+    .mat-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(38,91,139,.10);border-color:var(--cobalto)}
+    .mat-card.hidden{display:none}
+    .mat-card-bar{width:4px;flex-shrink:0}
+    .mat-card-body{padding:20px 20px 18px;display:flex;flex-direction:column;gap:11px;flex:1;min-width:0}
+    .mat-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .mat-card h3{font-family:'Trirong',serif;font-size:16px;font-weight:400;color:var(--cobalto);line-height:1.3}
+    .mat-level{flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1.5px solid}
+    .mat-level-b1{color:#7A4F1A;background:#FDF0E0;border-color:#D4953A}.mat-level-b2{color:#163D63;background:#E8F0F9;border-color:var(--cobalto)}.mat-level-c1{color:#2D4A1A;background:#EBF2E2;border-color:#4E7A2A}.mat-level-a2{color:#7A2020;background:#FAEAEA;border-color:#C04040}
+    .mat-card p{font-size:13px;color:#777;line-height:1.55}
+    .mat-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;line-height:1.5}
+    .tag-pre{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;opacity:.65;margin-right:4px}
+    .tag-gram{background:#EBF0F7;color:#1a3d61}.tag-func{background:#EAEDDE;color:#2e3210}.tag-tema{background:#FAF0E8;color:#7a3a0e}.tag-gen{background:#F3EEE9;color:#5e4d3b}.tag-cult{background:#EFF3EA;color:#3d5b2c}.tag-fon{background:#FDF5E3;color:#7a5500}
+    .mat-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px;border-top:1px solid var(--light-gray)}
+    .mat-date{font-size:11px;color:#bbb}
+    .mat-btn{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;background:var(--pitomba);color:white;border:none;border-radius:8px;padding:7px 14px;cursor:pointer;transition:opacity .2s;text-decoration:none}
+    .mat-btn:hover{opacity:.85}
+    .empty-state{background:var(--off-white);border:1.5px dashed var(--light-gray);border-radius:14px;padding:32px 24px;text-align:center;color:#bbb}
+    .empty-state p{font-size:13px}.empty-state .coming{font-size:12px;margin-top:6px;font-style:italic}
+    #no-results{display:none;text-align:center;padding:64px 24px;color:#bbb}
+    #no-results p{font-size:15px;margin-bottom:8px}#no-results span{font-size:13px}
+    .page-footer{text-align:center;padding:24px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--erva-doce);border-top:1px solid var(--light-gray)}
+    @media(max-width:768px){.topbar,.hero,.main,.search-banner{padding-left:20px;padding-right:20px}.filter-bar{padding:0 20px}.hero-stats{gap:20px}.cards-grid{grid-template-columns:1fr}.search-input{width:120px}}
   </style>
 </head>
 <body>
-
-<!-- PASSWORD GATE -->
-<div id="gate">
-  <div class="gate-box">
-    <div class="gate-logo">
-      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB">
-    </div>
-    <div class="gate-level">B2 — Intermediário II</div>
-    <h2>Student Materials</h2>
-    <p class="gate-sub">Enter your password to access your materials</p>
-    <p id="gate-error" class="gate-error">Incorrect password. Please try again.</p>
-    <input class="gate-input" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
-    <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
-    <a href="../index.html" class="gate-back">← Voltar ao portal</a>
-  </div>
-</div>
-
-<!-- MAIN CONTENT -->
+<div id="gate"><div class="gate-box">
+  <div class="gate-logo"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></div>
+  <div class="gate-level">B2</div>
+  <h2>Student Materials</h2>
+  <p class="gate-sub">Enter your password to access your materials</p>
+  <p id="gate-error" class="gate-error">Incorrect password. Please try again.</p>
+  <input class="gate-input" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
+  <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
+  <a href="../index.html" class="gate-back">← Back to portal</a>
+</div></div>
 <div id="content">
-
-  <!-- Topbar -->
   <div class="topbar">
-    <a href="../index.html">
-      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;">
-    </a>
-    <div class="topbar-right">
-      <span class="topbar-level">B2 — Intermediário II</span>
-      <a href="../musicas/index.html" class="topbar-back" style="color:var(--level);font-weight:700;">🎵 Músicas</a>
-      <a href="../index.html" class="topbar-back">← Portal</a>
-    </div>
+    <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:30px;"></a>
+    <div class="topbar-right"><span class="topbar-level">B2</span><a href="../index.html" class="topbar-back">← Portal</a></div>
   </div>
-
-  <!-- Hero -->
   <div class="hero">
-    <div class="hero-eyebrow">Materials Portal</div>
+    <div class="hero-eyebrow">Materials Portal — Nível B2</div>
     <h1>Intermediário II</h1>
     <p>Your complete library of B2 materials, organised by communicative dimension — following the Itamaraty/FUNAG curriculum framework.</p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="num" id="stat-total">7</div>
-        <div class="label">Materials available</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">6</div>
-        <div class="label">Curriculum dimensions</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">B2</div>
-        <div class="label">Your level</div>
-      </div>
+      <div class="hero-stat"><div class="num" id="stat-total">7</div><div class="label">Materials available</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="label">Curriculum dimensions</div></div>
+      <div class="hero-stat"><div class="num">B2</div><div class="label">Your level</div></div>
     </div>
   </div>
-
-  <!-- Filter + Search bar -->
   <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all" onclick="filterCat('all', this)">
-      <span class="filter-dot" style="background:#265B8B;"></span>
-      All materials
-      <span class="filter-count" id="fc-all">7</span>
-    </button>
-    <button class="filter-btn" data-filter="gram" onclick="filterCat('gram', this)">
-      <span class="filter-dot" style="background:var(--cat-gram);"></span>
-      Gramaticais
-      <span class="filter-count" id="fc-gram">7</span>
-    </button>
-    <button class="filter-btn" data-filter="func" onclick="filterCat('func', this)">
-      <span class="filter-dot" style="background:var(--cat-func);"></span>
-      Funções
-      <span class="filter-count" id="fc-func">7</span>
-    </button>
-    <button class="filter-btn" data-filter="tema" onclick="filterCat('tema', this)">
-      <span class="filter-dot" style="background:var(--cat-tema);"></span>
-      Temas
-      <span class="filter-count" id="fc-tema">4</span>
-    </button>
-    <button class="filter-btn" data-filter="gen" onclick="filterCat('gen', this)">
-      <span class="filter-dot" style="background:var(--cat-gen);"></span>
-      Gêneros
-      <span class="filter-count" id="fc-gen">4</span>
-    </button>
-    <button class="filter-btn" data-filter="cult" onclick="filterCat('cult', this)">
-      <span class="filter-dot" style="background:var(--cat-cult);"></span>
-      Culturais
-      <span class="filter-count" id="fc-cult">0</span>
-    </button>
-    <button class="filter-btn" data-filter="fon" onclick="filterCat('fon', this)">
-      <span class="filter-dot" style="background:var(--cat-fon);"></span>
-      Fonológicos
-      <span class="filter-count" id="fc-fon">0</span>
-    </button>
+    <button class="filter-btn active" data-filter="all" onclick="filterCat('all',this)"><span class="filter-dot" style="background:#265B8B;"></span>All materials<span class="filter-count" id="fc-all">7</span></button>
+    <button class="filter-btn" data-filter="gram" onclick="filterCat('gram',this)"><span class="filter-dot" style="background:var(--cat-gram);"></span>Gramaticais<span class="filter-count" id="fc-gram">7</span></button>
+    <button class="filter-btn" data-filter="func" onclick="filterCat('func',this)"><span class="filter-dot" style="background:var(--cat-func);"></span>Funções<span class="filter-count" id="fc-func">7</span></button>
+    <button class="filter-btn" data-filter="tema" onclick="filterCat('tema',this)"><span class="filter-dot" style="background:var(--cat-tema);"></span>Temas<span class="filter-count" id="fc-tema">4</span></button>
+    <button class="filter-btn" data-filter="gen" onclick="filterCat('gen',this)"><span class="filter-dot" style="background:var(--cat-gen);"></span>Gêneros<span class="filter-count" id="fc-gen">4</span></button>
+    <button class="filter-btn" data-filter="cult" onclick="filterCat('cult',this)"><span class="filter-dot" style="background:var(--cat-cult);"></span>Culturais<span class="filter-count" id="fc-cult">0</span></button>
+    <button class="filter-btn" data-filter="fon" onclick="filterCat('fon',this)"><span class="filter-dot" style="background:var(--cat-fon);"></span>Fonológicos<span class="filter-count" id="fc-fon">0</span></button>
     <div class="filter-spacer"></div>
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input class="search-input" type="text" id="search-input" placeholder="Search materials…" oninput="handleSearch(this.value)">
-      <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
-    </div>
+    <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" type="text" id="search-input" placeholder="Search materials…" oninput="handleSearch(this.value)"><button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button></div>
   </div>
-
-  <!-- Search banner -->
   <div class="search-banner" id="search-banner"></div>
-
-  <!-- Main -->
   <div class="main">
-
-    <!-- ── ASPECTOS GRAMATICAIS ── -->
     <div class="cat-section" data-cat="gram" id="sec-gram">
-      <div class="cat-header">
-        <div class="cat-dot" style="background:var(--cat-gram);"></div>
-        <div>
-          <h2>Aspectos Gramaticais</h2>
-          <div class="cat-desc">Inventário gramatical — categorias semântico-gramaticais da língua-alvo</div>
-        </div>
-        <span class="cat-count" id="count-gram">11 materiais</span>
-      </div>
+      <div class="cat-header"><div class="cat-dot" style="background:var(--cat-gram);"></div><div><h2>Aspectos Gramaticais</h2><div class="cat-desc">Inventário gramatical — categorias semântico-gramaticais da língua-alvo</div></div><span class="cat-count" id="count-gram">7 materiais</span></div>
       <div class="cards-grid" id="grid-gram">
-
-        <!-- Card 4: Futuro do Subjuntivo — Texto -->
-        <a class="mat-card" href="../exercicios/futuro-subjuntivo-texto.html"
-           data-tags="gram func tema gen"
-           data-search="futuro subjuntivo quando se enquanto depois que texto jornalístico tecnologia condição">
+        <a class="mat-card" href="../exercicios/preterito-imperfeito-b1-texto.html" data-tags="gram func tema gen" data-search="pretérito imperfeito rubem braga crônica memória infância narrar lazer enquanto">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Futuro do Subjuntivo</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-type-chip ref">📖 Material de referência</div>
-            <p>Reading and grammar reference for the futuro do subjuntivo, with conjugation rules, common triggers (quando, se, enquanto, depois que…) and authentic text.</p>
-            <div class="mat-tags">
-              <span class="tag tag-gram"><span class="tag-pre">GRAM</span>Futuro do subjuntivo</span>
-              <span class="tag tag-func"><span class="tag-pre">FUNC</span>F4 · Pensamento racional — pôr condições</span>
-              <span class="tag tag-tema"><span class="tag-pre">TEMA</span>T14 · Comunicação digital — tecnologia</span>
-              <span class="tag tag-gen"><span class="tag-pre">GÊN</span>Texto jornalístico</span>
-            </div>
-            <div class="mat-footer">
-              <span class="mat-date">Added Apr 2026</span>
-              <span class="mat-btn">Open material →</span>
-            </div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Pretérito Imperfeito — Texto e Exercícios</h3><span class="mat-level mat-level-b1">B1</span></div>
+          <p>Grammar reference covering all six uses of the imperfeito — including simultaneous actions with <em>enquanto</em> — with an authentic Rubem Braga text and 12 interactive exercises.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Pretérito imperfeito — 6 usos</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Narrar e descrever</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T3 · Lazer — memória e infância</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Crônica (Rubem Braga)</span></div>
+          <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open material →</span></div></div>
         </a>
-
-        <!-- Card 5: Futuro do Subjuntivo — Exercícios -->
-        <a class="mat-card" href="../exercicios/futuro-subjuntivo-exercicios-aluno.html"
-           data-tags="gram func"
-           data-search="futuro subjuntivo exercícios gap fill produção condição">
+        <a class="mat-card" href="../exercicios/fim-de-semana-passado.html" data-tags="gram func tema gen" data-search="pretérito perfeito imperfeito contraste diálogo lazer fim de semana relatar episódio">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Futuro do Subjuntivo</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-type-chip">✏️ Exercícios interativos</div>
-            <p>Gap-fill and production exercises to practise the futuro do subjuntivo with common triggers. Complete after the reading material.</p>
-            <div class="mat-tags">
-              <span class="tag tag-gram"><span class="tag-pre">GRAM</span>Futuro do subjuntivo</span>
-              <span class="tag tag-func"><span class="tag-pre">FUNC</span>F4 · Pensamento racional — pôr condições</span>
-            </div>
-            <div class="mat-footer">
-              <span class="mat-date">Added Apr 2026</span>
-              <span class="mat-btn">Open exercises →</span>
-            </div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Pretérito Perfeito vs. Imperfeito</h3><span class="mat-level mat-level-b2">B2</span></div>
+          <p>Practice distinguishing completed actions (perfeito) from ongoing or habitual past actions (imperfeito) through a real dialogue.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Perfeito e imperfeito — contraste</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F6 · Socialização — relatar episódio</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T3 · Lazer e diversão</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Diálogo situacional</span></div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open exercise →</span></div></div>
         </a>
-
-        <!-- Card 6: Tempos Compostos — Texto -->
-        <a class="mat-card" href="../exercicios/tempos-compostos-texto.html"
-           data-tags="gram func"
-           data-search="tempos compostos futuro composto presente composto narrar descrever">
+        <a class="mat-card" href="../exercicios/expressoes-fazer.html" data-tags="gram func tema gen" data-search="expressões fazer verbos locucionais fazer falta fazer questão profissional emoções">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Tempos Compostos</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <span class="mat-type-chip ref">📖 Material de referência</span>
-            <p>Introduction to compound tenses in the indicative mood — futuro composto and presente composto — with explanations and authentic examples.</p>
-            <div class="mat-tags">
-              <span class="tag tag-gram"><span class="tag-pre">GRAM</span>Tempos compostos</span>
-              <span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Discussão — narrar e descrever</span>
-            </div>
-            <div class="mat-footer">
-              <span class="mat-date">Added Apr 2026</span>
-              <span class="mat-btn">Open material →</span>
-            </div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Expressões com o verbo <em>fazer</em></h3><span class="mat-level mat-level-b2">B2</span></div>
+          <p>Learn five key idiomatic expressions with <em>fazer</em> — fazer falta, fazer questão, fazer as pazes, fazer diferença, fazer sentido — in a professional context.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Verbos locucionais — fazer</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F5 · Emoções — satisfação e reconciliação</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T5 · Relacionamentos</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Crônica adaptada</span></div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open exercise →</span></div></div>
         </a>
-
-        <!-- Card 7: Tempos Compostos — Exercícios -->
-        <a class="mat-card" href="../exercicios/tempos-compostos-exercicios-aluno.html"
-           data-tags="gram func"
-           data-search="tempos compostos exercícios interativos narrar descrever">
+        <a class="mat-card" href="../exercicios/futuro-subjuntivo-texto.html" data-tags="gram func tema gen" data-search="futuro subjuntivo quando se enquanto depois que tecnologia condição">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Tempos Compostos</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <span class="mat-type-chip">✏️ Exercícios interativos</span>
-            <p>Interactive exercises practising compound tenses. Complete after reviewing the reference material.</p>
-            <div class="mat-tags">
-              <span class="tag tag-gram"><span class="tag-pre">GRAM</span>Tempos compostos</span>
-              <span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Discussão — narrar e descrever</span>
-            </div>
-            <div class="mat-footer">
-              <span class="mat-date">Added Apr 2026</span>
-              <span class="mat-btn">Open exercises →</span>
-            </div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Futuro do Subjuntivo — Texto</h3><span class="mat-level mat-level-b2">B2</span></div>
+          <p>Reading and grammar reference for the futuro do subjuntivo, with conjugation rules, common triggers (quando, se, enquanto, depois que…) and authentic text.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Futuro do subjuntivo</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F4 · Pensamento racional — pôr condições</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T14 · Comunicação digital</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Texto jornalístico</span></div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open material →</span></div></div>
         </a>
-        <!-- Card 8: Tempos Compostos — Roteiro de Conversação -->
-        <a class="mat-card" href="../exercicios/tempos-compostos-b2-roteiro-conversacao.html"
-           data-tags="gram func"
-           data-search="tempos compostos roteiro conversação conversando com amigos ter tido sido narrar passado experiências B2 intermediário superior">
-          <div class="mat-card-bar" style="background:var(--cat-func);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Tempos Compostos — Roteiro de Conversação</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <p>Structured 60-minute conversation guide anchored in the theme of friendship and shared experiences. 4 sections: warm-up, key expressions, open discussion, and role-play. For use during class.</p>
-            <div class="mat-tags">
-              <span class="tag tag-gram"><span class="tag-pre">GRAM</span>Tempos compostos — ter tido / ter sido</span>
-              <span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Narrar e descrever experiências passadas</span>
-            </div>
-            <div class="mat-footer">
-              <span class="mat-date">Added May 2026</span>
-              <span class="mat-btn">Open guide →</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="mat-card" href="../exercicios/infinitivo-pessoal-b2-material.html" data-tags="gram func tema gen" data-search="infinitivo pessoal flexão infinitivo sujeito diferente locuções antes de depois de para ao apesar de pintora rotina maternidade">
+        <a class="mat-card" href="../exercicios/futuro-subjuntivo-exercicios-aluno.html" data-tags="gram func" data-search="futuro subjuntivo exercícios gap fill produção condição">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Infinitivo Pessoal</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-type-chip ref">📖 Material de referência</div>
-            <p>Reference material on the personal infinitive — when to inflect, which triggers require it, and how it differs from the impersonal form. Anchored in an original text about a Brazilian painter's daily routine.</p>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Infinitivo pessoal</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Descrever rotina e hábitos</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T3 · Arte e vida cotidiana</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Texto narrativo</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open material →</span></div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Futuro do Subjuntivo — Exercícios</h3><span class="mat-level mat-level-b2">B2</span></div>
+          <p>Gap-fill and production exercises to practise the futuro do subjuntivo with common triggers.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Futuro do subjuntivo</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F4 · Pensamento racional — pôr condições</span></div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open exercises →</span></div></div>
         </a>
-        <a class="mat-card" href="../exercicios/infinitivo-pessoal-b2-exercicios-aluno.html" data-tags="gram func tema gen" data-search="infinitivo pessoal exercícios interativos flexão locuções antes de depois de para ao apesar de">
+        <a class="mat-card" href="../exercicios/tempos-compostos-texto.html" data-tags="gram func" data-search="tempos compostos futuro composto presente composto narrar descrever">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Infinitivo Pessoal</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-type-chip">✏️ Exercícios interativos</div>
-            <p>Interactive exercises on the personal infinitive — sentence transformation, gap fill with locutions, and multiple-choice with feedback. Based on the same text from the reference material.</p>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Infinitivo pessoal</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Descrever rotina e hábitos</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Texto narrativo</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open exercises →</span></div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Tempos Compostos — Texto e Referência</h3><span class="mat-level mat-level-b2">B2</span></div>
+          <p>Introduction to compound tenses — futuro composto and presente composto — with explanations and authentic examples.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Tempos compostos</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Discussão — narrar e descrever</span></div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open material →</span></div></div>
         </a>
-
-        <a class="mat-card" href="../exercicios/locucoes-dar-b2-material.html" data-tags="gram gen func" data-search="locuções verbais dar uma olhada passada ligada pensada lida volta pesquisada checada dormida descansada espiada pausa sufixo ada coloquial registro informal whatsapp">
+        <a class="mat-card" href="../exercicios/tempos-compostos-exercicios-aluno.html" data-tags="gram func" data-search="tempos compostos exercícios interativos narrar descrever">
           <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Locuções com dar</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-type-chip ref">📖 Material de referência</div>
-            <p>The highly productive Brazilian pattern <em>dar uma + -ada</em>: <em>dar uma olhada</em>, <em>dar uma passada</em>, <em>dar uma ligada</em>. WhatsApp conversation anchor, suffix explanation, 12 essential locutions, conjugation table, and register comparison. Includes warning on unrelated DAR idioms.</p>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Locuções verbais</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>WhatsApp</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Expressar ações de forma atenuada</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open material →</span></div>
-          </div>
+          <div class="mat-card-body"><div class="mat-card-top"><h3>Tempos Compostos — Exercícios</h3><span class="mat-level mat-level-b2">B2</span></div>
+          <p>Interactive exercises practising compound tenses. Complete after reviewing the reference material.</p>
+          <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Tempos compostos</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Discussão — narrar e descrever</span></div>
+          <div class="mat-footer"><span class="mat-date">Added Apr 2026</span><span class="mat-btn">Open exercises →</span></div></div>
         </a>
-
-        <a class="mat-card" href="../exercicios/locucoes-dar-b2-exercicios-aluno.html" data-tags="gram gen func" data-search="locuções verbais dar exercícios interativos matching escolha múltipla formação ada escrita livre whatsapp coloquial">
-          <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Locuções com dar</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-type-chip">✏️ Exercícios interativos</div>
-            <p>4 interactive exercises: matching locutions to meanings, multiple-choice in context (8 situations with feedback), build the locution from the base verb (-ada/-ida formation), and free writing in WhatsApp situations.</p>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Locuções verbais</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>WhatsApp</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Expressar ações de forma atenuada</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open exercises →</span></div>
-          </div>
-        </a>
-
-        <a class="mat-card" href="../exercicios/gramatica-por-e-para-b1.html" data-tags="gram func tema gen" data-search="por para preposições nomadismo digital trabalho remoto Agência Brasil exercícios interativos texto autêntico voz passiva agente">
-          <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Por e Para — Preposições</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <p>Interactive exercises based on an authentic Agência Brasil article about digital nomadism — true/false comprehension, gap fill, function identification, and free writing. Covers agente da voz passiva, causa, duração, meio, finalidade, destinatário, prazo.</p>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Preposições por e para</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F3 · Descrever — modo, causa, finalidade</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T8 · Trabalho e negócios</span><span class="tag tag-gen"><span class="tag-pre">GÊN</span>Artigo jornalístico</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open exercises →</span></div>
-          </div>
-        </a>
-
-        <a class="mat-card" href="../exercicios/futuro-subjuntivo-conversacao.html" data-tags="gram func tema" data-search="futuro do subjuntivo quando se assim que logo que conversação roteiro inteligência artificial trabalho tecnologia condições hipóteses B2 intermediário superior">
-          <div class="mat-card-bar" style="background:var(--cat-func);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Futuro do Subjuntivo — Roteiro de Conversação</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <p>60-minute structured conversation guide anchored in the theme of AI and work. 4 sections: warm-up, key expressions, open discussion, role-play, and grammar review. Designed for use during class.</p>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Futuro do subjuntivo</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F4 · Expressar condições e hipóteses</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>T8 · Trabalho · IA · Tecnologia</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open guide →</span></div>
-          </div>
-        </a>
-        <a class="mat-card" href="../exercicios/futuro-subjuntivo-b2-verbos-regulares-exercicios-aluno.html" data-tags="gram func tema" data-search="futuro do subjuntivo verbos regulares se quando assim que logo que sempre que enquanto até que São Paulo cidade planos condições hipóteses exercícios interativos gap fill classificação combinar frases produção escrita B2 intermediário superior">
-          <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
-          <div class="mat-card-body">
-            <div class="mat-card-top">
-              <h3>Futuro do Subjuntivo — Verbos Regulares</h3>
-              <span class="mat-level mat-level-b2">B2</span>
-            </div>
-            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Futuro do subjuntivo · verbos regulares</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F4 · Expressar condições e hipóteses</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>Cidade · vida urbana · planos</span></div>
-            <div class="mat-footer"><span class="mat-date">Added May 2026</span><span class="mat-btn">Open exercises →</span></div>
-          </div>
-        </a>
-
       </div>
     </div>
-
-    <!-- ── FUNÇÕES COMUNICATIVAS ── -->
-    <div class="cat-section hidden" data-cat="func" id="sec-func">
-      <div class="cat-header">
-        <div class="cat-dot" style="background:var(--cat-func);"></div>
-        <div>
-          <h2>Funções Comunicativas</h2>
-          <div class="cat-desc">6 categorias: juízo/avaliação, persuasão, discussão, pensamento racional, emoções, socialização</div>
-        </div>
-        <span class="cat-count">0 materiais</span>
-      </div>
-      <div class="empty-state">
-        <p>No materials anchored here yet.</p>
-        <p class="coming">Materials with a communicative function as their primary focus will appear here.</p>
-      </div>
-    </div>
-
-    <!-- ── TEMAS E TÓPICOS ── -->
-    <div class="cat-section hidden" data-cat="tema" id="sec-tema">
-      <div class="cat-header">
-        <div class="cat-dot" style="background:var(--cat-tema);"></div>
-        <div>
-          <h2>Temas e Tópicos</h2>
-          <div class="cat-desc">T1 · Identificação pessoal → T14 · Comunicação digital — ordem curricular Itamaraty</div>
-        </div>
-        <span class="cat-count">0 materiais</span>
-      </div>
-      <div class="empty-state">
-        <p>No materials anchored here yet.</p>
-        <p class="coming">Materials centred on a specific theme will appear here in curricular order.</p>
-      </div>
-    </div>
-
-    <!-- ── GÊNEROS TEXTUAIS ── -->
-    <div class="cat-section hidden" data-cat="gen" id="sec-gen">
-      <div class="cat-header">
-        <div class="cat-dot" style="background:var(--cat-gen);"></div>
-        <div>
-          <h2>Gêneros Textuais</h2>
-          <div class="cat-desc">Crônica, e-mail, WhatsApp, convite, cardápio, notícia, redação, entrevista…</div>
-        </div>
-        <span class="cat-count">0 materiais</span>
-      </div>
-      <div class="empty-state">
-        <p>No materials anchored here yet.</p>
-        <p class="coming">Materials built around a specific text genre will appear here.</p>
-      </div>
-    </div>
-
-    <!-- ── ASPECTOS CULTURAIS ── -->
-    <div class="cat-section hidden" data-cat="cult" id="sec-cult">
-      <div class="cat-header">
-        <div class="cat-dot" style="background:var(--cat-cult);"></div>
-        <div>
-          <h2>Aspectos Culturais</h2>
-          <div class="cat-desc">Sistema de tratamento, valores, alimentação, habitação, cultura e produção artística…</div>
-        </div>
-        <span class="cat-count">0 materiais</span>
-      </div>
-      <div class="empty-state">
-        <p>No materials anchored here yet.</p>
-        <p class="coming">Materials with a cultural focus will appear here.</p>
-      </div>
-    </div>
-
-    <!-- ── ASPECTOS FONOLÓGICOS ── -->
-    <div class="cat-section hidden" data-cat="fon" id="sec-fon">
-      <div class="cat-header">
-        <div class="cat-dot" style="background:var(--cat-fon);"></div>
-        <div>
-          <h2>Aspectos Fonológicos</h2>
-          <div class="cat-desc">Acentuação, fonemas vocálicos e consonantais, nasalização, efeito africado…</div>
-        </div>
-        <span class="cat-count">0 materiais</span>
-      </div>
-      <div class="empty-state">
-        <p>No materials anchored here yet.</p>
-        <p class="coming">Pronunciation and phonology materials will appear here.</p>
-      </div>
-    </div>
-
-    <!-- No results -->
-    <div id="no-results">
-      <p>No materials found.</p>
-      <span>Try a different search term or filter.</span>
-    </div>
-
-  </div><!-- /main -->
-</div><!-- /content -->
-
+    <div class="cat-section hidden" data-cat="func" id="sec-func"><div class="cat-header"><div class="cat-dot" style="background:var(--cat-func);"></div><div><h2>Funções Comunicativas</h2><div class="cat-desc">6 categorias: juízo/avaliação, persuasão, discussão, pensamento racional, emoções, socialização</div></div><span class="cat-count">0 materiais</span></div><div class="empty-state"><p>No materials anchored here yet.</p><p class="coming">Materials with a communicative function as their primary focus will appear here.</p></div></div>
+    <div class="cat-section hidden" data-cat="tema" id="sec-tema"><div class="cat-header"><div class="cat-dot" style="background:var(--cat-tema);"></div><div><h2>Temas e Tópicos</h2><div class="cat-desc">T1 · Identificação pessoal → T14 · Comunicação digital</div></div><span class="cat-count">0 materiais</span></div><div class="empty-state"><p>No materials anchored here yet.</p></div></div>
+    <div class="cat-section hidden" data-cat="gen" id="sec-gen"><div class="cat-header"><div class="cat-dot" style="background:var(--cat-gen);"></div><div><h2>Gêneros Textuais</h2></div><span class="cat-count">0 materiais</span></div><div class="empty-state"><p>No materials anchored here yet.</p></div></div>
+    <div class="cat-section hidden" data-cat="cult" id="sec-cult"><div class="cat-header"><div class="cat-dot" style="background:var(--cat-cult);"></div><div><h2>Aspectos Culturais</h2></div><span class="cat-count">0 materiais</span></div><div class="empty-state"><p>No materials anchored here yet.</p></div></div>
+    <div class="cat-section hidden" data-cat="fon" id="sec-fon"><div class="cat-header"><div class="cat-dot" style="background:var(--cat-fon);"></div><div><h2>Aspectos Fonológicos</h2></div><span class="cat-count">0 materiais</span></div><div class="empty-state"><p>No materials anchored here yet.</p></div></div>
+    <div id="no-results"><p>No materials found.</p><span>Try a different search term or filter.</span></div>
+  </div>
+</div>
+<div class="page-footer">Brazilian Portuguese Hub &nbsp;·&nbsp; brazilianportuguesehub.com</div>
 <script>
-  (function(){
-    if(location.hash){
-      document.getElementById('gate').style.display='none';
-      document.getElementById('content').style.display='block';
-    }
-  })();
-
-  (function(){if(localStorage.getItem('bphub_auth')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
-  function checkGate(){
-    var val = document.getElementById('gate-pass').value.trim();
-    if(val){
-      localStorage.setItem('bphub_auth','1');
-      document.getElementById('gate').style.display='none';
-      document.getElementById('content').style.display='block';
-    } else {
-      document.getElementById('gate-error').style.display='block';
-    }
-  }
-  document.getElementById('gate-pass').addEventListener('keydown', function(e){
-    if(e.key==='Enter') checkGate();
-  });
-
-  var currentFilter = 'all';
-  var currentSearch = '';
-
-  // ── Dynamic counts on load ──
-  (function initCounts() {
-    var total = document.querySelectorAll('.mat-card').length;
-    document.getElementById('stat-total').textContent = total;
-    document.getElementById('fc-all').textContent = total;
-    ['gram','func','tema','gen','cult','fon'].forEach(function(cat) {
-      var n = document.querySelectorAll('#sec-' + cat + ' .mat-card').length;
-      var el = document.getElementById('fc-' + cat);
-      if(el) el.textContent = n;
-      var cnt = document.getElementById('count-' + cat);
-      if(cnt) cnt.textContent = n + (n === 1 ? ' material' : ' materiais');
-    });
-  })();
-
-  function filterCat(cat, btn) {
-    currentFilter = cat;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    applyFilters();
-  }
-
-  function handleSearch(val) {
-    currentSearch = val.trim().toLowerCase();
-    document.getElementById('search-clear').style.display = currentSearch ? 'block' : 'none';
-    applyFilters();
-  }
-
-  function clearSearch() {
-    document.getElementById('search-input').value = '';
-    currentSearch = '';
-    document.getElementById('search-clear').style.display = 'none';
-    applyFilters();
-  }
-
-  function applyFilters() {
-    var cards = document.querySelectorAll('.mat-card');
-    var visibleCount = 0;
-
-    cards.forEach(function(card) {
-      var tags = card.dataset.tags || '';
-      var searchText = (card.dataset.search || '') + ' ' +
-                       (card.querySelector('h3') ? card.querySelector('h3').textContent : '') + ' ' +
-                       (card.querySelector('p') ? card.querySelector('p').textContent : '');
-
-      var passesFilter = (currentFilter === 'all') || tags.split(' ').indexOf(currentFilter) !== -1;
-      var passesSearch = !currentSearch || searchText.toLowerCase().indexOf(currentSearch) !== -1;
-
-      if(passesFilter && passesSearch) {
-        card.classList.remove('hidden');
-        visibleCount++;
-      } else {
-        card.classList.add('hidden');
-      }
-    });
-
-    // Show/hide sections based on visible cards
-    if(currentFilter === 'all' && !currentSearch) {
-      document.querySelectorAll('.cat-section').forEach(function(sec) {
-        if(sec.dataset.cat === 'gram') {
-          sec.classList.remove('hidden');
-        } else {
-          sec.classList.add('hidden');
-        }
-      });
-    } else {
-      document.querySelectorAll('.cat-section').forEach(function(sec) {
-        var visibleInSection = sec.querySelectorAll('.mat-card:not(.hidden)').length;
-        if(visibleInSection > 0) {
-          sec.classList.remove('hidden');
-        } else {
-          // Only hide non-gram sections when filtering — keep gram always as fallback
-          if(sec.dataset.cat !== 'gram' || visibleCount === 0) {
-            sec.classList.add('hidden');
-          }
-        }
-      });
-      // If filter is active and gram has matches, show gram section
-      var gramCards = document.querySelectorAll('#sec-gram .mat-card:not(.hidden)').length;
-      if(gramCards > 0) {
-        document.getElementById('sec-gram').classList.remove('hidden');
-      } else {
-        document.getElementById('sec-gram').classList.add('hidden');
-      }
-    }
-
-    // Search banner
-    var banner = document.getElementById('search-banner');
-    if(currentSearch) {
-      banner.style.display = 'block';
-      banner.innerHTML = 'Showing <strong>' + visibleCount + ' result' + (visibleCount !== 1 ? 's' : '') + '</strong> for "<strong>' + currentSearch + '</strong>"';
-    } else {
-      banner.style.display = 'none';
-    }
-
-    // No results
-    document.getElementById('no-results').style.display = (visibleCount === 0) ? 'block' : 'none';
-
-    // Update stat
-    document.getElementById('stat-total').textContent = currentFilter === 'all' && !currentSearch ? document.querySelectorAll('.mat-card').length : visibleCount;
-  }
+  (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
+  function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
+  document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
+  var cf='all',cs='';
+  function filterCat(cat,btn){cf=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
+  function handleSearch(v){cs=v.trim().toLowerCase();document.getElementById('search-clear').style.display=cs?'block':'none';applyFilters();}
+  function clearSearch(){document.getElementById('search-input').value='';cs='';document.getElementById('search-clear').style.display='none';applyFilters();}
+  function applyFilters(){var cards=document.querySelectorAll('.mat-card'),n=0;cards.forEach(function(card){var tags=card.dataset.tags||'';var txt=(card.dataset.search||'')+' '+(card.querySelector('h3')?card.querySelector('h3').textContent:'')+' '+(card.querySelector('p')?card.querySelector('p').textContent:'');var pf=(cf==='all')||tags.split(' ').indexOf(cf)!==-1;var ps=!cs||txt.toLowerCase().indexOf(cs)!==-1;if(pf&&ps){card.classList.remove('hidden');n++;}else{card.classList.add('hidden');}});if(cf==='all'&&!cs){document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.dataset.cat==='gram'?'remove':'add']('hidden');});}else{document.querySelectorAll('.cat-section').forEach(function(s){s.classList[s.querySelectorAll('.mat-card:not(.hidden)').length>0?'remove':'add']('hidden');});}var banner=document.getElementById('search-banner');if(cs){banner.style.display='block';banner.innerHTML='Showing <strong>'+n+' result'+(n!==1?'s':'')+'</strong> for "<strong>'+cs+'</strong>"';}else{banner.style.display='none';}document.getElementById('no-results').style.display=(n===0)?'block':'none';document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'7':n;}
 </script>
-
-<div class="page-footer"><a href="https://www.brazilianportuguesehub.com" target="_blank" rel="noopener"><img src="data:image/png;base64,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yXu38wVLaWkpSJIU8Dq+QxAEKC4uhj///BMWL15cp0yr1dogXXfu3AkulwsQQlBZWX1lW2ZmJnAcBwghKCkpqVeWPyUlJb6olNX0qK+swRySJFVbVj5t2jTweDyAEAKPxwO+8Xd/du/eDQ6Ho8HXEgQB/LuDfed5noerV69Wu8bly5dv2CvYblMfZrO5VnsBXA/Wx7LsLT1/WVlZwPP8jUnQtS3H91FeXg4cx0FJSQm8/vrrDbpOMLz//vuQkZEBNpvNvyy47/92ux0yMjJg9erVQck7d+4cuN1usNls4NuosD4KCgqAZVmw2+1w6tSpetMfPXoUbDYbsCwLOTm3vnXNd999B5cuXap2j/2P/Px82LNnDzzwwAMNlr1p0ybIysoCt9tdq+yioiI4cOAAPProowBw/bvDsiwEsxJ44sSJcOjQITCbzbXK9t2zVatW1Svr7bffhoqKCuA4rsGH1WqFP/74o1a527Ztq7P8paWlcOjQIagrtlJWVhY4nc4G68WybMBv49mzZ6GyshIcDgc4HA6w2WyQn59fr5186Wse9bF48WI4ceJEwHvlcrkgKysLtmzZAoMHD74lHWo7KioqIC8vD44fPw7bt28P/sG9Te7YrNItW7aAf5hpq9Ua1CqJrVu3gsFguNFt5fF44OzZszBv3rw6823cuBHCw8PBNylSFEXIz8+HZ599ts58K1asgCZNmgBN09XOP/jgg3fKNAoK/1/wxBNPQFRUFFitVoiOjobLly/D1q2306n2v8OwYcPg4YcfBp1OB7t374aNGzf+pbIHDhwIcXFxsHv3bvBNxP2reOmll+C+++6Dc+fOwbZt2+DMmTN32Xp107t3bxgyZAgkJibCkSNHYPny5X+3SgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/SP4f0J/rfDUAMCIAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjYtMDUtMTZUMDI6NTc6NDUrMDA6MDCxdTBCAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI2LTA1LTE2VDAyOjU3OjQ1KzAwOjAwwCiI/gAAAC10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgQXJ0aWZleCBTb2Z0d2FyZSAyMDExCLrFtAAAADF0RVh0aWNjOmRlc2NyaXB0aW9uAEFydGlmZXggU29mdHdhcmUgc1JHQiBJQ0MgUHJvZmlsZRMMAYYAAAAfdEVYdFNvZnR3YXJlAEdQTCBHaG9zdHNjcmlwdCA5LjU1LjDyGIEvAAAAAElFTkSuQmCC" alt="Brazilian Portuguese Hub" style="height:36px;display:block;margin:0 auto;"></a></div>
-
 </body>
 </html>
