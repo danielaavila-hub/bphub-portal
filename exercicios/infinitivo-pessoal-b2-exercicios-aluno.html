@@ -108,6 +108,11 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
   .page-hero-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:12px;padding:4px 12px;border-radius:20px;font-weight:500}
 .item{position:relative;padding-left:44px;margin-bottom:20px;}
 .item-num{position:absolute;left:0;top:0;background:var(--terracota);color:#fff;font-family:'Trirong',serif;font-weight:800;font-size:12px;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.ex-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:4px;}
+.check-btn-inline{background:var(--cobalto);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:12px;display:block;}
+.check-btn-inline:hover{opacity:.88;}
+.score-bar2{background:var(--baunilha);border-radius:8px;padding:10px 16px;font-size:14px;font-weight:600;color:var(--pitomba);margin-top:10px;display:none;}
+.send-box{background:var(--baunilha);border-radius:10px;padding:24px 28px;margin:32px 0 8px;border-left:4px solid var(--erva-doce);font-size:15px;line-height:1.7;color:var(--nanquim);}
 </style>
 </head>
 <body>
@@ -132,7 +137,7 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
 
 
   <div class="ex-card" id="ex1">
-    <div class="ex-header"><div class="ex-num">1</div><div class="ex-title">Conectar frases</div></div>
+    <p class="ex-label">Exercício 1</p><div class="ex-header"><div class="ex-num">1</div><div class="ex-title">Conectar frases</div></div>
     <p class="ex-instr">Una as duas frases usando o gatilho indicado. Escreva sua resposta e clique para ver o modelo.</p>
 
     <div class="item"><span class="item-num">1</span>
@@ -226,7 +231,7 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
   </div>
 
   <div class="ex-card">
-    <div class="ex-header"><div class="ex-num">2</div><div class="ex-title">Expressões impessoais + infinitivo pessoal</div></div>
+    <p class="ex-label">Exercício 2</p><div class="ex-header"><div class="ex-num">2</div><div class="ex-title">Expressões impessoais + infinitivo pessoal</div></div>
     <p class="ex-instr">Clique em uma palavra do banco para completar cada frase. Cada opção é usada uma vez.</p>
 
     <div class="word-bank" id="bank1">
@@ -246,11 +251,11 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
       <li class="gap-item"><span class="gap-num">5.</span><span>É bom você </span><span class="blank" onclick="fillB(this)" data-correct="descansares"></span><span> um pouco antes de retomar o projeto.</span></li>
       <li class="gap-item"><span class="gap-num">6.</span><span>É necessário as crianças </span><span class="blank" onclick="fillB(this)" data-correct="chegarem"></span><span> na escola antes das oito.</span></li>
     </ul>
-    <div class="score-bar" id="score1"></div>
+    <button class="check-btn-inline" onclick="checkEx2()">Check answers — Exercício 2</button><div class="score-bar" id="score1"></div>
   </div>
 
   <div class="ex-card">
-    <div class="ex-header"><div class="ex-num">3</div><div class="ex-title">Escolha o gatilho certo</div></div>
+    <p class="ex-label">Exercício 3</p><div class="ex-header"><div class="ex-num">3</div><div class="ex-title">Escolha o gatilho certo</div></div>
     <p class="ex-instr">Escolha o gatilho que melhor se encaixa no sentido de cada frase.</p>
 
     <div class="choice-group">
@@ -309,12 +314,17 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
   </div>
 
   <div class="ex-card">
-    <div class="ex-header"><div class="ex-num">4</div><div class="ex-title">A sua semana — produção livre</div></div>
+    <button class="check-btn-inline" onclick="checkEx3()">Check answers — Exercício 3</button><div class="score-bar2" id="score3"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-label">Exercício 4</p><div class="ex-header"><div class="ex-num">4</div><div class="ex-title">A sua semana — produção livre</div></div>
     <p class="ex-instr">Descreva a sua semana usando pelo menos 6 gatilhos diferentes. Tente usar os que você ainda não praticou muito.</p>
     <p style="font-size:14px;margin-bottom:16px;color:#444;"><strong>Gatilhos sugeridos:</strong> <em>antes de, depois de, ao, sem, para, apesar de, em vez de, além de, a fim de, na hora de, é importante, é difícil para, está na hora de</em></p>
     <textarea class="prod-area" placeholder="Escreva aqui sobre a sua semana…" rows="8"></textarea>
   </div>
 
+  <div class="send-box">📩 <strong>When you're done,</strong> send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!</div>
   <button class="check-all-btn" onclick="checkAll()">Verificar exercícios 2 e 3</button>
   <div class="final-score" id="finalScore"></div>
 
@@ -342,6 +352,16 @@ function pickC(btn,ok){
   btn.classList.add(ok?'ok':'no');
 }
 function showM(btn){btn.nextElementSibling.style.display='block';btn.textContent='Resposta mostrada';btn.disabled=true;}
+function checkEx2(){
+  let c=0,t=0;
+  document.querySelectorAll('.blank').forEach(b=>{t++;if(b.dataset.filled===b.dataset.correct){b.classList.add('correct');b.classList.remove('wrong');c++;}else{b.classList.add('wrong');b.classList.remove('correct');if(!b.dataset.filled)b.textContent=b.dataset.correct;}});
+  const sb=document.getElementById('score1');sb.style.display='block';sb.textContent='Exercício 2: '+c+' de '+t+' corretas';
+}
+function checkEx3(){
+  let c=0,t=0;
+  document.querySelectorAll('.choice-group').forEach(g=>{t++;if(g.querySelector('.ok'))c++;});
+  const s3=document.getElementById('score3');s3.style.display='block';s3.textContent='Exercício 3: '+c+' de '+t+' corretos';
+}
 function checkAll(){
   let c=0,t=0;
   document.querySelectorAll('.blank').forEach(b=>{
