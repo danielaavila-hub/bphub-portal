@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Rotina do Dia a Dia — BPHUB A2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --marrom:     #967E63;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level-color: #265B8B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--texto); }
+
+    /* Topbar */
+    .topbar { position: sticky; top: 0; z-index: 100; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 16px; padding: 10px 24px; }
+    .topbar-logo img { height: 36px; display: block; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+    .topbar-badge { background: var(--level-color); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; padding: 4px 12px; border-radius: 20px; }
+    .topbar-back { font-size: 12px; color: #aaa; text-decoration: none; transition: color .2s; }
+    .topbar-back:hover { color: var(--level-color); }
+
+    /* Hero */
+    .page-hero { background: var(--level-color); color: #fff; padding: 48px 40px 40px; text-align: center; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+    .page-hero > p { font-size: 15px; opacity: .85; max-width: 560px; margin: 0 auto 20px; line-height: 1.6; }
+    .meta-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .meta-pill { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: 5px 14px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); display: inline-block; }
+
+    /* Main */
+    .main { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    /* Section header */
+    .sec-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--light-gray); }
+    .sec-icon { width: 38px; height: 38px; border-radius: 50%; background: var(--level-color); color: #fff; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sec-header h2 { font-size: 1.1rem; color: var(--texto); }
+    .sec-header p { font-size: 13px; color: #666; margin-top: 2px; }
+
+    /* Text block */
+    .text-block { background: #fff; border-radius: 12px; border: 1px solid var(--light-gray); padding: 28px 32px; margin-bottom: 32px; line-height: 1.85; }
+    .text-block h3 { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 400; color: var(--level-color); margin-bottom: 16px; }
+    .text-block p { margin-bottom: 14px; font-size: 15px; }
+    .text-block p:last-of-type { margin-bottom: 0; }
+    .vb-ar { background: rgba(38,91,139,.12); border-radius: 3px; padding: 1px 3px; font-weight: 700; color: #1a3d6b; }
+    .vb-er { background: rgba(78,85,29,.12); border-radius: 3px; padding: 1px 3px; font-weight: 700; color: var(--floresta); }
+    .vb-ir { background: rgba(211,109,41,.12); border-radius: 3px; padding: 1px 3px; font-weight: 700; color: #8b3a00; }
+    .text-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--light-gray); font-size: 12px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+    .fonte { font-size: 12px; color: #999; font-style: italic; margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--light-gray); }
+
+    /* Grammar reference */
+    .gram-ref { background: var(--off-white); border-radius: 12px; border: 1px solid var(--light-gray); padding: 24px 28px; margin-bottom: 32px; }
+    .gram-ref h3 { font-family: 'Trirong', serif; font-size: 1rem; font-weight: 500; color: var(--texto); margin-bottom: 16px; }
+    .conj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .conj-table { border-radius: 8px; overflow: hidden; font-size: 13px; }
+    .conj-title { background: var(--level-color); color: #fff; font-weight: 700; padding: 6px 12px; font-family: 'Trirong', serif; font-size: 13px; letter-spacing: .04em; }
+    .conj-title.ar { background: #1a3d6b; }
+    .conj-title.er { background: var(--floresta); }
+    .conj-title.ir { background: #8b3a00; }
+    .conj-row { display: flex; justify-content: space-between; padding: 5px 12px; background: #fff; border-bottom: 1px solid var(--light-gray); }
+    .conj-row:last-child { border-bottom: none; }
+    .conj-row .pronoun { color: #888; }
+    .conj-row .form { font-weight: 600; color: var(--texto); }
+    .conj-note { font-size: 12px; color: #888; margin-top: 10px; font-style: italic; }
+
+    /* Exercise block */
+    .exercise-block { background: #fff; border-radius: 12px; border: 1px solid var(--light-gray); padding: 28px 28px 24px; margin-bottom: 28px; }
+    .ex-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--level-color); font-weight: 700; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--texto); margin-bottom: 6px; }
+    .ex-instr { font-size: 13px; color: #666; font-style: italic; margin-bottom: 20px; }
+
+    /* True/False */
+    .tf-list { list-style: none; padding: 0; }
+    .tf-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-num { background: var(--level-color); color: #fff; font-weight: 700; font-size: 12px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center;#justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .tf-text { flex: 1; font-size: 15px; }
+    .tf-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .tf-btn { border: 1.5px solid var(--light-gray); border-radius: 6px; padding: 5px 14px; font-size: 13px; font-weight: 600; cursor: pointer; background: #fff; transition: all .15s; font-family: 'Manrope', sans-serif; }
+    .tf-btn:hover { border-color: var(--level-color); color: var(--level-color); }
+    .tf-btn.correct { background: rgba(78,85,29,.1); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.wrong   { background: rgba(211,109,41,.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    /* Gap fill */
+    .gap-list { list-style: none; padding: 0; }
+    .gap-item { display: flex; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; flex-wrap: wrap; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { color: var(--level-color); font-weight: 700; font-size: 12px; min-width: 20px; }
+    .gap-inf { color: #888; font-size: 12px; font-style: italic; }
+    input.gap-input { width: 140px; border: 1.5px solid var(--light-gray); border-radius: 6px; padding: 6px 10px; font-size: 14px; font-family: 'Manrope', sans-serif; transition: border-color .2s; }
+    input.gap-input:focus { outline: none; border-color: var(--level-color); }
+    input.gap-input.correct { border-color: var(--floresta); background: rgba(78,85,29,.06); }
+    input.gap-input.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,.06); }
+
+    /* Word bank */
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 14px; background: var(--off-white); border-radius: 8px; }
+    .chip { background: #fff; border: 1.5px solid var(--light-gray); border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; font-family: 'Manrope', sans-serif; }
+    .chip:hover { border-color: var(--level-color); color: var(--level-color); }
+    .chip.used { opacity: .35; pointer-events: none; text-decoration: line-through; }
+    .chip.selected { border-color: var(--ouro); background: rgba(255,185,74,.12); }
+    .wb-item { display: flex; align-items: baseline; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; flex-wrap: wrap; }
+    .wb-item:last-child { border-bottom: none; }
+    .wb-blank { display: inline-block; min-width: 130px; border-bottom: 2px solid var(--light-gray); cursor: pointer; padding: 2px 8px; font-weight: 600; color: var(--level-color); transition: border-color .2s; min-height: 26px; font-family: 'Manrope', sans-serif; font-size: 14px; }
+    .wb-blank:hover { border-color: var(--level-color); }
+    .wb-blank.correct { border-color: var(--floresta); color: var(--floresta); }
+    .wb-blank.wrong   { border-color: var(--pitomba); color: var(--pitomba); }
+
+    /* Production */
+    .prod-prompt { font-size: 15px; margin-bottom: 8px; color: var(--texto); }
+    .prod-prompt em { color: var(--level-color); font-style: italic; }
+    .prod-starters { list-style: none; padding: 0; margin-bottom: 20px; }
+    .prod-starters li { padding: 8px 0 8px 16px; border-left: 3px solid var(--erva-doce); margin-bottom: 6px; font-size: 14px; color: #555; }
+    .prod-starters li em { font-style: italic; color: var(--texto); font-weight: 600; }
+    .prod-area { width: 100%; min-height: 130px; border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 12px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; line-height: 1.7; resize: vertical; transition: border-color .2s; }
+    .prod-area:focus { outline: none; border-color: var(--level-color); }
+    .prod-tip { font-size: 12px; color: #999; margin-top: 8px; font-style: italic; }
+
+    /* Buttons */
+    .check-btn { background: var(--level-color); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 18px; font-family: 'Manrope', sans-serif; transition: opacity .2s; }
+    .check-btn:hover { opacity: .88; }
+
+    /* Result panel */
+    .result-msg { display: none; margin-top: 14px; padding: 14px 18px; border-radius: 8px; font-size: 13px; max-height: 280px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,.08);   border: 1px solid rgba(78,85,29,.25);   color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,.08); border: 1px solid rgba(211,109,41,.25); color: var(--pitomba); }
+
+    /* Contact box */
+    .contact-box { margin-top: 48px; background: var(--off-white); border-radius: 12px; padding: 24px 28px; text-align: center; font-size: 14px; color: #555; line-height: 1.7; border: 1px solid var(--light-gray); }
+    .contact-box strong { color: var(--texto); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .topbar { padding: 8px 16px; }
+      .page-hero { padding: 32px 20px 28px; }
+      .main { padding: 24px 16px 48px; }
+      .exercise-block, .text-block, .gram-ref { padding: 20px 16px; }
+      .conj-grid { grid-template-columns: 1fr; }
+      input.gap-input { width: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-badge">A2</span>
+    <a href="../a2/index.html" class="topbar-back">← A2 materials</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">Student Portal — Básico · A2</div>
+  <h1>A Rotina do Dia a Dia<br>
+    <em style="font-style:italic;font-weight:300;font-size:.75em;color:rgba(255,255,255,.7);">Verbos Regulares: -AR · -ER · -IR</em>
+  </h1>
+  <p>Read about Camila's daily routine in São Paulo, review the verb forms, and practise using them in context.</p>
+  <div class="meta-pills">
+    <span class="meta-pill"><span class="dot"></span>Level A2 — Básico</span>
+    <span class="meta-pill"><span class="dot"></span>Grammar · Reading · Writing</span>
+    <span class="meta-pill"><span class="dot"></span>falar · comer · abrir</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- TEXT -->
+  <div class="sec-header">
+    <div class="sec-icon">📖</div>
+    <div>
+      <h2>O Texto</h2>
+      <p>Read the text. Verbs are highlighted by type.</p>
+    </div>
+  </div>
+
+  <div class="text-block">
+    <h3>A Rotina da Camila</h3>
+
+    <p>Camila tem 32 anos e <span class="vb-ar">trabalha</span> em uma empresa de marketing em São Paulo. Ela <span class="vb-ar">mora</span> no bairro do Itaim Bibi e <span class="vb-ar">acorda</span> todos os dias às 6h30.</p>
+
+    <p>Pela manhã, ela <span class="vb-ar">toma</span> banho, <span class="vb-er">bebe</span> um café com leite e <span class="vb-er">come</span> torrada com manteiga. Às 7h30, ela <span class="vb-ir">parte</span> de casa e <span class="vb-ar">pega</span> o metrô para o trabalho. No caminho, ela <span class="vb-er">lê</span> notícias no celular.</p>
+
+    <p>Camila <span class="vb-ir">abre</span> o computador às 8h30 e <span class="vb-ar">começa</span> a trabalhar. Ela <span class="vb-er">responde</span> e-mails, <span class="vb-er">escreve</span> relatórios e <span class="vb-er">atende</span> clientes. Às 13h00, ela <span class="vb-ar">almoça</span> com os colegas em um restaurante perto do escritório.</p>
+
+    <p>À tarde, ela <span class="vb-er">resolve</span> problemas e <span class="vb-ar">participa</span> de reuniões. Às 18h30, Camila <span class="vb-ar">termina</span> o trabalho e <span class="vb-ar">volta</span> para casa.</p>
+
+    <p>À noite, ela <span class="vb-er">corre</span> no parque, <span class="vb-er">come</span> uma refeição leve e <span class="vb-ir">assiste</span> a séries na televisão. Ela <span class="vb-ir">prefere</span> dormir cedo — normalmente às 22h30.</p>
+
+    <p>Nos fins de semana, Camila <span class="vb-ar">visita</span> a família e <span class="vb-ar">descansa</span>. Ela <span class="vb-ar">gosta</span> muito da sua rotina!</p>
+
+    <div class="text-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(26,61,107,.35);"></div> Verbo -AR</div>
+      <div class="legend-dot" style="background:rgba(78,85,29,.35);border-radius:3px;width:12px;height:12px;"></div> <span style="font-size:12px;">Verbo -ER</span>
+      <div class="legend-dot" style="background:rgba(139,58,0,.35);border-radius:3px;width:12px;height:12px;margin-left:8px;"></div> <span style="font-size:12px;">Verbo -IR</span>
+    </div>
+
+    <p class="fonte">Texto elaborado para fins didáticos · Brazilian Portuguese Hub</p>
+  </div>
+
+  <!-- GRAMMAR REFERENCE -->
+  <div class="sec-header">
+    <div class="sec-icon">📋</div>
+    <div>
+      <h2>Referência Rápida</h2>
+      <p>Regular verb endings in the present tense (presente do indicativo)</p>
+    </div>
+  </div>
+
+  <div class="gram-ref">
+    <div class="conj-grid">
+
+      <div class="conj-table">
+        <div class="conj-title ar">-AR · falar</div>
+        <div class="conj-row"><span class="pronoun">eu</span><span class="form">fal<strong>o</strong></span></div>
+        <div class="conj-row"><span class="pronoun">você / ele / ela</span><span class="form">fal<strong>a</strong></span></div>
+        <div class="conj-row"><span class="pronoun">nós</span><span class="form">fal<strong>amos</strong></span></div>
+        <div class="conj-row"><span class="pronoun">vocês / eles / elas</span><span class="form">fal<strong>am</strong></span></div>
+      </div>
+
+      <div class="conj-table">
+        <div class="conj-title er">-ER · comer</div>
+        <div class="conj-row"><span class="pronoun">eu</span><span class="form">com<strong>o</strong></span></div>
+        <div class="conj-row"><span class="pronoun">você / ele / ela</span><span class="form">com<strong>e</strong></span></div>
+        <div class="conj-row"><span class="pronoun">nós</span><span class="form">com<strong>emos</strong></span></div>
+        <div class="conj-row"><span class="pronoun">vocês / eles / elas</span><span class="form">com<strong>em</strong></span></div>
+      </div>
+
+      <div class="conj-table">
+        <div class="conj-title ir">-IR · abrir</div>
+        <div class="conj-row"><span class="pronoun">eu</span><span class="form">abr<strong>o</strong></span></div>
+        <div class="conj-row"><span class="pronoun">você / ele / ela</span><span class="form">abr<strong>e</strong></span></div>
+        <div class="conj-row"><span class="pronoun">nós</span><span class="form">abr<strong>imos</strong></span></div>
+        <div class="conj-row"><span class="pronoun">vocês / eles / elas</span><span class="form">abr<strong>em</strong></span></div>
+      </div>
+
+    </div>
+    <p class="conj-note">💡 Common uses: habitual actions (<em>Ela acorda às 6h30 todos os dias.</em>) · stating facts (<em>O metrô parte às 7h30.</em>) · near future (<em>Ela termina o trabalho amanhã cedo.</em>)</p>
+  </div>
+
+  <!-- EXERCISE 1: TRUE / FALSE -->
+  <div class="sec-header" style="margin-top:8px;">
+    <div class="sec-icon">✏️</div>
+    <div>
+      <h2>Exercícios</h2>
+      <p>Based on the text and the grammar reference</p>
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 1</div>
+    <div class="ex-title">Verdadeiro ou Falso? — True or False?</div>
+    <p class="ex-instr">Read each sentence about Camila. Choose V (verdadeiro / true) or F (falso / false).</p>
+
+    <ul class="tf-list">
+      <li class="tf-item">
+        <div class="tf-num">1</div>
+        <div class="tf-text">Camila trabalha em uma empresa de marketing.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="pickTF(this, 1, true)">V</button>
+          <button class="tf-btn" onclick="pickTF(this, 1, false)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-num">2</div>
+        <div class="tf-text">Ela acorda às 7h30.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="pickTF(this, 2, true)">V</button>
+          <button class="tf-btn" onclick="pickTF(this, 2, false)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-num">3</div>
+        <div class="tf-text">Pela manhã, ela bebe um café com leite.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="pickTF(this, 3, true)">V</button>
+          <button class="tf-btn" onclick="pickTF(this, 3, false)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-num">4</div>
+        <div class="tf-text">Ela almoça em casa todos os dias.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="pickTF(this, 4, true)">V</button>
+          <button class="tf-btn" onclick="pickTF(this, 4, false)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-num">5</div>
+        <div class="tf-text">À noite, ela assiste a séries na televisão.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="pickTF(this, 5, true)">V</button>
+          <button class="tf-btn" onclick="pickTF(this, 5, false)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-num">6</div>
+        <div class="tf-text">Nos fins de semana, ela trabalha até às 18h30.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" onclick="pickTF(this, 6, true)">V</button>
+          <button class="tf-btn" onclick="pickTF(this, 6, false)">F</button>
+        </div>
+      </li>
+    </ul>
+
+    <button class="check-btn" onclick="checkTF()">✓ Check answers</button>
+    <div id="tf-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCISE 2: GAP FILL — CONJUGATE THE VERB -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 2</div>
+    <div class="ex-title">Complete com a forma correta</div>
+    <p class="ex-instr">Write the verb in the correct present tense form. The infinitive is given in brackets.</p>
+
+    <ul class="gap-list">
+      <li class="gap-item">
+        <span class="gap-num">1.</span>
+        <span>O Pedro</span>
+        <input class="gap-input" id="g1" type="text" placeholder="…" autocomplete="off">
+        <span>em uma empresa de tecnologia. <span class="gap-inf">(trabalhar)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">2.</span>
+        <span>Nós</span>
+        <input class="gap-input" id="g2" type="text" placeholder="…" autocomplete="off">
+        <span>café de manhã. <span class="gap-inf">(beber)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">3.</span>
+        <span>Você</span>
+        <input class="gap-input" id="g3" type="text" placeholder="…" autocomplete="off">
+        <span>o computador às 9h00? <span class="gap-inf">(abrir)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">4.</span>
+        <span>Eles</span>
+        <input class="gap-input" id="g4" type="text" placeholder="…" autocomplete="off">
+        <span>juntos todos os dias. <span class="gap-inf">(almoçar)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">5.</span>
+        <span>Ela</span>
+        <input class="gap-input" id="g5" type="text" placeholder="…" autocomplete="off">
+        <span>os e-mails rapidamente. <span class="gap-inf">(responder)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">6.</span>
+        <span>Eu</span>
+        <input class="gap-input" id="g6" type="text" placeholder="…" autocomplete="off">
+        <span>trabalhar de manhã. <span class="gap-inf">(preferir)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">7.</span>
+        <span>A reunião</span>
+        <input class="gap-input" id="g7" type="text" placeholder="…" autocomplete="off">
+        <span>às 10h00. <span class="gap-inf">(começar)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">8.</span>
+        <span>Vocês</span>
+        <input class="gap-input" id="g8" type="text" placeholder="…" autocomplete="off">
+        <span>relatórios no trabalho? <span class="gap-inf">(escrever)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">9.</span>
+        <span>Meu colega</span>
+        <input class="gap-input" id="g9" type="text" placeholder="…" autocomplete="off">
+        <span>de casa às 7h00. <span class="gap-inf">(partir)</span></span>
+      </li>
+      <li class="gap-item">
+        <span class="gap-num">10.</span>
+        <span>Nós</span>
+        <input class="gap-input" id="g10" type="text" placeholder="…" autocomplete="off">
+        <span>os problemas em equipe. <span class="gap-inf">(resolver)</span></span>
+      </li>
+    </ul>
+
+    <button class="check-btn" onclick="checkGaps()">✓ Check answers</button>
+    <div id="gap-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCISE 3: WORD BANK -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 3</div>
+    <div class="ex-title">Escolha o verbo certo — Word bank</div>
+    <p class="ex-instr">Click a verb from the box below, then click the blank to fill it. Each verb is used once.</p>
+
+    <div class="word-bank" id="bank">
+      <span class="chip" onclick="selectChip(this)">acorda</span>
+      <span class="chip" onclick="selectChip(this)">toma</span>
+      <span class="chip" onclick="selectChip(this)">abre</span>
+      <span class="chip" onclick="selectChip(this)">come</span>
+      <span class="chip" onclick="selectChip(this)">resolve</span>
+      <span class="chip" onclick="selectChip(this)">termina</span>
+      <span class="chip" onclick="selectChip(this)">assiste</span>
+      <span class="chip" onclick="selectChip(this)">prefere</span>
+    </div>
+
+    <ul class="gap-list">
+      <li class="wb-item"><span class="gap-num">1.</span><span>Camila</span> <span class="wb-blank" id="w1" onclick="fillBlank(this)" data-correct="acorda"></span> <span>cedo, às 6h30.</span></li>
+      <li class="wb-item"><span class="gap-num">2.</span><span>Ela</span> <span class="wb-blank" id="w2" onclick="fillBlank(this)" data-correct="toma"></span> <span>banho de manhã.</span></li>
+      <li class="wb-item"><span class="gap-num">3.</span><span>Às 8h30, ela</span> <span class="wb-blank" id="w3" onclick="fillBlank(this)" data-correct="abre"></span> <span>o computador.</span></li>
+      <li class="wb-item"><span class="gap-num">4.</span><span>No almoço, ela</span> <span class="wb-blank" id="w4" onclick="fillBlank(this)" data-correct="come"></span> <span>com os colegas.</span></li>
+      <li class="wb-item"><span class="gap-num">5.</span><span>À tarde, ela</span> <span class="wb-blank" id="w5" onclick="fillBlank(this)" data-correct="resolve"></span> <span>os problemas do dia.</span></li>
+      <li class="wb-item"><span class="gap-num">6.</span><span>Às 18h30, ela</span> <span class="wb-blank" id="w6" onclick="fillBlank(this)" data-correct="termina"></span> <span>o trabalho.</span></li>
+      <li class="wb-item"><span class="gap-num">7.</span><span>À noite, ela</span> <span class="wb-blank" id="w7" onclick="fillBlank(this)" data-correct="assiste"></span> <span>a séries na televisão.</span></li>
+      <li class="wb-item"><span class="gap-num">8.</span><span>Ela</span> <span class="wb-blank" id="w8" onclick="fillBlank(this)" data-correct="prefere"></span> <span>dormir cedo.</span></li>
+    </ul>
+
+    <button class="check-btn" onclick="checkBank()">✓ Check answers</button>
+    <div id="bank-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCISE 4: PRODUCTION -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 4</div>
+    <div class="ex-title">A sua rotina — Your routine</div>
+    <p class="ex-instr">Write 6–8 sentences about your own daily routine. Use the sentence starters below as a guide. Try to use -AR, -ER, and -IR verbs.</p>
+
+    <ul class="prod-starters">
+      <li>De manhã, eu <em>acordo às…</em></li>
+      <li>No café da manhã, eu <em>como / bebo…</em></li>
+      <li>Eu <em>começo</em> a trabalhar às…</li>
+      <li>No almoço, eu <em>prefiro…</em></li>
+      <li>À tarde, eu <em>resolvo / escrevo / atendo…</em></li>
+      <li>À noite, eu <em>assisto / corro / como…</em></li>
+      <li>Normalmente eu <em>termino</em> o trabalho às…</li>
+      <li>Nos fins de semana, eu <em>gosto de…</em></li>
+    </ul>
+
+    <textarea class="prod-area" placeholder="Escreva sobre a sua rotina aqui…"></textarea>
+    <p class="prod-tip">💡 Tip: use frequency words — <em>sempre, normalmente, às vezes, raramente, nunca, todos os dias</em></p>
+  </div>
+
+  <!-- CONTACT BOX -->
+  <div class="contact-box">
+    <p>📩 <strong>When you're done, send your exercises to your teacher.</strong> She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!</p>
+    <p style="margin-top:8px;font-size:13px;">Entre em contato com <strong>sua professora</strong> se tiver dúvidas sobre as atividades.</p>
+  </div>
+
+</div><!-- /.main -->
+
+<script>
+// ── Exercise 1: True / False ────────────────────────────────────────────
+var tfKey = { 1: true, 2: false, 3: true, 4: false, 5: true, 6: false };
+var tfExplain = {
+  1: 'Correto — ela trabalha em uma empresa de marketing.',
+  2: 'Errado — ela acorda às 6h30, não às 7h30.',
+  3: 'Correto — ela bebe café com leite de manhã.',
+  4: 'Errado — ela almoça em um restaurante perto do escritório.',
+  5: 'Correto — ela assiste a séries à noite.',
+  6: 'Errado — nos fins de semana ela visita a família e descansa.'
+};
+var tfAnswers = {};
+
+function pickTF(btn, n, choice) {
+  var group = btn.closest('.tf-btns');
+  group.querySelectorAll('.tf-btn').forEach(function(b){ b.classList.remove('correct','wrong'); });
+  var correct = (tfKey[n] === choice);
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  tfAnswers[n] = correct;
+}
+
+function checkTF() {
+  var html = '';
+  var score = 0;
+  for (var i = 1; i <= 6; i++) {
+    var ok = tfAnswers[i] === true;
+    if (ok) score++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + i + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + tfExplain[i] + '</div>';
+  }
+  var res = document.getElementById('tf-result');
+  res.className = 'result-msg ' + (score === 6 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (score === 6 ? '✓ All 6 correct!' : score + ' of 6 correct — see explanations:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── Exercise 2: Gap fill (conjugation) ─────────────────────────────────
+var gapKey = {
+  g1: { answer: 'trabalha',  display: 'trabalha (trabalhar → ele/ela trabalha)' },
+  g2: { answer: 'bebemos',   display: 'bebemos (beber → nós bebemos)' },
+  g3: { answer: 'abre',      display: 'abre (abrir → você/ele/ela abre)' },
+  g4: { answer: 'almoçam',   display: 'almoçam (almoçar → vocês/eles almoçam)' },
+  g5: { answer: 'responde',  display: 'responde (responder → ela responde)' },
+  g6: { answer: 'prefiro',   display: 'prefiro (preferir → eu prefiro)' },
+  g7: { answer: 'começa',    display: 'começa (começar → ela/a reunião começa)' },
+  g8: { answer: 'escrevem',  display: 'escrevem (escrever → vocês escrevem)' },
+  g9: { answer: 'parte',     display: 'parte (partir → ele/ela parte)' },
+  g10:{ answer: 'resolvemos',display: 'resolvemos (resolver → nós resolvemos)' }
+};
+
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[í]/g,'i')
+    .replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c');
+}
+
+function checkGaps() {
+  var html = '';
+  var score = 0;
+  var keys = Object.keys(gapKey);
+  keys.forEach(function(id, idx) {
+    var el = document.getElementById(id);
+    var ok = el.value.trim().length > 0 && norm(el.value) === norm(gapKey[id].answer);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) score++;
+    html += '<div style="margin-bottom:7px;font-weight:400;"><strong>' + (idx+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + gapKey[id].display + '</div>';
+  });
+  var res = document.getElementById('gap-result');
+  res.className = 'result-msg ' + (score === 10 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (score === 10 ? '✓ All 10 correct!' : score + ' of 10 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── Exercise 3: Word bank ───────────────────────────────────────────────
+var selectedChip = null;
+
+function selectChip(chip) {
+  if (chip.classList.contains('used')) return;
+  if (selectedChip) selectedChip.classList.remove('selected');
+  selectedChip = chip;
+  chip.classList.add('selected');
+}
+
+function fillBlank(blank) {
+  if (!selectedChip) return;
+  // If blank already has content, return the old chip to bank
+  if (blank.dataset.filled) {
+    document.querySelectorAll('.chip').forEach(function(c) {
+      if (c.textContent === blank.dataset.filled) {
+        c.classList.remove('used');
+      }
+    });
+  }
+  blank.textContent = selectedChip.textContent;
+  blank.dataset.filled = selectedChip.textContent;
+  blank.classList.remove('correct','wrong');
+  selectedChip.classList.add('used');
+  selectedChip.classList.remove('selected');
+  selectedChip = null;
+}
+
+function checkBank() {
+  var blanks = document.querySelectorAll('.wb-blank');
+  var score = 0;
+  var html = '';
+  blanks.forEach(function(blank, idx) {
+    var ok = blank.textContent.trim() === blank.dataset.correct;
+    blank.classList.toggle('correct', ok);
+    blank.classList.toggle('wrong', !ok);
+    if (ok) score++;
+    html += '<div style="margin-bottom:7px;"><strong>' + (idx+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' <em>' + blank.dataset.correct + '</em></div>';
+  });
+  var res = document.getElementById('bank-result');
+  res.className = 'result-msg ' + (score === 8 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (score === 8 ? '✓ All 8 correct!' : score + ' of 8 correct — answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+</script>
+</body>
+</html>
