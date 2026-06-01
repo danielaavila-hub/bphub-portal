@@ -66,6 +66,22 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
 
   .page-hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
   .page-hero-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:12px;padding:4px 12px;border-radius:20px;font-weight:500}
+/* Question blocks */
+.q-block{background:#fff;border:1.5px solid #e0d8c8;border-radius:8px;padding:18px 20px;margin-bottom:14px;}
+.q-block-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.q-answer-area{width:100%;min-height:80px;border:1.5px solid #d0c8b8;border-radius:6px;padding:10px 12px;font-family:'Manrope',sans-serif;font-size:14px;line-height:1.6;resize:vertical;overflow-y:auto;}
+.q-answer-area:focus{outline:none;border-color:var(--cobalto);}
+.q-answer-reveal{display:none;margin-top:10px;background:rgba(45,80,22,.08);border-radius:6px;padding:10px 14px;font-size:14px;border-left:3px solid var(--musgo);line-height:1.6;}
+.q-answer-reveal strong{color:var(--floresta);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px;}
+.check-btn{background:var(--cobalto);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;}
+.check-btn:hover{opacity:.88;}
+.disc-block{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.22);border-radius:8px;padding:16px 18px;margin-bottom:14px;}
+.disc-q-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.disc-q-num{background:rgba(255,255,255,.2);color:#fff;font-family:'Trirong',serif;font-weight:700;font-size:12px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.disc-q-text{color:var(--giz);font-size:15px;line-height:1.65;}
+.disc-answer-area{width:100%;min-height:80px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:6px;padding:10px 12px;font-family:'Manrope',sans-serif;font-size:14px;color:#fff;resize:vertical;overflow-y:auto;}
+.disc-answer-area::placeholder{color:rgba(255,255,255,.45);}
+.disc-answer-area:focus{outline:none;border-color:rgba(255,255,255,.55);}
 </style>
 </head>
 <body>
@@ -163,33 +179,21 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
 
   <div class="card">
     <h3>Compreensão do texto</h3>
-    <div style="max-height:260px;overflow-y:auto;padding-right:8px;margin-bottom:16px;">
-      <ul class="q-list">
-        <li><span class="q-num">1</span><span>O que Margaret faz antes de as crianças acordarem? Por que esse momento é importante para ela?</span></li>
-        <li><span class="q-num">2</span><span>Como é a personalidade de Rhone? E a de Marygold? Dê exemplos do texto.</span></li>
-        <li><span class="q-num">3</span><span>Qual é o projeto artístico atual de Margaret? Como a corrida se conecta ao seu trabalho?</span></li>
-        <li><span class="q-num">4</span><span>Releia o último parágrafo. O que significa <em>sem perceberem</em> nesse contexto? Quem é o sujeito?</span></li>
-        <li><span class="q-num">5</span><span>Encontre no texto todos os infinitivos pessoais destacados em verde. Identifique o gatilho de cada um.</span></li>
-      </ul>
-    </div>
-    <button class="model-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Ver respostas</button>
-    <div style="display:none;margin-top:12px;font-size:13px;color:#555;line-height:1.7;">
-      <p><strong>1.</strong> Margaret acorda cedo para correr antes de as crianças acordarem — é o único momento de silêncio e concentração que ela tem para si.</p>
-      <p><strong>2.</strong> Rhone é calmo e metódico; Marygold é curiosa e impulsiva. Exemplos no texto: Rhone termina o café devagar; Marygold já quer sair antes de ele terminar.</p>
-      <p><strong>3.</strong> Ela trabalha numa série sobre movimento e percepção do corpo no espaço. A corrida alimenta esse projeto diretamente.</p>
-      <p><strong>4.</strong> <em>Sem perceberem</em> indica que as crianças não têm consciência de que a caminhada virou ritual. O sujeito é <em>as crianças</em>.</p>
-      <p><strong>5.</strong> Os infinitivos pessoais aparecem após gatilhos como <em>antes de</em>, <em>depois de</em>, <em>sem</em>, <em>ao</em>, <em>a fim de</em> — sempre com sujeito diferente do verbo principal.</p>
-    </div>
+    <p style="font-size:14px;color:#666;margin-bottom:16px;">Answer in Portuguese.</p>
+    <div class="q-block"><div class="q-block-header"><span class="q-num">1</span><span>O que Margaret faz antes de as crianças acordarem? Por que esse momento é importante para ela?</span></div><textarea class="q-answer-area" placeholder="Resposta do aluno..."></textarea><div class="q-answer-reveal" id="ans1"><strong>Resposta</strong>Margaret corre quarenta minutos pela orla — sem celular, sem demandas, sem barulho. É o único momento do dia em que o silêncio é completamente dela.</div></div>
+    <div class="q-block"><div class="q-block-header"><span class="q-num">2</span><span>Como é a personalidade de Rhone? E a de Marygold? Dê exemplos do texto.</span></div><textarea class="q-answer-area" placeholder="Resposta do aluno..."></textarea><div class="q-answer-reveal" id="ans2"><strong>Resposta</strong>Rhone é mais animado e impaciente — já está pronto antes de Marygold terminar o suco. Marygold é mais calma, mas fica indignada quando alguém toca nas coisas dela sem pedir licença.</div></div>
+    <div class="q-block"><div class="q-block-header"><span class="q-num">3</span><span>Qual é o projeto artístico atual de Margaret? Como a corrida se conecta ao seu trabalho?</span></div><textarea class="q-answer-area" placeholder="Resposta do aluno..."></textarea><div class="q-answer-reveal" id="ans3"><strong>Resposta</strong>Ela está trabalhando numa série sobre movimento e energia. A corrida alimenta o trabalho criativo porque para o projeto ganhar forma ela precisa sentir o corpo em ação.</div></div>
+    <div class="q-block"><div class="q-block-header"><span class="q-num">4</span><span>Releia o último parágrafo. O que significa <em>sem perceberem</em> nesse contexto? Quem é o sujeito?</span></div><textarea class="q-answer-area" placeholder="Resposta do aluno..."></textarea><div class="q-answer-reveal" id="ans4"><strong>Resposta</strong>Significa que os três não notaram o momento em que a caminhada se tornou o favorito de todos — aconteceu naturalmente. O sujeito é <em>os três / eles</em> (Margaret e os gêmeos).</div></div>
+    <div class="q-block"><div class="q-block-header"><span class="q-num">5</span><span>Encontre no texto todos os infinitivos pessoais destacados em verde. Identifique o gatilho de cada um.</span></div><textarea class="q-answer-area" placeholder="Resposta do aluno..."></textarea><div class="q-answer-reveal" id="ans5"><strong>Resposta</strong><em>Antes de as crianças acordarem</em> (antes de) · <em>Para tudo correr bem</em> (para) · <em>antes de Marygold terminar</em> (antes de) · <em>Depois de as crianças saírem</em> (depois de) · <em>Para o projeto ganhar forma</em> (para) · <em>Sem perceberem</em> (sem)</div></div>
+    <button class="check-btn" onclick="document.querySelectorAll('.q-answer-reveal').forEach(function(el){el.style.display='block'})">Ver respostas</button>
   </div>
 
   <div class="disc">
     <h3>Discussão</h3>
-    <ul>
-      <li>É difícil para você equilibrar trabalho, vida pessoal e outros compromissos? O que é mais fácil de conciliar?</li>
-      <li>Você consegue ter um momento só seu durante o dia? Como você usa esse tempo?</li>
-      <li>Você está trabalhando em algum projeto pessoal ou profissional agora? Pode contar?</li>
-      <li>Apesar de a rotina ser intensa, o que te dá mais energia no dia a dia?</li>
-    </ul>
+    <div class="disc-block"><div class="disc-q-header"><span class="disc-q-num">1</span><span class="disc-q-text">É difícil para você equilibrar arte, corrida e família? O que é mais fácil de conciliar?</span></div><textarea class="disc-answer-area" placeholder="Notas da aula..."></textarea></div>
+    <div class="disc-block"><div class="disc-q-header"><span class="disc-q-num">2</span><span class="disc-q-text">Antes de os gêmeos acordarem, você já consegue ter um momento só seu? Como é isso?</span></div><textarea class="disc-answer-area" placeholder="Notas da aula..."></textarea></div>
+    <div class="disc-block"><div class="disc-q-header"><span class="disc-q-num">3</span><span class="disc-q-text">Em vez de uma série sobre movimento, você está trabalhando em algum projeto agora? Pode contar?</span></div><textarea class="disc-answer-area" placeholder="Notas da aula..."></textarea></div>
+    <div class="disc-block"><div class="disc-q-header"><span class="disc-q-num">4</span><span class="disc-q-text">Apesar de a rotina ser intensa, o que te dá mais energia no dia a dia?</span></div><textarea class="disc-answer-area" placeholder="Notas da aula..."></textarea></div>
   </div>
 
 </div>
