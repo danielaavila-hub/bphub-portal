@@ -153,7 +153,7 @@
 
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all" onclick="filterCat('all',this)">
-      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">1</span>
+      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">9</span>
     </button>
     <button class="filter-btn" data-filter="gram" onclick="filterCat('gram',this)">
       <span class="filter-dot" style="background:var(--cat-gram);"></span>Gramaticais<span class="filter-count" id="fc-gram">-</span>
@@ -383,10 +383,25 @@
 
 <script>
   (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
+  initCounts();
   (function(){if(localStorage.getItem('bphub_auth')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
   function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){localStorage.setItem('bphub_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
   document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
-  var cf='all',cs='';
+  function initCounts(){
+  var cats=['gram','func','tema','gen','cult','fon'];
+  var cards=document.querySelectorAll('.mat-card');
+  var totals={};cats.forEach(function(c){totals[c]=0;});
+  cards.forEach(function(card){
+    var tags=(card.dataset.tags||'').split(' ');
+    tags.forEach(function(t){if(totals[t]!==undefined)totals[t]++;});
+  });
+  document.getElementById('fc-all').textContent=cards.length;
+  cats.forEach(function(c){
+    var el=document.getElementById('fc-'+c);
+    if(el)el.textContent=totals[c]>0?totals[c]:'0';
+  });
+}
+var cf='all',cs='';
   var totalCards=document.querySelectorAll('.mat-card').length;
   document.getElementById('stat-total').textContent=totalCards;
   document.getElementById('fc-all').textContent=totalCards;
