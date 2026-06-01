@@ -32,10 +32,10 @@
     .topbar-back:hover { color: var(--b1); }
 
     /* HERO */
-    .hero { background: var(--b1); padding: 44px 40px 40px; }
-    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--baunilha2); margin-bottom: 10px; }
+    .hero { background: #967E63; padding: 44px 40px 40px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 10px; }
     .hero h1 { font-size: clamp(26px, 3.5vw, 40px); color: white; margin-bottom: 8px; }
-    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.7); max-width: 560px; line-height: 1.65; }
+    .hero-sub { font-size: 14px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.65; }
     .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
     .hero-tag { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
 
@@ -95,6 +95,15 @@
     .q-num { font-size: 11px; font-weight: 700; color: var(--pitomba); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
     .q-text { font-size: 15px; color: var(--nanquim); line-height: 1.55; }
     .q-type { display: inline-block; font-size: 10px; font-weight: 700; color: #aaa; background: var(--off-white); padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
+    .model-answer { display: none; margin-top: 10px; background: rgba(150,126,99,.07); border-left: 3px solid var(--b1); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 14px; color: var(--texto); line-height: 1.7; }
+    .model-answer.visible { display: block; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--b1); margin-bottom: 4px; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 20px; padding: 9px 20px; border-radius: 8px; background: var(--b1); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+    .see-answers-btn:hover { opacity: .85; }
+    .own-answers-note { margin-top: 20px; padding: 16px 22px; background: #f4f2eb; border-radius: 10px; border-left: 3px solid var(--b1); font-size: .88rem; line-height: 1.75; color: #666; font-family: 'Manrope', sans-serif; }
+    .gap-feedback { font-size: 13px; line-height: 1.65; padding: 8px 14px; border-radius: 0 6px 6px 0; margin: 2px 0 10px; font-family: 'Manrope', sans-serif; }
+    .gf-correct { background: rgba(46,125,50,.07); color: #1b5e20; border-left: 3px solid #2e7d32; }
+    .gf-wrong   { background: rgba(211,109,41,.08); color: #7a3a10; border-left: 3px solid var(--pitomba); }
 
     /* EXERCISE BLOCK */
     .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
@@ -138,23 +147,34 @@
       .text-card { padding: 24px 20px; }
       .ex-block, .questions-card { padding: 24px 20px; }
     }
+  
+    /* ── TOPBAR B1 standard ── */
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:64px; border-bottom:1px solid #EDEDE2; background:#FCF5EB; position:sticky; top:0; z-index:50; }
+    .topbar > a img { height:30px; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
   </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
-  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
-  <div class="topbar-meta">
-    <span class="badge badge-level">B1</span>
-    <span class="badge badge-gram">Aspectos Gramaticais</span>
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:30px;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
   </div>
-  <a href="../index.html" class="topbar-back">← Portal</a>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
 </div>
 
 <div class="hero">
-  <div class="hero-eyebrow">Texto e Exercícios — Nível B1</div>
-  <h1>Pretérito Imperfeito</h1>
-  <div class="hero-sub">Read the grammar reference, then the text, and complete the exercises. We'll discuss everything together in class.</div>
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Pretérito <em style="font-style:normal;color:#FFB94A;">Imperfeito</em></h1>
+  <div class="hero-sub">The tense of memory, habit, and background — used to paint the scene of a past story, describe ongoing states, and say what things used to be like. Essential for storytelling in Portuguese.</div>
   <div class="hero-tags">
     <span class="hero-tag">Aspectos Gramaticais</span>
     <span class="hero-tag">Função: descrever e narrar no passado</span>
@@ -285,24 +305,40 @@
       <div class="q-num">Question 1 — Literal</div>
       <div class="q-text">O que o narrador e seu pai faziam toda manhã? Como cada um se comportava durante esse passeio?</div>
       <span class="q-type">Compreensão literal</span>
+      <div class="model-answer" id="ma1">
+        <div class="model-label">Model answer</div>
+        Todo dia de manhã, o narrador e seu pai desciam até a beira do rio. O pai caminhava devagar, fumava um cigarro e ficava em silêncio. O narrador corria na frente, saltava entre as pedras e assustava os passarinhos que bebiam água na margem.
+      </div>
     </div>
 
     <div class="question-item">
       <div class="q-num">Question 2 — Literal</div>
       <div class="q-text">O que aconteceu naquela segunda-feira? O que o narrador fez de diferente naquele dia?</div>
       <span class="q-type">Compreensão literal</span>
+      <div class="model-answer" id="ma2">
+        <div class="model-label">Model answer</div>
+        Na segunda-feira, um cavalo branco apareceu na porta de casa, sem dono e sem explicação. Diferente dos outros dias, o narrador não dormiu depois do almoço — ficou acordado, pensando no cavalo e em por onde ele havia vindo.
+      </div>
     </div>
 
     <div class="question-item">
       <div class="q-num">Question 3 — Interpretation</div>
       <div class="q-text">O narrador diz que sua mãe olhava para o cavalo "como se o esperasse há muito tempo." O que essa frase sugere sobre ela?</div>
       <span class="q-type">Interpretação</span>
+      <div class="model-answer" id="ma3">
+        <div class="model-label">Model answer</div>
+        A frase sugere que a mãe tinha uma ligação misteriosa com o cavalo — como se a chegada dele fosse algo esperado ou inevitável. Pode indicar que ela carregava um desejo antigo, um segredo, ou uma memória que o narrador não conhecia.
+      </div>
     </div>
 
     <div class="question-item">
       <div class="q-num">Question 4 — Grammar awareness</div>
       <div class="q-text">Look at paragraph 2. Why are all the verbs in the imperfeito? What do they have in common?</div>
       <span class="q-type">Consciência gramatical</span>
+      <div class="model-answer" id="ma4">
+        <div class="model-label">Model answer</div>
+        All the verbs in paragraph 2 (caminhava, fumava, ficava, corria, saltava, assustava, bebiam) describe habitual, repeated actions or ongoing states — things that happened regularly, every morning. The imperfeito is used because none of them is a single, completed event; they are background description of routine.
+      </div>
     </div>
 
     <div class="question-item">
@@ -310,6 +346,8 @@
       <div class="q-text">Você tem uma lembrança clara da sua infância — um lugar, um ritual, uma pessoa? Escreva 2 ou 3 frases usando o imperfeito.</div>
       <span class="q-type">Produção pessoal</span>
     </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers(this)">👁 See model answers</button>
   </div>
 
   <hr>
@@ -381,8 +419,9 @@
   <div class="ex-block">
     <h2>Your Turn</h2>
     <div class="ex-instruction">Choose one of the prompts below and write 4–6 sentences in Portuguese. Try to use at least three different uses of the imperfeito.</div>
+    <div class="own-answers-note" style="margin-top:14px;">Write your own answers. There are no right or wrong responses — this activity is about expressing your own ideas and experiences.</div>
 
-    <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px;">
       <div class="prod-prompt">
         <strong>Option A —</strong> Describe your daily routine from 5 years ago. What <em>was</em> different? What did you <em>used to do</em> that you don't do anymore?
       </div>
@@ -396,72 +435,110 @@
     <textarea class="write-area" placeholder="Escreva aqui..."></textarea>
   </div>
 
+  <div class="own-answers-note" style="margin-top:32px;">
+    After completing the exercise, send it to your teacher so she can provide careful feedback and help you improve your Portuguese.
+  </div>
+
 </div><!-- /main -->
 
 <script>
+  function toggleAnswers(btn) {
+    const answers = document.querySelectorAll('.model-answer');
+    const showing = answers[0].classList.contains('visible');
+    answers.forEach(a => a.classList.toggle('visible', !showing));
+    btn.textContent = showing ? '👁 See model answers' : '🙈 Hide model answers';
+  }
+
   function normalise(str) {
     return str.trim().toLowerCase().replace(/\s+/g,' ')
       .normalize('NFD').replace(/[̀-ͯ]/g,'');
   }
 
-  // item 1: morar → morava (imperfeito, habit)
-  // full answers for each id
-  const answers = {
-    g1:  ['morava'],
-    g2:  ['chegou'],
-    g3:  ['iamos', 'íamos'],
-    g4:  ['era'],
-    g4b: ['ligou'],
-    g5:  ['tinha'],
-    g5b: ['eram'],
-    g6:  ['lia'],
-    g6b: ['tocou'],
-    g7:  ['morou'],
-    g8:  ['acordava'],
-    g8b: ['dormiu'],
-    g9:  ['era'],
-    g9b: ['fazia'],
-    g10: ['escreviam'],
-    g10b:['desapareceu'],
-    g11: ['estudava'],
-    g11b:['fazia'],
-    g12: ['brincavam'],
-    g12b:['lavavam']
-  };
-
-  const ids = Object.keys(answers);
+  // Each item: ids in the sentence, accepted answers per id, and a shared explanation
+  const items = [
+    { ids: ['g1'],        answers: { g1:  ['morava'] },
+      reason: '<strong>Imperfeito ✓</strong> — <em>"Quando eu era criança"</em> signals a habitual past state. The imperfect describes ongoing or repeated conditions, not a single event.' },
+    { ids: ['g2'],        answers: { g2:  ['chegou'] },
+      reason: '<strong>Perfeito ✓</strong> — <em>"Ontem"</em> anchors this to a specific, completed event. A precise time marker like <em>ontem</em> always calls for the perfeito.' },
+    { ids: ['g3'],        answers: { g3:  ['iamos','íamos'] },
+      reason: '<strong>Imperfeito ✓</strong> — <em>"Toda sexta-feira"</em> signals a recurring habit. The imperfect is the tense of routine.' },
+    { ids: ['g4','g4b'],  answers: { g4:  ['era'], g4b: ['ligou'] },
+      reason: '<strong>Era</strong> (imperfeito) sets the background scene — the day "was" Sunday. <strong>Ligou</strong> (perfeito) is the single event that broke into that background.' },
+    { ids: ['g5','g5b'],  answers: { g5:  ['tinha'], g5b: ['eram'] },
+      reason: '<strong>Imperfeito ✓</strong> — <em>"Naquela época"</em> introduces a past description. Both verbs describe ongoing states (the city\'s lack of traffic lights, the quiet streets) — not events.' },
+    { ids: ['g6','g6b'],  answers: { g6:  ['lia'], g6b: ['tocou'] },
+      reason: '<strong>Lia</strong> (imperfeito) is the ongoing background action — interrupted mid-flow. <strong>Tocou</strong> (perfeito) is the single completed event that cut in.' },
+    { ids: ['g7'],        answers: { g7:  ['morou'] },
+      reason: '<strong>Perfeito ✓</strong> — <em>"Por seis meses"</em> with <em>"no ano passado"</em> defines a completed, bounded period. A finished stay with a clear endpoint uses the perfeito.' },
+    { ids: ['g8','g8b'],  answers: { g8:  ['acordava'], g8b: ['dormiu'] },
+      reason: '<strong>Acordava</strong> (imperfeito) is the habitual norm — signalled by <em>"normalmente"</em>. <strong>Dormiu</strong> (perfeito) is the specific, one-off exception — signalled by <em>"mas naquele dia"</em>.' },
+    { ids: ['g9','g9b'],  answers: { g9:  ['era'], g9b: ['fazia'] },
+      reason: '<strong>Imperfeito ✓</strong> — Both verbs set the scene on arrival (<em>"quando chegamos"</em>). The month and weather were background states, not events.' },
+    { ids: ['g10','g10b'],answers: { g10: ['escreviam'], g10b: ['desapareceu'] },
+      reason: '<strong>Escreviam</strong> (imperfeito) describes an old custom (<em>"antigamente"</em>). <strong>Desapareceu</strong> (perfeito) marks the completed change brought by email — a shift that happened.' },
+    { ids: ['g11','g11b'],answers: { g11: ['estudava'], g11b: ['fazia'] },
+      reason: '<strong>Imperfeito ✓</strong> — <em>"Enquanto"</em> connects two simultaneous ongoing actions. Both must be in the imperfect: neither is a completed event.' },
+    { ids: ['g12','g12b'],answers: { g12: ['brincavam'], g12b: ['lavavam'] },
+      reason: '<strong>Imperfeito ✓</strong> — Same <em>"enquanto"</em> pattern: two parallel actions happening at the same time in the past, both ongoing.' },
+  ];
 
   function checkExercise() {
-    let correct = 0;
-    ids.forEach(id => {
-      const input = document.getElementById(id);
-      if (!input) return;
-      const accepted = answers[id].map(normalise);
-      const val = normalise(input.value);
-      input.classList.remove('correct','wrong');
-      if (val && accepted.includes(val)) { input.classList.add('correct'); correct++; }
-      else input.classList.add('wrong');
+    // Remove previous per-item feedback
+    document.querySelectorAll('.gap-feedback').forEach(el => el.remove());
+
+    let totalCorrect = 0, totalInputs = 0;
+
+    items.forEach(item => {
+      let allCorrect = true;
+      item.ids.forEach(id => {
+        const input = document.getElementById(id);
+        if (!input) return;
+        totalInputs++;
+        const accepted = item.answers[id].map(normalise);
+        const val = normalise(input.value);
+        input.classList.remove('correct','wrong');
+        if (val && accepted.includes(val)) { input.classList.add('correct'); totalCorrect++; }
+        else { input.classList.add('wrong'); allCorrect = false; }
+      });
+
+      // Inject per-sentence feedback after the gap-item
+      const firstInput = document.getElementById(item.ids[0]);
+      if (firstInput) {
+        const gapItem = firstInput.closest('.gap-item');
+        const fb = document.createElement('div');
+        fb.className = 'gap-feedback ' + (allCorrect ? 'gf-correct' : 'gf-wrong');
+        let prefix = '';
+        if (!allCorrect) {
+          const correct = item.ids.map(id => item.answers[id][0]).join(' + ');
+          prefix = `<strong>✗ Answer: ${correct}</strong> — `;
+        } else {
+          prefix = '✓ ';
+        }
+        fb.innerHTML = prefix + item.reason;
+        gapItem.after(fb);
+      }
     });
+
     const fb = document.getElementById('feedback');
     const rst = document.getElementById('resetBtn');
     fb.classList.add('show'); rst.classList.add('show');
-    const total = ids.length;
-    if (correct === total) {
+    if (totalCorrect === totalInputs) {
       fb.className = 'feedback show ok';
-      fb.textContent = `🎉 Perfect! All ${total} correct!`;
+      fb.textContent = `🎉 Perfect! All ${totalInputs} correct!`;
     } else {
       fb.className = 'feedback show partial';
-      fb.textContent = `${correct} out of ${total} correct. Red fields need a different form — check the tense and person.`;
+      fb.textContent = `${totalCorrect} out of ${totalInputs} correct. See the explanations above.`;
     }
   }
 
   function resetExercise() {
-    ids.forEach(id => {
+    document.querySelectorAll('.gap-feedback').forEach(el => el.remove());
+    items.forEach(item => item.ids.forEach(id => {
       const input = document.getElementById(id);
       if (!input) return;
       input.value = '';
       input.classList.remove('correct','wrong');
-    });
+    }));
     document.getElementById('feedback').classList.remove('show');
     document.getElementById('resetBtn').classList.remove('show');
   }
