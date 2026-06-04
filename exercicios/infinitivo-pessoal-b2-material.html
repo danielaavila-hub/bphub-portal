@@ -6,7 +6,7 @@
 <title>Infinitivo Pessoal — Material de Aula | BPHUB</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Trirong:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-:root{--nanquim:#1E1D1C;--baunilha:#FCF5EB;--off-white:#F2F0E3;--texto:#3C3C21;--pitomba:#D36D29;--floresta:#4E551D;--cobalto:#265B8B;--erva-doce:#A6B28A;--ouro:#FFB94A;--light-gray:#EDEDE2;}
+:root{--nanquim:#1E1D1C;--baunilha:#FCF5EB;--off-white:#F2F0E3;--texto:#3C3C21;--pitomba:#D36D29;--floresta:#4E551D;--cobalto:#265B8B;--erva-doce:#A6B28A;--ouro:#FFB94A;--light-gray:#EDEDE2;--giz:#F9F7F2;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.75;}
 
@@ -75,13 +75,13 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
 .q-answer-reveal strong{color:var(--floresta);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px;}
 .check-btn{background:var(--cobalto);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;}
 .check-btn:hover{opacity:.88;}
-.disc-block{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);border-left:4px solid var(--ouro);border-radius:8px;padding:16px 18px;margin-bottom:14px;}
+.disc-block{background:white;border:1.5px solid #e8e2d8;border-left:4px solid var(--ouro);border-radius:8px;padding:16px 18px;margin-bottom:14px;}
 .disc-q-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
 .disc-q-num{background:var(--ouro);color:#3a2a00;font-family:'Trirong',serif;font-weight:800;font-size:13px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.disc-q-text{color:var(--giz);font-size:15px;line-height:1.65;}
-.disc-answer-area{width:100%;min-height:80px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:6px;padding:10px 12px;font-family:'Manrope',sans-serif;font-size:14px;color:#fff;resize:vertical;overflow-y:auto;}
-.disc-answer-area::placeholder{color:rgba(255,255,255,.45);}
-.disc-answer-area:focus{outline:none;border-color:rgba(255,255,255,.55);}
+.disc-q-text{color:var(--nanquim);font-size:15px;line-height:1.65;}
+.disc-answer-area{width:100%;min-height:80px;background:white;border:1.5px solid #d0c8b8;border-radius:6px;padding:10px 12px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--nanquim);resize:vertical;overflow-y:auto;}
+.disc-answer-area::placeholder{color:#aaa;font-style:italic;}
+.disc-answer-area:focus{outline:none;border-color:var(--cobalto);box-shadow:0 0 0 3px rgba(38,91,139,.1);}
 </style>
 </head>
 <body>
@@ -199,6 +199,82 @@ body{background:var(--giz);color:var(--nanquim);font-family:'Manrope',sans-serif
 </div>
 
 
+
+
+<p style="margin-top:40px;margin-bottom:16px;font-size:14px;color:#666;font-style:italic;">Após a aula, envie as notas para guardar um registo das respostas do aluno.</p>
+
+<div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Guardar respostas da aula</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Nome do aluno *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Email do aluno (opcional — para enviar cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">As respostas vão para o teu email. Email do aluno é opcional.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas guardadas!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente.</div>
+
+<script>
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok,data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
 
 </body>
 </html>
