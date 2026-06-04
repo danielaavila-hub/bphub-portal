@@ -119,9 +119,13 @@
     /* QUESTIONS */
     .questions-box { background: var(--cobalto-light); border-radius: 14px; padding: 24px 28px; margin-bottom: 32px; }
     .questions-box h3 { font-size: 17px; color: var(--cobalto); margin-bottom: 16px; }
-    .q-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(38,91,139,0.12); font-size: 15px; color: var(--nanquim); }
+    .q-item { display: flex; flex-direction: column; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(38,91,139,0.12); font-size: 15px; color: var(--nanquim); }
+    .q-item-row { display: flex; gap: 14px; }
     .q-item:last-child { border-bottom: none; }
     .q-num { color: var(--cobalto); font-weight: 700; font-size: 13px; min-width: 24px; }
+    .q-answer { width: 100%; min-height: 72px; max-height: 180px; overflow-y: auto; resize: vertical; border: 1.5px solid rgba(38,91,139,0.25); border-radius: 8px; background: white; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); padding: 10px 14px; line-height: 1.6; outline: none; }
+    .q-answer:focus { border-color: var(--cobalto); box-shadow: 0 0 0 3px rgba(38,91,139,0.1); }
+    .q-answer::placeholder { color: #aaa; font-style: italic; }
 
     /* DIVIDER */
     hr { border: none; border-top: 1px solid var(--light-gray); margin: 36px 0; }
@@ -312,13 +316,105 @@
   <div class="sec-label">Perguntas de Compreensão</div>
   <div class="questions-box">
     <h3>Responda em português — discutiremos juntos durante a aula</h3>
-    <div class="q-item"><span class="q-num">1.</span> Por que Ana Lúcia recusou a proposta da empresa farmacêutica? Vocà teria tomado a mesma decisão?</div>
-    <div class="q-item"><span class="q-num">2.</span> Qual é o único arrependimento real da professora? Como ela explica esse arrependimento usando o futuro do pretérito composto?</div>
-    <div class="q-item"><span class="q-num">3.</span> O que Ana Lúcia prevê para o futuro da pesquisa no Brasil? Que evidências no texto apoiam essa visão?</div>
-    <div class="q-item"><span class="q-num">4.</span> Identifique no texto dois exemplos de futuro do presente composto e dois de futuro do pretérito composto. O que cada um expressa no contexto?</div>
-    <div class="q-item"><span class="q-num">5.</span> Pensando na sua própria carreira: o que vocà terá realizado quando se aposentar? O que teria feito diferente se pudesse voltar no tempo?</div>
+    <div class="q-item">
+      <div class="q-item-row"><span class="q-num">1.</span> Por que Ana Lúcia recusou a proposta da empresa farmacêutica? Vocà teria tomado a mesma decisão?</div>
+      <textarea class="q-answer" placeholder="Resposta do aluno…"></textarea>
+    </div>
+    <div class="q-item">
+      <div class="q-item-row"><span class="q-num">2.</span> Qual é o único arrependimento real da professora? Como ela explica esse arrependimento usando o futuro do pretérito composto?</div>
+      <textarea class="q-answer" placeholder="Resposta do aluno…"></textarea>
+    </div>
+    <div class="q-item">
+      <div class="q-item-row"><span class="q-num">3.</span> O que Ana Lúcia prevê para o futuro da pesquisa no Brasil? Que evidências no texto apoiam essa visão?</div>
+      <textarea class="q-answer" placeholder="Resposta do aluno…"></textarea>
+    </div>
+    <div class="q-item">
+      <div class="q-item-row"><span class="q-num">4.</span> Identifique no texto dois exemplos de futuro do presente composto e dois de futuro do pretérito composto. O que cada um expressa no contexto?</div>
+      <textarea class="q-answer" placeholder="Resposta do aluno…"></textarea>
+    </div>
+    <div class="q-item">
+      <div class="q-item-row"><span class="q-num">5.</span> Pensando na sua própria carreira: o que vocà terá realizado quando se aposentar? O que teria feito diferente se pudesse voltar no tempo?</div>
+      <textarea class="q-answer" placeholder="Resposta do aluno…"></textarea>
+    </div>
   </div>
 
 </div><!-- /main -->
+
+<p style="margin-top:40px;margin-bottom:16px;font-size:14px;color:#666;font-style:italic;">Após a aula, envie as respostas do aluno para guardar um registo e rever antes da próxima sessão.</p>
+
+<div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Guardar respostas da aula</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Nome do aluno *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Email do aluno (opcional — para enviar cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">As respostas serão enviadas para o teu email. Se o aluno tiver email, receberá uma cópia também.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas guardadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente.</div>
+
+<script>
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var questions = [
+    'Por que Ana Lúcia recusou a proposta?',
+    'Qual o arrependimento real da professora?',
+    'O que Ana Lúcia prevê para o futuro da pesquisa?',
+    'Dois exemplos de futuro composto no texto',
+    'O que terá realizado? O que teria feito diferente?'
+  ];
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea.q-answer').forEach(function(ta, idx) {
+    var label = questions[idx] || ('Pergunta ' + (idx+1));
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['P' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>P' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+
 </body>
 </html>
