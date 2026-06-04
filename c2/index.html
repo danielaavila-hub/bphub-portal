@@ -142,7 +142,7 @@
     <h1>Avançado II</h1>
     <p>Your library of C2 materials, organised by communicative dimension — following the Itamaraty/FUNAG curriculum framework.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num" id="stat-total">1</div><div class="label">Materials available</div></div>
+      <div class="hero-stat"><div class="num" id="stat-total">2</div><div class="label">Materials available</div></div>
       <div class="hero-stat"><div class="num">6</div><div class="label">Curriculum dimensions</div></div>
       <div class="hero-stat"><div class="num">C2</div><div class="label">Your level</div></div>
     </div>
@@ -186,13 +186,22 @@
       <div class="cat-header">
         <div class="cat-dot" style="background:var(--cat-gram);"></div>
         <div><h2>Aspectos Gramaticais</h2><div class="cat-desc">Inventário gramatical — categorias semântico-gramaticais da língua-alvo</div></div>
-        <span class="cat-count" id="count-gram">0 materiais</span>
+        <span class="cat-count" id="count-gram">1 material</span>
       </div>
       <div class="cards-grid" id="grid-gram">
-        <div class="empty-state" style="grid-column:1/-1">
-          <p>No materials available yet for this level.</p>
-          <p class="coming">New materials will be added here as they are produced.</p>
-        </div>
+        <a class="mat-card" href="../exercicios/marcadores-discursivos-c2-exercicios-aluno.html" data-tags="gram func tema" data-search="marcadores discursivos ademais todavia melhor dizendo eis por que razão pela qual não obstante reformulação concessão causa consequência ensaio literário pertencimento memória identidade C2 avançado">
+          <div class="mat-card-bar" style="background:var(--cat-gram);"></div>
+          <div class="mat-card-body">
+            <div class="mat-card-top">
+              <h3>Marcadores Discursivos</h3>
+              <span class="mat-level mat-level-c2">C2</span>
+            </div>
+            <span style="display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#FAF0E8;color:#7a3a0e;margin-bottom:4px;">✏️ Exercícios Interativos</span>
+            <p>Cinco categorias, dez marcadores avançados — nota gramatical, ensaio literário com marcadores em contexto e exercícios de compreensão, reescrita e produção com consciência estilística.</p>
+            <div class="mat-tags"><span class="tag tag-gram"><span class="tag-pre">GRAM</span>Marcadores discursivos — C2</span><span class="tag tag-func"><span class="tag-pre">FUNC</span>F1 · Argumentar e estruturar o discurso</span><span class="tag tag-tema"><span class="tag-pre">TEMA</span>Memória · identidade · pertencimento</span></div>
+            <div class="mat-footer"><span class="mat-date">Added Jun 2026</span><span class="mat-btn">Open material →</span></div>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -269,7 +278,8 @@
 <script>
   (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
   (function(){if(localStorage.getItem('bphub_auth')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
-  function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){localStorage.setItem('bphub_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
+  function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){localStorage.setItem('bphub_auth','1');document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';applyFilters();}else{document.getElementById('gate-error').style.display='block';}}
+  document.addEventListener('DOMContentLoaded',function(){applyFilters();});
   document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
   var cf='all',cs='';
   function filterCat(cat,btn){cf=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
@@ -289,8 +299,31 @@
     var banner=document.getElementById('search-banner');
     if(cs){banner.style.display='block';banner.innerHTML='Showing <strong>'+n+' result'+(n!==1?'s':'')+'</strong> for "<strong>'+cs+'</strong>"';}else{banner.style.display='none';}
     document.getElementById('no-results').style.display=(n===0)?'block':'none';
-    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'1':n;
+    document.getElementById('stat-total').textContent=(cf==='all'&&!cs)?'2':n;
   }
 </script>
+
+<script>
+// ── BPHUB PROGRESS CHECKMARKS ──
+(function(){
+  var cards = document.querySelectorAll('a.mat-card[href]');
+  cards.forEach(function(card) {
+    var href = card.getAttribute('href') || '';
+    var slug = href.split('/').pop().replace('.html','');
+    if (localStorage.getItem('bphub_done_' + slug) === '1') {
+      var top = card.querySelector('.mat-card-top');
+      if (top && !top.querySelector('.bphub-done-badge')) {
+        var badge = document.createElement('span');
+        badge.className = 'bphub-done-badge';
+        badge.title = 'Concluido';
+        badge.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#2E7D52;color:white;font-size:12px;font-weight:700;flex-shrink:0;margin-left:6px;';
+        badge.textContent = '✓';
+        top.appendChild(badge);
+      }
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
