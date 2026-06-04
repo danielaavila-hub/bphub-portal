@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Os usos de porque — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --verde: #2E7D52; --verde-bg: #EAF5EE;
+      --violeta: #8B3A7E; --violeta-bg: #F5EAF3;
+      --vermelho: #C0392B; --vermelho-bg: #FAEAEA;
+      /* 4 formas */
+      --f1: #D36D29; --f1-bg: #FDF0E5;   /* porque — conjunção */
+      --f2: #265B8B; --f2-bg: #EBF1F8;   /* por que — interrogativo/relativo */
+      --f3: #2E7D52; --f3-bg: #EAF5EE;   /* porquê — substantivo */
+      --f4: #8B3A7E; --f4-bg: #F5EAF3;   /* por quê — final de frase */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 38px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #A1441D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: #A1441D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* GRAM BOX */
+    .gram-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 32px; }
+    .gram-box h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .gram-intro { font-size: 14px; color: #666; line-height: 1.65; margin-bottom: 28px; max-width: 680px; }
+
+    /* FORM CARDS */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media(max-width:700px){ .form-grid { grid-template-columns: 1fr; } }
+    .form-card { border-radius: 12px; padding: 20px 22px; border-left: 5px solid; }
+    .form-card.f1 { background: var(--f1-bg); border-color: var(--f1); }
+    .form-card.f2 { background: var(--f2-bg); border-color: var(--f2); }
+    .form-card.f3 { background: var(--f3-bg); border-color: var(--f3); }
+    .form-card.f4 { background: var(--f4-bg); border-color: var(--f4); }
+    .form-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .form-card.f1 .form-label { color: var(--f1); }
+    .form-card.f2 .form-label { color: var(--f2); }
+    .form-card.f3 .form-label { color: var(--f3); }
+    .form-card.f4 .form-label { color: var(--f4); }
+    .form-word { font-family: 'Trirong', serif; font-size: 22px; font-weight: 400; margin-bottom: 4px; color: var(--nanquim); }
+    .form-function { font-size: 13px; color: #555; margin-bottom: 12px; }
+    .form-example { font-size: 13px; font-style: italic; color: #444; background: rgba(255,255,255,0.6); border-radius: 6px; padding: 7px 12px; line-height: 1.6; margin-bottom: 4px; }
+    .form-transl { font-size: 12px; color: #999; font-style: normal; }
+    .dica { font-size: 13px; color: #555; background: var(--off-white); border-radius: 8px; padding: 12px 16px; margin-top: 8px; line-height: 1.6; }
+    .dica strong { color: var(--nanquim); }
+
+    /* CONTRAST TABLE */
+    .contrast-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; }
+    .contrast-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); color: #888; }
+    .contrast-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; }
+    .contrast-table tr:last-child td { border-bottom: none; }
+    .tag-f1 { color: var(--f1); font-weight: 700; font-family: 'Trirong', serif; }
+    .tag-f2 { color: var(--f2); font-weight: 700; font-family: 'Trirong', serif; }
+    .tag-f3 { color: var(--f3); font-weight: 700; font-family: 'Trirong', serif; }
+    .tag-f4 { color: var(--f4); font-weight: 700; font-family: 'Trirong', serif; }
+
+    /* TEXT CARD */
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 36px 40px; margin-bottom: 32px; }
+    .text-source { font-size: 12px; color: #aaa; font-style: italic; margin-bottom: 20px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 26px; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .text-subtitle { font-size: 13px; color: #888; margin-bottom: 28px; }
+    .text-body { font-size: 15px; line-height: 1.9; color: var(--nanquim); }
+    .text-body p { margin-bottom: 18px; }
+    .text-body p:last-child { margin-bottom: 0; }
+    /* highlighted forms in text */
+    .hl1 { color: var(--f1); font-weight: 600; background: var(--f1-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl2 { color: var(--f2); font-weight: 600; background: var(--f2-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl3 { color: var(--f3); font-weight: 600; background: var(--f3-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl4 { color: var(--f4); font-weight: 600; background: var(--f4-bg); padding: 1px 3px; border-radius: 3px; }
+
+    /* LEGEND */
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--light-gray); }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; font-family: 'Manrope', sans-serif; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    /* EXERCISE CARD */
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+    .ex-num { width: 36px; height: 36px; background: #A1441D; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; font-family: 'Trirong', serif; }
+    .ex-title { font-family: 'Trirong', serif; font-weight: 300; font-size: 20px; color: var(--nanquim); margin-bottom: 4px; }
+    .ex-instruction { font-size: 13px; color: #666; line-height: 1.55; }
+
+    /* COMPREHENSION */
+    .q-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; color: var(--nanquim); line-height: 1.65; }
+    .q-item:last-of-type { border-bottom: none; }
+    .q-num { color: #A1441D; font-weight: 700; font-size: 13px; margin-right: 8px; }
+    .q-textarea { width: 100%; margin-top: 10px; padding: 10px 14px; border: 1.5px solid rgba(161,68,29,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); resize: vertical; min-height: 72px; line-height: 1.6; outline: none; transition: border-color 0.2s; }
+    .q-textarea:focus { border-color: #A1441D; }
+    .q-textarea::placeholder { color: #bbb; font-style: italic; }
+
+    /* TABLE EXERCISE */
+    .id-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .id-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); color: #888; background: var(--off-white); }
+    .id-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: middle; }
+    .id-table tr:last-child td { border-bottom: none; }
+    .id-table tr.example-row td { background: var(--off-white); }
+    .id-table .trecho { font-style: italic; color: #444; font-size: 13px; line-height: 1.5; }
+    .id-select { border: 1.5px solid var(--light-gray); border-radius: 7px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: var(--nanquim); background: white; cursor: pointer; outline: none; min-width: 110px; transition: border-color 0.2s; }
+    .id-select:focus { border-color: #A1441D; }
+    .id-select.correct { border-color: var(--verde); color: var(--verde); background: var(--verde-bg); }
+    .id-select.wrong   { border-color: var(--vermelho); color: var(--vermelho); background: var(--vermelho-bg); }
+    .id-just { width: 100%; font-family: 'Manrope', sans-serif; font-size: 12px; padding: 6px 10px; border: 1.5px solid var(--light-gray); border-radius: 7px; background: white; outline: none; resize: none; min-height: 52px; line-height: 1.5; transition: border-color 0.2s; color: var(--nanquim); }
+    .id-just:focus { border-color: #A1441D; }
+    .id-just.correct { border-color: var(--verde); background: var(--verde-bg); }
+    .id-just.wrong   { border-color: var(--vermelho); background: var(--vermelho-bg); }
+
+    /* REWRITE */
+    .rw-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .rw-item:last-child { border-bottom: none; }
+    .rw-num { font-size: 12px; font-weight: 700; color: #A1441D; margin-bottom: 6px; }
+    .rw-pair { font-size: 14px; font-style: italic; color: #444; margin-bottom: 8px; line-height: 1.6; }
+    .rw-hint { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 4px; color: white; margin-bottom: 8px; }
+    .rw-input { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; padding: 8px 12px; border: 1.5px solid var(--light-gray); border-radius: 8px; background: white; outline: none; color: var(--nanquim); transition: border-color 0.2s; }
+    .rw-input:focus { border-color: #A1441D; }
+    .rw-input.correct { border-color: var(--verde); background: var(--verde-bg); }
+    .rw-input.wrong   { border-color: var(--vermelho); background: var(--vermelho-bg); }
+    .rw-fb { font-size: 12px; margin-top: 6px; display: none; line-height: 1.5; }
+    .rw-fb.show { display: block; }
+
+    /* GAP FILL */
+    .gap-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { color: #A1441D; font-weight: 700; font-size: 13px; margin-right: 8px; }
+    .gap-select { border: none; border-bottom: 2px solid #A1441D; background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; color: #A1441D; font-weight: 600; outline: none; padding: 0 4px; cursor: pointer; transition: border-color 0.2s; }
+    .gap-select.correct { border-color: var(--verde); color: var(--verde); }
+    .gap-select.wrong   { border-color: var(--vermelho); color: var(--vermelho); }
+    .gap-just { display: block; width: 100%; font-family: 'Manrope', sans-serif; font-size: 12px; padding: 6px 10px; border: 1.5px solid var(--light-gray); border-radius: 7px; background: white; outline: none; resize: none; min-height: 44px; line-height: 1.5; transition: border-color 0.2s; color: var(--nanquim); margin-top: 8px; }
+    .gap-just:focus { border-color: #A1441D; }
+
+    /* CHECK / RESET */
+    .check-btn { background: #A1441D; color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 24px; border-radius: 8px; cursor: pointer; margin-top: 18px; transition: opacity 0.18s; }
+    .check-btn:hover { opacity: 0.88; }
+    .reset-btn { background: transparent; color: #888; border: 1.5px solid #ccc; font-family: 'Manrope', sans-serif; font-size: 12px; padding: 9px 18px; border-radius: 8px; cursor: pointer; margin-top: 18px; margin-left: 10px; }
+    .ex-score { font-family: 'Manrope', sans-serif; font-size: 13px; margin-top: 14px; padding: 12px 16px; border-radius: 8px; display: none; }
+    .ex-score.show { display: block; }
+    .ex-score.pass    { background: var(--verde-bg); color: var(--verde); }
+    .ex-score.partial { background: var(--baunilha2); color: #A1441D; }
+
+    /* PRODUÇÃO */
+    .prod-area { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14.5px; padding: 14px 16px; border: 1.5px solid var(--light-gray); border-radius: 10px; background: white; outline: none; resize: vertical; min-height: 200px; line-height: 1.75; transition: border-color 0.2s; color: var(--nanquim); }
+    .prod-area:focus { border-color: #A1441D; }
+    .prod-hints { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .hint-chip { font-size: 12px; font-style: italic; padding: 4px 12px; background: var(--off-white); border-radius: 14px; color: var(--nanquim); font-family: 'Trirong', serif; }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .gram-box, .text-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Os usos de <em>porque</em></h1>
+  <div class="hero-sub">Quatro formas, quatro funções — nota gramatical, texto autêntico e exercícios integrados.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">porque</span>
+    <span class="hero-tag">por que</span>
+    <span class="hero-tag">porquê</span>
+    <span class="hero-tag">por quê</span>
+  </div>
+  <div class="hero-note">📖 Leia a nota gramatical antes de passar para os exercícios</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- NOTA GRAMATICAL -->
+  <div class="sec-label">Nota Gramatical</div>
+  <div class="gram-box">
+    <h2>Quatro formas, quatro funções</h2>
+    <p class="gram-intro">Uma das dificuldades mais comuns para falantes estrangeiros de português é a distinção entre as quatro grafias de <em>porque</em>. Em muitas línguas — incluindo o inglês, o espanhol e o francês — existe apenas uma forma. Em português, há quatro formas distintas, cada uma com uma função específica. O desafio não é apenas ortográfico: cada forma sinaliza uma relação lógica diferente dentro da frase.</p>
+
+    <div class="form-grid">
+      <div class="form-card f1">
+        <div class="form-label">Forma 1</div>
+        <div class="form-word">porque</div>
+        <div class="form-function">junto, sem acento — <strong>conjunção causal</strong></div>
+        <div class="form-example">Ele não foi à reunião <span class="hl1">porque</span> estava doente.<span class="form-transl"> → He didn't go to the meeting because he was sick.</span></div>
+        <div class="form-example">Fiquei em casa <span class="hl1">porque</span> chovia muito.<span class="form-transl"> → I stayed home because it was raining hard.</span></div>
+        <div class="dica">Equivale a <strong>because</strong> em inglês. Introduz a causa ou a explicação do que foi dito antes.</div>
+      </div>
+
+      <div class="form-card f2">
+        <div class="form-label">Forma 2</div>
+        <div class="form-word">por que</div>
+        <div class="form-function">separado, sem acento — <strong>interrogativo ou relativo</strong></div>
+        <div class="form-example"><span class="hl2">Por que</span> você fez isso? <span class="form-transl"> → Why did you do that?</span></div>
+        <div class="form-example">Não sei <span class="hl2">por que</span> ela saiu cedo.</div>
+        <div class="form-example">Há razões <span class="hl2">por que</span> isso acontece. <span class="form-transl"> → There are reasons why / for which this happens.</span></div>
+        <div class="dica">Equivale a <strong>why</strong> ou <strong>for which</strong>. Aparece em perguntas diretas, indiretas e como pronome relativo.</div>
+      </div>
+
+      <div class="form-card f3">
+        <div class="form-label">Forma 3</div>
+        <div class="form-word">porquê</div>
+        <div class="form-function">junto, com acento — <strong>substantivo</strong></div>
+        <div class="form-example">Ninguém explicou <span class="hl3">o porquê</span> da decisão. <span class="form-transl"> → Nobody explained the reason for the decision.</span></div>
+        <div class="form-example">Há <span class="hl3">um porquê</span> por trás de cada escolha.</div>
+        <div class="form-example">Quero entender <span class="hl3">os porquês</span> dessa política.</div>
+        <div class="dica">Equivale a <strong>the reason</strong>. Sempre acompanhado de artigo ou pronome: <strong>o, um, esse, meu</strong>. Pode ter plural: <em>os porquês</em>.</div>
+      </div>
+
+      <div class="form-card f4">
+        <div class="form-label">Forma 4</div>
+        <div class="form-word">por quê</div>
+        <div class="form-function">separado, com acento — <strong>interrogativo no final de frase</strong></div>
+        <div class="form-example">Você fez isso <span class="hl4">por quê</span>? <span class="form-transl"> → Why did you do that?</span></div>
+        <div class="form-example">Ela foi embora sem explicar <span class="hl4">por quê</span>.</div>
+        <div class="form-example">Não sei <span class="hl4">por quê</span>.</div>
+        <div class="dica">É sempre usado <strong>no final da frase</strong> — antes de ponto final, ponto de interrogação ou reticências. Recebe acento por estar em posição tônica final. Dica: se o <em>why</em> em inglês cair no final, o equivalente em português é <em>por quê</em>.</div>
+      </div>
+    </div>
+
+    <!-- tabela resumo -->
+    <table class="contrast-table">
+      <thead>
+        <tr>
+          <th>Forma</th>
+          <th>Função</th>
+          <th>Equivalente em inglês</th>
+          <th>Posição na frase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag-f1">porque</span></td>
+          <td>conjunção causal</td>
+          <td><em>because</em></td>
+          <td>meio de frase, após vírgula ou sem ela</td>
+        </tr>
+        <tr>
+          <td><span class="tag-f2">por que</span></td>
+          <td>interrogativo / pronome relativo</td>
+          <td><em>why / for which</em></td>
+          <td>início ou meio de frase</td>
+        </tr>
+        <tr>
+          <td><span class="tag-f3">porquê</span></td>
+          <td>substantivo</td>
+          <td><em>the reason</em></td>
+          <td>precedido de artigo/pronome</td>
+        </tr>
+        <tr>
+          <td><span class="tag-f4">por quê</span></td>
+          <td>interrogativo</td>
+          <td><em>why</em> (final)</td>
+          <td>final de frase — antes de ponto ou ?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LEITURA -->
+  <div class="sec-label">Leitura</div>
+  <div class="text-card">
+    <div class="text-source">Texto elaborado para fins didáticos | Estilo: artigo de opinião | Tema: silêncio, poder e vozes marginalizadas no Brasil</div>
+    <div class="text-title">A cultura do silêncio não é ingenuidade</div>
+    <div class="text-subtitle">por Beatriz Fontenele — publicada na revista <em>Perspectiva</em>, março de 2025</div>
+
+    <div class="text-body">
+      <p>Há uma narrativa confortável que circula em certos meios intelectuais brasileiros: a de que o silêncio diante de injustiças é produto da ignorância. Discordo dessa leitura, <span class="hl1">porque</span> ela confunde efeito com causa e absolve estruturas que deveriam ser questionadas.</p>
+
+      <p>O silêncio, no Brasil, não é ingenuidade. É, em muitos casos, uma estratégia de sobrevivência — e há razões históricas profundas <span class="hl2">por que</span> isso acontece. Quem cresceu em contextos onde falar custava caro aprendeu, muito cedo, que o silêncio protege. Não é preciso ser analfabeto para fazer esse cálculo. Basta ter memória.</p>
+
+      <p>A pergunta que raramente se faz é <span class="hl2">por que</span> certas vozes têm mais espaço do que outras. Jornais, universidades, institutos de pesquisa — todos falam em nome da sociedade, mas nem sempre a representam. <span class="hl3">O porquê</span> dessa assimetria está menos na capacidade intelectual dos excluídos e mais nas condições materiais que determinam quem pode falar, quando e para quem.</p>
+
+      <p>Insistir na tese da ignorância é conveniente, <span class="hl1">porque</span> ela desloca o problema: em vez de questionar as estruturas, questiona-se o indivíduo. É mais fácil educar o povo do que redistribuir o poder. E é exatamente <span class="hl2">por que</span> esse deslocamento é tão eficaz que ele persiste.</p>
+
+      <p>Há <span class="hl3">um porquê</span> para cada silêncio. Compreendê-lo exige menos condescendência e mais escuta. Não precisamos de mais diagnósticos sobre quem cala — precisamos entender <span class="hl4">por quê</span>.</p>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--f1-bg);border:1.5px solid var(--f1);"></div> <span class="tag-f1">porque</span> — conjunção causal</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--f2-bg);border:1.5px solid var(--f2);"></div> <span class="tag-f2">por que</span> — interrogativo/relativo</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--f3-bg);border:1.5px solid var(--f3);"></div> <span class="tag-f3">porquê</span> — substantivo</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--f4-bg);border:1.5px solid var(--f4);"></div> <span class="tag-f4">por quê</span> — final de frase</div>
+    </div>
+  </div>
+
+  <!-- EXERCÍCIO 1 -->
+  <div class="sec-label">Exercícios</div>
+  <div class="ex-card" id="ex1">
+    <div class="ex-header">
+      <div class="ex-num">1</div>
+      <div>
+        <div class="ex-title">Compreensão do texto</div>
+        <div class="ex-instruction">Responda em português com base no texto.</div>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <span class="q-num">1.</span> Qual é a narrativa que a autora contesta no primeiro parágrafo?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+    </div>
+    <div class="q-item">
+      <span class="q-num">2.</span> Como a autora define o silêncio no contexto brasileiro?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+    </div>
+    <div class="q-item">
+      <span class="q-num">3.</span> A que a autora atribui a assimetria entre vozes que têm espaço e as que não têm?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+    </div>
+    <div class="q-item">
+      <span class="q-num">4.</span> Por que, segundo a autora, a tese da ignorância é conveniente?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+    </div>
+  </div>
+
+  <!-- EXERCÍCIO 2 -->
+  <div class="ex-card" id="ex2">
+    <div class="ex-header">
+      <div class="ex-num">2</div>
+      <div>
+        <div class="ex-title">Identifique no texto</div>
+        <div class="ex-instruction">Para cada trecho destacado, indique a forma usada e justifique a escolha.</div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="id-table">
+        <thead>
+          <tr>
+            <th style="min-width:220px;">Trecho do texto</th>
+            <th style="min-width:130px;">Forma usada</th>
+            <th style="min-width:200px;">Justificativa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="example-row">
+            <td class="trecho">"…<span class="hl1">porque</span> ela confunde efeito com causa"</td>
+            <td><select class="id-select" disabled><option>porque</option></select></td>
+            <td><textarea class="id-just" disabled>Conjunção causal — introduz a razão da discordância da autora.</textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"…há razões históricas profundas <span class="hl2">por que</span> isso acontece"</td>
+            <td>
+              <select class="id-select" id="s2-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s2-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"…é <span class="hl2">por que</span> certas vozes têm mais espaço"</td>
+            <td>
+              <select class="id-select" id="s3-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s3-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"<span class="hl3">O porquê</span> dessa assimetria está menos na capacidade…"</td>
+            <td>
+              <select class="id-select" id="s4-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s4-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"…conveniente, <span class="hl1">porque</span> ela desloca o problema"</td>
+            <td>
+              <select class="id-select" id="s5-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s5-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"…é exatamente <span class="hl2">por que</span> esse deslocamento é tão eficaz"</td>
+            <td>
+              <select class="id-select" id="s6-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s6-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"Há <span class="hl3">um porquê</span> para cada silêncio"</td>
+            <td>
+              <select class="id-select" id="s7-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s7-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+          <tr>
+            <td class="trecho">"…precisamos entender <span class="hl4">por quê</span>"</td>
+            <td>
+              <select class="id-select" id="s8-form">
+                <option value="">— escolha —</option>
+                <option>porque</option>
+                <option>por que</option>
+                <option>porquê</option>
+                <option>por quê</option>
+              </select>
+            </td>
+            <td><textarea class="id-just" id="s8-just" placeholder="Justifique…"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">Verificar respostas</button>
+    <button class="reset-btn" onclick="resetEx2()">Refazer</button>
+    <div class="ex-score" id="score2"></div>
+  </div>
+
+  <!-- EXERCÍCIO 3 -->
+  <div class="ex-card" id="ex3">
+    <div class="ex-header">
+      <div class="ex-num">3</div>
+      <div>
+        <div class="ex-title">Reescreva e transforme</div>
+        <div class="ex-instruction">Reescreva cada par de frases em uma só, usando a forma correta de <em>porque</em> indicada entre parênteses. Faça os ajustes necessários.</div>
+      </div>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-num">1.</div>
+      <div class="rw-pair"><em>A proposta foi aprovada. Os dados eram convincentes.</em></div>
+      <span class="rw-hint" style="background:var(--f1);">porque — causal</span>
+      <input class="rw-input" id="rw1" type="text" placeholder="Escreva a frase combinada…">
+      <div class="rw-fb" id="rfb1"></div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">2.</div>
+      <div class="rw-pair"><em>Ela não explicou o motivo. Quero entender esse motivo.</em></div>
+      <span class="rw-hint" style="background:var(--f3);">porquê — substantivo</span>
+      <input class="rw-input" id="rw2" type="text" placeholder="Escreva a frase combinada…">
+      <div class="rw-fb" id="rfb2"></div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">3.</div>
+      <div class="rw-pair"><em>O projeto foi adiado. Pergunta: qual foi o motivo?</em></div>
+      <span class="rw-hint" style="background:var(--f2);">por que — interrogativo direto</span>
+      <input class="rw-input" id="rw3" type="text" placeholder="Escreva a frase combinada…">
+      <div class="rw-fb" id="rfb3"></div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">4.</div>
+      <div class="rw-pair"><em>A decisão surpreendeu a todos. Ela rompe com décadas de política.</em></div>
+      <span class="rw-hint" style="background:var(--f1);">porque — explicativo, com vírgula</span>
+      <input class="rw-input" id="rw4" type="text" placeholder="Escreva a frase combinada…">
+      <div class="rw-fb" id="rfb4"></div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">5.</div>
+      <div class="rw-pair"><em>Ninguém soube responder. A pergunta ficou no ar.</em></div>
+      <span class="rw-hint" style="background:var(--f4);">por quê — final de frase</span>
+      <input class="rw-input" id="rw5" type="text" placeholder="Escreva a frase combinada…">
+      <div class="rw-fb" id="rfb5"></div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">6.</div>
+      <div class="rw-pair"><em>Há razões estruturais. Isso acontece repetidamente.</em></div>
+      <span class="rw-hint" style="background:var(--f2);">por que — pronome relativo</span>
+      <input class="rw-input" id="rw6" type="text" placeholder="Escreva a frase combinada…">
+      <div class="rw-fb" id="rfb6"></div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">Verificar respostas</button>
+    <button class="reset-btn" onclick="resetEx3()">Refazer</button>
+    <div class="ex-score" id="score3"></div>
+  </div>
+
+  <!-- EXERCÍCIO 4 -->
+  <div class="ex-card" id="ex4">
+    <div class="ex-header">
+      <div class="ex-num">4</div>
+      <div>
+        <div class="ex-title">Escolha e justifique</div>
+        <div class="ex-instruction">Complete cada frase com a forma correta (<em>porque / por que / porquê / por quê</em>) e escreva uma frase justificando sua escolha.</div>
+      </div>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">1.</span> Não consigo entender
+      <select class="gap-select" id="g1">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>porquê</option><option>por quê</option>
+      </select>
+      esse assunto divide tanto as pessoas.
+      <textarea class="gap-just" id="gj1" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">2.</span>
+      <select class="gap-select" id="g2">
+        <option value="">___</option>
+        <option>Porque</option><option>Por que</option><option>Porquê</option><option>Por quê</option>
+      </select>
+      você não falou nada na reunião?
+      <textarea class="gap-just" id="gj2" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">3.</span> A pesquisadora abandonou o projeto,
+      <select class="gap-select" id="g3">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>porquê</option><option>por quê</option>
+      </select>
+      os dados não sustentavam as hipóteses iniciais.
+      <textarea class="gap-just" id="gj3" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">4.</span> Ele partiu sem explicar
+      <select class="gap-select" id="g4">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>porquê</option><option>por quê</option>
+      </select>.
+      <textarea class="gap-just" id="gj4" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">5.</span> Ninguém conseguiu responder
+      <select class="gap-select" id="g5">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>o porquê</option><option>por quê</option>
+      </select>
+      da crise.
+      <textarea class="gap-just" id="gj5" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">6.</span> É importante discutir
+      <select class="gap-select" id="g6">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>porquê</option><option>por quê</option>
+      </select>
+      certas vozes são sistematicamente silenciadas.
+      <textarea class="gap-just" id="gj6" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">7.</span> O relatório foi bem recebido,
+      <select class="gap-select" id="g7">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>porquê</option><option>por quê</option>
+      </select>
+      demonstra rigor metodológico.
+      <textarea class="gap-just" id="gj7" placeholder="Justificativa…"></textarea>
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">8.</span> Você saiu
+      <select class="gap-select" id="g8">
+        <option value="">___</option>
+        <option>porque</option><option>por que</option><option>porquê</option><option>por quê</option>
+      </select>
+      não estava confortável?
+      <textarea class="gap-just" id="gj8" placeholder="Justificativa…"></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkEx4()">Verificar respostas</button>
+    <button class="reset-btn" onclick="resetEx4()">Refazer</button>
+    <div class="ex-score" id="score4"></div>
+  </div>
+
+  <!-- PRODUÇÃO ESCRITA -->
+  <div class="ex-card" id="ex5">
+    <div class="ex-header">
+      <div class="ex-num">5</div>
+      <div>
+        <div class="ex-title">Produção escrita</div>
+        <div class="ex-instruction">Escreva seu artigo de opinião — <strong>20 a 25 linhas</strong>.</div>
+      </div>
+    </div>
+
+    <p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:16px;">
+      Escolha uma questão cultural, social ou política brasileira sobre a qual você tem uma posição clara. Escreva um artigo de opinião argumentando a favor da sua posição. Seu texto deve conter:
+    </p>
+    <div class="prod-hints">
+      <span class="hint-chip">uma tese clara no primeiro parágrafo</span>
+      <span class="hint-chip">pelo menos um argumento com dados ou exemplo</span>
+      <span class="hint-chip">uso das 4 formas de <em>porque</em></span>
+      <span class="hint-chip">uma conclusão que retome a tese</span>
+    </div>
+
+    <textarea class="prod-area" placeholder="Escreva o seu artigo aqui…"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ── EXERCÍCIO 2 — Identifique no texto ──
+const ex2Answers = [
+  { id: 's2', form: 'por que',  justKey: ['pronome relativo','relativo','razão pela qual','causa pela qual','for which','why'] },
+  { id: 's3', form: 'por que',  justKey: ['interrogativo','indireto','why','por que = why'] },
+  { id: 's4', form: 'porquê',   justKey: ['substantivo','artigo','o porquê','precedido','the reason'] },
+  { id: 's5', form: 'porque',   justKey: ['conjunção','causal','causa','because','explicação'] },
+  { id: 's6', form: 'por que',  justKey: ['pronome relativo','relativo','for which','why','razão pela qual'] },
+  { id: 's7', form: 'porquê',   justKey: ['substantivo','artigo','um porquê','precedido','the reason'] },
+  { id: 's8', form: 'por quê',  justKey: ['final','final de frase','fim de frase','end of sentence','posição final'] },
+];
+
+function norm(s){ return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' '); }
+
+function checkEx2(){
+  let correct = 0;
+  ex2Answers.forEach(function(a){
+    const formEl = document.getElementById(a.id + '-form');
+    const justEl = document.getElementById(a.id + '-just');
+    const formOk = norm(formEl.value) === norm(a.form);
+    const justText = norm(justEl.value);
+    const justOk = a.justKey.some(k => justText.includes(norm(k)));
+    formEl.className = 'id-select ' + (formEl.value === '' ? '' : formOk ? 'correct' : 'wrong');
+    justEl.className  = 'id-just '  + (justEl.value.trim() === '' ? '' : justOk  ? 'correct' : 'wrong');
+    if(formOk && justOk) correct++;
+  });
+  const sc = document.getElementById('score2');
+  sc.className = 'ex-score show ' + (correct === ex2Answers.length ? 'pass' : 'partial');
+  sc.textContent = correct === ex2Answers.length
+    ? '🎉 Perfeito! Todas as formas identificadas corretamente.'
+    : correct + ' de ' + ex2Answers.length + ' corretas. Revise as destacadas em vermelho.';
+}
+function resetEx2(){
+  ex2Answers.forEach(function(a){
+    const f = document.getElementById(a.id+'-form'); f.className='id-select'; f.value='';
+    const j = document.getElementById(a.id+'-just'); j.className='id-just'; j.value='';
+  });
+  const sc=document.getElementById('score2'); sc.className='ex-score'; sc.textContent='';
+}
+
+// ── EXERCÍCIO 3 — Reescreva ──
+const ex3Answers = [
+  { id:'rw1', keys:['aprovada porque os dados','aprovada, porque os dados'] },
+  { id:'rw2', keys:['entender o porquê','entender esse porquê','quero entender o porquê'] },
+  { id:'rw3', keys:['por que o projeto foi adiado','por que foi adiado o projeto'] },
+  { id:'rw4', keys:['a todos, porque ela rompe','a todos, porque rompe'] },
+  { id:'rw5', keys:['responder por quê','soube responder por quê'] },
+  { id:'rw6', keys:['razões por que isso acontece','razões estruturais por que isso acontece','razões por que isso acontece repetidamente'] },
+];
+
+function checkEx3(){
+  let correct = 0;
+  ex3Answers.forEach(function(a){
+    const el = document.getElementById(a.id);
+    const v = norm(el.value);
+    const ok = v.length > 5 && a.keys.some(k => v.includes(norm(k)));
+    el.className = 'rw-input ' + (v === '' ? '' : ok ? 'correct' : 'wrong');
+    const fb = document.getElementById('r'+a.id.replace('rw','fb'));
+    if(!ok && v !== ''){
+      fb.className='rw-fb show'; fb.style.color=var_vermelho();
+      fb.textContent = 'Revise: verifique a forma de porque indicada.';
+    } else { fb.className='rw-fb'; }
+    if(ok) correct++;
+  });
+  const sc = document.getElementById('score3');
+  sc.className='ex-score show '+(correct===ex3Answers.length?'pass':'partial');
+  sc.textContent = correct===ex3Answers.length
+    ? '🎉 Excelente! Todas as transformações corretas.'
+    : correct+' de '+ex3Answers.length+' corretas.';
+}
+function var_vermelho(){ return '#C0392B'; }
+function resetEx3(){
+  ex3Answers.forEach(function(a){
+    const el=document.getElementById(a.id); el.className='rw-input'; el.value='';
+    const fb=document.getElementById('r'+a.id.replace('rw','fb')); fb.className='rw-fb'; fb.textContent='';
+  });
+  const sc=document.getElementById('score3'); sc.className='ex-score'; sc.textContent='';
+}
+
+// ── EXERCÍCIO 4 — Gap fill ──
+const ex4Answers = [
+  { id:'g1', correct:'por que'  },
+  { id:'g2', correct:'Por que'  },
+  { id:'g3', correct:'porque'   },
+  { id:'g4', correct:'por quê'  },
+  { id:'g5', correct:'o porquê' },
+  { id:'g6', correct:'por que'  },
+  { id:'g7', correct:'porque'   },
+  { id:'g8', correct:'porque'   },
+];
+
+function checkEx4(){
+  let correct = 0;
+  ex4Answers.forEach(function(a){
+    const el = document.getElementById(a.id);
+    const ok = norm(el.value) === norm(a.correct);
+    el.className = 'gap-select ' + (el.value==='' ? '' : ok ? 'correct' : 'wrong');
+    if(ok) correct++;
+  });
+  const sc=document.getElementById('score4');
+  sc.className='ex-score show '+(correct===ex4Answers.length?'pass':'partial');
+  sc.textContent = correct===ex4Answers.length
+    ? '🎉 Perfeito! Todas as formas corretas.'
+    : correct+' de '+ex4Answers.length+' corretas. Revise as destacadas em vermelho.';
+}
+function resetEx4(){
+  ex4Answers.forEach(function(a){
+    const el=document.getElementById(a.id); el.className='gap-select'; el.value='';
+  });
+  document.querySelectorAll('[id^="gj"]').forEach(function(el){ el.value=''; });
+  const sc=document.getElementById('score4'); sc.className='ex-score'; sc.textContent='';
+}
+</script>
+
+<script>
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+
+  // Collect material title
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  // Collect all textareas
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+
+</body>
+</html>

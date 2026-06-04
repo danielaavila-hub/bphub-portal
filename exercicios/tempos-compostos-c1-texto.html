@@ -645,7 +645,16 @@
 
   <div class="send-box">
     📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  
+  <div id="bphub-form-area" style="margin-top:12px;">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <input id="bphub-student-name" type="text" placeholder="O seu nome" style="flex:1;min-width:180px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:10px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas para a professora</button>
+    </div>
   </div>
+  <div id="bphub-success" style="display:none;margin-top:14px;background:#EAF5EE;border-radius:8px;padding:12px 16px;font-size:14px;color:#2E7D52;font-weight:600;">✓ Respostas enviadas com sucesso! A sua professora vai rever e dar feedback antes da próxima aula.</div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
 
   <div style="margin-top:32px;padding:24px 28px;background:white;border:1.5px solid var(--light-gray);border-radius:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
     <div>
@@ -656,5 +665,66 @@
   </div>
 
 </div><!-- /main -->
+
+<script>
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  // Collect material title
+  var material = document.title.replace(' | BPHUB','').trim();
+
+  // Collect all textareas with their labels
+  var answers = {};
+  var qItems = document.querySelectorAll('.q-item, .rw-item, .gap-item, .choice-item, .err-item, .match-row, [class*="ex"]');
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    // Try to find a label
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var num = parent.querySelector('.q-num, .rw-num, .gap-num, .ex-num');
+      if (num) label = num.textContent.trim() + ' ';
+      var q = parent.querySelector('.q-item, p');
+      // Get text before textarea
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = (label + clone.textContent.trim()).replace(/\s+/g,' ').substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    answers['R' + (idx+1) + ' — ' + label] = ta.value.trim() || '(sem resposta)';
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      // mark as done in localStorage
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas para a professora';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas para a professora';
+  });
+}
+</script>
+
 </body>
 </html>
