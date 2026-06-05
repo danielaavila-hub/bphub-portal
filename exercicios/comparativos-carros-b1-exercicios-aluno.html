@@ -35,7 +35,7 @@
       color: white; padding: 48px 48px 40px;
     }
     .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
-    .hero h1 { font-family: 'Trirong', serif; font-size: 1.9rem; font-weight: 300; margin-bottom: 8px; }
+    .hero h1 { font-family: 'Trirong', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 300; margin-bottom: 0; line-height: 1.15; }
     .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
     .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
     .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
@@ -181,7 +181,7 @@
 
     .page-footer { text-align: center; padding: 24px; font-size: 12px; color: var(--mid); border-top: 1px solid var(--border); }
     .page-footer a { color: var(--cobalto); text-decoration: none; }
-  
+
     /* ── TOPBAR B1 standard ── */
     .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:64px; border-bottom:1px solid #EDEDE2; background:#FCF5EB; position:sticky; top:0; z-index:50; }
     .topbar > a img { height:30px; display:block; }
@@ -207,7 +207,7 @@
 
 <div class="hero">
   <div class="page-eyebrow">Materials Portal</div>
-  <h1>Comparativos e Superlativos<br><em style="font-style:normal;font-weight:300;color:#FFB94A;font-size:.88em;">Carros Grandes e Carros Pequenos</em></h1>
+  <h1>Comparativos e Superlativos<br><em style="font-style:italic;font-weight:300;color:#FFB94A;font-size:1.8rem;">Carros grandes e carros pequenos</em></h1>
   <div class="student-meta">
     <span class="meta-pill"><span class="dot"></span>Memorização</span>
     <span class="meta-pill"><span class="dot"></span>Comparar e contrastar</span>
@@ -459,7 +459,7 @@
     <div class="score-bar" id="ex4Score"></div>
   </div>
 
-  <!-- ===== EXERCÍCIO 5 — OPEN PRODUCTION (GOOGLE DOCS) ===== -->
+  <!-- ===== EXERCÍCIO 5 — OPEN PRODUCTION ===== -->
   <div class="exercise" id="ex5">
     <div class="ex-header">
       <div class="ex-num">5</div>
@@ -500,6 +500,26 @@
     </ol>
   </div>
 
+  <!-- CONTACT BOX -->
+  <div style="background:#FDE7C4;border:1px solid rgba(211,109,41,0.20);border-radius:12px;padding:28px 32px;margin-bottom:20px;">
+    <p style="font-size:14px;color:#3C3C21;line-height:1.65;margin-bottom:24px;">When you're done, <strong>send your text to your teacher.</strong> They will read it carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!</p>
+    <div id="bphub-form-area" style="padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+      <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+        <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+    </div>
+    <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+      <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+      <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+      <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+    </div>
+    <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+  </div>
+
 </div>
 
 <footer class="page-footer">
@@ -508,14 +528,12 @@
 </footer>
 
 <script>
-  // ===== NORMALIZE: strip accents + lowercase + trim for flexible matching =====
   function norm(s) {
     return s.trim().toLowerCase()
       .normalize('NFD').replace(/[̀-ͯ]/g, '')
       .replace(/\s+/g, ' ');
   }
 
-  // ===== EXERCISE 1 — GAP FILL =====
   function checkGapFill() {
     const items = document.querySelectorAll('#ex1 .gap-list li');
     let correct = 0;
@@ -526,139 +544,92 @@
       const answers = li.dataset.answers.split(',');
       const userVal = norm(input.value);
       const isOk = answers.some(a => norm(a) === userVal);
-
       input.classList.remove('correct','wrong');
       if (isOk) {
-        input.classList.add('correct');
-        fb.className = 'feedback-msg ok';
-        fb.textContent = '✓';
-        ca.textContent = '';
-        correct++;
+        input.classList.add('correct'); fb.className = 'feedback-msg ok'; fb.textContent = '✓'; ca.textContent = ''; correct++;
       } else if (input.value.trim() === '') {
-        fb.className = 'feedback-msg no';
-        fb.textContent = '⚠ não preenchido';
-        ca.textContent = '→ ' + answers[0];
-        input.classList.add('wrong');
+        fb.className = 'feedback-msg no'; fb.textContent = '⚠ não preenchido'; ca.textContent = '→ ' + answers[0]; input.classList.add('wrong');
       } else {
-        input.classList.add('wrong');
-        fb.className = 'feedback-msg no';
-        fb.textContent = '✗';
-        ca.textContent = '→ ' + answers[0];
+        input.classList.add('wrong'); fb.className = 'feedback-msg no'; fb.textContent = '✗'; ca.textContent = '→ ' + answers[0];
       }
     });
     const score = document.getElementById('ex1Score');
     score.className = 'score-bar visible ' + (correct === items.length ? 'perfect' : correct >= items.length/2 ? 'good' : 'retry');
-    score.textContent = correct === items.length
-      ? '🎉 Perfeito! ' + correct + '/' + items.length + ' corretas!'
-      : correct + '/' + items.length + ' corretas — tente de novo!';
+    score.textContent = correct === items.length ? '🎉 Perfeito! ' + correct + '/' + items.length + ' corretas!' : correct + '/' + items.length + ' corretas — tente de novo!';
   }
 
   function resetGapFill() {
     document.querySelectorAll('#ex1 .gap-input').forEach(i => { i.value = ''; i.className = 'gap-input'; });
     document.querySelectorAll('#ex1 .feedback-msg').forEach(f => f.textContent = '');
     document.querySelectorAll('#ex1 .correct-ans').forEach(c => c.textContent = '');
-    const score = document.getElementById('ex1Score');
-    score.className = 'score-bar';
-    score.textContent = '';
+    const score = document.getElementById('ex1Score'); score.className = 'score-bar'; score.textContent = '';
   }
 
-  // ===== EXERCISE 2 — MULTIPLE CHOICE =====
   function checkMC(btn) {
     const group = btn.closest('.mc-item');
-    if (group.querySelector('.selected-correct, .selected-wrong')) return; // already answered
+    if (group.querySelector('.selected-correct, .selected-wrong')) return;
     const allOpts = group.querySelectorAll('.mc-opt');
     const fb = group.querySelector('.mc-feedback');
     const isCorrect = btn.dataset.correct === 'true';
-
     allOpts.forEach(o => o.classList.add('disabled'));
-
     if (isCorrect) {
-      btn.classList.add('selected-correct');
-      fb.className = 'mc-feedback ok';
-      fb.textContent = '✓ Correto!';
+      btn.classList.add('selected-correct'); fb.className = 'mc-feedback ok'; fb.textContent = '✓ Correto!';
     } else {
-      btn.classList.add('selected-wrong');
-      fb.className = 'mc-feedback no';
-      fb.textContent = '✗ Tente de novo depois — veja a resposta correta abaixo:';
+      btn.classList.add('selected-wrong'); fb.className = 'mc-feedback no'; fb.textContent = '✗ Tente de novo depois — veja a resposta correta abaixo:';
       allOpts.forEach(o => { if (o.dataset.correct === 'true') o.classList.add('show-correct'); });
     }
   }
 
   function resetMC() {
-    document.querySelectorAll('.mc-opt').forEach(o => {
-      o.className = 'mc-opt';
-      o.onclick = function(){ checkMC(this); };
-    });
+    document.querySelectorAll('.mc-opt').forEach(o => { o.className = 'mc-opt'; o.onclick = function(){ checkMC(this); }; });
     document.querySelectorAll('.mc-feedback').forEach(f => { f.textContent = ''; f.className = 'mc-feedback'; });
   }
 
-  // ===== EXERCISE 3 — TRUE / FALSE =====
   function checkTF(btn, picked) {
     const item = btn.closest('.tf-item');
-    if (item.querySelector('.correct-pick, .wrong-pick')) return; // already answered
+    if (item.querySelector('.correct-pick, .wrong-pick')) return;
     const allBtns = item.querySelectorAll('.tf-btn');
     const fb = item.querySelector('.tf-feedback');
     const correction = item.querySelector('.tf-correction');
     const correct = btn.dataset.correct;
     const isOk = picked === correct;
-
     allBtns.forEach(b => b.classList.add('disabled'));
-
     if (isOk) {
-      btn.classList.add('correct-pick');
-      fb.className = 'tf-feedback ok';
-      fb.textContent = '✓ Correto!';
+      btn.classList.add('correct-pick'); fb.className = 'tf-feedback ok'; fb.textContent = '✓ Correto!';
     } else {
-      btn.classList.add('wrong-pick');
-      fb.className = 'tf-feedback no';
-      fb.textContent = '✗';
+      btn.classList.add('wrong-pick'); fb.className = 'tf-feedback no'; fb.textContent = '✗';
       allBtns.forEach(b => { if (b.dataset.correct === correct && !b.classList.contains('wrong-pick')) b.classList.add('show-correct'); });
       if (correction && correction.textContent.trim()) correction.classList.add('visible');
     }
   }
 
   function resetTF() {
-    document.querySelectorAll('.tf-btn').forEach(b => {
-      b.className = 'tf-btn ' + (b.textContent === 'V' ? 'v' : 'f');
-      b.onclick = function(){ checkTF(this, this.textContent); };
-    });
+    document.querySelectorAll('.tf-btn').forEach(b => { b.className = 'tf-btn ' + (b.textContent === 'V' ? 'v' : 'f'); b.onclick = function(){ checkTF(this, this.textContent); }; });
     document.querySelectorAll('.tf-feedback').forEach(f => { f.textContent = ''; f.className = 'tf-feedback'; });
     document.querySelectorAll('.tf-correction').forEach(c => c.classList.remove('visible'));
   }
 
-  // ===== EXERCISE 4 — SELECT MATCHING =====
   function checkMatchSelect(sel) {
     const isOk = sel.value === sel.dataset.correct;
     sel.classList.remove('correct','wrong');
     sel.classList.add(isOk ? 'correct' : 'wrong');
-
-    // Show score
     const all = document.querySelectorAll('#matchGrid .match-select');
     const filled = [...all].filter(s => s.value !== '');
     if (filled.length === all.length) {
       const corrects = [...all].filter(s => s.classList.contains('correct')).length;
       const score = document.getElementById('ex4Score');
       score.className = 'score-bar visible ' + (corrects === all.length ? 'perfect' : corrects >= all.length/2 ? 'good' : 'retry');
-      score.textContent = corrects === all.length
-        ? '🎉 Perfeito! Todos os irregulares corretos!'
-        : corrects + '/' + all.length + ' corretos — revise os irregulares no texto!';
+      score.textContent = corrects === all.length ? '🎉 Perfeito! Todos os irregulares corretos!' : corrects + '/' + all.length + ' corretos — revise os irregulares no texto!';
     }
   }
 
   function resetMatch() {
-    document.querySelectorAll('#matchGrid .match-select').forEach(s => {
-      s.value = '';
-      s.className = 'match-select';
-    });
-    const score = document.getElementById('ex4Score');
-    score.className = 'score-bar';
-    score.textContent = '';
+    document.querySelectorAll('#matchGrid .match-select').forEach(s => { s.value = ''; s.className = 'match-select'; });
+    const score = document.getElementById('ex4Score'); score.className = 'score-bar'; score.textContent = '';
   }
 </script>
 
-
 <script>
-// ── FORMSPREE SUBMIT ──
 function bphubSubmit() {
   var btn = document.getElementById('bphub-submit-btn');
   var nameEl = document.getElementById('bphub-student-name');
@@ -666,13 +637,8 @@ function bphubSubmit() {
   var name = nameEl ? nameEl.value.trim() : '';
   if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
   if (nameEl) nameEl.style.borderColor='';
-
   var email = emailEl ? emailEl.value.trim() : '';
-
-  // Collect material title
   var material = document.title.replace(/ \| BPHUB.*/, '').trim();
-
-  // Collect all textareas
   var answers = {};
   var summaryLines = [];
   document.querySelectorAll('textarea').forEach(function(ta, idx) {
@@ -688,13 +654,10 @@ function bphubSubmit() {
     answers['R' + (idx+1) + ' — ' + label] = val;
     summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
   });
-
   var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
   if (email) payload['_replyto'] = email;
-
   btn.disabled = true;
   btn.textContent = 'A enviar…';
-
   fetch('https://formspree.io/f/xykaydly', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -719,23 +682,6 @@ function bphubSubmit() {
   });
 }
 </script>
-
-
-<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
-  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
-  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
-    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
-    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
-    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
-  </div>
-  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
-</div>
-<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
-  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
-  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
-  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
-</div>
-<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
 
 </body>
 </html>
