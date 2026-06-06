@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reuniões de Negócios — Exercícios | BPHUB B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Trirong:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --ouro-lt:    #FDF3E0;
+      --marrom:     #967E63;
+      --texto:      #3C3C21;
+      --cinza:      #6E6A5A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      background: var(--baunilha);
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .topbar > a img { height: 28px; display: block; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .badge {
+      font-family: 'Trirong', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .badge-level { background: var(--pitomba); color: white; }
+    .badge-func  { background: var(--off-white); color: var(--cinza); }
+    .topbar-back {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      color: var(--cinza);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--pitomba); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--pitomba);
+      padding: 48px 40px 44px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Trirong', serif;
+      font-weight: 800;
+      font-size: 36px;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .hero h1 span {
+      display: block;
+      font-weight: 300;
+      font-size: 26px;
+      color: rgba(255,255,255,0.8);
+    }
+    .hero-sub {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      margin: 14px auto 20px;
+      line-height: 1.65;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .hero-tag {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    /* ── NAV BAR ── */
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 48px;
+      background: white;
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky;
+      top: 56px;
+      z-index: 19;
+      gap: 16px;
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; overflow-x: auto; }
+    .nav-link {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cinza);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .nav-link:hover { background: var(--off-white); color: var(--texto); }
+    .nav-exercises {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      background: var(--cobalto);
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-exercises:hover { background: #1d4a73; }
+
+    /* ── MAIN ── */
+    main { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── CONTEXT BOX ── */
+    .context-box {
+      background: white;
+      border-left: 4px solid var(--floresta);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+      margin-bottom: 36px;
+      font-style: italic;
+      font-size: 15px;
+    }
+    .context-box strong {
+      font-family: 'Trirong', serif;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--floresta);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ── EXERCISE CARD ── */
+    .exercise {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(60,60,33,0.07);
+    }
+    .exercise-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .exercise-number {
+      background: var(--ouro);
+      color: var(--texto);
+      font-family: 'Trirong', serif;
+      font-weight: 800;
+      font-size: 13px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .exercise-title {
+      font-family: 'Trirong', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--floresta);
+    }
+    .exercise-subtitle {
+      font-family: 'Trirong', serif;
+      font-size: 13px;
+      color: var(--pitomba);
+      margin-top: 2px;
+    }
+    .instructions {
+      font-family: 'Trirong', serif;
+      font-size: 13px;
+      color: #666;
+      background: var(--off-white);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+    }
+
+    /* ── MATCHING ── */
+    .match-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 15px;
+    }
+    .match-row:last-child { border-bottom: none; }
+    .match-key {
+      font-family: 'Trirong', serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--floresta);
+      min-width: 20px;
+    }
+    .match-text { flex: 1; }
+    .match-select {
+      font-family: 'Trirong', serif;
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 2px solid var(--light-gray);
+      border-radius: 6px;
+      background: white;
+      color: var(--texto);
+      cursor: pointer;
+      min-width: 42px;
+      transition: border-color 0.2s;
+    }
+    .match-select:focus { outline: none; border-color: var(--erva-doce); }
+    .match-select.correct { border-color: var(--erva-doce); background: #f0f5ea; color: var(--floresta); }
+    .match-select.wrong   { border-color: #e08070; background: #fdf0ee; }
+    .match-feedback {
+      font-family: 'Trirong', serif;
+      font-size: 12px;
+      min-width: 16px;
+    }
+
+    /* ── WORD BANK ── */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px;
+      background: var(--marrom);
+      border-radius: 8px;
+      margin-bottom: 18px;
+    }
+    .word-chip {
+      background: rgba(252,245,235,0.18);
+      color: var(--baunilha);
+      font-family: 'Trirong', serif;
+      font-size: 13px;
+      font-style: italic;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(252,245,235,0.3);
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .word-chip:hover { background: rgba(252,245,235,0.3); }
+    .word-chip.used { opacity: 0.35; cursor: default; pointer-events: none; text-decoration: line-through; }
+
+    /* ── DIALOGUE ── */
+    .dialogue-line {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 15.5px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .dialogue-line:last-child { border-bottom: none; }
+    .speaker {
+      font-family: 'Trirong', serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--floresta);
+      min-width: 60px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .blank-slot {
+      display: inline-flex;
+      align-items: center;
+      min-width: 150px;
+      height: 34px;
+      border-bottom: 2px solid var(--ouro);
+      padding: 0 8px;
+      font-style: italic;
+      color: var(--floresta);
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      transition: background 0.15s;
+    }
+    .blank-slot:empty::before {
+      content: 'clique para preencher';
+      color: #bbb;
+      font-size: 12px;
+      font-style: normal;
+      font-family: 'Trirong', serif;
+    }
+    .blank-slot.correct { background: #f0f5ea; border-bottom-color: var(--erva-doce); }
+    .blank-slot.wrong   { background: #fdf0ee; border-bottom-color: #e08070; }
+    .blank-slot.filled  { background: rgba(255,185,74,0.1); }
+
+    /* ── TRUE/FALSE ── */
+    .tf-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-num {
+      font-family: 'Trirong', serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--floresta);
+      min-width: 18px;
+      padding-top: 6px;
+    }
+    .tf-content { flex: 1; }
+    .tf-statement { font-size: 15px; margin-bottom: 8px; }
+    .tf-buttons { display: flex; gap: 8px; }
+    .tf-btn {
+      font-family: 'Trirong', serif;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 5px 16px;
+      border-radius: 6px;
+      border: 2px solid var(--light-gray);
+      background: white;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.15s;
+    }
+    .tf-btn:hover { border-color: var(--erva-doce); }
+    .tf-btn.selected-v { background: #f0f5ea; border-color: var(--erva-doce); color: var(--floresta); }
+    .tf-btn.selected-f { background: #fdf0ee; border-color: #e08070; color: #c0392b; }
+    .tf-btn.correct-v  { background: var(--erva-doce); border-color: var(--erva-doce); color: white; }
+    .tf-btn.correct-f  { background: var(--erva-doce); border-color: var(--erva-doce); color: white; }
+    .tf-btn.wrong-ans  { background: #e08070; border-color: #e08070; color: white; }
+    .tf-correction {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #f0f5ea;
+      border-left: 3px solid var(--erva-doce);
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+      color: var(--floresta);
+      display: none;
+    }
+
+    /* ── TRANSFORMATION ── */
+    .transform-item {
+      padding: 14px 0;
+      border-bottom: 1px dashed var(--light-gray);
+    }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original {
+      font-style: italic;
+      color: var(--pitomba);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .transform-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--light-gray);
+      border-radius: 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--texto);
+      background: var(--off-white);
+      transition: border-color 0.2s;
+    }
+    .transform-input:focus { outline: none; border-color: var(--erva-doce); }
+    .transform-feedback {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'Trirong', serif;
+      font-size: 13px;
+      display: none;
+    }
+    .transform-feedback.show { display: block; }
+    .transform-feedback.model { background: var(--ouro-lt); color: var(--pitomba); border-left: 3px solid var(--ouro); }
+
+    /* ── PRODUCTION ── */
+    .production-textarea {
+      width: 100%;
+      min-height: 160px;
+      padding: 14px 16px;
+      border: 2px solid var(--light-gray);
+      border-radius: 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--texto);
+      background: var(--off-white);
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+    .production-textarea:focus { outline: none; border-color: var(--erva-doce); }
+    .word-count {
+      font-family: 'Trirong', serif;
+      font-size: 12px;
+      color: #888;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    /* ── VERIFY BUTTON ── */
+    .verify-btn {
+      margin-top: 18px;
+      background: var(--marrom);
+      color: white;
+      font-family: 'Trirong', serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .verify-btn:hover { background: var(--floresta); }
+    .verify-btn.reset { background: var(--pitomba); margin-left: 10px; }
+    .verify-btn.reset:hover { background: #b85a20; }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../b2/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-func">Exercícios</span>
+    <a href="../b2/index.html" class="topbar-back">← Voltar para os materiais B2</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Reuniões de Negócios<span>em Português</span></h1>
+  <p class="hero-sub">Pratique as expressões usadas em reuniões de negócios no Brasil — abrir, conduzir e encerrar discussões com naturalidade.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">Propor i sugerir</span>
+    <span class="hero-tag">Concordar e discordar</span>
+    <span class="hero-tag">Registrar decisões</span>
+    <span class="hero-tag">Pedir a palavra</span>
+  </div>
+</div>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <div class="nav-links">
+    <a class="nav-link" href="#ex1">Exercício 1</a>
+    <a class="nav-link" href="#ex2">Exercício 2</a>
+    <a class="nav-link" href="#ex3">Exercício 3</a>
+    <a class="nav-link" href="#ex4">Exercício 4</a>
+    <a class="nav-link" href="#ex5">Exercício 5</a>
+  </div>
+  <a class="nav-exercises" href="reunioes-negocios-b2-material.html">← Material de referência</a>
+</div>
+
+<main>
+
+  <div class="context-box">
+    <strong>Contexto</strong>
+    Você trabalha num escritório em São Paulo e participa de reuniões com clientes e colegas com frequência — presencialmente e por videoconferência (Teams, Zoom). Pratique o vocabulário e as expressões de reuniões de negócios no Brasil.
+  </div>
+
+  <!-- ── EXERCISE 1: MATCHING ── -->
+  <div class="exercise" id="ex1">
+    <div class="exercise-header">
+      <div class="exercise-number">1</div>
+      <div>
+        <div class="exercise-title">Vocabulário em contexto</div>
+        <div class="exercise-subtitle">Matching — associe as expressões às funções</div>
+      </div>
+    </div>
+    <div class="instructions">Select the correct function number (1–8) for each expression.</div>
+
+    <div class="match-row"><span class="match-key">A.</span><span class="match-text">"Vamos começar?"</span><select class="match-select" data-correct="4"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">B.</span><span class="match-text">"Com licença, posso acrescentar algo?"</span><select class="match-select" data-correct="2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">C.</span><span class="match-text">"Concordo com o que você disse."</span><select class="match-select" data-correct="7"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">D.</span><span class="match-text">"Não tenho certeza sobre isso."</span><select class="match-select" data-correct="3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">E.</span><span class="match-text">"Podemos deixar esse ponto para depois?"</span><select class="match-select" data-correct="5"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">F.</span><span class="match-text">"Qual é a pauta de hoje?"</span><select class="match-select" data-correct="6"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">G.</span><span class="match-text">"Ficou definido que..."</span><select class="match-select" data-correct="1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+    <div class="match-row"><span class="match-key">H.</span><span class="match-text">"Vou mandar um resumo por email."</span><select class="match-select" data-correct="8"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span class="match-feedback"></span></div>
+
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--light-gray);">
+      <p style="font-family:'Manrope',sans-serif;font-size:12px;color:#888;margin-bottom:10px;">Funções: 1 Registrar decisão · 2 Pedir a palavra · 3 Expressar dúvida · 4 Abrir reunião · 5 Adiar assunto · 6 Perguntar a pauta · 7 Concordar · 8 Propor follow-up</p>
+    </div>
+    <button class="verify-btn" onclick="verifyMatching()">Verificar</button>
+  </div>
+
+  <!-- ── EXERCISE 2: DIALOGUE ── -->
+  <div class="exercise" id="ex2">
+    <div class="exercise-header">
+      <div class="exercise-number">2</div>
+      <div>
+        <div class="exercise-title">Complete o diálogo</div>
+        <div class="exercise-subtitle">Clique na expressão e depois no espaço correto</div>
+      </div>
+    </div>
+    <div class="instructions">Click a word from the box, then click the blank where it belongs. Each expression is used once.</div>
+
+    <div class="word-bank" id="wordBank">
+      <span class="word-chip" onclick="selectWord(this)" data-word="vamos começar">vamos começar</span>
+      <span class="word-chip" onclick="selectWord(this)" data-word="qual é a pauta">qual é a pauta</span>
+      <span class="word-chip" onclick="selectWord(this)" data-word="Concordo">Concordo</span>
+      <span class="word-chip" onclick="selectWord(this)" data-word="posso sugerir">posso sugerir</span>
+      <span class="word-chip" onclick="selectWord(this)" data-word="ficou combinado">ficou combinado</span>
+      <span class="word-chip" onclick="selectWord(this)" data-word="Com licença">Com licença</span>
+    </div>
+
+    <div id="dialogue">
+      <div class="dialogue-line"><span class="speaker">Pedro</span><span><span class="blank-slot" onclick="fillBlank(this)" data-correct="qual é a pauta"></span> de hoje?</span></div>
+      <div class="dialogue-line"><span class="speaker">Você</span><span>Bom dia, Pedro. Precisamos discutir o contrato da Empresa X e o prazo de entrega.</span></div>
+      <div class="dialogue-line"><span class="speaker">Pedro</span><span>Certo. Então <span class="blank-slot" onclick="fillBlank(this)" data-correct="vamos começar"></span> pela parte do contrato?</span></div>
+      <div class="dialogue-line"><span class="speaker">Mariana</span><span><span class="blank-slot" onclick="fillBlank(this)" data-correct="Com licença"></span> — a prazo é urgente. Mas <span class="blank-slot" onclick="fillBlank(this)" data-correct="posso sugerir"></span> que a gente resolva o prazo primeiro?</span></div>
+      <div class="dialogue-line"><span class="speaker">Você</span><span><span class="blank-slot" onclick="fillBlank(this)" data-correct="Concordo"></span>, Mariana. O prazo é mais urgente mesmo.</span></div>
+      <div class="dialogue-line"><span class="speaker">Pedro</span><span>Ótimo. Então <span class="blank-slot" onclick="fillBlank(this)" data-correct="ficou combinado"></span> que falamos do prazo agora e do contrato na próxima semana.</span></div>
+    </div>
+    <button class="verify-btn" onclick="verifyDialogue()">Verificar</button>
+    <button class="verify-btn reset" onclick="resetDialogue()">Recomeçar</button>
+  </div>
+
+  <!-- ── EXERCISE 3: TRUE/FALSE ── -->
+  <div class="exercise" id="ex3">
+    <div class="exercise-header">
+      <div class="exercise-number">3</div>
+      <div>
+        <div class="exercise-title">Verdadeiro ou Falso?</div>
+        <div class="exercise-subtitle">Clique em V ou F para cada afirmação</div>
+      </div>
+    </div>
+    <div class="instructions">Click V (verdadeiro) or F (falso) for each statement. Then click Verificar to see corrections.</div>
+
+    <div class="tf-item">
+      <span class="tf-num">1.</span>
+      <div class="tf-content">
+        <div class="tf-statement">Em reuniões formais no Brasil, é comum usar "senhor" ou "senhora" para todos os participantes.</div>
+        <div class="tf-buttons">
+          <button class="tf-btn" onclick="selectTF(this,'V','1')">V</button>
+          <button class="tf-btn" onclick="selectTF(this,'F','1')">F</button>
+        </div>
+        <div class="tf-correction" id="corr1">No Brasil, "você" é o padrão mesmo em reuniões formais. "Senhor/senhora" é reservado para contextos muito formais ou ao se dirigir a clientes mais velhos.</div>
+      </div>
+    </div>
+    <div class="tf-item">
+      <span class="tf-num">2.</span>
+      <div class="tf-content">
+        <div class="tf-statement">"Pauta" é a lista de assuntos que vão ser discutidos na reunião.</div>
+        <div class="tf-buttons">
+          <button class="tf-btn" onclick="selectTF(this,'V','2')">V</button>
+          <button class="tf-btn" onclick="selectTF(this,'F','2')">F</button>
+        </div>
+        <div class="tf-correction" id="corr2"></div>
+      </div>
+    </div>
+    <div class="tf-item">
+      <span class="tf-num">3.</span>
+      <div class="tf-content">
+        <div class="tf-statement">A expressão "ficou definido que" é usada para registrar uma decisão.</div>
+        <div class="tf-buttons">
+          <button class="tf-btn" onclick="selectTF(this,'V','3')">V</button>
+          <button class="tf-btn" onclick="selectTF(this,'F','3')">F</button>
+        </div>
+        <div class="tf-correction" id="corr3"></div>
+      </div>
+    </div>
+    <div class="tf-item">
+      <span class="tf-num">4.</span>
+      <div class="tf-content">
+        <div class="tf-statement">No Brasil, reuniões por Teams e Zoom são raras no ambiente jurídico.</div>
+        <div class="tf-buttons">
+          <button class="tf-btn" onclick="selectTF(this,'V','4')">V</button>
+          <button class="tf-btn" onclick="selectTF(this,'F','4')">F</button>
+        </div>
+        <div class="tf-correction" id="corr4">Reuniões por Teams e Zoom são muito comuns no ambiente jurídico brasileiro, especialmente após 2020.</div>
+      </div>
+    </div>
+    <div class="tf-item">
+      <span class="tf-num">5.</span>
+      <div class="tf-content">
+        <div class="tf-statement">"Posso acrescentar algo?" é uma forma educada de pedir a palavra.</div>
+        <div class="tf-buttons">
+          <button class="tf-btn" onclick="selectTF(this,'V','5')">V</button>
+          <button class="tf-btn" onclick="selectTF(this,'F','5')">F</button>
+        </div>
+        <div class="tf-correction" id="corr5"></div>
+      </div>
+    </div>
+    <button class="verify-btn" onclick="verifyTF()">Verificar</button>
+  </div>
+
+  <!-- ── EXERCISE 4: TRANSFORMATION ── -->
+  <div class="exercise" id="ex4">
+    <div class="exercise-header">
+      <div class="exercise-number">4</div>
+      <div>
+        <div class="exercise-title">Transformação</div>
+        <div class="exercise-subtitle">Reescreva em português de reunião</div>
+      </div>
+    </div>
+    <div class="instructions">Rewrite each sentence in Portuguese using the expression indicated. Type your answer and click Verificar to see the model answer.</div>
+
+    <div class="transform-item">
+      <div class="transform-original">1. "I agree with your proposal." → (concordar com)</div>
+      <input class="transform-input" type="text" id="t1" placeholder="Digite sua resposta...">
+      <div class="transform-feedback model" id="tf1">✏️ Sugestão: <em>Concordo com a sua proposta.</em> / <em>Concordo com o que você sugeriu.</em></div>
+    </div>
+    <div class="transform-item">
+      <div class="transform-original">2. "Can I add something?" → (com licença / acrescentar)</div>
+      <input class="transform-input" type="text" id="t2" placeholder="Digite sua resposta...">
+      <div class="transform-feedback model" id="tf2">✏️ Sugestão: <em>Com licença, posso acrescentar algo?</em></div>
+    </div>
+    <div class="transform-item">
+      <div class="transform-original">3. "What are today's topics?" → (pauta)</div>
+      <input class="transform-input" type="text" id="t3" placeholder="Digite sua resposta...">
+      <div class="transform-feedback model" id="tf3">✏️ Sugestão: <em>Qual é a pauta de hoje?</em></div>
+    </div>
+    <div class="transform-item">
+      <div class="transform-original">4. "It was decided that we'll send the contract by Friday." → (ficou definido que)</div>
+      <input class="transform-input" type="text" id="t4" placeholder="Digite sua resposta...">
+      <div class="transform-feedback model" id="tf4">✏️ Sugestão: <em>Ficou definido que vamos enviar o contrato até sexta-feira.</em></div>
+    </div>
+    <button class="verify-btn" onclick="verifyTransform()">Ver respostas modelo</button>
+  </div>
+
+  <!-- ── EXERCISE 5: PRODUCTION ── -->
+  <div class="exercise" id="ex5">
+    <div class="exercise-header">
+      <div class="exercise-number">5</div>
+      <div>
+        <div class="exercise-title">Produção livre</div>
+        <div class="exercise-subtitle">Escreva um diálogo de reunião</div>
+      </div>
+    </div>
+    <div class="instructions">Write a short dialogue (8–10 lines) between you and Dr. Renato, a Brazilian client. Include: a greeting, a question about the agenda, at least one suggestion, and one expression of agreement or disagreement.</div>
+    <textarea class="production-textarea" id="production" placeholder="Escreva seu diálogo aqui..." oninput="updateWordCount()"></textarea>
+    <div class="word-count" id="wordCount">0 linhas</div>
+  </div>
+
+  <!-- ── BPHUB SUBMIT ── -->
+  <div style="margin-top:48px;background:white;border-radius:14px;padding:28px 32px;box-shadow:0 2px 12px rgba(60,60,33,0.07);">
+    <div style="font-family:'Trirong',serif;font-weight:700;font-size:18px;color:var(--floresta);margin-bottom:4px;">Enviar respostas para a professora</div>
+    <div style="font-family:'Manrope',sans-serif;font-size:13px;color:var(--cinza);margin-bottom:20px;">As suas respostas do exercício de produção livre (exercício 5) serão enviadas para revisão antes da próxima aula.</div>
+    <div id="bphub-form-area" style="margin-top:24px;padding:24px 28px;background:var(--off-white);border-radius:14px;border:1.5px solid var(--light-gray);">
+      <div style="font-size:12px;font-weight:700;color:var(--cobalto);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+        <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(60,60,33,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(60,60,33,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+    </div>
+    <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+      <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+      <div id="bphub-answer-summary" style="font-size:13px;color:var(--texto);line-height:1.9;"></div>
+      <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+    </div>
+    <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+  </div>
+
+</main>
+
+<script>
+// ── STATE ──
+let selectedWord = null;
+const tfAnswers = {};
+const tfCorrect = { '1':'F','2':'V','3':'V','4':'F','5':'V' };
+
+// ── MATCHING ──
+function verifyMatching() {
+  let correct = 0;
+  document.querySelectorAll('#ex1 .match-select').forEach(sel => {
+    const fb = sel.nextElementSibling;
+    if (!sel.value) { fb.textContent = ''; return; }
+    if (sel.value === sel.dataset.correct) {
+      sel.className = 'match-select correct';
+      fb.textContent = '✓'; fb.style.color = '#4E551D';
+      correct++;
+    } else {
+      sel.className = 'match-select wrong';
+      fb.textContent = '→ ' + sel.dataset.correct;
+      fb.style.color = '#c0392b';
+    }
+  });
+}
+
+// ── WORD BANK (DIALOGUE) ──
+function selectWord(chip) {
+  document.querySelectorAll('.word-chip').forEach(c => c.style.outline = 'none');
+  if (selectedWord === chip) { selectedWord = null; return; }
+  selectedWord = chip;
+  chip.style.outline = '2px solid var(--ouro)';
+  chip.style.outlineOffset = '2px';
+}
+
+function fillBlank(slot) {
+  if (!selectedWord) return;
+  if (slot.classList.contains('correct')) return;
+  slot.textContent = selectedWord.dataset.word;
+  slot.classList.remove('wrong');
+  slot.classList.add('filled');
+  selectedWord.style.outline = 'none';
+  selectedWord.classList.add('used');
+  selectedWord = null;
+}
+
+function verifyDialogue() {
+  document.querySelectorAll('#dialogue .blank-slot').forEach(slot => {
+    if (!slot.textContent.trim()) return;
+    const correct = slot.dataset.correct.toLowerCase();
+    const given   = slot.textContent.trim().toLowerCase();
+    if (given === correct) {
+      slot.classList.remove('wrong','filled'); slot.classList.add('correct');
+    } else {
+      slot.classList.remove('correct','filled'); slot.classList.add('wrong');
+    }
+  });
+}
+
+function resetDialogue() {
+  document.querySelectorAll('#dialogue .blank-slot').forEach(slot => {
+    slot.textContent = '';
+    slot.className = 'blank-slot';
+  });
+  document.querySelectorAll('.word-chip').forEach(chip => {
+    chip.classList.remove('used');
+    chip.style.outline = 'none';
+  });
+  selectedWord = null;
+}
+
+// ── TRUE/FALSE ──
+function selectTF(btn, answer, num) {
+  const parent = btn.closest('.tf-buttons');
+  parent.querySelectorAll('.tf-btn').forEach(b => {
+    b.classList.remove('selected-v','selected-f');
+  });
+  btn.classList.add(answer === 'V' ? 'selected-v' : 'selected-f');
+  tfAnswers[num] = answer;
+}
+
+function verifyTF() {
+  Object.keys(tfCorrect).forEach(num => {
+    const given   = tfAnswers[num];
+    const correct = tfCorrect[num];
+    const buttons = document.querySelectorAll(`#ex3 .tf-item:nth-child(${num}) .tf-btn`);
+    const corr    = document.getElementById('corr' + num);
+    buttons.forEach(b => {
+      const bVal = b.textContent.trim();
+      b.classList.remove('selected-v','selected-f','correct-v','correct-f','wrong-ans');
+      if (bVal === correct) b.classList.add(correct === 'V' ? 'correct-v' : 'correct-f');
+      else if (given && bVal === given) b.classList.add('wrong-ans');
+    });
+    if (corr && corr.textContent.trim()) {
+      corr.style.display = (given !== correct) ? 'block' : 'none';
+    }
+  });
+}
+
+// ── TRANSFORMATION ──
+function verifyTransform() {
+  ['tf1','tf2','tf3','tf4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.add('show');
+  });
+}
+
+// ── WORD COUNT ──
+function updateWordCount() {
+  const text = document.getElementById('production').value.trim();
+  const lines = text ? text.split('\n').filter(l => l.trim()).length : 0;
+  document.getElementById('wordCount').textContent = lines + (lines === 1 ? ' linha' : ' linhas');
+}
+
+// ── BPHUB SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor = '#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor = '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var prev = ta.previousElementSibling;
+    if (prev) label = prev.textContent.trim().substring(0, 80);
+    if (!label) label = 'Campo ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx + 1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx + 1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r) {
+    return r.json().then(function(d) { return { ok: r.ok, data: d }; });
+  }).then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+
+</body>
+</html>
