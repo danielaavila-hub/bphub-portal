@@ -39,7 +39,7 @@
     .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 600; }
 
     /* MAIN */
-    .main { max-width: 900px; padding: 48px 40px 100px; }
+    .main { max-width: 900px; padding: 48px 40px 100px; margin: 0 auto; }
 
     /* SECTION LABEL */
     .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
@@ -149,7 +149,7 @@
 </div>
 
 <div class="hero">
-  <div class="hero-eyebrow">Material de Aula — Nível B2</div>
+  <div class="hero-eyebrow">Materials Portal</div>
   <h1>Tempos Compostos: <span>Terei feito</span> &amp; <span>Teria feito</span></h1>
   <div class="hero-sub">Explore os dois tempos compostos do indicativo — o futuro do presente composto e o futuro do pretérito composto — através de um texto autêntico sobre carreira acadêmica.</div>
   <div class="hero-tags">
@@ -281,7 +281,7 @@
   </div>
 
   <!-- TEXT -->
-  <div class="sec-label">Texto — Leia antes da aula</div>
+  <div class="sec-label">Texto Autêntico</div>
   <div class="text-card">
     <div class="text-source">Texto elaborado para fins didáticos | Estilo: entrevista jornalística | Tema: carreira acadêmica</div>
     <div class="text-title">Cinquenta anos de sala de aula</div>
@@ -336,6 +336,29 @@
       <div class="q-item-row"><span class="q-num">5.</span> Pensando na sua própria carreira: o que vocà terá realizado quando se aposentar? O que teria feito diferente se pudesse voltar no tempo?</div>
       <textarea class="q-answer" placeholder="Resposta do aluno…"></textarea>
     </div>
+  </div>
+
+
+  <!-- CONTACT BOX -->
+  <div style="background:#FDE7C4; border:1px solid rgba(211,109,41,0.20); border-radius:12px; padding:28px 32px; margin-top:40px; margin-bottom:32px;">
+    <p style="font-weight:700; font-size:15px; color:var(--pitomba); margin-bottom:8px;">📩 Envie suas respostas para a professora</p>
+    <p style="font-size:14px; color:#666; margin-bottom:20px;">Escreva suas respostas nas caixas acima e envie antes da aula.</p>
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:18px;">
+      <div>
+        <label style="font-size:13px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Seu nome</label>
+        <input id="bphub-nome" type="text" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px; font-family:'Manrope',sans-serif;" placeholder="Nome completo">
+      </div>
+      <div>
+        <label style="font-size:13px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Seu e-mail</label>
+        <input id="bphub-email" type="email" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px; font-family:'Manrope',sans-serif;" placeholder="seu@email.com">
+      </div>
+    </div>
+    <button onclick="bphubSubmit()" style="background:var(--pitomba); color:white; border:none; padding:12px 28px; border-radius:8px; font-weight:700; font-size:15px; cursor:pointer; font-family:'Manrope',sans-serif;">Enviar para a professora →</button>
+    <p id="bphub-msg" style="margin-top:12px; font-size:14px; color:var(--pitomba); display:none;"></p>
+  </div>
+
+  <div style="display:flex; justify-content:flex-end; margin-top:32px;">
+    <a href="tempos-compostos-exercicios-aluno.html" style="display:inline-block; background:var(--pitomba); color:white; padding:12px 28px; border-radius:8px; font-weight:700; font-size:15px; text-decoration:none;">✏️ Ir para os exercícios →</a>
   </div>
 
 </div><!-- /main -->
@@ -415,5 +438,26 @@ function bphubSubmit() {
 }
 </script>
 
+
+<script>
+async function bphubSubmit() {
+  const nome = document.getElementById('bphub-nome').value.trim();
+  const email = document.getElementById('bphub-email').value.trim();
+  const msg = document.getElementById('bphub-msg');
+  if (!nome || !email) { msg.style.display='block'; msg.textContent='Por favor, preencha nome e e-mail.'; return; }
+  const areas = document.querySelectorAll('.q-answer');
+  let body = `Nome: ${nome}\nE-mail: ${email}\n\n`;
+  areas.forEach((t, i) => { body += `Questão ${i+1}:\n${t.value || '(sem resposta)'}\n\n`; });
+  msg.style.display='block'; msg.textContent='Enviando...';
+  try {
+    const r = await fetch('https://formspree.io/f/xykaydly', {
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({ nome, email, respostas: body })
+    });
+    if (r.ok) { msg.textContent='✅ Respostas enviadas com sucesso!'; msg.style.color='#2e7d32'; }
+    else { msg.textContent='Erro ao enviar. Tente novamente.'; }
+  } catch(e) { msg.textContent='Erro de conexão. Tente novamente.'; }
+}
+</script>
 </body>
 </html>
