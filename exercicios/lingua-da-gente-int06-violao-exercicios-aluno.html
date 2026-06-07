@@ -11,58 +11,104 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --giz:        #FCF5EB;
-    --baunilha:   #FDE7C4;
-    --musgo:      #3C3C21;
+    /* B2 palette */
+    --baunilha:   #FCF5EB;
+    --pitomba:    #D36D29;
     --floresta:   #4E551D;
-    --erva-doce:  #A6B28A;
     --cobalto:    #265B8B;
-    --terracota:  #D36D29;
-    --telha:      #A1441D;
     --ouro:       #FFB94A;
-    --rosa-cha:   #FFD8C5;
-    --goiaba:     #FCA290;
-    --pitomba:    #967E63;
-    --nanquim:    #000000;
-    --b1-amber:   #D4953A;
-    --b1-dark:    #7A4F1A;
+    --marrom:     #967E63;
+    --cinza:      #6E6A5A;
+    --off-white:  #F2F0E3;
+    --erva-doce:  #A6B28A;
+    --light-gray: #EDEDE2;
+    --texto:      #3C3C21;
+    /* legacy aliases for exercise styles */
+    --giz:        #FCF5EB;
+    --musgo:      #3C3C21;
+    --terracota:  #D36D29;
+    --ouro-lt:    #FDF0D8;
+    --b1-amber:   #D36D29;
+    --b1-dark:    #4E551D;
   }
   body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
 
-  .portal-header {
-    background: #967E63;
-    padding: 14px 28px;
+  /* ── TOPBAR B2 ── */
+  .topbar {
     display: flex;
     align-items: center;
-    gap: 12px;
-  }
-  .portal-header img { height:34px; width:auto; flex-shrink:0; display:block; }
-  .portal-header .back {
-    color: rgba(255,255,255,.8);
-    text-decoration: none;
-    font-size: .85rem;
-    margin-left: auto;
-  }
-  .portal-header .back:hover { color: #fff; }
-
-  .level-bar {
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 56px;
     background: var(--baunilha);
-    color: var(--musgo);
-    padding: 8px 28px;
-    font-size: .8rem;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    border-bottom: 1px solid var(--light-gray);
+    position: sticky;
+    top: 0;
+    z-index: 20;
   }
+  .topbar > a img { height: 28px; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
   .badge {
-    background: var(--terracota);
-    color: #fff;
+    font-family: 'Trirong', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
     border-radius: 20px;
-    padding: 2px 12px;
-    font-size: .75rem;
+  }
+  .badge-level { background: var(--pitomba); color: white; }
+  .badge-func  { background: var(--off-white); color: var(--cinza); }
+  .topbar-back {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    color: var(--cinza);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .topbar-back:hover { color: var(--pitomba); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--pitomba);
+    padding: 48px 40px 44px;
+    text-align: left;
+  }
+  .hero-eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Trirong', serif;
+    font-weight: 400;
+    font-size: 36px;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .hero-sub {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    margin: 14px 0 20px;
+    line-height: 1.65;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; }
+  .hero-tag {
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
   }
 
   .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
@@ -319,20 +365,7 @@
   }
   .score-badge.visible { display: inline-flex; }
 
-  .site-footer {
-    background: var(--musgo);
-    padding: 24px 32px;
-    text-align: center;
-    margin-top: 48px;
-  }
-  .site-footer .footer-copy {
-    font-size: 12px;
-    color: rgba(255,255,255,.55);
-    font-family: 'Manrope', sans-serif;
-    letter-spacing: .02em;
-  }
-  .site-footer .footer-copy a { color: rgba(255,255,255,.75); text-decoration: none; }
-  .site-footer .footer-copy a:hover { color: #fff; }
+
 
   @media(max-width:600px) {
     .card { padding: 20px 18px; }
@@ -381,46 +414,37 @@
     font-family: 'Trirong', serif;
   }
 
-    /* ── TOPBAR B1 standard ── */
-    .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:64px; border-bottom:1px solid #EDEDE2; background:#FCF5EB; position:sticky; top:0; z-index:50; }
-    .topbar > a img { height:30px; display:block; }
-    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
-    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
-    .topbar-name { font-size:13px; font-weight:500; }
-    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
-    .topbar-back:hover { color:#967E63; }
+
 
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <!-- TOPBAR -->
 <div class="topbar">
-  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:30px;"></a>
-  <div class="topbar-student">
-    <div class="topbar-avatar">B1</div>
-    <span class="topbar-name">Intermediário I</span>
+  <a href="../b2/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-func">Exercícios</span>
+    <a href="../b2/index.html" class="topbar-back">← Voltar para os materiais B2</a>
   </div>
-  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
 </div>
-<div class="level-bar">
-  <span class="badge">B2</span>
-  Intermediário II · Comprando um Violão
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Comprando um Violão</h1>
+  <p class="hero-sub">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:underline;">CC BY 4.0</a></p>
+  <div class="hero-tags">
+    <span class="hero-tag">Episódio 6</span>
+    <span class="hero-tag">Língua da Gente</span>
+    <span class="hero-tag">Falar sobre instrumentos</span>
+  </div>
 </div>
 
 <div class="container">
 
-  <!-- INTRO -->
-  <div class="card intro-card">
-    <h1>Comprando um Violão</h1>
-    <div class="series-row">
-      <span class="series-name">Língua da Gente — Intermediate</span>
-      <span class="ep-badge">Episódio 06</span>
-      <span class="b2-badge">B2</span>
-    </div>
-    <div class="fonte">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" style="color:var(--b1-amber);text-decoration:none;font-weight:600">CC BY 4.0</a></div>
-  </div>
+
 
   <!-- STEP 1 -->
   <p class="section-title">Step 1 — Listen</p>
@@ -906,12 +930,7 @@
 
 </div>
 
-<!-- FOOTER -->
-<div class="site-footer">
-  <div class="footer-copy">
-    © <a href="https://brazilianportuguesehub.com" target="_blank">Brazilian Portuguese Hub</a>
-  </div>
-</div>
+
 
 <script>
 // ── Exercise 1: True / False ─────────────────────────────────────────────────
