@@ -183,6 +183,15 @@
       .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
       .ex-card, .gram-box, .text-card { padding: 24px 20px; }
     }
+  
+    /* ── Ex2 cards ── */
+    .ex2-card { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .ex2-card.example-row { background: rgba(211,109,41,0.04); padding: 14px 12px; border-radius: 8px; margin-bottom: 4px; border-bottom: none; }
+    .ex2-trecho { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.6; }
+    .ex2-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .ex2-fb { font-size: 13px; font-weight: 700; }
+    .ex2-fb.ok { color: #2E7D52; }
+    .ex2-fb.err { color: #C0392B; }
   </style>
 </head>
 <body>
@@ -217,7 +226,7 @@
   <div class="sec-label">Nota Gramatical</div>
   <div class="gram-box">
     <h2>Quatro formas, quatro funções</h2>
-    <p class="gram-intro">Uma das dificuldades mais comuns para falantes estrangeiros de português é a distinção entre as quatro grafias de <em>porque</em>. Em muitas línguas — incluindo o inglês, o espanhol e o francês — existe apenas uma forma. Em português, há quatro formas distintas, cada uma com uma função específica. O desafio não é apenas ortográfico: cada forma sinaliza uma relação lógica diferente dentro da frase.</p>
+    <p class="gram-intro">Uma das dificuldades mais comuns para falantes estrangeiros de português é a distinção entre as quatro grafias de <em>porque</em>. Em português, há quatro formas distintas, cada uma com uma função específica. O desafio não é apenas ortográfico: cada forma sinaliza uma função diferente dentro da frase.</p>
 
     <div class="form-grid">
       <div class="form-card f1">
@@ -252,7 +261,7 @@
       <div class="form-card f4">
         <div class="form-label">Forma 4</div>
         <div class="form-word">por quê</div>
-        <div class="form-function">separado, com acento — <strong>interrogativo no final de frase</strong></div>
+        <div class="form-function">separado, com acento — <strong>no final da frase</strong></div>
         <div class="form-example">Você fez isso <span class="hl4">por quê</span>? <span class="form-transl"> → Why did you do that?</span></div>
         <div class="form-example">Ela foi embora sem explicar <span class="hl4">por quê</span>.</div>
         <div class="form-example">Não sei <span class="hl4">por quê</span>.</div>
@@ -353,6 +362,8 @@
       <span class="q-num">4.</span> Por que, segundo a autora, a tese da ignorância é conveniente?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
     </div>
+    <button class="check-btn" onclick="markEx1Done()" style="margin-top:4px;">Concluído ✓</button>
+    <div class="ex-score" id="score1"></div>
   </div>
 
   <!-- EXERCÍCIO 2 -->
@@ -365,115 +376,112 @@
       </div>
     </div>
 
-    <div style="overflow-x:auto;">
-      <table class="id-table">
-        <thead>
-          <tr>
-            <th style="min-width:220px;">Trecho do texto</th>
-            <th style="min-width:130px;">Forma usada</th>
-            <th style="min-width:200px;">Justificativa</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="example-row">
-            <td class="trecho">"…<span class="hl1">porque</span> ela confunde efeito com causa"</td>
-            <td><select class="id-select" disabled><option>porque</option></select></td>
-            <td><textarea class="id-just" disabled>Conjunção causal — introduz a razão da discordância da autora.</textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"…há razões históricas profundas <span class="hl2">por que</span> isso acontece"</td>
-            <td>
-              <select class="id-select" id="s2-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s2-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"…é <span class="hl2">por que</span> certas vozes têm mais espaço"</td>
-            <td>
-              <select class="id-select" id="s3-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s3-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"<span class="hl3">O porquê</span> dessa assimetria está menos na capacidade…"</td>
-            <td>
-              <select class="id-select" id="s4-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s4-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"…conveniente, <span class="hl1">porque</span> ela desloca o problema"</td>
-            <td>
-              <select class="id-select" id="s5-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s5-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"…é exatamente <span class="hl2">por que</span> esse deslocamento é tão eficaz"</td>
-            <td>
-              <select class="id-select" id="s6-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s6-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"Há <span class="hl3">um porquê</span> para cada silêncio"</td>
-            <td>
-              <select class="id-select" id="s7-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s7-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-          <tr>
-            <td class="trecho">"…precisamos entender <span class="hl4">por quê</span>"</td>
-            <td>
-              <select class="id-select" id="s8-form">
-                <option value="">— escolha —</option>
-                <option>porque</option>
-                <option>por que</option>
-                <option>porquê</option>
-                <option>por quê</option>
-              </select>
-            </td>
-            <td><textarea class="id-just" id="s8-just" placeholder="Justifique…"></textarea></td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Exemplo (sem interação) -->
+    <div class="ex2-card example-row">
+      <div class="ex2-trecho">"…<span class="hl1">porque</span> ela confunde efeito com causa"</div>
+      <div class="ex2-row">
+        <select class="id-select" disabled><option>porque</option></select>
+        <span class="ex2-fb ok">✓ Exemplo</span>
+      </div>
     </div>
+
+    <div class="ex2-card" id="item-s2">
+      <div class="ex2-trecho">"…há razões históricas profundas <span class=\"hl2\">por que</span> isso acontece"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s2-form" onchange="checkEx2Item('s2')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s2-fb"></span>
+      </div>
+    </div>
+
+    <div class="ex2-card" id="item-s3">
+      <div class="ex2-trecho">"…é <span class=\"hl2\">por que</span> certas vozes têm mais espaço"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s3-form" onchange="checkEx2Item('s3')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s3-fb"></span>
+      </div>
+    </div>
+
+    <div class="ex2-card" id="item-s4">
+      <div class="ex2-trecho">"<span class=\"hl3\">O porquê</span> dessa assimetria está menos na capacidade…"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s4-form" onchange="checkEx2Item('s4')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s4-fb"></span>
+      </div>
+    </div>
+
+    <div class="ex2-card" id="item-s5">
+      <div class="ex2-trecho">"…conveniente, <span class=\"hl1\">porque</span> ela desloca o problema"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s5-form" onchange="checkEx2Item('s5')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s5-fb"></span>
+      </div>
+    </div>
+
+    <div class="ex2-card" id="item-s6">
+      <div class="ex2-trecho">"…é exatamente <span class=\"hl2\">por que</span> esse deslocamento é tão eficaz"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s6-form" onchange="checkEx2Item('s6')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s6-fb"></span>
+      </div>
+    </div>
+
+    <div class="ex2-card" id="item-s7">
+      <div class="ex2-trecho">"Há <span class=\"hl3\">um porquê</span> para cada silêncio"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s7-form" onchange="checkEx2Item('s7')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s7-fb"></span>
+      </div>
+    </div>
+
+    <div class="ex2-card" id="item-s8">
+      <div class="ex2-trecho">"…precisamos entender <span class=\"hl4\">por quê</span>"</div>
+      <div class="ex2-row">
+        <select class="id-select" id="s8-form" onchange="checkEx2Item('s8')">
+          <option value="">— escolha —</option>
+          <option>porque</option>
+          <option>por que</option>
+          <option>porquê</option>
+          <option>por quê</option>
+        </select>
+        <span class="ex2-fb" id="s8-fb"></span>
+      </div>
+    </div>    </div>
 
     <button class="check-btn" onclick="checkEx2()">Verificar respostas</button>
     <button class="reset-btn" onclick="resetEx2()">Refazer</button>
@@ -494,42 +502,66 @@
       <div class="rw-num">1.</div>
       <div class="rw-pair"><em>A proposta foi aprovada. Os dados eram convincentes.</em></div>
       <span class="rw-hint" style="background:var(--f1);">porque — causal</span>
-      <input class="rw-input" id="rw1" type="text" placeholder="Escreva a frase combinada…">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <input class="rw-input" id="rw1" type="text" placeholder="Escreva a frase combinada…" style="flex:1;min-width:200px;">
+        <button onclick="checkRw(1)" style="background:var(--cobalto);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;">Verificar</button>
+        <button id="rreset1" onclick="resetRw(1)" style="display:none;background:white;border:1px solid #ccc;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#555;font-family:'Manrope',sans-serif;white-space:nowrap;">↩ Nova tentativa</button>
+      </div>
       <div class="rw-fb" id="rfb1"></div>
     </div>
     <div class="rw-item">
       <div class="rw-num">2.</div>
       <div class="rw-pair"><em>Ela não explicou o motivo. Quero entender esse motivo.</em></div>
       <span class="rw-hint" style="background:var(--f3);">porquê — substantivo</span>
-      <input class="rw-input" id="rw2" type="text" placeholder="Escreva a frase combinada…">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <input class="rw-input" id="rw2" type="text" placeholder="Escreva a frase combinada…" style="flex:1;min-width:200px;">
+        <button onclick="checkRw(2)" style="background:var(--cobalto);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;">Verificar</button>
+        <button id="rreset2" onclick="resetRw(2)" style="display:none;background:white;border:1px solid #ccc;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#555;font-family:'Manrope',sans-serif;white-space:nowrap;">↩ Nova tentativa</button>
+      </div>
       <div class="rw-fb" id="rfb2"></div>
     </div>
     <div class="rw-item">
       <div class="rw-num">3.</div>
       <div class="rw-pair"><em>O projeto foi adiado. Pergunta: qual foi o motivo?</em></div>
       <span class="rw-hint" style="background:var(--f2);">por que — interrogativo direto</span>
-      <input class="rw-input" id="rw3" type="text" placeholder="Escreva a frase combinada…">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <input class="rw-input" id="rw3" type="text" placeholder="Escreva a frase combinada…" style="flex:1;min-width:200px;">
+        <button onclick="checkRw(3)" style="background:var(--cobalto);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;">Verificar</button>
+        <button id="rreset3" onclick="resetRw(3)" style="display:none;background:white;border:1px solid #ccc;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#555;font-family:'Manrope',sans-serif;white-space:nowrap;">↩ Nova tentativa</button>
+      </div>
       <div class="rw-fb" id="rfb3"></div>
     </div>
     <div class="rw-item">
       <div class="rw-num">4.</div>
       <div class="rw-pair"><em>A decisão surpreendeu a todos. Ela rompe com décadas de política.</em></div>
       <span class="rw-hint" style="background:var(--f1);">porque — explicativo, com vírgula</span>
-      <input class="rw-input" id="rw4" type="text" placeholder="Escreva a frase combinada…">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <input class="rw-input" id="rw4" type="text" placeholder="Escreva a frase combinada…" style="flex:1;min-width:200px;">
+        <button onclick="checkRw(4)" style="background:var(--cobalto);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;">Verificar</button>
+        <button id="rreset4" onclick="resetRw(4)" style="display:none;background:white;border:1px solid #ccc;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#555;font-family:'Manrope',sans-serif;white-space:nowrap;">↩ Nova tentativa</button>
+      </div>
       <div class="rw-fb" id="rfb4"></div>
     </div>
     <div class="rw-item">
       <div class="rw-num">5.</div>
       <div class="rw-pair"><em>Ninguém soube responder. A pergunta ficou no ar.</em></div>
       <span class="rw-hint" style="background:var(--f4);">por quê — final de frase</span>
-      <input class="rw-input" id="rw5" type="text" placeholder="Escreva a frase combinada…">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <input class="rw-input" id="rw5" type="text" placeholder="Escreva a frase combinada…" style="flex:1;min-width:200px;">
+        <button onclick="checkRw(5)" style="background:var(--cobalto);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;">Verificar</button>
+        <button id="rreset5" onclick="resetRw(5)" style="display:none;background:white;border:1px solid #ccc;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#555;font-family:'Manrope',sans-serif;white-space:nowrap;">↩ Nova tentativa</button>
+      </div>
       <div class="rw-fb" id="rfb5"></div>
     </div>
     <div class="rw-item">
       <div class="rw-num">6.</div>
       <div class="rw-pair"><em>Há razões estruturais. Isso acontece repetidamente.</em></div>
       <span class="rw-hint" style="background:var(--f2);">por que — pronome relativo</span>
-      <input class="rw-input" id="rw6" type="text" placeholder="Escreva a frase combinada…">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+        <input class="rw-input" id="rw6" type="text" placeholder="Escreva a frase combinada…" style="flex:1;min-width:200px;">
+        <button onclick="checkRw(6)" style="background:var(--cobalto);color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;white-space:nowrap;">Verificar</button>
+        <button id="rreset6" onclick="resetRw(6)" style="display:none;background:white;border:1px solid #ccc;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#555;font-family:'Manrope',sans-serif;white-space:nowrap;">↩ Nova tentativa</button>
+      </div>
       <div class="rw-fb" id="rfb6"></div>
     </div>
 
@@ -636,7 +668,7 @@
     </div>
 
     <p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:16px;">
-      Escolha uma questão cultural, social ou política brasileira sobre a qual você tem uma posição clara. Escreva um artigo de opinião argumentando a favor da sua posição. Seu texto deve conter:
+      Escolha uma questão cultural, social ou política — sobre o Brasil ou sobre o seu próprio país — sobre a qual você tem uma posição clara. Escreva um artigo de opinião argumentando a favor da sua posição. Seu texto deve conter:
     </p>
     <div class="prod-hints">
       <span class="hint-chip">uma tese clara no primeiro parágrafo</span>
@@ -650,7 +682,7 @@
 
   <!-- SEND BOX -->
   <div class="send-box">
-    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+    <p>📩 Quando terminar, envie os exercícios para a professora. Ela vai ler com atenção e dar um feedback personalizado — apontando o que você já faz bem e ajudando a melhorar o seu português ainda mais. Essa troca é uma das partes mais importantes do aprendizado!</p>
   
   <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
   <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
@@ -672,84 +704,115 @@
 </div><!-- /main -->
 
 <script>
+// ── EXERCÍCIO 1 — Concluído ──
+function markEx1Done(){
+  const sc = document.getElementById('score1');
+  sc.className = 'ex-score show pass';
+  sc.textContent = '✓ Respostas registradas. Envie ao final para a professora rever.';
+}
+
 // ── EXERCÍCIO 2 — Identifique no texto ──
 const ex2Answers = [
-  { id: 's2', form: 'por que',  justKey: ['pronome relativo','relativo','razão pela qual','causa pela qual','for which','why'] },
-  { id: 's3', form: 'por que',  justKey: ['interrogativo','indireto','why','por que = why'] },
-  { id: 's4', form: 'porquê',   justKey: ['substantivo','artigo','o porquê','precedido','the reason'] },
-  { id: 's5', form: 'porque',   justKey: ['conjunção','causal','causa','because','explicação'] },
-  { id: 's6', form: 'por que',  justKey: ['pronome relativo','relativo','for which','why','razão pela qual'] },
-  { id: 's7', form: 'porquê',   justKey: ['substantivo','artigo','um porquê','precedido','the reason'] },
-  { id: 's8', form: 'por quê',  justKey: ['final','final de frase','fim de frase','end of sentence','posição final'] },
+  { id:'s2', form:'por que'  },
+  { id:'s3', form:'por que'  },
+  { id:'s4', form:'porquê'   },
+  { id:'s5', form:'porque'   },
+  { id:'s6', form:'por que'  },
+  { id:'s7', form:'porquê'   },
+  { id:'s8', form:'por quê'  },
 ];
 
 function norm(s){ return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' '); }
 
-function checkEx2(){
-  let correct = 0;
-  ex2Answers.forEach(function(a){
-    const formEl = document.getElementById(a.id + '-form');
-    const justEl = document.getElementById(a.id + '-just');
-    const formOk = norm(formEl.value) === norm(a.form);
-    const justText = norm(justEl.value);
-    const justOk = a.justKey.some(k => justText.includes(norm(k)));
-    formEl.className = 'id-select ' + (formEl.value === '' ? '' : formOk ? 'correct' : 'wrong');
-    justEl.className  = 'id-just '  + (justEl.value.trim() === '' ? '' : justOk  ? 'correct' : 'wrong');
-    if(formOk && justOk) correct++;
-  });
+function checkEx2Item(id){
+  const a = ex2Answers.find(x => x.id === id);
+  const el = document.getElementById(id + '-form');
+  const fb = document.getElementById(id + '-fb');
+  if(!el.value){ fb.textContent=''; el.className='id-select'; return; }
+  const ok = el.value.trim().toLowerCase() === a.form.toLowerCase();
+  el.className = 'id-select ' + (ok ? 'correct' : 'wrong');
+  fb.className = 'ex2-fb ' + (ok ? 'ok' : 'err');
+  fb.textContent = ok ? '✓ Correto' : '✗ Revise';
+  const done = ex2Answers.filter(x => {
+    const e = document.getElementById(x.id+'-form');
+    return e && e.value && e.value.trim().toLowerCase() === x.form.toLowerCase();
+  }).length;
   const sc = document.getElementById('score2');
-  sc.className = 'ex-score show ' + (correct === ex2Answers.length ? 'pass' : 'partial');
-  sc.textContent = correct === ex2Answers.length
-    ? '🎉 Perfeito! Todas as formas identificadas corretamente.'
-    : correct + ' de ' + ex2Answers.length + ' corretas. Revise as destacadas em vermelho.';
+  if(done === ex2Answers.length){
+    sc.className='ex-score show pass';
+    sc.textContent='🎉 Perfeito! Todas as formas identificadas corretamente.';
+  } else { sc.className='ex-score'; sc.textContent=''; }
 }
 function resetEx2(){
   ex2Answers.forEach(function(a){
-    const f = document.getElementById(a.id+'-form'); f.className='id-select'; f.value='';
-    const j = document.getElementById(a.id+'-just'); j.className='id-just'; j.value='';
+    const f = document.getElementById(a.id+'-form'); if(f){ f.className='id-select'; f.value=''; }
+    const fb = document.getElementById(a.id+'-fb'); if(fb){ fb.className='ex2-fb'; fb.textContent=''; }
   });
   const sc=document.getElementById('score2'); sc.className='ex-score'; sc.textContent='';
 }
 
 // ── EXERCÍCIO 3 — Reescreva ──
 const ex3Answers = [
-  { id:'rw1', keys:['aprovada porque os dados','aprovada, porque os dados'] },
-  { id:'rw2', keys:['entender o porquê','entender esse porquê','quero entender o porquê'] },
-  { id:'rw3', keys:['por que o projeto foi adiado','por que foi adiado o projeto'] },
-  { id:'rw4', keys:['a todos, porque ela rompe','a todos, porque rompe'] },
-  { id:'rw5', keys:['responder por quê','soube responder por quê'] },
-  { id:'rw6', keys:['razões por que isso acontece','razões estruturais por que isso acontece','razões por que isso acontece repetidamente'] },
+  { id:'rw1', form:'porque'  },
+  { id:'rw2', form:'porquê'  },
+  { id:'rw3', form:'por que' },
+  { id:'rw4', form:'porque'  },
+  { id:'rw5', form:'por quê' },
+  { id:'rw6', form:'por que' },
 ];
+
+function rwFormOk(val, form){
+  const v = val.toLowerCase().trim();
+  if(!v || v.length < 5) return false;
+  return v.includes(form.toLowerCase());
+}
+
+function checkRw(n){
+  const a = ex3Answers[n-1];
+  const el = document.getElementById(a.id);
+  const fb = document.getElementById('rfb' + n);
+  const rst = document.getElementById('rreset' + n);
+  const v = el.value.trim();
+  if(!v) return;
+  const ok = rwFormOk(v, a.form);
+  el.className = 'rw-input ' + (ok ? 'correct' : 'wrong');
+  fb.className = 'rw-fb show';
+  if(ok){ fb.style.color='#2E7D52'; fb.textContent='✓ Correto!'; if(rst) rst.style.display='none'; }
+  else  { fb.style.color='#C0392B'; fb.textContent='Revise: verifique a forma indicada entre parênteses.'; if(rst) rst.style.display='inline'; }
+}
+
+function resetRw(n){
+  const a = ex3Answers[n-1];
+  const el = document.getElementById(a.id); el.className='rw-input'; el.value='';
+  const fb = document.getElementById('rfb'+n); fb.className='rw-fb'; fb.textContent='';
+  const rst = document.getElementById('rreset'+n); if(rst) rst.style.display='none';
+}
 
 function checkEx3(){
   let correct = 0;
-  ex3Answers.forEach(function(a){
+  ex3Answers.forEach(function(a,i){
     const el = document.getElementById(a.id);
-    const v = norm(el.value);
-    const ok = v.length > 5 && a.keys.some(k => v.includes(norm(k)));
-    el.className = 'rw-input ' + (v === '' ? '' : ok ? 'correct' : 'wrong');
-    const fb = document.getElementById('r'+a.id.replace('rw','fb'));
-    if(!ok && v !== ''){
-      fb.className='rw-fb show'; fb.style.color=var_vermelho();
-      fb.textContent = 'Revise: verifique a forma de porque indicada.';
-    } else { fb.className='rw-fb'; }
+    const v = el.value.trim();
+    const ok = rwFormOk(v, a.form);
+    el.className = 'rw-input ' + (v==='' ? '' : ok ? 'correct' : 'wrong');
+    const fb = document.getElementById('rfb'+(i+1));
+    const rst = document.getElementById('rreset'+(i+1));
+    if(ok){ fb.className='rw-fb show'; fb.style.color='#2E7D52'; fb.textContent='✓ Correto!'; if(rst) rst.style.display='none'; }
+    else if(v){ fb.className='rw-fb show'; fb.style.color='#C0392B'; fb.textContent='Revise: verifique a forma indicada.'; if(rst) rst.style.display='inline'; }
     if(ok) correct++;
   });
   const sc = document.getElementById('score3');
   sc.className='ex-score show '+(correct===ex3Answers.length?'pass':'partial');
-  sc.textContent = correct===ex3Answers.length
-    ? '🎉 Excelente! Todas as transformações corretas.'
-    : correct+' de '+ex3Answers.length+' corretas.';
+  sc.textContent = correct===ex3Answers.length ? '🎉 Excelente! Todas as transformações corretas.' : correct+' de '+ex3Answers.length+' corretas.';
 }
-function var_vermelho(){ return '#C0392B'; }
 function resetEx3(){
-  ex3Answers.forEach(function(a){
+  ex3Answers.forEach(function(a,i){
     const el=document.getElementById(a.id); el.className='rw-input'; el.value='';
-    const fb=document.getElementById('r'+a.id.replace('rw','fb')); fb.className='rw-fb'; fb.textContent='';
+    const fb=document.getElementById('rfb'+(i+1)); fb.className='rw-fb'; fb.textContent='';
+    const rst=document.getElementById('rreset'+(i+1)); if(rst) rst.style.display='none';
   });
   const sc=document.getElementById('score3'); sc.className='ex-score'; sc.textContent='';
 }
-
 // ── EXERCÍCIO 4 — Gap fill ──
 const ex4Answers = [
   { id:'g1', correct:'por que'  },
