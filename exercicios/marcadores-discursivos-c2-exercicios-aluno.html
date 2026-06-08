@@ -124,6 +124,9 @@
     .q-textarea { width: 100%; margin-top: 10px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.15); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); resize: vertical; min-height: 72px; line-height: 1.6; outline: none; transition: border-color 0.2s; }
     .q-textarea:focus { border-color: var(--nanquim); }
     .q-textarea::placeholder { color: #bbb; font-style: italic; }
+.show-model-btn { display:inline-flex; align-items:center; gap:6px; margin:8px 0 4px; padding:5px 13px; border-radius:6px; background:transparent; border:1.5px solid var(--nanquim); color:var(--nanquim); font-family:'Manrope',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+.show-model-btn:hover { background:rgba(30,29,28,0.07); }
+.model-ans { display:none; background:rgba(30,29,28,0.05); border-left:3px solid var(--nanquim); border-radius:0 6px 6px 0; padding:10px 14px; font-size:13px; color:var(--nanquim); line-height:1.65; margin:4px 0 2px; }
 
     /* REWRITE ITEMS */
     .rw-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
@@ -325,26 +328,38 @@
     <div class="q-item">
       <span class="q-num">1.</span> O que o autor quer dizer com "uma herança que não vem em testamento"?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+<button class="show-model-btn" onclick="showModel(1)">Ver resposta modelo</button>
+<div class="model-ans" id="model-1">O autor refere-se a elementos da identidade cultural — como a língua materna, o sotaque e o ritmo do tempo — que são absorvidos de forma inconsciente, antes de qualquer escolha ou tomada de consciência. Por não serem transmitidos de forma explícita (como um bem material legado em testamento), essa herança é anterior à identidade: é substrato, não escolha.</div>
     </div>
     <div class="q-item">
       <span class="q-num">2.</span> Por que, segundo o autor, chamar essa herança de "identidade" seria simplificar demais?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+<button class="show-model-btn" onclick="showModel(2)">Ver resposta modelo</button>
+<div class="model-ans" id="model-2">Porque a identidade pressupõe escolha, afirmação e narração de si — processos ativos e conscientes. O que o autor descreve é anterior a tudo isso: um substrato sobre o qual a identidade se constrói, mas que permanece reconhecível mesmo diante das reformulações impostas pela vida. Confundir os dois seria apagar a distinção entre o que se recebe e o que se constrói.</div>
     </div>
     <div class="q-item">
       <span class="q-num">3.</span> Como o autor descreve o mecanismo pelo qual o trauma histórico se transmite entre gerações?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+<button class="show-model-btn" onclick="showModel(3)">Ver resposta modelo</button>
+<div class="model-ans" id="model-3">O trauma não desaparece com as gerações: transmite-se por gestos, por silêncios e por formas de reagir a perigos que já não existem na mesma forma. Trata-se de uma transmissão implícita e não verbal, que persiste mesmo quando as circunstâncias históricas originais já se transformaram.</div>
     </div>
     <div class="q-item">
       <span class="q-num">4.</span> Qual é o efeito que as narrativas oficiais sobre o Brasil produzem, segundo o texto?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+<button class="show-model-btn" onclick="showModel(4)">Ver resposta modelo</button>
+<div class="model-ans" id="model-4">O autor descreve um efeito de estranhamento em quem as ouve "de dentro": narrativas como a da cordialidade e da democracia racial funcionam como uma camada depositada sobre memórias que o corpo ainda guarda. Elas não apagam a memória — encobrem-na —, tornando o esquecimento um esforço constante, não uma condição natural.</div>
     </div>
     <div class="q-item">
       <span class="q-num">5.</span> O que o autor entende por "arqueologia do sofrimento"? Por que ela seria necessária antes de qualquer celebração da identidade nacional?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+<button class="show-model-btn" onclick="showModel(5)">Ver resposta modelo</button>
+<div class="model-ans" id="model-5">"Arqueologia do sofrimento" é uma metáfora para o processo de escavação das camadas de trauma histórico — escravidão, ditaduras, destruição de arquivos — enterradas na base da formação nacional. Ela seria necessária porque celebrar a identidade sem reconhecer esse substrato significaria perpetuar a lógica do encobrimento criticada no texto: o que se herda sem saber inclui justamente o que foi deliberadamente ocultado.</div>
     </div>
     <div class="q-item">
       <span class="q-num">6.</span> Como o autor resolve, no último parágrafo, a tensão entre memória e identidade?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+<button class="show-model-btn" onclick="showModel(6)">Ver resposta modelo</button>
+<div class="model-ans" id="model-6">O autor reconhece os limites da memória: saber de onde se vem não determina para onde se vai. A resolução proposta é relacional — pertencer é uma escolha contínua, renovada a cada dia, de reconhecer no outro algo de si. A tensão não é resolvida pela memória, mas pela ética do reconhecimento.</div>
     </div>
     <button class="check-btn" onclick="markEx1Done()" style="margin-top:4px;">Concluído ✓</button>
     <div class="ex-score" id="score1"></div>
@@ -435,6 +450,7 @@
 </div><!-- /main -->
 
 <script>
+function showModel(n){var p=document.getElementById('model-'+n);var b=p.previousElementSibling;p.style.display='block';b.style.display='none';}
 // ── EXERCÍCIO 1 — Concluído ──
 function markEx1Done(){
   var sc = document.getElementById('score1');
