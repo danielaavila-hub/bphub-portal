@@ -149,19 +149,19 @@
 
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all" onclick="filterCat('all',this)">
-      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">2</span>
+      <span class="filter-dot" style="background:var(--level);"></span>All materials<span class="filter-count" id="fc-all">5</span>
     </button>
     <button class="filter-btn" data-filter="gram" onclick="filterCat('gram',this)">
-      <span class="filter-dot" style="background:var(--cat-gram);"></span>Gramaticais<span class="filter-count" id="fc-gram">-</span>
+      <span class="filter-dot" style="background:var(--cat-gram);"></span>Gramaticais<span class="filter-count" id="fc-gram">5</span>
     </button>
     <button class="filter-btn" data-filter="func" onclick="filterCat('func',this)">
-      <span class="filter-dot" style="background:var(--cat-func);"></span>Funções<span class="filter-count" id="fc-func">-</span>
+      <span class="filter-dot" style="background:var(--cat-func);"></span>Funções<span class="filter-count" id="fc-func">5</span>
     </button>
     <button class="filter-btn" data-filter="tema" onclick="filterCat('tema',this)">
-      <span class="filter-dot" style="background:var(--cat-tema);"></span>Temas<span class="filter-count" id="fc-tema">-</span>
+      <span class="filter-dot" style="background:var(--cat-tema);"></span>Temas<span class="filter-count" id="fc-tema">5</span>
     </button>
     <button class="filter-btn" data-filter="gen" onclick="filterCat('gen',this)">
-      <span class="filter-dot" style="background:var(--cat-gen);"></span>Gêneros<span class="filter-count" id="fc-gen">-</span>
+      <span class="filter-dot" style="background:var(--cat-gen);"></span>Gêneros<span class="filter-count" id="fc-gen">4</span>
     </button>
     <button class="filter-btn" data-filter="cult" onclick="filterCat('cult',this)">
       <span class="filter-dot" style="background:var(--cat-cult);"></span>Culturais<span class="filter-count" id="fc-cult">0</span>
@@ -309,6 +309,16 @@
 
 <script>
   (function(){if(location.hash){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}})();
+  (function initCounts(){
+    var cats=['gram','func','tema','gen','cult','fon'];
+    var all=document.querySelectorAll('.mat-card').length;
+    var el=document.getElementById('fc-all'); if(el) el.textContent=all;
+    document.getElementById('stat-total').textContent=all;
+    cats.forEach(function(c){
+      var n=document.querySelectorAll('.mat-card[data-tags*="'+c+'"]').length;
+      var fc=document.getElementById('fc-'+c); if(fc) fc.textContent=n;
+    });
+  })();
   function checkGate(){var v=document.getElementById('gate-pass').value.trim();if(v){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';}else{document.getElementById('gate-error').style.display='block';}}
   document.getElementById('gate-pass').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});
   var cf='all',cs='';
