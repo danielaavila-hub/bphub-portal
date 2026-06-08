@@ -191,6 +191,10 @@
     .ex2-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .blank-word { font-style: italic; color: var(--cobalto); font-weight: 700; letter-spacing: 0.04em; }
     .ex2-fb { font-size: 13px; font-weight: 700; }
+    .modelo-btn { background: none; border: 1px solid var(--cobalto); color: var(--cobalto); border-radius: 8px; padding: 4px 14px; font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 8px; font-family: 'Manrope', sans-serif; transition: background 0.15s; }
+    .modelo-btn:hover { background: #EBF1F8; }
+    .modelo-box { display: none; margin-top: 10px; padding: 14px 18px; background: #EBF1F8; border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; font-size: 14px; color: var(--nanquim); line-height: 1.65; }
+    .modelo-box.show { display: block; }
     .ex2-fb.ok { color: #2E7D52; }
     .ex2-fb.err { color: #C0392B; }
   </style>
@@ -350,18 +354,26 @@
     <div class="q-item">
       <span class="q-num">1.</span> Qual é a narrativa que a autora contesta no primeiro parágrafo?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="modelo-btn" id="mbtn1" onclick="toggleModelo(1)">Ver resposta modelo</button>
+      <div class="modelo-box" id="m1">A narrativa de que o silêncio diante de injustiças é produto da ignorância — ideia que circula em certos meios intelectuais brasileiros e que a autora rejeita por confundir efeito com causa.</div>
     </div>
     <div class="q-item">
       <span class="q-num">2.</span> Como a autora define o silêncio no contexto brasileiro?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="modelo-btn" id="mbtn2" onclick="toggleModelo(2)">Ver resposta modelo</button>
+      <div class="modelo-box" id="m2">Como uma estratégia de sobrevivência, não como ingenuidade. Quem cresceu em contextos onde falar custava caro aprendeu cedo que o silêncio protege — o que exige memória, não ignorância.</div>
     </div>
     <div class="q-item">
       <span class="q-num">3.</span> A que a autora atribui a assimetria entre vozes que têm espaço e as que não têm?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="modelo-btn" id="mbtn3" onclick="toggleModelo(3)">Ver resposta modelo</button>
+      <div class="modelo-box" id="m3">Às condições materiais que determinam quem pode falar, quando e para quem — não à capacidade intelectual dos excluídos. Jornais, universidades e institutos falam em nome da sociedade, mas nem sempre a representam.</div>
     </div>
     <div class="q-item">
       <span class="q-num">4.</span> Por que, segundo a autora, a tese da ignorância é conveniente?
       <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="modelo-btn" id="mbtn4" onclick="toggleModelo(4)">Ver resposta modelo</button>
+      <div class="modelo-box" id="m4">Porque desloca o problema: em vez de questionar as estruturas de poder, questiona-se o indivíduo. É mais fácil "educar o povo" do que redistribuir o poder — por isso esse argumento persiste.</div>
     </div>
     <button class="check-btn" onclick="markEx1Done()" style="margin-top:4px;">Concluído ✓</button>
     <div class="ex-score" id="score1"></div>
@@ -710,6 +722,14 @@ function markEx1Done(){
   const sc = document.getElementById('score1');
   sc.className = 'ex-score show pass';
   sc.textContent = '✓ Respostas registradas. Envie ao final para a professora rever.';
+}
+
+// ── RESPOSTA MODELO ──
+function toggleModelo(n) {
+  const box = document.getElementById('m' + n);
+  const btn = document.getElementById('mbtn' + n);
+  box.classList.toggle('show');
+  btn.textContent = box.classList.contains('show') ? 'Ocultar resposta' : 'Ver resposta modelo';
 }
 
 // ── EXERCÍCIO 2 — Identifique no texto ──
