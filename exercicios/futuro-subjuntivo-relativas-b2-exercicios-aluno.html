@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futuro do Subjuntivo em OraÃ§Ãµes Relativas â ExercÃ­cios B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --pitomba-light: #FBF0E8;
+      --ouro: #FFB94A; --floresta: #4E551D; --erva-doce: #A6B28A;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 10; }
+    .topbar img { height: 38px; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--pitomba); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--pitomba); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.18); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 48px 0; }
+
+    /* exercise block */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 24px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 32px; height: 32px; border-radius: 50%; background: var(--pitomba); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* blanks */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 160px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--pitomba); }
+    .blank-input.correct { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .hint-tag { font-size: 12px; color: #999; font-style: italic; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); resize: vertical; min-height: 72px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 10px; }
+    .open-textarea:focus { border-color: var(--pitomba); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* transform items */
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-cue { font-size: 12px; color: #888; font-style: italic; margin-bottom: 8px; }
+
+    /* combine items */
+    .combine-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .combine-item:last-child { border-bottom: none; }
+    .combine-original { font-size: 15px; color: var(--texto); margin-bottom: 6px; }
+    .combine-cue { font-size: 12px; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; font-style: italic; }
+
+    /* buttons */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--pitomba); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .reset-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .reset-btn:hover { background: var(--pitomba-light); }
+
+    /* model answers */
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; background: transparent; border: 1.5px solid #967E63; color: #967E63; border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s; }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+    .model-answers-block { display: none; margin-top: 20px; }
+    .model-answers-block.visible { display: block; }
+    .model-answer-item { margin-bottom: 12px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom: 0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size: 14px; color: var(--texto); line-height: 1.7; margin: 0; }
+
+    /* result msg */
+    .result-msg { display: none; margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 400; max-height: 320px; overflow-y: auto; }
+    .result-msg.good    { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    /* writing */
+    .writing-prompt-box { background: var(--pitomba-light); border: 1.5px solid rgba(211,109,41,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; font-size: 14px; line-height: 1.8; }
+    .writing-prompt-box strong { color: var(--pitomba); }
+
+    /* send box */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    /* nav link */
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; color: var(--cobalto); }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; background: var(--cobalto); }
+    .nav-btn:hover { opacity: 0.88; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">ExercÃ­cios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Futuro do Subjuntivo <em>em OraÃ§Ãµes Relativas</em></h1>
+  <div class="hero-sub">Complete, transforme e crie frases com <strong style="color:white;">quem, que</strong> e <strong style="color:white;">onde</strong> â da forma mecÃ¢nica Ã  produÃ§Ã£o livre.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">completar lacunas</span>
+    <span class="hero-tag">transformar frases</span>
+    <span class="hero-tag">combinar oraÃ§Ãµes</span>
+    <span class="hero-tag">produÃ§Ã£o escrita</span>
+  </div>
+  <div class="hero-note">ð Complete apÃ³s a aula</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- EXERCÃCIO 1 â Preencha as lacunas -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">1</div>
+      <div>
+        <h3>Preencha as lacunas com o futuro do subjuntivo</h3>
+        <p>Conjugue o verbo indicado entre parÃªnteses</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Complete cada frase com o verbo entre parÃªnteses no futuro do subjuntivo. AtenÃ§Ã£o ao sujeito da oraÃ§Ã£o relativa.</p>
+
+    <ul class="blanks-list" id="ex1-list">
+      <li>
+        <span class="item-num">1.</span>
+        <span>Todas as pessoas que</span>
+        <input class="blank-input" id="b1" data-answer="forem" placeholder="____________">
+        <span>convidadas vÃ£o ser bem recebidas.</span>
+        <span class="hint-tag">(ser)</span>
+      </li>
+      <li>
+        <span class="item-num">2.</span>
+        <span>Vou aonde vocÃªs</span>
+        <input class="blank-input" id="b2" data-answer="forem" placeholder="____________">
+        <span>. Tenho confianÃ§a em vocÃªs.</span>
+        <span class="hint-tag">(ir)</span>
+      </li>
+      <li>
+        <span class="item-num">3.</span>
+        <span>DÃ¡-se uma recompensa a quem</span>
+        <input class="blank-input" id="b3" data-answer="encontrar" placeholder="____________">
+        <span>a carteira.</span>
+        <span class="hint-tag">(encontrar)</span>
+      </li>
+      <li>
+        <span class="item-num">4.</span>
+        <span>Cada participante pode escolher o tema que</span>
+        <input class="blank-input" id="b4" data-answer="quiser" placeholder="____________">
+        <span>para a redaÃ§Ã£o.</span>
+        <span class="hint-tag">(querer)</span>
+      </li>
+      <li>
+        <span class="item-num">5.</span>
+        <span>Quem</span>
+        <input class="blank-input" id="b5" data-answer="for" placeholder="____________">
+        <span>contra a proposta, levante a mÃ£o.</span>
+        <span class="hint-tag">(ser)</span>
+      </li>
+      <li>
+        <span class="item-num">6.</span>
+        <span>FaÃ§a o melhor que vocÃª</span>
+        <input class="blank-input" id="b6" data-answer="puder" placeholder="____________">
+        <span>pela sua empresa.</span>
+        <span class="hint-tag">(poder)</span>
+      </li>
+      <li>
+        <span class="item-num">7.</span>
+        <span>Aqueles que me</span>
+        <input class="blank-input" id="b7" data-answer="ajudarem" placeholder="____________">
+        <span>serÃ£o recompensados.</span>
+        <span class="hint-tag">(ajudar)</span>
+      </li>
+      <li>
+        <span class="item-num">8.</span>
+        <span>Quem</span>
+        <input class="blank-input" id="b8" data-answer="tiver" placeholder="____________">
+        <span>dÃºvidas pode falar comigo depois da aula.</span>
+        <span class="hint-tag">(ter)</span>
+      </li>
+      <li>
+        <span class="item-num">9.</span>
+        <span>Ele irÃ¡ aonde nÃ³s o</span>
+        <input class="blank-input" id="b9" data-answer="mandarmos" placeholder="____________">
+        <span>. Ã muito obediente.</span>
+        <span class="hint-tag">(mandar â sujeito: nÃ³s)</span>
+      </li>
+      <li>
+        <span class="item-num">10.</span>
+        <span>Tudo o que ele</span>
+        <input class="blank-input" id="b10" data-answer="disser" placeholder="____________">
+        <span>sobre nÃ³s Ã© mentira.</span>
+        <span class="hint-tag">(dizer)</span>
+      </li>
+    </ul>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="check-btn" onclick="checkEx1()">â Verificar respostas</button>
+      <button class="reset-btn" onclick="resetEx1()">âº Reiniciar</button>
+    </div>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÃCIO 2 â Transforme as frases -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">2</div>
+      <div>
+        <h3>Transforme as frases</h3>
+        <p>Use o pronome relativo indicado e o futuro do subjuntivo</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Reescreva cada frase usando o pronome relativo entre parÃªnteses. Algumas frases tÃªm duas versÃµes possÃ­veis (a) e (b) â escreva as duas.</p>
+
+    <div class="example-box">
+      <strong>Exemplo:</strong> Os alunos aprovados receberÃ£o um certificado. (a) <strong>os que</strong> / (b) <strong>quem</strong><br>
+      â (a) <strong>Os que forem aprovados</strong> receberÃ£o um certificado.<br>
+      â (b) <strong>Quem for aprovado</strong> receberÃ¡ um certificado.
+    </div>
+
+    <div class="transform-item">
+      <p class="transform-original">1. Todos os participantes do curso vÃ£o estar habilitados para uma bolsa de estudo.</p>
+      <p class="transform-cue">(a) todos os que &nbsp;Â·&nbsp; (b) quem</p>
+      <textarea class="open-textarea" id="t1a" placeholder="(a) Todos os que..."></textarea>
+      <textarea class="open-textarea" id="t1b" placeholder="(b) Quem..."></textarea>
+    </div>
+    <div class="transform-item">
+      <p class="transform-original">2. Hospedem-se nos lugares indicados pelos organizadores do congresso.</p>
+      <p class="transform-cue">(onde)</p>
+      <textarea class="open-textarea" id="t2" placeholder="Hospedem-se onde..."></textarea>
+    </div>
+    <div class="transform-item">
+      <p class="transform-original">3. SÃ³ pessoas com muita paciÃªncia conseguem resolver esse enigma.</p>
+      <p class="transform-cue">(a) quem &nbsp;Â·&nbsp; (b) aqueles que</p>
+      <textarea class="open-textarea" id="t3a" placeholder="(a) Quem..."></textarea>
+      <textarea class="open-textarea" id="t3b" placeholder="(b) Aqueles que..."></textarea>
+    </div>
+    <div class="transform-item">
+      <p class="transform-original">4. Os primeiros a chegar poderÃ£o escolher os melhores lugares.</p>
+      <p class="transform-cue">(a) os que &nbsp;Â·&nbsp; (b) quem</p>
+      <textarea class="open-textarea" id="t4a" placeholder="(a) Os que..."></textarea>
+      <textarea class="open-textarea" id="t4b" placeholder="(b) Quem..."></textarea>
+    </div>
+    <div class="transform-item">
+      <p class="transform-original">5. Os candidatos Ã  vaga terÃ£o que se submeter a uma entrevista.</p>
+      <p class="transform-cue">(a) quem &nbsp;Â·&nbsp; (b) todos aqueles que</p>
+      <textarea class="open-textarea" id="t5a" placeholder="(a) Quem..."></textarea>
+      <textarea class="open-textarea" id="t5b" placeholder="(b) Todos aqueles que..."></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex2-answers', this)">ð Ver respostas modelo</button>
+    <div class="model-answers-block" id="ex2-answers">
+      <div class="model-answer-item">
+        <div class="model-label">Frase 1</div>
+        <p>(a) Todos os que <strong>participarem</strong> do curso vÃ£o estar habilitados para uma bolsa de estudo.<br>
+           (b) Quem <strong>participar</strong> do curso vai estar habilitado para uma bolsa de estudo.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 2</div>
+        <p>Hospedem-se onde os organizadores do congresso <strong>indicarem</strong>.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 3</div>
+        <p>(a) Quem <strong>tiver</strong> muita paciÃªncia consegue resolver esse enigma.<br>
+           (b) Aqueles que <strong>tiverem</strong> muita paciÃªncia conseguem resolver esse enigma.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 4</div>
+        <p>(a) Os que <strong>chegarem</strong> primeiro poderÃ£o escolher os melhores lugares.<br>
+           (b) Quem <strong>chegar</strong> primeiro poderÃ¡ escolher os melhores lugares.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 5</div>
+        <p>(a) Quem <strong>se candidatar</strong> Ã  vaga terÃ¡ que se submeter a uma entrevista.<br>
+           (b) Todos aqueles que <strong>se candidatarem</strong> Ã  vaga terÃ£o que se submeter a uma entrevista.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXERCÃCIO 3 â Combine as oraÃ§Ãµes -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">3</div>
+      <div>
+        <h3>Combine as oraÃ§Ãµes</h3>
+        <p>Una as duas ideias usando pronome relativo + futuro do subjuntivo</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Reescreva as frases combinando as duas ideias em uma Ãºnica frase, usando o pronome relativo indicado e o futuro do subjuntivo.</p>
+
+    <div class="example-box">
+      <strong>Exemplo:</strong> AlguÃ©m vai ter o maior nÃºmero de pontos. Essa pessoa ganharÃ¡ o prÃªmio. (quem)<br>
+      â <strong>Quem tiver</strong> o maior nÃºmero de pontos ganharÃ¡ o prÃªmio.
+    </div>
+
+    <div class="combine-item">
+      <p class="combine-original">1. Qualquer pessoa pode experimentar as amostras. Precisa se inscrever antes.</p>
+      <p class="combine-cue">Use: quem</p>
+      <textarea class="open-textarea" id="c1" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="combine-item">
+      <p class="combine-original">2. O professor vai premiar um aluno. Esse aluno terÃ¡ as melhores notas da turma.</p>
+      <p class="combine-cue">Use: que</p>
+      <textarea class="open-textarea" id="c2" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="combine-item">
+      <p class="combine-original">3. Ele vai gravar algo que vocÃª disser. Tudo, sem exceÃ§Ã£o.</p>
+      <p class="combine-cue">Use: o que / tudo o que</p>
+      <textarea class="open-textarea" id="c3" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="combine-item">
+      <p class="combine-original">4. VocÃªs querem ir a algum lugar. Eu levo vocÃªs lÃ¡ de carro.</p>
+      <p class="combine-cue">Use: onde / aonde</p>
+      <textarea class="open-textarea" id="c4" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="combine-item">
+      <p class="combine-original">5. AlguÃ©m vai fazer o desenho com o tema mais relacionado Ã  Ecologia. Essa pessoa receberÃ¡ uma menÃ§Ã£o honrosa.</p>
+      <p class="combine-cue">Use: quem / o aluno que</p>
+      <textarea class="open-textarea" id="c5" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex3-answers', this)">ð Ver respostas modelo</button>
+    <div class="model-answers-block" id="ex3-answers">
+      <div class="model-answer-item">
+        <div class="model-label">Frase 1</div>
+        <p>Quem <strong>quiser</strong> experimentar as amostras precisa se inscrever antes.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 2</div>
+        <p>O professor vai premiar o aluno que <strong>tiver</strong> / <strong>obtiver</strong> as melhores notas da turma.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 3</div>
+        <p>Ele vai gravar tudo o que vocÃª <strong>disser</strong>.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 4</div>
+        <p>Levo vocÃªs onde / aonde <strong>quiserem</strong> de carro.</p>
+      </div>
+      <div class="model-answer-item">
+        <div class="model-label">Frase 5</div>
+        <p>Quem <strong>fizer</strong> o desenho com o tema mais relacionado Ã  Ecologia receberÃ¡ uma menÃ§Ã£o honrosa.<br>
+        <em>ou:</em> O aluno que <strong>fizer</strong> o desenho com o tema mais relacionado Ã  Ecologia receberÃ¡ uma menÃ§Ã£o honrosa.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- EXERCÃCIO 4 â ProduÃ§Ã£o escrita -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">4</div>
+      <div>
+        <h3>ProduÃ§Ã£o escrita â Crie o seu regulamento</h3>
+        <p>Uso livre do futuro do subjuntivo em oraÃ§Ãµes relativas</p>
+      </div>
+    </div>
+
+    <div class="writing-prompt-box">
+      <strong>Proposta:</strong> Escreva o regulamento de um concurso, evento ou campeonato â real ou imaginÃ¡rio. Use pelo menos <strong>5 estruturas</strong> com pronome relativo + futuro do subjuntivo.<br><br>
+      SugestÃµes de tema: um concurso de gastronomia Â· um campeonato esportivo Â· um festival de mÃºsica Â· uma promoÃ§Ã£o na sua empresa Â· um concurso de fotografia no bairro.<br><br>
+      <strong>Lembre-se:</strong> inclua quem pode participar, o que acontece com quem nÃ£o cumprir as regras, como serÃ¡ escolhido o vencedor e onde / quando serÃ¡ realizado o evento.
+    </div>
+
+    <p style="font-size:13px; color:#888; margin-bottom:12px; font-style:italic;">Destaque as estruturas com futuro do subjuntivo em MAIÃSCULAS ou entre asteriscos *assim*, para facilitar o feedback da professora.</p>
+
+    <textarea class="open-textarea" style="min-height:220px;" placeholder="Escreva o regulamento aqui...&#10;&#10;Exemplo de abertura: Este concurso Ã© aberto a todos que QUISEREM participar..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    ð© Quando terminar, envie seus exercÃ­cios para a professora. Ela vai ler com atenÃ§Ã£o e dar um feedback personalizado â destacando o que vocÃª fez bem e ajudando a aprimorar ainda mais o seu portuguÃªs. Essa troca Ã© uma das partes mais importantes do aprendizado!
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:24px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional â para receber uma cÃ³pia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email Ã© opcional â se preencher, receberÃ¡ uma cÃ³pia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">â Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da prÃ³xima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <!-- NAV LINK -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label">Material de referÃªncia</div>
+      <div class="nav-link-title">Futuro do Subjuntivo em OraÃ§Ãµes Relativas â Nota gramatical e texto Ã¢ncora</div>
+    </div>
+    <a href="futuro-subjuntivo-relativas-b2-texto.html" class="nav-btn">Ver material de referÃªncia â</a>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  /* ââ NormalizaÃ§Ã£o ââ */
+  function norm(s) {
+    return s.toLowerCase().trim()
+      .normalize('NFD').replace(/[Ì-Í¯]/g, '')
+      .replace(/\s+/g, ' ');
+  }
+
+  /* ââ EX 1: Preencher lacunas ââ */
+  var ex1Answers = [
+    { id: 'b1',  answer: 'forem',      display: 'forem' },
+    { id: 'b2',  answer: 'forem',      display: 'forem' },
+    { id: 'b3',  answer: 'encontrar',  display: 'encontrar' },
+    { id: 'b4',  answer: 'quiser',     display: 'quiser' },
+    { id: 'b5',  answer: 'for',        display: 'for' },
+    { id: 'b6',  answer: 'puder',      display: 'puder' },
+    { id: 'b7',  answer: 'ajudarem',   display: 'ajudarem' },
+    { id: 'b8',  answer: 'tiver',      display: 'tiver' },
+    { id: 'b9',  answer: 'mandarmos',  display: 'mandarmos' },
+    { id: 'b10', answer: 'disser',     display: 'disser' }
+  ];
+
+  function checkEx1() {
+    var correct = 0;
+    var html = '';
+    ex1Answers.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var val = el.value.trim();
+      var ok = norm(val) === norm(a.answer);
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', val !== '' && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:6px;">'
+            + '<strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">â</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">â</span>')
+            + ' <em>' + a.display + '</em></div>';
+    });
+    var res = document.getElementById('ex1-result');
+    var allOk = correct === ex1Answers.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? 'â Todas as 10 respostas corretas!'
+               : correct + ' de 10 corretas â respostas modelo:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  function resetEx1() {
+    ex1Answers.forEach(function(a) {
+      var el = document.getElementById(a.id);
+      el.value = '';
+      el.classList.remove('correct', 'wrong');
+    });
+    var res = document.getElementById('ex1-result');
+    res.style.display = 'none';
+    res.innerHTML = '';
+  }
+
+  /* ââ EX 2 e 3: Toggle respostas modelo ââ */
+  function toggleAnswers(id, btn) {
+    var block = document.getElementById(id);
+    var visible = block.classList.toggle('visible');
+    btn.textContent = visible ? 'ð Ocultar respostas modelo' : 'ð Ver respostas modelo';
+  }
+
+  /* ââ FORMSPREE SUBMIT ââ */
+  function bphubSubmit() {
+    var btn = document.getElementById('bphub-submit-btn');
+    var nameEl = document.getElementById('bphub-student-name');
+    var emailEl = document.getElementById('bphub-student-email');
+    var name = nameEl ? nameEl.value.trim() : '';
+    if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+    if (nameEl) nameEl.style.borderColor='';
+    var email = emailEl ? emailEl.value.trim() : '';
+    var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+    var answers = {};
+    var summaryLines = [];
+    document.querySelectorAll('textarea').forEach(function(ta, idx) {
+      var label = '';
+      var parent = ta.closest('[class]');
+      if (parent) {
+        var clone = parent.cloneNode(true);
+        clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+        label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+      }
+      if (!label) label = 'Campo ' + (idx+1);
+      var val = ta.value.trim() || '(sem resposta)';
+      answers['R' + (idx+1) + ' â ' + label] = val;
+      summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    });
+
+    var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+    if (email) payload['_replyto'] = email;
+
+    btn.disabled = true;
+    btn.textContent = 'A enviarâ¦';
+
+    fetch('https://formspree.io/f/xykaydly', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+    .then(function(res) {
+      if (res.ok) {
+        document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+        document.getElementById('bphub-success').style.display = 'block';
+        document.getElementById('bphub-form-area').style.display = 'none';
+        document.getElementById('bphub-error').style.display = 'none';
+        var slug = location.pathname.split('/').pop().replace('.html','');
+        localStorage.setItem('bphub_done_' + slug, '1');
+        document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        document.getElementById('bphub-error').style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Enviar respostas';
+      }
+    }).catch(function() {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    });
+  }
+</script>
+
+</body>
+</html>
