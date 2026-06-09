@@ -465,7 +465,7 @@
   <div class="page-hero">
     <div class="page-eyebrow">Materials Portal</div>
     <h1>Pretérito Perfeito<br><em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Composto</em></h1>
-    <p>Unlike the simple past, this tense connects a past action to the present moment — built with <em style="color:rgba(255,255,255,.95);font-style:normal;">ter</em> and a past participle, and far more common in Brazilian Portuguese than you might expect.</p>
+    <p>Unlike the simple past, this tense connects a past action to the present moment — built with <strong style="color:var(--ouro);">ter</strong> and a past participle, and far more common in Brazilian Portuguese than you might expect.</p>
     <div class="student-meta">
       <span class="meta-pill"><span class="dot"></span>ter + particípio</span>
       <span class="meta-pill"><span class="dot"></span>Particípio regular</span>
@@ -506,6 +506,7 @@
         <table class="form-table">
           <tr><td>eu</td><td>tenho</td></tr>
           <tr><td>você / ele / ela</td><td>tem</td></tr>
+          <tr><td>a gente</td><td>tem</td></tr>
           <tr><td>nós</td><td>temos</td></tr>
           <tr><td>vocês / eles / elas</td><td>têm</td></tr>
         </table>
@@ -755,7 +756,10 @@
         </li>
       </ul>
 
-      <button class="check-btn" onclick="checkBlanks()">✓ Check answers</button>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks()">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks()" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
       <div id="blanks-result" class="result-msg"></div>
     </div>
 
@@ -806,18 +810,18 @@
           <textarea class="choice-explain" placeholder="Explanation: I chose ___ because..."></textarea>
         </li>
         <li class="choice-item">
-          <p class="choice-sentence">5. Vocês _______ de todas as reuniões este mês?</p>
+          <p class="choice-sentence">5. Vocês _______ de todas as reuniões mês passado?</p>
           <div class="choice-options">
-            <button class="choice-btn" data-item="5" data-val="participaram" data-correct="false" onclick="selectChoice(this)">participaram</button>
-            <button class="choice-btn" data-item="5" data-val="têm participado" data-correct="true" onclick="selectChoice(this)">têm participado</button>
+            <button class="choice-btn" data-item="5" data-val="participaram" data-correct="true" onclick="selectChoice(this)">participaram</button>
+            <button class="choice-btn" data-item="5" data-val="têm participado" data-correct="false" onclick="selectChoice(this)">têm participado</button>
           </div>
           <textarea class="choice-explain" placeholder="Explanation: I chose ___ because..."></textarea>
         </li>
         <li class="choice-item">
           <p class="choice-sentence">6. Eu _______ português por dois anos até agora.</p>
           <div class="choice-options">
-            <button class="choice-btn" data-item="6" data-val="aprendi" data-correct="false" onclick="selectChoice(this)">aprendi</button>
-            <button class="choice-btn" data-item="6" data-val="tenho aprendido" data-correct="true" onclick="selectChoice(this)">tenho aprendido</button>
+            <button class="choice-btn" data-item="6" data-val="estudei" data-correct="false" onclick="selectChoice(this)">estudei</button>
+            <button class="choice-btn" data-item="6" data-val="tenho estudado" data-correct="true" onclick="selectChoice(this)">tenho estudado</button>
           </div>
           <textarea class="choice-explain" placeholder="Explanation: I chose ___ because..."></textarea>
         </li>
@@ -984,6 +988,18 @@
       el.className = 'result-msg try-again';
       el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
     }
+  }
+
+  /* ── EX 2: Reset blanks ── */
+  function resetBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list .blank-input');
+    inputs.forEach(inp => {
+      inp.value = '';
+      inp.classList.remove('correct-input', 'wrong-input');
+    });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'none';
+    el.textContent = '';
   }
 
   /* ── EX 3: Choice ── */
