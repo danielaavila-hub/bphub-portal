@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eu Quero Ver Gol — O Rappa | Brazilian Portuguese Hub</title>
+  <style>
+    /* ───── design tokens ───── */
+    :root{
+      --nanquim:#1C1C1C; --telha:#A1441D; --goiaba:#FCA290;
+      --baunilha:#F5F0E8; --samba:#967E63; --forro:#D36D29;
+      --funk:#2B2B1E; --rock:#A1441D; --ouro:#FFB94A;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;background:#f7f4ef;color:var(--nanquim);line-height:1.6;}
+
+    /* topbar */
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      height:64px;padding:0 48px;
+      background:#fff;border-bottom:1px solid #e0dbd4;
+      display:flex;align-items:center;gap:16px;
+    }
+    .topbar a.logo{font-weight:700;font-size:1rem;color:var(--telha);text-decoration:none;letter-spacing:.02em;}
+    .topbar-sep{color:#ccc;font-size:1.1rem;}
+    .topbar-title{color:var(--nanquim);font-size:.95rem;font-weight:500;}
+
+    /* container */
+    .container{max-width:820px;margin:0 auto;padding:32px 16px 64px;}
+
+    /* hero */
+    .hero{margin-bottom:20px;}
+    .hero h1{font-size:2rem;font-weight:800;color:var(--nanquim);line-height:1.2;margin-bottom:4px;}
+    .hero .artista{font-size:1.1rem;color:var(--samba);margin-bottom:6px;}
+    .hero .fonte{font-size:.82rem;color:#888;}
+
+    /* level-bar */
+    .level-bar{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      padding:10px 16px;border-radius:8px;margin-bottom:20px;
+    }
+    .badge{font-size:.78rem;font-weight:600;letter-spacing:.04em;padding:4px 12px;border-radius:20px;}
+    .nivel-tag{font-size:.78rem;font-weight:700;letter-spacing:.06em;padding:4px 12px;border-radius:20px;margin-left:auto;}
+
+    /* youtube */
+    .yt-wrap{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;margin-bottom:32px;box-shadow:0 4px 16px rgba(0,0,0,.12);}
+    .yt-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+    /* section title */
+    .sec-title{
+      font-size:1.05rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+      border-left:4px solid var(--funk);padding-left:12px;margin:32px 0 14px;color:var(--nanquim);
+    }
+
+    /* lyrics fragments */
+    .letra-box{
+      background:#fff;border:1px solid #e0dbd4;border-radius:10px;
+      padding:24px 28px;margin-bottom:28px;font-size:.97rem;line-height:2;
+    }
+    .letra-box .estrofe{margin-bottom:18px;}
+    .letra-box .refrao{
+      background:var(--funk);color:#fff;border-radius:8px;
+      padding:14px 20px;margin:10px 0;font-weight:600;line-height:1.9;
+    }
+    .letra-box .refrao .hl{background:rgba(255,200,100,.3);border-radius:3px;padding:1px 4px;}
+    .letra-box .reticencias{color:#bbb;font-style:italic;margin:6px 0;}
+    .letra-box .attr{font-size:.78rem;color:#999;margin-top:16px;border-top:1px solid #eee;padding-top:10px;}
+
+    /* grammar */
+    .gram-box{background:#fff;border:1px solid #e0dbd4;border-radius:10px;padding:24px 28px;margin-bottom:28px;}
+    .gram-box h3{font-size:1rem;font-weight:700;margin-bottom:12px;}
+    .gram-box p{font-size:.95rem;margin-bottom:12px;}
+    .gram-box .formula{
+      background:var(--baunilha);border-left:4px solid var(--funk);
+      padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:.97rem;font-weight:600;
+    }
+    .gram-box table{width:100%;border-collapse:collapse;font-size:.91rem;margin:14px 0;}
+    .gram-box th{background:var(--funk);color:#fff;padding:9px 14px;text-align:left;font-weight:600;}
+    .gram-box td{padding:9px 14px;border-bottom:1px solid #f0ece6;}
+    .gram-box tr:last-child td{border-bottom:none;}
+    .gram-box tr:nth-child(even) td{background:#f7f4ef;}
+    .conj-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;
+      background:#f7f4ef;border-radius:8px;padding:14px 18px;font-size:.9rem;margin-top:10px;
+    }
+    .conj-grid span strong{color:var(--telha);}
+
+    /* cultural */
+    .cult-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+    @media(max-width:600px){.cult-grid{grid-template-columns:1fr;}}
+    .cult-box{background:#fff;border:1px solid #e0dbd4;border-radius:10px;padding:20px;}
+    .cult-box .cult-icon{font-size:1.5rem;margin-bottom:8px;}
+    .cult-box h4{font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--nanquim);}
+    .cult-box p{font-size:.88rem;line-height:1.65;color:#444;}
+    .cult-box em{font-style:italic;color:var(--telha);}
+
+    /* vocab */
+    .vocab-table{width:100%;border-collapse:collapse;font-size:.91rem;margin-bottom:28px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+    .vocab-table th{background:var(--funk);color:#fff;padding:10px 16px;text-align:left;font-weight:600;}
+    .vocab-table td{padding:10px 16px;border-bottom:1px solid #f0ece6;vertical-align:top;}
+    .vocab-table tr:last-child td{border-bottom:none;}
+    .vocab-table tr:nth-child(even) td{background:#f7f4ef;}
+
+    /* exercise boxes */
+    .ex-box{background:#fff;border:1px solid #e0dbd4;border-radius:10px;padding:24px 28px;margin-bottom:20px;}
+    .ex-box h3{font-size:1rem;font-weight:700;margin-bottom:4px;}
+    .ex-box .instrucao{font-size:.88rem;color:#555;margin-bottom:18px;font-style:italic;}
+
+    /* T/F */
+    .tf-item{margin-bottom:14px;font-size:.95rem;}
+    .tf-item .tf-q{margin-bottom:6px;}
+    .tf-item label{display:inline-flex;align-items:center;gap:5px;margin-right:14px;cursor:pointer;}
+    .tf-item input[type=radio]{accent-color:var(--funk);}
+
+    /* gap fill */
+    .word-bank{
+      background:var(--baunilha);border:1px solid #e0dbd4;border-radius:8px;
+      padding:10px 16px;margin-bottom:18px;font-size:.9rem;
+    }
+    .word-bank span{font-weight:700;color:var(--telha);}
+    .gap-item{margin-bottom:13px;font-size:.95rem;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+    .gap-num{font-weight:700;color:var(--funk);min-width:20px;}
+    .gap-input{
+      border:none;border-bottom:2px solid var(--funk);background:transparent;
+      font-size:.95rem;padding:2px 6px;width:120px;outline:none;color:var(--nanquim);
+    }
+
+    /* dropdown */
+    .dd-item{margin-bottom:13px;font-size:.95rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .dd-num{font-weight:700;color:var(--funk);min-width:20px;}
+    .dd-select{
+      border:2px solid #d0ccc4;border-radius:6px;background:#fff;
+      font-size:.92rem;padding:4px 8px;color:var(--nanquim);cursor:pointer;
+    }
+
+    /* production */
+    .prod-item{margin-bottom:20px;}
+    .prod-item p{font-size:.95rem;margin-bottom:8px;}
+    .prod-textarea{
+      width:100%;border:1.5px solid #d0ccc4;border-radius:8px;
+      padding:12px;font-size:.93rem;font-family:inherit;resize:vertical;
+      min-height:80px;background:#fafaf8;color:var(--nanquim);
+    }
+    .prod-textarea:focus{outline:none;border-color:var(--funk);}
+
+    /* feedback */
+    .feedback{margin-top:12px;font-size:.9rem;padding:8px 12px;border-radius:6px;display:none;}
+    .feedback.ok{background:#eafbe7;color:#1a5c28;display:block;}
+    .feedback.err{background:#fdecea;color:#7c1d1d;display:block;}
+    .mark-ok{color:#1a5c28;font-weight:700;}
+    .mark-err{color:#c0392b;font-weight:700;text-decoration:line-through;}
+
+    /* buttons */
+    .btn-check{
+      background:var(--funk);color:#fff;border:none;border-radius:8px;
+      padding:10px 24px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:14px;transition:opacity .15s;
+    }
+    .btn-check:hover{opacity:.82;}
+    .btn-reset{
+      background:transparent;color:var(--funk);border:2px solid var(--funk);border-radius:8px;
+      padding:8px 18px;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:14px;margin-left:10px;transition:opacity .15s;
+    }
+    .btn-reset:hover{opacity:.7;}
+
+    /* form */
+    .form-wrap{max-width:760px;margin:0 auto;padding:0 16px 48px;}
+    .form-title{font-size:1.1rem;font-weight:700;margin-bottom:6px;color:var(--nanquim);}
+    .form-sub{font-size:.88rem;color:#666;margin-bottom:18px;}
+    .form-group{margin-bottom:14px;}
+    .form-group label{display:block;font-size:.88rem;font-weight:600;margin-bottom:5px;}
+    .form-group input,.form-group textarea{
+      width:100%;border:1.5px solid #d0ccc4;border-radius:8px;
+      padding:10px 12px;font-size:.93rem;font-family:inherit;background:#fff;color:var(--nanquim);
+    }
+    .form-group textarea{resize:vertical;min-height:90px;}
+    .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--funk);}
+    .btn-send{
+      background:var(--funk);color:#fff;border:none;border-radius:8px;
+      padding:11px 28px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:4px;
+    }
+    .form-msg{margin-top:10px;font-size:.9rem;}
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a class="logo" href="../musicas/index.html">Brazilian Portuguese Hub</a>
+  <span class="topbar-sep">›</span>
+  <span class="topbar-title">Eu Quero Ver Gol — O Rappa</span>
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Eu Quero Ver Gol</h1>
+    <div class="artista">O Rappa</div>
+    <div class="fonte">Rappa Mundi · álbum, 1996</div>
+  </div>
+
+  <!-- LEVEL BAR -->
+  <div class="level-bar" style="background:var(--funk)">
+    <span class="badge" style="background:rgba(255,255,255,.2);color:#fff">Hip-hop</span>
+    <span class="badge" style="background:rgba(255,255,255,.2);color:#fff">O Rappa</span>
+    <span class="badge" style="background:rgba(255,255,255,.2);color:#fff">1996</span>
+    <span class="nivel-tag" style="background:rgba(255,255,255,.2);color:#fff">A2</span>
+  </div>
+
+  <!-- YOUTUBE -->
+  <div class="yt-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/kbj3ifGGKTo"
+      title="Eu Quero Ver Gol — O Rappa (áudio oficial)"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- LYRICS FRAGMENTS -->
+  <div class="sec-title">Fragmentos da música</div>
+  <div class="letra-box">
+
+    <div class="estrofe">
+      Batuque, balanço, swing, praia e carnaval<br>
+      Hoje no pé do <strong>morro</strong> tem ensaio geral
+    </div>
+
+    <div class="refrao">
+      Eu <span class="hl">quero ver</span> gol, eu <span class="hl">quero ver</span> gol<br>
+      Não precisa ser de <strong>placa</strong>, eu <span class="hl">quero ver</span> gol
+    </div>
+
+    <div class="reticencias">…</div>
+
+    <div class="estrofe">
+      Tem limão, tem mate, melancia fatiada<br>
+      O globo sal e doce, dragão chinês
+    </div>
+
+    <div class="reticencias">…</div>
+
+    <div class="estrofe">
+      Tô no <strong>rango</strong> desde as 2 e a lombra bateu<br>
+      O jogo é as 5 e eu sou mais o meu<br>
+      Tô com a <strong>geral</strong> no bolso, garanti o meu lugar<br>
+      Vou <strong>torcer</strong>, vou xingar pro meu time ganhar
+    </div>
+
+    <div class="refrao">
+      Porque eu <span class="hl">quero ver</span> gol, eu <span class="hl">quero ver</span> gol<br>
+      Não precisa ser de placa, eu <span class="hl">quero ver</span> gol
+    </div>
+
+    <div class="attr">© O Rappa — <em>Rappa Mundi</em>, 1996. Trechos selecionados para fins educativos.</div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="sec-title">Gramática em foco</div>
+  <div class="gram-box">
+    <h3>Locução verbal — <em>querer</em> + infinitivo</h3>
+
+    <p>Na música: <strong>"Eu <span style="color:var(--telha)">quero ver</span> gol"</strong></p>
+
+    <div class="formula">Fórmula: verbo conjugado + infinitivo</div>
+
+    <p>A <strong>locução verbal</strong> junta dois verbos. O primeiro verbo é conjugado (muda com a pessoa). O segundo verbo fica no infinitivo (não muda).</p>
+
+    <table>
+      <thead>
+        <tr><th>Locução verbal</th><th>Em inglês</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>querer + infinitivo</strong></td>
+          <td>to want to</td>
+          <td>Eu <strong>quero ver</strong> gol.</td>
+        </tr>
+        <tr>
+          <td><strong>ir + infinitivo</strong></td>
+          <td>going to / will</td>
+          <td>Eu <strong>vou torcer</strong> pro Brasil.</td>
+        </tr>
+        <tr>
+          <td><strong>poder + infinitivo</strong></td>
+          <td>can / to be able to</td>
+          <td>Você <strong>pode entrar</strong>!</td>
+        </tr>
+        <tr>
+          <td><strong>precisar + infinitivo</strong></td>
+          <td>to need to</td>
+          <td>Ele <strong>precisa ganhar</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-weight:600;font-size:.92rem;margin-top:4px;">Conjugação de <em>querer</em> — presente do indicativo</p>
+    <div class="conj-grid">
+      <span>eu <strong>quero</strong></span>
+      <span>nós <strong>queremos</strong></span>
+      <span>você / ele / ela <strong>quer</strong></span>
+      <span>vocês / eles / elas <strong>querem</strong></span>
+    </div>
+  </div>
+
+  <!-- CULTURAL CONTEXT -->
+  <div class="sec-title">Contexto cultural</div>
+  <div class="cult-grid">
+    <div class="cult-box">
+      <div class="cult-icon">🎤</div>
+      <h4>O Rappa</h4>
+      <p>O Rappa is a Rio de Janeiro band formed in 1993. They mix funk, hip-hop, reggae, and rock to tell stories about daily life in Rio's streets and communities. <em>"Eu Quero Ver Gol"</em> is from their breakthrough album <em>Rappa Mundi</em> (1996) — one of the most celebrated Brazilian hip-hop albums of the 1990s.</p>
+    </div>
+    <div class="cult-box">
+      <div class="cult-icon">⚽</div>
+      <h4>Football in Brazil</h4>
+      <p>Football is the most popular sport in Brazil — many Brazilians call it <em>a paixão nacional</em> (the national passion). Brazil has won the FIFA World Cup 5 times. On match day, cities grow quiet, streets fill with fans in yellow jerseys, and everyone watches <em>o jogo</em> together.</p>
+    </div>
+    <div class="cult-box">
+      <div class="cult-icon">🏆</div>
+      <h4>Gol de placa</h4>
+      <p>A <em>gol de placa</em> (literally: a goal worthy of a commemorative plaque) is something truly extraordinary. The phrase was born after Pelé scored an incredible goal at Maracanã in 1961. Journalists said it deserved a commemorative plaque — and one was actually installed! Today Brazilians use it for anything amazing: <em>"Essa comida foi um gol de placa!"</em></p>
+    </div>
+    <div class="cult-box">
+      <div class="cult-icon">🌊</div>
+      <h4>A vida carioca</h4>
+      <p>This song paints a vivid picture of life in Rio de Janeiro (<em>carioca</em> = from Rio). The singer takes a crowded bus to the beach, cheers for his team, and dreams of seeing a goal. It captures the energy, the slang, and the everyday rhythm of carioca street life.</p>
+    </div>
+  </div>
+
+  <!-- VOCABULARY -->
+  <div class="sec-title">Vocabulário carioca</div>
+  <table class="vocab-table">
+    <thead>
+      <tr>
+        <th>Palavra / expressão</th>
+        <th>Significado (English)</th>
+        <th>Na música…</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>gol de placa</strong></td>
+        <td>a spectacular goal; anything extraordinary</td>
+        <td><em>"Não precisa ser de placa"</em> — any goal is fine!</td>
+      </tr>
+      <tr>
+        <td><strong>morro</strong></td>
+        <td>hill; in Rio, a hillside community (favela)</td>
+        <td><em>"no pé do morro"</em> = at the base of the hill</td>
+      </tr>
+      <tr>
+        <td><strong>bonde</strong></td>
+        <td>originally a tram; in Rio slang, a crew, a group of friends</td>
+        <td><em>"Méier-Copacabana é o bonde ideal"</em></td>
+      </tr>
+      <tr>
+        <td><strong>rebu</strong></td>
+        <td>confusion, chaos, commotion</td>
+        <td><em>"No ponto final o rebu é total"</em></td>
+      </tr>
+      <tr>
+        <td><strong>rango</strong></td>
+        <td>food (very informal carioca slang)</td>
+        <td><em>"Tô no rango desde as 2…"</em></td>
+      </tr>
+      <tr>
+        <td><strong>geral</strong></td>
+        <td>the cheap standing section of a stadium; also: everyone / everything</td>
+        <td><em>"Tô com a geral no bolso"</em> = I've got my standing ticket</td>
+      </tr>
+      <tr>
+        <td><strong>torcer</strong></td>
+        <td>to cheer, to support a football team</td>
+        <td><em>"Vou torcer… pro meu time ganhar"</em></td>
+      </tr>
+      <tr>
+        <td><strong>xingar</strong></td>
+        <td>to curse, to swear; in football, to yell at players or the referee (very common!)</td>
+        <td><em>"Vou torcer, vou xingar pro meu time ganhar"</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EX 1 — T/F -->
+  <div class="sec-title">Exercícios</div>
+  <div class="ex-box">
+    <h3>Exercício 1 — Verdadeiro (V) ou Falso (F)?</h3>
+    <div class="instrucao">Ouça a música e leia os fragmentos. Marque V ou F.</div>
+
+    <div class="tf-item">
+      <div class="tf-q"><strong>1.</strong> A música fala sobre um dia de jogo de futebol.</div>
+      <label><input type="radio" name="tf1" value="V"> V</label>
+      <label><input type="radio" name="tf1" value="F"> F</label>
+    </div>
+    <div class="tf-item">
+      <div class="tf-q"><strong>2.</strong> Para o cantor, só um "gol de placa" é suficiente — um gol simples não serve.</div>
+      <label><input type="radio" name="tf2" value="V"> V</label>
+      <label><input type="radio" name="tf2" value="F"> F</label>
+    </div>
+    <div class="tf-item">
+      <div class="tf-q"><strong>3.</strong> O caminho para o jogo é tranquilo e fácil.</div>
+      <label><input type="radio" name="tf3" value="V"> V</label>
+      <label><input type="radio" name="tf3" value="F"> F</label>
+    </div>
+    <div class="tf-item">
+      <div class="tf-q"><strong>4.</strong> Na praia, há pessoas vendendo limão, mate e melancia.</div>
+      <label><input type="radio" name="tf4" value="V"> V</label>
+      <label><input type="radio" name="tf4" value="F"> F</label>
+    </div>
+    <div class="tf-item">
+      <div class="tf-q"><strong>5.</strong> O cantor não conseguiu ingresso para o jogo.</div>
+      <label><input type="radio" name="tf5" value="V"> V</label>
+      <label><input type="radio" name="tf5" value="F"> F</label>
+    </div>
+
+    <button class="btn-check" onclick="checkTF()">Verificar</button>
+    <button class="btn-reset" onclick="resetTF()">Apagar</button>
+    <div class="feedback" id="tf-fb"></div>
+  </div>
+
+  <!-- EX 2 — GAP FILL -->
+  <div class="ex-box">
+    <h3>Exercício 2 — Complete com as palavras da música</h3>
+    <div class="instrucao">Use o banco de palavras para completar os trechos.</div>
+
+    <div class="word-bank">
+      Banco de palavras: <span>gol</span> &nbsp;|&nbsp; <span>torcer</span> &nbsp;|&nbsp; <span>placa</span> &nbsp;|&nbsp; <span>morro</span> &nbsp;|&nbsp; <span>rango</span>
+    </div>
+
+    <div class="gap-item">
+      <span class="gap-num">1.</span>
+      Hoje no pé do <input class="gap-input" id="g1" autocomplete="off"> tem ensaio geral.
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">2.</span>
+      Não precisa ser de <input class="gap-input" id="g2" autocomplete="off">, eu quero ver gol.
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">3.</span>
+      Tô no <input class="gap-input" id="g3" autocomplete="off"> desde as 2 e a lombra bateu.
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">4.</span>
+      Vou <input class="gap-input" id="g4" autocomplete="off">, vou xingar pro meu time ganhar.
+    </div>
+    <div class="gap-item">
+      <span class="gap-num">5.</span>
+      Eu quero ver <input class="gap-input" id="g5" autocomplete="off">.
+    </div>
+
+    <button class="btn-check" onclick="checkGaps()">Verificar</button>
+    <button class="btn-reset" onclick="resetGaps()">Apagar</button>
+    <div class="feedback" id="gap-fb"></div>
+  </div>
+
+  <!-- EX 3 — DROPDOWN -->
+  <div class="ex-box">
+    <h3>Exercício 3 — Locução verbal</h3>
+    <div class="instrucao">Escolha a forma correta do verbo para completar cada locução verbal.</div>
+
+    <div class="dd-item">
+      <span class="dd-num">1.</span>
+      Eu
+      <select class="dd-select" id="d1">
+        <option value="">—</option>
+        <option>quero</option><option>quer</option><option>queremos</option><option>querem</option>
+      </select>
+      ver o jogo hoje!
+    </div>
+    <div class="dd-item">
+      <span class="dd-num">2.</span>
+      Ela
+      <select class="dd-select" id="d2">
+        <option value="">—</option>
+        <option>quero</option><option>quer</option><option>queremos</option><option>querem</option>
+      </select>
+      torcer para o Brasil.
+    </div>
+    <div class="dd-item">
+      <span class="dd-num">3.</span>
+      Nós
+      <select class="dd-select" id="d3">
+        <option value="">—</option>
+        <option>quero</option><option>quer</option><option>queremos</option><option>querem</option>
+      </select>
+      ver gol!
+    </div>
+    <div class="dd-item">
+      <span class="dd-num">4.</span>
+      Amanhã eu
+      <select class="dd-select" id="d4">
+        <option value="">—</option>
+        <option>vou</option><option>vai</option><option>vamos</option><option>vão</option>
+      </select>
+      ao estádio.
+    </div>
+    <div class="dd-item">
+      <span class="dd-num">5.</span>
+      Os jogadores
+      <select class="dd-select" id="d5">
+        <option value="">—</option>
+        <option>quero</option><option>quer</option><option>queremos</option><option>querem</option>
+      </select>
+      ganhar.
+    </div>
+
+    <button class="btn-check" onclick="checkDD()">Verificar</button>
+    <button class="btn-reset" onclick="resetDD()">Apagar</button>
+    <div class="feedback" id="dd-fb"></div>
+  </div>
+
+  <!-- EX 4 — PRODUCTION -->
+  <div class="ex-box">
+    <h3>Exercício 4 — Fale sobre você!</h3>
+    <div class="instrucao">Responda em português. Não existe resposta certa ou errada — use as suas próprias palavras!</div>
+
+    <div class="prod-item">
+      <p><strong>1.</strong> O que você quer ver, fazer ou experimentar? Escreva 3 frases com <em>"Eu quero ver / fazer / experimentar…"</em></p>
+      <textarea class="prod-textarea" placeholder="Eu quero ver…&#10;Eu quero fazer…&#10;Eu quero experimentar…"></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>2.</strong> Você gosta de futebol? Por quê? Qual é o seu time favorito (se você tem um)?</p>
+      <textarea class="prod-textarea" placeholder="Eu gosto / não gosto de futebol porque…"></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>3.</strong> No seu país, qual é o esporte mais popular? Por que as pessoas gostam tanto?</p>
+      <textarea class="prod-textarea" placeholder="No meu país, o esporte mais popular é…"></textarea>
+    </div>
+
+    <button class="btn-check" onclick="checkEx4()">Salvar respostas</button>
+    <div class="feedback" id="ex4-fb"></div>
+  </div>
+
+</main>
+
+<!-- BPHUB FORM -->
+<div class="form-wrap">
+  <div class="form-title">Feedback da aula</div>
+  <div class="form-sub">Escreva suas dúvidas, comentários ou novos exemplos para a professora.</div>
+  <form id="bphub-form" action="https://formspree.io/f/xykaydly" method="POST">
+    <input type="hidden" name="musica" value="Eu Quero Ver Gol — O Rappa (A2)">
+    <div class="form-group">
+      <label>Seu nome</label>
+      <input type="text" name="nome" placeholder="Nome" required>
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" name="email" placeholder="email@exemplo.com" required>
+    </div>
+    <div class="form-group">
+      <label>Comentário / dúvida</label>
+      <textarea name="mensagem" placeholder="Escreva aqui…" required></textarea>
+    </div>
+    <button type="submit" class="btn-send">Enviar →</button>
+    <div class="form-msg" id="form-msg"></div>
+  </form>
+</div>
+
+<script>
+  /* ── normalização ── */
+  function norm(s){
+    return s.trim().toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z]/g,'');
+  }
+
+  /* ── Ex 1 — T/F ── */
+  const tfKey = {tf1:'V', tf2:'F', tf3:'F', tf4:'V', tf5:'F'};
+
+  function checkTF(){
+    let ok=0, miss=[];
+    for(let k in tfKey){
+      const sel = document.querySelector(`input[name="${k}"]:checked`);
+      if(sel && sel.value === tfKey[k]) ok++;
+      else miss.push(k.replace('tf',''));
+    }
+    const fb = document.getElementById('tf-fb');
+    if(ok===5){
+      fb.className='feedback ok';
+      fb.textContent='✓ Perfeito! Todas as respostas estão corretas.';
+    } else {
+      fb.className='feedback err';
+      fb.textContent=`${ok}/5 corretas. Revise os itens: ${miss.join(', ')}.`;
+    }
+  }
+
+  function resetTF(){
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked=false);
+    const fb=document.getElementById('tf-fb'); fb.className='feedback'; fb.textContent='';
+  }
+
+  /* ── Ex 2 — Gaps ── */
+  const gapKey = {g1:'morro', g2:'placa', g3:'rango', g4:'torcer', g5:'gol'};
+
+  function checkGaps(){
+    let ok=0, parts=[];
+    for(let k in gapKey){
+      const inp = document.getElementById(k);
+      const correct = gapKey[k];
+      if(norm(inp.value)===norm(correct)){
+        ok++;
+        parts.push(`<span class="mark-ok">✓ ${correct}</span>`);
+      } else {
+        parts.push(`<span class="mark-err">${inp.value||'—'}</span> → ${correct}`);
+      }
+    }
+    const fb = document.getElementById('gap-fb');
+    fb.className = 'feedback ' + (ok===5 ? 'ok' : 'err');
+    fb.innerHTML = `${ok}/5 &nbsp;— &nbsp;${parts.join(' &nbsp;|&nbsp; ')}`;
+  }
+
+  function resetGaps(){
+    Object.keys(gapKey).forEach(k => { document.getElementById(k).value=''; });
+    const fb=document.getElementById('gap-fb'); fb.className='feedback'; fb.innerHTML='';
+  }
+
+  /* ── Ex 3 — Dropdown ── */
+  const ddKey = {d1:'quero', d2:'quer', d3:'queremos', d4:'vou', d5:'querem'};
+
+  function checkDD(){
+    let ok=0, parts=[];
+    for(let k in ddKey){
+      const sel = document.getElementById(k);
+      const correct = ddKey[k];
+      if(sel.value===correct){
+        ok++;
+        parts.push(`<span class="mark-ok">✓ ${correct}</span>`);
+      } else {
+        parts.push(`<span class="mark-err">${sel.value||'—'}</span> → ${correct}`);
+      }
+    }
+    const fb = document.getElementById('dd-fb');
+    fb.className = 'feedback ' + (ok===5 ? 'ok' : 'err');
+    fb.innerHTML = `${ok}/5 &nbsp;— &nbsp;${parts.join(' &nbsp;|&nbsp; ')}`;
+  }
+
+  function resetDD(){
+    Object.keys(ddKey).forEach(k => { document.getElementById(k).value=''; });
+    const fb=document.getElementById('dd-fb'); fb.className='feedback'; fb.innerHTML='';
+  }
+
+  /* ── Ex 4 — Production ── */
+  function checkEx4(){
+    const areas = document.querySelectorAll('.prod-textarea');
+    let filled = 0;
+    areas.forEach(a => { if(a.value.trim().length > 5) filled++; });
+    const fb = document.getElementById('ex4-fb');
+    if(filled===3){
+      fb.className='feedback ok';
+      fb.textContent='✓ Respostas salvas! Compartilhe com a professora na próxima aula.';
+    } else {
+      fb.className='feedback err';
+      fb.textContent='Preencha todas as respostas antes de salvar.';
+    }
+  }
+
+  /* ── Form ── */
+  document.getElementById('bphub-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.style.color='#555'; msg.textContent='Enviando…';
+    try{
+      const r = await fetch(this.action,{
+        method:'POST', body:new FormData(this), headers:{Accept:'application/json'}
+      });
+      if(r.ok){
+        msg.style.color='#1a5c28'; msg.textContent='✓ Mensagem enviada! Obrigada.';
+        this.reset();
+      } else {
+        msg.style.color='#c0392b'; msg.textContent='Erro ao enviar. Tente novamente.';
+      }
+    } catch {
+      msg.style.color='#c0392b'; msg.textContent='Erro de conexão.';
+    }
+  });
+</script>
+
+</body>
+</html>
