@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tempo Perdido — Legião Urbana | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--rock:#A1441D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--rock);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .lyric-block{background:var(--giz);border-radius:8px;padding:20px 24px;margin:12px 0;font-size:.95rem;line-height:2.1;font-family:'Trirong',serif}
+  .lyric-stanza{margin-bottom:18px}
+  .lyric-stanza:last-child{margin-bottom:0}
+  .lyric-refrain{color:var(--rock);font-weight:600}
+  .lyric-highlight{border-left:3px solid var(--rock);padding-left:14px;border-radius:0 4px 4px 0}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo)}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--terracota);color:var(--terracota)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--terracota);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:140px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .dd-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .dd-row:last-of-type{border-bottom:none}
+  .dd-num{font-weight:700;color:var(--terracota);min-width:20px}
+  select.dd{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.9rem;color:var(--nanquim);padding:2px 4px;outline:none;cursor:pointer}
+  select.dd.ok{border-color:#2e7d32;color:#2e7d32}
+  select.dd.err{border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:80px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .word-bank{background:var(--baunilha);border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .word-bank strong{color:var(--musgo);margin-right:4px}
+  .wb-word{background:#fff;border:1.5px solid var(--pitomba);border-radius:4px;padding:2px 10px;font-size:.85rem;font-family:'Manrope',sans-serif;color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Rock Brasileiro</span>
+  <span class="badge">Legião Urbana</span>
+  <span class="badge">1986</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Tempo Perdido</h1>
+    <p class="fonte">Renato Russo · álbum <em>Dois</em>, 1986</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">"Tempo Perdido" é talvez a música mais famosa da Legião Urbana e um dos maiores hinos do rock brasileiro. Lançada em 1986 no álbum <em>Dois</em>, a canção foi escrita por Renato Russo em um momento de intensa reflexão sobre a passagem do tempo, as promessas não cumpridas e a juventude. A letra mistura nostalgia, urgência e esperança — e termina com uma das frases mais icônicas da música brasileira: <em>"Somos tão jovens."</em></p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Tempo Perdido</p>
+    <p class="instr">Ouça antes de ler a letra. Qual é o clima emocional da música? O que você sente ao ouvir?</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/SAlOfCg1F_E"
+        title="Tempo Perdido — Legião Urbana" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- LYRICS -->
+  <div class="card">
+    <p class="section-label">Letra</p>
+    <div class="lyric-block">
+      <div class="lyric-stanza">
+        Todos os dias quando acordo<br>
+        Não tenho mais o tempo que passou<br>
+        Mas tenho muito tempo<br>
+        Temos todo tempo do mundo
+      </div>
+      <div class="lyric-stanza">
+        Todos os dias, antes de dormir<br>
+        Lembro e esqueço como foi o dia<br>
+        Sempre em frente<br>
+        Não temos tempo a perder
+      </div>
+      <div class="lyric-stanza">
+        Nosso suor <strong>sagrado</strong><br>
+        É bem mais belo que esse sangue amargo<br>
+        E tão sério
+      </div>
+      <div class="lyric-stanza lyric-refrain">
+        E selvagem<br>
+        Selvagem<br>
+        Selvagem
+      </div>
+      <div class="lyric-stanza">
+        Veja o Sol dessa manhã tão cinza<br>
+        A tempestade que chega é da cor dos teus olhos<br>
+        Castanhos
+      </div>
+      <div class="lyric-stanza">
+        Então me abraça forte<br>
+        Me diz mais uma vez que já estamos<br>
+        Distantes de tudo
+      </div>
+      <div class="lyric-stanza lyric-refrain">
+        Temos nosso próprio tempo<br>
+        Temos nosso próprio tempo<br>
+        Temos nosso próprio tempo
+      </div>
+      <div class="lyric-stanza">
+        Não tenho medo do escuro<br>
+        Mas deixe as luzes <strong>acesas</strong><br>
+        Agora
+      </div>
+      <div class="lyric-stanza lyric-highlight">
+        O que foi <strong>escondido</strong> é o que se escondeu<br>
+        E o que foi <strong>prometido</strong> ninguém prometeu<br>
+        Nem foi tempo <strong>perdido</strong>
+      </div>
+      <div class="lyric-stanza lyric-refrain">
+        Somos tão jovens<br>
+        Tão jovens<br>
+        Tão jovens
+      </div>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da música</p>
+    <table class="vocab-table">
+      <thead>
+        <tr><th>Português</th><th>Significado em contexto</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="vocab-pt">sagrado</td><td>sagrado, santo; intenso e valioso — <em>nosso suor sagrado</em> = o esforço profundo e verdadeiro que valeu a pena</td></tr>
+        <tr><td class="vocab-pt">amargo</td><td>amargo, áspero; doloroso — <em>sangue amargo</em> = sofrimento, violência, conflito</td></tr>
+        <tr><td class="vocab-pt">selvagem</td><td>selvagem, primitivo — aqui: livre, autêntico, sem filtro</td></tr>
+        <tr><td class="vocab-pt">cinza</td><td>cinza (adjetivo) — <em>manhã tão cinza</em> = manhã nublada, sem sol, melancólica</td></tr>
+        <tr><td class="vocab-pt">tempestade</td><td>tempestade — usada como metáfora para algo intenso e inevitável que se aproxima</td></tr>
+        <tr><td class="vocab-pt">castanhos</td><td>castanhos = marrons — refere-se à cor dos olhos de alguém amado</td></tr>
+        <tr><td class="vocab-pt">distantes de tudo</td><td>distantes de tudo = far from everything; isolados do mundo exterior</td></tr>
+        <tr><td class="vocab-pt">próprio</td><td>próprio = own — <em>nosso próprio tempo</em> = o tempo que pertence só a nós</td></tr>
+        <tr><td class="vocab-pt">acesas</td><td>acesas = acesas, ligadas (luzes) — particípio irregular de <em>acender</em>; concorda com <em>luzes</em> (fem. pl.)</td></tr>
+        <tr><td class="vocab-pt">escondido / prometido / perdido</td><td>particípios passados de <em>esconder, prometer, perder</em> — usados como adjetivos na penúltima estrofe</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURAL CONTEXT -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>🎸 Legião Urbana e o BRock</strong><br>
+      Nos anos 1980, o Brasil viveu uma explosão do rock nacional — chamado de <strong>BRock</strong> — com bandas como Legião Urbana, Titãs, Os Paralamas do Sucesso, Cazuza e Barão Vermelho. Era a época da redemocratização do país, depois de 21 anos de ditadura militar (1964–1985), e a música jovem virou voz de uma geração que queria falar de liberdade, identidade e esperança. A Legião Urbana foi fundada em Brasília em 1982 e rapidamente se tornou a maior banda de rock do Brasil.
+    </div>
+    <div class="cult-box">
+      <strong>✍️ Renato Russo</strong><br>
+      Renato Russo (1960–1996) era poeta, compositor e vocalista da Legião Urbana. Escrevia letras extremamente literárias, cheias de referências filosóficas e autobiográficas. "Tempo Perdido" foi escrita quando ele tinha apenas 25 anos. Renato era conhecido pela intensidade e pela honestidade das suas canções — ele cantava sobre amor, existência, solidão e política com uma profundidade rara no rock. Faleceu em 1996 em decorrência de complicações da AIDS, aos 36 anos, deixando um legado imenso para a música brasileira.
+    </div>
+    <div class="cult-box">
+      <strong>📀 O álbum <em>Dois</em> (1986)</strong><br>
+      <em>Dois</em> é o segundo álbum da Legião Urbana e um dos discos mais importantes do rock brasileiro. Além de "Tempo Perdido", o álbum traz músicas como "Índios", "Quase Sem Querer" e "Geração Coca-Cola". Foi lançado em um momento em que a banda ainda era jovem e cheia de energia — e isso se sente em cada faixa. Já vendeu mais de 2 milhões de cópias e continua sendo descoberto por novas gerações até hoje.
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">Particípio passado — dois usos</p>
+    <div class="gram-box">
+      <strong>Na música:</strong>
+      <div style="background:rgba(255,255,255,.6);border-radius:6px;padding:12px 16px;margin:10px 0;font-family:'Trirong',serif;font-size:1rem;line-height:2.1">
+        Mas deixe as luzes <strong>acesas</strong>.<br>
+        O que foi <strong>escondido</strong> é o que se escondeu.<br>
+        E o que foi <strong>prometido</strong> ninguém prometeu.<br>
+        Nem foi tempo <strong>perdido</strong>.
+      </div>
+      Esses quatro termos em negrito são <strong>particípios passados</strong> usados como adjetivos.<br><br>
+
+      <strong>Uso 1 — Adjetivo (concorda em gênero e número com o substantivo):</strong>
+      <table>
+        <thead><tr><th>Infinitivo</th><th>Particípio</th><th>Exemplo da música</th></tr></thead>
+        <tbody>
+          <tr><td>perder</td><td><strong>perdido / perdida</strong></td><td><em>Nem foi tempo perdido.</em></td></tr>
+          <tr><td>esconder</td><td><strong>escondido / escondida</strong></td><td><em>O que foi escondido…</em></td></tr>
+          <tr><td>prometer</td><td><strong>prometido / prometida</strong></td><td><em>O que foi prometido…</em></td></tr>
+          <tr><td>acender ⚠️</td><td><strong>aceso / acesa / acesas</strong></td><td><em>as luzes acesas</em></td></tr>
+        </tbody>
+      </table>
+      <br>
+      ⚠️ <em>acender</em> tem particípio <strong>irregular como adjetivo</strong>: <em>aceso, acesa, acesos, acesas</em>. Com os auxiliares <em>ter / haver</em>, usa-se a forma regular: <em>Ela tinha acendido a luz.</em> Isso se chama <strong>duplo particípio</strong>.<br><br>
+
+      <strong>Uso 2 — Tempo composto com ter / haver (forma invariável):</strong>
+      <table>
+        <thead><tr><th>Exemplo</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td><em>Eu tenho <strong>perdido</strong> muito sono.</em></td><td>invariável — não varia com sujeito ou objeto</td></tr>
+          <tr><td><em>Ela tinha <strong>prometido</strong> voltar cedo.</em></td><td>invariável</td></tr>
+          <tr><td><em>Nunca tínhamos <strong>visto</strong> algo assim.</em></td><td>irregular: ver → <strong>visto</strong></td></tr>
+        </tbody>
+      </table>
+      <br>
+      <strong>Particípios irregulares mais comuns:</strong>
+      <table>
+        <thead><tr><th>Infinitivo</th><th>Irregular</th><th>Regular (só com ter/haver)</th></tr></thead>
+        <tbody>
+          <tr><td>abrir</td><td><strong>aberto</strong></td><td>—</td></tr>
+          <tr><td>fazer</td><td><strong>feito</strong></td><td>—</td></tr>
+          <tr><td>dizer</td><td><strong>dito</strong></td><td>—</td></tr>
+          <tr><td>escrever</td><td><strong>escrito</strong></td><td>—</td></tr>
+          <tr><td>ver</td><td><strong>visto</strong></td><td>—</td></tr>
+          <tr><td>pôr</td><td><strong>posto</strong></td><td>—</td></tr>
+          <tr><td>acender</td><td><strong>aceso</strong> (adjetivo)</td><td>acendido (ter/haver)</td></tr>
+          <tr><td>limpar</td><td><strong>limpo</strong> (adjetivo)</td><td>limpado (ter/haver)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EX 1: T/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro ou Falso?</p>
+    <p class="ex-instr">Com base na letra da música, escolha <strong>V</strong> (Verdadeiro) ou <strong>F</strong> (Falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>O cantor diz que não tem mais o tempo passado, mas afirma ter muito tempo agora.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>Na música, o suor sagrado é comparado ao sangue amargo — e o suor é considerado mais belo.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>A manhã descrita na música é clara e ensolarada.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>O cantor afirma ter medo do escuro e pede para alguém deixar as luzes acesas.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>Para o cantor, apesar de tudo, o tempo vivido não foi tempo perdido.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: Gap fill -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Complete a letra</p>
+    <p class="ex-instr">Complete os espaços com as palavras do banco abaixo — todas tiradas diretamente da letra da música.</p>
+    <div class="word-bank">
+      <strong>Banco de palavras:</strong>
+      <span class="wb-word">sagrado</span>
+      <span class="wb-word">acesas</span>
+      <span class="wb-word">escondido</span>
+      <span class="wb-word">prometido</span>
+      <span class="wb-word">perdido</span>
+    </div>
+    <div id="gap-area">
+      <div class="gap-row">
+        <span class="gap-num">1.</span>
+        <span>Nosso suor</span>
+        <input class="gap-input" id="g1" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>/ É bem mais belo que esse sangue amargo</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">2.</span>
+        <span>Mas deixe as luzes</span>
+        <input class="gap-input" id="g2" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>/ Agora</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">3.</span>
+        <span>O que foi</span>
+        <input class="gap-input" id="g3" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>é o que se escondeu</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">4.</span>
+        <span>E o que foi</span>
+        <input class="gap-input" id="g4" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>ninguém prometeu</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">5.</span>
+        <span>Nem foi tempo</span>
+        <input class="gap-input" id="g5" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps()">Refazer</button>
+    </div>
+    <div id="gap-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Dropdown particípio -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">Particípio passado — escolha a forma correta</p>
+    <p class="ex-instr">Complete cada frase com o particípio correto. Atenção à concordância (adjetivo) e às formas irregulares.</p>
+    <div id="dd-area">
+      <div class="dd-row">
+        <span class="dd-num">1.</span>
+        <span>As janelas estão</span>
+        <select class="dd" id="d1">
+          <option value="">— escolha —</option>
+          <option value="abrindo">abrindo</option>
+          <option value="abertas">abertas</option>
+          <option value="aberto">aberto</option>
+          <option value="abriu">abriu</option>
+        </select>
+        <span>desde de manhã. (abrir)</span>
+      </div>
+      <div class="dd-row">
+        <span class="dd-num">2.</span>
+        <span>Esse assunto ficou</span>
+        <select class="dd" id="d2">
+          <option value="">— escolha —</option>
+          <option value="escondendo">escondendo</option>
+          <option value="escondeu">escondeu</option>
+          <option value="escondido">escondido</option>
+          <option value="esconder">esconder</option>
+        </select>
+        <span>por muito tempo. (esconder)</span>
+      </div>
+      <div class="dd-row">
+        <span class="dd-num">3.</span>
+        <span>Ela nunca tinha</span>
+        <select class="dd" id="d3">
+          <option value="">— escolha —</option>
+          <option value="vendo">vendo</option>
+          <option value="viu">viu</option>
+          <option value="vido">vido</option>
+          <option value="visto">visto</option>
+        </select>
+        <span>o mar antes. (ver)</span>
+      </div>
+      <div class="dd-row">
+        <span class="dd-num">4.</span>
+        <span>A carta estava</span>
+        <select class="dd" id="d4">
+          <option value="">— escolha —</option>
+          <option value="escrevida">escrevida</option>
+          <option value="escrito">escrito</option>
+          <option value="escrita">escrita</option>
+          <option value="escrever">escrever</option>
+        </select>
+        <span>à mão, com muito cuidado. (escrever)</span>
+      </div>
+      <div class="dd-row">
+        <span class="dd-num">5.</span>
+        <span>As luzes continuam</span>
+        <select class="dd" id="d5">
+          <option value="">— escolha —</option>
+          <option value="acendidas">acendidas</option>
+          <option value="acendendo">acendendo</option>
+          <option value="acesas">acesas</option>
+          <option value="acendido">acendido</option>
+        </select>
+        <span>desde ontem. (acender — como na música)</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkDD()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetDD()">Refazer</button>
+    </div>
+    <div id="dd-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: Production -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Produção — Particípio no dia a dia</p>
+    <p class="ex-instr">Responda com suas próprias palavras. Use particípios onde for natural — como adjetivo ou nos tempos compostos.</p>
+
+    <p style="font-size:.9rem;font-weight:700;margin:16px 0 6px">1. Descreva 3 coisas que estão em um certo estado agora na sua casa ou rotina. Use o verbo <em>estar</em> + particípio adjetivo.</p>
+    <textarea class="prod" id="prod1" placeholder="Ex: A cama está feita. O computador está ligado. A janela está aberta."></textarea>
+    <div class="btn-row"><button class="btn btn-reset" onclick="document.getElementById('prod1').value=''">Apagar</button></div>
+
+    <p style="font-size:.9rem;font-weight:700;margin:20px 0 6px">2. Existe algo que você tem prometido para si mesmo, mas ainda não fez? Escreva sobre isso usando <em>tenho prometido</em>, <em>tinha planejado</em>, <em>nunca tinha feito</em>, etc.</p>
+    <textarea class="prod" id="prod2" placeholder="Eu tenho prometido para mim mesmo que…"></textarea>
+    <div class="btn-row"><button class="btn btn-reset" onclick="document.getElementById('prod2').value=''">Apagar</button></div>
+
+    <p style="font-size:.9rem;font-weight:700;margin:20px 0 6px">3. Existe um período da sua vida que pareceu "tempo perdido" na época, mas que depois você percebeu que valeu a pena? O que foi aprendido naquele tempo?</p>
+    <textarea class="prod" id="prod3" placeholder="Houve um período em que…"></textarea>
+    <div class="btn-row"><button class="btn btn-reset" onclick="document.getElementById('prod3').value=''">Apagar</button></div>
+  </div>
+
+</div>
+
+<script>
+const tfKey={1:'T',2:'T',3:'F',4:'F',5:'T'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'')}
+const gapKey={g1:['sagrado'],g2:['acesas'],g3:['escondido'],g4:['prometido'],g5:['perdido']};
+function checkGaps(){
+  let ok=0,tot=Object.keys(gapKey).length;
+  for(const id in gapKey){const inp=document.getElementById(id);const correct=gapKey[id].some(a=>norm(inp.value)===norm(a));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetGaps(){for(const id in gapKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap-msg');msg.className='result-msg';msg.textContent='';}
+const ddKey={d1:'abertas',d2:'escondido',d3:'visto',d4:'escrita',d5:'acesas'};
+function checkDD(){
+  let ok=0,tot=Object.keys(ddKey).length;
+  for(const id in ddKey){const sel=document.getElementById(id);const correct=norm(sel.value)===norm(ddKey[id]);sel.classList.remove('ok','err');sel.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('dd-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetDD(){for(const id in ddKey){const sel=document.getElementById(id);sel.value='';sel.classList.remove('ok','err');}const msg=document.getElementById('dd-msg');msg.className='result-msg';msg.textContent='';}
+</script>
+
+<script>
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
