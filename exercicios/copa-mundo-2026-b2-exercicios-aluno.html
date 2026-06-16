@@ -61,28 +61,33 @@
 
     /* VF ITEMS */
     .vf-list { list-style: none; }
-    .vf-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: flex-start; gap: 12px; font-size: .92rem; }
+    .vf-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
     .vf-item:last-child { border-bottom: none; }
-    .vf-sentence { flex: 1; line-height: 1.65; }
-    .vf-btns { display: flex; gap: 8px; flex-shrink: 0; margin-top: 2px; }
-    .vf-btn { border: 2px solid var(--light-gray); background: white; border-radius: 8px; padding: 5px 14px; font-family: 'Manrope', sans-serif; font-size: .82rem; font-weight: 700; cursor: pointer; letter-spacing: .04em; color: var(--nanquim); transition: all .15s; }
-    .vf-btn:hover { border-color: var(--pitomba); }
+    .vf-num  { font-size: .77rem; font-weight: 700; color: var(--pitomba); margin-bottom: 5px; }
+    .vf-sentence { font-size: .92rem; line-height: 1.7; margin-bottom: 10px; color: var(--nanquim); }
+    .vf-btns { display: flex; gap: 10px; }
+    .vf-btn { border: 2px solid var(--light-gray); background: white; border-radius: 8px; padding: 7px 22px; font-family: 'Manrope', sans-serif; font-size: .85rem; font-weight: 700; cursor: pointer; letter-spacing: .05em; color: var(--nanquim); transition: all .15s; }
+    .vf-btn:hover { border-color: var(--pitomba); color: var(--pitomba); }
     .vf-btn.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
     .vf-btn.wrong   { background: var(--red-bg);   border-color: var(--red);   color: var(--red);   }
     .vf-btn:disabled { cursor: default; }
-    .vf-fb { font-size: .82rem; margin-top: 6px; width: 100%; }
+    .vf-fb { font-size: .83rem; margin-top: 8px; line-height: 1.55; }
     .vf-fb.ok  { color: var(--green); }
     .vf-fb.err { color: var(--red); }
 
-    /* MATCHING */
-    .match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .match-col h3 { font-size: .77rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
-    .match-item { padding: 9px 12px; border-radius: 8px; background: var(--off-white); margin-bottom: 8px; display: flex; gap: 8px; align-items: center; font-size: .9rem; cursor: pointer; border: 2px solid transparent; transition: all .15s; }
-    .match-item.selected { border-color: var(--pitomba); background: var(--pitomba-light); }
-    .match-item.matched  { border-color: var(--green); background: var(--green-bg); color: var(--green); cursor: default; }
-    .match-item.wrong-sel { border-color: var(--red); background: var(--red-bg); }
-    .match-num  { font-weight: 700; color: var(--pitomba); min-width: 22px; }
-    .match-letter { font-weight: 700; color: var(--pitomba); min-width: 22px; }
+    /* MATCHING — dropdown format */
+    .match-row { display: grid; grid-template-columns: 160px 1fr; gap: 12px; align-items: start; padding: 11px 0; border-bottom: 1px solid var(--light-gray); font-size: .9rem; }
+    .match-row:last-child { border-bottom: none; }
+    .match-word { font-weight: 700; color: var(--nanquim); display: flex; align-items: center; gap: 8px; }
+    .match-num  { color: var(--pitomba); font-weight: 700; min-width: 20px; }
+    .match-sel  { width: 100%; border: 2px solid var(--light-gray); background: white; border-radius: 7px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: .87rem; color: var(--nanquim); cursor: pointer; }
+    .match-sel:focus { outline: none; border-color: var(--pitomba); }
+    .match-sel.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+    .match-sel.wrong   { border-color: var(--red);   background: var(--red-bg);   color: var(--red);   }
+    .match-hint { font-size: .8rem; margin-top: 4px; display: none; }
+    .match-hint.show { display: block; }
+    .match-hint.ok  { color: var(--green); }
+    .match-hint.err { color: var(--red); }
     .match-score-box { display: none; margin-top: 14px; padding: 12px 18px; border-radius: 10px; font-size: .9rem; font-weight: 600; }
     .match-score-box.show { display: block; }
 
@@ -205,16 +210,8 @@
     <div class="ex-num">Exercício 2</div>
     <h2>Vocabulário em contexto — conecte a palavra à definição</h2>
     <p class="ex-instr">Clique em uma palavra na coluna da esquerda e depois na definição correspondente na coluna da direita. Continue até parear todos os itens.</p>
-    <div class="match-cols">
-      <div class="match-col">
-        <h3>Palavra</h3>
-        <div id="m-words"></div>
-      </div>
-      <div class="match-col">
-        <h3>Definição</h3>
-        <div id="m-defs"></div>
-      </div>
-    </div>
+    <div id="m-rows"></div>
+    <button class="check-btn" onclick="checkMatch()" style="margin-top:18px;">Verificar respostas</button>
     <div class="match-score-box" id="match-score"></div>
   </div>
 
@@ -347,63 +344,40 @@ var matchData = [
   { word: 'pentacampeão',  def: 'quem venceu o mesmo torneio cinco vezes', id: 'h' },
 ];
 
-var selectedWord = null;
-var matched = {};
+// Shuffle definitions into options (runs once on load)
+var allDefs = matchData.map(function(item){ return item.def; });
+(function shuffle(arr){ for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;} })(allDefs);
 
 (function buildMatch(){
-  var wDiv = document.getElementById('m-words');
-  var dDiv = document.getElementById('m-defs');
+  var container = document.getElementById('m-rows');
   matchData.forEach(function(item, i) {
-    var w = document.createElement('div');
-    w.className = 'match-item'; w.id = 'mw-' + i;
-    w.innerHTML = '<span class="match-num">' + (i+1) + '.</span><span>' + item.word + '</span>';
-    w.onclick = function(){ selectWord(i); };
-    wDiv.appendChild(w);
-  });
-  var shuffled = matchData.map(function(item, i){ return {def: item.def, id: item.id, origIdx: i}; });
-  shuffled.sort(function(){ return Math.random() - .5; });
-  shuffled.forEach(function(item, j) {
-    var d = document.createElement('div');
-    d.className = 'match-item'; d.id = 'md-' + item.id;
-    d.innerHTML = '<span class="match-letter">' + String.fromCharCode(65+j) + '.</span><span>' + item.def + '</span>';
-    d.onclick = function(){ selectDef(item.id, item.origIdx); };
-    dDiv.appendChild(d);
+    var row = document.createElement('div');
+    row.className = 'match-row';
+    var opts = ['<option value="">— escolha a definição —</option>'].concat(
+      allDefs.map(function(d){ return '<option value="' + d.replace(/"/g,'&quot;') + '">' + d + '</option>'; })
+    ).join('');
+    row.innerHTML =
+      '<div class="match-word"><span class="match-num">' + (i+1) + '.</span>' + item.word + '</div>' +
+      '<div><select class="match-sel" id="ms-' + i + '">' + opts + '</select>' +
+        '<div class="match-hint" id="mh-' + i + '"></div></div>';
+    container.appendChild(row);
   });
 })();
 
-function selectWord(i) {
-  if (matched['w'+i]) return;
-  document.querySelectorAll('#m-words .match-item').forEach(function(el){ el.classList.remove('selected'); });
-  document.getElementById('mw-' + i).classList.add('selected');
-  selectedWord = i;
-}
-
-function selectDef(defId, origIdx) {
-  if (matched['d'+defId] || selectedWord === null) return;
-  var isCorrect = (matchData[selectedWord].id === defId);
-  if (isCorrect) {
-    document.getElementById('mw-' + selectedWord).classList.remove('selected');
-    document.getElementById('mw-' + selectedWord).classList.add('matched');
-    document.getElementById('md-' + defId).classList.add('matched');
-    matched['w'+selectedWord] = true;
-    matched['d'+defId] = true;
-    selectedWord = null;
-    if (Object.keys(matched).length === matchData.length * 2) {
-      var box = document.getElementById('match-score');
-      box.className = 'match-score-box show good';
-      box.textContent = '🎉 Parabéns! Todos os pares corretos!';
-    }
-  } else {
-    var wEl = document.getElementById('mw-' + selectedWord);
-    var dEl = document.getElementById('md-' + defId);
-    wEl.classList.add('wrong-sel');
-    dEl.classList.add('wrong-sel');
-    setTimeout(function(){
-      wEl.classList.remove('wrong-sel','selected');
-      dEl.classList.remove('wrong-sel');
-      selectedWord = null;
-    }, 800);
-  }
+function checkMatch() {
+  var score = 0;
+  matchData.forEach(function(item, i) {
+    var sel = document.getElementById('ms-' + i);
+    var hint = document.getElementById('mh-' + i);
+    var ok = (sel.value === item.def);
+    sel.className = 'match-sel ' + (ok ? 'correct' : 'wrong');
+    hint.textContent = ok ? '✓ Correto!' : '✗ A definição correta é: "' + item.def + '"';
+    hint.className = 'match-hint show ' + (ok ? 'ok' : 'err');
+    if (ok) score++;
+  });
+  var box = document.getElementById('match-score');
+  box.className = 'match-score-box show score-box ' + (score===matchData.length ? 'good' : score>=6 ? 'ok' : 'retry');
+  box.textContent = score + '/' + matchData.length + ' correto(s) — ' + (score===matchData.length ? 'Perfeito! 🎉' : score>=6 ? 'Muito bom! Reveja os itens errados.' : 'Continue praticando — releia o vocabulário.');
 }
 
 // ── EX 3: GAP FILL — EXPRESSÕES ─────────────────────────────────────────────
