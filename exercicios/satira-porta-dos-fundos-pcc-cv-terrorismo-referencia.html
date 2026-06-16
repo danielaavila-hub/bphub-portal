@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCC, CV e Washington — C2 | BPHUB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --baunilha:#FCF5EB;--baunilha2:#FDE7C4;--off-white:#F2F0E3;
+  --light-gray:#EDEDE2;--nanquim:#1E1D1C;--texto:#3C3C21;
+  --cobalto:#265B8B;--pitomba:#D36D29;--ouro:#FFB94A;
+  --floresta:#4E551D;--erva-doce:#A6B28A;--giz:#FCF5EB;--musgo:#3C3C21;
+}
+html{scroll-behavior:smooth}
+body{background:var(--baunilha);color:var(--texto);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.7}
+h1,h2,h3{font-family:'Trirong',serif;font-weight:300}
+a{color:var(--cobalto)}
+.topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:var(--giz);border-bottom:1px solid #E8E4DE;position:sticky;top:0;z-index:50}
+.topbar img{height:40px;width:auto}
+.badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.badge-level{background:#1E1D1C;color:white}
+.badge-type{background:rgba(30,29,28,.1);color:var(--nanquim)}
+.hero{background:#1E1D1C;padding:52px 48px 46px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--floresta),var(--erva-doce),var(--ouro),var(--pitomba))}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px}
+.hero h1{font-size:clamp(24px,4vw,42px);color:white;margin-bottom:12px;line-height:1.2}
+.hero h1 em{font-style:italic;color:var(--ouro)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.6);max-width:600px;line-height:1.65}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero-tag{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);font-size:12px;padding:4px 12px;border-radius:20px;font-weight:500}
+.hero-note{margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,179,74,.15);border-radius:20px;padding:6px 16px;font-size:13px;color:var(--ouro);font-weight:600}
+.main{max-width:920px;padding:52px 48px 100px}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pitomba);margin-bottom:10px}
+.card{background:white;border-radius:14px;padding:32px 36px;margin-bottom:28px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.card h2{font-size:1.4rem;color:var(--nanquim);margin-bottom:18px}
+.card p{margin-bottom:14px;font-size:.95rem;line-height:1.85}
+.card p:last-child{margin-bottom:0}
+.art-fonte{font-size:.78rem;color:var(--pitomba);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--light-gray)}
+.art-fonte strong{color:var(--nanquim)}
+blockquote{border-left:3px solid var(--nanquim);padding:8px 18px;margin:16px 0;font-style:italic;font-family:'Trirong',serif;font-size:.98rem;color:var(--musgo);line-height:1.7}
+.infografico{background:var(--off-white);border-radius:10px;padding:20px 24px;margin:20px 0}
+.infografico h3{font-size:1rem;color:var(--nanquim);margin-bottom:14px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:.85rem}
+.info-item{background:white;border-radius:8px;padding:12px 16px;line-height:1.6}
+.info-item strong{display:block;color:var(--nanquim);margin-bottom:4px;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:12px}
+.vocab-table th{background:var(--nanquim);color:white;padding:8px 14px;text-align:left;font-weight:600}
+.vocab-table td{padding:9px 14px;border-bottom:1px solid var(--light-gray);vertical-align:top;line-height:1.65}
+.vocab-table tr:last-child td{border-bottom:none}
+.vocab-table tr:nth-child(even) td{background:var(--off-white)}
+.vocab-term{font-weight:700;color:var(--nanquim);white-space:nowrap}
+.cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 10px 10px 0;padding:16px 20px;margin:16px 0;font-size:.9rem;line-height:1.75}
+.cult-box strong{color:var(--musgo)}
+.guia-box{background:var(--baunilha2);border-left:4px solid var(--pitomba);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0;font-size:.9rem}
+.guia-box strong{color:var(--pitomba);display:block;margin-bottom:10px;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em}
+.guia-box ol{padding-left:18px}
+.guia-box li{margin-bottom:8px;line-height:1.65}
+.embed-wrap{border-radius:10px;overflow:hidden;margin:16px 0}
+.nav-link{padding:24px 28px;background:white;border:1.5px solid var(--light-gray);border-radius:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:32px}
+.nav-link-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.nav-link-title{font-size:15px;color:var(--nanquim);font-family:'Trirong',serif;font-weight:300}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;color:white;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;text-decoration:none}
+@media(max-width:700px){.topbar,.hero,.main{padding-left:20px;padding-right:20px}.info-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span class="badge badge-level">C2</span>
+    <span class="badge badge-type">Material de Referência</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>PCC, Comando Vermelho e Washington — <em>sátira política e análise jurídica</em></h1>
+  <div class="hero-sub">Dois olhares sobre o mesmo fato: o esquete do Porta dos Fundos e a análise do promotor Lincoln Gakiya sobre a decisão americana de classificar o PCC e o CV como organizações terroristas.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Sátira política</span>
+    <span class="hero-tag">Crime organizado</span>
+    <span class="hero-tag">Direito internacional</span>
+    <span class="hero-tag">Relações Brasil–EUA</span>
+    <span class="hero-tag">C2 · Avançado II</span>
+  </div>
+  <div class="hero-note">📖 Leia e assista antes da aula</div>
+</div>
+
+<div class="main">
+
+  <!-- ARTIGO -->
+  <div class="card">
+    <p class="sec-label">Texto de referência</p>
+    <h2>EUA expandem poder contra PCC e Comando Vermelho</h2>
+    <p class="art-fonte"><strong>André Fleury Moraes</strong> — <em>Folha de S.Paulo</em>, 30 mai. 2026<br>
+    Texto adaptado para fins didáticos. <a href="https://www1.folha.uol.com.br/cotidiano/2026/05/eua-expandem-poder-contra-pcc-e-comando-vermelho-entenda-o-que-preve-a-legislacao-americana.shtml" target="_blank">Leia o original</a></p>
+
+    <p>A legislação americana de combate ao terrorismo permite que os Estados Unidos investiguem, sancionem e eventualmente processem pessoas físicas ou jurídicas mesmo que estejam fora de seu território. Também prevê sanções a instituições financeiras que se omitam diante de determinações americanas contra indivíduos ou empresas suspeitos de vínculos com organizações terroristas.</p>
+
+    <p>Nesta quinta-feira (28), o governo Donald Trump decidiu que as facções PCC (Primeiro Comando da Capital) e Comando Vermelho (CV), ambas brasileiras, se enquadram nessa classificação. A medida, anunciada pelo secretário de Estado Marco Rubio, deve entrar em vigor no dia 5 de junho. Pelo rito americano, o Executivo notifica o Legislativo e a decisão passa a valer automaticamente, a menos que o Congresso vote para derrubá-la.</p>
+
+    <p>A partir daí, os EUA poderão instaurar apurações próprias e eventualmente levar à Justiça pessoas que não necessariamente morem no país, caso entendam que elas prestaram apoio a organizações terroristas e exista algum elemento de conexão com interesses americanos — uso do sistema financeiro em dólar, movimentações no comércio internacional, presença em solo americano.</p>
+
+    <blockquote>"Eles se dão esse direito", afirma o professor titular de direito internacional da USP Paulo Borba Casella. Para ele, a nova definição para o PCC e o CV rompe "princípios básicos da vida coletiva dos Estados no mundo" e abre margem para atos arbitrários contra cidadãos estrangeiros.</blockquote>
+
+    <p>Na prática, a mudança amplia o escopo das investigações. Promotores do Departamento de Justiça, que antes atuavam em casos de corrupção envolvendo empresas brasileiras listadas em Nova York, passam a ter também um novo campo de atuação relacionado ao PCC, agora tratado como terrorista. A legislação alcança quem "fornece, tenta fornecer ou conspira para fornecer suporte material ou recursos" — um rol que inclui dinheiro, serviços financeiros, treinamento, documentos falsos, abrigo, transporte, equipamentos e pessoal.</p>
+
+    <p>As consequências recaem igualmente sobre o sistema financeiro. Pela lei americana, qualquer instituição financeira que tome conhecimento de que possui fundos nos quais uma organização terrorista estrangeira tenha interesse deverá bloqueá-los e informar ao secretário do Tesouro. Se não o fizer, poderá receber multa de US$ 50 mil ou o dobro do valor que era obrigada a bloquear — aplica-se o maior valor.</p>
+
+    <p>A decisão de Trump encaminhou o nome das duas facções ao chamado SDGT (lista de terroristas globais), mantida pelo Departamento do Tesouro. A inscrição nessa lista implica automaticamente o registro no cadastro de sanções da Ofac: bloqueio de bens nos EUA e exclusão de qualquer sistema financeiro relacionado ao dólar — na prática, todos os bancos que operam no Brasil. As sanções também podem levar empresas americanas de tecnologia e meios de pagamento, como Google, Meta, Visa e Mastercard, a suspender serviços ou contas associados a indivíduos sancionados.</p>
+
+    <p>No âmbito da inteligência, o arcabouço legal americano permite que agências promovam interceptações telefônicas e coleta de dados sobre cidadãos estrangeiros mesmo que estejam fora do país, a partir da infraestrutura de empresas como Google, Meta ou Apple — e sem necessidade de mandados judiciais individualizados.</p>
+
+    <div class="infografico">
+      <h3>O que muda para o Brasil</h3>
+      <div class="info-grid">
+        <div class="info-item"><strong>Controle financeiro</strong>Movimentações ligadas às facções passam a ter vigilância global. Contas e bens podem ser bloqueados; bancos e fintechs ficam sujeitos a sanções.</div>
+        <div class="info-item"><strong>Pressão diplomática</strong>PCC e CV passam a ser tratados como ameaça internacional. Os EUA podem pressionar por operações policiais, fiscalização em portos e compartilhamento de inteligência.</div>
+        <div class="info-item"><strong>Debate sobre soberania</strong>Críticos afirmam que a medida amplia a influência americana sobre decisões brasileiras de segurança pública. O temor é de aumento de pressão diplomática e econômica.</div>
+        <div class="info-item"><strong>O que não muda</strong>PCC e CV já são organizações criminosas no Brasil. A decisão não altera automaticamente as leis brasileiras e não há indicação de ação militar americana.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VÍDEO -->
+  <div class="card">
+    <p class="sec-label">Vídeo</p>
+    <h2>Porta dos Fundos — O esquete</h2>
+    <p>Antes de assistir, considere: o que você já sabe sobre o Porta dos Fundos como coletivo de humor político? O contexto da decisão americana e da visita de Flávio Bolsonaro a Washington oferece material fértil para a sátira. O que você espera que o grupo satirize?</p>
+    <div class="embed-wrap" style="aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_5X2vGQgga0" title="Porta dos Fundos" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:block"></iframe>
+    </div>
+    <div class="guia-box">
+      <strong>Perguntas-guia — assistência ativa</strong>
+      <ol>
+        <li>Quem são os personagens e a que figuras ou instituições reais correspondem?</li>
+        <li>Qual é o alvo central da crítica — a decisão americana, a postura do governo brasileiro, a visita a Washington ou algo mais amplo?</li>
+        <li>Que recursos o esquete utiliza: exagero, ironia, absurdo, inversão de papéis, paródia? Identifique ao menos dois.</li>
+        <li>Há algum momento em que o humor diz, de forma implícita, algo que o noticiário sério evitaria afirmar diretamente?</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ÁUDIO -->
+  <div class="card">
+    <p class="sec-label">Áudio</p>
+    <h2>Natuza Nery entrevista Lincoln Gakiya</h2>
+    <p>Lincoln Gakiya é promotor de Justiça e uma das maiores autoridades brasileiras no combate ao crime organizado. Ouça a entrevista com atenção à construção argumentativa — como Gakiya fundamenta a posição de que a decisão americana é "muito grave".</p>
+    <div class="embed-wrap">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/0ZoGA2p0CUmO637hSLMkIO?utm_source=generator" width="100%" height="232" frameborder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
+    </div>
+    <div class="guia-box">
+      <strong>Perguntas-guia — escuta ativa</strong>
+      <ol>
+        <li>Por que Gakiya considera a classificação americana "muito grave" para o combate ao crime no Brasil?</li>
+        <li>Quais efeitos práticos ele menciona além do impacto direto nas investigações policiais?</li>
+        <li>Compare o argumento de Gakiya com o do professor Paulo Borba Casella (citado na matéria da Folha). Ambos são críticos — por razões distintas. Quais são essas diferenças?</li>
+        <li>Qual é o tom predominante da entrevista — alarmista, analítico, propositivo? Que escolhas linguísticas sustentam essa leitura?</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- VOCABULÁRIO -->
+  <div class="card">
+    <p class="sec-label">Vocabulário</p>
+    <h2>Léxico jurídico-político</h2>
+    <table class="vocab-table">
+      <thead><tr><th>Expressão</th><th>Significado e uso em contexto</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-term">arcabouço legal</td><td>Conjunto estruturado de normas, leis e regulamentos que regem uma área. Sinônimos formais: <em>ordenamento jurídico</em>, <em>corpo normativo</em>.</td></tr>
+        <tr><td class="vocab-term">suporte material</td><td>Na legislação antiterrorismo americana, qualquer forma de auxílio concreto a uma organização terrorista: dinheiro, treinamento, documentos, abrigo, transporte, pessoal.</td></tr>
+        <tr><td class="vocab-term">SDGT</td><td><em>Specially Designated Global Terrorists</em> — lista do governo americano que identifica terroristas e organizações terroristas com atuação global. Inclusão nessa lista desencadeia sanções automáticas.</td></tr>
+        <tr><td class="vocab-term">Ofac</td><td><em>Office of Foreign Assets Control</em> — órgão do Departamento do Tesouro americano que administra e aplica sanções econômicas. Mantém o cadastro de indivíduos e entidades sancionados.</td></tr>
+        <tr><td class="vocab-term">sanções</td><td>Medidas punitivas — bloqueio de bens, restrições financeiras, proibições comerciais — impostas por um Estado a indivíduos, empresas ou países.</td></tr>
+        <tr><td class="vocab-term">compliance</td><td>Conformidade legal e ética; conjunto de procedimentos adotados por empresas para garantir o cumprimento de normas internas e externas. No contexto internacional, implica respeitar simultaneamente legislações de múltiplos países.</td></tr>
+        <tr><td class="vocab-term">soberania</td><td>Poder autônomo de um Estado de governar seu território sem interferência externa. A questão da soberania aparece quando um país aplica sua legislação além de suas fronteiras.</td></tr>
+        <tr><td class="vocab-term">extraterritorialidade</td><td>Aplicação de normas de um Estado fora do seu território. A legislação antiterrorismo americana é um exemplo clássico de exercício extraterritorial do poder jurídico.</td></tr>
+        <tr><td class="vocab-term">apreensão</td><td>Aqui: preocupação, inquietação, estado de alerta. Não confundir com a apreensão policial de bens ou pessoas.</td></tr>
+        <tr><td class="vocab-term">enfrentamento</td><td>Substantivo de <em>enfrentar</em>; a ação de combater, resistir, opor-se. "Referência no enfrentamento ao crime organizado" = autoridade reconhecida no combate ao crime.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONTEXTO CULTURAL -->
+  <div class="card">
+    <p class="sec-label">Contexto cultural</p>
+    <h2>Sátira, crime e diplomacia no Brasil contemporâneo</h2>
+    <div class="cult-box">
+      <strong>🎭 Porta dos Fundos — humor como crítica política</strong><br>
+      Fundado em 2012, o Porta dos Fundos tornou-se referência do humor político brasileiro. Com roteiros que abordam religião, gênero, burocracia e poder, o grupo usa o absurdo e a ironia para revelar contradições que o discurso oficial tende a suavizar. Em 2019, a sede do grupo no Rio de Janeiro sofreu um atentado a bomba após um especial natalino polêmico — episódio que evidencia o alcance e o impacto de sua produção. A sátira política tem, no Brasil, raízes longas: das charges de Ângelo Agostini no século XIX às colunas de Millôr Fernandes durante a ditadura, o humor sempre funcionou como espaço de crítica onde o discurso direto encontrava obstáculos.
+    </div>
+    <div class="cult-box">
+      <strong>⚖️ PCC e Comando Vermelho — quem são</strong><br>
+      O PCC (Primeiro Comando da Capital) foi fundado em 1993 na Penitenciária do Carandiru, em São Paulo, e se tornou a maior organização criminosa do Brasil, com ramificações em países da América do Sul, Europa e África. O Comando Vermelho (CV) surgiu no Rio de Janeiro nos anos 1970, dentro dos presídios, e domina parte do tráfico de drogas no estado. Ambas têm estrutura hierárquica, códigos internos e presença internacional — o que, segundo os EUA, justificaria a classificação como organizações terroristas de alcance global.
+    </div>
+    <div class="cult-box">
+      <strong>🌐 A questão da extraterritorialidade</strong><br>
+      A decisão americana levanta um debate jurídico-filosófico clássico: até onde um Estado pode exercer sua jurisdição além de suas fronteiras? Os EUA têm histórico de aplicar sua legislação a cidadãos e empresas de outros países quando há conexão com o sistema financeiro em dólar ou com o seu comércio. O professor Paulo Borba Casella (USP) afirma que essa prática rompe "princípios básicos da vida coletiva dos Estados no mundo" — argumento que ecoa os debates sobre soberania nacional em um mundo cada vez mais interdependente.
+    </div>
+  </div>
+
+  <!-- NAV LINK -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label" style="color:var(--pitomba)">Próximo passo</div>
+      <div class="nav-link-title">Exercícios — PCC, CV e Washington</div>
+    </div>
+    <a href="satira-porta-dos-fundos-pcc-cv-terrorismo-exercicios-aluno.html" class="nav-btn" style="background:var(--pitomba)">Ir para os exercícios →</a>
+  </div>
+
+</div>
+</body>
+</html>
