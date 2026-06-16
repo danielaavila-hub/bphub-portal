@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artigos em Português — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* CARDS */
+    .card { background: white; border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .card h2 { font-size: 1.3rem; color: var(--nanquim); margin-bottom: 14px; }
+    .card p { font-size: .95rem; line-height: 1.75; margin-bottom: 12px; }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* ARTICLE QUICK REFERENCE */
+    .art-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+    .art-col { border-radius: 10px; overflow: hidden; border: 1px solid var(--light-gray); }
+    .art-col-header { padding: 12px 18px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .art-col.def .art-col-header { background: var(--cobalto); color: white; }
+    .art-col.indef .art-col-header { background: var(--pitomba); color: white; }
+    .art-row { display: grid; grid-template-columns: 56px 1fr 1fr; align-items: center; padding: 10px 18px; border-bottom: 1px solid var(--light-gray); background: white; }
+    .art-row:last-child { border-bottom: none; }
+    .art-token { font-family: 'Trirong', serif; font-weight: 500; font-size: 1.25rem; }
+    .art-col.def .art-token { color: var(--cobalto); }
+    .art-col.indef .art-token { color: var(--pitomba); }
+    .art-gender { font-size: .76rem; color: #888; }
+    .art-ex { font-size: .85rem; color: #555; font-style: italic; }
+
+    /* TABLES */
+    .ex-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .9rem; }
+    .ex-table th { background: var(--cobalto-light); color: var(--cobalto); font-size: .77rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; text-align: left; }
+    .ex-table td { padding: 11px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.6; }
+    .ex-table tr:last-child td { border-bottom: none; }
+    .pt { color: var(--nanquim); font-weight: 500; }
+    .en { color: #888; font-size: .85rem; }
+    .art-hl { color: var(--cobalto); font-weight: 700; }
+    .art-hl-i { color: var(--pitomba); font-weight: 700; }
+    .err { color: #c62828; font-size: .85rem; }
+
+    /* RULES LIST */
+    .rules-list { list-style: none; margin: 14px 0 0; }
+    .rules-list li { padding: 12px 0; border-bottom: 1px solid var(--light-gray); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: .9rem; }
+    .rules-list li:last-child { border-bottom: none; }
+    .rule-cat { font-weight: 700; color: var(--nanquim); margin-bottom: 4px; font-size: .85rem; }
+    .rule-pt { color: var(--nanquim); }
+    .rule-en { color: #888; font-size: .87rem; }
+
+    /* CASE GRID */
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 0; }
+    .case-card { background: var(--off-white); border-radius: 10px; padding: 16px 18px; font-size: .88rem; line-height: 1.65; }
+    .case-card h3 { font-family: 'Manrope', sans-serif; font-size: .77rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 8px; }
+    .case-card p { margin-bottom: 6px; }
+    .case-card .ex { color: #555; font-style: italic; background: white; border-radius: 6px; padding: 6px 10px; margin-top: 6px; }
+    .case-card .exc { color: #c62828; font-weight: 600; margin-top: 4px; }
+
+    /* GRAM BOXES */
+    .gram-box { border-radius: 12px; padding: 16px 20px; margin: 18px 0; font-size: .9rem; line-height: 1.7; }
+    .gram-box.rule { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); }
+    .gram-box.warn { background: #FFF4ED; border-left: 4px solid var(--pitomba); }
+    .gram-box.cult { background: #EEF5E8; border-left: 4px solid var(--floresta); }
+    .gram-box.tip  { background: #FFFBEE; border-left: 4px solid var(--ouro); }
+    .gram-box-title { font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+    .gram-box.rule .gram-box-title { color: var(--cobalto); }
+    .gram-box.warn .gram-box-title { color: var(--pitomba); }
+    .gram-box.cult .gram-box-title { color: var(--floresta); }
+    .gram-box.tip  .gram-box-title { color: #7A5900; }
+
+    /* NAV LINK */
+    .nav-link { padding: 22px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--pitomba); margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+    .nav-btn:hover { opacity: .88; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .art-grid, .case-grid { grid-template-columns: 1fr; }
+      .rules-list li { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Material de Referência</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal — Gramática</div>
+  <h1>Artigos em Português — <em>o, a, um, uma…</em></h1>
+  <div class="hero-sub">Everything you need to know about definite and indefinite articles in Brazilian Portuguese — including the cases where Portuguese and English work very differently.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Artigos definidos</span>
+    <span class="hero-tag">Artigos indefinidos</span>
+    <span class="hero-tag">Gênero e número</span>
+    <span class="hero-tag">A2 · Iniciante II</span>
+  </div>
+  <div class="hero-note">📖 Leia este material antes da aula</div>
+</div>
+
+<div class="main">
+
+  <!-- QUICK REFERENCE -->
+  <p class="sec-label">Referência rápida</p>
+  <div class="card">
+    <h2>All eight articles at a glance</h2>
+    <p>Portuguese has four <strong>definite articles</strong> (equivalent to English <em>the</em>) and four <strong>indefinite articles</strong> (equivalent to <em>a / an / some</em>). Each one must agree in <strong>gender</strong> (masculine / feminine) and <strong>number</strong> (singular / plural) with the noun it modifies.</p>
+
+    <div class="art-grid">
+      <div class="art-col def">
+        <div class="art-col-header">Artigos Definidos — "the"</div>
+        <div class="art-row">
+          <span class="art-token">o</span>
+          <span class="art-gender">masc. singular</span>
+          <span class="art-ex">o carro</span>
+        </div>
+        <div class="art-row">
+          <span class="art-token">a</span>
+          <span class="art-gender">fem. singular</span>
+          <span class="art-ex">a casa</span>
+        </div>
+        <div class="art-row">
+          <span class="art-token">os</span>
+          <span class="art-gender">masc. plural</span>
+          <span class="art-ex">os carros</span>
+        </div>
+        <div class="art-row">
+          <span class="art-token">as</span>
+          <span class="art-gender">fem. plural</span>
+          <span class="art-ex">as casas</span>
+        </div>
+      </div>
+
+      <div class="art-col indef">
+        <div class="art-col-header">Artigos Indefinidos — "a / some"</div>
+        <div class="art-row">
+          <span class="art-token">um</span>
+          <span class="art-gender">masc. singular</span>
+          <span class="art-ex">um gato</span>
+        </div>
+        <div class="art-row">
+          <span class="art-token">uma</span>
+          <span class="art-gender">fem. singular</span>
+          <span class="art-ex">uma cadeira</span>
+        </div>
+        <div class="art-row">
+          <span class="art-token">uns</span>
+          <span class="art-gender">masc. plural</span>
+          <span class="art-ex">uns amigos</span>
+        </div>
+        <div class="art-row">
+          <span class="art-token">umas</span>
+          <span class="art-gender">fem. plural</span>
+          <span class="art-ex">umas amigas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEFINITE ARTICLES BASICS -->
+  <p class="sec-label">Artigos definidos</p>
+  <div class="card">
+    <h2>O, A, Os, As — talking about something specific</h2>
+    <p>Use the definite article when both you and your listener already know <em>which</em> thing you are talking about — it's specific, identified. In this sense it works just like English <em>the</em>.</p>
+
+    <table class="ex-table">
+      <tr><th>Artigo</th><th>Português</th><th>English</th></tr>
+      <tr>
+        <td><span class="art-hl">o</span></td>
+        <td class="pt"><span class="art-hl">O</span> carro é novo.</td>
+        <td class="en"><span class="art-hl">The</span> car is new.</td>
+      </tr>
+      <tr>
+        <td><span class="art-hl">a</span></td>
+        <td class="pt"><span class="art-hl">A</span> casa é azul.</td>
+        <td class="en"><span class="art-hl">The</span> house is blue.</td>
+      </tr>
+      <tr>
+        <td><span class="art-hl">os</span></td>
+        <td class="pt"><span class="art-hl">Os</span> gatos estão dormindo.</td>
+        <td class="en"><span class="art-hl">The</span> cats are sleeping.</td>
+      </tr>
+      <tr>
+        <td><span class="art-hl">as</span></td>
+        <td class="pt"><span class="art-hl">As</span> portas estão fechadas.</td>
+        <td class="en"><span class="art-hl">The</span> doors are closed.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- WHERE PORTUGUESE DIFFERS -->
+  <div class="card">
+    <h2>Where Portuguese uses <em>the</em> — but English doesn't</h2>
+    <p>This is the most common source of mistakes for English speakers. Portuguese uses the definite article in several situations where English uses <strong>no article at all</strong>.</p>
+
+    <ul class="rules-list">
+      <li>
+        <div>
+          <div class="rule-cat">🍂 Seasons (estações do ano)</div>
+          <div class="rule-pt"><span class="art-hl">A</span> primavera é linda. &nbsp;/&nbsp; Eu amo <span class="art-hl">o</span> inverno.</div>
+        </div>
+        <div class="rule-en">Spring is beautiful. / I love winter.</div>
+      </li>
+      <li>
+        <div>
+          <div class="rule-cat">🍽️ Meals (refeições)</div>
+          <div class="rule-pt"><span class="art-hl">O</span> almoço está pronto! &nbsp;/&nbsp; Vamos tomar <span class="art-hl">o</span> jantar às 20h.</div>
+        </div>
+        <div class="rule-en">Lunch is ready! / Let's have dinner at 8 pm.</div>
+      </li>
+      <li>
+        <div>
+          <div class="rule-cat">🎄 Holidays &amp; celebrations</div>
+          <div class="rule-pt"><span class="art-hl">O</span> Natal é muito celebrado no Brasil. &nbsp;/&nbsp; <span class="art-hl">A</span> Páscoa é em abril.</div>
+        </div>
+        <div class="rule-en">Christmas is very celebrated in Brazil. / Easter is in April.</div>
+      </li>
+      <li>
+        <div>
+          <div class="rule-cat">💧 Uncountable nouns (água, sal, beleza…)</div>
+          <div class="rule-pt"><span class="art-hl">O</span> sal é um tempero básico. &nbsp;/&nbsp; <span class="art-hl">A</span> água da torneira é potável.</div>
+        </div>
+        <div class="rule-en">Salt is a basic seasoning. / Tap water is drinkable.</div>
+      </li>
+      <li>
+        <div>
+          <div class="rule-cat">🌎 General categories (all people, all Brazilians…)</div>
+          <div class="rule-pt"><span class="art-hl">Os</span> brasileiros falam português. &nbsp;/&nbsp; <span class="art-hl">As</span> pessoas aqui são simpáticas.</div>
+        </div>
+        <div class="rule-en">Brazilians speak Portuguese. / People here are friendly.</div>
+      </li>
+      <li>
+        <div>
+          <div class="rule-cat">🔢 "Ambos / Ambas" — always takes an article</div>
+          <div class="rule-pt">Ambas <span class="art-hl">as</span> cidades são lindas. &nbsp;/&nbsp; Ambos <span class="art-hl">os</span> projetos foram aprovados.</div>
+        </div>
+        <div class="rule-en">Both cities are beautiful. / Both projects were approved.</div>
+      </li>
+    </ul>
+
+    <div class="gram-box tip">
+      <div class="gram-box-title">💡 Quick pattern</div>
+      If a noun represents a <strong>whole category</strong> or a <strong>general concept</strong> in Portuguese, it almost always needs a definite article. English skips it — Portuguese doesn't.
+    </div>
+  </div>
+
+  <!-- SPECIAL CASES -->
+  <div class="card">
+    <h2>Special cases — names, countries, cities, possessives</h2>
+    <p>These are specific rules that do not have direct equivalents in English. Read each one carefully.</p>
+
+    <div class="case-grid">
+      <div class="case-card">
+        <h3>👤 People's names</h3>
+        <p>Using an article before a first name is <strong>optional</strong> in Brazilian Portuguese. It signals familiarity and is very common in everyday conversation — especially in São Paulo and Rio.</p>
+        <div class="ex"><span class="art-hl">A</span> Paula é brilhante.<br><span class="art-hl">O</span> Antônio ligou pra você?</div>
+        <p style="margin-top:8px;">Both forms are correct. In formal writing, skip the article.</p>
+      </div>
+
+      <div class="case-card">
+        <h3>🌎 Countries</h3>
+        <p>Countries have gender in Portuguese and most take a definite article. Learn the gender with the name!</p>
+        <div class="ex"><span class="art-hl">O</span> Brasil &nbsp;·&nbsp; <span class="art-hl">A</span> Argentina<br><span class="art-hl">A</span> França &nbsp;·&nbsp; <span class="art-hl">Os</span> Estados Unidos</div>
+        <p class="exc">⚠️ Exception: Portugal — no article!<br>"Portugal fica na Europa." ✓</p>
+      </div>
+
+      <div class="case-card">
+        <h3>🏙️ Cities</h3>
+        <p>Cities usually have <strong>no article</strong> in Portuguese. They are treated as proper names without gender.</p>
+        <div class="ex">São Paulo · Fortaleza · Salvador · Curitiba</div>
+        <p class="exc">⚠️ Exception: <span class="art-hl">O</span> Rio de Janeiro<br>Rio always takes the masculine article.</p>
+      </div>
+
+      <div class="case-card">
+        <h3>🏠 Possessives</h3>
+        <p>The article before a possessive is <strong>optional</strong> — both forms are equally correct in Brazilian Portuguese.</p>
+        <div class="ex"><span class="art-hl">O</span> meu nome é Lucas. ✓<br>Meu nome é Lucas. ✓</div>
+        <p style="margin-top:8px;">In practice, Brazilians often drop the article before possessives in informal speech.</p>
+      </div>
+    </div>
+
+    <div class="gram-box cult" style="margin-top:16px;">
+      <div class="gram-box-title">🇧🇷 Regional variation — articles before names</div>
+      The habit of saying <em>a Paula</em> or <em>o João</em> is most common in <strong>São Paulo and Rio de Janeiro</strong>. In northeastern cities like Recife and Fortaleza, people more often skip the article. Both forms are grammatically correct — the article before a name is always optional.
+    </div>
+  </div>
+
+  <!-- INDEFINITE ARTICLES -->
+  <p class="sec-label">Artigos indefinidos</p>
+  <div class="card">
+    <h2>Um, Uma, Uns, Umas — something non-specific</h2>
+    <p>Use the indefinite article when you are talking about <strong>one item among many</strong>, or something <strong>mentioned for the first time</strong> that the listener cannot identify yet. The singular forms equal English <em>a / an</em>; the plurals equal <em>some</em>.</p>
+
+    <table class="ex-table">
+      <tr><th>Artigo</th><th>Português</th><th>English</th></tr>
+      <tr>
+        <td><span class="art-hl-i">um</span></td>
+        <td class="pt">Eu tenho <span class="art-hl-i">um</span> gato.</td>
+        <td class="en">I have <em>a</em> cat.</td>
+      </tr>
+      <tr>
+        <td><span class="art-hl-i">uma</span></td>
+        <td class="pt">Ela comprou <span class="art-hl-i">uma</span> cama nova.</td>
+        <td class="en">She bought <em>a</em> new bed.</td>
+      </tr>
+      <tr>
+        <td><span class="art-hl-i">uns</span></td>
+        <td class="pt">Convidei <span class="art-hl-i">uns</span> amigos para a festa.</td>
+        <td class="en">I invited <em>some</em> friends to the party.</td>
+      </tr>
+      <tr>
+        <td><span class="art-hl-i">umas</span></td>
+        <td class="pt">Trouxe <span class="art-hl-i">umas</span> flores do mercado.</td>
+        <td class="en">I brought <em>some</em> flowers from the market.</td>
+      </tr>
+    </table>
+
+    <div class="gram-box rule">
+      <div class="gram-box-title">📐 Uns / Umas = approximate quantity</div>
+      The plural indefinite articles also express an <strong>approximate number</strong> — like <em>around</em> or <em>about</em> in English:<br><br>
+      <span class="pt">Acho que ele tem <span class="art-hl-i">uns</span> 60 anos.</span> — I think he is <em>around</em> 60 years old.<br>
+      <span class="pt"><span class="art-hl-i">Umas</span> 30 pessoas virão à festa.</span> — <em>About</em> 30 people will come to the party.<br>
+      <span class="pt">Esse cinto custou <span class="art-hl-i">uns</span> R$&nbsp;200.</span> — This belt cost <em>around</em> R$&nbsp;200.
+    </div>
+  </div>
+
+  <!-- NO ARTICLE WITH PROFESSIONS -->
+  <div class="card">
+    <h2>⚠️ Important rule — no article before professions</h2>
+    <p>When you state someone's <strong>profession, nationality, or religion</strong>, do <strong>not</strong> use an indefinite article in Portuguese. This is one of the most common mistakes for English speakers.</p>
+
+    <table class="ex-table">
+      <tr><th>English (uses "a")</th><th>Português (no article)</th></tr>
+      <tr>
+        <td class="en">I am <strong>a</strong> teacher.</td>
+        <td>
+          <div class="pt">Eu sou professora. ✓</div>
+          <div class="err">✗ Eu sou <u>uma</u> professora. (wrong)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="en">He is <strong>a</strong> doctor.</td>
+        <td>
+          <div class="pt">Ele é médico. ✓</div>
+          <div class="err">✗ Ele é <u>um</u> médico. (wrong)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="en">She is <strong>a</strong> lawyer.</td>
+        <td class="pt">Ela é advogada. ✓</td>
+      </tr>
+      <tr>
+        <td class="en">They are <strong>Brazilian</strong>.</td>
+        <td class="pt">Eles são brasileiros. ✓</td>
+      </tr>
+    </table>
+
+    <div class="gram-box warn">
+      <div class="gram-box-title">⚠️ When CAN you use the article before a profession?</div>
+      Adding <em>um/uma</em> before a profession is possible, but it shifts the meaning — it implies a quality or emphasis: <em>"Ela é uma médica incrível"</em> (She is an <strong>incredible</strong> doctor). Without the article, you are simply stating the profession. In most situations, drop it.
+    </div>
+  </div>
+
+  <!-- NAV LINK -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label">Próximo passo</div>
+      <div class="nav-link-title">Exercícios — Artigos em Português</div>
+    </div>
+    <a href="gramatica-artigos-definidos-indefinidos-a2-exercicios-aluno.html" class="nav-btn">Ir para os exercícios →</a>
+  </div>
+
+</div>
+</body>
+</html>
