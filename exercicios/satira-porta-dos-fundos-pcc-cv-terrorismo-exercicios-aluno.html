@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCC, CV e Washington — Exercícios C2 | BPHUB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --baunilha:#FCF5EB;--baunilha2:#FDE7C4;--off-white:#F2F0E3;
+  --light-gray:#EDEDE2;--nanquim:#1E1D1C;--texto:#3C3C21;
+  --cobalto:#265B8B;--pitomba:#D36D29;--ouro:#FFB94A;
+  --floresta:#4E551D;--erva-doce:#A6B28A;--giz:#FCF5EB;--musgo:#3C3C21;
+}
+html{scroll-behavior:smooth}
+body{background:var(--baunilha);color:var(--texto);font-family:'Manrope',sans-serif;font-size:16px;line-height:1.7}
+h1,h2,h3{font-family:'Trirong',serif;font-weight:300}
+a{color:var(--cobalto)}
+.topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:var(--giz);border-bottom:1px solid #E8E4DE;position:sticky;top:0;z-index:50}
+.topbar img{height:40px;width:auto}
+.badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.badge-level{background:#1E1D1C;color:white}
+.badge-type{background:rgba(30,29,28,.1);color:var(--nanquim)}
+.hero{background:#1E1D1C;padding:52px 48px 46px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--floresta),var(--erva-doce),var(--ouro),var(--pitomba))}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px}
+.hero h1{font-size:clamp(24px,4vw,42px);color:white;margin-bottom:12px;line-height:1.2}
+.hero h1 em{font-style:italic;color:var(--ouro)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.6);max-width:600px;line-height:1.65}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero-tag{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);font-size:12px;padding:4px 12px;border-radius:20px;font-weight:500}
+.hero-note{margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,179,74,.15);border-radius:20px;padding:6px 16px;font-size:13px;color:var(--ouro);font-weight:600}
+.main{max-width:920px;padding:52px 48px 80px}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+/* exercise cards */
+.ex-card{background:white;border-radius:14px;padding:28px 32px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.ex-num{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pitomba);margin-bottom:6px}
+.ex-title{font-family:'Trirong',serif;font-weight:300;font-size:1.25rem;color:var(--nanquim);margin-bottom:8px}
+.ex-instr{font-size:.88rem;color:#666;margin-bottom:18px;line-height:1.6}
+/* V/F */
+.vf-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+.vf-item:last-child{border-bottom:none}
+.vf-btns{display:flex;gap:6px;flex-shrink:0;padding-top:2px}
+.vf-btn{border:1.5px solid var(--light-gray);background:white;border-radius:6px;padding:5px 13px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Manrope',sans-serif}
+.vf-btn:hover{border-color:var(--nanquim);color:var(--nanquim)}
+.vf-btn.sel-V{background:var(--nanquim);color:white;border-color:var(--nanquim)}
+.vf-btn.sel-F{background:var(--pitomba);color:white;border-color:var(--pitomba)}
+.vf-btn.right{background:#2e7d32;color:white;border-color:#2e7d32}
+.vf-btn.wrong{background:#c62828;color:white;border-color:#c62828}
+/* gap fill */
+.word-bank{background:var(--baunilha2);border-radius:8px;padding:10px 16px;margin-bottom:18px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.word-bank strong{color:var(--musgo);margin-right:4px;white-space:nowrap}
+.wb-word{background:white;border:1.5px solid #aaa;border-radius:4px;padding:2px 10px;font-size:.85rem;color:var(--nanquim)}
+.gap-block{padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.9}
+.gap-block:last-of-type{border-bottom:none}
+.gap-num{font-weight:700;color:var(--pitomba);margin-right:6px}
+.gap-input{border:none;border-bottom:2px solid #aaa;background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:180px;outline:none;transition:border-color .2s}
+.gap-input:focus{border-color:var(--nanquim)}
+.gap-input.correct{border-color:#2e7d32;color:#2e7d32}
+.gap-input.wrong{border-color:#c62828;color:#c62828}
+/* textareas */
+textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:8px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:12px 14px;color:var(--nanquim);background:var(--off-white);resize:vertical;min-height:100px;margin-top:6px;outline:none}
+textarea.prod:focus{border-color:var(--nanquim)}
+.q-label{font-size:.9rem;font-weight:600;color:var(--nanquim);margin:18px 0 4px}
+.q-label:first-of-type{margin-top:0}
+/* buttons & results */
+.check-btn{border:none;border-radius:8px;padding:10px 22px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;background:var(--nanquim);color:white;margin-top:18px;transition:opacity .15s}
+.check-btn:hover{opacity:.85}
+.reset-btn{border:none;border-radius:8px;padding:10px 18px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;background:var(--light-gray);color:var(--nanquim);margin-top:18px;margin-left:8px;transition:opacity .15s}
+.reset-btn:hover{opacity:.8}
+.result-msg{margin-top:14px;padding:14px 18px;border-radius:10px;font-size:.88rem;line-height:1.85;display:none;max-height:300px;overflow-y:auto}
+.result-msg.good{background:#e8f5e9;color:#1b5e20;display:block}
+.result-msg.try-again{background:#fff3e0;color:#4a2c0a;display:block}
+/* send box */
+.send-box{background:var(--baunilha2);border-radius:14px;padding:24px 28px;margin-top:8px;font-size:.95rem;color:var(--nanquim);line-height:1.75}
+/* nav link */
+.nav-link{padding:24px 28px;background:white;border:1.5px solid var(--light-gray);border-radius:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:32px}
+.nav-link-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.nav-link-title{font-size:15px;color:var(--nanquim);font-family:'Trirong',serif;font-weight:300}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;color:white;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;text-decoration:none}
+@media(max-width:700px){.topbar,.hero,.main{padding-left:20px;padding-right:20px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span class="badge badge-level">C2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>PCC, Comando Vermelho e Washington — <em>exercícios</em></h1>
+  <div class="hero-sub">Compreensão do texto jornalístico, análise da sátira política, escuta crítica da entrevista e produção argumentativa.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Sátira política</span>
+    <span class="hero-tag">Léxico jurídico</span>
+    <span class="hero-tag">Produção argumentativa</span>
+    <span class="hero-tag">C2 · Avançado II</span>
+  </div>
+  <div class="hero-note">📝 Complete após assistir ao vídeo e ouvir a entrevista</div>
+</div>
+
+<div class="main">
+
+<!-- EX 1: V/F -->
+<div class="ex-card">
+  <p class="ex-num">Exercício 1</p>
+  <p class="ex-title">Compreensão do texto — Verdadeiro ou Falso?</p>
+  <p class="ex-instr">Com base na matéria da <em>Folha de S.Paulo</em> (material de referência), classifique cada afirmação como Verdadeira (V) ou Falsa (F).</p>
+
+  <div class="vf-item" data-id="1">
+    <div class="vf-btns">
+      <button class="vf-btn" data-val="V" onclick="selVF(this,1,'V')">V</button>
+      <button class="vf-btn" data-val="F" onclick="selVF(this,1,'F')">F</button>
+    </div>
+    <span>A legislação americana de combate ao terrorismo permite que os EUA investiguem e sancionem apenas cidadãos residentes em solo americano.</span>
+  </div>
+  <div class="vf-item" data-id="2">
+    <div class="vf-btns">
+      <button class="vf-btn" data-val="V" onclick="selVF(this,2,'V')">V</button>
+      <button class="vf-btn" data-val="F" onclick="selVF(this,2,'F')">F</button>
+    </div>
+    <span>A decisão de classificar o PCC e o CV como organizações terroristas passa a valer automaticamente, a menos que o Congresso americano vote para derrubá-la.</span>
+  </div>
+  <div class="vf-item" data-id="3">
+    <div class="vf-btns">
+      <button class="vf-btn" data-val="V" onclick="selVF(this,3,'V')">V</button>
+      <button class="vf-btn" data-val="F" onclick="selVF(this,3,'F')">F</button>
+    </div>
+    <span>A definição de "suporte material" segundo a lei americana é restrita a transferências de dinheiro e serviços bancários diretos.</span>
+  </div>
+  <div class="vf-item" data-id="4">
+    <div class="vf-btns">
+      <button class="vf-btn" data-val="V" onclick="selVF(this,4,'V')">V</button>
+      <button class="vf-btn" data-val="F" onclick="selVF(this,4,'F')">F</button>
+    </div>
+    <span>Instituições financeiras que não bloquearem e reportarem fundos vinculados a organizações terroristas estrangeiras podem ser multadas em US$ 50 mil ou o dobro do valor que deveriam ter bloqueado — o que for maior.</span>
+  </div>
+  <div class="vf-item" data-id="5">
+    <div class="vf-btns">
+      <button class="vf-btn" data-val="V" onclick="selVF(this,5,'V')">V</button>
+      <button class="vf-btn" data-val="F" onclick="selVF(this,5,'F')">F</button>
+    </div>
+    <span>Segundo os especialistas ouvidos pela <em>Folha</em>, uma intervenção militar americana direta no Brasil é o cenário mais provável decorrente da nova classificação.</span>
+  </div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="check-btn" onclick="checkVF()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetVF()">Refazer</button>
+  </div>
+  <div id="vf-result" class="result-msg"></div>
+</div>
+
+<!-- EX 2: Gap fill -->
+<div class="ex-card">
+  <p class="ex-num">Exercício 2</p>
+  <p class="ex-title">Léxico em contexto — Complete as lacunas</p>
+  <p class="ex-instr">Complete cada frase com a expressão correta do banco de palavras. Use cada termo uma vez.</p>
+  <div class="word-bank">
+    <strong>Banco de palavras:</strong>
+    <span class="wb-word">arcabouço legal</span>
+    <span class="wb-word">compliance</span>
+    <span class="wb-word">entra em vigor</span>
+    <span class="wb-word">Ofac</span>
+    <span class="wb-word">sanções</span>
+    <span class="wb-word">suporte material</span>
+  </div>
+
+  <div class="gap-block">
+    <span class="gap-num">1.</span>
+    A nova classificação <input class="gap-input" id="g1" autocomplete="off" spellcheck="false" placeholder="________________"> no dia 5 de junho, após notificação ao Congresso americano.
+  </div>
+  <div class="gap-block">
+    <span class="gap-num">2.</span>
+    Quem fornecer <input class="gap-input" id="g2" autocomplete="off" spellcheck="false" placeholder="________________"> ao PCC — dinheiro, treinamento, documentos falsos ou abrigo — pode ser processado nos EUA, mesmo estando fora do território americano.
+  </div>
+  <div class="gap-block">
+    <span class="gap-num">3.</span>
+    O <input class="gap-input" id="g3" autocomplete="off" spellcheck="false" placeholder="________________"> americano para combater o terrorismo é amplo: inclui dispositivos de lei penal, vigilância financeira e normas de inteligência.
+  </div>
+  <div class="gap-block">
+    <span class="gap-num">4.</span>
+    A inscrição na lista SDGT implica automaticamente o registro no cadastro de <input class="gap-input" id="g4" autocomplete="off" spellcheck="false" placeholder="________________">, administrado pelo Departamento do Tesouro americano, com bloqueio de bens e exclusão do sistema financeiro em dólar.
+  </div>
+  <div class="gap-block">
+    <span class="gap-num">5.</span>
+    As <input class="gap-input" id="g5" autocomplete="off" spellcheck="false" placeholder="________________"> não afetam apenas indivíduos: bancos, fintechs e até plataformas digitais que operem com entidades listadas também ficam sujeitos a punições.
+  </div>
+  <div class="gap-block">
+    <span class="gap-num">6.</span>
+    Empresas com atuação no Brasil e nos EUA precisarão revisar seus programas de <input class="gap-input" id="g6" autocomplete="off" spellcheck="false" placeholder="________________"> para equilibrar exigências jurídicas dos dois países — que podem, nesse caso, entrar em conflito.
+  </div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="check-btn" onclick="checkGaps()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetGaps()">Refazer</button>
+  </div>
+  <div id="gap-result" class="result-msg"></div>
+</div>
+
+<!-- EX 3: Análise da sátira -->
+<div class="ex-card">
+  <p class="ex-num">Exercício 3</p>
+  <p class="ex-title">Análise do esquete — Porta dos Fundos</p>
+  <p class="ex-instr">Com base no vídeo assistido, responda às questões abaixo com profundidade analítica. Não há respostas únicas — o que se avalia é a qualidade da argumentação.</p>
+
+  <p class="q-label">a) Qual é o principal alvo de crítica do esquete? Como o Porta dos Fundos enquadra a decisão americana e o contexto político brasileiro? Identifique a tese implícita do humor.</p>
+  <textarea class="prod" rows="4" placeholder="Escreva sua análise aqui…"></textarea>
+
+  <p class="q-label">b) Identifique dois recursos humorísticos utilizados no esquete — exagero, ironia, absurdo, inversão de papéis, paródia, entre outros — e explique como cada um constrói o efeito crítico.</p>
+  <textarea class="prod" rows="5" placeholder="Escreva sua análise aqui…"></textarea>
+
+  <p class="q-label">c) A sátira frequentemente diz mais pelo que não verbaliza do que pelo que afirma diretamente. Há no esquete alguma crítica implícita que o humor mascara ou suaviza? Como o gênero da comédia permite dizer o que o jornalismo sério hesitaria em afirmar?</p>
+  <textarea class="prod" rows="5" placeholder="Escreva sua análise aqui…"></textarea>
+</div>
+
+<!-- EX 4: Compreensão da entrevista -->
+<div class="ex-card">
+  <p class="ex-num">Exercício 4</p>
+  <p class="ex-title">Compreensão da entrevista — Lincoln Gakiya</p>
+  <p class="ex-instr">Com base no episódio do podcast de Natuza Nery, responda às questões abaixo.</p>
+
+  <p class="q-label">a) Sintetize em 3–4 frases o argumento central de Gakiya contra a decisão americana. Por que ele a considera "muito grave" do ponto de vista do combate ao crime organizado no Brasil?</p>
+  <textarea class="prod" rows="5" placeholder="Escreva sua síntese aqui…"></textarea>
+
+  <p class="q-label">b) Gakiya e o professor Paulo Borba Casella (citado na matéria da <em>Folha</em>) chegam a conclusões parecidas, mas por caminhos distintos. Compare os dois argumentos: em que se fundamenta cada um? Qual é a diferença essencial entre a perspectiva do promotor e a do internacionalista?</p>
+  <textarea class="prod" rows="6" placeholder="Escreva sua comparação aqui…"></textarea>
+
+  <p class="q-label">c) Qual é o tom predominante da entrevista com Gakiya — alarmista, analítico, propositivo, resignado? Identifique ao menos dois elementos linguísticos (escolha lexical, modalização, registro) que sustentam essa leitura.</p>
+  <textarea class="prod" rows="4" placeholder="Escreva sua análise aqui…"></textarea>
+</div>
+
+<!-- EX 5: Produção argumentativa -->
+<div class="ex-card">
+  <p class="ex-num">Exercício 5</p>
+  <p class="ex-title">Síntese e produção argumentativa</p>
+  <p class="ex-instr">Dois momentos de escrita: primeiro uma síntese analítica, depois um texto de opinião desenvolvido.</p>
+
+  <p class="q-label">Parte A — Soberania em questão</p>
+  <p style="font-size:.88rem;color:#666;line-height:1.65;margin-bottom:8px">Releia o trecho do professor Borba Casella e o parágrafo sobre extraterritorialidade no material de referência. Em 3–4 frases, explique o problema de soberania que a medida americana coloca — sem tomar partido, apenas expondo o conflito jurídico.</p>
+  <textarea class="prod" rows="4" placeholder="Escreva sua síntese aqui…"></textarea>
+
+  <p class="q-label" style="margin-top:20px">Parte B — Texto de opinião</p>
+  <p style="font-size:.88rem;color:#666;line-height:1.65;margin-bottom:8px">Escreva 3–4 parágrafos em que você defende ou questiona a decisão americana de classificar o PCC e o CV como organizações terroristas. Seu texto deve: (1) apresentar uma tese clara no primeiro parágrafo; (2) desenvolver ao menos dois argumentos sustentados em evidências do material lido/assistido/ouvido; (3) reconhecer e rebater um contra-argumento relevante; (4) concluir de forma coerente com a tese.</p>
+  <textarea class="prod" rows="12" placeholder="Escreva seu texto de opinião aqui…"></textarea>
+</div>
+
+<!-- SEND BOX -->
+<div class="send-box">
+  📩 Quando terminar, envie os exercícios para a professora. Ela vai ler com atenção e dar um feedback personalizado — destacando o que você argumentou bem e sugerindo como aprimorar ainda mais a sua escrita em português. Essa troca é uma das partes mais importantes do processo.
+</div>
+
+<!-- NAV LINK -->
+<div class="nav-link">
+  <div>
+    <div class="nav-link-label" style="color:var(--cobalto)">Material de referência</div>
+    <div class="nav-link-title">PCC, CV e Washington — texto, vídeo e áudio</div>
+  </div>
+  <a href="satira-porta-dos-fundos-pcc-cv-terrorismo-referencia.html" class="nav-btn" style="background:var(--cobalto)">Ver material de referência →</a>
+</div>
+
+</div>
+
+<script>
+// ── V/F ──
+var vfKey = {1:'F',2:'V',3:'F',4:'V',5:'F'};
+var vfSel = {};
+function selVF(btn,id,val) {
+  var item = document.querySelector('.vf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.vf-btn').forEach(function(b){b.className='vf-btn';});
+  btn.classList.add('sel-'+val);
+  vfSel[id] = val;
+}
+function checkVF() {
+  var ok=0, tot=Object.keys(vfKey).length, html='';
+  for (var id in vfKey) {
+    var item = document.querySelector('.vf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.vf-btn').forEach(function(b){b.classList.remove('right','wrong','sel-V','sel-F');});
+    var sel = vfSel[id], correct = sel === vfKey[id];
+    if (sel) {
+      if (correct) ok++;
+      item.querySelectorAll('.vf-btn').forEach(function(b){
+        if (b.dataset.val === vfKey[id]) b.classList.add('right');
+        else if (b.dataset.val === sel && !correct) b.classList.add('wrong');
+      });
+    }
+    html += '<div style="margin-bottom:6px;font-size:.85rem">'
+      + (sel ? (correct ? '<span style="color:#2e7d32;font-weight:700">✓</span>' : '<span style="color:#c62828;font-weight:700">✗</span>') : '<span style="color:#aaa">—</span>')
+      + ' <strong>'+id+'.</strong> Resposta correta: <strong>'+vfKey[id]+'</strong></div>';
+  }
+  var msg = document.getElementById('vf-result');
+  msg.className = 'result-msg '+(ok===tot?'good':'try-again');
+  msg.innerHTML = '<div style="font-weight:700;margin-bottom:10px">'+(ok===tot?'✓ '+tot+' de '+tot+' correto(s)!':ok+' de '+tot+' correto(s) — gabarito:')+' </div>'+html;
+}
+function resetVF() {
+  for (var id in vfKey) {
+    document.querySelector('.vf-item[data-id="'+id+'"]').querySelectorAll('.vf-btn').forEach(function(b){b.className='vf-btn';});
+    delete vfSel[id];
+  }
+  var msg=document.getElementById('vf-result'); msg.className='result-msg'; msg.innerHTML='';
+}
+
+// ── Gap fill ──
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íì]/g,'i')
+    .replace(/[óôõ]/g,'o').replace(/[úù]/g,'u').replace(/ç/g,'c')
+    .replace(/[^a-z0-9]/g,'');
+}
+var gapAnswers = [
+  {id:'g1', key:'entraemvigor',      display:'entra em vigor'},
+  {id:'g2', key:'suportematerial',   display:'suporte material'},
+  {id:'g3', key:'arcaboucolegal',    display:'arcabouço legal'},
+  {id:'g4', key:'ofac',              display:'Ofac'},
+  {id:'g5', key:'sancoes',           display:'sanções'},
+  {id:'g6', key:'compliance',        display:'compliance'}
+];
+function checkGaps() {
+  var ok=0, html='';
+  gapAnswers.forEach(function(a) {
+    var inp = document.getElementById(a.id);
+    var correct = norm(inp.value) === a.key;
+    inp.classList.remove('correct','wrong');
+    inp.classList.add(correct?'correct':'wrong');
+    if (correct) ok++;
+    html += '<div style="margin-bottom:6px;font-size:.85rem">'
+      + (correct ? '<span style="color:#2e7d32;font-weight:700">✓</span>' : '<span style="color:#c62828;font-weight:700">✗</span>')
+      + ' <strong>'+gapAnswers.indexOf(a)+1+'.</strong> '+a.display+'</div>';
+  });
+  var msg = document.getElementById('gap-result');
+  msg.className = 'result-msg '+(ok===gapAnswers.length?'good':'try-again');
+  msg.innerHTML = '<div style="font-weight:700;margin-bottom:10px">'+(ok===gapAnswers.length?'✓ Todas corretas!':ok+' de '+gapAnswers.length+' correto(s) — gabarito:')+' </div>'+html;
+}
+function resetGaps() {
+  gapAnswers.forEach(function(a){var i=document.getElementById(a.id);i.value='';i.classList.remove('correct','wrong');});
+  var msg=document.getElementById('gap-result'); msg.className='result-msg'; msg.innerHTML='';
+}
+
+// ── FORMSPREE ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){el.remove();});
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R'+(idx+1)+' — '+label] = val;
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({'Nome do aluno':name,'Material':material},answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(payload)
+  }).then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled=false; btn.textContent='Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display='block';
+    btn.disabled=false; btn.textContent='Enviar respostas';
+  });
+}
+</script>
+
+<div id="bphub-form-area" style="max-width:920px;margin:0 auto 40px;padding:0 48px">
+<div style="padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none"/>
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none"/>
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+</div>
+<div id="bphub-success" style="display:none;max-width:920px;margin:0 auto 40px;padding:0 48px">
+  <div style="background:#EAF5EE;border-radius:12px;padding:22px 26px">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+</div>
+<div id="bphub-error" style="display:none;max-width:920px;margin:0 auto 40px;padding:0 48px">
+  <div style="background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
