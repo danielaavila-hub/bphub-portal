@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios — Copa do Mundo 2026 — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --pitomba: #D36D29; --pitomba-light: #FEF0E5;
+      --cobalto: #265B8B; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --green: #2E7D32; --green-bg: #E8F5E9;
+      --red: #C62828;   --red-bg: #FFEBEE;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--pitomba); }
+    strong { font-weight: 600; }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .badge-level { background: #D36D29; color: white; }
+    .badge-type  { background: rgba(30,29,28,.1); color: var(--nanquim); }
+
+    .hero { background: #D36D29; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: '⚽'; position: absolute; right: 48px; top: 50%; transform: translateY(-50%); font-size: 140px; opacity: .07; line-height: 1; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), #265B8B); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,.65); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.12); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; font-weight: 600; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* RECAP */
+    .recap-box { background: var(--pitomba-light); border-radius: 14px; padding: 18px 24px; margin-bottom: 36px; font-size: .88rem; line-height: 1.7; }
+    .recap-title { font-size: .77rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    .recap-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .recap-item { display: flex; gap: 10px; margin-bottom: 6px; }
+    .recap-word { font-weight: 700; color: var(--nanquim); min-width: 130px; }
+    .recap-def  { color: #666; }
+
+    /* EX CARDS */
+    .ex-card { background: white; border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .ex-num { font-size: .77rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; }
+    .ex-card h2 { font-size: 1.2rem; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: .9rem; color: #555; margin-bottom: 18px; line-height: 1.65; }
+
+    /* VF ITEMS */
+    .vf-list { list-style: none; }
+    .vf-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: flex-start; gap: 12px; font-size: .92rem; }
+    .vf-item:last-child { border-bottom: none; }
+    .vf-sentence { flex: 1; line-height: 1.65; }
+    .vf-btns { display: flex; gap: 8px; flex-shrink: 0; margin-top: 2px; }
+    .vf-btn { border: 2px solid var(--light-gray); background: white; border-radius: 8px; padding: 5px 14px; font-family: 'Manrope', sans-serif; font-size: .82rem; font-weight: 700; cursor: pointer; letter-spacing: .04em; color: var(--nanquim); transition: all .15s; }
+    .vf-btn:hover { border-color: var(--pitomba); }
+    .vf-btn.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+    .vf-btn.wrong   { background: var(--red-bg);   border-color: var(--red);   color: var(--red);   }
+    .vf-btn:disabled { cursor: default; }
+    .vf-fb { font-size: .82rem; margin-top: 6px; width: 100%; }
+    .vf-fb.ok  { color: var(--green); }
+    .vf-fb.err { color: var(--red); }
+
+    /* MATCHING */
+    .match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .match-col h3 { font-size: .77rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    .match-item { padding: 9px 12px; border-radius: 8px; background: var(--off-white); margin-bottom: 8px; display: flex; gap: 8px; align-items: center; font-size: .9rem; cursor: pointer; border: 2px solid transparent; transition: all .15s; }
+    .match-item.selected { border-color: var(--pitomba); background: var(--pitomba-light); }
+    .match-item.matched  { border-color: var(--green); background: var(--green-bg); color: var(--green); cursor: default; }
+    .match-item.wrong-sel { border-color: var(--red); background: var(--red-bg); }
+    .match-num  { font-weight: 700; color: var(--pitomba); min-width: 22px; }
+    .match-letter { font-weight: 700; color: var(--pitomba); min-width: 22px; }
+    .match-score-box { display: none; margin-top: 14px; padding: 12px 18px; border-radius: 10px; font-size: .9rem; font-weight: 600; }
+    .match-score-box.show { display: block; }
+
+    /* GAP FILL */
+    .gap-list { list-style: none; }
+    .gap-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; font-size: .92rem; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { color: var(--pitomba); font-weight: 700; min-width: 22px; }
+    .gap-sentence { flex: 1; min-width: 240px; line-height: 1.75; }
+    .gap-select { border: 2px solid var(--light-gray); background: white; border-radius: 6px; padding: 4px 10px; font-family: 'Manrope', sans-serif; font-size: .88rem; color: var(--nanquim); cursor: pointer; max-width: 260px; }
+    .gap-select:focus { outline: none; border-color: var(--pitomba); }
+    .gap-select.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+    .gap-select.wrong   { border-color: var(--red);   background: var(--red-bg);   color: var(--red);   }
+    .gap-hint { font-size: .8rem; margin-top: 4px; display: none; }
+    .gap-hint.show { display: block; }
+    .gap-hint.ok  { color: var(--green); }
+    .gap-hint.err { color: var(--red); }
+
+    /* CHECK / SCORE */
+    .check-btn { display: inline-flex; align-items: center; gap: 8px; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 18px; background: var(--pitomba); color: white; }
+    .check-btn:hover { opacity: .86; }
+    .score-box { display: none; margin-top: 14px; padding: 12px 18px; border-radius: 10px; font-size: .9rem; font-weight: 600; }
+    .score-box.show { display: block; }
+    .score-box.good  { background: var(--green-bg); color: var(--green); }
+    .score-box.ok    { background: #FFF8E6; color: #7A5900; }
+    .score-box.retry { background: var(--red-bg); color: var(--red); }
+
+    /* PRODUCTION */
+    .prod-label { font-size: .9rem; font-weight: 600; color: var(--nanquim); margin-bottom: 6px; margin-top: 18px; }
+    .prod-sub   { font-size: .83rem; color: #666; margin-bottom: 8px; }
+    .prod-ta    { width: 100%; border: 2px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--nanquim); resize: vertical; min-height: 90px; background: white; transition: border-color .15s; }
+    .prod-ta:focus { outline: none; border-color: var(--pitomba); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: .92rem; color: var(--nanquim); line-height: 1.75; }
+    .send-box b { color: var(--pitomba); }
+    .send-form { margin-top: 16px; }
+    .send-form input[type=text], .send-form input[type=email] { width: 100%; border: 2px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: .9rem; margin-bottom: 10px; background: white; }
+    .send-form input:focus { outline: none; border-color: var(--pitomba); }
+    .send-btn { border: none; border-radius: 10px; padding: 11px 28px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .send-btn:hover { opacity: .88; }
+    .send-conf { display: none; padding: 12px 18px; background: var(--green-bg); color: var(--green); border-radius: 10px; font-weight: 600; font-size: .9rem; margin-top: 12px; }
+
+    /* NAV */
+    .nav-link { padding: 22px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--pitomba); margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+    .nav-btn:hover { opacity: .88; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-cols { grid-template-columns: 1fr; }
+      .recap-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal — Cultura &amp; Vocabulário</div>
+  <h1>Exercícios — <em>Copa do Mundo 2026</em></h1>
+  <div class="hero-sub">Compreensão de texto, vocabulário do futebol, expressões idiomáticas e produção escrita — tudo sobre a Copa e o futebol brasileiro.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Compreensão de leitura</span>
+    <span class="hero-tag">Vocabulário</span>
+    <span class="hero-tag">Expressões idiomáticas</span>
+    <span class="hero-tag">B2 · Intermediário Superior</span>
+  </div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<div class="main">
+
+  <!-- RECAP -->
+  <div class="recap-box">
+    <div class="recap-title">🧭 Para relembrar — expressões do futebol no cotidiano</div>
+    <div class="recap-cols">
+      <div>
+        <div class="recap-item"><span class="recap-word">show de bola</span><span class="recap-def">ótimo, incrível</span></div>
+        <div class="recap-item"><span class="recap-word">craque</span><span class="recap-def">pessoa extraordinária em algo</span></div>
+        <div class="recap-item"><span class="recap-word">pisar na bola</span><span class="recap-def">cometer um erro grave</span></div>
+        <div class="recap-item"><span class="recap-word">dar um chapéu</span><span class="recap-def">enganar, superar com esperteza</span></div>
+        <div class="recap-item"><span class="recap-word">correr por fora</span><span class="recap-def">ser o azarão</span></div>
+        <div class="recap-item"><span class="recap-word">na trave</span><span class="recap-def">quase conseguiu</span></div>
+      </div>
+      <div>
+        <div class="recap-item"><span class="recap-word">aos 45 do segundo tempo</span><span class="recap-def">no último momento</span></div>
+        <div class="recap-item"><span class="recap-word">pendurar as chuteiras</span><span class="recap-def">se aposentar</span></div>
+        <div class="recap-item"><span class="recap-word">entregar o jogo</span><span class="recap-def">desistir, não se esforçar</span></div>
+        <div class="recap-item"><span class="recap-word">bola pra frente</span><span class="recap-def">seguir em frente</span></div>
+        <div class="recap-item"><span class="recap-word">deixar na cara do gol</span><span class="recap-def">facilitar muito algo para alguém</span></div>
+        <div class="recap-item"><span class="recap-word">de virada</span><span class="recap-def">conseguir após situação difícil</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 1: V/F COMPREENSÃO -->
+  <p class="sec-label">Exercício 1 de 5</p>
+  <div class="ex-card" id="ex1">
+    <div class="ex-num">Exercício 1</div>
+    <h2>Compreensão de texto — verdadeiro ou falso?</h2>
+    <p class="ex-instr">Com base na reportagem do material de referência, classifique cada afirmação como <strong>Verdadeiro</strong> ou <strong>Falso</strong>. Quando for falso, pense em como a frase deveria ser corrigida.</p>
+    <ul class="vf-list" id="vf-list"></ul>
+    <button class="check-btn" onclick="checkVF()">Verificar respostas</button>
+    <div class="score-box" id="vf-score"></div>
+  </div>
+
+  <!-- EX 2: MATCHING VOCABULÁRIO -->
+  <p class="sec-label">Exercício 2 de 5</p>
+  <div class="ex-card" id="ex2">
+    <div class="ex-num">Exercício 2</div>
+    <h2>Vocabulário em contexto — conecte a palavra à definição</h2>
+    <p class="ex-instr">Clique em uma palavra na coluna da esquerda e depois na definição correspondente na coluna da direita. Continue até parear todos os itens.</p>
+    <div class="match-cols">
+      <div class="match-col">
+        <h3>Palavra</h3>
+        <div id="m-words"></div>
+      </div>
+      <div class="match-col">
+        <h3>Definição</h3>
+        <div id="m-defs"></div>
+      </div>
+    </div>
+    <div class="match-score-box" id="match-score"></div>
+  </div>
+
+  <!-- EX 3: GAP FILL — EXPRESSÕES -->
+  <p class="sec-label">Exercício 3 de 5</p>
+  <div class="ex-card" id="ex3">
+    <div class="ex-num">Exercício 3</div>
+    <h2>Expressões do futebol — complete as frases</h2>
+    <p class="ex-instr">Escolha a expressão correta para completar cada frase. Atenção ao contexto e ao sentido da situação descrita.</p>
+    <ul class="gap-list" id="g3-list"></ul>
+    <button class="check-btn" onclick="checkGaps()">Verificar respostas</button>
+    <div class="score-box" id="g3-score"></div>
+  </div>
+
+  <!-- EX 4: COPA 2026 — MULTIPLE CHOICE -->
+  <p class="sec-label">Exercício 4 de 5</p>
+  <div class="ex-card" id="ex4">
+    <div class="ex-num">Exercício 4</div>
+    <h2>A nova Copa do Mundo 2026</h2>
+    <p class="ex-instr">Com base nas informações do material, escolha a alternativa correta para cada pergunta sobre o formato e os detalhes da Copa de 2026.</p>
+    <div id="quiz-container"></div>
+    <button class="check-btn" onclick="checkQuiz()">Verificar respostas</button>
+    <div class="score-box" id="quiz-score"></div>
+  </div>
+
+  <!-- EX 5: PRODUÇÃO -->
+  <p class="sec-label">Exercício 5 de 5</p>
+  <div class="ex-card" id="ex5">
+    <div class="ex-num">Exercício 5</div>
+    <h2>Produção escrita — o futebol e você</h2>
+    <p class="ex-instr">Responda às perguntas abaixo em português. Tente usar pelo menos <strong>três expressões futebolísticas</strong> do material em contextos diferentes dos exemplos dados. A professora vai avaliar sua criatividade e precisão.</p>
+
+    <div class="prod-label">a) O futebol no seu país</div>
+    <div class="prod-sub">O futebol é popular no seu país? Qual é o esporte mais importante culturalmente? Existe algo parecido com a "febre da Copa" que você conhece de perto?</div>
+    <textarea class="prod-ta" id="p1" placeholder="Escreva aqui…"></textarea>
+
+    <div class="prod-label">b) O Brasil na Copa 2026 — a sua previsão</div>
+    <div class="prod-sub">Na sua opinião, o Brasil vai conquistar o "hexa" em 2026? Justifique sua resposta com pelo menos dois argumentos. Use conectores como: <em>por um lado… por outro…, embora…, no entanto…, portanto…</em></div>
+    <textarea class="prod-ta" id="p2" placeholder="Na minha opinião…"></textarea>
+
+    <div class="prod-label">c) Expressões futebolísticas no trabalho ou na vida pessoal</div>
+    <div class="prod-sub">Crie três frases originais usando expressões do material. Descreva situações reais da sua vida profissional ou pessoal. Não repita os exemplos do texto!</div>
+    <textarea class="prod-ta" id="p3" style="min-height:120px;" placeholder="1. …&#10;2. …&#10;3. …"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 <b>Quando terminar</b>, envie os exercícios para a professora. Ela vai analisar com cuidado — especialmente as expressões que você usou na produção — e dar um feedback personalizado.<br>
+    <form class="send-form" onsubmit="bphubSend(event)">
+      <input type="text" id="s-nome" name="nome" placeholder="Seu nome" required>
+      <input type="email" id="s-email" name="email" placeholder="Seu e-mail (opcional)">
+      <button type="submit" class="send-btn">Enviar exercícios →</button>
+    </form>
+    <div class="send-conf" id="s-conf">✅ Enviado! A professora vai responder com feedback detalhado em breve.</div>
+  </div>
+
+  <!-- NAV BACK -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label">Material de referência</div>
+      <div class="nav-link-title">Copa do Mundo 2026 — Texto, Vocabulário e Expressões</div>
+    </div>
+    <a href="copa-mundo-2026-b2-material.html" class="nav-btn">← Voltar ao material</a>
+  </div>
+
+</div>
+
+<script>
+// ── EX 1: V/F ───────────────────────────────────────────────────────────────
+var vfData = [
+  { s: 'A Copa do Mundo de 2026 é realizada em apenas um país anfitrião.', correct: 'F', explain: 'Falso. A Copa de 2026 é realizada em três países: EUA, Canadá e México.' },
+  { s: 'O Brasil está no Grupo C, com Marrocos, Escócia e Haiti como adversários.', correct: 'V', explain: '' },
+  { s: 'Na estreia, o Brasil venceu o Marrocos por 2 a 1.', correct: 'F', explain: 'Falso. O Brasil empatou com o Marrocos em 1 a 1.' },
+  { s: 'Vinícius Júnior é descrito na reportagem como o craque que carrega a esperança do hexa.', correct: 'V', explain: '' },
+  { s: 'O Brasil é hexacampeão do mundo.', correct: 'F', explain: 'Falso. O Brasil é pentacampeão (5 títulos). O "hexa" é o sonho — o 6º título — que ainda não foi conquistado.' },
+  { s: 'Carlo Ancelotti é o primeiro técnico estrangeiro a dirigir a Seleção Brasileira em uma Copa do Mundo.', correct: 'V', explain: '' },
+  { s: 'Na nova Copa de 2026, apenas os dois primeiros de cada grupo avançam para o mata-mata.', correct: 'F', explain: 'Falso. Avançam o 1º e o 2º de cada grupo, mais os 8 melhores 3ºs colocados — totalizando 32 seleções.' },
+];
+var vfAnswers = new Array(vfData.length).fill(null);
+
+(function buildVF(){
+  var ul = document.getElementById('vf-list');
+  vfData.forEach(function(item, i) {
+    var li = document.createElement('li');
+    li.className = 'vf-item';
+    li.innerHTML = '<div class="vf-sentence">' + item.s + '</div>' +
+      '<div class="vf-btns">' +
+        '<button class="vf-btn" onclick="pickVF(' + i + ',\'V\',this)">V</button>' +
+        '<button class="vf-btn" onclick="pickVF(' + i + ',\'F\',this)">F</button>' +
+      '</div>' +
+      '<div class="vf-fb" id="vf-fb-' + i + '"></div>';
+    ul.appendChild(li);
+  });
+})();
+
+function pickVF(i, val, btn) {
+  var btns = btn.parentElement.querySelectorAll('.vf-btn');
+  btns.forEach(function(b){ b.classList.remove('correct','wrong'); });
+  vfAnswers[i] = val;
+  btn.classList.add(val === vfData[i].correct ? 'correct' : 'wrong');
+}
+
+function checkVF() {
+  var score = 0;
+  vfData.forEach(function(item, i) {
+    var fb = document.getElementById('vf-fb-' + i);
+    if (vfAnswers[i] === item.correct) {
+      score++;
+      fb.textContent = '✓ Correto!' + (item.explain ? ' ' + item.explain : '');
+      fb.className = 'vf-fb ok';
+    } else {
+      fb.textContent = (vfAnswers[i] === null ? '↑ Selecione V ou F.' : '✗ ' + (item.explain || 'A afirmação é ' + item.correct + '.'));
+      fb.className = 'vf-fb err';
+    }
+  });
+  var box = document.getElementById('vf-score');
+  box.className = 'score-box show ' + (score === vfData.length ? 'good' : score >= 5 ? 'ok' : 'retry');
+  box.textContent = score + '/' + vfData.length + ' correto(s) — ' + (score === vfData.length ? 'Perfeito! Leitura muito atenta. 🎉' : score >= 5 ? 'Muito bom! Reveja os itens marcados.' : 'Releia o texto com atenção e tente novamente.');
+}
+
+// ── EX 2: MATCHING ──────────────────────────────────────────────────────────
+var matchData = [
+  { word: 'goleiro',       def: 'jogador que guarda o gol e impede o adversário de marcar', id: 'a' },
+  { word: 'artilheiro',    def: 'o jogador que mais marcou gols no torneio', id: 'b' },
+  { word: 'mata-mata',     def: 'fase eliminatória — quem perde, vai embora', id: 'c' },
+  { word: 'torcida',       def: 'conjunto dos torcedores de um time ou seleção', id: 'd' },
+  { word: 'goleada',       def: 'vitória por uma diferença grande de gols', id: 'e' },
+  { word: 'craque',        def: 'jogador ou pessoa com habilidade excepcional', id: 'f' },
+  { word: 'impedimento',   def: 'infração em que um atacante está à frente da defesa no momento do passe (offside)', id: 'g' },
+  { word: 'pentacampeão',  def: 'quem venceu o mesmo torneio cinco vezes', id: 'h' },
+];
+
+var selectedWord = null;
+var matched = {};
+
+(function buildMatch(){
+  var wDiv = document.getElementById('m-words');
+  var dDiv = document.getElementById('m-defs');
+  matchData.forEach(function(item, i) {
+    var w = document.createElement('div');
+    w.className = 'match-item'; w.id = 'mw-' + i;
+    w.innerHTML = '<span class="match-num">' + (i+1) + '.</span><span>' + item.word + '</span>';
+    w.onclick = function(){ selectWord(i); };
+    wDiv.appendChild(w);
+  });
+  var shuffled = matchData.map(function(item, i){ return {def: item.def, id: item.id, origIdx: i}; });
+  shuffled.sort(function(){ return Math.random() - .5; });
+  shuffled.forEach(function(item, j) {
+    var d = document.createElement('div');
+    d.className = 'match-item'; d.id = 'md-' + item.id;
+    d.innerHTML = '<span class="match-letter">' + String.fromCharCode(65+j) + '.</span><span>' + item.def + '</span>';
+    d.onclick = function(){ selectDef(item.id, item.origIdx); };
+    dDiv.appendChild(d);
+  });
+})();
+
+function selectWord(i) {
+  if (matched['w'+i]) return;
+  document.querySelectorAll('#m-words .match-item').forEach(function(el){ el.classList.remove('selected'); });
+  document.getElementById('mw-' + i).classList.add('selected');
+  selectedWord = i;
+}
+
+function selectDef(defId, origIdx) {
+  if (matched['d'+defId] || selectedWord === null) return;
+  var isCorrect = (matchData[selectedWord].id === defId);
+  if (isCorrect) {
+    document.getElementById('mw-' + selectedWord).classList.remove('selected');
+    document.getElementById('mw-' + selectedWord).classList.add('matched');
+    document.getElementById('md-' + defId).classList.add('matched');
+    matched['w'+selectedWord] = true;
+    matched['d'+defId] = true;
+    selectedWord = null;
+    if (Object.keys(matched).length === matchData.length * 2) {
+      var box = document.getElementById('match-score');
+      box.className = 'match-score-box show good';
+      box.textContent = '🎉 Parabéns! Todos os pares corretos!';
+    }
+  } else {
+    var wEl = document.getElementById('mw-' + selectedWord);
+    var dEl = document.getElementById('md-' + defId);
+    wEl.classList.add('wrong-sel');
+    dEl.classList.add('wrong-sel');
+    setTimeout(function(){
+      wEl.classList.remove('wrong-sel','selected');
+      dEl.classList.remove('wrong-sel');
+      selectedWord = null;
+    }, 800);
+  }
+}
+
+// ── EX 3: GAP FILL — EXPRESSÕES ─────────────────────────────────────────────
+var g3data = [
+  { before: 'A reunião foi ', gap: true, opts: ['show de bola', 'na trave', 'pisar na bola', 'entregar o jogo'], correct: 'show de bola', after: '! O cliente adorou tudo.', hint: '"Show de bola" = excelente, incrível. Perfeito para elogiar algo.' },
+  { before: 'O diretor ', gap: true, opts: ['deu um chapéu', 'pendurou as chuteiras', 'baixou a bola', 'correu por fora'], correct: 'pendurou as chuteiras', after: ' depois de 35 anos na empresa.', hint: '"Pendurar as chuteiras" = se aposentar, encerrar a carreira.' },
+  { before: 'Ela enviou o relatório ', gap: true, opts: ['bola pra frente', 'aos 45 do segundo tempo', 'de virada', 'na cara do gol'], correct: 'aos 45 do segundo tempo', after: ' — chegou cinco minutos antes do prazo final.', hint: '"Aos 45 do segundo tempo" = no último momento, na hora da última chance.' },
+  { before: 'Nossa startup ', gap: true, opts: ['pisou na bola', 'deu um chapéu', 'entregou o jogo', 'ficou na trave'], correct: 'deu um chapéu', after: ' nas grandes empresas ao lançar o app primeiro.', hint: '"Dar um chapéu" = superar o adversário de forma criativa e inesperada.' },
+  { before: 'Fui aprovado nas duas primeiras etapas, mas fui ', gap: true, opts: ['show de bola', 'bola pra frente', 'na trave', 'de virada'], correct: 'na trave', after: ' na entrevista final com o CEO.', hint: '"Na trave" = quase conseguiu, mas não alcançou o objetivo.' },
+  { before: 'Perdemos o maior contrato do ano, mas ', gap: true, opts: ['na trave', 'bola pra frente', 'entramos em campo', 'show de bola'], correct: 'bola pra frente', after: ' — já temos novas oportunidades no horizonte.', hint: '"Bola pra frente" = seguir em frente, não olhar para o passado.' },
+  { before: 'Ele é um ', gap: true, opts: ['torcedor', 'craque', 'artilheiro', 'lateral'], correct: 'craque', after: ' em negociações — consegue fechar qualquer contrato.', hint: '"Craque" fora do campo = pessoa extraordinariamente boa em algo.' },
+  { before: 'A equipe de marketing ', gap: true, opts: ['deu um chapéu', 'pisou na bola', 'correu por fora', 'deixou na cara do gol'], correct: 'deixou na cara do gol', after: ' para o time de vendas fechar o negócio com tranquilidade.', hint: '"Deixar na cara do gol" = preparar tudo para alguém finalizar com facilidade.' },
+];
+
+(function buildG3(){
+  var ul = document.getElementById('g3-list');
+  g3data.forEach(function(item, i) {
+    var li = document.createElement('li');
+    li.className = 'gap-item';
+    var opts = item.opts.slice().sort(function(){ return Math.random() - .5; });
+    var sel = '<select class="gap-select" id="gs-' + i + '">' +
+      '<option value="">— escolha —</option>' +
+      opts.map(function(o){ return '<option value="' + o + '">' + o + '</option>'; }).join('') + '</select>';
+    li.innerHTML = '<span class="gap-num">' + (i+1) + '.</span>' +
+      '<span class="gap-sentence">' + item.before + sel + item.after +
+        '<div class="gap-hint" id="gh-' + i + '"></div></span>';
+    ul.appendChild(li);
+  });
+})();
+
+function checkGaps() {
+  var score = 0;
+  g3data.forEach(function(item, i) {
+    var sel = document.getElementById('gs-' + i);
+    var hint = document.getElementById('gh-' + i);
+    var ok = sel.value === item.correct;
+    sel.className = 'gap-select ' + (ok ? 'correct' : 'wrong');
+    hint.textContent = ok ? '✓ ' + item.hint : '✗ A expressão correta é "' + item.correct + '". ' + item.hint;
+    hint.className = 'gap-hint show ' + (ok ? 'ok' : 'err');
+    if (ok) score++;
+  });
+  var box = document.getElementById('g3-score');
+  box.className = 'score-box show ' + (score === g3data.length ? 'good' : score >= 6 ? 'ok' : 'retry');
+  box.textContent = score + '/' + g3data.length + ' correto(s) — ' + (score === g3data.length ? 'Excelente! Domínio perfeito das expressões! 🎉' : score >= 6 ? 'Muito bom! Reveja as expressões que errou.' : 'Volte ao material e releia os exemplos de cada expressão.');
+}
+
+// ── EX 4: QUIZ COPA 2026 ────────────────────────────────────────────────────
+var quizData = [
+  {
+    q: 'Quantas seleções participam da Copa do Mundo de 2026?',
+    opts: ['32 seleções', '40 seleções', '48 seleções', '64 seleções'],
+    correct: 2,
+    explain: '48 seleções — o maior número da história. Antes eram 32.'
+  },
+  {
+    q: 'Quantos países sediam a Copa do Mundo de 2026?',
+    opts: ['1 — somente os EUA', '2 — EUA e México', '3 — EUA, Canadá e México', '4 — EUA, Canadá, México e Brasil'],
+    correct: 2,
+    explain: 'Três países: EUA, Canadá e México — a primeira Copa com três países anfitriões.'
+  },
+  {
+    q: 'Como se chama o mascote da Copa 2026 que representa o México?',
+    opts: ['Maple', 'Clutch', 'Zayu', 'Pelé'],
+    correct: 2,
+    explain: 'Zayu é a onça (jaguar), símbolo do México. Maple é o alce do Canadá e Clutch é a águia dos EUA.'
+  },
+  {
+    q: 'Qual foi o resultado da estreia do Brasil na Copa 2026?',
+    opts: ['Brasil 2 × 0 Marrocos', 'Brasil 1 × 1 Marrocos', 'Marrocos 2 × 1 Brasil', 'Brasil 0 × 0 Marrocos'],
+    correct: 1,
+    explain: 'Brasil 1 × 1 Marrocos, no MetLife Stadium (Nova Jersey). Vinícius Jr. marcou o gol do empate.'
+  },
+  {
+    q: 'Na nova Copa de 2026, quantas seleções avançam para a fase de mata-mata?',
+    opts: ['16 seleções', '24 seleções', '32 seleções', '48 seleções'],
+    correct: 2,
+    explain: '32 seleções: os 2 primeiros de cada um dos 12 grupos (24) + os 8 melhores 3ºs colocados.'
+  },
+];
+
+(function buildQuiz(){
+  var c = document.getElementById('quiz-container');
+  quizData.forEach(function(item, i) {
+    var div = document.createElement('div');
+    div.style.cssText = 'margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--light-gray);';
+    div.innerHTML = '<p style="font-size:.92rem;font-weight:600;margin-bottom:10px;color:var(--nanquim);">' + (i+1) + '. ' + item.q + '</p>' +
+      item.opts.map(function(opt, j){
+        return '<label style="display:flex;align-items:center;gap:10px;margin-bottom:7px;cursor:pointer;font-size:.9rem;">' +
+          '<input type="radio" name="q' + i + '" value="' + j + '" style="accent-color:var(--pitomba);"> ' + opt + '</label>';
+      }).join('') +
+      '<div id="qfb-' + i + '" style="font-size:.82rem;margin-top:6px;display:none;"></div>';
+    c.appendChild(div);
+  });
+})();
+
+function checkQuiz() {
+  var score = 0;
+  quizData.forEach(function(item, i) {
+    var sel = document.querySelector('input[name="q' + i + '"]:checked');
+    var fb = document.getElementById('qfb-' + i);
+    fb.style.display = 'block';
+    if (sel && parseInt(sel.value) === item.correct) {
+      score++;
+      fb.textContent = '✓ Correto! ' + item.explain;
+      fb.style.color = 'var(--green)';
+    } else {
+      fb.textContent = '✗ ' + item.explain;
+      fb.style.color = 'var(--red)';
+    }
+  });
+  var box = document.getElementById('quiz-score');
+  box.className = 'score-box show ' + (score === quizData.length ? 'good' : score >= 3 ? 'ok' : 'retry');
+  box.textContent = score + '/' + quizData.length + ' correto(s) — ' + (score === quizData.length ? 'Perfeito! Você leu o material com muita atenção! 🎉' : score >= 3 ? 'Bom trabalho! Reveja os itens errados no material.' : 'Releia a ficha técnica e a reportagem para encontrar as respostas.');
+}
+
+// ── SEND ─────────────────────────────────────────────────────────────────────
+function bphubSend(e) {
+  e.preventDefault();
+  var data = new FormData();
+  data.append('_subject', 'Exercícios B2 — Copa do Mundo 2026');
+  data.append('nome', document.getElementById('s-nome').value);
+  data.append('email', document.getElementById('s-email').value);
+  data.append('producao_5a_futebol_no_seu_pais', document.getElementById('p1').value);
+  data.append('producao_5b_previsao_brasil', document.getElementById('p2').value);
+  data.append('producao_5c_expressoes_originais', document.getElementById('p3').value);
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+    .then(function(r){
+      if (r.ok) { document.querySelector('.send-form').style.display='none'; document.getElementById('s-conf').style.display='block'; }
+      else { alert('Erro ao enviar. Tente novamente.'); }
+    }).catch(function(){ alert('Erro de rede.'); });
+}
+</script>
+</body>
+</html>
