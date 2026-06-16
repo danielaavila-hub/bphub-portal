@@ -208,7 +208,7 @@ main { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
     <div class="ex-num">1</div>
     <div><div class="ex-title">Levar, Trazer ou Pegar?</div><div class="ex-subtitle">Choose the correct verb for each context.</div></div>
   </div>
-  <div class="instructions">Read each situation carefully. Think about direction (away from / towards you) and type of action (grabbing / picking up).</div>
+  <div class="instructions">Read each situation carefully. Remember: the reference point is always <strong>where YOU (the speaker) are</strong>. Trazer = someone/something comes <em>towards me</em>. Levar = someone/something goes <em>away from me</em>. Pegar = picking up / grabbing / using transport.</div>
   <div id="choice-container"></div>
   <div class="ex-score" id="score1"></div>
 </div>
@@ -220,7 +220,7 @@ main { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
     <div class="ex-num">2</div>
     <div><div class="ex-title">Complete com a forma correta</div><div class="ex-subtitle">Select the correct verb — already conjugated.</div></div>
   </div>
-  <div class="instructions">Choose the correct form of <em>levar</em>, <em>trazer</em>, or <em>pegar</em> from the dropdown. Pay attention to the tense and the context.</div>
+  <div class="instructions">Choose the correct form of <em>levar</em>, <em>trazer</em>, or <em>pegar</em>. Pay attention to tense, context, and — for levar/trazer — the speaker's reference point.</div>
   <div id="gap-container"></div>
   <button class="check-btn" onclick="checkGap()">Check answers</button>
   <button class="reset-btn" onclick="resetGap()">Reset</button>
@@ -340,6 +340,9 @@ const choiceData = [
   { sent: 'Ela _____ um resfriado depois de sair na chuva.', opts:['levou','trouxe','pegou'], correct:2, exp:'To catch an illness → always <em>pegar</em>: <em>pegou um resfriado</em>.' },
   { sent: 'Você pode _____ a conta, por favor?', opts:['levar','trazer','pegar'], correct:1, exp:'At a restaurant, asking the waiter to bring the bill to your table → <em>trazer</em>.' },
   { sent: 'Vou _____ o notebook da sala pra poder trabalhar no quarto.', opts:['levar','trazer','pegar'], correct:0, exp:'Moving the laptop <strong>away</strong> from the room (sala) to another place → <em>levar</em>.' },
+  { sent: '<em style="color:#888;font-size:13px">[Você está em casa.]</em> Sua mãe vai ao mercado. Você pede: "Mãe, _____ pão, por favor!"', opts:['leva','traz','pega'], correct:1, exp:'You are at home. You want the bread brought <strong>back to you</strong> → <em>traz</em>. (Your mom, when she returns, will say: <em>trouxe o pão</em>.)' },
+  { sent: '<em style="color:#888;font-size:13px">[Você está na festa.]</em> Seu amigo acaba de chegar. Você diz: "Boa! Você _____ mais cerveja!"', opts:['levou','trouxe','pegou'], correct:1, exp:'You are at the party and your friend just arrived <strong>to where you are</strong> with beer → <em>trouxe</em>. 💡 From your friend\'s perspective: <em>levei a cerveja</em> (he took it away from his home).' },
+  { sent: '<em style="color:#888;font-size:13px">[Você está no escritório.]</em> Esqueceu a carteira em casa. Liga pra sua parceira: "Você pode _____ minha carteira até aqui?"', opts:['levar','trazer','pegar'], correct:1, exp:'You are at the office — that\'s your reference point. You want the wallet brought <strong>to where you are</strong> → <em>trazer</em>. 💡 Your partner, picking it up at home, will say: <em>vou levar a sua carteira</em> — from her/his perspective, she/he is taking it away from home. Same movement, opposite verbs.' },
 ];
 
 let choiceScore=0, choiceDone=0;
@@ -366,7 +369,7 @@ function pickChoice(i,j,btn){
   if(choiceDone===choiceData.length){
     const sc=document.getElementById('score1');
     sc.className='ex-score show '+(choiceScore===choiceData.length?'pass':'partial');
-    sc.textContent=choiceScore===choiceData.length?'🎉 Perfeito! All 10 correct.': `${choiceScore}/10 correct. Read the explanations in each item.`;
+    sc.textContent=choiceScore===choiceData.length?'🎉 Perfeito! All '+choiceData.length+' correct.': choiceScore+'/'+choiceData.length+' correct. Read the explanations in each item.';
   }
 }
 
@@ -405,7 +408,7 @@ function checkGap(){
   });
   const sc=document.getElementById('score2');
   sc.className='ex-score show '+(correct===gapData.length?'pass':'partial');
-  sc.textContent=correct===gapData.length?'🎉 All 8 correct!':`${correct}/8 correct. Review the ones in red.`;
+  sc.textContent=correct===gapData.length?'🎉 All '+gapData.length+' correct!':correct+'/'+gapData.length+' correct. Review the ones in red.';
 }
 function resetGap(){
   gapData.forEach((_,i)=>{const s=document.getElementById('gs'+i);s.className='gap-select';s.value='';});
