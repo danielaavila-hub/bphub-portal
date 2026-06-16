@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copa do Mundo 2026 — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --nanquim: #1E1D1C; --texto: #3C3C21;
+      --pitomba: #D36D29; --pitomba-light: #FEF0E5;
+      --cobalto: #265B8B; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--pitomba); }
+    strong { font-weight: 600; }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .badge-level { background: #D36D29; color: white; }
+    .badge-type  { background: rgba(30,29,28,.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: #D36D29; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: '⚽'; position: absolute; right: 48px; top: 50%; transform: translateY(-50%); font-size: 160px; opacity: .07; line-height: 1; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), #265B8B); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 46px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,.65); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.12); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* ARTICLE LAYOUT */
+    .article-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 32px; align-items: start; margin-bottom: 32px; }
+    .article-body { background: white; border-radius: 14px; padding: 32px 36px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .article-source { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 12px; }
+    .article-body h2 { font-size: 1.5rem; line-height: 1.25; color: var(--nanquim); margin-bottom: 6px; }
+    .article-deck { font-size: 1.05rem; color: #555; font-style: italic; margin-bottom: 20px; border-bottom: 1px solid var(--light-gray); padding-bottom: 16px; line-height: 1.6; }
+    .article-body p { font-size: .95rem; line-height: 1.8; margin-bottom: 14px; color: var(--texto); }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-hl { color: var(--pitomba); font-weight: 600; }
+    .article-note { font-size: .8rem; color: #888; border-top: 1px solid var(--light-gray); padding-top: 12px; margin-top: 16px; font-style: italic; }
+
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .side-card { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,.06); font-size: .88rem; line-height: 1.65; }
+    .side-card h3 { font-size: .77rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    .side-card .fact { display: flex; gap: 10px; margin-bottom: 8px; }
+    .side-card .fact:last-child { margin-bottom: 0; }
+    .fact-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .fact-text strong { display: block; font-size: .8rem; color: var(--nanquim); }
+    .fact-text span { font-size: .82rem; color: #666; }
+
+    /* MASCOT CARD */
+    .mascot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .mascot-item { background: var(--off-white); border-radius: 8px; padding: 10px; text-align: center; font-size: .8rem; }
+    .mascot-emoji { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+    .mascot-name { font-weight: 700; color: var(--nanquim); font-size: .8rem; }
+    .mascot-sub { color: #888; font-size: .72rem; }
+
+    /* VOCABULARY SECTION */
+    .card { background: white; border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .card h2 { font-size: 1.2rem; color: var(--nanquim); margin-bottom: 16px; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .vocab-col { }
+    .vocab-col h3 { font-family: 'Manrope', sans-serif; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 2px solid var(--pitomba); }
+    .vocab-item { padding: 5px 0; border-bottom: 1px solid var(--light-gray); font-size: .86rem; display: flex; gap: 6px; align-items: baseline; }
+    .vocab-item:last-child { border-bottom: none; }
+    .v-word { font-weight: 700; color: var(--nanquim); min-width: 120px; }
+    .v-def  { color: #666; font-size: .82rem; }
+
+    /* EXPRESSIONS TABLE */
+    .expr-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-top: 10px; }
+    .expr-table th { background: var(--pitomba-light); color: var(--pitomba); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; text-align: left; }
+    .expr-table td { padding: 11px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.6; }
+    .expr-table tr:last-child td { border-bottom: none; }
+    .expr-word { font-weight: 700; color: var(--pitomba); font-size: .95rem; }
+    .expr-origin { font-size: .78rem; color: #888; font-style: italic; }
+    .expr-ex { font-style: italic; color: #555; font-size: .82rem; margin-top: 3px; }
+
+    /* BOXES */
+    .gram-box { border-radius: 12px; padding: 16px 20px; margin: 18px 0; font-size: .9rem; line-height: 1.7; }
+    .gram-box.cult { background: #EEF5E8; border-left: 4px solid var(--floresta); }
+    .gram-box.tip  { background: var(--pitomba-light); border-left: 4px solid var(--pitomba); }
+    .gram-box-title { font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+    .gram-box.cult .gram-box-title { color: var(--floresta); }
+    .gram-box.tip  .gram-box-title { color: var(--pitomba); }
+
+    /* NAV LINK */
+    .nav-link { padding: 22px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--cobalto); margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+    .nav-btn:hover { opacity: .88; }
+
+    @media (max-width: 760px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .article-wrap { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: 1fr 1fr; }
+      .mascot-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .vocab-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Material de Referência</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal — Cultura &amp; Vocabulário</div>
+  <h1>Copa do Mundo 2026 — <em>Hexa, eu te quero</em></h1>
+  <div class="hero-sub">Texto jornalístico sobre o Brasil na Copa de 2026, o significado cultural do evento, vocabulário do futebol e as expressões que nasceram dos gramados e invadiram o português do dia a dia.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Cultura brasileira</span>
+    <span class="hero-tag">Vocabulário do futebol</span>
+    <span class="hero-tag">Expressões idiomáticas</span>
+    <span class="hero-tag">B2 · Intermediário Superior</span>
+  </div>
+  <div class="hero-note">📖 Leia antes da aula</div>
+</div>
+
+<div class="main">
+
+  <!-- REPORTAGEM + SIDEBAR -->
+  <p class="sec-label">Texto principal</p>
+  <div class="article-wrap">
+
+    <!-- ARTIGO -->
+    <div class="article-body">
+      <div class="article-source">Reportagem — Texto elaborado para fins didáticos · Junho 2026</div>
+      <h2>Hexa, eu te quero: o Brasil e a febre da Copa do Mundo</h2>
+      <div class="article-deck">A cada quatro anos, o país para. Escritórios esvaziam, reuniões são canceladas e até o trânsito das metrópoles dá uma trégua. A Copa do Mundo não é apenas um evento esportivo — é quase uma <span class="article-hl">religião nacional</span>.</div>
+
+      <p>Em junho de 2026, a paixão voltou a virar do avesso a nação. A Copa desta edição é realizada em três países anfitriões pela primeira vez na história: <strong>Estados Unidos, Canadá e México</strong>. A novidade mais comentada, porém, é outra: a expansão para <strong>48 seleções</strong>, divididas em 12 grupos — um formato que promete mais jogos, mais surpresas e mais drama futebolístico.</p>
+
+      <p>O Brasil, sorteado no <strong>Grupo C</strong> ao lado de Marrocos, Escócia e Haiti, estreou em 13 de junho no MetLife Stadium, em Nova Jersey, diante de mais de 80 mil torcedores enlouquecidos de verde e amarelo. A estreia, porém, não foi o festão esperado. O Marrocos — a seleção que já havia surpreendido o mundo inteiro na Copa de 2022 — abriu o placar logo no primeiro tempo, em uma jogada que pegou a defesa desprevenida. O <span class="article-hl">craque</span> Vinícius Júnior, que carrega nas costas a esperança do <span class="article-hl">hexa</span>, empatou com um <span class="article-hl">golaço</span> de categoria. Mas o Brasil saiu de campo com o empate de 1 a 1 — e um gostinho de "bola fora".</p>
+
+      <p>A pressão sobre a Seleção é imensa. O Brasil é <span class="article-hl">pentacampeão</span> — conquistou o troféu em 1958, 1962, 1970, 1994 e 2002 — e carrega o peso de quem mais ganhou essa taça na história. O "hexa" virou obsessão nacional. Cada Copa, a <span class="article-hl">torcida</span> traz de volta a esperança; cada eliminação, uma dor coletiva que demora anos para cicatrizar.</p>
+
+      <p>Mas o futebol brasileiro tem algo que vai além dos títulos. É o chamado <em>"jogo bonito"</em> — a ginga, a criatividade, o improviso que transforma uma jogada comum em obra de arte. Craques como Pelé, Ronaldo, Ronaldinho e, hoje, Vinícius Jr., não jogam apenas para ganhar: jogam para <strong>encantar</strong>. Esse estilo de jogar é parte da identidade do país, assim como o samba, a cachaça e o churrasco de domingo.</p>
+
+      <p>Em 2026, com Carlo Ancelotti no comando — o primeiro técnico estrangeiro a dirigir a Seleção em uma Copa do Mundo —, o Brasil entrou em campo com uma mistura de expectativa e ansiedade. Os próximos jogos dirão se o empate na estreia foi apenas um tropeço ou o prenúncio de algo mais preocupante. Por enquanto, a <span class="article-hl">torcida</span> segue fiel ao mantra de sempre: <em>"Vai, Brasil! O hexa é nosso."</em></p>
+
+      <div class="article-note">Fontes: CNN Brasil, Agência Brasil, Olympics.com · Informações atualizadas em 16 de junho de 2026.</div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div class="side-card">
+        <h3>🏆 Copa do Mundo FIFA 2026 — ficha técnica</h3>
+        <div class="fact"><span class="fact-icon">📅</span><div class="fact-text"><strong>Período</strong><span>11 de junho – 19 de julho de 2026</span></div></div>
+        <div class="fact"><span class="fact-icon">🌎</span><div class="fact-text"><strong>Países-sede</strong><span>EUA, Canadá e México</span></div></div>
+        <div class="fact"><span class="fact-icon">⚽</span><div class="fact-text"><strong>Seleções</strong><span>48 equipes (antes: 32)</span></div></div>
+        <div class="fact"><span class="fact-icon">📊</span><div class="fact-text"><strong>Grupos</strong><span>12 grupos (A até L)</span></div></div>
+        <div class="fact"><span class="fact-icon">🎯</span><div class="fact-text"><strong>Partidas</strong><span>104 jogos no total</span></div></div>
+        <div class="fact"><span class="fact-icon">🔢</span><div class="fact-text"><strong>Classificação</strong><span>1º e 2º de cada grupo + 8 melhores 3ºs colocados = 32 equipes no mata-mata</span></div></div>
+      </div>
+
+      <div class="side-card">
+        <h3>🇧🇷 Brasil no Grupo C</h3>
+        <div class="fact"><span class="fact-icon">🧑‍💼</span><div class="fact-text"><strong>Técnico</strong><span>Carlo Ancelotti (ITA) — 1º estrangeiro a comandar o Brasil em uma Copa</span></div></div>
+        <div class="fact"><span class="fact-icon">⭐</span><div class="fact-text"><strong>Craque</strong><span>Vinícius Júnior</span></div></div>
+        <div class="fact"><span class="fact-icon">📍</span><div class="fact-text"><strong>Adversários</strong><span>Marrocos, Escócia, Haiti</span></div></div>
+        <div class="fact"><span class="fact-icon">🏟️</span><div class="fact-text"><strong>Estreia</strong><span>13/06 — Brasil 1 × 1 Marrocos (MetLife Stadium, NJ)</span></div></div>
+        <div class="fact"><span class="fact-icon">📆</span><div class="fact-text"><strong>Próximo jogo</strong><span>19/06 — Brasil × Haiti (Filadélfia)</span></div></div>
+      </div>
+
+      <div class="side-card">
+        <h3>🦌🦅🐆 Mascotes da Copa 2026</h3>
+        <div class="mascot-grid">
+          <div class="mascot-item"><span class="mascot-emoji">🦌</span><div class="mascot-name">Maple</div><div class="mascot-sub">alce · Canadá</div></div>
+          <div class="mascot-item"><span class="mascot-emoji">🦅</span><div class="mascot-name">Clutch</div><div class="mascot-sub">águia · EUA</div></div>
+          <div class="mascot-item"><span class="mascot-emoji">🐆</span><div class="mascot-name">Zayu</div><div class="mascot-sub">onça · México</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VOCABULARY -->
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <h2>⚽ O léxico do futebol — palavras que você precisa conhecer</h2>
+    <div class="vocab-grid">
+
+      <div class="vocab-col">
+        <h3>Posições em campo</h3>
+        <div class="vocab-item"><span class="v-word">goleiro</span><span class="v-def">guarda a meta</span></div>
+        <div class="vocab-item"><span class="v-word">zagueiro</span><span class="v-def">defesa central</span></div>
+        <div class="vocab-item"><span class="v-word">lateral</span><span class="v-def">defensor/atacante pela lateral</span></div>
+        <div class="vocab-item"><span class="v-word">volante</span><span class="v-def">meia defensivo</span></div>
+        <div class="vocab-item"><span class="v-word">meia</span><span class="v-def">meio-campo</span></div>
+        <div class="vocab-item"><span class="v-word">atacante</span><span class="v-def">jogador ofensivo</span></div>
+        <div class="vocab-item"><span class="v-word">centroavante</span><span class="v-def">atacante central</span></div>
+        <div class="vocab-item"><span class="v-word">camisa 10</span><span class="v-def">armador criativo / estrela</span></div>
+      </div>
+
+      <div class="vocab-col">
+        <h3>Durante o jogo</h3>
+        <div class="vocab-item"><span class="v-word">chute</span><span class="v-def">finalização à gol</span></div>
+        <div class="vocab-item"><span class="v-word">golaço</span><span class="v-def">gol muito bonito</span></div>
+        <div class="vocab-item"><span class="v-word">pênalti</span><span class="v-def">cobrança da marca dos 11 metros</span></div>
+        <div class="vocab-item"><span class="v-word">escanteio</span><span class="v-def">cobrança de canto (córner)</span></div>
+        <div class="vocab-item"><span class="v-word">falta</span><span class="v-def">infração</span></div>
+        <div class="vocab-item"><span class="v-word">impedimento</span><span class="v-def">offside</span></div>
+        <div class="vocab-item"><span class="v-word">cartão amarelo</span><span class="v-def">advertência</span></div>
+        <div class="vocab-item"><span class="v-word">cartão vermelho</span><span class="v-def">expulsão</span></div>
+      </div>
+
+      <div class="vocab-col">
+        <h3>Na Copa</h3>
+        <div class="vocab-item"><span class="v-word">seleção</span><span class="v-def">time nacional</span></div>
+        <div class="vocab-item"><span class="v-word">torcida</span><span class="v-def">os torcedores (coletivo)</span></div>
+        <div class="vocab-item"><span class="v-word">craque</span><span class="v-def">jogador excepcional / estrela</span></div>
+        <div class="vocab-item"><span class="v-word">titular</span><span class="v-def">jogador no time inicial</span></div>
+        <div class="vocab-item"><span class="v-word">artilheiro</span><span class="v-def">maior goleador do torneio</span></div>
+        <div class="vocab-item"><span class="v-word">mata-mata</span><span class="v-def">fase eliminatória</span></div>
+        <div class="vocab-item"><span class="v-word">hexa</span><span class="v-def">6º título (sonho do Brasil)</span></div>
+        <div class="vocab-item"><span class="v-word">goleada</span><span class="v-def">vitória por muitos gols</span></div>
+      </div>
+
+    </div>
+
+    <div class="gram-box tip" style="margin-top:20px;">
+      <div class="gram-box-title">🔖 Para saber mais</div>
+      <strong>Pelada</strong> = jogo informal, na rua ou num campo improvisado — a versão mais popular do futebol no Brasil.<br>
+      <strong>Clássico</strong> = jogo entre rivais históricos (ex: Flamengo × Fluminense; Corinthians × Palmeiras).<br>
+      <strong>Pentacampeão</strong> = o Brasil é o único país a ter <em>cinco</em> títulos mundiais (1958, 1962, 1970, 1994, 2002).
+    </div>
+  </div>
+
+  <!-- EXPRESSIONS -->
+  <p class="sec-label">Expressões idiomáticas</p>
+  <div class="card">
+    <h2>Do campo para a vida — expressões que nasceram do futebol</h2>
+    <p style="font-size:.9rem;color:#555;margin-bottom:16px;">O futebol moldou não apenas o lazer brasileiro, mas também a forma como os brasileiros se comunicam. Muitas expressões do dia a dia têm origem direta nos gramados — e você vai ouvi-las em conversas de escritório, em reuniões e nas redes sociais.</p>
+
+    <table class="expr-table">
+      <tr>
+        <th style="width:190px;">Expressão</th>
+        <th style="width:200px;">Significado</th>
+        <th>Exemplo de uso</th>
+      </tr>
+      <tr>
+        <td><span class="expr-word">show de bola</span><br><span class="expr-origin">← bola muito bem controlada</span></td>
+        <td>incrível, ótimo, excelente</td>
+        <td><div>— Como foi a apresentação?<br>— <em>Show de bola!</em> Todo mundo adorou.</div><div class="expr-ex">✦ Pode ser usado como interjeição ou adjetivo.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">craque</span><br><span class="expr-origin">← "crack" em inglês (brilhante)</span></td>
+        <td>pessoa extraordinariamente boa em algo</td>
+        <td><div>Essa advogada é <em>um craque</em> em direito trabalhista.</div><div class="expr-ex">✦ Usado para qualquer área, não só futebol.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">pisar na bola</span><br><span class="expr-origin">← perder controle da bola</span></td>
+        <td>cometer um erro grave; decepcionar</td>
+        <td><div>O gerente <em>pisou na bola</em> na negociação com o cliente.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">dar um chapéu</span><br><span class="expr-origin">← lançar a bola sobre o adversário</span></td>
+        <td>enganar alguém de forma criativa; superar com esperteza</td>
+        <td><div>A startup <em>deu um chapéu</em> nas grandes empresas do setor.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">correr por fora</span><br><span class="expr-origin">← avançar pelas laterais do campo</span></td>
+        <td>ser o azarão; não ser o favorito mas ter chances reais</td>
+        <td><div>Ela <em>correu por fora</em> e conseguiu a vaga que ninguém esperava.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">aos 45 do segundo tempo</span><br><span class="expr-origin">← último minuto do jogo</span></td>
+        <td>na hora da última chance; no momento mais crítico</td>
+        <td><div>Ele entregou o relatório <em>aos 45 do segundo tempo</em>.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">pendurar as chuteiras</span><br><span class="expr-origin">← jogador que para de jogar</span></td>
+        <td>se aposentar; encerrar uma carreira</td>
+        <td><div>Após 30 anos de empresa, ela finalmente <em>pendurou as chuteiras</em>.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">na trave</span><br><span class="expr-origin">← chutar na trave (sem gol)</span></td>
+        <td>quase conseguir; estar muito perto mas não alcançar</td>
+        <td><div>Fui aprovado para a segunda fase, mas <em>fui na trave</em> na entrevista final.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">entregar o jogo</span><br><span class="expr-origin">← jogar mal de propósito</span></td>
+        <td>desistir; sabotar; não se esforçar</td>
+        <td><div>Parece que a equipe <em>entregou o jogo</em> nos últimos meses do projeto.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">bola pra frente</span><br><span class="expr-origin">← avançar com a bola</span></td>
+        <td>seguir em frente; não olhar para o passado</td>
+        <td><div>A negociação não deu certo, mas <em>bola pra frente</em> — já temos outra oportunidade.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">deixar na cara do gol</span><br><span class="expr-origin">← passe perfeito para finalizar</span></td>
+        <td>facilitar muito algo para alguém; deixar tudo pronto</td>
+        <td><div>Eu fiz toda a análise e <em>deixei na cara do gol</em> para ele apresentar.</div></td>
+      </tr>
+      <tr>
+        <td><span class="expr-word">de virada</span><br><span class="expr-origin">← virar o placar após estar perdendo</span></td>
+        <td>conseguir algo após uma situação difícil; uma guinada</td>
+        <td><div>Estávamos quase falindo, mas conseguimos a conta <em>de virada</em> no fim do ano.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- CULTURAL NOTE -->
+  <div class="card" style="background: linear-gradient(135deg, #FEF0E5, #FFF8EE);">
+    <h2>🇧🇷 Por que o futebol é quase uma religião no Brasil?</h2>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:12px;">O futebol chegou ao Brasil no final do século XIX, trazido pelo jovem paulistano Charles Miller, filho de imigrantes ingleses. Em pouco tempo, deixou de ser esporte de elite para se tornar a paixão do povo — jogado em campos de terra, praias e vielas de todo o país.</p>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:12px;">Hoje, durante os jogos da Seleção, o Brasil literalmente para: o trânsito diminui, o comércio fecha mais cedo e as redes sociais entram em colapso de tanta emoção. Nas Copas, é comum que até igrejas e hospitais ajustem seus horários para os jogos.</p>
+    <p style="font-size:.92rem;line-height:1.8;margin-bottom:0;">O Brasil tem títulos mundiais em 1958, 1962, 1970, 1994 e 2002 — mais do que qualquer outro país. E o sonho do <strong>"hexa"</strong> (o 6º título) une a nação a cada quatro anos, independentemente de partidos políticos, classes sociais ou regiões do país. Quando a Seleção entra em campo, o Brasil é um só.</p>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label">Próximo passo</div>
+      <div class="nav-link-title">Exercícios — Copa do Mundo 2026</div>
+    </div>
+    <a href="copa-mundo-2026-b2-exercicios-aluno.html" class="nav-btn">Ir para os exercícios →</a>
+  </div>
+
+</div>
+</body>
+</html>
