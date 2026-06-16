@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios — Artigos em Português — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --green: #2E7D32; --green-bg: #E8F5E9;
+      --red: #C62828; --red-bg: #FFEBEE;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* GRAM BOX RECAP */
+    .gram-recap { background: var(--cobalto-light); border-radius: 14px; padding: 20px 24px; margin-bottom: 36px; }
+    .gram-recap-title { font-size: .77rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 12px; }
+    .recap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .recap-cell { background: white; border-radius: 8px; padding: 10px 12px; text-align: center; }
+    .recap-art { font-family: 'Trirong', serif; font-size: 1.3rem; font-weight: 500; }
+    .recap-cell.def .recap-art { color: var(--cobalto); }
+    .recap-cell.indef .recap-art { color: var(--pitomba); }
+    .recap-sub { font-size: .72rem; color: #888; line-height: 1.3; margin-top: 2px; }
+
+    /* EXERCISE CARDS */
+    .ex-card { background: white; border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .ex-num { font-size: .77rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; }
+    .ex-card h2 { font-size: 1.2rem; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: .9rem; color: #555; margin-bottom: 18px; line-height: 1.65; }
+
+    /* EX 1 — CLASSIFY */
+    .classify-list { list-style: none; }
+    .classify-item { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: .92rem; }
+    .classify-item:last-child { border-bottom: none; }
+    .classify-sent { flex: 1; min-width: 200px; }
+    .classify-sent .trans { font-size: .82rem; color: #888; margin-top: 2px; }
+    .classify-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .cl-btn { border: 2px solid var(--light-gray); background: white; border-radius: 8px; padding: 6px 16px; font-family: 'Manrope', sans-serif; font-size: .82rem; font-weight: 700; cursor: pointer; transition: all .15s; letter-spacing: .05em; text-transform: uppercase; }
+    .cl-btn.def { color: var(--cobalto); }
+    .cl-btn.indef { color: var(--pitomba); }
+    .cl-btn.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+    .cl-btn.wrong   { background: var(--red-bg);   border-color: var(--red);   color: var(--red);   }
+    .cl-btn.missed  { background: #FFF8E6; border-color: var(--ouro); color: #7A5900; }
+    .cl-btn:disabled { cursor: default; }
+    .classify-feedback { font-size: .82rem; margin-top: 4px; width: 100%; }
+    .classify-feedback.ok  { color: var(--green); }
+    .classify-feedback.err { color: var(--red); }
+
+    /* EX 2, 3, 4 — SELECT GAPS */
+    .gap-list { list-style: none; }
+    .gap-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: .92rem; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { color: var(--pitomba); font-weight: 700; min-width: 22px; }
+    .gap-sentence { flex: 1; min-width: 240px; line-height: 1.75; }
+    .gap-select { border: 2px solid var(--light-gray); background: white; border-radius: 6px; padding: 4px 10px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--nanquim); cursor: pointer; }
+    .gap-select:focus { outline: none; border-color: var(--cobalto); }
+    .gap-select.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+    .gap-select.wrong   { border-color: var(--red);   background: var(--red-bg);   color: var(--red);   }
+    .gap-hint { font-size: .8rem; margin-top: 4px; display: none; }
+    .gap-hint.show { display: block; }
+    .gap-hint.ok  { color: var(--green); }
+    .gap-hint.err { color: var(--red); }
+    .gap-note { font-size: .8rem; color: #888; font-style: italic; }
+
+    /* CHECK BUTTON + SCORE */
+    .check-btn { display: inline-flex; align-items: center; gap: 8px; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: opacity .15s; background: var(--cobalto); color: white; }
+    .check-btn:hover { opacity: .86; }
+    .score-box { display: none; margin-top: 14px; padding: 12px 18px; border-radius: 10px; font-size: .9rem; font-weight: 600; }
+    .score-box.show { display: block; }
+    .score-box.good  { background: var(--green-bg); color: var(--green); }
+    .score-box.ok    { background: #FFF8E6; color: #7A5900; }
+    .score-box.retry { background: var(--red-bg); color: var(--red); }
+
+    /* EX 5 — TEXTAREAS */
+    .prod-list { list-style: none; }
+    .prod-item { margin-bottom: 18px; }
+    .prod-label { font-size: .88rem; font-weight: 600; color: var(--nanquim); margin-bottom: 6px; }
+    .prod-sub { font-size: .82rem; color: #666; margin-bottom: 6px; }
+    .prod-ta { width: 100%; border: 2px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--nanquim); resize: vertical; min-height: 80px; background: white; transition: border-color .15s; }
+    .prod-ta:focus { outline: none; border-color: var(--cobalto); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: .92rem; color: var(--nanquim); line-height: 1.75; }
+    .send-box b { color: var(--pitomba); }
+    .send-form { margin-top: 16px; }
+    .send-form input[type=email], .send-form input[type=text] { width: 100%; border: 2px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: .9rem; margin-bottom: 10px; background: white; }
+    .send-form input:focus { outline: none; border-color: var(--cobalto); }
+    .send-btn { border: none; border-radius: 10px; padding: 11px 28px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .send-btn:hover { opacity: .88; }
+    .send-confirmation { display: none; padding: 12px 18px; background: var(--green-bg); color: var(--green); border-radius: 10px; font-weight: 600; font-size: .9rem; margin-top: 12px; }
+
+    /* NAV LINK */
+    .nav-link { padding: 22px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--cobalto); margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--cobalto); color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+    .nav-btn:hover { opacity: .88; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .recap-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal — Gramática</div>
+  <h1>Exercícios — <em>Artigos em Português</em></h1>
+  <div class="hero-sub">Practice using definite and indefinite articles in context — including the tricky cases where Portuguese and English differ.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">o · a · os · as</span>
+    <span class="hero-tag">um · uma · uns · umas</span>
+    <span class="hero-tag">A2 · Iniciante II</span>
+  </div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<div class="main">
+
+  <!-- QUICK RECAP -->
+  <div class="gram-recap">
+    <div class="gram-recap-title">🧭 Quick recap — the eight articles</div>
+    <div class="recap-grid">
+      <div class="recap-cell def"><div class="recap-art">o</div><div class="recap-sub">masc. sing.<br><em>definido</em></div></div>
+      <div class="recap-cell def"><div class="recap-art">a</div><div class="recap-sub">fem. sing.<br><em>definido</em></div></div>
+      <div class="recap-cell def"><div class="recap-art">os</div><div class="recap-sub">masc. plur.<br><em>definido</em></div></div>
+      <div class="recap-cell def"><div class="recap-art">as</div><div class="recap-sub">fem. plur.<br><em>definido</em></div></div>
+      <div class="recap-cell indef"><div class="recap-art">um</div><div class="recap-sub">masc. sing.<br><em>indefinido</em></div></div>
+      <div class="recap-cell indef"><div class="recap-art">uma</div><div class="recap-sub">fem. sing.<br><em>indefinido</em></div></div>
+      <div class="recap-cell indef"><div class="recap-art">uns</div><div class="recap-sub">masc. plur.<br><em>indefinido</em></div></div>
+      <div class="recap-cell indef"><div class="recap-art">umas</div><div class="recap-sub">fem. plur.<br><em>indefinido</em></div></div>
+    </div>
+  </div>
+
+  <!-- EX 1 — CLASSIFY -->
+  <p class="sec-label">Exercício 1 de 5</p>
+  <div class="ex-card" id="ex1">
+    <div class="ex-num">Exercício 1</div>
+    <h2>Definido ou indefinido?</h2>
+    <p class="ex-instr">Look at the article in bold in each sentence. Click <strong>DEFINIDO</strong> or <strong>INDEFINIDO</strong> to classify it. The translation is there to help.</p>
+    <ul class="classify-list" id="cl-list"></ul>
+    <button class="check-btn" onclick="checkClassify()">Verificar respostas</button>
+    <div class="score-box" id="cl-score"></div>
+  </div>
+
+  <!-- EX 2 — FILL IN THE BLANK (all articles) -->
+  <p class="sec-label">Exercício 2 de 5</p>
+  <div class="ex-card" id="ex2">
+    <div class="ex-num">Exercício 2</div>
+    <h2>Complete com o artigo correto</h2>
+    <p class="ex-instr">Choose the correct article from the dropdown — or select <strong>— (sem artigo)</strong> when no article is needed.</p>
+    <ul class="gap-list" id="g2-list"></ul>
+    <button class="check-btn" onclick="checkGaps('g2')">Verificar respostas</button>
+    <div class="score-box" id="g2-score"></div>
+  </div>
+
+  <!-- EX 3 — COUNTRIES / CITIES / NAMES -->
+  <p class="sec-label">Exercício 3 de 5</p>
+  <div class="ex-card" id="ex3">
+    <div class="ex-num">Exercício 3</div>
+    <h2>Países, cidades e nomes — qual artigo usar?</h2>
+    <p class="ex-instr">Fill in the correct definite article before each country or city, or choose <strong>—</strong> if no article is used in Portuguese. Pay attention to the exceptions!</p>
+    <ul class="gap-list" id="g3-list"></ul>
+    <button class="check-btn" onclick="checkGaps('g3')">Verificar respostas</button>
+    <div class="score-box" id="g3-score"></div>
+  </div>
+
+  <!-- EX 4 — PORTUGUESE VS ENGLISH -->
+  <p class="sec-label">Exercício 4 de 5</p>
+  <div class="ex-card" id="ex4">
+    <div class="ex-num">Exercício 4</div>
+    <h2>Inglês vs. português — adicione o artigo</h2>
+    <p class="ex-instr">In English, these sentences have <strong>no article</strong>. But in Portuguese they need one! Fill in the correct definite article.</p>
+    <ul class="gap-list" id="g4-list"></ul>
+    <button class="check-btn" onclick="checkGaps('g4')">Verificar respostas</button>
+    <div class="score-box" id="g4-score"></div>
+  </div>
+
+  <!-- EX 5 — PRODUCTION -->
+  <p class="sec-label">Exercício 5 de 5</p>
+  <div class="ex-card" id="ex5">
+    <div class="ex-num">Exercício 5</div>
+    <h2>Escreva sobre você — production</h2>
+    <p class="ex-instr">Write your own sentences in Portuguese using the prompts below. Your teacher will give you personalized feedback.</p>
+    <ul class="prod-list">
+      <li class="prod-item">
+        <div class="prod-label">a) Sobre o seu país</div>
+        <div class="prod-sub">Write 1–2 sentences about your country. Use the correct definite article before the country name.</div>
+        <textarea class="prod-ta" id="p1" placeholder="Ex: O Canadá tem invernos muito frios. A capital é Ottawa."></textarea>
+      </li>
+      <li class="prod-item">
+        <div class="prod-label">b) Uma estação do ano que você ama ou odeia</div>
+        <div class="prod-sub">Use <em>o / a</em> + season. Remember: seasons always take a definite article in Portuguese!</div>
+        <textarea class="prod-ta" id="p2" placeholder="Ex: Eu amo o verão porque posso ir à praia."></textarea>
+      </li>
+      <li class="prod-item">
+        <div class="prod-label">c) A sua profissão</div>
+        <div class="prod-sub">State your profession WITHOUT an article. (Eu sou + profession, no <em>um/uma</em>!)</div>
+        <textarea class="prod-ta" id="p3" placeholder="Ex: Eu sou engenheira de software."></textarea>
+      </li>
+      <li class="prod-item">
+        <div class="prod-label">d) Uma cidade que você conhece</div>
+        <div class="prod-sub">Write 1–2 sentences about a city. Use <em>um/uma</em> where appropriate (e.g., before adjectives like "uma cidade linda").</div>
+        <textarea class="prod-ta" id="p4" placeholder="Ex: São Paulo é uma cidade enorme e movimentada."></textarea>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 <b>Quando terminar</b>, envie seus exercícios para a professora. Ela vai ler com atenção e dar um feedback personalizado — mostrando o que você acertou e ajudando você a melhorar ainda mais o seu português.<br>
+    <form class="send-form" onsubmit="bphubSubmit(event)">
+      <input type="hidden" name="_subject" value="Exercícios A2 — Artigos em Português">
+      <input type="text" name="nome" id="s-nome" placeholder="Seu nome" required>
+      <input type="email" name="email" id="s-email" placeholder="Seu e-mail (opcional)">
+      <textarea name="exercicio5a" id="s-p1" style="display:none;"></textarea>
+      <textarea name="exercicio5b" id="s-p2" style="display:none;"></textarea>
+      <textarea name="exercicio5c" id="s-p3" style="display:none;"></textarea>
+      <textarea name="exercicio5d" id="s-p4" style="display:none;"></textarea>
+      <button type="submit" class="send-btn">Enviar exercícios →</button>
+    </form>
+    <div class="send-confirmation" id="s-conf">✅ Enviado com sucesso! A professora vai analisar e responder em breve.</div>
+  </div>
+
+  <!-- BACK TO REFERENCE -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label">Material de referência</div>
+      <div class="nav-link-title">Artigos em Português — Material Teórico</div>
+    </div>
+    <a href="gramatica-artigos-definidos-indefinidos-a2-material.html" class="nav-btn">← Voltar ao material</a>
+  </div>
+
+</div>
+
+<script>
+// ── EX 1: CLASSIFY ──────────────────────────────────────────────────────────
+var classData = [
+  { s: 'Eu tenho <strong>um</strong> gato.', t: 'I have a cat.', correct: 'indefinido' },
+  { s: '<strong>O</strong> carro é novo.', t: 'The car is new.', correct: 'definido' },
+  { s: 'Convidei <strong>umas</strong> amigas para a festa.', t: 'I invited some friends to the party.', correct: 'indefinido' },
+  { s: '<strong>As</strong> portas estão fechadas.', t: 'The doors are closed.', correct: 'definido' },
+  { s: '<strong>A</strong> Paula é brilhante.', t: 'Paula is brilliant. (article before name)', correct: 'definido' },
+  { s: 'Ele comprou <strong>uma</strong> cama nova.', t: 'He bought a new bed.', correct: 'indefinido' },
+];
+var clAnswers = new Array(classData.length).fill(null);
+
+(function buildClassify() {
+  var ul = document.getElementById('cl-list');
+  classData.forEach(function(item, i) {
+    var li = document.createElement('li');
+    li.className = 'classify-item';
+    li.innerHTML =
+      '<div class="classify-sent"><span>' + item.s + '</span><div class="trans">' + item.t + '</div></div>' +
+      '<div class="classify-btns">' +
+        '<button class="cl-btn def" onclick="pickClass(' + i + ',\'definido\',this)">Definido</button>' +
+        '<button class="cl-btn indef" onclick="pickClass(' + i + ',\'indefinido\',this)">Indefinido</button>' +
+      '</div>' +
+      '<div class="classify-feedback" id="cl-fb-' + i + '"></div>';
+    ul.appendChild(li);
+  });
+})();
+
+function pickClass(i, val, btn) {
+  var btns = btn.parentElement.querySelectorAll('.cl-btn');
+  btns.forEach(function(b) { b.classList.remove('correct','wrong','missed'); });
+  clAnswers[i] = val;
+  btn.classList.add(val === classData[i].correct ? 'correct' : 'wrong');
+}
+
+function checkClassify() {
+  var score = 0;
+  classData.forEach(function(item, i) {
+    var fb = document.getElementById('cl-fb-' + i);
+    if (clAnswers[i] === item.correct) {
+      score++;
+      fb.textContent = '✓ Correct!';
+      fb.className = 'classify-feedback ok';
+    } else {
+      fb.textContent = clAnswers[i] === null ? '↑ Select an answer above.' : '✗ The article is ' + item.correct + '.';
+      fb.className = 'classify-feedback err';
+    }
+  });
+  var box = document.getElementById('cl-score');
+  var msg = score + '/' + classData.length + ' correct — ';
+  box.className = 'score-box show ' + (score === classData.length ? 'good' : score >= 4 ? 'ok' : 'retry');
+  box.textContent = msg + (score === classData.length ? 'Perfeito! 🎉' : score >= 4 ? 'Bom trabalho! Reveja os itens errados.' : 'Continue praticando — revise o material de referência.');
+}
+
+// ── EX 2: ALL ARTICLES ──────────────────────────────────────────────────────
+var g2data = [
+  { before: '', gap: true, after: ' Brasil tem muitas praias lindas.', correct: 'o', hint: 'O Brasil — countries take a definite article.' },
+  { before: 'Ela é ', gap: true, after: ' médica.', correct: '—', hint: '— (sem artigo) — no article before professions.' },
+  { before: '', gap: true, after: ' primavera é linda em São Paulo.', correct: 'a', hint: 'A primavera — seasons take a definite article.' },
+  { before: 'Você quer ', gap: true, after: ' café?', correct: 'um', hint: 'um café — one (unspecified) cup of coffee → indefinite.' },
+  { before: '', gap: true, after: ' pessoas aqui são muito simpáticas.', correct: 'as', hint: 'As pessoas — general category takes definite article.' },
+  { before: '', gap: true, after: ' Natal é muito celebrado no Brasil.', correct: 'o', hint: 'O Natal — celebrations/holidays take a definite article.' },
+  { before: 'Ela tem ', gap: true, after: ' apartamento bonito no centro.', correct: 'um', hint: 'um apartamento — non-specific singular → indefinite.' },
+  { before: '', gap: true, after: ' almoço vai sair mais tarde hoje.', correct: 'o', hint: 'O almoço — meals take a definite article.' },
+  { before: 'Convidei ', gap: true, after: ' amigos para o jantar.', correct: 'uns', hint: 'uns amigos — some (unspecified plural) friends → indefinite plural.' },
+  { before: 'Minha mãe é ', gap: true, after: ' professora de matemática.', correct: '—', hint: '— (sem artigo) — no article before professions.' },
+];
+var g2opts = ['—', 'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas'];
+buildGaps('g2', g2data, g2opts);
+
+// ── EX 3: COUNTRIES / CITIES ─────────────────────────────────────────────────
+var g3data = [
+  { before: '', gap: true, after: ' Brasil fica na América do Sul.', correct: 'O', hint: 'O Brasil — masculine country → o.' },
+  { before: '', gap: true, after: ' Argentina é um país vizinho do Brasil.', correct: 'A', hint: 'A Argentina — feminine country → a.' },
+  { before: '', gap: true, after: ' Estados Unidos ficam na América do Norte.', correct: 'Os', hint: 'Os Estados Unidos — plural country → os.' },
+  { before: '', gap: true, after: ' França é famosa por sua gastronomia.', correct: 'A', hint: 'A França — feminine country → a.' },
+  { before: '', gap: true, after: ' Portugal fica na Europa.', correct: '—', hint: '— (sem artigo) — Portugal is a special exception with no article.' },
+  { before: '', gap: true, after: ' Rio de Janeiro é famoso pelo Carnaval.', correct: 'O', hint: 'O Rio de Janeiro — special exception: this city always takes the article.' },
+  { before: '', gap: true, after: ' São Paulo é a maior cidade do Brasil.', correct: '—', hint: '— (sem artigo) — cities in Portuguese don\'t take an article.' },
+  { before: '', gap: true, after: ' México tem uma cultura incrível.', correct: 'O', hint: 'O México — masculine country → o.' },
+];
+var g3opts = ['—', 'O', 'A', 'Os', 'As'];
+buildGaps('g3', g3data, g3opts);
+
+// ── EX 4: PORTUGUESE VS ENGLISH ──────────────────────────────────────────────
+var g4data = [
+  { before: '', gap: true, after: ' inverno não é frio em Recife.', correct: 'O', hint: 'O inverno — seasons always take the definite article in Portuguese. English: "Winter is not cold in Recife."' },
+  { before: '', gap: true, after: ' almoço está pronto.', correct: 'O', hint: 'O almoço — meals take the definite article. English: "Lunch is ready."' },
+  { before: '', gap: true, after: ' brasileiros falam português.', correct: 'Os', hint: 'Os brasileiros — general category (all Brazilians). English: "Brazilians speak Portuguese."' },
+  { before: '', gap: true, after: ' beleza está nos olhos de quem vê.', correct: 'A', hint: 'A beleza — abstract/uncountable noun. English: "Beauty is in the eye of the beholder."' },
+  { before: '', gap: true, after: ' Páscoa é um grande feriado no Brasil.', correct: 'A', hint: 'A Páscoa — celebrations take the definite article. English: "Easter is a big holiday in Brazil."' },
+  { before: 'Ambas ', gap: true, after: ' cidades são lindas.', correct: 'as', hint: 'Ambas as cidades — "ambos/ambas" is always followed by the definite article. English: "Both cities are beautiful."' },
+];
+var g4opts = ['—', 'O', 'A', 'Os', 'As', 'o', 'a', 'os', 'as'];
+buildGaps('g4', g4data, g4opts);
+
+// ── GENERIC GAP-FILL ENGINE ─────────────────────────────────────────────────
+function buildGaps(id, data, opts) {
+  var ul = document.getElementById(id + '-list');
+  data.forEach(function(item, i) {
+    var li = document.createElement('li');
+    li.className = 'gap-item';
+    var sel = '<select class="gap-select" id="' + id + '-sel-' + i + '">' +
+      opts.map(function(o){ return '<option value="' + o + '">' + o + '</option>'; }).join('') + '</select>';
+    li.innerHTML =
+      '<span class="gap-num">' + (i+1) + '.</span>' +
+      '<span class="gap-sentence">' + item.before + sel + item.after +
+        (item.note ? ' <span class="gap-note">(' + item.note + ')</span>' : '') +
+        '<div class="gap-hint" id="' + id + '-hint-' + i + '"></div></span>';
+    ul.appendChild(li);
+  });
+}
+
+function checkGaps(id) {
+  var data = id === 'g2' ? g2data : id === 'g3' ? g3data : g4data;
+  var score = 0;
+  data.forEach(function(item, i) {
+    var sel = document.getElementById(id + '-sel-' + i);
+    var hint = document.getElementById(id + '-hint-' + i);
+    var val = sel.value;
+    var correct = (val.toLowerCase() === item.correct.toLowerCase());
+    sel.className = 'gap-select ' + (correct ? 'correct' : 'wrong');
+    hint.textContent = correct ? '✓ ' + item.hint : '✗ ' + item.hint;
+    hint.className = 'gap-hint show ' + (correct ? 'ok' : 'err');
+    if (correct) score++;
+  });
+  var total = data.length;
+  var box = document.getElementById(id + '-score');
+  box.className = 'score-box show ' + (score === total ? 'good' : score >= Math.ceil(total*0.7) ? 'ok' : 'retry');
+  box.textContent = score + '/' + total + ' correct — ' + (score === total ? 'Excelente! Todos corretos! 🎉' : score >= Math.ceil(total*0.7) ? 'Muito bom! Reveja os itens errados.' : 'Continue praticando — revise o material de referência.');
+}
+
+// ── SEND FORM ───────────────────────────────────────────────────────────────
+function bphubSubmit(e) {
+  e.preventDefault();
+  document.getElementById('s-p1').value = document.getElementById('p1').value;
+  document.getElementById('s-p2').value = document.getElementById('p2').value;
+  document.getElementById('s-p3').value = document.getElementById('p3').value;
+  document.getElementById('s-p4').value = document.getElementById('p4').value;
+  var data = new FormData();
+  data.append('_subject', 'Exercícios A2 — Artigos em Português');
+  data.append('nome', document.getElementById('s-nome').value);
+  data.append('email', document.getElementById('s-email').value);
+  data.append('exercicio_5a_pais', document.getElementById('p1').value);
+  data.append('exercicio_5b_estacao', document.getElementById('p2').value);
+  data.append('exercicio_5c_profissao', document.getElementById('p3').value);
+  data.append('exercicio_5d_cidade', document.getElementById('p4').value);
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+    .then(function(r) {
+      if (r.ok) {
+        document.querySelector('.send-form').style.display = 'none';
+        document.getElementById('s-conf').style.display = 'block';
+      } else { alert('Erro ao enviar. Tente novamente.'); }
+    }).catch(function() { alert('Erro de rede. Verifique sua conexão.'); });
+}
+</script>
+</body>
+</html>
