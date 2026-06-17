@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Games — Listening Comprehension — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #967E63; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: #967E63; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    /* MAIN */
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* CARDS */
+    .card { background: white; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(30,29,28,0.06); }
+    .card h2 { font-size: 20px; margin-bottom: 6px; color: var(--nanquim); }
+    .ex-instr { font-size: 14px; color: #777; margin-bottom: 20px; line-height: 1.6; }
+    .ex-num { display: inline-block; background: var(--pitomba); color: white; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 10px; margin-bottom: 10px; letter-spacing: 0.06em; }
+
+    /* VIDEO LINK */
+    .video-link { display: flex; align-items: center; gap: 14px; background: var(--off-white); border-radius: 12px; padding: 16px 20px; text-decoration: none; margin-bottom: 8px; border: 1.5px solid var(--light-gray); transition: border-color .2s; }
+    .video-link:hover { border-color: var(--pitomba); }
+    .video-icon { font-size: 28px; flex-shrink: 0; }
+    .video-title { font-size: 15px; color: var(--nanquim); font-weight: 600; margin-bottom: 2px; }
+    .video-meta { font-size: 13px; color: #888; }
+
+    /* MATCHING */
+    .match-row { display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; margin-bottom: 12px; }
+    .match-term { font-size: 15px; font-weight: 600; color: var(--nanquim); }
+    .match-select { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: 14px; background: white; cursor: pointer; width: 100%; outline: none; }
+    .match-select.ok  { border-color: var(--floresta); background: rgba(78,85,29,0.06); color: var(--floresta); }
+    .match-select.err { border-color: #e74c3c; background: rgba(231,76,60,0.05); }
+
+    /* TRUE/FALSE */
+    .tf-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-buttons { display: flex; gap: 6px; flex-shrink: 0; }
+    .tf-btn { border: 1.5px solid var(--light-gray); background: white; border-radius: 8px; padding: 5px 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Manrope', sans-serif; transition: .15s; }
+    .tf-btn.sel-V { background: rgba(78,85,29,0.12); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.sel-F { background: rgba(211,109,41,0.12); border-color: var(--pitomba); color: var(--pitomba); }
+    .tf-btn.correct { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .tf-btn.wrong   { background: #e74c3c; color: white; border-color: #e74c3c; }
+    .tf-text { font-size: 15px; line-height: 1.6; }
+
+    /* GAP FILL */
+    .gap-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; font-size: 15px; line-height: 1.9; }
+    .gap-num { color: #aaa; font-size: 13px; min-width: 18px; }
+    .gap-input { border: none; border-bottom: 2px solid var(--pitomba); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; width: 180px; padding: 2px 4px; outline: none; color: var(--nanquim); }
+    .gap-input.ok  { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.07); border-radius: 4px 4px 0 0; }
+    .gap-input.err { border-bottom-color: #e74c3c; }
+
+    /* WORD BANK */
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 14px 18px; background: var(--off-white); border-radius: 10px; }
+    .wb-word { background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; padding: 3px 14px; font-size: 13px; font-weight: 600; }
+
+    /* GRAMMAR BOX */
+    .gram-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 0 12px 12px 0; padding: 20px 24px; margin-bottom: 24px; }
+    .gram-box h3 { color: var(--cobalto); font-size: 16px; margin-bottom: 14px; }
+    .gram-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .gram-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; padding: 4px 10px; border-radius: 10px; display: inline-block; }
+    .gram-col.aprova h4  { background: rgba(78,85,29,0.15); color: var(--floresta); }
+    .gram-col.desaprova h4 { background: rgba(211,109,41,0.15); color: var(--pitomba); }
+    .gram-col ul { list-style: none; }
+    .gram-col ul li { font-size: 14px; line-height: 1.9; padding-left: 14px; position: relative; }
+    .gram-col ul li::before { content: '—'; position: absolute; left: 0; color: #bbb; }
+    .gram-col ul li em { color: #888; font-size: 12px; }
+
+    /* PRODUCTION */
+    .prod-block { margin-bottom: 18px; }
+    .prod-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--nanquim); }
+    .prod-hint { font-size: 12px; color: #999; font-style: italic; margin-bottom: 6px; }
+    .prod-textarea { width: 100%; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.7; resize: vertical; min-height: 90px; background: white; color: var(--nanquim); outline: none; transition: border-color .2s; }
+    .prod-textarea:focus { border-color: var(--pitomba); }
+
+    /* BUTTONS */
+    .check-btn { background: var(--pitomba); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .reset-btn  { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 10px; padding: 9px 20px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; margin-left: 8px; }
+
+    /* RESULT */
+    .result-msg { margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; display: none; max-height: 260px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.09); border: 1.5px solid var(--floresta); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1.5px solid var(--pitomba); color: var(--pitomba); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { grid-template-columns: 1fr; }
+      .gram-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1</span>
+    <span class="badge badge-type">Listening Comprehension</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>A <em>"Olimpíada dos Esteroides"</em></h1>
+  <div class="hero-sub">Compreensão oral, vocabulário e como expressar aprovação e desaprovação em português.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">compreensão oral</span>
+    <span class="hero-tag">vocabulário</span>
+    <span class="hero-tag">opinião</span>
+    <span class="hero-tag">aprovação · desaprovação</span>
+    <span class="hero-tag">BBC Brasil</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- VÍDEO -->
+  <div class="card">
+    <p class="sec-label">Assista ao vídeo</p>
+    <h2>Enhanced Games — BBC Brasil</h2>
+    <p class="ex-instr">Reporter Ian Alves explains how the first edition of the Enhanced Games worked, held in Las Vegas in May 2026. You will watch twice — with a different focus each time.</p>
+    <a class="video-link" href="https://www.bbc.com/portuguese/articles/c893zdlq85xo" target="_blank" rel="noopener">
+      <span class="video-icon">▶️</span>
+      <div>
+        <div class="video-title">'Olimpíada dos Esteroides': a competição onde o doping é permitido</div>
+        <div class="video-meta">BBC News Brasil · junho 2026 · clique para abrir</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- EX 1: ANTES DE ASSISTIR -->
+  <div class="card">
+    <span class="ex-num">Exercício 1 de 5</span>
+    <h2>Antes de assistir — vocabulário</h2>
+    <p class="ex-instr">Match each term to its definition. Use context and your general knowledge to help.</p>
+
+    <div class="match-row">
+      <span class="match-term">doping</span>
+      <select class="match-select" id="m1">
+        <option value="">— choose a definition —</option>
+        <option value="b">uso de substâncias proibidas para melhorar o rendimento esportivo</option>
+        <option value="a">conjunto de regras e valores que garantem a honestidade na competição</option>
+        <option value="e">nível de resultado alcançado em uma atividade</option>
+        <option value="c">avanço tecnológico aplicado à pesquisa científica</option>
+        <option value="d">capacidade máxima de desenvolvimento do ser humano</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-term">jogo limpo</span>
+      <select class="match-select" id="m2">
+        <option value="">— escolha a definição —</option>
+        <option value="b">uso de substâncias proibidas para melhorar o rendimento esportivo</option>
+        <option value="a">conjunto de regras e valores que garantem a honestidade na competição</option>
+        <option value="e">nível de resultado alcançado em uma atividade</option>
+        <option value="c">avanço tecnológico aplicado à pesquisa científica</option>
+        <option value="d">capacidade máxima de desenvolvimento do ser humano</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-term">desempenho</span>
+      <select class="match-select" id="m3">
+        <option value="">— escolha a definição —</option>
+        <option value="b">uso de substâncias proibidas para melhorar o rendimento esportivo</option>
+        <option value="a">conjunto de regras e valores que garantem a honestidade na competição</option>
+        <option value="e">nível de resultado alcançado em uma atividade</option>
+        <option value="c">avanço tecnológico aplicado à pesquisa científica</option>
+        <option value="d">capacidade máxima de desenvolvimento do ser humano</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-term">inovação científica</span>
+      <select class="match-select" id="m4">
+        <option value="">— escolha a definição —</option>
+        <option value="b">uso de substâncias proibidas para melhorar o rendimento esportivo</option>
+        <option value="a">conjunto de regras e valores que garantem a honestidade na competição</option>
+        <option value="e">nível de resultado alcançado em uma atividade</option>
+        <option value="c">avanço tecnológico aplicado à pesquisa científica</option>
+        <option value="d">capacidade máxima de desenvolvimento do ser humano</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-term">potencial humano</span>
+      <select class="match-select" id="m5">
+        <option value="">— escolha a definição —</option>
+        <option value="b">uso de substâncias proibidas para melhorar o rendimento esportivo</option>
+        <option value="a">conjunto de regras e valores que garantem a honestidade na competição</option>
+        <option value="e">nível de resultado alcançado em uma atividade</option>
+        <option value="c">avanço tecnológico aplicado à pesquisa científica</option>
+        <option value="d">capacidade máxima de desenvolvimento do ser humano</option>
+      </select>
+    </div>
+
+    <button class="check-btn" onclick="checkMatch()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetMatch()">Reset</button>
+    <div id="match-result" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: PRIMEIRA AUDIÇÃO -->
+  <div class="card">
+    <span class="ex-num">Exercício 2 de 5</span>
+    <h2>First listening — global comprehension</h2>
+    <p class="ex-instr">Watch the video once without stopping. Decide if each statement is true (V) or false (F).</p>
+
+    <div class="tf-item" data-id="1" data-answer="F">
+      <div class="tf-buttons">
+        <button class="tf-btn" data-val="V" onclick="selectTF(this,1,'V')">V</button>
+        <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+      </div>
+      <span class="tf-text">Os Enhanced Games aconteceram em Miami, nos Estados Unidos.</span>
+    </div>
+    <div class="tf-item" data-id="2" data-answer="V">
+      <div class="tf-buttons">
+        <button class="tf-btn" data-val="V" onclick="selectTF(this,2,'V')">V</button>
+        <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+      </div>
+      <span class="tf-text">Os atletas participantes usaram substâncias que são proibidas em competições convencionais.</span>
+    </div>
+    <div class="tf-item" data-id="3" data-answer="V">
+      <div class="tf-buttons">
+        <button class="tf-btn" data-val="V" onclick="selectTF(this,3,'V')">V</button>
+        <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+      </div>
+      <span class="tf-text">Críticos afirmam que o evento coloca em risco a saúde dos participantes.</span>
+    </div>
+    <div class="tf-item" data-id="4" data-answer="V">
+      <div class="tf-buttons">
+        <button class="tf-btn" data-val="V" onclick="selectTF(this,4,'V')">V</button>
+        <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+      </div>
+      <span class="tf-text">Os organizadores apresentam o evento como uma celebração da inovação científica.</span>
+    </div>
+    <div class="tf-item" data-id="5" data-answer="V">
+      <div class="tf-buttons">
+        <button class="tf-btn" data-val="V" onclick="selectTF(this,5,'V')">V</button>
+        <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+      </div>
+      <span class="tf-text">Esta foi a primeira edição dos Enhanced Games.</span>
+    </div>
+
+    <button class="check-btn" onclick="checkTF()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetTF()">Resetar</button>
+    <div id="tf-result" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: SEGUNDA AUDIÇÃO -->
+  <div class="card">
+    <span class="ex-num">Exercício 3 de 5</span>
+    <h2>Second listening — detailed comprehension</h2>
+    <p class="ex-instr">Watch the video again. Fill in the blanks using the words from the word bank below.</p>
+    <div class="word-bank">
+      <strong style="font-size:13px;color:#999;margin-right:4px;">Word bank:</strong>
+      <span class="wb-word">fraudes</span>
+      <span class="wb-word">normaliza</span>
+      <span class="wb-word">desempenho</span>
+      <span class="wb-word">potencial humano</span>
+    </div>
+
+    <div class="gap-row">
+      <span class="gap-num">1.</span>
+      <span>Críticos dizem que o evento</span>
+      <input class="gap-input" id="g1" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+      <span>o doping no esporte.</span>
+    </div>
+    <div class="gap-row">
+      <span class="gap-num">2.</span>
+      <span>O evento enfraquece a longa luta contra</span>
+      <input class="gap-input" id="g2" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+      <span>no esporte.</span>
+    </div>
+    <div class="gap-row">
+      <span class="gap-num">3.</span>
+      <span>Os atletas usaram substâncias para melhorar o</span>
+      <input class="gap-input" id="g3" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+      <span>.</span>
+    </div>
+    <div class="gap-row">
+      <span class="gap-num">4.</span>
+      <span>Os organizadores afirmam que o evento explora o</span>
+      <input class="gap-input" id="g4" style="width:200px;" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+      <span>.</span>
+    </div>
+
+    <button class="check-btn" onclick="checkGaps()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetGaps()">Resetar</button>
+    <div id="gap-result" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: GRAMÁTICA -->
+  <div class="card">
+    <span class="ex-num">Exercício 4 de 5</span>
+    <h2>Grammar in use — expressing approval and disapproval</h2>
+    <p class="ex-instr">Study the expressions below. Then complete each sentence using the structure indicated, sharing your real opinion about the Enhanced Games.</p>
+
+    <div class="gram-box">
+      <h3>Expressing approval and disapproval in Portuguese</h3>
+      <div class="gram-cols">
+        <div class="gram-col aprova">
+          <h4>Aprovação</h4>
+          <ul>
+            <li>Apoio essa iniciativa.</li>
+            <li>Sou a favor de + <em>substantivo</em></li>
+            <li>Concordo com a decisão de + <em>infinitivo</em></li>
+            <li>Faz todo sentido que + <em>subjuntivo</em></li>
+            <li>É válido / louvável que + <em>subjuntivo</em></li>
+            <li>Me parece uma ideia acertada.</li>
+            <li>O que me agrada é que + <em>indicativo</em></li>
+          </ul>
+        </div>
+        <div class="gram-col desaprova">
+          <h4>Desaprovação</h4>
+          <ul>
+            <li>Sou contra essa medida.</li>
+            <li>Não apoio / discordo de + <em>substantivo</em></li>
+            <li>Não faz o menor sentido que + <em>subjuntivo</em></li>
+            <li>É questionável / preocupante que + <em>subjuntivo</em></li>
+            <li>O que me preocupa é que + <em>indicativo</em></li>
+            <li>Isso normaliza / banaliza…</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-block">
+      <p class="prod-label">1. [É preocupante / É louvável que…]</p>
+      <textarea class="prod-textarea" id="op1" placeholder="Write the full sentence..."></textarea>
+    </div>
+    <div class="prod-block">
+      <p class="prod-label">2. [Concordo com / Discordo de…]</p>
+      <textarea class="prod-textarea" id="op2" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="prod-block">
+      <p class="prod-label">3. [O que me preocupa é que… / O que me agrada é que…]</p>
+      <textarea class="prod-textarea" id="op3" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="prod-block">
+      <p class="prod-label">4. [Isso normaliza… / Isso demonstra…]</p>
+      <textarea class="prod-textarea" id="op4" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+  </div>
+
+  <!-- EX 5: PRODUÇÃO -->
+  <div class="card">
+    <span class="ex-num">Exercício 5 de 5</span>
+    <h2>Production — your opinion</h2>
+    <p class="ex-instr">Are you for or against the Enhanced Games? Write a paragraph of 6 to 8 sentences defending your position. Use at least three expressions from the grammar box in exercise 4.</p>
+    <textarea class="prod-textarea" id="producao" style="min-height:180px;" placeholder="Write your answer here..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── MATCH ──
+var matchKey = { m1:'b', m2:'a', m3:'e', m4:'c', m5:'d' };
+var matchDisplay = {
+  m1: 'uso de substâncias proibidas para melhorar o rendimento esportivo',
+  m2: 'conjunto de regras e valores que garantem a honestidade na competição',
+  m3: 'nível de resultado alcançado em uma atividade',
+  m4: 'avanço tecnológico aplicado à pesquisa científica',
+  m5: 'capacidade máxima de desenvolvimento do ser humano'
+};
+var matchTermNames = { m1:'doping', m2:'jogo limpo', m3:'desempenho', m4:'inovação científica', m5:'potencial humano' };
+
+function checkMatch() {
+  var correct = 0, html = '';
+  ['m1','m2','m3','m4','m5'].forEach(function(id) {
+    var sel = document.getElementById(id);
+    var ok = sel.value === matchKey[id];
+    sel.className = 'match-select ' + (ok ? 'ok' : (sel.value ? 'err' : ''));
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>' + matchTermNames[id] + '</strong>: '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + matchDisplay[id] + '</div>';
+  });
+  var res = document.getElementById('match-result');
+  res.className = 'result-msg ' + (correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (correct===5?'✓ All correct!':correct+' of 5 correct — answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+function resetMatch() {
+  ['m1','m2','m3','m4','m5'].forEach(function(id){
+    var s=document.getElementById(id); s.value=''; s.className='match-select';
+  });
+  document.getElementById('match-result').style.display='none';
+}
+
+// ── TRUE/FALSE ──
+var tfAnswers = {1:'F',2:'V',3:'V',4:'V',5:'V'};
+var tfCorrection = {
+  1:'False — they took place in Las Vegas.',
+  2:'True.',
+  3:'Verdadeiro.',
+  4:'Verdadeiro.',
+  5:'True — it was the first edition.'
+};
+var tfSelected = {};
+
+function selectTF(btn, id, val) {
+  btn.closest('.tf-item').querySelectorAll('.tf-btn').forEach(function(b){
+    b.classList.remove('sel-V','sel-F');
+  });
+  btn.classList.add('sel-'+val);
+  tfSelected[id] = val;
+}
+
+function checkTF() {
+  var correct=0, html='';
+  for(var id=1;id<=5;id++){
+    var item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    var ans=tfAnswers[id], sel=tfSelected[id], ok=(sel===ans);
+    if(ok) correct++;
+    item.querySelectorAll('.tf-btn').forEach(function(b){
+      b.classList.remove('sel-V','sel-F','correct','wrong');
+      if(b.dataset.val===ans) b.classList.add('correct');
+      else if(b.dataset.val===sel&&!ok) b.classList.add('wrong');
+    });
+    html+='<div style="margin-bottom:8px;"><strong>'+id+'.</strong> '
+        +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+        +' '+tfCorrection[id]+'</div>';
+  }
+  var res=document.getElementById('tf-result');
+  res.className='result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All correct!':correct+' of 5 correct — answers:')
+    +'</div>'+html;
+  res.style.display='block';
+}
+function resetTF(){
+  tfSelected={};
+  document.querySelectorAll('.tf-btn').forEach(function(b){b.classList.remove('sel-V','sel-F','correct','wrong');});
+  document.getElementById('tf-result').style.display='none';
+}
+
+// ── GAP FILL ──
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();}
+var gapKey={g1:['normaliza'],g2:['fraudes'],g3:['desempenho'],g4:['potencial humano']};
+var gapDisplay={g1:'normaliza',g2:'fraudes',g3:'desempenho',g4:'potencial humano'};
+
+function checkGaps(){
+  var correct=0,html='';
+  ['g1','g2','g3','g4'].forEach(function(id,i){
+    var inp=document.getElementById(id);
+    var ok=gapKey[id].some(function(a){return norm(inp.value)===norm(a);});
+    inp.classList.toggle('ok',ok);
+    inp.classList.toggle('err',!ok&&inp.value.trim().length>0);
+    if(ok) correct++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+        +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+        +' <strong>'+gapDisplay[id]+'</strong></div>';
+  });
+  var res=document.getElementById('gap-result');
+  res.className='result-msg '+(correct===4?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===4?'✓ Tudo certo!':correct+' of 4 correct — answers:')
+    +'</div>'+html;
+  res.style.display='block';
+}
+function resetGaps(){
+  ['g1','g2','g3','g4'].forEach(function(id){
+    var inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');
+  });
+  document.getElementById('gap-result').style.display='none';
+}
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var emailEl=document.getElementById('bphub-student-email');
+  var name=nameEl?nameEl.value.trim():'';
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=emailEl?emailEl.value.trim():'';
+  var material=document.title.replace(/ \| BPHUB.*/,'').trim();
+  var answers={},summaryLines=[];
+  document.querySelectorAll('textarea').forEach(function(ta,idx){
+    var label='';
+    var parent=ta.closest('[class]');
+    if(parent){var clone=parent.cloneNode(true);clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){el.remove();});label=clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);}
+    if(!label) label='Campo '+(idx+1);
+    var val=ta.value.trim()||'(sem resposta)';
+    answers['R'+(idx+1)+' — '+label]=val;
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+  });
+  var payload=Object.assign({'Nome do aluno':name,'Material':material},answers);
+  if(email) payload['_replyto']=email;
+  btn.disabled=true;btn.textContent='A enviar…';
+  fetch('https://formspree.io/f/xykaydly',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+  .then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
+  .then(function(res){
+    if(res.ok){
+      document.getElementById('bphub-answer-summary').innerHTML=summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display='block';
+      document.getElementById('bphub-form-area').style.display='none';
+      document.getElementById('bphub-error').style.display='none';
+      var slug=location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display='block';
+      btn.disabled=false;btn.textContent='Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display='block';
+    btn.disabled=false;btn.textContent='Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
