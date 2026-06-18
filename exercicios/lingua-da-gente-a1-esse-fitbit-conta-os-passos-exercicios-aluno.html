@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Esse Fitbit Conta os Passos! | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+  .card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(60,60,33,.07); }
+  .section-title { font-family: 'Trirong', serif; font-size: 1.05rem; color: var(--floresta); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 32px 0 10px; padding-left: 12px; border-left: 3px solid var(--terracota); }
+  .card-title { font-family: 'Trirong', serif; font-size: 1.1rem; color: var(--terracota); margin-bottom: 14px; font-weight: 600; }
+  .instr { background: var(--baunilha); border-radius: 8px; padding: 12px 16px; font-size: .87rem; margin-bottom: 16px; line-height: 1.6; }
+  .instr strong { color: var(--terracota); }
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+  .dialogue { margin: 16px 0; }
+  .dialogue-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--giz); align-items: baseline; }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker { font-weight: 700; color: var(--floresta); font-size: .85rem; min-width: 28px; text-transform: uppercase; }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th { background: var(--floresta); color: #fff; padding: 10px 14px; text-align: left; font-family: 'Trirong', serif; font-weight: 600; }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .phon-box { background: var(--rosa-cha); border-left: 4px solid var(--goiaba); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cult-box { background: #EEF4EC; border-left: 4px solid var(--floresta); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ex-num { display: inline-block; background: var(--terracota); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .ex-title { font-family: 'Trirong', serif; font-size: 1rem; color: var(--musgo); font-weight: 600; display: flex; align-items: center; margin-bottom: 14px; }
+  .fill-line { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; line-height: 2; font-size: .97rem; }
+  .fill-line input { border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: .97rem; color: var(--musgo); padding: 2px 6px; width: 120px; text-align: center; outline: none; transition: border-color .2s; }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+  .word-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--erva-doce); border-radius: 10px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 200px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn { background: var(--giz); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 6px 13px; font-family: 'Manrope', sans-serif; font-size: .84rem; font-weight: 700; color: var(--musgo); cursor: pointer; transition: background .15s, border-color .15s; }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+  .match-select { width: 100%; border: 2px solid var(--erva-doce); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--musgo); background: #fff; outline: none; transition: border-color .2s; cursor: pointer; }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+  .prod-textarea { width: 100%; border: 2px solid var(--erva-doce); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; color: var(--musgo); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; margin-top: 10px; }
+  .prod-textarea:focus { border-color: var(--terracota); }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check { background: var(--terracota); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 8px; padding: 10px 18px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge { display: none; align-items: center; gap: 6px; background: var(--baunilha); border-radius: 8px; padding: 10px 16px; font-size: .88rem; font-weight: 700; color: var(--musgo); }
+  .score-badge.visible { display: inline-flex; }
+  @media(max-width:600px) { .card { padding: 20px 18px; } .word-item { flex-direction: column; align-items: flex-start; } }
+  .tq { color: var(--telha); font-weight: 800; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: var(--giz); border-bottom: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level { background: var(--floresta); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; font-family: 'Manrope', sans-serif; }
+  .topbar-back { font-size: 12px; color: #999; text-decoration: none; transition: color .2s; }
+  .topbar-back:hover { color: var(--floresta); }
+  .page-hero { background: var(--floresta); padding: 40px 28px 36px; }
+  .page-hero h1 { font-family: 'Trirong', serif; font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 300; line-height: 1.3; margin-bottom: 16px; color: #fff; }
+  .page-attribution { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Manrope', sans-serif; line-height: 1.7; }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Iniciante I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Esse Fitbit Conta os Passos!</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 40</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Falar de hábitos e obrigações do dia a dia</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> What does the Fitbit do? How many steps has one person taken today? What's the one downside of using it — and does the person care?
+    </div>
+    <div class="audio-label">Língua da Gente · Episode 40</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/beginning-40-counting-steps-with-my-fitbit/id1020665354?i=1000371652078">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/beginning-40-counting-steps-with-my-fitbit/id1020665354?i=1000371652078" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Read along</strong> while listening. Spot <em>tem que</em>, <em>deu</em>, and <em>não ligo</em> — three very common patterns in everyday Brazilian conversation.
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Sabe que esse Fitbit conta os passos diários.</div>
+          <div class="line-en">You know, this Fitbit counts your daily steps.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Sério, quantos passos você já <span class="tq">deu</span> hoje?</div>
+          <div class="line-en">Really, how many steps have you taken today?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Deixa eu ver, 9.850. Nada mal.</div>
+          <div class="line-en">Let me see, 9,850. Not bad.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Legal, mas você <span class="tq">tem que</span> usar essa pulseira o dia todo, não é?</div>
+          <div class="line-en">Cool, but you've got to wear that bracelet all day, right?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">É, mas eu <span class="tq">não ligo</span>.</div>
+          <div class="line-en">Yeah, but I don't mind.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <!-- Grammar 1: Ter que -->
+  <div class="card">
+    <div class="card-title">📖 Ter que + infinitivo — Obligation</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B says <em>"você <strong>tem que</strong> usar essa pulseira o dia todo"</em> — <em>ter que</em> + infinitive is the most common way to express obligation in Brazilian Portuguese, equivalent to "have to / must / need to."</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Pronoun</th>
+        <th>Ter que + infinitivo</th>
+        <th>English</th>
+      </tr>
+      <tr>
+        <td>eu</td>
+        <td><span class="pt tq">tenho que</span> trabalhar</td>
+        <td><span class="en">I have to work</span></td>
+      </tr>
+      <tr>
+        <td>você / ele / ela</td>
+        <td><span class="pt tq">tem que</span> usar a pulseira</td>
+        <td><span class="en">you/he/she has to wear the bracelet</span></td>
+      </tr>
+      <tr>
+        <td>nós</td>
+        <td><span class="pt tq">temos que</span> sair cedo</td>
+        <td><span class="en">we have to leave early</span></td>
+      </tr>
+      <tr>
+        <td>eles / vocês</td>
+        <td><span class="pt tq">têm que</span> estudar</td>
+        <td><span class="en">they/you all have to study</span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box">
+      <strong>💡 Ter que vs. Ter de vs. Precisar</strong>
+      All three express obligation, but with slightly different registers. <em>Ter que</em> is the most common in everyday speech — natural and casual. <em>Ter de</em> is more formal or written. <em>Precisar de</em> (to need to) is slightly softer — more of a necessity than a strict obligation. At this level, <em>ter que</em> is the one to master: <em>Tenho que ir.</em> (I have to go.) <em>Você tem que ver esse filme!</em> (You have to see this film!)
+    </div>
+  </div>
+
+  <!-- Grammar 2: Dar passos / quantos -->
+  <div class="card">
+    <div class="card-title">📖 Quantos passos você deu? — Dar + passos</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B asks <em>"quantos passos você já <strong>deu</strong> hoje?"</em> — In Portuguese, steps are "given" (<em>dar passos</em>), not "taken" as in English. <em>Deu</em> is the preterite of <em>dar</em> (3rd person singular / você). You already saw <em>deu</em> in Episode 39 (the medicine Marina gave me).</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Question word</th>
+        <th>Use</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Quantos</span> (m. pl.)</td>
+        <td><span class="en">How many — with masculine plural nouns</span></td>
+        <td><span class="pt"><span class="tq">Quantos</span> passos você deu? <span class="en">(How many steps did you take?)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Quantas</span> (f. pl.)</td>
+        <td><span class="en">How many — with feminine plural nouns</span></td>
+        <td><span class="pt"><span class="tq">Quantas</span> horas você dormiu? <span class="en">(How many hours did you sleep?)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Quanto</span> (m. sg.)</td>
+        <td><span class="en">How much</span></td>
+        <td><span class="pt"><span class="tq">Quanto</span> custa? <span class="en">(How much does it cost?)</span></span></td>
+      </tr>
+    </table>
+
+    <p style="font-size:.88rem;color:#666;margin-top:12px;">Other common expressions with <em>dar</em>: <em>dar uma olhada</em> (to take a look), <em>dar um passeio</em> (to take a walk / stroll), <em>dar certo</em> (to work out / go well), <em>dar trabalho</em> (to be a burden — Episode 37!).</p>
+  </div>
+
+  <!-- Grammar 3: Key expressions -->
+  <div class="card">
+    <div class="card-title">📖 Expressões-chave — Não ligo, nada mal, o dia todo</div>
+
+    <table class="gram-table">
+      <tr>
+        <th>Expression</th>
+        <th>Meaning</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Eu não ligo.</span></td>
+        <td><span class="en">I don't mind. / I don't care.</span></td>
+        <td><span class="note"><em>Ligar para</em> = to care about. Without the <em>para</em> in speech: <em>não ligo</em> = I don't mind / it doesn't bother me. Casual and very common.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Nada mal.</span></td>
+        <td><span class="en">Not bad.</span></td>
+        <td><span class="note">Fixed phrase — used as a mild compliment or to express mild satisfaction. <em>Nada</em> = nothing; <em>mal</em> = bad. Literally "nothing bad." Equivalent to "not bad at all."</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt tq">O dia todo.</span></td>
+        <td><span class="en">All day / the whole day.</span></td>
+        <td><span class="note"><em>Todo/toda</em> + article + time noun = the whole ___. <em>A semana toda</em> (all week), <em>o ano todo</em> (all year), <em>a noite toda</em> (all night).</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Deixa eu ver.</span></td>
+        <td><span class="en">Let me see.</span></td>
+        <td><span class="note">Very natural filler — used when checking something, pausing to think, or looking something up. <em>Deixa eu pensar</em> = let me think. <em>Deixa eu verificar</em> = let me check.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt tq">Sabe que…</span></td>
+        <td><span class="en">You know, … / Did you know that…</span></td>
+        <td><span class="note">Used to introduce a piece of information — like English "you know what?" or "get this." Very common conversation opener in Brazilian Portuguese.</span></td>
+      </tr>
+    </table>
+
+    <div class="phon-box" style="margin-top:16px;">
+      <strong>🔊 Numbers with periods and commas</strong>
+      In Brazil (and most of continental Europe), the decimal separator is a <strong>comma</strong> and the thousands separator is a <strong>period</strong> — the opposite of English. So 9,850 steps in the dialogue is written <em>9.850</em> in Portuguese. And R$ 1.500,00 = R$ 1,500.00. This trips up many English speakers when reading prices or statistics in Brazil!
+    </div>
+  </div>
+
+  <p class="section-title">Step 4 — Practice</p>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> Ter que — Obligation Quiz</div>
+    <div class="instr">Choose the correct form of <em>ter que</em> for each sentence.</div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">Eu ___ usar o Fitbit o dia todo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','b')">tem que</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','b')">tenho que</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','b')">têm que</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Tenho que</em> = I have to (1st person singular of <em>ter</em>). <em>Tenho que usar o Fitbit o dia todo.</em> = I have to wear the Fitbit all day.</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">Você ___ dar pelo menos 10.000 passos por dia.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','a')">tem que</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','a')">tenho que</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','a')">temos que</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Tem que</em> = you/he/she has to (3rd person singular). <em>Você tem que dar 10.000 passos.</em> = You have to take 10,000 steps.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Eu não ligo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','c')">I don't understand.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','c')">I'm not calling.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','c')">I don't mind.</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Ligar para</em> = to care about / to mind. <em>Não ligo</em> (without <em>para</em>) = I don't mind / I don't care. It sounds like "I don't call" but in this context it means "it doesn't bother me."</span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">Nada mal.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','b')">Really bad.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','b')">Not bad at all.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','b')">Nothing worse.</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Nada mal</em> = not bad / not bad at all. A handy, casual expression of mild approval or pleasant surprise — "9,850 steps, not bad!"</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks with the missing words.<br>
+      <strong>Word bank:</strong> <em>passos · deu · tem que · ligo · nada</em>
+    </div>
+    <div class="fill-line">— Sério, quantos <input type="text" id="f1" placeholder="___"> você já <input type="text" id="f2" placeholder="___"> hoje?</div>
+    <div class="fill-line">— Deixa eu ver, 9.850. <input type="text" id="f3" placeholder="___"> mal.</div>
+    <div class="fill-line">— Legal, mas você <input type="text" id="f4" placeholder="___"> usar essa pulseira o dia todo, não é?</div>
+    <div class="fill-line">— É, mas eu não <input type="text" id="f5" placeholder="___">.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> O dia todo — Toda a ___ or o/a ___ todo/a?</div>
+    <div class="instr">
+      Select the correct "all ___" expression for each situation.
+    </div>
+    <div style="display:grid;gap:14px;margin-top:8px;">
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">She wore the Fitbit ___ (all day).</p>
+        <select class="match-select" id="ms1">
+          <option value="">— escolha —</option>
+          <option value="a">o dia todo</option>
+          <option value="b">a semana toda</option>
+          <option value="c">o ano todo</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">He was at the gym ___ (all morning).</p>
+        <select class="match-select" id="ms2">
+          <option value="">— escolha —</option>
+          <option value="a">a tarde toda</option>
+          <option value="b">a manhã toda</option>
+          <option value="c">a noite toda</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">They talked ___ (all night).</p>
+        <select class="match-select" id="ms3">
+          <option value="">— escolha —</option>
+          <option value="a">o dia todo</option>
+          <option value="b">a manhã toda</option>
+          <option value="c">a noite toda</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">She didn't work ___ (all week).</p>
+        <select class="match-select" id="ms4">
+          <option value="">— escolha —</option>
+          <option value="a">a semana toda</option>
+          <option value="b">o dia todo</option>
+          <option value="c">o mês todo</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Você se cuida?</div>
+    <div class="instr"><strong>Write in Portuguese.</strong><br>Write 4–6 sentences about your daily health habits (real or imaginary). Use <em>tenho que</em>, <em>não ligo</em>, <em>o dia todo / a semana toda</em>, and <em>dar passos / dar uma caminhada</em>. How many steps do you take? What do you have to do to stay healthy? Is there anything you don't mind doing?</div>
+    <textarea class="prod-textarea" placeholder="Example:&#10;Todo dia tenho que dar pelo menos 8.000 passos. Uso o celular para contar os passos porque não tenho Fitbit. Às vezes tenho que caminhar a tarde toda para chegar no número. Não ligo de caminhar — adoro! Também tenho que beber muita água o dia todo. Nada mal como hábito!"></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var match = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(match && match[1] === chosen) { b.classList.add(chosen === correct ? 'correct' : 'wrong'); }
+      if(match && match[1] === correct && chosen !== correct) { b.classList.add('correct'); }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      fb.textContent = '❌ Not quite — try again.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  var fillAnswers = { f1:'passos', f2:'deu', f3:'Nada|nada', f4:'tem que', f5:'ligo' };
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ã/g,'a').replace(/õ/g,'o'); }
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  var matchAnswers = { ms1:'a', ms2:'b', ms3:'c', ms4:'a' };
+  function checkMatch(){
+    var score = 0;
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+
+<script>
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {}; var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = ''; var parent = ta.closest('[class]');
+    if (parent) { var clone = parent.cloneNode(true); clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); }); label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80); }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+  .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      localStorage.setItem('bphub_done_' + location.pathname.split('/').pop().replace('.html',''), '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; }
+  }).catch(function() { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
