@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesmo — Vários Usos | B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --nanquim: #1E1D1C; --texto: #3C3C21; --cobalto: #265B8B;
+      --pitomba: #D36D29; --ouro: #FFB94A; --floresta: #4E551D;
+      --erva-doce: #A6B28A; --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: "Manrope", sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: "Trirong", serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--marrom); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--marrom); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; margin-bottom: 28px; }
+    .card-title { font-family: "Trirong", serif; font-size: 1.25rem; font-weight: 300; color: var(--nanquim); margin-bottom: 14px; }
+
+    .dialogue { font-family: "Trirong", serif; font-size: 0.97rem; line-height: 2.1; }
+    .dialogue p { margin-bottom: 0; }
+    .spk { font-weight: 500; color: var(--marrom); }
+    .hl  { color: var(--marrom); font-weight: 700; }
+
+    .use-grid { display: grid; gap: 16px; margin-top: 8px; }
+    .gram-use { background: white; border-radius: 12px; border: 1.5px solid var(--light-gray); padding: 22px 26px; }
+    .gram-num  { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 5px; }
+    .gram-title { font-family: "Trirong", serif; font-size: 1.1rem; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .gram-en   { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 8px; }
+    .gram-note { font-size: 0.86rem; color: #666; margin-bottom: 12px; line-height: 1.6; }
+    .gram-ex   { background: rgba(150,126,99,0.07); border-left: 3px solid var(--marrom); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: "Trirong", serif; font-size: 0.92rem; line-height: 2.1; }
+    .gram-ex em { color: var(--marrom); font-style: normal; font-weight: 700; }
+
+    .bonus-box { background: rgba(150,126,99,0.07); border-radius: 12px; padding: 20px 24px; border: 1.5px dashed rgba(150,126,99,0.45); margin-top: 4px; }
+    .bonus-tag { display: inline-block; background: var(--marrom); color: white; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; padding: 2px 10px; border-radius: 20px; margin-bottom: 10px; text-transform: uppercase; }
+
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: "Trirong", serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: "Manrope", sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+
+    @media (max-width: 700px) { .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; } }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1</span>
+    <span class="badge badge-type">Material de Referência</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1><em>Mesmo</em> — Vários Usos</h1>
+  <div class="hero-sub">How one word does seven different jobs in Brazilian Portuguese — from "the same" to "really" to "it makes no difference."</div>
+  <div class="hero-tags">
+    <span class="hero-tag">vocabulário</span>
+    <span class="hero-tag">gramática</span>
+    <span class="hero-tag">registro informal</span>
+  </div>
+  <div class="hero-note">📖 Leia este material antes da aula</div>
+</div>
+
+<div class="main">
+
+  <div style="margin-bottom:32px;">
+    <div class="sec-label">Por que estudar mesmo?</div>
+    <p style="font-size:0.94rem;color:#666;line-height:1.75;max-width:700px;">The word <em>mesmo</em> is one of the most versatile in Brazilian Portuguese. In conversation, you'll hear it constantly — but it can mean very different things depending on the context. Read the dialogue below and notice how many uses appear in just one short conversation.</p>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Leitura</div>
+    <div class="card-title">Depois da reunião</div>
+    <p style="font-size:0.82rem;color:#aaa;margin-bottom:18px;font-style:italic;">Mariana e Lucas trabalham numa startup de tecnologia. Eles saem de uma reunião longa.</p>
+    <div class="dialogue">
+      <p><span class="spk">Lucas:</span> Mariana, você foi à reunião ontem?</p>
+      <p><span class="spk">Mariana:</span> Fui <span class="hl">eu mesma</span>. Por quê?</p>
+      <p><span class="spk">Lucas:</span> Porque o Danilo fez <span class="hl">a mesma</span> apresentação do trimestre passado!</p>
+      <p><span class="spk">Mariana:</span> <span class="hl">É mesmo</span>? Achei que ia trazer dados novos.</p>
+      <p><span class="spk">Lucas:</span> Não. Os gráficos eram <span class="hl">os mesmos</span> de março. Só mudou a cor do slide.</p>
+      <p><span class="spk">Mariana:</span> Nossa. E a diretora aprovou <span class="hl">mesmo assim</span>?</p>
+      <p><span class="spk">Lucas:</span> Aprovou <span class="hl">mesmo</span>. Parece que ninguém nota.</p>
+      <p><span class="spk">Mariana:</span> A gente sempre chega <span class="hl">na mesma</span>: reunião longa, resultado zero.</p>
+      <p><span class="spk">Lucas:</span> Exato. Você vai mandar um feedback para ele?</p>
+      <p><span class="spk">Mariana:</span> Pensei em mandar, mas <span class="hl">dá no mesmo</span> — ele nunca muda nada.</p>
+      <p><span class="spk">Lucas:</span> E o projeto do aplicativo, como está?</p>
+      <p><span class="spk">Mariana:</span> Tá <span class="hl">na mesma</span>. Ainda esperando aprovação do cliente.</p>
+      <p><span class="spk">Lucas:</span> Igual ao mês passado, então. <span class="hl">O mesmo</span> de sempre.</p>
+      <p><span class="spk">Mariana:</span> <span class="hl">É mesmo</span>! A gente precisa de uma mudança aqui.</p>
+    </div>
+    <p style="margin-top:16px;font-size:0.79rem;color:#ccc;font-style:italic;">Texto elaborado para fins didáticos.</p>
+  </div>
+
+  <div style="margin-bottom:16px;">
+    <div class="sec-label">Gramática — Os usos de "mesmo"</div>
+  </div>
+
+  <div class="use-grid">
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 1</div>
+      <div class="gram-title">mesmo / mesma / mesmos / mesmas</div>
+      <div class="gram-en">English: the same</div>
+      <div class="gram-note">Used as an adjective before a noun. Agrees in gender and number with the noun it describes.</div>
+      <div class="gram-ex">
+        Você ainda trabalha na <em>mesma</em> empresa?<br>
+        Ela leu o <em>mesmo</em> relatório duas vezes.<br>
+        Os clientes fizeram os <em>mesmos</em> comentários de antes.<br>
+        Temos as <em>mesmas</em> dificuldades de sempre.
+      </div>
+    </div>
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 2</div>
+      <div class="gram-title">o mesmo / a mesma</div>
+      <div class="gram-en">English: the same (replacing an action or thing)</div>
+      <div class="gram-note">The fixed form <strong>o mesmo</strong> (masculine) replaces a verb or action. When replacing a specific feminine noun, use <strong>a mesma</strong>.</div>
+      <div class="gram-ex">
+        Pedro chegou cedo, e a Ana fez <em>o mesmo</em>.<br>
+        Vou pedir uma pizza. Você quer <em>o mesmo</em>?<br>
+        — Qual é a senha do Wi-Fi? — É <em>a mesma</em> de antes.<br>
+        Lucas estava frustrado. Mariana sentia <em>o mesmo</em>.
+      </div>
+    </div>
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 3</div>
+      <div class="gram-title">eu mesmo / ela mesma / eles mesmos…</div>
+      <div class="gram-en">English: myself / herself / themselves (emphasis)</div>
+      <div class="gram-note">Added after a pronoun or name for emphasis — "I did it personally, without help." Agrees in gender and number with the person.</div>
+      <div class="gram-ex">
+        Eu <em>mesmo</em> resolvi o problema sem pedir ajuda.<br>
+        A diretora <em>mesma</em> enviou o comunicado para a equipe.<br>
+        Eles <em>mesmos</em> desenvolveram toda a plataforma do zero.<br>
+        Foi você <em>mesma</em> que escreveu esse relatório?
+      </div>
+    </div>
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 4</div>
+      <div class="gram-title">É mesmo? / Foi mesmo?</div>
+      <div class="gram-en">English: Really? / Oh really? / No way!</div>
+      <div class="gram-note">Used to show surprise or genuine interest, and to invite the other person to continue. Very common in informal conversation.</div>
+      <div class="gram-ex">
+        — A startup foi vendida por R$200 milhões. — <em>É mesmo</em>? Não acredito!<br>
+        — O Daniel pediu demissão. — <em>Foi mesmo</em>? Que surpresa!<br>
+        — Consegui uma reunião com o CEO. — <em>É mesmo</em>? Conta tudo!
+      </div>
+    </div>
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 5</div>
+      <div class="gram-title">mesmo (adverb)</div>
+      <div class="gram-en">English: really, indeed, truly</div>
+      <div class="gram-note">Adds strong emphasis. Often appears after a verb or before an adjective. Equivalent to "She really is…" or "I truly did it."</div>
+      <div class="gram-ex">
+        Aquela apresentação foi <em>mesmo</em> impressionante.<br>
+        Ele é <em>mesmo</em> muito competente para esse cargo.<br>
+        Fiz <em>mesmo</em> o relatório inteiro sozinha — não foi fácil!<br>
+        — Você está bem? — Estou <em>mesmo</em>!
+      </div>
+    </div>
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 6</div>
+      <div class="gram-title">dar no mesmo / dar na mesma</div>
+      <div class="gram-en">English: it makes no difference / it's all the same</div>
+      <div class="gram-note">Used when two different options produce the same result. Very common in everyday speech.</div>
+      <div class="gram-ex">
+        — Reunião às 9h ou às 10h? — <em>Dá no mesmo</em> para mim.<br>
+        Ir de carro ou de metrô — <em>dá na mesma</em>, os dois levam 30 minutos.<br>
+        Enviar por email ou WhatsApp? <em>Dá no mesmo</em>, ela vai ver.
+      </div>
+    </div>
+
+    <div class="gram-use">
+      <div class="gram-num">Uso 7</div>
+      <div class="gram-title">estar na mesma</div>
+      <div class="gram-en">English: to be in the same situation / nothing has changed</div>
+      <div class="gram-note">Used informally to say that a situation hasn't progressed. Often shortened to <em>tá na mesma</em> in spoken Portuguese.</div>
+      <div class="gram-ex">
+        — Como está o orçamento do projeto? — <em>Tá na mesma</em>. Ainda sem resposta.<br>
+        — O contrato foi aprovado? — Não, está <em>na mesma</em>.<br>
+        Após meses de negociação, o processo ainda estava <em>na mesma</em>.
+      </div>
+    </div>
+
+    <div class="bonus-box">
+      <div class="bonus-tag">Bônus</div>
+      <div style="font-family:'Trirong',serif;font-size:1.05rem;color:var(--nanquim);margin-bottom:6px;"><strong>mesmo assim</strong> = even so / even then</div>
+      <div style="font-size:0.86rem;color:#666;margin-bottom:12px;line-height:1.6;">Used to say that something happened <em>despite</em> an obstacle or unfavourable situation.</div>
+      <div class="gram-ex">
+        Estava chovendo muito, mas fomos à conferência <em>mesmo assim</em>.<br>
+        O cliente rejeitou a proposta, mas a equipe continuou <em>mesmo assim</em>.<br>
+        Não tinha muito tempo, mas ela fez uma apresentação excelente <em>mesmo assim</em>.
+      </div>
+    </div>
+
+  </div><!-- /use-grid -->
+
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label" style="color:var(--pitomba);">Próximo passo</div>
+      <div class="nav-link-title">Mesmo — Exercícios Interativos</div>
+    </div>
+    <a href="mesmo-varios-usos-b1-exercicios-aluno.html" class="nav-btn" style="background:var(--pitomba);">Ir para os exercícios →</a>
+  </div>
+
+</div>
+</body>
+</html>
