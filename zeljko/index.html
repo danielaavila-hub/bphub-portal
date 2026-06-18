@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeljko — My Materials | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .gate-box {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 20px;
+      padding: 52px 48px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(38,91,139,0.10);
+    }
+
+    .gate-logo img {
+      height: 36px;
+      width: auto;
+      margin: 0 auto 32px;
+    }
+
+    .gate-box h2 {
+      font-family: 'Trirong', serif;
+      font-size: 26px;
+      font-weight: 300;
+      color: var(--cobalto);
+      margin-bottom: 6px;
+    }
+
+    .gate-sub {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    .gate-field {
+      width: 100%;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--nanquim);
+      text-align: center;
+      letter-spacing: 0.04em;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .gate-field:focus { border-color: var(--cobalto); }
+
+    .gate-error {
+      display: none;
+      font-size: 12px;
+      color: var(--pitomba);
+      background: #fff0ed;
+      border: 1px solid #f5c0b0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+    }
+
+    .gate-btn {
+      width: 100%;
+      background: var(--pitomba);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+    .gate-btn:hover { opacity: 0.88; }
+  </style>
+</head>
+<body>
+
+<div class="gate-box">
+  <div class="gate-logo">
+    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+  </div>
+  <h2>Zeljko's Page</h2>
+  <p class="gate-sub">Enter your login and password to access your materials</p>
+  <p id="gate-error" class="gate-error">Incorrect login or password. Please try again.</p>
+  <input class="gate-field" type="text" id="gate-user" placeholder="Your login" autocomplete="username">
+  <input class="gate-field" type="password" id="gate-pass" placeholder="Your password" autocomplete="current-password">
+  <button class="gate-btn" onclick="checkGate()">Access My Materials</button>
+</div>
+
+<script>
+  var STUDENT_LOGIN    = "zeljko";
+  var STUDENT_PASSWORD = "zeljko2026";
+
+  function checkGate() {
+    var user = document.getElementById("gate-user").value.trim().toLowerCase();
+    var pass = document.getElementById("gate-pass").value.trim();
+    if (user === STUDENT_LOGIN && pass === STUDENT_PASSWORD) {
+      window.location.href = "../index.html";
+    } else {
+      document.getElementById("gate-error").style.display = "block";
+      document.getElementById("gate-pass").value = "";
+      document.getElementById("gate-pass").focus();
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") checkGate();
+  });
+</script>
+
+</body>
+</html>
