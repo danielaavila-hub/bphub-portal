@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imperativo — Primeiro dia na academia | A2 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --giz:        #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #265B8B;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --musgo:      #3C3C21;
+      --texto:      #3C3C21;
+      --level-color: #265B8B;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:64px; border-bottom:1px solid #E8E4DE; background:var(--giz); position:sticky; top:0; z-index:50; }
+    .topbar-logo img { height:40px; width:auto; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; margin-right:20px; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level-color); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; color:var(--texto); }
+    .topbar-back { font-size:12px; color:#aaa; transition:color .2s; }
+    .topbar-back:hover { color:var(--level-color); }
+
+    /* HERO */
+    .page-hero { background:var(--level-color); padding:60px 48px 52px; }
+    .page-eyebrow { font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.75); margin-bottom:14px; }
+    .page-hero h1 { font-size:clamp(28px,4vw,44px); color:white; margin-bottom:10px; }
+    .page-hero p { font-size:15px; color:rgba(255,255,255,.88); max-width:560px; line-height:1.75; }
+    .student-meta { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+    .meta-pill { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.25); border:1px solid rgba(255,255,255,.40); border-radius:20px; padding:6px 14px; font-size:12px; font-weight:500; color:white; }
+    .meta-pill .dot { width:6px; height:6px; border-radius:50%; background:white; opacity:.7; }
+
+    /* MAIN */
+    .main { padding:52px 48px 100px; max-width:900px; margin:0 auto; }
+    .sec-header { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+    .sec-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+    .icon-ref  { background:#EEF4FB; }
+    .icon-text { background:var(--baunilha2); }
+    .icon-ex   { background:rgba(38,91,139,.12); }
+    .icon-write{ background:var(--rosa-cha); }
+    .sec-header h2 { font-size:22px; }
+    .sec-header p  { font-size:13px; color:#888; margin-top:3px; }
+    .sec-divider { border:none; border-top:1px solid var(--light-gray); margin:52px 0; }
+
+    /* REFERENCE TABLE */
+    .ref-table-wrap { background:white; border:1.5px solid var(--light-gray); border-radius:14px; overflow:hidden; margin-bottom:14px; }
+    .ref-table { width:100%; border-collapse:collapse; }
+    .ref-table thead th { background:var(--level-color); color:white; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:12px 18px; text-align:left; }
+    .ref-table tbody tr { border-bottom:1px solid var(--light-gray); }
+    .ref-table tbody tr:last-child { border-bottom:none; }
+    .ref-table tbody td { padding:12px 18px; font-size:14px; vertical-align:top; }
+    .ref-table tbody td:first-child { font-weight:700; color:var(--level-color); white-space:nowrap; }
+    .ref-table tfoot td { background:var(--off-white); font-size:13px; padding:12px 18px; color:#666; border-top:1px solid var(--light-gray); }
+
+    /* VOCAB TABLE */
+    .vocab-table-wrap { background:white; border:1.5px solid var(--light-gray); border-radius:14px; overflow:hidden; }
+    .vocab-table { width:100%; border-collapse:collapse; }
+    .vocab-table thead th { background:var(--off-white); color:#888; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:10px 18px; text-align:left; }
+    .vocab-table tbody tr { border-bottom:1px solid var(--light-gray); }
+    .vocab-table tbody tr:last-child { border-bottom:none; }
+    .vocab-table tbody td { padding:10px 18px; font-size:14px; }
+    .vocab-table tbody td:first-child { font-weight:700; color:var(--level-color); }
+
+    /* TEXT */
+    .text-reader { background:white; border:1.5px solid var(--light-gray); border-radius:14px; padding:32px 36px; }
+    .text-title { font-family:'Trirong',serif; font-size:20px; font-weight:400; color:var(--cobalto); margin-bottom:4px; }
+    .text-byline { font-size:12px; color:#aaa; margin-bottom:24px; }
+    .text-reader p { font-size:15px; color:var(--texto); line-height:1.9; margin-bottom:16px; }
+    .text-reader p:last-child { margin-bottom:0; }
+    .text-reader strong { color:var(--level-color); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background:white; border:1.5px solid var(--light-gray); border-radius:14px; padding:32px 36px; margin-bottom:20px; }
+    .ex-header { display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:18px; border-bottom:1px solid var(--light-gray); }
+    .ex-num { width:30px; height:30px; border-radius:50%; background:var(--level-color); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; flex-shrink:0; }
+    .ex-header h3 { font-family:'Manrope',sans-serif; font-size:15px; font-weight:700; color:var(--nanquim); }
+    .ex-header p { font-size:12px; color:#999; margin-top:2px; }
+    .ex-instruction { font-size:14px; color:#666; font-style:italic; margin-bottom:22px; line-height:1.7; }
+
+    /* BLANKS */
+    .blanks-list { list-style:none; }
+    .blanks-list li { font-size:15px; color:var(--texto); padding:14px 0; border-bottom:1px solid var(--light-gray); display:flex; align-items:center; gap:8px; flex-wrap:wrap; line-height:1.7; }
+    .blanks-list li:last-child { border-bottom:none; }
+    .item-num { font-size:12px; font-weight:700; color:#bbb; min-width:22px; }
+    .blank-input { display:inline-block; border:none; border-bottom:2px solid var(--ouro); background:transparent; padding:3px 8px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--nanquim); min-width:150px; outline:none; transition:border-color .2s; }
+    .blank-input:focus { border-bottom-color:var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color:var(--floresta); color:var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color:var(--pitomba);  color:var(--pitomba); }
+    .item-hint { font-size:12px; color:#bbb; font-style:italic; }
+
+    /* TRANSFORM LIST */
+    .transform-list { list-style:none; }
+    .transform-list li { padding:16px 0; border-bottom:1px solid var(--light-gray); }
+    .transform-list li:last-child { border-bottom:none; }
+    .transform-prompt { font-size:15px; color:var(--texto); margin-bottom:10px; }
+    .transform-prompt strong { color:var(--level-color); }
+    .transform-input { width:100%; border:none; border-bottom:2px solid var(--ouro); background:transparent; padding:4px 8px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--texto); outline:none; transition:border-color .2s; }
+    .transform-input:focus { border-bottom-color:var(--cobalto); }
+    .transform-input.ok  { border-bottom-color:var(--floresta); color:var(--floresta); }
+    .transform-input.err { border-bottom-color:var(--pitomba);  color:var(--pitomba); }
+
+    /* REORDER LIST */
+    .reorder-list { list-style:none; }
+    .reorder-list li { padding:16px 0; border-bottom:1px solid var(--light-gray); }
+    .reorder-list li:last-child { border-bottom:none; }
+    .scrambled { font-size:13px; color:#888; font-style:italic; margin-bottom:10px; background:var(--off-white); border-radius:6px; padding:8px 12px; line-height:1.6; }
+    .scrambled span { font-weight:700; color:var(--level-color); font-style:normal; }
+
+    /* OPEN TEXTAREA */
+    .open-textarea { width:100%; background:var(--off-white); border:1.5px solid var(--light-gray); border-radius:10px; padding:14px 16px; font-family:'Manrope',sans-serif; font-size:15px; color:var(--texto); resize:vertical; min-height:110px; outline:none; line-height:1.65; transition:border-color .2s; display:block; margin-bottom:14px; }
+    .open-textarea:focus { border-color:var(--cobalto); }
+    .open-textarea::placeholder { color:#bbb; }
+
+    /* BUTTONS */
+    .check-btn { display:inline-flex; align-items:center; gap:7px; margin-top:18px; padding:10px 22px; border-radius:8px; background:var(--level-color); color:white; border:none; font-family:'Manrope',sans-serif; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .2s; }
+    .check-btn:hover { opacity:.85; }
+    .show-model-btn { display:inline-flex; align-items:center; gap:6px; margin:6px 0 8px; padding:6px 14px; border-radius:6px; background:transparent; border:1.5px solid var(--level-color); color:var(--level-color); font-family:'Manrope',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:background .2s; }
+    .show-model-btn:hover { background:rgba(38,91,139,.12); }
+
+    /* RESULT & MODEL */
+    .result-msg { display:none; margin-top:14px; padding:10px 16px; border-radius:8px; font-size:13px; font-weight:600; line-height:1.65; }
+    .result-msg.good { background:rgba(78,85,29,.08); border:1px solid rgba(78,85,29,.25); color:var(--floresta); }
+    .result-msg.try-again { background:rgba(211,109,41,.08); border:1px solid rgba(211,109,41,.25); color:var(--pitomba); }
+    .model-ans { display:none; background:rgba(38,91,139,.07); border-left:3px solid var(--level-color); border-radius:0 6px 6px 0; padding:10px 14px; font-size:14px; color:var(--level-color); line-height:1.65; margin-bottom:14px; }
+
+    /* WRITING */
+    .writing-questions { list-style:none; margin:16px 0 20px; }
+    .writing-questions li { font-size:14px; color:var(--texto); padding:6px 0; padding-left:18px; position:relative; }
+    .writing-questions li::before { content:'→'; position:absolute; left:0; color:var(--erva-doce); font-weight:700; }
+    .expr-bank { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px; }
+    .expr-chip { background:var(--off-white); border:1px solid var(--light-gray); border-radius:5px; padding:3px 10px; font-size:13px; font-weight:700; color:var(--cobalto); }
+
+    /* WARNING BOX */
+    .warning-box { background:#FFF8EC; border:1.5px solid rgba(255,185,74,.5); border-radius:10px; padding:12px 16px; font-size:13px; color:var(--musgo); margin-bottom:20px; }
+    .warning-box strong { color:var(--pitomba); }
+
+    /* CONTACT BOX */
+    .contact-box { background:var(--baunilha2); border:1px solid rgba(211,109,41,.20); border-radius:12px; padding:28px 32px; }
+    .contact-box p { font-size:14px; color:var(--texto); line-height:1.65; }
+
+    @media (max-width:700px) {
+      .topbar, .page-hero, .main { padding-left:20px; padding-right:20px; }
+      .exercise-block, .text-reader { padding:24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB">
+    </a>
+  </div>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A2</div>
+    <span class="topbar-name">Iniciante II</span>
+  </div>
+  <a href="../a2/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">Grammar · A2</div>
+  <h1>Imperativo Afirmativo<br><em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">e Negativo</em></h1>
+  <p>Learn to give instructions and advice using the imperative — <em style="color:white; font-weight:600;">você, nós</em> and <em style="color:white; font-weight:600;">vocês</em> — through an authentic text about starting at the gym.</p>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Imperativo</span>
+    <span class="meta-pill"><span class="dot"></span>Primeiro dia na academia</span>
+    <span class="meta-pill"><span class="dot"></span>Cia Athletica / Netshoes Blog, 2026</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1: LANGUAGE REFERENCE -->
+  <div class="sec-header">
+    <div class="sec-icon icon-ref">📘</div>
+    <div>
+      <h2>Language Reference</h2>
+      <p>Read before starting — you will use these forms throughout</p>
+    </div>
+  </div>
+
+  <div class="ref-table-wrap">
+    <table class="ref-table">
+      <thead>
+        <tr>
+          <th>Infinitive</th>
+          <th>você</th>
+          <th>nós</th>
+          <th>vocês</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>-ar → falar</td>
+          <td>fale</td>
+          <td>falemos</td>
+          <td>falem</td>
+        </tr>
+        <tr>
+          <td>-er → comer</td>
+          <td>coma</td>
+          <td>comamos</td>
+          <td>comam</td>
+        </tr>
+        <tr>
+          <td>-ir → partir</td>
+          <td>parta</td>
+          <td>partamos</td>
+          <td>partam</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4"><strong>Negative:</strong> add <strong>não</strong> before the verb — <em>Não fale. / Não comam.</em> &nbsp;·&nbsp; ⚠️ There is no first person singular imperative (we never say <em>"fale eu"</em>).</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- VOCAB TABLE -->
+  <div style="margin-top:20px; margin-bottom:0;">
+    <div class="sec-header" style="margin-bottom:14px;">
+      <div class="sec-icon icon-ref">📋</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Key words from the text</p>
+      </div>
+    </div>
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead>
+          <tr><th>Português</th><th>English</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>academia</td><td>gym</td></tr>
+          <tr><td>treino</td><td>workout / training session</td></tr>
+          <tr><td>professor</td><td>trainer / instructor</td></tr>
+          <tr><td>aquecimento</td><td>warm-up</td></tr>
+          <tr><td>pesos</td><td>weights</td></tr>
+          <tr><td>leve(s)</td><td>light</td></tr>
+          <tr><td>pesado(s)</td><td>heavy</td></tr>
+          <tr><td>descansar / descanse</td><td>to rest</td></tr>
+          <tr><td>se recuperar</td><td>to recover</td></tr>
+          <tr><td>resultado(s)</td><td>result(s)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- SECTION 2: TEXT -->
+  <div class="sec-header">
+    <div class="sec-icon icon-text">📖</div>
+    <div>
+      <h2>Leitura</h2>
+      <p>Read carefully — notice how the imperative is used</p>
+    </div>
+  </div>
+
+  <div class="text-reader">
+    <div class="text-title">Primeiro dia na academia</div>
+    <div class="text-byline">Adaptado de Cia Athletica Blog / Netshoes Blog, 2026</div>
+
+    <p>Você vai começar a academia? Ótimo! Veja algumas dicas importantes.</p>
+
+    <p>Antes de tudo, <strong>converse</strong> com um professor. Ele vai montar um treino para você. <strong>Comece</strong> com exercícios leves e <strong>use</strong> pesos pequenos. <strong>Beba</strong> água antes, durante e depois do treino. <strong>Descanse</strong> bem entre os dias de treino — o corpo precisa de tempo para se recuperar.</p>
+
+    <p>Mas atenção: <strong>não use</strong> pesos muito pesados no começo. <strong>Não pule</strong> o aquecimento antes de treinar. <strong>Não treine</strong> todos os dias — três vezes por semana é o ideal para quem está começando.</p>
+
+    <p>Com paciência e disciplina, os resultados aparecem!</p>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- SECTION 3: EXERCISES -->
+  <div class="sec-header">
+    <div class="sec-icon icon-ex">✏️</div>
+    <div>
+      <h2>Exercises</h2>
+      <p>Complete after your lesson and send your answers to your teacher</p>
+    </div>
+  </div>
+
+  <!-- PART 1: READING COMPREHENSION -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">1</div>
+      <div>
+        <h3>Reading comprehension</h3>
+        <p>Answer in Portuguese based on the text</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Answer each question in Portuguese. Short answers are fine.</p>
+
+    <div style="margin-bottom:4px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">1. Qual é a primeira coisa que o texto recomenda fazer?</label>
+      <textarea class="open-textarea" placeholder="A primeira coisa é..."></textarea>
+      <button class="show-model-btn" onclick="showModel('r1')">Show model answer</button>
+      <div class="model-ans" id="model-r1">Conversar com um professor.</div>
+    </div>
+    <div style="margin-bottom:4px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">2. O texto diz para usar pesos pesados ou leves no primeiro dia?</label>
+      <textarea class="open-textarea" placeholder="O texto diz para usar pesos..."></textarea>
+      <button class="show-model-btn" onclick="showModel('r2')">Show model answer</button>
+      <div class="model-ans" id="model-r2">Leves.</div>
+    </div>
+    <div style="margin-bottom:4px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">3. Quantas vezes por semana o iniciante deve treinar?</label>
+      <textarea class="open-textarea" placeholder="O iniciante deve treinar..."></textarea>
+      <button class="show-model-btn" onclick="showModel('r3')">Show model answer</button>
+      <div class="model-ans" id="model-r3">Três vezes por semana.</div>
+    </div>
+    <div style="margin-bottom:4px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">4. O que o corpo precisa entre os dias de treino?</label>
+      <textarea class="open-textarea" placeholder="O corpo precisa de..."></textarea>
+      <button class="show-model-btn" onclick="showModel('r4')">Show model answer</button>
+      <div class="model-ans" id="model-r4">Precisa de tempo para se recuperar.</div>
+    </div>
+  </div>
+
+  <!-- PART 2 EX 1: COMPLETE WITH IMPERATIVE -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">2</div>
+      <div>
+        <h3>Complete with the imperative</h3>
+        <p>Read the situation and write the correct form</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Read each situation and write the correct imperative form of the verb in brackets. The person(s) addressed and the type (affirmative/negative) are indicated.</p>
+
+    <ul class="blanks-list" id="imp-list">
+      <li>
+        <span class="item-num">1.</span>
+        <span>O aluno quer começar sem aquecer. →</span>
+        <input class="blank-input" data-answer="não pule" placeholder="___________">
+        <span>sem aquecer!</span>
+        <span class="item-hint">(pular — você, negativo)</span>
+      </li>
+      <li>
+        <span class="item-num">2.</span>
+        <span>A aluna está com sede. →</span>
+        <input class="blank-input" data-answer="beba" placeholder="___________">
+        <span>água!</span>
+        <span class="item-hint">(beber — você, afirmativo)</span>
+      </li>
+      <li>
+        <span class="item-num">3.</span>
+        <span>O aluno quer usar carga muito alta. →</span>
+        <input class="blank-input" data-answer="não exagere" placeholder="___________">
+        <span>na carga!</span>
+        <span class="item-hint">(exagerar — você, negativo)</span>
+      </li>
+      <li>
+        <span class="item-num">4.</span>
+        <span>A aluna não sabe se a postura está correta. →</span>
+        <input class="blank-input" data-answer="verifique" placeholder="___________">
+        <span>a postura com o professor!</span>
+        <span class="item-hint">(verificar — você, afirmativo)</span>
+      </li>
+      <li>
+        <span class="item-num">5.</span>
+        <span>Os alunos estão conversando durante o exercício. →</span>
+        <input class="blank-input" data-answer="não conversem" placeholder="___________">
+        <span>durante o exercício!</span>
+        <span class="item-hint">(conversar — vocês, negativo)</span>
+      </li>
+      <li>
+        <span class="item-num">6.</span>
+        <span>Os alunos chegaram para a aula. →</span>
+        <input class="blank-input" data-answer="peguem" placeholder="___________">
+        <span>as fichas de treino antes de começar!</span>
+        <span class="item-hint">(pegar — vocês, afirmativo)</span>
+      </li>
+      <li>
+        <span class="item-num">7.</span>
+        <span>O grupo quer começar pesado no primeiro dia. →</span>
+        <input class="blank-input" data-answer="comecemos" placeholder="___________">
+        <span>devagar!</span>
+        <span class="item-hint">(começar — nós, afirmativo)</span>
+      </li>
+      <li>
+        <span class="item-num">8.</span>
+        <span>O grupo não quer considerar o descanso entre os exercícios. →</span>
+        <input class="blank-input" data-answer="não consideremos" placeholder="___________">
+        <span>o descanso!</span>
+        <span class="item-hint">(considerar — nós, negativo)</span>
+      </li>
+    </ul>
+    <button class="check-btn" onclick="checkImp()">✓ Check answers</button>
+    <div id="imp-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 EX 2: TRANSFORM -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">3</div>
+      <div>
+        <h3>Transform the sentences</h3>
+        <p>Change affirmative → negative or negative → affirmative</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Rewrite each sentence, changing affirmative to negative or negative to affirmative. Keep the same subject.</p>
+
+    <div class="warning-box">⚠️ Some transformed sentences will sound logically odd — that's intentional. Focus on the grammar, not the meaning.</div>
+
+    <ul class="transform-list" id="transform-list">
+      <li>
+        <p class="transform-prompt">1. <strong>Treine</strong> todos os dias.</p>
+        <input class="transform-input" data-answer="não treine todos os dias" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <p class="transform-prompt">2. <strong>Não use</strong> pesos pesados no início.</p>
+        <input class="transform-input" data-answer="use pesos pesados no inicio|use pesos pesados no início" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <p class="transform-prompt">3. <strong>Beba</strong> água durante o treino.</p>
+        <input class="transform-input" data-answer="não beba água durante o treino|nao beba agua durante o treino" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <p class="transform-prompt">4. <strong>Não pule</strong> o aquecimento.</p>
+        <input class="transform-input" data-answer="pule o aquecimento" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <p class="transform-prompt">5. <strong>Respeite</strong> os seus limites.</p>
+        <input class="transform-input" data-answer="não respeite os seus limites" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <p class="transform-prompt">6. <strong>Não exagere</strong> nos exercícios.</p>
+        <input class="transform-input" data-answer="exagere nos exercicios|exagere nos exercícios" placeholder="→ ____________________________">
+      </li>
+    </ul>
+    <button class="check-btn" onclick="checkTransform()">✓ Check answers</button>
+    <div id="transform-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 EX 3: REORDER + CONJUGATE -->
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">4</div>
+      <div>
+        <h3>Put the words in order + conjugate</h3>
+        <p>Rewrite the sentence in the correct order, conjugating the verb</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Rearrange the words into a correct sentence and conjugate the verb in brackets in the imperative for the subject indicated. Example: <em>professor / com / um / [conversar — você] → Converse com um professor.</em></p>
+
+    <ul class="reorder-list" id="reorder-list">
+      <li>
+        <div class="scrambled">1. aquecimento / antes / o / de / <span>[fazer — você]</span> / treinar</div>
+        <input class="transform-input" data-answer="faça o aquecimento antes de treinar" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <div class="scrambled">2. pesos / não / no / <span>[usar — você]</span> / pesados / início</div>
+        <input class="transform-input" data-answer="não use pesos pesados no início|nao use pesos pesados no inicio" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <div class="scrambled">3. com / <span>[começar — nós]</span> / exercícios / leves</div>
+        <input class="transform-input" data-answer="comecemos com exercícios leves|comecemos com exercicios leves" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <div class="scrambled">4. todos / não / os / <span>[treinar — vocês]</span> / dias</div>
+        <input class="transform-input" data-answer="não treinem todos os dias|nao treinem todos os dias" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <div class="scrambled">5. água / o / durante / <span>[beber — você]</span> / treino</div>
+        <input class="transform-input" data-answer="beba água durante o treino|beba agua durante o treino" placeholder="→ ____________________________">
+      </li>
+      <li>
+        <div class="scrambled">6. o / não / <span>[pular — nós]</span> / descanso</div>
+        <input class="transform-input" data-answer="não pulemos o descanso|nao pulemos o descanso" placeholder="→ ____________________________">
+      </li>
+    </ul>
+    <button class="check-btn" onclick="checkReorder()">✓ Check answers</button>
+    <div id="reorder-result" class="result-msg"></div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- PART 3: WRITTEN PRODUCTION -->
+  <div class="sec-header">
+    <div class="sec-icon icon-write">✍️</div>
+    <div>
+      <h2>Produção escrita</h2>
+      <p>Use the imperative to give instructions</p>
+    </div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="ex-header">
+      <div class="ex-num">5</div>
+      <div>
+        <h3>Um esporte ou atividade que você conhece</h3>
+        <p>5–7 sentences · 3 affirmative + 2 negative imperatives · address as você</p>
+      </div>
+    </div>
+    <p class="ex-instruction">Think of a sport, physical activity, or hobby you know well. Write 5–7 sentences giving instructions to a friend who wants to try it for the first time. Use at least <strong>three affirmative</strong> and <strong>two negative</strong> imperatives, addressing your friend as <strong>você</strong>.</p>
+
+    <ul class="writing-questions">
+      <li>What should your friend do first?</li>
+      <li>What equipment or preparation is needed?</li>
+      <li>What are the most important rules or tips?</li>
+      <li>What should your friend avoid doing?</li>
+    </ul>
+
+    <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#bbb; margin-bottom:10px;">Forms to use</p>
+    <div class="expr-bank">
+      <span class="expr-chip">fale / comece / use</span>
+      <span class="expr-chip">não pule / não exagere</span>
+      <span class="expr-chip">beba / descanse / verifique</span>
+    </div>
+
+    <textarea class="open-textarea" style="min-height:220px;" placeholder="Escreva aqui em português... (5–7 frases com imperativo)"></textarea>
+  </div>
+
+  <!-- CONTACT / SUBMIT -->
+  <div class="contact-box">
+    <p>When you're done, <strong>send your answers to your teacher.</strong> She will review and give you personalized feedback before your next lesson.</p>
+  </div>
+
+  <div style="margin-top:40px; padding:24px 28px; background:#F2F0E3; border-radius:14px; border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px; font-weight:700; color:#265B8B; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1; min-width:150px; padding:10px 14px; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; font-family:'Manrope',sans-serif; font-size:14px; outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2; min-width:200px; padding:10px 14px; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; font-family:'Manrope',sans-serif; font-size:14px; outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C; color:white; border:none; border-radius:10px; padding:11px 22px; font-family:'Manrope',sans-serif; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px; font-size:12px; color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none; margin-top:16px; background:#EAF5EE; border-radius:12px; padding:22px 26px;">
+    <div style="font-size:15px; font-weight:700; color:#2E7D52; margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px; color:#3C3C21; line-height:1.9;"></div>
+    <div style="margin-top:14px; font-size:13px; color:#666; border-top:1px solid #c3e6d0; padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none; margin-top:14px; background:#FAEAEA; border-radius:8px; padding:12px 16px; font-size:13px; color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+/* NORMALISE */
+function norm(s) {
+  return s.trim().toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ');
+}
+
+/* Show model answer */
+function showModel(id) {
+  var panel = document.getElementById('model-' + id);
+  panel.previousElementSibling.style.display = 'none';
+  panel.style.display = 'block';
+}
+
+/* EX 2 — Imperative completion */
+var impAnswers = [
+  '1. Não pule', '2. Beba', '3. Não exagere', '4. Verifique',
+  '5. Não conversem', '6. Peguem', '7. Comecemos', '8. Não consideremos'
+];
+
+function checkImp() {
+  var inputs = document.querySelectorAll('#imp-list .blank-input');
+  var correct = 0;
+  inputs.forEach(function(inp) {
+    var accepted = inp.dataset.answer.split('|').map(norm);
+    var ok = accepted.indexOf(norm(inp.value)) !== -1;
+    inp.classList.toggle('correct-input', ok);
+    inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+    if (ok) correct++;
+  });
+  var allOk = correct === inputs.length;
+  var html = '<div style="font-weight:700;margin-bottom:10px;">'
+           + (allOk ? '✓ All 8 correct!' : correct + ' of ' + inputs.length + ' correct — answers:')
+           + '</div>';
+  impAnswers.forEach(function(a) { html += '<div style="margin-bottom:4px;font-weight:400;">' + a + '</div>'; });
+  var el = document.getElementById('imp-result');
+  el.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  el.innerHTML = html;
+  el.style.display = 'block';
+}
+
+/* EX 3 — Transform */
+var transformAnswers = [
+  '1. Não treine todos os dias.',
+  '2. Use pesos pesados no início.',
+  '3. Não beba água durante o treino.',
+  '4. Pule o aquecimento.',
+  '5. Não respeite os seus limites.',
+  '6. Exagere nos exercícios.'
+];
+
+function checkInputList(listId, resultId, answerKey) {
+  var inputs = document.querySelectorAll('#' + listId + ' .transform-input');
+  var correct = 0;
+  inputs.forEach(function(inp) {
+    if (!inp.value.trim()) return;
+    var accepted = inp.dataset.answer.split('|').map(norm);
+    var ok = accepted.indexOf(norm(inp.value)) !== -1;
+    inp.classList.toggle('ok', ok);
+    inp.classList.toggle('err', !ok);
+    if (ok) correct++;
+  });
+  var allOk = correct === inputs.length;
+  var html = '<div style="font-weight:700;margin-bottom:10px;">'
+           + (allOk ? '✓ All ' + inputs.length + ' correct!' : correct + ' of ' + inputs.length + ' correct — answers:')
+           + '</div>';
+  answerKey.forEach(function(a) { html += '<div style="margin-bottom:4px;font-weight:400;">' + a + '</div>'; });
+  var el = document.getElementById(resultId);
+  el.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  el.innerHTML = html;
+  el.style.display = 'block';
+}
+
+function checkTransform() { checkInputList('transform-list', 'transform-result', transformAnswers); }
+
+/* EX 4 — Reorder */
+var reorderAnswers = [
+  '1. Faça o aquecimento antes de treinar.',
+  '2. Não use pesos pesados no início.',
+  '3. Comecemos com exercícios leves.',
+  '4. Não treinem todos os dias.',
+  '5. Beba água durante o treino.',
+  '6. Não pulemos o descanso.'
+];
+
+function checkReorder() { checkInputList('reorder-list', 'reorder-result', reorderAnswers); }
+
+/* FORMSPREE SUBMIT */
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor = '#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor = '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| .*/, '').trim();
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = 'Campo ' + (idx + 1);
+    var prev = ta.previousElementSibling;
+    if (prev && prev.tagName === 'LABEL') label = prev.textContent.trim().substring(0, 80);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx + 1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx + 1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.querySelector('[style*="F2F0E3"]').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html', '');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+
+</body>
+</html>
