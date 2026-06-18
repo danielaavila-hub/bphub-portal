@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Primeira Vez no Brasil? | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+  .card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(60,60,33,.07); }
+  .section-title { font-family: 'Trirong', serif; font-size: 1.05rem; color: var(--floresta); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 32px 0 10px; padding-left: 12px; border-left: 3px solid var(--terracota); }
+  .card-title { font-family: 'Trirong', serif; font-size: 1.1rem; color: var(--terracota); margin-bottom: 14px; font-weight: 600; }
+  .instr { background: var(--baunilha); border-radius: 8px; padding: 12px 16px; font-size: .87rem; margin-bottom: 16px; line-height: 1.6; }
+  .instr strong { color: var(--terracota); }
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+  .dialogue { margin: 16px 0; }
+  .dialogue-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--giz); align-items: baseline; }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker { font-weight: 700; color: var(--floresta); font-size: .85rem; min-width: 28px; text-transform: uppercase; }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th { background: var(--floresta); color: #fff; padding: 10px 14px; text-align: left; font-family: 'Trirong', serif; font-weight: 600; }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .gram-table .hl { color: var(--telha); font-weight: 700; }
+  .phon-box { background: var(--rosa-cha); border-left: 4px solid var(--goiaba); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cult-box { background: #EEF4EC; border-left: 4px solid var(--floresta); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ex-num { display: inline-block; background: var(--terracota); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .ex-title { font-family: 'Trirong', serif; font-size: 1rem; color: var(--musgo); font-weight: 600; display: flex; align-items: center; margin-bottom: 14px; }
+  .fill-line { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; line-height: 2; font-size: .97rem; }
+  .fill-line input { border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: .97rem; color: var(--musgo); padding: 2px 6px; width: 120px; text-align: center; outline: none; transition: border-color .2s; }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+  .word-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--erva-doce); border-radius: 10px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 200px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn { background: var(--giz); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 6px 13px; font-family: 'Manrope', sans-serif; font-size: .84rem; font-weight: 700; color: var(--musgo); cursor: pointer; transition: background .15s, border-color .15s; }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+  .match-select { width: 100%; border: 2px solid var(--erva-doce); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--musgo); background: #fff; outline: none; transition: border-color .2s; cursor: pointer; }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+  .prod-textarea { width: 100%; border: 2px solid var(--erva-doce); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; color: var(--musgo); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; margin-top: 10px; }
+  .prod-textarea:focus { border-color: var(--terracota); }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check { background: var(--terracota); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 8px; padding: 10px 18px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge { display: none; align-items: center; gap: 6px; background: var(--baunilha); border-radius: 8px; padding: 10px 16px; font-size: .88rem; font-weight: 700; color: var(--musgo); }
+  .score-badge.visible { display: inline-flex; }
+  @media(max-width:600px) { .card { padding: 20px 18px; } .word-item { flex-direction: column; align-items: flex-start; } }
+  .vir { color: var(--telha); font-weight: 800; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: var(--giz); border-bottom: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level { background: var(--floresta); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; font-family: 'Manrope', sans-serif; }
+  .topbar-back { font-size: 12px; color: #999; text-decoration: none; transition: color .2s; }
+  .topbar-back:hover { color: var(--floresta); }
+  .page-hero { background: var(--floresta); padding: 40px 28px 36px; }
+  .page-hero h1 { font-family: 'Trirong', serif; font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 300; line-height: 1.3; margin-bottom: 16px; color: #fff; }
+  .page-attribution { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Manrope', sans-serif; line-height: 1.7; }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Iniciante I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Primeira Vez no Brasil?</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 38</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Falar de viagens e motivos de visita</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> Is this person's first time in Brazil? What reason do they give for coming? Is it the reason you'd expect?
+    </div>
+    <div class="audio-label">Língua da Gente · Episode 38</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/beginning-38-first-time-in-brazil/id1020665354?i=1000371652091">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/beginning-38-first-time-in-brazil/id1020665354?i=1000371652091" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Read along</strong> while listening. Notice the two highlighted forms of <em>vir</em> (to come) — they look different from the infinitive and from each other.
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Essa é a primeira vez que você <span class="vir">vem</span> ao Brasil?</div>
+          <div class="line-en">Is this the first time that you have come to Brazil?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">É.</div>
+          <div class="line-en">It is.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Você <span class="vir">veio</span> para trabalhar ou para estudar?</div>
+          <div class="line-en">Did you come to work or to study?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Eu <span class="vir">vim</span> para as praias e para as caipirinhas.</div>
+          <div class="line-en">I came for the beaches and for the caipirinhas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <!-- Grammar 1: VIR -->
+  <div class="card">
+    <div class="card-title">📖 Vir — to come (irregular verb)</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">This dialogue uses three forms of <em>vir</em>: <em>vem</em> (present), <em>veio</em> (preterite — you/he/she came), and <em>vim</em> (preterite — I came). <em>Vir</em> is one of the most irregular verbs in Portuguese — every tense looks quite different from the infinitive.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Pronoun</th>
+        <th>Presente</th>
+        <th>Pretérito perfeito</th>
+      </tr>
+      <tr>
+        <td>eu</td>
+        <td><span class="pt">venho</span></td>
+        <td><span class="pt vir">vim</span></td>
+      </tr>
+      <tr>
+        <td>você / ele / ela</td>
+        <td><span class="pt vir">vem</span></td>
+        <td><span class="pt vir">veio</span></td>
+      </tr>
+      <tr>
+        <td>nós</td>
+        <td><span class="pt">vimos</span></td>
+        <td><span class="pt vir">viemos</span></td>
+      </tr>
+      <tr>
+        <td>eles / vocês</td>
+        <td><span class="pt">vêm</span></td>
+        <td><span class="pt vir">vieram</span></td>
+      </tr>
+    </table>
+
+    <div class="phon-box">
+      <strong>🔊 Vem vs. vêm</strong>
+      Notice the accent: <em>vem</em> (he/she/you comes) vs. <em>vêm</em> (they/you all come). In speech they're pronounced slightly differently — <em>vem</em> is open, <em>vêm</em> is closed — but both are common and context usually makes the subject clear. The preterite forms <em>vim / veio / viemos / vieram</em> are the most important ones to practice for past-tense conversations.
+    </div>
+
+    <div class="cult-box">
+      <strong>💡 Vim vs. fui — "I came" vs. "I went"</strong>
+      Both translate past movement, but the perspective differs. <em>Vim</em> (I came) = movement toward where the speaker is now or where the listener is. <em>Fui</em> (I went) = movement away from the speaker's current position. So a visitor in Brazil would say <em>"vim ao Brasil"</em> — I came to Brazil (I'm here now). Back home they'd say <em>"fui ao Brasil"</em> — I went to Brazil (past trip, now I'm back). You've already seen <em>foi</em> in Episode 31 ("ele foi para São Paulo").
+    </div>
+  </div>
+
+  <!-- Grammar 2: Para + purpose -->
+  <div class="card">
+    <div class="card-title">📖 Para — expressing purpose and destination</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A asks <em>"você veio <strong>para</strong> trabalhar ou <strong>para</strong> estudar?"</em> and B answers <em>"vim <strong>para</strong> as praias e <strong>para</strong> as caipirinhas."</em> <em>Para</em> expresses both purpose (in order to) and destination (for, to).</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Structure</th>
+        <th>Use</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td><span class="vir">para</span> + infinitivo</td>
+        <td><span class="en">purpose — in order to</span></td>
+        <td><span class="pt">Vim <span class="vir">para trabalhar</span>. <span class="en">(I came to / in order to work.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="vir">para</span> + noun</td>
+        <td><span class="en">destination / beneficiary — for</span></td>
+        <td><span class="pt">Vim <span class="vir">para as praias</span>. <span class="en">(I came for the beaches.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="vir">para</span> + place</td>
+        <td><span class="en">destination — to</span></td>
+        <td><span class="pt">Ele foi <span class="vir">para São Paulo</span>. <span class="en">(He went to São Paulo.) — Ep. 31</span></span></td>
+      </tr>
+    </table>
+
+    <p style="font-size:.88rem;color:#666;margin-top:12px;">B's answer <em>"para as praias e para as caipirinhas"</em> is playful — instead of answering the expected "work or study", the visitor gives a more fun, honest reason. This kind of humorous deflection is culturally very natural in Brazilian conversation.</p>
+  </div>
+
+  <!-- Grammar 3: Primeira vez que + key expressions -->
+  <div class="card">
+    <div class="card-title">📖 Primeira vez que… + Useful travel expressions</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A opens with <em>"Essa é a <strong>primeira vez que</strong> você vem ao Brasil?"</em> — a very common pattern for asking about someone's first experience of something.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Portuguese</th>
+        <th>English</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><span class="pt">Essa é a <span class="vir">primeira vez</span> que você vem?</span></td>
+        <td><span class="en">Is this your first time coming?</span></td>
+        <td><span class="note">Literally: "Is this the first time that you come?" — present after <em>que</em> here</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">É a <span class="vir">segunda vez</span> que venho.</span></td>
+        <td><span class="en">It's my second time coming.</span></td>
+        <td><span class="note">Use ordinals: primeira, segunda, terceira vez…</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Você veio <span class="vir">para trabalhar</span>?</span></td>
+        <td><span class="en">Did you come to work?</span></td>
+        <td><span class="note"><em>Para</em> + infinitive = purpose</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Vim <span class="vir">para as praias</span>.</span></td>
+        <td><span class="en">I came for the beaches.</span></td>
+        <td><span class="note"><em>Para</em> + noun = for (reason/attraction)</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">É.</span></td>
+        <td><span class="en">It is. / Yes, it is.</span></td>
+        <td><span class="note">Ultra-short affirmative — just the verb <em>é</em> alone. Very common in spoken Brazilian Portuguese.</span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box" style="margin-top:16px;">
+      <strong>🇧🇷 A caipirinha</strong>
+      B's answer is a gentle joke — but caipirinhas really are one of Brazil's most iconic cultural exports. Made with <em>cachaça</em> (sugarcane spirit), lime, and sugar, the caipirinha is Brazil's national cocktail. The name comes from <em>caipira</em>, a word for a rural person from the interior. It's inseparable from Brazilian social life — you'll find it at every <em>churrasco</em>, beach bar, and festive gathering. Other regional variants use vodka (<em>caipivodka</em>) or sake (<em>caipisake</em>), especially in São Paulo.
+    </div>
+  </div>
+
+  <p class="section-title">Step 4 — Practice</p>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> VIR — Which form? Quiz</div>
+    <div class="instr">Choose the correct form of <em>vir</em> for each sentence.</div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">Eu ___ ao Brasil de avião.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','b')">veio</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','b')">vim</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','b')">vem</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Vim</em> = I came (preterite, 1st person singular). <em>Vim ao Brasil</em> = I came to Brazil.</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">A professora ___ de Portugal.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','a')">veio</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','a')">vim</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','a')">viemos</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Veio</em> = he/she/you came (preterite, 3rd person singular). <em>A professora veio</em> = The teacher came.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Essa é a primeira vez que você ___ aqui?</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','b')">vim</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','b')">vem</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','b')">veio</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! After <em>"é a primeira vez que"</em> (it's the first time that…), Brazilian Portuguese uses the present tense: <em>vem</em> (you come). This is a fixed conversational pattern.</span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">Nós ___ juntos de São Paulo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','c')">vieram</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','c')">vim</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','c')">viemos</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Viemos</em> = we came (preterite, 1st person plural). <em>Nós viemos juntos</em> = We came together.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks with the missing words.<br>
+      <strong>Word bank:</strong> <em>primeira · vem · veio · vim · praias</em>
+    </div>
+    <div class="fill-line">— Essa é a <input type="text" id="f1" placeholder="___"> vez que você <input type="text" id="f2" placeholder="___"> ao Brasil?</div>
+    <div class="fill-line">— É.</div>
+    <div class="fill-line">— Você <input type="text" id="f3" placeholder="___"> para trabalhar ou para estudar?</div>
+    <div class="fill-line">— Eu <input type="text" id="f4" placeholder="___"> para as <input type="text" id="f5" placeholder="___"> e para as caipirinhas.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> Para — purpose or destination?</div>
+    <div class="instr">
+      Select whether <em>para</em> expresses <strong>purpose</strong> (in order to do something) or <strong>destination/reason</strong> (for a place or thing) in each sentence.
+    </div>
+    <div style="display:grid;gap:14px;margin-top:8px;">
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;"><em>"Vim para estudar português."</em></p>
+        <select class="match-select" id="ms1">
+          <option value="">— escolha —</option>
+          <option value="a">purpose (in order to)</option>
+          <option value="b">destination / reason (for)</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;"><em>"Vim para as praias."</em></p>
+        <select class="match-select" id="ms2">
+          <option value="">— escolha —</option>
+          <option value="a">purpose (in order to)</option>
+          <option value="b">destination / reason (for)</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;"><em>"Ela foi para São Paulo trabalhar."</em></p>
+        <select class="match-select" id="ms3">
+          <option value="">— escolha —</option>
+          <option value="a">purpose (in order to)</option>
+          <option value="b">destination / reason (for)</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;"><em>"Comprei um presente para a minha mãe."</em></p>
+        <select class="match-select" id="ms4">
+          <option value="">— escolha —</option>
+          <option value="a">purpose (in order to)</option>
+          <option value="b">destination / reason (for a person)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Por que você veio?</div>
+    <div class="instr"><strong>Write in Portuguese.</strong><br>Imagine you've just arrived in Brazil (or another country you'd love to visit). Write 4–5 sentences explaining: Is it your first time? How did you get there (<em>vim de avião / de carro…</em>)? Why did you come — <em>para</em> + infinitive and/or <em>para</em> + noun? What are you most excited about?</div>
+    <textarea class="prod-textarea" placeholder="Example:&#10;Essa é a minha segunda vez no Brasil. Vim de avião de Nova York. Vim para aprender português e para conhecer Salvador. Quero muito ir às praias e comer acarajé. Na primeira vez, vim só para o Rio."></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var match = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(match && match[1] === chosen) { b.classList.add(chosen === correct ? 'correct' : 'wrong'); }
+      if(match && match[1] === correct && chosen !== correct) { b.classList.add('correct'); }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      fb.textContent = '❌ Not quite — try again.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  var fillAnswers = { f1:'primeira', f2:'vem', f3:'veio', f4:'vim', f5:'praias' };
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ã/g,'a').replace(/õ/g,'o'); }
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  var matchAnswers = { ms1:'a', ms2:'b', ms3:'b', ms4:'b' };
+  function checkMatch(){
+    var score = 0;
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+
+<script>
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {}; var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = ''; var parent = ta.closest('[class]');
+    if (parent) { var clone = parent.cloneNode(true); clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); }); label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80); }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+  .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      localStorage.setItem('bphub_done_' + location.pathname.split('/').pop().replace('.html',''), '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; }
+  }).catch(function() { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
