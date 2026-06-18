@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Cadê as Chaves? | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+  .card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(60,60,33,.07); }
+  .section-title { font-family: 'Trirong', serif; font-size: 1.05rem; color: var(--floresta); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 32px 0 10px; padding-left: 12px; border-left: 3px solid var(--terracota); }
+  .card-title { font-family: 'Trirong', serif; font-size: 1.1rem; color: var(--terracota); margin-bottom: 14px; font-weight: 600; }
+  .instr { background: var(--baunilha); border-radius: 8px; padding: 12px 16px; font-size: .87rem; margin-bottom: 16px; line-height: 1.6; }
+  .instr strong { color: var(--terracota); }
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+  .dialogue { margin: 16px 0; }
+  .dialogue-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--giz); align-items: baseline; }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker { font-weight: 700; color: var(--floresta); font-size: .85rem; min-width: 28px; text-transform: uppercase; }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th { background: var(--floresta); color: #fff; padding: 10px 14px; text-align: left; font-family: 'Trirong', serif; font-weight: 600; }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .gram-table .hl { color: var(--telha); font-weight: 700; }
+  .phon-box { background: var(--rosa-cha); border-left: 4px solid var(--goiaba); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cult-box { background: #EEF4EC; border-left: 4px solid var(--floresta); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ex-num { display: inline-block; background: var(--terracota); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .ex-title { font-family: 'Trirong', serif; font-size: 1rem; color: var(--musgo); font-weight: 600; display: flex; align-items: center; margin-bottom: 14px; }
+  .fill-line { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; line-height: 2; font-size: .97rem; }
+  .fill-line input { border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: .97rem; color: var(--musgo); padding: 2px 6px; width: 130px; text-align: center; outline: none; transition: border-color .2s; }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+  .word-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--erva-doce); border-radius: 10px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 200px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn { background: var(--giz); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 6px 13px; font-family: 'Manrope', sans-serif; font-size: .84rem; font-weight: 700; color: var(--musgo); cursor: pointer; transition: background .15s, border-color .15s; }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+  .match-select { width: 100%; border: 2px solid var(--erva-doce); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--musgo); background: #fff; outline: none; transition: border-color .2s; cursor: pointer; }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+  .prod-textarea { width: 100%; border: 2px solid var(--erva-doce); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; color: var(--musgo); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; margin-top: 10px; }
+  .prod-textarea:focus { border-color: var(--terracota); }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check { background: var(--terracota); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 8px; padding: 10px 18px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge { display: none; align-items: center; gap: 6px; background: var(--baunilha); border-radius: 8px; padding: 10px 16px; font-size: .88rem; font-weight: 700; color: var(--musgo); }
+  .score-badge.visible { display: inline-flex; }
+  @media(max-width:600px) { .card { padding: 20px 18px; } .word-item { flex-direction: column; align-items: flex-start; } }
+  .loc { color: var(--telha); font-weight: 800; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: var(--giz); border-bottom: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level { background: var(--floresta); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; font-family: 'Manrope', sans-serif; }
+  .topbar-back { font-size: 12px; color: #999; text-decoration: none; transition: color .2s; }
+  .topbar-back:hover { color: var(--floresta); }
+  .page-hero { background: var(--floresta); padding: 40px 28px 36px; }
+  .page-hero h1 { font-family: 'Trirong', serif; font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 300; line-height: 1.3; margin-bottom: 16px; color: #fff; }
+  .page-attribution { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Manrope', sans-serif; line-height: 1.7; }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Iniciante I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Cadê as Chaves?</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 35</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Localizar objetos e indicar lugares</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> Someone is looking for two things. What are they? Where is each one? Listen for location words — they're the key to this episode.
+    </div>
+    <div class="audio-label">Língua da Gente · Episode 35</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/beginning-35-where-are-my-keys/id1020665354?i=1000371652080">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/beginning-35-where-are-my-keys/id1020665354?i=1000371652080" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Read along</strong> while listening again. Notice the highlighted location expressions — they tell you exactly where things are.
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Cadê as chaves?</div>
+          <div class="line-en">Where are my keys?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Na estante, <span class="loc">lá em baixo</span> daqueles livros.</div>
+          <div class="line-en">On the bookshelf, underneath those books.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">E a carteira, não tô vendo ela?</div>
+          <div class="line-en">And my wallet, I can't see it.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Você deixou <span class="loc">em cima da</span> mesa na cozinha.</div>
+          <div class="line-en">You left it on top of the kitchen table.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <!-- Grammar 1: Preposições de lugar -->
+  <div class="card">
+    <div class="card-title">📖 Preposições de lugar — Location expressions</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B uses two key location expressions: <em>"<strong>lá em baixo</strong> daqueles livros"</em> (underneath those books) and <em>"<strong>em cima da</strong> mesa"</em> (on top of the table). These are among the most useful location phrases in everyday Brazilian Portuguese.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Expression</th>
+        <th>Meaning</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td><span class="loc">em cima de</span></td>
+        <td><span class="en">on top of / on</span></td>
+        <td><span class="pt">A carteira está <span class="loc">em cima da</span> mesa. <span class="en">(The wallet is on the table.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="loc">em baixo de</span></td>
+        <td><span class="en">underneath / below / under</span></td>
+        <td><span class="pt">As chaves estão <span class="loc">em baixo dos</span> livros. <span class="en">(The keys are under the books.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="loc">na / no</span></td>
+        <td><span class="en">in / on (contracted: em + a/o)</span></td>
+        <td><span class="pt"><span class="loc">Na</span> estante. / <span class="loc">No</span> quarto. <span class="en">(On the shelf. / In the bedroom.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="loc">lá</span></td>
+        <td><span class="en">over there (adds distance)</span></td>
+        <td><span class="pt"><span class="loc">Lá</span> em baixo daqueles livros. <span class="en">(Under those books over there.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="loc">atrás de</span></td>
+        <td><span class="en">behind</span></td>
+        <td><span class="pt">Está <span class="loc">atrás da</span> porta. <span class="en">(It's behind the door.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="loc">na frente de</span></td>
+        <td><span class="en">in front of</span></td>
+        <td><span class="pt">Está <span class="loc">na frente do</span> sofá. <span class="en">(It's in front of the sofa.)</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="loc">perto de</span></td>
+        <td><span class="en">near / close to</span></td>
+        <td><span class="pt">Está <span class="loc">perto da</span> janela. <span class="en">(It's near the window.)</span></span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box" style="margin-top:16px;">
+      <strong>💡 De + article contractions</strong>
+      When <em>de</em> meets <em>o/a/os/as</em>, they contract: <em>de + o = do</em>, <em>de + a = da</em>, <em>de + os = dos</em>, <em>de + as = das</em>. When <em>de</em> meets <em>aquele/aquela</em>, they contract too: <em>de + aquele = daquele</em>, <em>de + aquela = daquela</em>. So <em>"em baixo de aqueles livros"</em> → <em>"em baixo daqueles livros"</em>. These contractions are mandatory — you can't skip them!
+    </div>
+  </div>
+
+  <!-- Grammar 2: Cadê -->
+  <div class="card">
+    <div class="card-title">📖 Cadê? — The Brazilian way to say "Where is…?"</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A opens with <em>"<strong>Cadê</strong> as chaves?"</em>. This little word is pure Brazilian Portuguese — you won't hear it in Portugal — and it's one of the most practical words you'll ever learn.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Portuguese</th>
+        <th>English</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><span class="pt"><span class="loc">Cadê</span> as chaves?</span></td>
+        <td><span class="en">Where are my keys?</span></td>
+        <td><span class="note">Works for plural or singular, no verb needed — just <em>cadê</em> + noun</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt"><span class="loc">Cadê</span> a carteira?</span></td>
+        <td><span class="en">Where's the wallet?</span></td>
+        <td><span class="note">Singular: same structure</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt"><span class="loc">Cadê</span> o João?</span></td>
+        <td><span class="en">Where's João?</span></td>
+        <td><span class="note">Works for people too</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt"><span class="loc">Cadê</span> você?</span></td>
+        <td><span class="en">Where are you?</span></td>
+        <td><span class="note">Heard constantly on the phone or calling out to someone</span></td>
+      </tr>
+    </table>
+
+    <p style="font-size:.88rem;color:#666;margin-top:14px;">The formal equivalent is <em>Onde está…?</em> (Where is…?), but <em>cadê</em> is far more common in everyday spoken Brazilian Portuguese.</p>
+
+    <div class="phon-box" style="margin-top:16px;">
+      <strong>🔊 "Não tô vendo ela" — informal speech</strong>
+      A says <em>"não <strong>tô</strong> vendo ela"</em> — a very common informal contraction: <em>estou</em> → <em>tô</em>. The full formal version would be <em>"não estou vendo-a"</em> or <em>"não a estou vendo."</em> In informal Brazilian Portuguese, pronouns like <em>ela, ele, eles</em> are commonly used as direct objects (instead of the formal <em>-a/-o/-as/-os</em> clitic pronouns). So you'll constantly hear: <em>vi ela</em> (I saw her), <em>chamei ele</em> (I called him), <em>não tô vendo ela</em> (I can't see it/her) — completely natural in speech.
+    </div>
+  </div>
+
+  <!-- Grammar 3: Deixar -->
+  <div class="card">
+    <div class="card-title">📖 Deixar — to leave (something somewhere)</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B says <em>"Você <strong>deixou</strong> em cima da mesa."</em> — <em>deixar</em> here means to leave or put something in a place (often accidentally). It's different from <em>sair</em> (to leave a place).</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Pronoun</th>
+        <th>Presente</th>
+        <th>Pretérito</th>
+      </tr>
+      <tr>
+        <td>eu</td>
+        <td><span class="pt">deixo</span></td>
+        <td><span class="pt loc">deixei</span></td>
+      </tr>
+      <tr>
+        <td>você / ele / ela</td>
+        <td><span class="pt">deixa</span></td>
+        <td><span class="pt loc">deixou</span></td>
+      </tr>
+      <tr>
+        <td>nós</td>
+        <td><span class="pt">deixamos</span></td>
+        <td><span class="pt loc">deixamos</span></td>
+      </tr>
+      <tr>
+        <td>eles / vocês</td>
+        <td><span class="pt">deixam</span></td>
+        <td><span class="pt loc">deixaram</span></td>
+      </tr>
+    </table>
+
+    <p style="font-size:.88rem;color:#666;margin-top:10px;"><em>Deixar</em> is a regular -ar verb in all tenses, so the patterns are consistent. Common uses: <em>Deixei o celular em casa.</em> (I left my phone at home.) · <em>Não deixa isso aí.</em> (Don't leave that there.)</p>
+  </div>
+
+  <p class="section-title">Step 4 — Practice</p>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> Where is it? — Expression Quiz</div>
+    <div class="instr">Choose the correct meaning for each location expression.</div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">em cima da mesa</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','b')">under the table</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','b')">on top of the table</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','b')">next to the table</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Em cima de</em> = on top of / on. <em>Em cima da mesa</em> = on (top of) the table. You can also hear just <em>"na mesa"</em> in casual speech.</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">lá em baixo daqueles livros</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','b')">on top of those books over there</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','b')">underneath those books over there</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','b')">between those books</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Lá</em> = over there (adds distance). <em>Em baixo de</em> = underneath/under. <em>Daqueles</em> = de + aqueles (those). Together: under those books over there.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Cadê o celular?</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','c')">Is the phone here?</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','c')">What is a phone?</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','c')">Where's the phone?</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Cadê?</em> is the everyday Brazilian word for "Where is…?" — much more common in speech than <em>Onde está?</em></span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">Você deixou a chave atrás da porta.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','a')">You left the key behind the door.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','a')">You left the key in front of the door.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','a')">You found the key behind the door.</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Deixou</em> = pretérito of <em>deixar</em> (to leave something somewhere). <em>Atrás da</em> = behind the. So: you left the key behind the door.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks with the missing words.<br>
+      <strong>Word bank:</strong> <em>chaves · baixo · carteira · cima · deixou</em>
+    </div>
+    <div class="fill-line">— Cadê as <input type="text" id="f1" placeholder="___">?</div>
+    <div class="fill-line">— Na estante, lá em <input type="text" id="f2" placeholder="___"> daqueles livros.</div>
+    <div class="fill-line">— E a <input type="text" id="f3" placeholder="___">, não tô vendo ela?</div>
+    <div class="fill-line">— Você <input type="text" id="f4" placeholder="___"> em <input type="text" id="f5" placeholder="___"> da mesa na cozinha.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> Choose the Right Preposition</div>
+    <div class="instr">
+      Select the correct location expression for each sentence.
+    </div>
+    <div style="display:grid;gap:14px;margin-top:8px;">
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">O gato está ___ da cama. <em>(The cat is under the bed.)</em></p>
+        <select class="match-select" id="ms1">
+          <option value="">— escolha —</option>
+          <option value="a">em baixo</option>
+          <option value="b">em cima</option>
+          <option value="c">na frente</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">As chaves estão ___ da mesa. <em>(The keys are on top of the table.)</em></p>
+        <select class="match-select" id="ms2">
+          <option value="">— escolha —</option>
+          <option value="a">em baixo</option>
+          <option value="b">em cima</option>
+          <option value="c">atrás</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">O carro está ___ da garagem. <em>(The car is in front of the garage.)</em></p>
+        <select class="match-select" id="ms3">
+          <option value="">— escolha —</option>
+          <option value="a">perto</option>
+          <option value="b">em cima</option>
+          <option value="c">na frente</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">Eu deixei o celular ___ do sofá. <em>(I left my phone behind the sofa.)</em></p>
+        <select class="match-select" id="ms4">
+          <option value="">— escolha —</option>
+          <option value="a">atrás</option>
+          <option value="b">na frente</option>
+          <option value="c">em cima</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Cadê tudo?</div>
+    <div class="instr"><strong>Write in Portuguese.</strong><br>You're helping a friend find things around their house. Write 4–5 sentences saying where each item is. Use at least three different location expressions (<em>em cima de, em baixo de, atrás de, na frente de, perto de, na/no</em>) and <em>cadê</em> at least once.</div>
+    <textarea class="prod-textarea" placeholder="Example:&#10;— Cadê o controle remoto?&#10;— Está em cima do sofá.&#10;— E o meu casaco?&#10;— Você deixou atrás da porta.&#10;— O cachorro está em baixo da cama de novo!"></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var match = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(match && match[1] === chosen) { b.classList.add(chosen === correct ? 'correct' : 'wrong'); }
+      if(match && match[1] === correct && chosen !== correct) { b.classList.add('correct'); }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      fb.textContent = '❌ Not quite — try to remember the correct meaning.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  var fillAnswers = { f1:'chaves', f2:'baixo', f3:'carteira', f4:'deixou', f5:'cima' };
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ã/g,'a').replace(/õ/g,'o'); }
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  var matchAnswers = { ms1:'a', ms2:'b', ms3:'c', ms4:'a' };
+  function checkMatch(){
+    var score = 0;
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+
+<script>
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {}; var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = ''; var parent = ta.closest('[class]');
+    if (parent) { var clone = parent.cloneNode(true); clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); }); label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80); }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+  .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      localStorage.setItem('bphub_done_' + location.pathname.split('/').pop().replace('.html',''), '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; }
+  }).catch(function() { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
