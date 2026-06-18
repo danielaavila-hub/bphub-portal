@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Que Tipo de Música Tu Gosta? | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+    --nanquim:    #000000;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+  .card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(60,60,33,.07); }
+  .section-title { font-family: 'Trirong', serif; font-size: 1.05rem; color: var(--floresta); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 32px 0 10px; padding-left: 12px; border-left: 3px solid var(--terracota); }
+  .card-title { font-family: 'Trirong', serif; font-size: 1.1rem; color: var(--terracota); margin-bottom: 14px; font-weight: 600; }
+  .instr { background: var(--baunilha); border-radius: 8px; padding: 12px 16px; font-size: .87rem; margin-bottom: 16px; line-height: 1.6; }
+  .instr strong { color: var(--terracota); }
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+  .dialogue { margin: 16px 0; }
+  .dialogue-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--giz); align-items: baseline; }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker { font-weight: 700; color: var(--floresta); font-size: .85rem; min-width: 28px; text-transform: uppercase; }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th { background: var(--floresta); color: #fff; padding: 10px 14px; text-align: left; font-family: 'Trirong', serif; font-weight: 600; }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .gram-table .hl { color: var(--telha); font-weight: 700; }
+  .phon-box { background: var(--rosa-cha); border-left: 4px solid var(--goiaba); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cult-box { background: #EEF4EC; border-left: 4px solid var(--floresta); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ex-num { display: inline-block; background: var(--terracota); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .ex-title { font-family: 'Trirong', serif; font-size: 1rem; color: var(--musgo); font-weight: 600; display: flex; align-items: center; margin-bottom: 14px; }
+  .fill-line { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; line-height: 2; font-size: .97rem; }
+  .fill-line input { border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: .97rem; color: var(--musgo); padding: 2px 6px; width: 120px; text-align: center; outline: none; transition: border-color .2s; }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+  .word-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--erva-doce); border-radius: 10px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 180px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn { background: var(--giz); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 6px 13px; font-family: 'Manrope', sans-serif; font-size: .84rem; font-weight: 700; color: var(--musgo); cursor: pointer; transition: background .15s, border-color .15s; }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+  .match-select { width: 100%; border: 2px solid var(--erva-doce); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--musgo); background: #fff; outline: none; transition: border-color .2s; cursor: pointer; }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+  .prod-textarea { width: 100%; border: 2px solid var(--erva-doce); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; color: var(--musgo); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; margin-top: 10px; }
+  .prod-textarea:focus { border-color: var(--terracota); }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check { background: var(--terracota); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 8px; padding: 10px 18px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge { display: none; align-items: center; gap: 6px; background: var(--baunilha); border-radius: 8px; padding: 10px 16px; font-size: .88rem; font-weight: 700; color: var(--musgo); }
+  .score-badge.visible { display: inline-flex; }
+  @media(max-width:600px) { .card { padding: 20px 18px; } .word-item { flex-direction: column; align-items: flex-start; } }
+  .pref { color: var(--telha); font-weight: 800; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: var(--giz); border-bottom: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level { background: var(--floresta); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; font-family: 'Manrope', sans-serif; }
+  .topbar-back { font-size: 12px; color: #999; text-decoration: none; transition: color .2s; }
+  .topbar-back:hover { color: var(--floresta); }
+  .page-hero { background: var(--floresta); padding: 40px 28px 36px; }
+  .page-hero h1 { font-family: 'Trirong', serif; font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 300; line-height: 1.3; margin-bottom: 16px; color: #fff; }
+  .page-attribution { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Manrope', sans-serif; line-height: 1.7; }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Iniciante I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <h1>Que Tipo de Música Tu Gosta?</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 32</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Falar sobre gostos musicais</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <!-- STEP 1 -->
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> What musical genre does speaker B prefer? What artist does speaker A mention? Do they share the same taste?
+    </div>
+    <div class="audio-label">Língua da Gente · Episode 32</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0"
+        height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/beginning-32-what-type-of-music-do-you-like/id1020665354?i=1000371652046">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/beginning-32-what-type-of-music-do-you-like/id1020665354?i=1000371652046" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Listen again</strong> while reading. Notice how both speakers express strong enthusiasm — and how they agree with each other at the end.
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Que tipo de música tu <span class="pref">gosta</span>?</div>
+          <div class="line-en">What type of music do you like?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Para mim, é a MPB, <span class="pref">adoro</span> ouvir essas músicas.</div>
+          <div class="line-en">For me, it is MPB, I love to hear that type of music.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt"><span class="pref">Concordo</span>, <span class="pref">adoro</span> essas clássicas do Gilberto Gil.</div>
+          <div class="line-en">I agree, I love the classics of Gilberto Gil.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Sei, <span class="pref">também</span> gosto.</div>
+          <div class="line-en">I know, I like them too.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <!-- Grammar 1: Adorar + expressions of preference -->
+  <div class="card">
+    <div class="card-title">📖 Adorar + infinitivo — Loving something</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B says <em>"<strong>adoro</strong> ouvir essas músicas"</em> — I love listening to that music. <em>Adorar</em> expresses a stronger feeling than <em>gostar de</em>. It's very common in everyday Brazilian speech and works just like <em>gostar</em> + infinitive, without needing <em>de</em> between the verbs.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Subject</th>
+        <th>Adorar</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td><span class="pt">Eu</span></td>
+        <td><span class="pref">adoro</span></td>
+        <td><span class="pt">Eu <span class="pref">adoro</span> ouvir MPB.</span> <span class="en">I love listening to MPB.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Você / Ele / Ela</span></td>
+        <td><span class="pref">adora</span></td>
+        <td><span class="pt">Ela <span class="pref">adora</span> cantar.</span> <span class="en">She loves to sing.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">A gente</span></td>
+        <td><span class="pref">adora</span></td>
+        <td><span class="pt">A gente <span class="pref">adora</span> essas clássicas.</span> <span class="en">We love these classics.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Vocês / Eles / Elas</span></td>
+        <td><span class="pref">adoram</span></td>
+        <td><span class="pt">Eles <span class="pref">adoram</span> música brasileira.</span> <span class="en">They love Brazilian music.</span></td>
+      </tr>
+    </table>
+
+    <p style="margin-top:18px;font-size:.88rem;font-weight:700;color:var(--floresta);">Preference scale — from mild to intense:</p>
+    <table class="gram-table" style="margin-top:8px;">
+      <tr><th>Portuguese</th><th>English</th><th>Strength</th></tr>
+      <tr><td><span class="pt">não gosto de</span></td><td><span class="en">I don't like</span></td><td><span class="note">negative</span></td></tr>
+      <tr><td><span class="pt">gosto de</span></td><td><span class="en">I like</span></td><td><span class="note">neutral / positive</span></td></tr>
+      <tr><td><span class="pt">gosto muito de</span></td><td><span class="en">I really like</span></td><td><span class="note">strong positive</span></td></tr>
+      <tr><td><span class="pt"><span class="pref">adoro</span></span></td><td><span class="en">I love / I adore</span></td><td><span class="note">very strong!</span></td></tr>
+    </table>
+  </div>
+
+  <!-- Grammar 2: Que tipo de / Para mim / agreeing -->
+  <div class="card">
+    <div class="card-title">📖 Que tipo de…? + Concordar + Também</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">This dialogue is full of conversational tools — asking what kind of something someone likes, expressing a personal opinion, and agreeing. These phrases come up constantly in Brazilian conversation.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Structure</th>
+        <th>Example</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td><span class="pt">Que tipo de + noun + verb?</span></td>
+        <td><span class="pt">Que tipo de música tu <span class="pref">gosta</span>?</span></td>
+        <td><span class="en">What type of music do you like?</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Para mim, é…</span></td>
+        <td><span class="pt">Para mim, é a MPB.</span></td>
+        <td><span class="en">For me, it's MPB. — frames this as a personal opinion, not a universal fact.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Concordo.</span></td>
+        <td><span class="pt">Concordo, adoro essas clássicas.</span></td>
+        <td><span class="en">I agree. — direct, simple, very useful.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Sei.</span></td>
+        <td><span class="pt">Sei, também gosto.</span></td>
+        <td><span class="en">I know. — used as a soft "yeah" or acknowledgement, not literally "I know that fact".</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Também</span></td>
+        <td><span class="pt">Eu <span class="pref">também</span> gosto. / <span class="pref">Também</span> gosto.</span></td>
+        <td><span class="en">I like them too. — <em>também</em> = also / too. Can go before or after the verb.</span></td>
+      </tr>
+    </table>
+
+    <p style="margin-top:18px;font-size:.88rem;font-weight:700;color:var(--floresta);">More "Que tipo de…?" questions:</p>
+    <table class="gram-table" style="margin-top:8px;">
+      <tr><th>Question</th><th>Meaning</th></tr>
+      <tr><td><span class="pt">Que tipo de comida você gosta?</span></td><td><span class="en">What type of food do you like?</span></td></tr>
+      <tr><td><span class="pt">Que tipo de filme você assiste?</span></td><td><span class="en">What type of film do you watch?</span></td></tr>
+      <tr><td><span class="pt">Que tipo de livro você lê?</span></td><td><span class="en">What type of book do you read?</span></td></tr>
+    </table>
+
+    <div class="phon-box" style="margin-top:16px;">
+      <strong>🔊 "Tu gosta" — again!</strong>
+      Just like in Episode 30, speaker A uses <em>tu</em> with the <em>você</em> verb form: <em>"tu gosta"</em> instead of <em>"tu gostas"</em>. This is completely natural in spoken Brazilian Portuguese across many regions. If you're using <em>você</em>, say <em>"você gosta"</em> — both are correct and both will be understood everywhere in Brazil.
+    </div>
+  </div>
+
+  <!-- Culture: MPB -->
+  <div class="card">
+    <div class="card-title">🎵 Culture — MPB: A música que define o Brasil</div>
+
+    <div class="cult-box">
+      <strong>🇧🇷 O que é MPB?</strong>
+      <strong>MPB</strong> — Música Popular Brasileira — is far more than a musical genre. Born in the 1960s, it blends the rhythmic roots of <em>samba</em> and <em>bossa nova</em> with poetic lyrics, jazz harmonies, and later rock influences. It became the soundtrack of Brazilian identity, artistic resistance, and everyday emotion. If you want to understand Brazilian culture, MPB is a key to unlock it.
+    </div>
+
+    <div class="cult-box" style="margin-top:12px;">
+      <strong>🎸 Gilberto Gil — artist, activist, minister</strong>
+      <strong>Gilberto Gil</strong> (born 1942, Bahia) is one of Brazil's most beloved and influential musicians. Co-founder of the <em>Tropicália</em> movement in the late 1960s — which fused Brazilian music with electric rock and avant-garde art — he has spent six decades creating music that is simultaneously deeply Brazilian and globally minded. His catalogue spans samba, reggae, forró, electronic music, and more. Gil was exiled from Brazil under the military dictatorship (1969–72), living in London before returning. From 2003 to 2008, he served as Brazil's <strong>Minister of Culture</strong>. Essential songs to discover: <em>Aquele Abraço</em>, <em>Toda Menina Baiana</em>, <em>Esperando na Janela</em>, <em>Palco</em>.
+    </div>
+
+    <p style="margin-top:16px;font-size:.88rem;font-weight:700;color:var(--floresta);">Other essential MPB artists to explore:</p>
+    <table class="gram-table" style="margin-top:8px;">
+      <tr><th>Artist</th><th>Known for</th></tr>
+      <tr><td><span class="pt">Caetano Veloso</span></td><td><span class="en">Tropicália co-founder; lyrical genius; bossa nova and beyond</span></td></tr>
+      <tr><td><span class="pt">Chico Buarque</span></td><td><span class="en">Master poet-songwriter; political and romantic classics</span></td></tr>
+      <tr><td><span class="pt">Elis Regina</span></td><td><span class="en">One of Brazil's greatest voices; iconic recordings from the 1970s</span></td></tr>
+      <tr><td><span class="pt">Milton Nascimento</span></td><td><span class="en">Extraordinary voice; Minas Gerais roots; globally recognised</span></td></tr>
+      <tr><td><span class="pt">Maria Bethânia</span></td><td><span class="en">Gilberto Gil's contemporary; emotional, theatrical stage presence</span></td></tr>
+    </table>
+  </div>
+
+  <!-- STEP 4 -->
+  <p class="section-title">Step 4 — Practice</p>
+
+  <!-- EXERCISE 1 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> What does it mean? — Expression Quiz</div>
+    <div class="instr">Each expression comes from the dialogue. Choose the correct English meaning.</div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">Para mim, é a MPB.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','b')">In general, it's MPB.</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','b')">For me, it's MPB.</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','b')">According to you, it's MPB.</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Para mim</em> = for me — it frames the answer as a personal preference, not a universal fact. A polite, natural way to share your opinion.</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">Adoro ouvir essas músicas.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','c')">I like to sing these songs.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','c')">I hate these songs.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','c')">I love to hear this music.</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Adoro</em> = I love / I adore (stronger than <em>gosto</em>). <em>Ouvir</em> = to listen / to hear. <em>Essas músicas</em> = this / that music.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Concordo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','b')">I disagree.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','b')">I agree.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','b')">I understand.</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Concordo</em> = I agree — from the verb <em>concordar</em>. The opposite is <em>Discordo</em> (I disagree). Quick and very natural for showing agreement.</span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">Sei, também gosto.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','b')">I know, I don't like them either.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','b')">I know, I like them too.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','b')">I know, I liked them.</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Sei</em> = I know (used here as a soft "yeah" / acknowledgement). <em>Também</em> = also / too. <em>Gosto</em> = I like. Together: "Yeah, I like them too."</span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 2 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks with the missing words.<br>
+      <strong>Word bank:</strong> <em>tipo · MPB · adoro · concordo · também</em>
+    </div>
+    <div class="fill-line">— Que <input type="text" id="f1" placeholder="___"> de música tu gosta?</div>
+    <div class="fill-line">— Para mim, é a <input type="text" id="f2" placeholder="___">, <input type="text" id="f3" placeholder="___"> ouvir essas músicas.</div>
+    <div class="fill-line">— <input type="text" id="f4" placeholder="___">, adoro essas clássicas do Gilberto Gil.</div>
+    <div class="fill-line">— Sei, <input type="text" id="f5" placeholder="___"> gosto.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 3 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> Adorar — Choose the correct form</div>
+    <div class="instr">
+      Select the correct conjugation of <em>adorar</em> for each sentence.
+    </div>
+    <div style="display:grid;gap:12px;margin-top:8px;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.95rem;flex:1;min-width:280px;color:var(--musgo);">Eu ___ ouvir música de manhã.</span>
+        <select class="match-select" id="ms1" style="max-width:160px;">
+          <option value="">— escolha —</option>
+          <option value="a">adoro</option>
+          <option value="b">adora</option>
+          <option value="c">adoram</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.95rem;flex:1;min-width:280px;color:var(--musgo);">Ela ___ cantar as músicas do Gilberto Gil.</span>
+        <select class="match-select" id="ms2" style="max-width:160px;">
+          <option value="">— escolha —</option>
+          <option value="a">adoro</option>
+          <option value="b">adora</option>
+          <option value="c">adoram</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.95rem;flex:1;min-width:280px;color:var(--musgo);">Vocês ___ MPB?</span>
+        <select class="match-select" id="ms3" style="max-width:160px;">
+          <option value="">— escolha —</option>
+          <option value="a">adoro</option>
+          <option value="b">adora</option>
+          <option value="c">adoram</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:.95rem;flex:1;min-width:280px;color:var(--musgo);">A gente ___ essas clássicas.</span>
+        <select class="match-select" id="ms4" style="max-width:160px;">
+          <option value="">— escolha —</option>
+          <option value="a">adoro</option>
+          <option value="b">adora</option>
+          <option value="c">adoram</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 4 -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Que tipo de música você gosta?</div>
+    <div class="instr"><strong>Write in Portuguese.</strong><br>Share your musical taste! Use <em>adoro / gosto de / não gosto de</em>, <em>para mim</em>, and <em>concordo / também</em>. Mention at least one artist or genre.</div>
+    <textarea class="prod-textarea" placeholder="Example:&#10;Para mim, adoro jazz e MPB.&#10;Gosto muito de ouvir música de manhã.&#10;Concordo que o Gilberto Gil é incrível — também adoro essas clássicas!&#10;Não gosto muito de funk, mas gosto de samba."></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var match = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(match && match[1] === chosen) { b.classList.add(chosen === correct ? 'correct' : 'wrong'); }
+      if(match && match[1] === correct && chosen !== correct) { b.classList.add('correct'); }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      fb.textContent = '❌ Not quite — try to remember the correct meaning.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  var fillAnswers = { f1:'tipo', f2:'MPB', f3:'adoro|Adoro', f4:'Concordo|concordo', f5:'também|tambem' };
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ã/g,'a').replace(/õ/g,'o'); }
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  var matchAnswers = { ms1:'a', ms2:'b', ms3:'c', ms4:'b' };
+  function checkMatch(){
+    var score = 0;
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+
+<script>
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {}; var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = ''; var parent = ta.closest('[class]');
+    if (parent) { var clone = parent.cloneNode(true); clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); }); label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80); }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+  .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      localStorage.setItem('bphub_done_' + location.pathname.split('/').pop().replace('.html',''), '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; }
+  }).catch(function() { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
