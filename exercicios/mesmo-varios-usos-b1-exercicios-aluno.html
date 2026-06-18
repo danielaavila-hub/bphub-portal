@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesmo — Exercícios Interativos | B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A; --giz: #FCF5EB;
+      --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: "Manrope", sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: "Trirong", serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--marrom); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--marrom); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* EXERCISE CARDS */
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; margin-bottom: 28px; }
+    .ex-num   { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--marrom); margin-bottom: 6px; }
+    .ex-title { font-family: "Trirong", serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instr { font-size: 0.86rem; color: #555; margin-bottom: 20px; line-height: 1.65; }
+
+    /* INPUTS */
+    .blank { border: none; border-bottom: 2px solid var(--marrom); background: transparent; font-family: "Trirong", serif; font-size: 0.97rem; width: 115px; outline: none; padding: 2px 4px; text-align: center; transition: background 0.2s; }
+    .blank.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.09); border-radius: 3px; }
+    .blank.wrong   { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.09); border-radius: 3px; }
+
+    .sel { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 6px 10px; font-family: "Manrope", sans-serif; font-size: 0.85rem; background: white; cursor: pointer; outline: none; transition: border-color 0.2s; }
+    .sel:focus { border-color: var(--marrom); }
+    .sel.correct { border-color: var(--floresta); background: rgba(78,85,29,0.08); }
+    .sel.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.08); }
+
+    .tw-input { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: "Trirong", serif; font-size: 0.93rem; width: 100%; outline: none; background: white; margin-top: 6px; transition: border-color 0.2s; }
+    .tw-input:focus { border-color: var(--marrom); }
+    .tw-input.correct { border-color: var(--floresta); background: rgba(78,85,29,0.06); }
+    .tw-input.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.06); }
+
+    .prod { width: 100%; min-height: 130px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; font-family: "Manrope", sans-serif; font-size: 14px; resize: vertical; outline: none; background: white; }
+    .prod:focus { border-color: var(--marrom); }
+
+    /* SENTENCE ROWS */
+    .sent-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; font-family: "Trirong", serif; font-size: 0.95rem; line-height: 1.8; flex-wrap: wrap; }
+    .sent-num { font-size: 0.78rem; font-weight: 700; color: var(--marrom); min-width: 18px; flex-shrink: 0; }
+
+    /* CLASSIFY ROWS */
+    .cls-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-family: "Trirong", serif; font-size: 0.93rem; flex-wrap: wrap; }
+    .cls-quote { flex: 1; min-width: 220px; color: var(--nanquim); font-style: italic; }
+
+    /* TRANSFORM ROWS */
+    .tr-block { background: var(--off-white); border-radius: 10px; padding: 16px 20px; margin-bottom: 14px; }
+    .tr-original { font-family: "Trirong", serif; font-size: 0.94rem; color: var(--nanquim); margin-bottom: 6px; }
+    .tr-cue { font-size: 0.79rem; font-weight: 600; color: var(--marrom); margin-bottom: 6px; }
+
+    /* DIALOGUE WORD BANK */
+    .wb-box { background: rgba(150,126,99,0.08); border-radius: 10px; padding: 12px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .wb-label { font-size: 0.78rem; font-weight: 700; color: var(--marrom); letter-spacing: 0.08em; text-transform: uppercase; width: 100%; margin-bottom: 2px; }
+    .wb-chip  { background: white; border: 1.5px solid rgba(150,126,99,0.4); border-radius: 20px; padding: 3px 14px; font-family: "Trirong", serif; font-size: 0.88rem; color: var(--nanquim); }
+
+    /* CATEGORY REFERENCE */
+    .cat-ref { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 8px; margin-bottom: 20px; }
+    .cat-chip { background: var(--off-white); border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; line-height: 1.5; }
+    .cat-letter { font-weight: 700; color: var(--marrom); margin-right: 6px; }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; font-size: 0.87rem; color: #555; line-height: 2.1; }
+    .checklist li::before { content: "☐  "; font-size: 1rem; }
+
+    /* BUTTONS */
+    .check-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--marrom); color: white; border: none; border-radius: 10px; padding: 10px 20px; font-family: "Manrope", sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 18px; }
+    .check-btn:hover { opacity: 0.88; }
+
+    /* RESULTS */
+    .result-msg { display: none; margin-top: 14px; padding: 16px 20px; border-radius: 10px; font-size: 0.86rem; line-height: 1.85; max-height: 280px; overflow-y: auto; }
+    .result-msg.good     { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again{ background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* NAV LINK */
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: "Trirong", serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: "Manrope", sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+
+    @media (max-width: 700px) { .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; } }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1><em>Mesmo</em> — Exercícios</h1>
+  <div class="hero-sub">Practice the seven uses of <em>mesmo</em> — from agreement and emphasis to expressing surprise and indifference.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">vocabulário</span>
+    <span class="hero-tag">gramática</span>
+    <span class="hero-tag">produção escrita</span>
+  </div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<div class="main">
+
+  <!-- ── EXERCÍCIO 1 ── -->
+  <div class="ex-card">
+    <div class="ex-num">Exercício 1</div>
+    <div class="ex-title">Agreement — mesmo, mesma, mesmos or mesmas?</div>
+    <p class="ex-instr">Complete each sentence with the correct form. The noun after the blank is your guide — check its gender and number.</p>
+
+    <div class="sent-row"><span class="sent-num">1.</span><span>Você ainda trabalha na <input class="blank" id="e1a" placeholder="___"> empresa onde você começou?</span></div>
+    <div class="sent-row"><span class="sent-num">2.</span><span>O Gabriel e a Lívia têm o <input class="blank" id="e1b" placeholder="___"> perfil de LinkedIn.</span></div>
+    <div class="sent-row"><span class="sent-num">3.</span><span>Sempre ouço as <input class="blank" id="e1c" placeholder="___"> reclamações nas reuniões.</span></div>
+    <div class="sent-row"><span class="sent-num">4.</span><span>Eles usam os <input class="blank" id="e1d" placeholder="___"> critérios de avaliação todos os anos.</span></div>
+    <div class="sent-row"><span class="sent-num">5.</span><span>A nossa equipe passou pelo <input class="blank" id="e1e" placeholder="___"> processo de seleção que vocês.</span></div>
+    <div class="sent-row"><span class="sent-num">6.</span><span>Você e eu temos a <input class="blank" id="e1f" placeholder="___"> opinião sobre esse assunto.</span></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- ── EXERCÍCIO 2 ── -->
+  <div class="ex-card">
+    <div class="ex-num">Exercício 2</div>
+    <div class="ex-title">Which use of mesmo? — Identify the category</div>
+    <p class="ex-instr">For each sentence, select the correct use from the categories below.</p>
+
+    <div class="cat-ref">
+      <div class="cat-chip"><span class="cat-letter">A</span>the same (adjective + noun)</div>
+      <div class="cat-chip"><span class="cat-letter">B</span>himself / herself (emphasis)</div>
+      <div class="cat-chip"><span class="cat-letter">C</span>É mesmo? — Really?</div>
+      <div class="cat-chip"><span class="cat-letter">D</span>really, indeed (adverb)</div>
+      <div class="cat-chip"><span class="cat-letter">E</span>dar no mesmo — makes no difference</div>
+      <div class="cat-chip"><span class="cat-letter">F</span>estar na mesma — no change</div>
+    </div>
+
+    <div class="cls-row">
+      <span class="sent-num">1.</span>
+      <span class="cls-quote">— Consegui o prazo que o cliente pediu. — É mesmo? Que alívio!</span>
+      <select class="sel" id="e2a"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="cls-row">
+      <span class="sent-num">2.</span>
+      <span class="cls-quote">A Andrea mesma negociou o contrato com o fornecedor.</span>
+      <select class="sel" id="e2b"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="cls-row">
+      <span class="sent-num">3.</span>
+      <span class="cls-quote">Ir de avião ou de ônibus? Dá no mesmo — as duas opções chegam na sexta.</span>
+      <select class="sel" id="e2c"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="cls-row">
+      <span class="sent-num">4.</span>
+      <span class="cls-quote">Ele é mesmo muito criterioso nas análises — todo relatório dele é impecável.</span>
+      <select class="sel" id="e2d"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="cls-row">
+      <span class="sent-num">5.</span>
+      <span class="cls-quote">Você ainda usa o mesmo sistema de gestão de dois anos atrás?</span>
+      <select class="sel" id="e2e"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+    <div class="cls-row">
+      <span class="sent-num">6.</span>
+      <span class="cls-quote">— O projeto avançou? — Tá na mesma, sem feedback do cliente.</span>
+      <select class="sel" id="e2f"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- ── EXERCÍCIO 3 ── -->
+  <div class="ex-card">
+    <div class="ex-num">Exercício 3</div>
+    <div class="ex-title">Complete the dialogue — word bank</div>
+    <p class="ex-instr">Complete the conversation with the correct option from the word bank. Each option is used only once.</p>
+
+    <div class="wb-box">
+      <div class="wb-label">Word bank</div>
+      <span class="wb-chip">É mesmo?</span>
+      <span class="wb-chip">o mesmo</span>
+      <span class="wb-chip">os mesmos</span>
+      <span class="wb-chip">eu mesma</span>
+      <span class="wb-chip">dá no mesmo</span>
+      <span class="wb-chip">mesmo</span>
+    </div>
+
+    <p style="font-size:0.82rem;color:#aaa;margin-bottom:16px;font-style:italic;">Marina e Bruno conversam após um comunicado interno da empresa.</p>
+
+    <div style="font-family:'Trirong',serif;font-size:0.95rem;line-height:2.3;">
+      <p><strong style="color:var(--marrom);">Marina:</strong> Você ouviu? O diretor vai mudar o sistema de avaliação.</p>
+      <p><strong style="color:var(--marrom);">Bruno:</strong> <select class="sel" id="e3a" style="font-family:'Trirong',serif;font-size:0.93rem;"><option value="">— escolha —</option><option>É mesmo?</option><option>o mesmo</option><option>os mesmos</option><option>eu mesma</option><option>dá no mesmo</option><option>mesmo</option></select> Mas o atual funciona bem!</p>
+      <p><strong style="color:var(--marrom);">Marina:</strong> Eu sei. E vai usar <select class="sel" id="e3b" style="font-family:'Trirong',serif;font-size:0.93rem;"><option value="">— escolha —</option><option>É mesmo?</option><option>o mesmo</option><option>os mesmos</option><option>eu mesma</option><option>dá no mesmo</option><option>mesmo</option></select> critérios do ano passado.</p>
+      <p><strong style="color:var(--marrom);">Bruno:</strong> Quem te contou?</p>
+      <p><strong style="color:var(--marrom);">Marina:</strong> <select class="sel" id="e3c" style="font-family:'Trirong',serif;font-size:0.93rem;"><option value="">— escolha —</option><option>É mesmo?</option><option>o mesmo</option><option>os mesmos</option><option>Eu mesma</option><option>dá no mesmo</option><option>mesmo</option></select> li no comunicado interno.</p>
+      <p><strong style="color:var(--marrom);">Bruno:</strong> Para muita gente vai ser <select class="sel" id="e3d" style="font-family:'Trirong',serif;font-size:0.93rem;"><option value="">— escolha —</option><option>É mesmo?</option><option>o mesmo</option><option>os mesmos</option><option>eu mesma</option><option>dá no mesmo</option><option>mesmo</option></select> de sempre — muito processo, pouca mudança.</p>
+      <p><strong style="color:var(--marrom);">Marina:</strong> Falar com ele agora ou depois da reunião — <select class="sel" id="e3e" style="font-family:'Trirong',serif;font-size:0.93rem;"><option value="">— escolha —</option><option>É mesmo?</option><option>o mesmo</option><option>os mesmos</option><option>eu mesma</option><option>dá no mesmo</option><option>mesmo</option></select>, o diretor já decidiu.</p>
+      <p><strong style="color:var(--marrom);">Bruno:</strong> Você está chateada?</p>
+      <p><strong style="color:var(--marrom);">Marina:</strong> Estou <select class="sel" id="e3f" style="font-family:'Trirong',serif;font-size:0.93rem;"><option value="">— escolha —</option><option>É mesmo?</option><option>o mesmo</option><option>os mesmos</option><option>eu mesma</option><option>dá no mesmo</option><option>mesmo</option></select> frustrada com tudo isso.</p>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- ── EXERCÍCIO 4 ── -->
+  <div class="ex-card">
+    <div class="ex-num">Exercício 4</div>
+    <div class="ex-title">Rewrite using "mesmo"</div>
+    <p class="ex-instr">Rewrite each sentence using the cue in brackets. The meaning should stay the same.</p>
+
+    <div class="tr-block">
+      <div class="tr-original">1. "A Beatriz organizou a conferência toda sem pedir ajuda."</div>
+      <div class="tr-cue">→ use: ela mesma</div>
+      <input class="tw-input" id="e4a" placeholder="Rewrite the sentence here…">
+    </div>
+    <div class="tr-block">
+      <div class="tr-original">2. "Ir de metrô ou de ônibus — as duas opções chegam no mesmo horário."</div>
+      <div class="tr-cue">→ use: dar no mesmo</div>
+      <input class="tw-input" id="e4b" placeholder="Rewrite the sentence here…">
+    </div>
+    <div class="tr-block">
+      <div class="tr-original">3. "O processo de aprovação ainda não avançou nada."</div>
+      <div class="tr-cue">→ use: estar na mesma</div>
+      <input class="tw-input" id="e4c" placeholder="Rewrite the sentence here…">
+    </div>
+    <div class="tr-block">
+      <div class="tr-original">4. "A empresa continua usando o software que implementou em 2020."</div>
+      <div class="tr-cue">→ add mesmo before the noun</div>
+      <input class="tw-input" id="e4d" placeholder="Rewrite the sentence here…">
+    </div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+
+  <!-- ── EXERCÍCIO 5 ── -->
+  <div class="ex-card">
+    <div class="ex-num">Exercício 5</div>
+    <div class="ex-title">Production — Talk about your work or routine</div>
+    <p class="ex-instr">Write 5–6 sentences about your own work or daily routine, using at least 4 different uses of <em>mesmo</em>. Use the checklist as a guide.</p>
+    <ul class="checklist" style="margin-bottom:18px;">
+      <li>mesmo/mesma/mesmos/mesmas — the same + noun</li>
+      <li>o mesmo / a mesma — the same (replacing an action)</li>
+      <li>eu mesmo / ela mesma — did it personally, without help</li>
+      <li>É mesmo? / Foi mesmo? — Really?</li>
+      <li>mesmo (adverb) — really, indeed</li>
+      <li>dar no mesmo — makes no difference</li>
+      <li>estar na mesma — same situation, no change</li>
+      <li>mesmo assim — even so</li>
+    </ul>
+    <textarea class="prod" id="prod1" placeholder="Write your sentences in Portuguese here…"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div style="background:var(--baunilha2);border-radius:14px;padding:24px 28px;margin-top:8px;font-size:15px;color:var(--nanquim);line-height:1.75;">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further.
+  </div>
+
+  <!-- FORM -->
+  <div id="bphub-form-area" style="margin-top:28px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <!-- NAV LINK -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label" style="color:var(--cobalto);">Material de referência</div>
+      <div class="nav-link-title">Mesmo — Vários Usos</div>
+    </div>
+    <a href="mesmo-varios-usos-b1-referencia.html" class="nav-btn" style="background:var(--cobalto);">Ver material de referência →</a>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s){
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+    .replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c')
+    .replace(/\s+/g,' ');
+}
+
+// ── EX 1 ──
+var e1ans = [
+  {id:'e1a', key:'mesma',  display:'mesma (empresa — feminine singular)'},
+  {id:'e1b', key:'mesmo',  display:'mesmo (perfil — masculine singular)'},
+  {id:'e1c', key:'mesmas', display:'mesmas (reclamações — feminine plural)'},
+  {id:'e1d', key:'mesmos', display:'mesmos (critérios — masculine plural)'},
+  {id:'e1e', key:'mesmo',  display:'mesmo (processo — masculine singular)'},
+  {id:'e1f', key:'mesma',  display:'mesma (opinião — feminine singular)'},
+];
+function checkEx1(){
+  var correct=0, html='';
+  e1ans.forEach(function(a,i){
+    var el=document.getElementById(a.id);
+    var ok=norm(el.value)===a.key;
+    el.classList.toggle('correct',ok);
+    el.classList.toggle('wrong',el.value.trim().length>0&&!ok);
+    if(ok)correct++;
+    html+='<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var r=document.getElementById('ex1-result');
+  r.className='result-msg '+(correct===e1ans.length?'good':'try-again');
+  r.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===e1ans.length?'✓ All 6 correct!':correct+' of 6 correct — model answers:')
+    +'</div>'+html;
+  r.style.display='block';
+}
+
+// ── EX 2 ──
+var e2ans = [
+  {id:'e2a', key:'C', display:'C — É mesmo? (Really?)'},
+  {id:'e2b', key:'B', display:'B — ela mesma (emphasis: she herself)'},
+  {id:'e2c', key:'E', display:'E — dar no mesmo (makes no difference)'},
+  {id:'e2d', key:'D', display:'D — mesmo (adverb: really, indeed)'},
+  {id:'e2e', key:'A', display:'A — mesmo (the same + noun)'},
+  {id:'e2f', key:'F', display:'F — estar na mesma (no change)'},
+];
+function checkEx2(){
+  var correct=0, html='';
+  e2ans.forEach(function(a,i){
+    var el=document.getElementById(a.id);
+    var ok=el.value===a.key;
+    el.classList.toggle('correct',ok);
+    el.classList.toggle('wrong',el.value!==''&&!ok);
+    if(ok)correct++;
+    html+='<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var r=document.getElementById('ex2-result');
+  r.className='result-msg '+(correct===e2ans.length?'good':'try-again');
+  r.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===e2ans.length?'✓ All 6 correct!':correct+' of 6 correct — answers:')
+    +'</div>'+html;
+  r.style.display='block';
+}
+
+// ── EX 3 ──
+var e3ans = [
+  {id:'e3a', key:'É mesmo?',    display:'É mesmo? (Really? — surprise)'},
+  {id:'e3b', key:'os mesmos',   display:'os mesmos (the same + plural masculine noun)'},
+  {id:'e3c', key:'Eu mesma',    display:'Eu mesma (I did it myself — emphasis)'},
+  {id:'e3d', key:'o mesmo',     display:'o mesmo (the same + replaces an action)'},
+  {id:'e3e', key:'dá no mesmo', display:'dá no mesmo (it makes no difference)'},
+  {id:'e3f', key:'mesmo',       display:'mesmo (adverb: really, truly)'},
+];
+function checkEx3(){
+  var correct=0, html='';
+  e3ans.forEach(function(a,i){
+    var el=document.getElementById(a.id);
+    var ok=norm(el.value)===norm(a.key);
+    el.classList.toggle('correct',ok);
+    el.classList.toggle('wrong',el.value!==''&&!ok);
+    if(ok)correct++;
+    html+='<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var r=document.getElementById('ex3-result');
+  r.className='result-msg '+(correct===e3ans.length?'good':'try-again');
+  r.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===e3ans.length?'✓ All 6 correct!':correct+' of 6 correct — answers:')
+    +'</div>'+html;
+  r.style.display='block';
+}
+
+// ── EX 4 — keyword matching ──
+var e4keys = [
+  {id:'e4a', keywords:['ela mesma'],    model:'A Beatriz ela mesma organizou a conferência toda. / Ela mesma organizou a conferência toda.'},
+  {id:'e4b', keywords:['da no mesmo','dá no mesmo'], model:'Dá no mesmo ir de metrô ou de ônibus — as duas opções chegam no mesmo horário.'},
+  {id:'e4c', keywords:['na mesma'],     model:'O processo de aprovação está na mesma. / O processo tá na mesma — ainda não avançou.'},
+  {id:'e4d', keywords:['mesmo software'], model:'A empresa continua usando o mesmo software que implementou em 2020.'},
+];
+function checkEx4(){
+  var correct=0, html='';
+  e4keys.forEach(function(a,i){
+    var el=document.getElementById(a.id);
+    var v=norm(el.value);
+    var ok=a.keywords.some(function(k){ return v.indexOf(norm(k))>-1; })&&v.length>5;
+    el.classList.toggle('correct',ok);
+    el.classList.toggle('wrong',el.value.trim().length>0&&!ok);
+    if(ok)correct++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' <em>'+a.model+'</em></div>';
+  });
+  var r=document.getElementById('ex4-result');
+  r.className='result-msg '+(correct===e4keys.length?'good':'try-again');
+  r.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===e4keys.length?'✓ All 4 correct!':correct+' of 4 matched — model answers:')
+    +'</div>'+html;
+  r.style.display='block';
+}
+
+// ── FORMSPREE ──
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var emailEl=document.getElementById('bphub-student-email');
+  var name=nameEl?nameEl.value.trim():'';
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=emailEl?emailEl.value.trim():'';
+  var material=document.title.replace(/ \| BPHUB.*/,'').trim();
+  var answers={};
+  var summaryLines=[];
+  document.querySelectorAll('textarea').forEach(function(ta,idx){
+    var val=ta.value.trim()||'(sem resposta)';
+    answers['R'+(idx+1)]=val;
+    summaryLines.push('<strong>Exercício 5:</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+  });
+  var payload=Object.assign({'Nome do aluno':name,'Material':material},answers);
+  if(email)payload['_replyto']=email;
+  btn.disabled=true;btn.textContent='A enviar…';
+  fetch('https://formspree.io/f/xykaydly',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(payload)
+  }).then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
+  .then(function(res){
+    if(res.ok){
+      document.getElementById('bphub-answer-summary').innerHTML=summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display='block';
+      document.getElementById('bphub-form-area').style.display='none';
+      document.getElementById('bphub-error').style.display='none';
+      var slug=location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display='block';
+      btn.disabled=false;btn.textContent='Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display='block';
+    btn.disabled=false;btn.textContent='Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
