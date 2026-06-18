@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Você Pegou uma Gripe! | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+  .card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(60,60,33,.07); }
+  .section-title { font-family: 'Trirong', serif; font-size: 1.05rem; color: var(--floresta); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 32px 0 10px; padding-left: 12px; border-left: 3px solid var(--terracota); }
+  .card-title { font-family: 'Trirong', serif; font-size: 1.1rem; color: var(--terracota); margin-bottom: 14px; font-weight: 600; }
+  .instr { background: var(--baunilha); border-radius: 8px; padding: 12px 16px; font-size: .87rem; margin-bottom: 16px; line-height: 1.6; }
+  .instr strong { color: var(--terracota); }
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+  .dialogue { margin: 16px 0; }
+  .dialogue-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--giz); align-items: baseline; }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker { font-weight: 700; color: var(--floresta); font-size: .85rem; min-width: 28px; text-transform: uppercase; }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th { background: var(--floresta); color: #fff; padding: 10px 14px; text-align: left; font-family: 'Trirong', serif; font-weight: 600; }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .gram-table .hl { color: var(--telha); font-weight: 700; }
+  .phon-box { background: var(--rosa-cha); border-left: 4px solid var(--goiaba); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cult-box { background: #EEF4EC; border-left: 4px solid var(--floresta); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ex-num { display: inline-block; background: var(--terracota); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .ex-title { font-family: 'Trirong', serif; font-size: 1rem; color: var(--musgo); font-weight: 600; display: flex; align-items: center; margin-bottom: 14px; }
+  .fill-line { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; line-height: 2; font-size: .97rem; }
+  .fill-line input { border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: .97rem; color: var(--musgo); padding: 2px 6px; width: 130px; text-align: center; outline: none; transition: border-color .2s; }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+  .word-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--erva-doce); border-radius: 10px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 200px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn { background: var(--giz); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 6px 13px; font-family: 'Manrope', sans-serif; font-size: .84rem; font-weight: 700; color: var(--musgo); cursor: pointer; transition: background .15s, border-color .15s; }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+  .match-select { width: 100%; border: 2px solid var(--erva-doce); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--musgo); background: #fff; outline: none; transition: border-color .2s; cursor: pointer; }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+  .prod-textarea { width: 100%; border: 2px solid var(--erva-doce); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; color: var(--musgo); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; margin-top: 10px; }
+  .prod-textarea:focus { border-color: var(--terracota); }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check { background: var(--terracota); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 8px; padding: 10px 18px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge { display: none; align-items: center; gap: 6px; background: var(--baunilha); border-radius: 8px; padding: 10px 16px; font-size: .88rem; font-weight: 700; color: var(--musgo); }
+  .score-badge.visible { display: inline-flex; }
+  @media(max-width:600px) { .card { padding: 20px 18px; } .word-item { flex-direction: column; align-items: flex-start; } }
+  .grp { color: var(--telha); font-weight: 800; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: var(--giz); border-bottom: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level { background: var(--floresta); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; font-family: 'Manrope', sans-serif; }
+  .topbar-back { font-size: 12px; color: #999; text-decoration: none; transition: color .2s; }
+  .topbar-back:hover { color: var(--floresta); }
+  .page-hero { background: var(--floresta); padding: 40px 28px 36px; }
+  .page-hero h1 { font-family: 'Trirong', serif; font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 300; line-height: 1.3; margin-bottom: 16px; color: #fff; }
+  .page-attribution { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Manrope', sans-serif; line-height: 1.7; }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Iniciante I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Você Pegou uma Gripe!</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 39</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Falar de saúde e remédios</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> One person is sick but doesn't want to admit it. What does the other person ask them? What has the sick person already done to feel better?
+    </div>
+    <div class="audio-label">Língua da Gente · Episode 39</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/beginning-39-you-caught-a-cold/id1020665354?i=1000371652084">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/beginning-39-you-caught-a-cold/id1020665354?i=1000371652084" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Read along</strong> while listening again. Notice the highlighted verbs — <em>pegou, tomou, deu</em> — and how "já" and "sim" add nuance to what's being said.
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">E, você <span class="grp">pegou</span> uma gripe!</div>
+          <div class="line-en">Wow, you've caught a cold!</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Não é nada, estou bem.</div>
+          <div class="line-en">No, it's nothing, I'm fine.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Não, você <span class="grp">pegou</span> sim. Você <span class="grp">já tomou</span> alguma coisa?</div>
+          <div class="line-en">No, you really caught one. Have you taken anything?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Só o remédio que a Marina me <span class="grp">deu</span>, e muita vitamina C.</div>
+          <div class="line-en">Just the medicine that Marina gave to me, and a lot of vitamin C.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <!-- Grammar 1: Pegar + pegou sim -->
+  <div class="card">
+    <div class="card-title">📖 Pegar — to catch / to get (something)</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A says <em>"você <strong>pegou</strong> uma gripe"</em> — <em>pegar</em> (literally: to grab/take) is used in everyday Brazilian Portuguese in many health and physical contexts. It's a regular -ar verb.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Portuguese</th>
+        <th>English</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><span class="pt grp">pegar uma gripe</span></td>
+        <td><span class="en">to catch a cold</span></td>
+        <td><span class="note">Health — most common use</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt grp">pegar um táxi</span></td>
+        <td><span class="en">to catch / take a taxi</span></td>
+        <td><span class="note">Transport</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt grp">pegar sol</span></td>
+        <td><span class="en">to sunbathe / to catch sun</span></td>
+        <td><span class="note">Very common at the beach</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt grp">pegar fila</span></td>
+        <td><span class="en">to queue up / to wait in line</span></td>
+        <td><span class="note">Everyday life</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt grp">pegar trânsito</span></td>
+        <td><span class="en">to get stuck in traffic</span></td>
+        <td><span class="note">Very common in Brazilian cities</span></td>
+      </tr>
+    </table>
+
+    <div class="phon-box">
+      <strong>🔊 "Pegou sim" — affirmative reinforcement</strong>
+      When B denies having a cold, A insists: <em>"Não, você <strong>pegou sim</strong>."</em> Adding <em>sim</em> after the verb is a powerful Brazilian way to affirm something the other person has just denied — like English "Yes you did!" or "You really did." You'll hear this constantly in everyday disagreements: <em>Fui sim!</em> (I did go!), <em>Eu disse sim!</em> (I did say it!). It turns a simple statement into a firm, emphatic one.
+    </div>
+  </div>
+
+  <!-- Grammar 2: Já + pretérito / Já tomou? -->
+  <div class="card">
+    <div class="card-title">📖 Já tomou? — Já + preterite for recent actions</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A asks <em>"Você <strong>já tomou</strong> alguma coisa?"</em> — Here <em>já</em> + preterite asks whether something has already happened. You've seen <em>já</em> in several episodes — this is its "already" meaning applied as a question about the recent past.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Question with já</th>
+        <th>English</th>
+        <th>Answer</th>
+      </tr>
+      <tr>
+        <td><span class="pt">Você já <span class="grp">tomou</span> o remédio?</span></td>
+        <td><span class="en">Have you taken the medicine yet / already?</span></td>
+        <td><span class="pt">Já tomei. / Ainda não.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Você já <span class="grp">comeu</span>?</span></td>
+        <td><span class="en">Have you eaten yet?</span></td>
+        <td><span class="pt">Já comi. / Ainda não.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Você já <span class="grp">foi</span> ao médico?</span></td>
+        <td><span class="en">Have you been to the doctor yet?</span></td>
+        <td><span class="pt">Já fui. / Ainda não fui.</span></td>
+      </tr>
+    </table>
+
+    <p style="font-size:.88rem;color:#666;margin-top:12px;"><em>Tomar</em> in health contexts means "to take" (medicine, vitamins, a pill). Key health phrases with <em>tomar</em>: <em>tomar um remédio</em> (to take a medicine), <em>tomar vitamina C</em> (to take vitamin C), <em>tomar um chá</em> (to have a herbal tea). <em>Alguma coisa</em> = anything / something.</p>
+  </div>
+
+  <!-- Grammar 3: Relative pronoun QUE + me deu + muito/muita -->
+  <div class="card">
+    <div class="card-title">📖 O remédio que… — Relative pronoun + object pronouns</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B says <em>"o remédio <strong>que</strong> a Marina <strong>me</strong> deu."</em> Two important patterns in one sentence: the relative pronoun <em>que</em> and the indirect object pronoun <em>me</em>.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Pattern</th>
+        <th>Example</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><span class="pt grp">que</span> (relative pronoun)</td>
+        <td><span class="pt">o remédio <span class="grp">que</span> ela me deu <span class="en">(the medicine that she gave me)</span></span></td>
+        <td><span class="note">Links the noun to a relative clause. <em>Que</em> works for people and things — no distinction like English who/that/which</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt grp">me</span> (indirect object)</td>
+        <td><span class="pt">A Marina <span class="grp">me</span> deu o remédio. <span class="en">(Marina gave me the medicine.)</span></span></td>
+        <td><span class="note"><em>Me</em> = to me. Comes before the verb in Brazilian Portuguese spoken style</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt grp">muita</span> vitamina C</td>
+        <td><span class="pt">tomei <span class="grp">muita</span> vitamina C <span class="en">(I took a lot of vitamin C)</span></span></td>
+        <td><span class="note"><em>Muito/muita</em> agrees with the noun: <em>muito suco</em> (m.) / <em>muita água</em> (f.)</span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box" style="margin-top:16px;">
+      <strong>🇧🇷 Remédios caseiros — Home remedies in Brazil</strong>
+      Brazilians rely heavily on <em>remédios caseiros</em> (home remedies) alongside conventional medicine. Vitamin C is a go-to, but you'll also hear: <em>chá de gengibre com mel</em> (ginger tea with honey), <em>chá de erva-cidreira</em> (lemon balm tea), <em>sopa de galinha</em> (chicken soup — yes, universal!), and <em>mel puro</em> (pure honey) for sore throats. Pharmacies (<em>farmácias</em>) in Brazil are everywhere and you can get many medications without a prescription that require one elsewhere. <em>"Já tomou alguma coisa?"</em> is a very natural Brazilian way to check in on a sick friend or family member.
+    </div>
+  </div>
+
+  <p class="section-title">Step 4 — Practice</p>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> What does it mean? — Expression Quiz</div>
+    <div class="instr">Choose the correct meaning for each expression from the dialogue.</div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">Você pegou uma gripe.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','b')">You're going to catch a cold.</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','b')">You've caught a cold.</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','b')">You had a cold.</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Pegou</em> = preterite of <em>pegar</em> (you caught / you've caught). <em>Uma gripe</em> = a cold / flu. <em>Pegar uma gripe</em> is the standard Brazilian expression for "to catch a cold."</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">Você pegou sim.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','b')">Maybe you caught it.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','b')">You really did catch it.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','b')">You didn't catch it.</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Sim</em> after the verb is emphatic affirmation — used when the other person has denied something. <em>Pegou sim</em> = You really did catch it / Yes you did catch it.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Você já tomou alguma coisa?</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','c')">Are you going to take something?</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','c')">Did you take everything?</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','c')">Have you taken anything?</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Já</em> + preterite = have you already / yet. <em>Tomou</em> = preterite of <em>tomar</em> (to take). <em>Alguma coisa</em> = anything / something. Together: Have you taken anything (yet)?</span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">O remédio que a Marina me deu.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','a')">The medicine that Marina gave me.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','a')">The medicine that Marina needs.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','a')">The medicine Marina took from me.</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Que</em> = that (relative pronoun). <em>Me deu</em> = gave me (<em>me</em> = indirect object "to me"; <em>deu</em> = preterite of <em>dar</em>). So: the medicine that Marina gave (to) me.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks with the missing words.<br>
+      <strong>Word bank:</strong> <em>pegou · tomou · remédio · deu · muita</em>
+    </div>
+    <div class="fill-line">— E, você <input type="text" id="f1" placeholder="___"> uma gripe!</div>
+    <div class="fill-line">— Não é nada, estou bem.</div>
+    <div class="fill-line">— Não, você pegou sim. Você já <input type="text" id="f2" placeholder="___"> alguma coisa?</div>
+    <div class="fill-line">— Só o <input type="text" id="f3" placeholder="___"> que a Marina me <input type="text" id="f4" placeholder="___">, e <input type="text" id="f5" placeholder="___"> vitamina C.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> Muito or Muita?</div>
+    <div class="instr">
+      Select the correct form — <em>muito</em> (masculine) or <em>muita</em> (feminine) — for each noun.
+    </div>
+    <div style="display:grid;gap:14px;margin-top:8px;">
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">___ vitamina C</p>
+        <select class="match-select" id="ms1">
+          <option value="">— escolha —</option>
+          <option value="a">muita</option>
+          <option value="b">muito</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">___ suco de laranja</p>
+        <select class="match-select" id="ms2">
+          <option value="">— escolha —</option>
+          <option value="a">muita</option>
+          <option value="b">muito</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">___ água</p>
+        <select class="match-select" id="ms3">
+          <option value="">— escolha —</option>
+          <option value="a">muita</option>
+          <option value="b">muito</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">___ repouso <em>(rest)</em></p>
+        <select class="match-select" id="ms4">
+          <option value="">— escolha —</option>
+          <option value="a">muita</option>
+          <option value="b">muito</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Estou mal!</div>
+    <div class="instr"><strong>Write in Portuguese.</strong><br>A friend texts you saying they feel terrible. Write your reply (4–5 sentences). Ask what's wrong, whether they've seen a doctor or taken anything yet, and give them some advice using <em>toma…</em>, <em>bebe muita…</em>, <em>descansa…</em>.</div>
+    <textarea class="prod-textarea" placeholder="Example:&#10;— Ai, que pena! Você pegou uma gripe?&#10;— Já foi ao médico? Você já tomou alguma coisa?&#10;— Toma um remédio para febre e bebe muita água.&#10;— O remédio que eu sempre tomo quando estou mal é o Neosaldina — funciona muito bem!&#10;— Fica em casa e descansa. Melhoras!"></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var match = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(match && match[1] === chosen) { b.classList.add(chosen === correct ? 'correct' : 'wrong'); }
+      if(match && match[1] === correct && chosen !== correct) { b.classList.add('correct'); }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      fb.textContent = '❌ Not quite — try again.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  var fillAnswers = { f1:'pegou', f2:'tomou', f3:'remédio|remedio', f4:'deu', f5:'muita' };
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ã/g,'a').replace(/õ/g,'o'); }
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  var matchAnswers = { ms1:'a', ms2:'b', ms3:'a', ms4:'b' };
+  function checkMatch(){
+    var score = 0;
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+
+<script>
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {}; var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = ''; var parent = ta.closest('[class]');
+    if (parent) { var clone = parent.cloneNode(true); clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); }); label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80); }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+  .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      localStorage.setItem('bphub_done_' + location.pathname.split('/').pop().replace('.html',''), '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; }
+  }).catch(function() { document.getElementById('bphub-error').style.display = 'block'; btn.disabled = false; btn.textContent = 'Enviar respostas'; });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
