@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Dormiu Bem? | Iniciante II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --cobalto-lt: #EBF1F8;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+    --nanquim:    #000000;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(60,60,33,.07);
+  }
+
+  .section-title {
+    font-family: 'Trirong', serif;
+    font-size: 1.05rem;
+    color: var(--cobalto);
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin: 32px 0 10px;
+    padding-left: 12px;
+    border-left: 3px solid var(--terracota);
+  }
+
+  .card-title {
+    font-family: 'Trirong', serif;
+    font-size: 1.1rem;
+    color: var(--terracota);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .instr {
+    background: var(--baunilha);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: .87rem;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .instr strong { color: var(--terracota); }
+
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .audio-embed iframe { width: 100%; border-radius: 10px; border: none; }
+  .audio-link { font-size: .8rem; color: #aaa; margin-top: 8px; }
+  .audio-link a { color: var(--terracota); }
+
+  .dialogue { margin: 16px 0; }
+  .dialogue-line {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--giz);
+    align-items: baseline;
+  }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker {
+    font-weight: 700;
+    color: var(--cobalto);
+    font-size: .85rem;
+    min-width: 28px;
+    text-transform: uppercase;
+  }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th {
+    background: var(--cobalto);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Trirong', serif;
+    font-weight: 600;
+  }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .gram-table .hl { color: var(--cobalto); font-weight: 700; }
+
+  .phon-box {
+    background: var(--rosa-cha);
+    border-left: 4px solid var(--goiaba);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: .9rem;
+  }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+
+  .cult-box {
+    background: var(--cobalto-lt);
+    border-left: 4px solid var(--cobalto);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: .9rem;
+  }
+  .cult-box strong { color: var(--cobalto); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+
+  .ex-num {
+    display: inline-block;
+    background: var(--terracota);
+    color: #fff;
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    text-align: center;
+    line-height: 26px;
+    font-size: .8rem;
+    font-weight: 700;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .ex-title {
+    font-family: 'Trirong', serif;
+    font-size: 1rem;
+    color: var(--musgo);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .fill-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    line-height: 2;
+    font-size: .97rem;
+  }
+  .fill-line input {
+    border: none;
+    border-bottom: 2px solid var(--erva-doce);
+    background: transparent;
+    font-family: 'Manrope', sans-serif;
+    font-size: .97rem;
+    color: var(--musgo);
+    padding: 2px 6px;
+    width: 150px;
+    text-align: center;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+
+  .word-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border: 1.5px solid var(--erva-doce);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 180px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn {
+    background: var(--giz);
+    border: 1.5px solid var(--erva-doce);
+    border-radius: 8px;
+    padding: 6px 13px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .84rem;
+    font-weight: 700;
+    color: var(--musgo);
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+
+  .match-select {
+    width: 100%;
+    border: 2px solid var(--erva-doce);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .9rem;
+    color: var(--musgo);
+    background: #fff;
+    outline: none;
+    transition: border-color .2s;
+    cursor: pointer;
+  }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+
+  .prod-textarea {
+    width: 100%;
+    border: 2px solid var(--erva-doce);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .95rem;
+    color: var(--musgo);
+    resize: vertical;
+    min-height: 110px;
+    outline: none;
+    transition: border-color .2s;
+    margin-top: 10px;
+  }
+  .prod-textarea:focus { border-color: var(--terracota); }
+
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check {
+    background: var(--terracota);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset {
+    background: transparent;
+    color: var(--pitomba);
+    border: 1.5px solid var(--pitomba);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: 'Manrope', sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: var(--baunilha);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--musgo);
+  }
+  .score-badge.visible { display: inline-flex; }
+
+  .answers-list {
+    display: none;
+    margin-top: 12px;
+    background: var(--giz);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: .84rem;
+    line-height: 1.9;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+  .answers-list.show { display: block; }
+
+  @media(max-width:600px) {
+    .card { padding: 20px 18px; }
+    .word-item { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── TOPBAR ─────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--giz);
+    border-bottom: 1px solid #E8E4DE;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level {
+    background: var(--cobalto); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+    font-family: 'Manrope', sans-serif;
+  }
+  .topbar-back {
+    font-size: 12px; color: #999; text-decoration: none; transition: color .2s;
+  }
+  .topbar-back:hover { color: var(--cobalto); }
+
+  /* ── PAGE HERO ─────────────────────────── */
+  .page-hero {
+    background: var(--cobalto);
+    padding: 40px 28px 36px;
+  }
+  .page-hero h1 {
+    font-family: 'Trirong', serif;
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
+    font-weight: 300; line-height: 1.3;
+    margin-bottom: 16px; color: #fff;
+  }
+  .page-attribution {
+    font-size: 12px; color: rgba(255,255,255,0.75);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.7;
+  }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+
+  /* ── highlight key words ── */
+  .kw { color: var(--cobalto); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A2 — Iniciante II</span>
+    <a href="../a2/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <h1>Dormiu Bem?</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 01</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Cumprimentos matinais</span>
+    <span class="meta-pill"><span class="dot"></span>Que horas são?</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <!-- STEP 1 -->
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> What time is it? How did B sleep? What do they decide to do?
+    </div>
+    <div class="audio-label">Língua da Gente · Elementary 01</div>
+    <div class="audio-embed">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0"
+        height="175"
+        style="width:100%;overflow:hidden;border-radius:10px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-01-did-you-sleep-well/id862545884?i=1000347351565">
+      </iframe>
+    </div>
+    <div class="audio-link">Can't play? <a href="https://podcasts.apple.com/br/podcast/elementary-01-did-you-sleep-well/id862545884?i=1000347351565" target="_blank">Open in Apple Podcasts →</a></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Listen again</strong> while reading. Notice how B makes a suggestion — what structure does B use?
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Bom dia, você <span class="kw">dormiu bem</span>?</div>
+          <div class="line-en">Good morning, did you sleep well?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt"><span class="kw">Mais ou menos</span>. <span class="kw">Que horas são</span>?</div>
+          <div class="line-en">More or less. What time is it?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt"><span class="kw">Seis e meia</span>, ainda é muito <span class="kw">cedo</span>.</div>
+          <div class="line-en">Six-thirty, it's still really early.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt"><span class="kw">Vamos dormir</span> um pouco mais!</div>
+          <div class="line-en">Let's sleep a little more!</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt"><span class="kw">Tá</span>, mais um <span class="kw">pouquinho</span> só.</div>
+          <div class="line-en">OK, just a tiny bit more.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <!-- Grammar 1: Telling Time -->
+  <div class="card">
+    <div class="card-title">📖 Que horas são? — Telling the Time</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A replies <em>"Seis e meia"</em> — six-thirty. Here's how to ask and tell the time in Brazilian Portuguese.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Clock</th>
+        <th>Portuguese</th>
+        <th>Note</th>
+      </tr>
+      <tr>
+        <td>1:00</td>
+        <td><span class="pt"><strong>É</strong> uma hora.</span></td>
+        <td><span class="note">Singular — only 1:00 uses <em>é</em></span></td>
+      </tr>
+      <tr>
+        <td>6:00</td>
+        <td><span class="pt"><strong>São</strong> seis horas.</span></td>
+        <td><span class="note">Plural — use <em>são</em> for all other times</span></td>
+      </tr>
+      <tr>
+        <td>6:15</td>
+        <td><span class="pt"><strong>São</strong> seis e quinze.</span></td>
+        <td><span class="note">six and fifteen</span></td>
+      </tr>
+      <tr>
+        <td>6:30</td>
+        <td><span class="pt"><strong>São</strong> seis e <span class="hl">meia</span>.</span></td>
+        <td><span class="note"><em>meia</em> = half → from the dialogue!</span></td>
+      </tr>
+      <tr>
+        <td>6:45</td>
+        <td><span class="pt"><strong>São</strong> seis e quarenta e cinco.</span></td>
+        <td><span class="note">or: <em>sete menos quinze</em></span></td>
+      </tr>
+      <tr>
+        <td>12:00</td>
+        <td><span class="pt"><strong>É</strong> meio-dia.</span></td>
+        <td><span class="note">noon — singular!</span></td>
+      </tr>
+      <tr>
+        <td>00:00</td>
+        <td><span class="pt"><strong>É</strong> meia-noite.</span></td>
+        <td><span class="note">midnight — singular!</span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box" style="margin-top:16px;">
+      <strong>💡 É vs. São — the most common mistake</strong>
+      Use <em>é</em> only for <strong>1 o'clock, noon, and midnight</strong> (all singular). Use <em>são</em> for everything else (plural). <em>"São seis e meia"</em> — not <em>"é seis e meia"</em>.
+    </div>
+  </div>
+
+  <!-- Grammar 2: Vamos + infinitivo -->
+  <div class="card">
+    <div class="card-title">📖 Vamos + infinitivo — Making Suggestions</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">B says <em>"Vamos dormir um pouco mais!"</em> — this is the most natural way to say "let's…" in Brazilian Portuguese.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Infinitive</th>
+        <th>Suggestion</th>
+        <th>English</th>
+      </tr>
+      <tr>
+        <td><span class="pt">dormir</span></td>
+        <td><span class="hl">Vamos dormir</span> um pouco mais!</td>
+        <td><span class="en">Let's sleep a little more!</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">comer</span></td>
+        <td><span class="hl">Vamos comer</span>?</td>
+        <td><span class="en">Shall we eat?</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">trabalhar</span></td>
+        <td><span class="hl">Vamos trabalhar</span>!</td>
+        <td><span class="en">Let's get to work!</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">sair</span></td>
+        <td><span class="hl">Vamos sair</span>?</td>
+        <td><span class="en">Shall we go out?</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">começar</span></td>
+        <td><span class="hl">Vamos começar</span>!</td>
+        <td><span class="en">Let's start!</span></td>
+      </tr>
+    </table>
+
+    <p style="font-size:.84rem;color:#666;margin-top:12px;">💡 <em>Vamos</em> with a <strong>?</strong> sounds like an invitation; with a <strong>!</strong> it's more enthusiastic. Both are very common in everyday Brazilian speech.</p>
+  </div>
+
+  <!-- Grammar 3: Key Expressions -->
+  <div class="card">
+    <div class="card-title">📖 Key Expressions from the Dialogue</div>
+
+    <table class="gram-table">
+      <tr>
+        <th>Portuguese</th>
+        <th>English</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><span class="pt">Dormiu bem?</span></td>
+        <td><span class="en">Did you sleep well?</span></td>
+        <td><span class="note">From <em>dormir</em> (to sleep). Pretérito perfeito: <em>você dormiu</em>.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Mais ou menos.</span></td>
+        <td><span class="en">More or less. / So-so.</span></td>
+        <td><span class="note">Very common in Brazil — a relaxed, honest answer. Brazilians avoid extremes in casual conversation.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Que horas são?</span></td>
+        <td><span class="en">What time is it?</span></td>
+        <td><span class="note">Literally: "What hours are they?" Always plural <em>são</em> in the question.</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Seis e meia.</span></td>
+        <td><span class="en">Six-thirty.</span></td>
+        <td><span class="note"><em>Meia</em> = half. So "six and a half" = 6:30. Also used for "meia" = 6 in phone numbers!</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Ainda é muito cedo.</span></td>
+        <td><span class="en">It's still really early.</span></td>
+        <td><span class="note"><em>Ainda</em> = still. <em>Cedo</em> = early (opposite: <em>tarde</em> = late).</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Um pouco / pouquinho.</span></td>
+        <td><span class="en">A little / a tiny bit.</span></td>
+        <td><span class="note"><em>Pouquinho</em> is the diminutive — smaller and warmer than <em>pouco</em>. Very Brazilian!</span></td>
+      </tr>
+      <tr>
+        <td><span class="pt">Tá.</span></td>
+        <td><span class="en">OK / Alright.</span></td>
+        <td><span class="note">Informal short form of <em>está bem</em>. One of the most frequent words in spoken Brazilian Portuguese.</span></td>
+      </tr>
+    </table>
+
+    <div class="cult-box" style="margin-top:20px;">
+      <strong>🇧🇷 Culture Note — Diminutives &amp; "mais ou menos"</strong>
+      Two things will make your Portuguese sound instantly more Brazilian. First: use <em>pouquinho</em> instead of <em>pouco</em> — diminutives signal warmth and are everywhere in Brazilian speech (<em>cafezinho, beijinho, rapidinho</em>). Second: reply <em>mais ou menos</em> when someone asks how you are — it's honest, relaxed, and very natural. A simple <em>bem</em> can sound formal or American.
+    </div>
+
+    <div class="phon-box" style="margin-top:16px;">
+      <strong>🔊 Phonology Note — Nasal vowels: bom, mais, ainda</strong>
+      Notice the nasal sounds in this dialogue: <em><strong>bom</strong></em>, <em><strong>mais</strong></em>, <em><strong>ainda</strong></em>. In Brazilian Portuguese, vowels before <strong>m</strong> or <strong>n</strong>, or marked with <strong>~</strong>, resonate through the nose. This is very different from English. Try it: say <em>bom</em> and let the air flow through your nose at the end. Listen to the episode several times focusing on these nasal sounds.
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <p class="section-title">Step 4 — Practice</p>
+
+  <!-- EXERCISE 1: Expression quiz -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> What does it mean? — Expression Quiz</div>
+    <div class="instr">
+      Each expression comes from the dialogue. Choose the correct English meaning.
+    </div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">Mais ou menos.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','b')">More than less.</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','b')">More or less. / So-so.</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','b')">Yes, very much.</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Mais ou menos</em> is one of the most useful expressions in Brazilian Portuguese — a relaxed way to say "so-so" or "not too bad." You'll hear it constantly.</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">Vamos dormir um pouco mais!</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','a')">Let's sleep a little more!</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','a')">I slept a little more.</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','a')">You should sleep more.</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Vamos</em> + infinitive = "let's…". Here: <em>vamos dormir</em> = let's sleep. <em>Um pouco mais</em> = a little more.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Ainda é muito cedo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','c')">It was very early.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','c')">It's almost too late.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','c')">It's still really early.</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Ainda</em> = still. <em>Cedo</em> = early. <em>Muito</em> = very/really. The opposite: <em>ainda é muito tarde</em> = it's still really late.</span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">Tá, mais um pouquinho só.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','b')">No, not even a little.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','b')">OK, just a tiny bit more.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','b')">OK, let's get up now.</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Tá</em> = OK. <em>Pouquinho</em> = tiny bit (diminutive of <em>pouco</em>). <em>Só</em> adds the idea of "just/only." A very natural, soft agreement.</span>
+    </div>
+  </div>
+
+  <!-- EXERCISE 2: Gap fill -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the missing words. <strong>Word bank:</strong> <em>Bom · dormiu · menos · horas · Seis · cedo · mais · Tá</em>
+    </div>
+    <div class="fill-line">— <input type="text" id="f1" placeholder="___" style="width:80px;"> dia, você <input type="text" id="f2" placeholder="___" style="width:110px;"> bem?</div>
+    <div class="fill-line">— Mais ou <input type="text" id="f3" placeholder="___" style="width:100px;">. Que <input type="text" id="f4" placeholder="___" style="width:90px;"> são?</div>
+    <div class="fill-line">— <input type="text" id="f5" placeholder="___" style="width:80px;"> e meia, ainda é muito <input type="text" id="f6" placeholder="___" style="width:90px;">.</div>
+    <div class="fill-line">— Vamos dormir um pouco <input type="text" id="f7" placeholder="___" style="width:90px;">!</div>
+    <div class="fill-line">— <input type="text" id="f8" placeholder="___" style="width:60px;">, mais um pouquinho só.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+    <div class="answers-list" id="fill-answers"></div>
+  </div>
+
+  <!-- EXERCISE 3: Telling time -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> What time is it? — Choose the correct answer</div>
+    <div class="instr">
+      Select the correct Portuguese time expression for each clock.
+    </div>
+    <div style="display:grid;gap:14px;margin-top:8px;">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span style="font-size:1.2rem;font-weight:700;color:var(--cobalto);min-width:55px;">6:30</span>
+        <select class="match-select" id="ms1" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">São seis e quinze.</option>
+          <option value="b">São seis e meia.</option>
+          <option value="c">É seis e meia.</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span style="font-size:1.2rem;font-weight:700;color:var(--cobalto);min-width:55px;">7:00</span>
+        <select class="match-select" id="ms2" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">É sete horas.</option>
+          <option value="b">São sete e meia.</option>
+          <option value="c">São sete horas.</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span style="font-size:1.2rem;font-weight:700;color:var(--cobalto);min-width:55px;">8:15</span>
+        <select class="match-select" id="ms3" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">São oito e quinze.</option>
+          <option value="b">São oito e meia.</option>
+          <option value="c">É oito e quinze.</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span style="font-size:1.2rem;font-weight:700;color:var(--cobalto);min-width:55px;">12:00</span>
+        <select class="match-select" id="ms4" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">São doze horas.</option>
+          <option value="b">É meia-noite.</option>
+          <option value="c">É meio-dia.</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span style="font-size:1.2rem;font-weight:700;color:var(--cobalto);min-width:55px;">1:00</span>
+        <select class="match-select" id="ms5" style="max-width:260px;">
+          <option value="">— choose —</option>
+          <option value="a">São uma hora.</option>
+          <option value="b">É uma hora.</option>
+          <option value="c">É um hora.</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+    <div class="answers-list" id="match-answers"></div>
+  </div>
+
+  <!-- EXERCISE 4: Vamos + infinitivo -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Make a suggestion — Vamos + infinitivo!</div>
+    <div class="instr">
+      Write a complete suggestion using <strong>Vamos + infinitivo</strong>. You can add more words after the verb. Example: <em>dormir</em> → <em>Vamos dormir um pouco mais!</em>
+    </div>
+    <div class="fill-line">comer → <input type="text" id="v1" placeholder="Escreva a frase completa..." style="width:280px;text-align:left;padding-left:8px;"></div>
+    <div class="fill-line">trabalhar → <input type="text" id="v2" placeholder="Escreva a frase completa..." style="width:280px;text-align:left;padding-left:8px;"></div>
+    <div class="fill-line">conversar → <input type="text" id="v3" placeholder="Escreva a frase completa..." style="width:280px;text-align:left;padding-left:8px;"></div>
+    <div class="fill-line">começar → <input type="text" id="v4" placeholder="Escreva a frase completa..." style="width:280px;text-align:left;padding-left:8px;"></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkVamos()">Check answers</button>
+      <button class="btn-reset" onclick="resetVamos()">Reset</button>
+      <span class="score-badge" id="vamos-score"></span>
+    </div>
+    <div class="answers-list" id="vamos-answers"></div>
+  </div>
+
+  <!-- EXERCISE 5: Production -->
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">5</span> Your Turn — Write a morning dialogue!</div>
+    <div class="instr"><strong>Write a short dialogue (4–6 lines)</strong> between two people in the morning. Use at least 3 expressions from this episode: a greeting, a question about time, a <em>Vamos…</em> suggestion, and/or <em>tá / mais ou menos / pouquinho</em>. Be creative!</div>
+    <textarea class="prod-textarea" id="prod1" placeholder="Example:&#10;A: Oi! Bom dia! Dormiu bem?&#10;B: Mais ou menos. Que horas são?&#10;A: São oito horas já!&#10;B: Não pode ser! Vamos tomar café?&#10;A: Tá, mais um minutinho só."></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  /* ── normalise (accent-tolerant) ── */
+  function norm(s){ return s.trim().toLowerCase().replace(/[áàãâä]/g,'a').replace(/[éèêë]/g,'e').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' '); }
+
+  /* ── EXERCISE 1: expression quiz ── */
+  var choiceCorrect = { w1:'b', w2:'a', w3:'c', w4:'b' };
+  var choiceFeedback = {
+    w1: '✅ <em>Mais ou menos</em> = more or less / so-so. Very common, relaxed Brazilian answer.',
+    w2: '✅ <em>Vamos dormir</em> = let\'s sleep. <em>Um pouco mais</em> = a little more.',
+    w3: '✅ <em>Ainda</em> = still. <em>Cedo</em> = early. <em>Muito</em> = really/very.',
+    w4: '✅ <em>Tá</em> = OK. <em>Pouquinho</em> = tiny bit (diminutive of <em>pouco</em>). <em>Só</em> = just/only.'
+  };
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var m = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(m && m[1] === correct) b.classList.add('correct');
+      if(m && m[1] === chosen && chosen !== correct) b.classList.add('wrong');
+    });
+    if(chosen === correct){
+      fb.innerHTML = choiceFeedback[wordId];
+      fb.classList.add('show');
+    } else {
+      fb.innerHTML = '❌ Not quite. Look at the correct answer above.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  /* ── EXERCISE 2: gap fill ── */
+  var fillAnswers = { f1:'bom', f2:'dormiu', f3:'menos', f4:'horas', f5:'seis', f6:'cedo', f7:'mais', f8:'ta' };
+  var fillDisplay = { f1:'Bom', f2:'dormiu', f3:'menos', f4:'horas', f5:'Seis', f6:'cedo', f7:'mais', f8:'Tá' };
+  function checkFill(){
+    var ids = ['f1','f2','f3','f4','f5','f6','f7','f8'];
+    var score = 0;
+    var lines = [];
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var ok = norm(el.value) === norm(fillAnswers[id]);
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+      lines.push('<strong>' + id.replace('f','') + '.</strong> ' + (ok ? '✅' : '❌') + ' <em>' + fillDisplay[id] + '</em>');
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 8 correct';
+    badge.classList.add('visible');
+    var al = document.getElementById('fill-answers');
+    al.innerHTML = '<strong style="font-size:.82rem;">Model answers:</strong><br>' + lines.join(' &nbsp;·&nbsp; ');
+    al.classList.add('show');
+  }
+  function resetFill(){
+    ['f1','f2','f3','f4','f5','f6','f7','f8'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value=''; el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+    document.getElementById('fill-answers').classList.remove('show');
+  }
+
+  /* ── EXERCISE 3: telling time ── */
+  var matchAnswers = { ms1:'b', ms2:'c', ms3:'a', ms4:'c', ms5:'b' };
+  var matchDisplay = { ms1:'São seis e meia.', ms2:'São sete horas.', ms3:'São oito e quinze.', ms4:'É meio-dia.', ms5:'É uma hora.' };
+  function checkMatch(){
+    var score = 0;
+    var lines = [];
+    ['ms1','ms2','ms3','ms4','ms5'].forEach(function(id,i){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      var ok = el.value === matchAnswers[id];
+      if(ok){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+      lines.push('<strong>' + (i+1) + '.</strong> ' + (ok?'✅':'❌') + ' <em>' + matchDisplay[id] + '</em>');
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 5 correct';
+    badge.classList.add('visible');
+    var al = document.getElementById('match-answers');
+    al.innerHTML = '<strong style="font-size:.82rem;">Model answers:</strong><br>' + lines.join('<br>');
+    al.classList.add('show');
+  }
+  function resetMatch(){
+    ['ms1','ms2','ms3','ms4','ms5'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value=''; el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+    document.getElementById('match-answers').classList.remove('show');
+  }
+
+  /* ── EXERCISE 4: Vamos + infinitivo ── */
+  var vamosKeys = { v1:'vamos comer', v2:'vamos trabalhar', v3:'vamos conversar', v4:'vamos comecar' };
+  var vamosDisplay = { v1:'Vamos comer! (any sentence with "vamos comer")', v2:'Vamos trabalhar! (any sentence with "vamos trabalhar")', v3:'Vamos conversar! (any sentence with "vamos conversar")', v4:'Vamos começar! (any sentence with "vamos começar")' };
+  function checkVamos(){
+    var ids = ['v1','v2','v3','v4'];
+    var score = 0;
+    var lines = [];
+    ids.forEach(function(id,i){
+      var el = document.getElementById(id);
+      var val = norm(el.value);
+      var ok = val.indexOf(norm(vamosKeys[id])) >= 0;
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : (el.value.trim() ? 'wrong' : ''));
+      if(ok) score++;
+      lines.push('<strong>' + (i+1) + '.</strong> ' + (ok?'✅':'❌') + ' <em>' + vamosDisplay[id] + '</em>');
+    });
+    var badge = document.getElementById('vamos-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+    var al = document.getElementById('vamos-answers');
+    al.innerHTML = '<strong style="font-size:.82rem;">Model answers:</strong><br>' + lines.join('<br>');
+    al.classList.add('show');
+  }
+  function resetVamos(){
+    ['v1','v2','v3','v4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value=''; el.classList.remove('correct','wrong');
+    });
+    document.getElementById('vamos-score').classList.remove('visible');
+    document.getElementById('vamos-answers').classList.remove('show');
+  }
+</script>
+
+<script>
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
