@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qual Ônibus Pegar? — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    /* HERO */
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* STEP BLOCK */
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    /* PODCAST EMBED */
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    /* DIALOGUE */
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+
+    /* LANGUAGE FOCUS CARDS */
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    /* CULTURE / PHON BOXES */
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    /* EXERCISES */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.7; }
+    .ex-item label { display: block; margin-bottom: 4px; color: var(--nanquim); }
+
+    /* INPUTS */
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 160px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 120px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    /* RADIO / CHECKBOX */
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    /* BUTTONS */
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    /* RESULT */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 260px; overflow-y: auto; }
+    .result-msg.good       { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again  { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    /* NAV LINK */
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Qual Ônibus <em>Pegar?</em></h1>
+  <div class="hero-sub">Asking for directions on public transport in Brazil — prepositions of route, modal <em>poder</em>, and navigating São Paulo's bus system.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">transporte público</span>
+    <span class="hero-tag">pedir informação</span>
+    <span class="hero-tag">poder + infinitivo</span>
+    <span class="hero-tag">preposições de rota</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 02</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEP 1: PODCAST -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div class="step-title">Listen to the episode</div>
+    </div>
+    <div class="podcast-wrap">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:14px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-02-which-bus-should-i-take/id862545884?i=1000347351589">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/elementary-02-which-bus-should-i-take/id862545884?i=1000347351589" target="_blank">Open in Apple Podcasts →</a></p>
+  </div>
+
+  <!-- STEP 2: DIALOGUE -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div class="step-title">Read the dialogue</div>
+    </div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">Two people at a bus stop in São Paulo. A is looking for the bus that goes to Rua Francisco Morato.</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> Com licença, <span class="kw">esse vai pela</span> Morato?</p>
+        <p><span class="spk">B:</span> Não, esse vai <span class="kw">pela</span> Avenida Vital Brasil, <span class="kw">até</span> o Instituto Butantã.</p>
+        <p><span class="spk">A:</span> Tá. Você sabe <span class="kw">qual que eu devia pegar</span>?</p>
+        <p><span class="spk">B:</span> Pela Francisco Morato? <span class="kw">Pode pegar</span> o 702C. Ele passa aqui <span class="kw">mesmo nessa parada</span>.</p>
+        <p><span class="spk">A:</span> Tá bom, obrigado.</p>
+      </div>
+      <div class="dialogue-translation">
+        <p><b>A:</b> Excuse me, does this one go down Morato?</p>
+        <p><b>B:</b> No, this one goes down Avenida Vital Brasil, until the Butantã Institute.</p>
+        <p><b>A:</b> OK. Do you know which one I should take?</p>
+        <p><b>B:</b> Along Francisco Morato? You can take the 702C. It stops right here at this bus stop.</p>
+        <p><b>A:</b> OK, good, thanks.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: LANGUAGE FOCUS -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div class="step-title">Language focus</div>
+    </div>
+    <div class="focus-grid">
+
+      <!-- CARD 1 -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Preposições de rota — pela / pelo / até</div>
+        <div class="focus-card-en">English: along / down / through / until</div>
+        <div class="focus-card-note">
+          <b>Pela / pelo</b> = <i>por</i> + <i>a/o</i>. Use it to say which street or avenue a vehicle travels along.
+          <b>Até</b> says where the journey ends.
+        </div>
+        <div class="focus-ex">
+          Esse ônibus vai <em>pela</em> Avenida Paulista.<br>
+          <small>This bus goes along Avenida Paulista.</small>
+          O metrô passa <em>pelo</em> centro.<br>
+          <small>The metro goes through downtown.</small>
+          O 702C vai <em>até</em> o Instituto Butantã.<br>
+          <small>The 702C goes all the way to the Butantã Institute.</small>
+          Esse ônibus vai <em>pela</em> Francisco Morato <em>até</em> o terminal.<br>
+          <small>This bus goes down Francisco Morato all the way to the terminal.</small>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Poder + infinitivo — suggestions &amp; possibilities</div>
+        <div class="focus-card-en">English: you can / could take</div>
+        <div class="focus-card-note">
+          In Brazilian Portuguese, <b>pode</b> + infinitive is the natural way to give directions or suggest an option. It is warmer and less blunt than a command.
+        </div>
+        <div class="focus-ex">
+          <em>Pode pegar</em> o 702C.<br>
+          <small>You can take the 702C.</small>
+          <em>Pode ir</em> de metrô — é mais rápido.<br>
+          <small>You can go by metro — it's faster.</small>
+          <em>Pode descer</em> na próxima parada.<br>
+          <small>You can get off at the next stop.</small>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Expressões-chave do diálogo</div>
+        <div class="focus-card-en">Key phrases for asking about transport</div>
+        <div class="focus-card-note">These expressions are ready to use in any city, at any bus stop.</div>
+        <div class="focus-ex">
+          <em>Com licença</em> — polite opener; gets someone's attention<br>
+          <em>Esse vai pela...?</em> — Does this one go down...?<br>
+          <em>Qual que eu devia pegar?</em> — Which one should I take? <i>(informal spoken form)</i><br>
+          <em>Aqui mesmo</em> — right here (mesmo = emphasis, not "same")<br>
+          <em>Parada</em> — bus stop<br>
+          <em>Tá bom</em> — OK, got it, sounds good
+        </div>
+
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">🏙 Culture note</span>
+            São Paulo has over 13,000 bus lines — the largest network in Brazil. Each line has a code like <b>702C</b>. Finding the right bus is a daily challenge even for locals. Apps like SPTrans and Google Maps are widely used, but asking someone at the stop still works perfectly.
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Phonology note</span>
+            The <b>R</b> in Brazilian Portuguese has two sounds: at the start of a word or doubled (<b>rr</b>), it sounds like English <b>"h"</b> — <i>rua</i> = "hua". Between vowels, it is a quick tap, like the <b>"dd"</b> in "ladder" — <i>pa<b>r</b>ada</i>, <i>pe<b>g</b>ar</i>.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /focus-grid -->
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">4</div>
+      <div class="step-title">Exercises</div>
+    </div>
+
+    <!-- EX 1 — COMPREHENSION QUIZ -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. Why doesn't the first bus help person A?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> It goes too far — past Francisco Morato.</label>
+          <label><input type="radio" name="q1" value="b"> It goes a different route — down Avenida Vital Brasil.</label>
+          <label><input type="radio" name="q1" value="c"> It doesn't stop at Instituto Butantã.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. Which bus should person A take?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> The Vital Brasil line.</label>
+          <label><input type="radio" name="q2" value="b"> The Butantã Express.</label>
+          <label><input type="radio" name="q2" value="c"> The 702C.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. Where does the 702C stop?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> At the next block.</label>
+          <label><input type="radio" name="q3" value="b"> Right at that same bus stop.</label>
+          <label><input type="radio" name="q3" value="c"> At the Instituto Butantã only.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — GAP FILL: pela/pelo/até -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Pela, pelo or até?</div>
+      <div class="ex-instr">Fill in the gaps with <b>pela</b>, <b>pelo</b>, or <b>até</b>.</div>
+
+      <div class="ex-item">
+        1. Esse ônibus vai <input type="text" class="gap" id="g1" placeholder="pela / pelo / até"> a Avenida Paulista.
+      </div>
+      <div class="ex-item">
+        2. O metrô passa <input type="text" class="gap" id="g2" placeholder="pela / pelo / até"> centro da cidade.
+      </div>
+      <div class="ex-item">
+        3. Esse vai <input type="text" class="gap" id="g3" placeholder="pela / pelo / até"> o terminal Santana.
+      </div>
+      <div class="ex-item">
+        4. O 702C passa <input type="text" class="gap" id="g4" placeholder="pela / pelo / até"> a Francisco Morato.
+      </div>
+      <div class="ex-item">
+        5. O ônibus vai <input type="text" class="gap" id="g5" placeholder="pela / pelo / até"> a Praça da Sé.
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — PODER + INFINITIVO -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Giving directions with <em>poder</em></div>
+      <div class="ex-instr">Rewrite each sentence as a suggestion using <b>Pode + infinitivo</b>. Write the full sentence.</div>
+
+      <div class="ex-item">
+        <label>1. Take the 702C.</label>
+        <textarea id="p1" placeholder="Escreva a frase completa..."></textarea>
+      </div>
+      <div class="ex-item">
+        <label>2. Get off at the next stop.</label>
+        <textarea id="p2" placeholder="Escreva a frase completa..."></textarea>
+      </div>
+      <div class="ex-item">
+        <label>3. Go by metro — it's faster.</label>
+        <textarea id="p3" placeholder="Escreva a frase completa..."></textarea>
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — MATCH EXPRESSIONS -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — Match the expression</div>
+      <div class="ex-instr">Choose the correct English meaning for each Portuguese expression.</div>
+
+      <div class="ex-item">
+        <label>1. <b>Com licença</b></label>
+        <select id="m1">
+          <option value="">— choose —</option>
+          <option value="a">Thank you very much</option>
+          <option value="b">Excuse me / Pardon me</option>
+          <option value="c">You're welcome</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>2. <b>Aqui mesmo</b></label>
+        <select id="m2">
+          <option value="">— choose —</option>
+          <option value="a">Over there</option>
+          <option value="b">Right here</option>
+          <option value="c">The same place</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>3. <b>Tá bom</b></label>
+        <select id="m3">
+          <option value="">— choose —</option>
+          <option value="a">That's wrong</option>
+          <option value="b">Sounds great, I'm excited</option>
+          <option value="c">OK, got it / sounds good</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>4. <b>Parada</b></label>
+        <select id="m4">
+          <option value="">— choose —</option>
+          <option value="a">Bus stop</option>
+          <option value="b">Parade</option>
+          <option value="c">Train station</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>5. <b>Qual que eu devia pegar?</b></label>
+        <select id="m5">
+          <option value="">— choose —</option>
+          <option value="a">Where do I get off?</option>
+          <option value="b">Which one should I take?</option>
+          <option value="c">How much does the ticket cost?</option>
+        </select>
+      </div>
+
+      <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+      <div id="ex4-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 5 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 5 — Your turn</div>
+      <div class="ex-instr">Think of a real situation — a city you know, a place you want to reach, or a trip you've taken. Write 4–6 sentences in Portuguese describing how to get there by bus or public transport. Use at least one <b>pela/pelo/até</b> and one <b>pode + infinitivo</b>.</div>
+      <textarea id="free1" style="min-height:120px;" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div><!-- /step 4 -->
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── NORMALISE ──
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 — Comprehension quiz ──
+var ex1Answers = { q1: 'b', q2: 'c', q3: 'b' };
+var ex1Explain = {
+  q1: 'B — It goes a different route (down Avenida Vital Brasil).',
+  q2: 'C — The 702C.',
+  q3: 'B — Right at that same bus stop (aqui mesmo nessa parada).'
+};
+function checkEx1() {
+  var correct = 0;
+  var html = '';
+  ['q1','q2','q3'].forEach(function(q, i) {
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1Answers[q];
+    if (ok) correct++;
+    // highlight labels
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl) {
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1Answers[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + ex1Explain[q] + '</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg ' + (correct === 3 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (correct === 3 ? '✓ All 3 correct!' : correct + ' of 3 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — pela/pelo/até ──
+var ex2Answers = [
+  { id:'g1', key:'pela',  display:'<b>pela</b> (por + a — feminine: Avenida)' },
+  { id:'g2', key:'pelo',  display:'<b>pelo</b> (por + o — masculine: centro)' },
+  { id:'g3', key:'ate',   display:'<b>até</b> (indicates the final destination)' },
+  { id:'g4', key:'pela',  display:'<b>pela</b> (por + a — feminine: Francisco Morato / rua)' },
+  { id:'g5', key:'ate',   display:'<b>até</b> (indicates the final destination: Praça da Sé)' },
+];
+function checkEx2() {
+  var correct = 0;
+  var html = '';
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var ok = norm(el.value) === norm(a.key);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg ' + (correct === 5 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (correct === 5 ? '✓ All 5 correct!' : correct + ' of 5 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — Poder + infinitivo ──
+var ex3Answers = [
+  { id:'p1', keys:['pode pegar o 702'], display:'<b>Pode pegar o 702C.</b>' },
+  { id:'p2', keys:['pode descer na proxima'], display:'<b>Pode descer na próxima parada.</b>' },
+  { id:'p3', keys:['pode ir de metro'], display:'<b>Pode ir de metrô — é mais rápido.</b>' },
+];
+function checkEx3() {
+  var correct = 0;
+  var html = '';
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var normed = norm(el.value);
+    var ok = a.keys.some(function(k){ return normed.indexOf(norm(k)) >= 0; });
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg ' + (correct === 3 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (correct === 3 ? '✓ All 3 correct!' : correct + ' of 3 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EX 4 — Match expressions ──
+var ex4Answers = [
+  { id:'m1', key:'b', display:'<b>Com licença</b> = Excuse me / Pardon me' },
+  { id:'m2', key:'b', display:'<b>Aqui mesmo</b> = Right here' },
+  { id:'m3', key:'c', display:'<b>Tá bom</b> = OK, got it / sounds good' },
+  { id:'m4', key:'a', display:'<b>Parada</b> = Bus stop' },
+  { id:'m5', key:'b', display:'<b>Qual que eu devia pegar?</b> = Which one should I take?' },
+];
+function checkEx4() {
+  var correct = 0;
+  var html = '';
+  ex4Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex4-result');
+  res.className = 'result-msg ' + (correct === 5 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (correct === 5 ? '✓ All 5 correct!' : correct + ' of 5 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
