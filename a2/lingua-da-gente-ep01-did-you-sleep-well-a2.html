@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Língua da Gente · Episódio 01 — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* AUDIO SECTION */
+    .audio-block { background: white; border-radius: 14px; border: 1.5px solid var(--light-gray); padding: 24px 28px; margin-bottom: 12px; }
+    .audio-block h3 { font-size: 15px; font-weight: 600; font-family: 'Manrope', sans-serif; margin-bottom: 12px; color: var(--nanquim); }
+    .audio-block iframe { width: 100%; border-radius: 10px; display: block; }
+    audio { width: 100%; border-radius: 8px; margin-top: 8px; }
+
+    /* DIALOGUE */
+    .dialogue-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .dialogue-table td { padding: 12px 16px; vertical-align: top; }
+    .dialogue-table tr:nth-child(odd) td { background: var(--cobalto-light); }
+    .dialogue-table tr:nth-child(even) td { background: white; }
+    .dialogue-table tr:first-child td:first-child { border-radius: 10px 0 0 0; }
+    .dialogue-table tr:first-child td:last-child { border-radius: 0 10px 0 0; }
+    .dialogue-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+    .dialogue-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+    .spk { font-weight: 700; font-size: 13px; color: #265B8B; min-width: 28px; }
+    .pt { font-size: 15px; color: var(--nanquim); font-weight: 500; }
+    .en { font-size: 13px; color: #888; font-style: italic; }
+
+    /* VOCABULARY */
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+    .vocab-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 16px 18px; }
+    .vocab-pt { font-size: 16px; font-family: 'Trirong', serif; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .vocab-en { font-size: 13px; color: #777; margin-bottom: 6px; }
+    .vocab-ex { font-size: 12.5px; color: var(--texto); border-left: 3px solid var(--cobalto); padding-left: 10px; line-height: 1.5; }
+
+    /* GRAMMAR BOXES */
+    .grammar-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 0 12px 12px 0; padding: 20px 24px; margin-top: 16px; }
+    .grammar-box h3 { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: var(--cobalto); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .grammar-box p { font-size: 15px; margin-bottom: 10px; }
+    .grammar-box ul { padding-left: 20px; }
+    .grammar-box li { margin-bottom: 8px; font-size: 15px; }
+    .grammar-box .example { background: white; border-radius: 8px; padding: 10px 14px; margin: 8px 0; font-size: 14px; }
+    .grammar-box .example em { color: var(--cobalto); font-style: normal; font-weight: 600; }
+    .grammar-box .example .en-gloss { color: #888; font-style: italic; font-size: 13px; margin-top: 2px; display: block; }
+
+    /* TIME TABLE */
+    .time-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+    .time-table th { background: #265B8B; color: white; padding: 8px 14px; text-align: left; font-weight: 600; }
+    .time-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .time-table tr:last-child td { border-bottom: none; }
+    .time-table tr:nth-child(odd) td { background: white; }
+    .time-table tr:nth-child(even) td { background: var(--off-white); }
+
+    /* CULTURE & PHONOLOGY */
+    .note-box { border-radius: 12px; padding: 18px 22px; margin-top: 16px; }
+    .note-box.culture { background: #FFF8EE; border: 1.5px solid #FFD89B; }
+    .note-box.phonology { background: #F0F4FF; border: 1.5px solid #B8C9E8; }
+    .note-box-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+    .note-box.culture .note-box-label { color: var(--pitomba); }
+    .note-box.phonology .note-box-label { color: #265B8B; }
+    .note-box p { font-size: 14.5px; line-height: 1.7; }
+    .note-box strong { font-weight: 700; }
+
+    /* SECTION DIVIDER */
+    .section { margin-top: 44px; }
+
+    /* NAV LINK */
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; white-space: nowrap; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .vocab-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Material de Referência</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Língua da Gente <em>Episode 01</em></h1>
+  <div class="hero-sub">Did you sleep well? Practice morning greetings, telling time, and making suggestions in Brazilian Portuguese.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">A2 · Iniciante II</span>
+    <span class="hero-tag">Greetings</span>
+    <span class="hero-tag">Telling Time</span>
+    <span class="hero-tag">Suggestions</span>
+    <span class="hero-tag">Daily Routine</span>
+  </div>
+  <div class="hero-note">📖 Read this material before your class</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- AUDIO -->
+  <div class="section">
+    <div class="sec-label">Audio</div>
+    <div class="audio-block">
+      <h3>🎧 Full Lesson — Apple Podcasts</h3>
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/elementary-01-did-you-sleep-well/id862545884?i=1000347351565"></iframe>
+    </div>
+    <div class="audio-block" style="margin-top:12px;">
+      <h3>🗣️ Dialog only — listen and repeat</h3>
+      <audio controls src="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-ele01-dialog.mp3">
+        Your browser does not support the audio element.
+      </audio>
+      <p style="font-size:12px;color:#aaa;margin-top:6px;">Source: COERLL / University of Texas at Austin · <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank" style="color:#aaa;">CC BY 3.0</a></p>
+    </div>
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="section">
+    <div class="sec-label">Diálogo</div>
+    <h2 style="font-size:22px;margin-bottom:6px;">Did You Sleep Well?</h2>
+    <p style="font-size:14px;color:#888;margin-bottom:16px;">Listen first, then read along. Pay attention to how <strong>A</strong> and <strong>B</strong> take turns.</p>
+    <table class="dialogue-table">
+      <tr>
+        <td class="spk">A</td>
+        <td>
+          <div class="pt">Bom dia, você dormiu bem?</div>
+          <div class="en">Good morning, did you sleep well?</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="spk">B</td>
+        <td>
+          <div class="pt">Mais ou menos. Que horas são?</div>
+          <div class="en">More or less. What time is it?</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="spk">A</td>
+        <td>
+          <div class="pt">Seis e meia, ainda é muito cedo.</div>
+          <div class="en">Six-thirty, it's still really early.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="spk">B</td>
+        <td>
+          <div class="pt">Vamos dormir um pouco mais!</div>
+          <div class="en">Let's sleep a little more!</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="spk">A</td>
+        <td>
+          <div class="pt">Tá, mais um pouquinho só.</div>
+          <div class="en">OK, just a tiny bit more.</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- VOCABULARY -->
+  <div class="section">
+    <div class="sec-label">Vocabulário em contexto</div>
+    <h2 style="font-size:22px;margin-bottom:6px;">Key Words &amp; Expressions</h2>
+    <p style="font-size:14px;color:#888;margin-bottom:4px;">These words come directly from the dialogue. Study them in context.</p>
+    <div class="vocab-grid">
+
+      <div class="vocab-card">
+        <div class="vocab-pt">bom dia</div>
+        <div class="vocab-en">good morning</div>
+        <div class="vocab-ex">— <em>Bom dia!</em> Como você está?</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">dormiu bem?</div>
+        <div class="vocab-en">did you sleep well?</div>
+        <div class="vocab-ex">From <strong>dormir</strong> (to sleep). <em>Você dormiu bem?</em> — Did you sleep well?</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">mais ou menos</div>
+        <div class="vocab-en">more or less / so-so</div>
+        <div class="vocab-ex">Very common in Brazil! — Como você está? <em>Mais ou menos.</em></div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">que horas são?</div>
+        <div class="vocab-en">what time is it?</div>
+        <div class="vocab-ex"><em>Que horas são?</em> — É meia-noite.</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">seis e meia</div>
+        <div class="vocab-en">six-thirty (6:30)</div>
+        <div class="vocab-ex"><em>Meia</em> = half. So <em>seis e meia</em> = six and a half = 6:30.</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">ainda</div>
+        <div class="vocab-en">still / yet</div>
+        <div class="vocab-ex"><em>Ainda</em> é cedo. — It's still early.</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">cedo</div>
+        <div class="vocab-en">early</div>
+        <div class="vocab-ex">Opposite: <strong>tarde</strong> (late). <em>Cheguei cedo.</em> — I arrived early.</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">um pouco / pouquinho</div>
+        <div class="vocab-en">a little / a tiny bit</div>
+        <div class="vocab-ex"><em>Pouquinho</em> is the diminutive — even smaller than <em>pouco</em>. Very Brazilian!</div>
+      </div>
+
+      <div class="vocab-card">
+        <div class="vocab-pt">tá</div>
+        <div class="vocab-en">OK / alright</div>
+        <div class="vocab-ex">Informal contraction of <em>está bem</em>. Super common in spoken Brazilian Portuguese.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRAMMAR 1: TELLING TIME -->
+  <div class="section">
+    <div class="sec-label">Gramática</div>
+    <h2 style="font-size:22px;margin-bottom:6px;">Telling Time in Portuguese</h2>
+    <p style="font-size:14px;color:#888;margin-bottom:4px;">In the dialogue, B asks <em>Que horas são?</em> and A replies <em>Seis e meia.</em> Here's the full pattern:</p>
+
+    <div class="grammar-box">
+      <h3>The question</h3>
+      <div class="example"><em>Que horas são?</em> <span class="en-gloss">What time is it?</span></div>
+      <p style="font-size:14px;">Literally: "What hours are they?" — always use the plural <em>são</em> for any time except 1:00.</p>
+      <div class="example"><em>São duas horas.</em> <span class="en-gloss">It's two o'clock. (plural)</span></div>
+      <div class="example"><em>É uma hora.</em> <span class="en-gloss">It's one o'clock. (singular)</span></div>
+    </div>
+
+    <table class="time-table" style="margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Clock</th>
+          <th>Portuguese</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>6:00</td><td><strong>São seis horas</strong></td><td>on the hour</td></tr>
+        <tr><td>6:15</td><td><strong>São seis e quinze</strong></td><td>six and fifteen</td></tr>
+        <tr><td>6:30</td><td><strong>São seis e meia</strong></td><td><em>meia</em> = half</td></tr>
+        <tr><td>6:45</td><td><strong>São seis e quarenta e cinco</strong></td><td>or: <em>sete menos quinze</em></td></tr>
+        <tr><td>7:00</td><td><strong>São sete horas</strong></td><td>on the hour</td></tr>
+        <tr><td>12:00</td><td><strong>É meio-dia</strong></td><td>noon — singular!</td></tr>
+        <tr><td>00:00</td><td><strong>É meia-noite</strong></td><td>midnight — singular!</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GRAMMAR 2: VAMOS + INFINITIVE -->
+  <div class="section">
+    <div class="sec-label">Gramática</div>
+    <h2 style="font-size:22px;margin-bottom:6px;">Making Suggestions: <em>Vamos + infinitive</em></h2>
+    <p style="font-size:14px;color:#888;margin-bottom:4px;">In the dialogue, B says <em>Vamos dormir um pouco mais!</em> This structure is the most natural way to make a "let's…" suggestion in Brazilian Portuguese.</p>
+
+    <div class="grammar-box">
+      <h3>Pattern</h3>
+      <p><strong>Vamos</strong> + infinitive verb</p>
+      <div class="example"><em>Vamos <strong>dormir</strong> um pouco mais!</em> <span class="en-gloss">Let's sleep a little more!</span></div>
+      <div class="example"><em>Vamos <strong>comer</strong>?</em> <span class="en-gloss">Shall we eat? / Let's eat!</span></div>
+      <div class="example"><em>Vamos <strong>trabalhar</strong>!</em> <span class="en-gloss">Let's get to work!</span></div>
+      <div class="example"><em>Vamos <strong>começar</strong>?</em> <span class="en-gloss">Shall we start?</span></div>
+      <p style="font-size:13px;color:#666;margin-top:10px;">💡 <em>Vamos</em> with a question mark sounds like an invitation; with an exclamation mark, it's more enthusiastic. Both are very common.</p>
+    </div>
+  </div>
+
+  <!-- CULTURE NOTE -->
+  <div class="section">
+    <div class="sec-label">Cultura</div>
+    <h2 style="font-size:22px;margin-bottom:6px;">Language &amp; Culture Notes</h2>
+
+    <div class="note-box culture">
+      <div class="note-box-label">🇧🇷 Brazilian Portuguese in real life</div>
+      <p><strong>"Mais ou menos"</strong> is much more common in Brazil than a simple "sim" or "não" when answering how you are. Brazilians tend to avoid extreme answers in casual conversation — <em>mais ou menos</em> is a friendly, honest, relaxed response.</p>
+      <br>
+      <p><strong>"Tá"</strong> (from <em>está bem</em>) is everywhere in informal Brazilian speech. You'll hear it constantly as a filler, agreement marker, or conversation connector. Learning it will make your Portuguese sound much more natural immediately.</p>
+      <br>
+      <p><strong>Diminutives</strong> are a hallmark of Brazilian warmth. <em>Pouquinho</em> (from <em>pouco</em>) doesn't just mean "less" — it makes the request softer, more affectionate. Brazilians use diminutives frequently to add warmth, urgency, or humor to everyday speech.</p>
+    </div>
+  </div>
+
+  <!-- PHONOLOGY NOTE -->
+  <div class="section">
+    <div class="sec-label">Pronúncia</div>
+    <div class="note-box phonology">
+      <div class="note-box-label">🔊 Phonology tip for English speakers</div>
+      <p>Notice the <strong>nasal vowels</strong> in this dialogue: <em><strong>bom</strong></em>, <em><strong>mais</strong></em>, <em><strong>ainda</strong></em>. In Brazilian Portuguese, vowels before <strong>m</strong> or <strong>n</strong> are nasalized — the sound resonates through your nose. This is very different from English. Practice: say <em>bom</em> and feel the air flow through your nose at the end. Compare <em>bom dia</em> (nasal "bom") with "bone" in English (not nasal). Listen to the dialog audio several times focusing on these sounds.</p>
+    </div>
+  </div>
+
+  <!-- NAV LINK -->
+  <div class="nav-link">
+    <div>
+      <div class="nav-link-label" style="color:var(--pitomba);">Próximo passo</div>
+      <div class="nav-link-title">Exercícios Interativos — Episódio 01</div>
+    </div>
+    <a href="lingua-da-gente-ep01-did-you-sleep-well-a2-exercicios.html" class="nav-btn" style="background:var(--pitomba);">Ir para os exercícios →</a>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>
