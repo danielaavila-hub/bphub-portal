@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assim Não Dá! — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    /* HERO */
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+
+    /* STEP */
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    /* PODCAST */
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    /* DIALOGUE */
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+
+    /* FOCUS CARDS */
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    /* BOX ROW */
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    /* EXERCISES */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.75; }
+
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 180px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 160px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 260px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Assim <em>Não Dá!</em></h1>
+  <div class="hero-sub">Inviting someone to lunch, expressing obligation and necessity — <em>ter que</em>, <em>precisar</em>, <em>ir + infinitivo</em>, and essential work-life expressions.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">convite ao almoço</span>
+    <span class="hero-tag">ter que / precisar</span>
+    <span class="hero-tag">ir + infinitivo</span>
+    <span class="hero-tag">rotina de trabalho</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 03</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div class="step-title">Listen to the episode</div>
+    </div>
+    <div class="podcast-wrap">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:14px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-03-you-cant-keep-working-like-this/id862545884?i=1000347351603">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/elementary-03-you-cant-keep-working-like-this/id862545884?i=1000347351603" target="_blank">Open in Apple Podcasts →</a></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div class="step-title">Read the dialogue</div>
+    </div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">Paulo is at his desk during lunch break. A colleague stops by to invite him to eat.</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> Ô Paulo, você <span class="kw">não quer almoçar</span>?</p>
+        <p><span class="spk">B:</span> Obrigado, hoje não. <span class="kw">Acho que vou ficar</span> aqui <span class="kw">trabalhando</span> mais um pouco.</p>
+        <p><span class="spk">A:</span> Mas, você <span class="kw">tem que</span> comer também, não é?</p>
+        <p><span class="spk">B:</span> Depois, <span class="kw">tem mil e uma coisas</span> pra fazer aqui primeiro. Vai você, eu como depois.</p>
+        <p><span class="spk">A:</span> Tá bom, mas você <span class="kw">não pode trabalhar o tempo todo</span>. <span class="kw">Assim não dá</span>.</p>
+        <p><span class="spk">B:</span> Eu sei, é só hoje. Realmente, eu <span class="kw">preciso terminar</span> esse projeto.</p>
+      </div>
+      <div class="dialogue-translation">
+        <p><b>A:</b> Hey Paulo, don't you want to go eat lunch?</p>
+        <p><b>B:</b> Thanks, not today. I think I'm going to stay here working for a little longer.</p>
+        <p><b>A:</b> But you've gotta eat too, right?</p>
+        <p><b>B:</b> Later, there are a million things to do here first. Go ahead, I'll eat later.</p>
+        <p><b>A:</b> OK, but you can't work all the time. It just won't do.</p>
+        <p><b>B:</b> I know, it's just for today. Really, I need to finish this project.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div class="step-title">Language focus</div>
+    </div>
+    <div class="focus-grid">
+
+      <!-- CARD 1: ter que / precisar -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Ter que + infinitivo &amp; Precisar + infinitivo</div>
+        <div class="focus-card-en">English: have to / need to</div>
+        <div class="focus-card-note">
+          Both express <b>obligation or necessity</b>. They are nearly interchangeable in everyday speech.<br>
+          <b>Ter que</b> often sounds a bit more external (you have to, the situation demands it).<br>
+          <b>Precisar</b> often sounds more personal (I need to, it's important to me).
+        </div>
+        <div class="focus-ex">
+          Você <em>tem que</em> comer também.<br>
+          <small>You have to eat too.</small>
+          Eu <em>preciso terminar</em> esse projeto.<br>
+          <small>I need to finish this project.</small>
+          A gente <em>tem que</em> sair daqui às seis.<br>
+          <small>We have to leave by six.</small>
+          Ele <em>precisa descansar</em> um pouco.<br>
+          <small>He needs to rest a little.</small>
+        </div>
+      </div>
+
+      <!-- CARD 2: ir + infinitivo -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Ir + infinitivo — near future</div>
+        <div class="focus-card-en">English: going to (do something)</div>
+        <div class="focus-card-note">
+          Use <b>vou / vai / vamos</b> + infinitive to talk about what's going to happen soon. This is the most natural way to express future plans in everyday Brazilian Portuguese.
+        </div>
+        <div class="focus-ex">
+          Acho que <em>vou ficar</em> aqui trabalhando.<br>
+          <small>I think I'm going to stay here working.</small>
+          Ela <em>vai almoçar</em> com a equipe.<br>
+          <small>She's going to have lunch with the team.</small>
+          Nós <em>vamos terminar</em> o projeto hoje.<br>
+          <small>We're going to finish the project today.</small>
+          Você <em>vai sair</em> mais cedo amanhã?<br>
+          <small>Are you going to leave earlier tomorrow?</small>
+        </div>
+      </div>
+
+      <!-- CARD 3: expressões-chave -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Expressões-chave do diálogo</div>
+        <div class="focus-card-en">Essential everyday expressions</div>
+        <div class="focus-card-note">These fixed expressions appear constantly in Brazilian workplaces and daily conversation. Learn them as ready-made chunks.</div>
+        <div class="focus-ex">
+          <em>Assim não dá</em> — It won't work this way / That's not sustainable<br>
+          <em>Mil e uma coisas</em> — A million things (lit. "a thousand and one")<br>
+          <em>O tempo todo</em> — All the time / non-stop<br>
+          <em>Mais um pouco</em> — A little longer / a bit more<br>
+          <em>É só hoje</em> — It's just for today<br>
+          <em>Não é?</em> — Right? / Isn't it? (tag question, very common)
+        </div>
+
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">🍽 Culture note</span>
+            In Brazil, <b>almoço</b> is a serious meal — often the biggest of the day. A lunch break of one to two hours is normal. Skipping lunch or eating at your desk is still unusual and seen as unhealthy. Eating together strengthens workplace bonds (<em>o almoço une a equipe</em>).
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Phonology note</span>
+            The gerund ending <b>-ndo</b> — stress falls on the syllable before: tra-ba-<b>LHAN</b>-do. In Brazilian Portuguese, the gerund is used for ongoing actions (<em>estou trabalhando</em> = I'm working), whereas European Portuguese uses infinitive after preposition (<em>estou a trabalhar</em>).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">4</div>
+      <div class="step-title">Exercises</div>
+    </div>
+
+    <!-- EX 1 — COMPREHENSION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. Why doesn't Paulo want to go to lunch?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> He already ate.</label>
+          <label><input type="radio" name="q1" value="b"> He has a lot of things to do and wants to stay and work.</label>
+          <label><input type="radio" name="q1" value="c"> He doesn't like eating with colleagues.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. What does person A say about working all the time?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> It's fine as long as it's just for today.</label>
+          <label><input type="radio" name="q2" value="b"> Paulo should work even harder.</label>
+          <label><input type="radio" name="q2" value="c"> You can't keep working like that — it won't do.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. What does Paulo say he needs to do?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> Finish his project.</label>
+          <label><input type="radio" name="q3" value="b"> Go to lunch after all.</label>
+          <label><input type="radio" name="q3" value="c"> Call his manager.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — TER QUE / PRECISAR GAP FILL -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Ter que or precisar?</div>
+      <div class="ex-instr">Fill in the gap with the correct form: <b>tem que</b>, <b>tenho que</b>, <b>precisa</b>, or <b>preciso</b>. More than one answer may be possible — choose the one that feels most natural.</div>
+
+      <div class="ex-item">
+        1. Eu <input type="text" class="gap" id="g1" placeholder="..."> entregar o relatório hoje.
+      </div>
+      <div class="ex-item">
+        2. Você <input type="text" class="gap" id="g2" placeholder="..."> comer — já é uma da tarde!
+      </div>
+      <div class="ex-item">
+        3. Ele <input type="text" class="gap" id="g3" placeholder="..."> descansar mais.
+      </div>
+      <div class="ex-item">
+        4. Eu <input type="text" class="gap" id="g4" placeholder="..."> terminar esse projeto antes das cinco.
+      </div>
+      <div class="ex-item">
+        5. A gente <input type="text" class="gap" id="g5" placeholder="..."> sair daqui logo.
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — IR + INFINITIVO -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Near future with <em>ir + infinitivo</em></div>
+      <div class="ex-instr">Rewrite each sentence in the near future using the correct form of <b>ir</b>. Write the full sentence.</div>
+
+      <div class="ex-item">
+        <label>1. Eu fico aqui trabalhando. → (near future)</label>
+        <textarea id="p1" placeholder="Escreva a frase completa..."></textarea>
+      </div>
+      <div class="ex-item">
+        <label>2. Ela almoça com a equipe. → (near future)</label>
+        <textarea id="p2" placeholder="Escreva a frase completa..."></textarea>
+      </div>
+      <div class="ex-item">
+        <label>3. Nós terminamos o projeto. → (near future)</label>
+        <textarea id="p3" placeholder="Escreva a frase completa..."></textarea>
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — MATCH EXPRESSIONS -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — What does it mean?</div>
+      <div class="ex-instr">Match each expression to its English meaning.</div>
+
+      <div class="ex-item">
+        <label>1. <b>Assim não dá.</b></label>
+        <select id="m1">
+          <option value="">— choose —</option>
+          <option value="a">It gives a lot this way.</option>
+          <option value="b">It won't work / That's not sustainable.</option>
+          <option value="c">This is a good idea.</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>2. <b>Mil e uma coisas</b></label>
+        <select id="m2">
+          <option value="">— choose —</option>
+          <option value="a">One single thing</option>
+          <option value="b">A thousand words</option>
+          <option value="c">A million things / loads to do</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>3. <b>O tempo todo</b></label>
+        <select id="m3">
+          <option value="">— choose —</option>
+          <option value="a">All the time / non-stop</option>
+          <option value="b">Sometimes</option>
+          <option value="c">Early in the morning</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>4. <b>Mais um pouco</b></label>
+        <select id="m4">
+          <option value="">— choose —</option>
+          <option value="a">Too much already</option>
+          <option value="b">A little longer / a bit more</option>
+          <option value="c">Less than before</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>5. <b>Não é?</b></label>
+        <select id="m5">
+          <option value="">— choose —</option>
+          <option value="a">It is not!</option>
+          <option value="b">Right? / Isn't it? (tag question)</option>
+          <option value="c">No, it isn't.</option>
+        </select>
+      </div>
+
+      <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+      <div id="ex4-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 5 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 5 — Your turn</div>
+      <div class="ex-instr">Think about your own work routine. Write 4–6 sentences in Portuguese about what you <em>have to do</em> this week, what you <em>are going to do</em>, and one thing that <em>assim não dá</em> — something that just isn't working. Use <b>ter que</b> or <b>precisar</b>, <b>ir + infinitivo</b>, and at least one expression from Focus 3.</div>
+      <textarea id="free1" style="min-height:120px;" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div><!-- /step 4 -->
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 — Comprehension ──
+var ex1A = { q1:'b', q2:'c', q3:'a' };
+var ex1E = {
+  q1: 'B — He has a lot of things to do and wants to stay and work.',
+  q2: 'C — You can\'t keep working like that — assim não dá.',
+  q3: 'A — Preciso terminar esse projeto.'
+};
+function checkEx1() {
+  var correct = 0; var html = '';
+  ['q1','q2','q3'].forEach(function(q,i){
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1A[q];
+    if (ok) correct++;
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl){
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1A[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+ex1E[q]+'</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — ter que / precisar ──
+var ex2A = [
+  { id:'g1', keys:['tenho que','preciso'], display:'<b>tenho que</b> or <b>preciso</b> (1st person singular)' },
+  { id:'g2', keys:['tem que','precisa'],   display:'<b>tem que</b> or <b>precisa</b> (2nd/3rd person)' },
+  { id:'g3', keys:['tem que','precisa'],   display:'<b>tem que</b> or <b>precisa</b> (3rd person)' },
+  { id:'g4', keys:['tenho que','preciso'], display:'<b>tenho que</b> or <b>preciso</b> (1st person singular)' },
+  { id:'g5', keys:['tem que','precisa'],   display:'<b>tem que</b> or <b>precisa</b> — <i>a gente</i> uses 3rd person singular' },
+];
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — ir + infinitivo ──
+var ex3A = [
+  { id:'p1', keys:['vou ficar'], display:'<b>Vou ficar aqui trabalhando.</b>' },
+  { id:'p2', keys:['vai almocar','vai almoçar'], display:'<b>Ela vai almoçar com a equipe.</b>' },
+  { id:'p3', keys:['vamos terminar'], display:'<b>Nós vamos terminar o projeto.</b>' },
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n.indexOf(norm(k)) >= 0; });
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 4 — Match expressions ──
+var ex4A = [
+  { id:'m1', key:'b', display:'<b>Assim não dá</b> = It won\'t work / That\'s not sustainable.' },
+  { id:'m2', key:'c', display:'<b>Mil e uma coisas</b> = A million things / loads to do.' },
+  { id:'m3', key:'a', display:'<b>O tempo todo</b> = All the time / non-stop.' },
+  { id:'m4', key:'b', display:'<b>Mais um pouco</b> = A little longer / a bit more.' },
+  { id:'m5', key:'b', display:'<b>Não é?</b> = Right? / Isn\'t it? — a tag question.' },
+];
+function checkEx4() {
+  var correct = 0; var html = '';
+  ex4A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex4-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var answers = {}; var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R'+(idx+1)+' — '+label] = val;
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+  });
+  var payload = Object.assign({'Nome do aluno':name,'Material':material}, answers);
+  if (email) payload['_replyto'] = email;
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  fetch('https://formspree.io/f/xykaydly', {
+    method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok,data:d}; }); })
+  .then(function(res){
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
