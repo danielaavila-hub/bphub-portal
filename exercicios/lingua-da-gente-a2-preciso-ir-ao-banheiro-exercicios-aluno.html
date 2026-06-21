@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preciso Ir ao Banheiro — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    .conj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+    .conj-col { background: var(--cobalto-light); border-radius: 10px; padding: 14px 16px; font-size: 0.84rem; }
+    .conj-col h4 { font-family: 'Trirong', serif; font-size: 0.9rem; font-weight: 400; color: var(--cobalto); margin-bottom: 8px; border-bottom: 1px solid rgba(38,91,139,0.2); padding-bottom: 6px; }
+    .conj-col p { margin-bottom: 3px; line-height: 1.65; }
+    .conj-col .form { font-weight: 700; color: var(--nanquim); }
+
+    .scale-bar { display: flex; align-items: stretch; border-radius: 10px; overflow: hidden; margin: 14px 0; font-size: 0.8rem; font-weight: 600; }
+    .scale-seg { flex: 1; padding: 10px 8px; text-align: center; display: flex; align-items: center; justify-content: center; }
+    .scale-seg.s1 { background: rgba(38,91,139,0.12); color: var(--cobalto); }
+    .scale-seg.s2 { background: rgba(38,91,139,0.22); color: var(--cobalto); }
+    .scale-seg.s3 { background: var(--cobalto); color: white; }
+    .scale-label { font-size: 0.7rem; font-weight: 400; display: block; margin-top: 2px; opacity: 0.75; }
+
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.75; }
+
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 190px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 210px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 300px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row, .conj-grid { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Preciso Ir <em>ao Banheiro</em></h1>
+  <div class="hero-sub">Expressing need and desire — <em>precisar vs querer + infinitivo</em>, degree modifiers (<em>muito, tão… assim</em>), <em>vamos + infinitivo</em>, and everyday negotiation expressions.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">precisar + infinitivo</span>
+    <span class="hero-tag">querer + infinitivo</span>
+    <span class="hero-tag">tão… assim</span>
+    <span class="hero-tag">vamos embora</span>
+    <span class="hero-tag">não vale a pena</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 10</div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">1</div><div class="step-title">Listen to the episode</div></div>
+    <div class="podcast-wrap">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:14px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-10-ive-got-to-go-bad/id862545884?i=1000347351619">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/elementary-10-ive-got-to-go-bad/id862545884?i=1000347351619" target="_blank">Open in Apple Podcasts →</a></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">2</div><div class="step-title">Read the dialogue</div></div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">Two friends are out. One urgently needs a bathroom — but refuses to use the public one nearby.</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> <span class="kw">Vamos para casa</span>.</p>
+        <p><span class="spk">B:</span> Por quê? <span class="kw">Muito cedo ainda</span>.</p>
+        <p><span class="spk">A:</span> Eu sei, mas eu <span class="kw">preciso ir ao banheiro</span>.</p>
+        <p><span class="spk">B:</span> Mas <span class="kw">tem banheiro</span> aqui, aqui do lado.</p>
+        <p><span class="spk">A:</span> Não, esses são <span class="kw">muito sujos</span>, <span class="kw">não quero</span> ir aqui.</p>
+        <p><span class="spk">B:</span> <span class="kw">Não são tão maus assim</span>.</p>
+        <p><span class="spk">A:</span> Não, porque você é homem e <span class="kw">não precisa sentar</span> pra fazer <span class="kw">xixi</span>.</p>
+        <p><span class="spk">B:</span> <span class="kw">Tá bom</span>, já sei quando <span class="kw">não vale a pena brigar</span>. <span class="kw">Vamos embora</span>.</p>
+      </div>
+      <div class="dialogue-translation">
+        <p><b>A:</b> Let's go home.</p>
+        <p><b>B:</b> Why? It's still really early.</p>
+        <p><b>A:</b> I know, but I need to use the bathroom.</p>
+        <p><b>B:</b> But there's a bathroom right here, right next door.</p>
+        <p><b>A:</b> No, these are really dirty — I don't want to go here.</p>
+        <p><b>B:</b> They aren't that bad.</p>
+        <p><b>A:</b> No, because you're a man and you don't need to sit down to pee.</p>
+        <p><b>B:</b> OK, I know when it's not worth arguing. Let's go.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">3</div><div class="step-title">Language focus</div></div>
+    <div class="focus-grid">
+
+      <!-- CARD 1: precisar vs querer -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Precisar vs Querer + infinitivo</div>
+        <div class="focus-card-en">English: to need to / to want to + verb</div>
+        <div class="focus-card-note">
+          Both verbs are followed directly by an infinitive (no preposition). The key contrast: <b>precisar</b> = necessity (need), <b>querer</b> = desire (want). In the dialogue, A <em>precisa</em> use the bathroom (necessity) but <em>não quer</em> use this specific one (desire/preference). This distinction between need and want is fundamental to everyday negotiation in Portuguese.
+        </div>
+        <div class="conj-grid">
+          <div class="conj-col">
+            <h4>Precisar — to need to</h4>
+            <p>Eu <span class="form">preciso</span> ir</p>
+            <p>Você/Ele <span class="form">precisa</span> sentar</p>
+            <p>A gente <span class="form">precisa</span> sair</p>
+            <p>Vocês/Eles <span class="form">precisam</span> esperar</p>
+          </div>
+          <div class="conj-col">
+            <h4>Querer — to want to</h4>
+            <p>Eu <span class="form">quero</span> ir</p>
+            <p>Você/Ele <span class="form">quer</span> ficar</p>
+            <p>A gente <span class="form">quer</span> sair</p>
+            <p>Vocês/Eles <span class="form">querem</span> ir</p>
+          </div>
+        </div>
+        <div class="focus-ex">
+          Eu <em>preciso ir</em> ao banheiro — <em>não quero</em> usar esse aqui.<br>
+          <small>I need to go to the bathroom — I don't want to use this one.</small>
+          Você não <em>precisa</em> se preocupar, mas se <em>quiser</em> pode vir junto.<br>
+          <small>You don't need to worry, but if you want you can come along.</small>
+        </div>
+      </div>
+
+      <!-- CARD 2: muito / tão…assim -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Muito, tão… assim — degrees of intensity</div>
+        <div class="focus-card-en">English: very / so… like that / not that…</div>
+        <div class="focus-card-note">
+          Three key ways to express degree in BP: <b>muito + adj</b> (very), <b>tão + adj + assim</b> (so/that + adj, often dismissive), <b>não tão + adj + assim</b> (not that + adj = they're not as bad as you think). Notice <em>assim</em> adds a colloquial, slightly dismissive tone — "they're not THAT bad."
+        </div>
+        <div class="scale-bar">
+          <div class="scale-seg s1">não tão mau<span class="scale-label">not that bad</span></div>
+          <div class="scale-seg s2">mau / sujo<span class="scale-label">bad / dirty</span></div>
+          <div class="scale-seg s3">muito sujo<span class="scale-label">very dirty</span></div>
+        </div>
+        <div class="focus-ex">
+          Esses banheiros são <em>muito sujos</em>.<br>
+          <small>These bathrooms are very dirty.</small>
+          — <em>Tão maus assim</em>? Exagero!<br>
+          <small>That bad? You're exaggerating!</small>
+          Não são <em>tão maus assim</em>.<br>
+          <small>They're not that bad (dismissing the complaint).</small>
+          Ainda é <em>muito cedo</em>.<br>
+          <small>It's still really early.</small>
+        </div>
+      </div>
+
+      <!-- CARD 3: Vamos + expressions -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Vamos + infinitivo &amp; expressões do diálogo</div>
+        <div class="focus-card-en">Let's + verb &amp; key dialogue expressions</div>
+        <div class="focus-card-note">
+          <b>Vamos + infinitivo</b> = let's + verb. A very common and direct way to suggest an action. <b>Vamos embora</b> is a fixed expression meaning "let's go / let's get out of here." Notice how B uses it at the end after conceding — a graceful exit!
+        </div>
+        <div class="focus-ex">
+          <em>Vamos para casa</em>. — Let's go home.<br>
+          <em>Vamos embora</em>. — Let's go / let's get out of here.<br>
+          <em>Vamos comer</em>? — Shall we eat? / Let's eat?<br>
+          <br>
+          <em>Por quê?</em> — Why? (note the accent — standalone question)<br>
+          <em>Muito cedo ainda</em> — (It's) still really early<br>
+          <em>Aqui do lado</em> — right next door / right here beside<br>
+          <em>Tá bom</em> — OK / alright (resignation or acceptance)<br>
+          <em>Não vale a pena + infinitivo</em> — It's not worth + -ing<br>
+          <small>Já sei quando não vale a pena brigar = I know when it's not worth arguing.</small>
+          <em>Fazer xixi</em> — to pee (colloquial / child-friendly BP term)
+        </div>
+
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">🌎 Culture note</span>
+            Public bathrooms in Brazil vary enormously — from pristine shopping mall facilities to difficult street options. The colloquial expression <em>fazer xixi</em> (pee) and <em>fazer cocô</em> (poo) are widely used by adults in everyday speech, not just with children, making them perfectly normal to know. The phrase <em>já sei quando não vale a pena brigar</em> reveals something typically Brazilian: knowing gracefully when to give in — a social skill highly valued in Brazilian culture.
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Phonology note</span>
+            Note <em>pra</em> — this is the colloquial contraction of <em>para</em> in BP: <em>sentar pra fazer xixi</em>. You'll hear <em>pra</em> constantly in speech. Also listen to <em>vamos embora</em> — the stress falls on <em>-bo-</em>: /ˈvɐ.muz ẽˈbo.ɾɐ/. And <em>muito</em> is often reduced to /ˈmuĩtu/ or even /ˈmutu/ in fast informal speech.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">4</div><div class="step-title">Exercises</div></div>
+
+    <!-- EX 1 — COMPREHENSION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. Por que A quer ir para casa?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> Porque está com fome e quer comer em casa.</label>
+          <label><input type="radio" name="q1" value="b"> Porque precisa ir ao banheiro e não quer usar o banheiro público.</label>
+          <label><input type="radio" name="q1" value="c"> Porque está cansada e quer dormir.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. Qual é o argumento de A para não usar o banheiro público?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> O banheiro fica muito longe.</label>
+          <label><input type="radio" name="q2" value="b"> O banheiro está fechado.</label>
+          <label><input type="radio" name="q2" value="c"> Os banheiros são muito sujos e ela precisa sentar para fazer xixi.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. Como B reage no final?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> Continua insistindo que o banheiro não é tão ruim.</label>
+          <label><input type="radio" name="q3" value="b"> Concorda e diz "vamos embora" — reconhece que não vale a pena brigar.</label>
+          <label><input type="radio" name="q3" value="c"> Fica com raiva e vai embora sozinho.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — PRECISAR vs QUERER -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Precisar or querer?</div>
+      <div class="ex-instr">Fill in the gap with the correct form of <b>precisar</b> or <b>querer</b>. Think about whether the sentence expresses need (necessity) or desire (preference).</div>
+
+      <div class="ex-item">
+        1. Ela <input type="text" class="gap" id="g1" placeholder="..."> ir ao banheiro — é urgente!
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">Dica: urgency = necessity</div>
+      </div>
+      <div class="ex-item">
+        2. Eu não <input type="text" class="gap" id="g2" placeholder="..."> usar esse banheiro — está sujo.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">Dica: not a desire/preference</div>
+      </div>
+      <div class="ex-item">
+        3. Você não <input type="text" class="gap" id="g3" placeholder="..."> sentar — você é homem.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">Dica: no necessity for him</div>
+      </div>
+      <div class="ex-item">
+        4. Eles <input type="text" class="gap" id="g4" placeholder="..."> sair mais cedo — mas eu não <input type="text" class="gap" id="g4b" placeholder="...">.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">Dica: 1º = desire; 2º = no desire on my part</div>
+      </div>
+      <div class="ex-item">
+        5. A gente <input type="text" class="gap" id="g5" placeholder="..."> encontrar um banheiro limpo — e rápido!
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">Dica: urgent necessity</div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — MUITO / TÃO…ASSIM -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Muito or não tão… assim?</div>
+      <div class="ex-instr">Complete each exchange. One speaker exaggerates with <b>muito</b>; the other dismisses with <b>não é/são tão… assim</b>. Fill in the correct form.</div>
+
+      <div class="ex-item">
+        1. — Esse café é <input type="text" class="gap" id="t1" placeholder="..."> amargo! — Não é <input type="text" class="gap" id="t1b" placeholder="...">.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">muito + amargo / não é tão amargo assim</div>
+      </div>
+      <div class="ex-item">
+        2. — O filme foi <input type="text" class="gap" id="t2" placeholder="..."> longo. — Não foi <input type="text" class="gap" id="t2b" placeholder="...">.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">muito + longo / não foi tão longo assim</div>
+      </div>
+      <div class="ex-item">
+        3. — Está <input type="text" class="gap" id="t3" placeholder="..."> frio hoje! — Não está <input type="text" class="gap" id="t3b" placeholder="...">.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">muito + frio / não está tão frio assim</div>
+      </div>
+      <div class="ex-item">
+        4. — Essas ruas são <input type="text" class="gap" id="t4" placeholder="..."> perigosas. — Não são <input type="text" class="gap" id="t4b" placeholder="...">.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:2px;">muito + perigosas / não são tão perigosas assim</div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — VAMOS + INFINITIVO -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — Vamos + infinitivo</div>
+      <div class="ex-instr">Rewrite each sentence as a suggestion using <b>vamos + infinitivo</b> or the fixed expression <b>vamos embora</b>.</div>
+
+      <div class="ex-item">
+        <b>Modelo:</b> Eu acho que devemos ir para casa. → <em>Vamos para casa!</em>
+      </div>
+      <div class="ex-item">
+        1. Eu acho que devemos sair daqui.<br>
+        <input type="text" class="gap" id="v1" placeholder="Vamos..." style="width:100%;max-width:360px;">
+      </div>
+      <div class="ex-item">
+        2. Precisamos comer alguma coisa.<br>
+        <input type="text" class="gap" id="v2" placeholder="Vamos..." style="width:100%;max-width:360px;">
+      </div>
+      <div class="ex-item">
+        3. Deveríamos procurar outro banheiro.<br>
+        <input type="text" class="gap" id="v3" placeholder="Vamos..." style="width:100%;max-width:360px;">
+      </div>
+      <div class="ex-item">
+        4. Hora de ir embora — não vale a pena ficar.<br>
+        <input type="text" class="gap" id="v4" placeholder="Vamos..." style="width:100%;max-width:360px;">
+      </div>
+
+      <button class="check-btn" onclick="checkEx4()">✓ Model answers</button>
+      <div id="ex4-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 5 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 5 — Your turn</div>
+      <div class="ex-instr">Write a short dialogue (6–8 lines) where one person wants to leave a place and the other resists. Include: <b>preciso + infinitivo, não quero, muito + adj, não é/são tão… assim, vamos embora</b>, and <b>não vale a pena + infinitivo</b>.</div>
+      <textarea id="free1" style="min-height:150px;" placeholder="Escreva o diálogo aqui..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div>
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 ──
+var ex1A = { q1:'b', q2:'c', q3:'b' };
+var ex1E = {
+  q1: 'B — Precisa ir ao banheiro e não quer usar o banheiro público (<em>preciso ir ao banheiro / não quero ir aqui</em>).',
+  q2: 'C — Os banheiros são muito sujos e ela precisa sentar (<em>não precisa sentar pra fazer xixi</em> — spoken from B\'s perspective).',
+  q3: 'B — Concorda e diz <em>vamos embora</em>: já sei quando não vale a pena brigar.'
+};
+function checkEx1() {
+  var correct = 0; var html = '';
+  ['q1','q2','q3'].forEach(function(q,i){
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1A[q];
+    if (ok) correct++;
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl){
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1A[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+ex1E[q]+'</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'+(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — precisar vs querer ──
+var ex2A = [
+  { id:'g1',  keys:['precisa'],         display:'Ela <b>precisa</b> ir ao banheiro — é urgente! (necessity)' },
+  { id:'g2',  keys:['quero'],           display:'Eu não <b>quero</b> usar esse banheiro. (desire/preference)' },
+  { id:'g3',  keys:['precisa'],         display:'Você não <b>precisa</b> sentar. (no necessity)' },
+  { id:'g4',  keys:['querem'],          display:'Eles <b>querem</b> sair mais cedo… (desire)' },
+  { id:'g4b', keys:['quero'],           display:'…mas eu não <b>quero</b>. (no desire)' },
+  { id:'g5',  keys:['precisa','precisamos'], display:'A gente <b>precisa</b> encontrar um banheiro. (urgent need)' },
+];
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var total = ex2A.length;
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg '+(correct===total?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'+(correct===total?'✓ All '+total+' correct!':correct+' of '+total+' correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — muito / não tão assim ──
+var ex3A = [
+  { ids:['t1','t1b'], keys:[['muito amargo'],['nao e tao amargo assim','não é tão amargo assim','tao amargo assim']], display:'<b>muito amargo</b> / <b>não é tão amargo assim</b>' },
+  { ids:['t2','t2b'], keys:[['muito longo'],['nao foi tao longo assim','não foi tão longo assim','tao longo assim']], display:'<b>muito longo</b> / <b>não foi tão longo assim</b>' },
+  { ids:['t3','t3b'], keys:[['muito frio'],['nao esta tao frio assim','não está tão frio assim','tao frio assim']], display:'<b>muito frio</b> / <b>não está tão frio assim</b>' },
+  { ids:['t4','t4b'], keys:[['muito perigosas'],['nao sao tao perigosas assim','não são tão perigosas assim','tao perigosas assim']], display:'<b>muito perigosas</b> / <b>não são tão perigosas assim</b>' },
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3A.forEach(function(a,i){
+    var ok = true;
+    a.ids.forEach(function(id, j){
+      var el = document.getElementById(id);
+      var n = norm(el.value);
+      var match = a.keys[j].some(function(k){ return n === norm(k); });
+      el.classList.toggle('correct', match);
+      el.classList.toggle('wrong', !match && el.value.trim().length > 0);
+      if (!match) ok = false;
+    });
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg '+(correct===4?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'+(correct===4?'✓ All 4 correct!':correct+' of 4 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 4 — vamos ──
+function checkEx4() {
+  var models = [
+    '<strong>1.</strong> <em>Vamos embora!</em>',
+    '<strong>2.</strong> <em>Vamos comer alguma coisa!</em>',
+    '<strong>3.</strong> <em>Vamos procurar outro banheiro!</em>',
+    '<strong>4.</strong> <em>Vamos embora — não vale a pena ficar.</em>'
+  ];
+  var res = document.getElementById('ex4-result');
+  res.className = 'result-msg try-again';
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">Model answers (compare with yours):</div>'
+    + models.map(function(m){ return '<div style="margin-bottom:8px;">'+m+'</div>'; }).join('');
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var emailEl = document.getElementById('bphub-student-email');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join("");
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' enviou exercícios — '+material,
+      htmlContent:'<h2>'+name+' enviou os exercícios</h2><p><strong>Material:</strong> '+material+'</p><p><strong>Email:</strong> '+(email||'não informado')+'</p><p><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function(responses){ return Promise.all(responses.map(function(r){ return r.ok ? Promise.resolve(true) : r.json().then(function(d){ return {ok:false,err:d}; }); })); })
+  .then(function(results){
+    var allOk = results.every(function(r){ return r === true; });
+    if (allOk) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
