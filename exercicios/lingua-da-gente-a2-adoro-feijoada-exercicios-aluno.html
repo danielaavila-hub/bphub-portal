@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adoro Feijoada! — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.75; }
+
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 190px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 160px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 260px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1><em>Adoro</em> Feijoada!</h1>
+  <div class="hero-sub">Expressing likes and opinions about food — <em>gostar de</em>, <em>adorar</em>, <em>achar que</em>, <em>por isso que</em>, and the vocabulary of Brazil's most iconic dish.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">gostar de · adorar</span>
+    <span class="hero-tag">achar que</span>
+    <span class="hero-tag">por isso que</span>
+    <span class="hero-tag">feijoada</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 05</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div class="step-title">Listen to the episode</div>
+    </div>
+    <div class="podcast-wrap">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:14px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-05-i-love-feijoada/id862545884?i=1000347351579">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/elementary-05-i-love-feijoada/id862545884?i=1000347351579" target="_blank">Open in Apple Podcasts →</a></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div class="step-title">Read the dialogue</div>
+    </div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">Two friends are having lunch. One of them is serving herself feijoada — and clearly loving it.</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> Você <span class="kw">gosta mesmo</span> de feijoada, <span class="kw">não é</span>?</p>
+        <p><span class="spk">B:</span> <span class="kw">Adoro</span>, <span class="kw">principalmente</span> nessa época do ano.</p>
+        <p><span class="spk">A:</span> Mas você <span class="kw">não acha que</span> é muito pesada?</p>
+        <p><span class="spk">B:</span> Um pouco, <span class="kw">por isso que</span> eu coloco com umas <span class="kw">fatias de laranja</span>.</p>
+        <p><span class="spk">A:</span> Eu também <span class="kw">não resisto</span>, e <span class="kw">me dá</span> um pouco mais dessa <span class="kw">farofa</span> aí vai.</p>
+      </div>
+      <div class="dialogue-translation">
+        <p><b>A:</b> You really like feijoada, don't you?</p>
+        <p><b>B:</b> I love it, especially this time of year.</p>
+        <p><b>A:</b> But don't you think it's kind of heavy?</p>
+        <p><b>B:</b> A little — that's why I have it with some orange slices.</p>
+        <p><b>A:</b> I can't resist it either, and give me a little more of that farofa, will you.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div class="step-title">Language focus</div>
+    </div>
+    <div class="focus-grid">
+
+      <!-- CARD 1: gostar de / adorar -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Gostar de · Adorar — expressing likes</div>
+        <div class="focus-card-en">English: to like / to love</div>
+        <div class="focus-card-note">
+          <b>Gostar de</b> means "to like" and always needs <b>de</b> before the noun or verb. <b>Adorar</b> means "to love / adore" and is used without preposition. Adding <b>mesmo</b> after the verb intensifies it: <em>gosta mesmo</em> = really likes.<br><br>
+          Both follow the regular conjugation pattern for <b>-ar</b> verbs, but <em>gostar</em> is followed by <b>de</b>, not a direct object.
+        </div>
+        <div class="focus-ex">
+          Você <em>gosta</em> de feijoada? — Do you like feijoada?<br>
+          <small>Note: gostar <b>de</b> + noun/infinitive — the de is required.</small>
+          Ela <em>gosta muito</em> de farofa.<br>
+          <small>She really likes farofa.</small>
+          Eu <em>adoro</em> feijoada, principalmente no inverno.<br>
+          <small>I love feijoada, especially in winter.</small>
+          Você <em>gosta mesmo</em> de cozinhar?<br>
+          <small>Do you really like to cook?</small>
+        </div>
+      </div>
+
+      <!-- CARD 2: achar que / por isso que -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Achar que · Por isso que</div>
+        <div class="focus-card-en">English: to think that / that's why</div>
+        <div class="focus-card-note">
+          <b>Achar que</b> = "to think that" — used to express opinions softly. It's much more common in everyday speech than <em>pensar que</em>.<br><br>
+          <b>Por isso que</b> = "that's why / that's the reason why" — links a cause to its consequence. Equivalent to <em>por essa razão</em>, but far more colloquial and natural.
+        </div>
+        <div class="focus-ex">
+          Você não <em>acha que</em> é muito pesada?<br>
+          <small>Don't you think it's too heavy?</small>
+          Eu <em>acho que</em> a feijoada é deliciosa.<br>
+          <small>I think feijoada is delicious.</small>
+          <em>Por isso que</em> eu coloco laranja.<br>
+          <small>That's why I put orange with it.</small>
+          É pesada, <em>por isso que</em> eu não como todo dia.<br>
+          <small>It's heavy, that's why I don't eat it every day.</small>
+        </div>
+      </div>
+
+      <!-- CARD 3: expressions + feijoada vocabulary -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Expressões e vocabulário da feijoada</div>
+        <div class="focus-card-en">Expressions &amp; feijoada vocabulary</div>
+        <div class="focus-card-note">The dialogue packs in several essential expressions alongside the vocabulary of Brazil's most iconic dish.</div>
+        <div class="focus-ex">
+          <em>Não resistir</em> — can't resist / to be unable to say no<br>
+          <em>Não é?</em> — Right? / Don't you think? (tag question)<br>
+          <em>Principalmente</em> — especially / mainly / above all<br>
+          <em>Nessa época do ano</em> — this time of year<br>
+          <em>Me dá…</em> — Give me… (informal imperative, very natural)<br>
+          <em>Aí vai</em> — there you go / OK then<br>
+          <br>
+          <em>Feijoada</em> — black bean stew with pork cuts (Brazil's national dish)<br>
+          <em>Fatias de laranja</em> — orange slices (served alongside to cut the richness)<br>
+          <em>Farofa</em> — toasted manioc flour, a classic feijoada side<br>
+          <em>Pesada</em> — heavy (rich, hard to digest)
+        </div>
+
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">🫘 Culture note</span>
+            <b>Feijoada</b> is considered Brazil's national dish. Traditionally served on <b>Saturdays</b>, it is a slow-cooked black bean stew with sausage, pork ribs, and other cuts, served with rice, couve (collard greens), farofa, and orange slices. The orange is not just decoration — the acidity helps digest the fat. It's a social meal: unhurried, abundant, and shared.
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Phonology note</span>
+            Notice <b>principalmente</b> — 6 syllables: prin-ci-<b>pal</b>-men-te. Stress falls on the antepenultimate syllable. Similarly: <em>laranja</em> (la-<b>ran</b>-ja), <em>farofa</em> (fa-<b>ro</b>-fa). In BP, unstressed <b>e</b> at the end of a word is often reduced to a near-silent "i" sound: <em>principalmente</em> → /prinsipal'mẽtʃi/.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">4</div>
+      <div class="step-title">Exercises</div>
+    </div>
+
+    <!-- EX 1 — COMPREHENSION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. A pessoa B gosta de feijoada?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> Ela gosta um pouco, mas prefere outras comidas.</label>
+          <label><input type="radio" name="q1" value="b"> Ela adora, especialmente nessa época do ano.</label>
+          <label><input type="radio" name="q1" value="c"> Ela não gosta porque é muito pesada.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. Por que a pessoa B coloca fatias de laranja?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> Porque ela não gosta de feijão puro.</label>
+          <label><input type="radio" name="q2" value="b"> Porque a laranja é mais saudável.</label>
+          <label><input type="radio" name="q2" value="c"> Porque a feijoada é pesada e a laranja ajuda.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. O que a pessoa A pede no final do diálogo?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> Mais um pouco de farofa.</label>
+          <label><input type="radio" name="q3" value="b"> Um prato de feijoada.</label>
+          <label><input type="radio" name="q3" value="c"> Mais fatias de laranja.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — GOSTAR DE vs ADORAR GAP FILL -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Gostar de or adorar?</div>
+      <div class="ex-instr">Fill in the gap with the correct form of <b>gostar de</b> or <b>adorar</b>. Pay attention to the preposition <em>de</em> after <em>gostar</em>.</div>
+
+      <div class="ex-item">
+        1. Eu <input type="text" class="gap" id="g1" placeholder="..."> feijoada. Não resisto!
+        <div style="font-size:0.78rem;color:#aaa;margin-top:3px;">Dica: use a forma mais intensa (love it)</div>
+      </div>
+      <div class="ex-item">
+        2. Você <input type="text" class="gap" id="g2" placeholder="..."> comida brasileira?
+        <div style="font-size:0.78rem;color:#aaa;margin-top:3px;">Dica: use <em>gostar de</em> (do you like…?)</div>
+      </div>
+      <div class="ex-item">
+        3. Ela <input type="text" class="gap" id="g3" placeholder="..."> farofa, principalmente com feijoada.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:3px;">Dica: use <em>adorar</em> (3ª pessoa)</div>
+      </div>
+      <div class="ex-item">
+        4. Nós <input type="text" class="gap" id="g4" placeholder="..."> comer juntos no sábado.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:3px;">Dica: use <em>gostar de</em> + infinitivo</div>
+      </div>
+      <div class="ex-item">
+        5. Eles <input type="text" class="gap" id="g5" placeholder="..."> feijoada — pedem toda semana.
+        <div style="font-size:0.78rem;color:#aaa;margin-top:3px;">Dica: use a forma mais intensa (3ª pessoa plural)</div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — ACHAR QUE / POR ISSO QUE -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Achar que or por isso que?</div>
+      <div class="ex-instr">Choose <b>acho que</b> or <b>por isso que</b> to complete each sentence logically.</div>
+
+      <div class="ex-item">
+        1. A feijoada é pesada. <select id="s1"><option value="">— escolha —</option><option value="a">Por isso que</option><option value="b">Acho que</option></select> eu sempre coloco laranja.
+      </div>
+      <div class="ex-item">
+        2. <select id="s2"><option value="">— escolha —</option><option value="a">Por isso que</option><option value="b">Acho que</option></select> a feijoada é o prato mais brasileiro que existe.
+      </div>
+      <div class="ex-item">
+        3. Ela não gosta de carne. <select id="s3"><option value="">— escolha —</option><option value="a">Por isso que</option><option value="b">Acho que</option></select> ela não come feijoada.
+      </div>
+      <div class="ex-item">
+        4. <select id="s4"><option value="">— escolha —</option><option value="a">Por isso que</option><option value="b">Acho que</option></select> o sábado é o melhor dia para comer feijoada.
+      </div>
+      <div class="ex-item">
+        5. O restaurante é muito bom. <select id="s5"><option value="">— escolha —</option><option value="a">Por isso que</option><option value="b">Acho que</option></select> está sempre cheio.
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — FEIJOADA VOCABULARY MATCH -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — What is it?</div>
+      <div class="ex-instr">Match each word or expression to its correct description.</div>
+
+      <div class="ex-item">
+        <label>1. <b>Farofa</b></label>
+        <select id="m1">
+          <option value="">— escolha —</option>
+          <option value="a">Fatias de fruta cítrica servidas com a feijoada.</option>
+          <option value="b">Farinha de mandioca torrada, servida ao lado da feijoada.</option>
+          <option value="c">Um tipo de feijão preto cozido sozinho.</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>2. <b>Fatias de laranja</b></label>
+        <select id="m2">
+          <option value="">— escolha —</option>
+          <option value="a">Fatias de fruta cítrica servidas com a feijoada para ajudar na digestão.</option>
+          <option value="b">Uma sobremesa típica brasileira.</option>
+          <option value="c">Uma bebida feita de laranja.</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>3. <b>Pesada</b> (sobre uma comida)</label>
+        <select id="m3">
+          <option value="">— escolha —</option>
+          <option value="a">Comida leve e fácil de digerir.</option>
+          <option value="b">Comida rica, gordurosa ou difícil de digerir.</option>
+          <option value="c">Comida sem sabor.</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>4. <b>Principalmente</b></label>
+        <select id="m4">
+          <option value="">— escolha —</option>
+          <option value="a">De vez em quando / às vezes.</option>
+          <option value="b">Especialmente / acima de tudo.</option>
+          <option value="c">Raramente / quase nunca.</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>5. <b>Não resisto</b></label>
+        <select id="m5">
+          <option value="">— escolha —</option>
+          <option value="a">Não gosto / evito.</option>
+          <option value="b">Consigo resistir facilmente.</option>
+          <option value="c">Não consigo resistir / é impossível dizer não.</option>
+        </select>
+      </div>
+
+      <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+      <div id="ex4-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 5 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 5 — Your turn</div>
+      <div class="ex-instr">Think of a dish or food you love (or can't resist). Write 4–6 sentences in Portuguese describing: what you love, why, whether anyone thinks it's "heavy" or unhealthy, and what you eat or drink alongside it. Use <b>gostar de</b> or <b>adorar</b>, <b>achar que</b>, <b>por isso que</b>, and at least one expression from Focus 3.</div>
+      <textarea id="free1" style="min-height:120px;" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div><!-- /step 4 -->
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 — Comprehension ──
+var ex1A = { q1:'b', q2:'c', q3:'a' };
+var ex1E = {
+  q1: 'B — Ela adora, especialmente nessa época do ano (<em>Adoro, principalmente nessa época do ano</em>).',
+  q2: 'C — Porque a feijoada é pesada e a laranja ajuda na digestão (<em>por isso que eu coloco com umas fatias de laranja</em>).',
+  q3: 'A — Mais um pouco de farofa (<em>me dá um pouco mais dessa farofa</em>).'
+};
+function checkEx1() {
+  var correct = 0; var html = '';
+  ['q1','q2','q3'].forEach(function(q,i){
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1A[q];
+    if (ok) correct++;
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl){
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1A[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+ex1E[q]+'</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — Gostar de / Adorar ──
+var ex2A = [
+  { id:'g1', keys:['adoro'],           display:'<b>adoro</b> feijoada. (adorar — 1ª pessoa, sem preposição)' },
+  { id:'g2', keys:['gosta de'],        display:'Você <b>gosta de</b> comida brasileira? (gostar de — 2ª/3ª pessoa + de)' },
+  { id:'g3', keys:['adora'],           display:'Ela <b>adora</b> farofa. (adorar — 3ª pessoa, sem preposição)' },
+  { id:'g4', keys:['gostamos de'],     display:'Nós <b>gostamos de</b> comer juntos. (gostar de — 1ª pessoa plural + de)' },
+  { id:'g5', keys:['adoram'],          display:'Eles <b>adoram</b> feijoada. (adorar — 3ª pessoa plural)' },
+];
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — Achar que / Por isso que ──
+var ex3A = [
+  { id:'s1', key:'a', display:'<b>Por isso que</b> eu sempre coloco laranja. (consequence of being heavy)' },
+  { id:'s2', key:'b', display:'<b>Acho que</b> a feijoada é o prato mais brasileiro que existe. (opinion)' },
+  { id:'s3', key:'a', display:'<b>Por isso que</b> ela não come feijoada. (consequence of not liking meat)' },
+  { id:'s4', key:'b', display:'<b>Acho que</b> o sábado é o melhor dia para comer feijoada. (opinion)' },
+  { id:'s5', key:'a', display:'<b>Por isso que</b> está sempre cheio. (consequence of being a good restaurant)' },
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 4 — Vocabulary match ──
+var ex4A = [
+  { id:'m1', key:'b', display:'<b>Farofa</b> = farinha de mandioca torrada, servida ao lado da feijoada.' },
+  { id:'m2', key:'a', display:'<b>Fatias de laranja</b> = fatias de fruta cítrica que ajudam na digestão.' },
+  { id:'m3', key:'b', display:'<b>Pesada</b> = comida rica, gordurosa ou difícil de digerir.' },
+  { id:'m4', key:'b', display:'<b>Principalmente</b> = especialmente / acima de tudo.' },
+  { id:'m5', key:'c', display:'<b>Não resisto</b> = não consigo resistir / é impossível dizer não.' },
+];
+function checkEx4() {
+  var correct = 0; var html = '';
+  ex4A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex4-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var emailEl = document.getElementById('bphub-student-email');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var key = 'R'+(idx+1)+' — '+label;
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>'+key+':</strong><br>'+val.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join("");
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' enviou exercícios — '+material,
+      htmlContent:'<h2>'+name+' enviou os exercícios</h2><p><strong>Material:</strong> '+material+'</p><p><strong>Email:</strong> '+(email||'não informado')+'</p><p><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function(responses){
+    return Promise.all(responses.map(function(r){ return r.ok ? Promise.resolve(true) : r.json().then(function(d){ return {ok:false,err:d}; }); }));
+  })
+  .then(function(results){
+    var allOk = results.every(function(r){ return r === true; });
+    if (allOk) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
