@@ -444,7 +444,7 @@
   <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
   <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
     <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
-    <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
   </div>
 </div>
 <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
@@ -470,9 +470,11 @@ function markEx1Done(){
 function bphubSubmit() {
   var btn = document.getElementById('bphub-submit-btn');
   var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
   var name = nameEl ? nameEl.value.trim() : '';
   if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
   if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
   var material = document.title.replace(/ \| BPHUB.*/, '').trim();
   var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
   var summaryLines = []; var answersHtml = '';
@@ -491,7 +493,18 @@ function bphubSubmit() {
   });
   btn.disabled = true; btn.textContent = 'A enviar…';
   var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
-  fetch('https://api.brevo.com/v3/smtp/email', {
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
     method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
     body: JSON.stringify({
       to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
@@ -499,9 +512,9 @@ function bphubSubmit() {
       subject:'📝 '+name+' — '+material,
       htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
     })
-  })
-  .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,data:d}; }); })
-  .then(function(res) {
+  }));
+  Promise.all(calls)
+  .then(function() {
     document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
     document.getElementById('bphub-success').style.display = 'block';
     document.getElementById('bphub-form-area').style.display = 'none';
