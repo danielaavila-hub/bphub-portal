@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="version" content="2.1.2">
+  <title>Querida, Estou Grávida! — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --b1: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--b1); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--b1); text-decoration: none; letter-spacing: 0.04em; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--b1); color: white; }
+    .badge-ep { background: rgba(30,29,28,0.08); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: var(--b1); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; font-style: italic; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.88); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; font-style: normal; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,185,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+    .attribution { margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.4); font-style: normal; }
+    .attribution a { color: rgba(255,255,255,0.55); }
+
+    /* MAIN */
+    .main { max-width: 920px; padding: 0 48px 100px; }
+
+    /* STEPS */
+    .step { margin-top: 52px; }
+    .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--b1); color: white; font-family: 'Trirong', serif; font-size: 16px; font-weight: 400; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 22px; font-weight: 300; color: var(--nanquim); }
+    .step-divider { margin-top: 52px; border: none; border-top: 1px solid var(--light-gray); }
+
+    /* PLAYER */
+    .player-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px; }
+    .player-instruction { font-size: 14px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+    .player-instruction strong { color: var(--nanquim); }
+    .player-embed { width: 100%; height: 175px; border-radius: 10px; border: none; display: block; }
+    .player-fallback { margin-top: 12px; font-size: 13px; color: #888; }
+    .player-fallback a { color: var(--b1); font-weight: 600; }
+
+    /* DIALOGUE */
+    .dialogue-intro { font-size: 14px; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue-intro strong { color: var(--nanquim); }
+    .dialogue-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; }
+    .dialogue-turn { display: grid; grid-template-columns: 36px 1fr; gap: 0; border-bottom: 1px solid var(--light-gray); }
+    .dialogue-turn:last-child { border-bottom: none; }
+    .dialogue-speaker { background: var(--off-white); display: flex; align-items: flex-start; justify-content: center; padding-top: 18px; }
+    .speaker-label { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; }
+    .speaker-a { background: var(--b1); }
+    .speaker-b { background: var(--nanquim); }
+    .dialogue-content { padding: 16px 20px; }
+    .dialogue-pt { font-size: 15px; color: var(--nanquim); font-weight: 500; line-height: 1.55; }
+    .dialogue-en { font-size: 13px; color: #999; margin-top: 4px; font-style: italic; line-height: 1.5; }
+
+    /* LANGUAGE FOCUS */
+    .focus-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px; margin-bottom: 20px; }
+    .focus-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--b1); margin-bottom: 10px; }
+    .focus-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 300; color: var(--nanquim); margin-bottom: 4px; }
+    .focus-subtitle { font-size: 13px; color: #888; margin-bottom: 18px; font-style: italic; }
+    .focus-body { font-size: 15px; color: var(--texto); line-height: 1.75; margin-bottom: 18px; }
+    .focus-body p { margin-bottom: 10px; }
+    .focus-body p:last-child { margin-bottom: 0; }
+
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+    th { background: var(--off-white); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #666; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--light-gray); }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; color: var(--texto); line-height: 1.55; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--nanquim); }
+    td em { color: var(--b1); font-style: normal; font-weight: 600; }
+
+    /* CALLOUT BOXES */
+    .callout { border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 14px; line-height: 1.7; }
+    .callout-tip { background: rgba(150,126,99,0.08); border-left: 3px solid var(--b1); }
+    .callout-culture { background: rgba(78,85,29,0.07); border-left: 3px solid var(--floresta); }
+    .callout-phonology { background: rgba(211,109,41,0.07); border-left: 3px solid var(--pitomba); }
+    .callout-title { font-weight: 700; color: var(--nanquim); margin-bottom: 6px; display: block; font-size: 13px; letter-spacing: 0.02em; }
+    .dialogue-highlight { background: rgba(150,126,99,0.1); border-radius: 6px; padding: 2px 6px; font-style: italic; }
+
+    /* EXERCISES */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px; margin-bottom: 20px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--b1); margin-bottom: 8px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 18px; font-weight: 300; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instruction { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6; }
+    .ex-instruction strong { color: var(--nanquim); }
+
+    /* MC questions */
+    .mc-question { margin-bottom: 20px; }
+    .mc-question-text { font-size: 15px; font-weight: 600; color: var(--nanquim); margin-bottom: 10px; }
+    .mc-option { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border-radius: 8px; margin-bottom: 6px; cursor: pointer; border: 1.5px solid transparent; transition: background 0.15s, border-color 0.15s; }
+    .mc-option:hover { background: var(--off-white); }
+    .mc-option input[type="radio"] { margin-top: 3px; accent-color: var(--b1); flex-shrink: 0; }
+    .mc-option label { font-size: 14px; color: var(--texto); cursor: pointer; line-height: 1.5; }
+    .mc-option.correct-opt { background: rgba(78,85,29,0.08); border-color: var(--floresta); }
+    .mc-option.wrong-opt { background: rgba(211,109,41,0.08); border-color: var(--pitomba); }
+
+    /* Gap fill */
+    .gap-fill-item { margin-bottom: 18px; }
+    .gap-fill-item p { font-size: 15px; color: var(--texto); line-height: 1.7; margin-bottom: 8px; }
+    .gap-fill-item p em { font-style: italic; color: #888; font-size: 13px; }
+    .gap-input { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 8px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); width: 100%; max-width: 340px; outline: none; transition: border-color 0.2s; }
+    .gap-input:focus { border-color: var(--b1); }
+    .gap-input.correct { border-color: var(--floresta); background: rgba(78,85,29,0.05); }
+    .gap-input.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.05); }
+    .gap-hint { font-size: 12px; color: #aaa; margin-top: 4px; font-style: italic; }
+
+    /* Dropdown */
+    .drop-item { margin-bottom: 14px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 15px; color: var(--texto); line-height: 1.6; }
+    .drop-select { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 7px 12px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); outline: none; cursor: pointer; transition: border-color 0.2s; }
+    .drop-select:focus { border-color: var(--b1); }
+    .drop-select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.05); }
+    .drop-select.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.05); }
+
+    /* Matching */
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .match-item { display: flex; align-items: flex-start; gap: 10px; }
+    .match-item p { font-size: 14px; color: var(--texto); }
+    .match-item strong { color: var(--nanquim); }
+    .match-select { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 7px 10px; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--nanquim); background: var(--baunilha); outline: none; cursor: pointer; width: 100%; margin-top: 6px; }
+    .match-select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.05); }
+    .match-select.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.05); }
+
+    /* Textarea */
+    textarea { width: 100%; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); resize: vertical; min-height: 130px; outline: none; line-height: 1.7; transition: border-color 0.2s; }
+    textarea:focus { border-color: var(--b1); }
+
+    /* Buttons */
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .reset-btn { background: transparent; color: #999; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 9px 18px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 16px; margin-left: 8px; transition: border-color 0.2s; }
+    .reset-btn:hover { border-color: #bbb; }
+
+    /* Result */
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 14px 18px; font-size: 14px; line-height: 1.7; max-height: 280px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1.5px solid var(--floresta); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1.5px solid var(--pitomba); color: var(--nanquim); }
+
+    /* NAV */
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; color: var(--b1); }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; background: var(--b1); }
+    .nav-btn:hover { opacity: 0.88; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-grid { grid-template-columns: 1fr; }
+      .topbar { padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub"></a>
+  <div class="topbar-right">
+    <a href="../b1/index.html" class="topbar-back">← B1</a>
+    <span class="badge badge-level">B1 — Intermediário I</span>
+    <span class="badge badge-ep">Língua da Gente</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Querida, Estou Grávida!</h1>
+  <div class="hero-sub">A husband keeps thinking his wife is sick — until she finally spells it out. Subjuntivo presente, health vocabulary, and the art of breaking big news in Portuguese.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Episódio 01</span>
+    <span class="hero-tag">Subjuntivo presente</span>
+    <span class="hero-tag">Saúde e gravidez</span>
+    <span class="hero-tag">Expressões coloquiais</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Intermediate 01</div>
+  <div class="attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ── STEP 1: LISTEN ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Listen to the episode</div>
+    </div>
+    <div class="player-box">
+      <p class="player-instruction"><strong>First listen:</strong> What seems to be wrong with the wife? What does the husband keep suggesting? What is the actual explanation?</p>
+      <iframe class="player-embed"
+        src="https://embed.podcasts.apple.com/br/podcast/intermediate-01-sweetie-im-pregnant/id862545884?i=1000347351600"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+        allow="autoplay *; encrypted-media *; clipboard-write"
+        title="Língua da Gente · Intermediate 01"></iframe>
+      <p class="player-fallback">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/intermediate-01-sweetie-im-pregnant/id862545884?i=1000347351600" target="_blank">Open in Apple Podcasts →</a></p>
+    </div>
+  </div>
+
+  <hr class="step-divider">
+
+  <!-- ── STEP 2: DIALOGUE ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Read the dialogue</div>
+    </div>
+    <p class="dialogue-intro"><strong>Listen again</strong> while reading. Notice how the wife's frustration builds — and pay attention to the structures in bold in Step 3.</p>
+    <div class="dialogue-box">
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Você está bem? Parece um pouco pálida. Não sei não, hein?</div>
+          <div class="dialogue-en">Are you OK? You look a little pale. I don't know, you know?</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Não, não estou doente. Estou bem, não é nada.</div>
+          <div class="dialogue-en">No, I'm not sick. I'm fine, it's nothing.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Você comeu alguma coisa que te fez mal?</div>
+          <div class="dialogue-en">Did you eat something that didn't agree with you?</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Não, mas toda manhã estou com náuseas, e depois a sensação passa.</div>
+          <div class="dialogue-en">No, but every morning I feel nauseous, and then the feeling passes.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Bom, toma essa água. Você quer que eu te <strong>leve</strong> ao médico.</div>
+          <div class="dialogue-en">OK, drink this water. Do you want me to take you to the doctor?</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Não, não é preciso. Olha, o que eu quero mesmo é chupar mais desse limão.</div>
+          <div class="dialogue-en">No, that's not necessary. Look, what I really want is more of this lemon.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Mas se você está doente, é <strong>melhor</strong> que você não <strong>coma</strong> tanto.</div>
+          <div class="dialogue-en">But if you're sick, it's better that you don't eat so much.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Querido, eu não estou doente.</div>
+          <div class="dialogue-en">Honey, I'm not sick.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Olha, OK, acho melhor você ficar em casa hoje. Não vai para o trabalho.</div>
+          <div class="dialogue-en">Look, OK, I think it's better for you to stay home today. Don't go to work.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Querido, eu não estou doente.</div>
+          <div class="dialogue-en">Honey, I'm not sick.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Meu bem, eu posso ligar para seu chefe se você quiser.</div>
+          <div class="dialogue-en">Sweetheart, I can call your boss if you want.</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Como é <strong>possível</strong> que você não <strong>esteja</strong> entendendo? Escuta aqui, eu não estou doente, viu?</div>
+          <div class="dialogue-en">How is it possible that you don't understand? Listen here, I'm not sick, you get it?</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Então, que que é?</div>
+          <div class="dialogue-en">So, what is it then?</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Querido, eu estou grávida!</div>
+          <div class="dialogue-en">Honey, I'm pregnant!</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-a">A</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Você está o quê?</div>
+          <div class="dialogue-en">You're what?</div>
+        </div>
+      </div>
+
+      <div class="dialogue-turn">
+        <div class="dialogue-speaker"><div class="speaker-label speaker-b">B</div></div>
+        <div class="dialogue-content">
+          <div class="dialogue-pt">Eu estou grávida!</div>
+          <div class="dialogue-en">I'm pregnant!</div>
+        </div>
+      </div>
+
+    </div><!-- /dialogue-box -->
+  </div>
+
+  <hr class="step-divider">
+
+  <!-- ── STEP 3: LANGUAGE FOCUS ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Language focus</div>
+    </div>
+
+    <!-- Focus 1: Subjuntivo Presente -->
+    <div class="focus-block">
+      <div class="focus-label">Focus 1</div>
+      <div class="focus-title">Subjuntivo Presente — The Present Subjunctive</div>
+      <div class="focus-subtitle">English: "that you (do something)" — in wishes, judgements, and doubt</div>
+      <div class="focus-body">
+        <p>The dialogue has three clear examples of the <strong>subjuntivo presente</strong> — a verb mood that English largely lost but Portuguese uses constantly. Notice how each one appears after a trigger phrase:</p>
+        <p>① <span class="dialogue-highlight">Você quer que eu te <strong>leve</strong> ao médico.</span> → Do you want me to take you to the doctor?<br>
+        ② <span class="dialogue-highlight">É melhor que você não <strong>coma</strong> tanto.</span> → It's better that you don't eat so much.<br>
+        ③ <span class="dialogue-highlight">Como é possível que você não <strong>esteja</strong> entendendo?</span> → How is it possible that you don't understand?</p>
+        <p>The key pattern: <strong>trigger phrase + que + different subject + subjuntivo</strong>. The subjunctive appears because the speaker is expressing a wish, value judgement, or disbelief — not a neutral fact.</p>
+      </div>
+
+      <table>
+        <tr><th>Trigger phrase</th><th>Use</th><th>Example from the dialogue</th></tr>
+        <tr><td><em>querer que</em></td><td>Wish / desire</td><td>Você quer que eu te <em>leve</em> ao médico.</td></tr>
+        <tr><td><em>é melhor que</em></td><td>Value judgement</td><td>É melhor que você não <em>coma</em> tanto.</td></tr>
+        <tr><td><em>é possível que</em></td><td>Possibility / disbelief</td><td>É possível que você não <em>esteja</em> entendendo.</td></tr>
+        <tr><td><em>é importante que</em></td><td>Importance</td><td>É importante que você <em>vá</em> ao médico.</td></tr>
+        <tr><td><em>esperar que</em></td><td>Hope</td><td>Espero que você <em>fique</em> bem.</td></tr>
+        <tr><td><em>pedir que</em></td><td>Request</td><td>Ela pediu que eu <em>ligasse</em> para o chefe.</td></tr>
+      </table>
+
+      <div class="callout callout-tip">
+        <span class="callout-title">💡 How to form the subjuntivo presente</span>
+        For regular verbs, start from the <strong>eu</strong> form of the present indicative, drop the <strong>-o</strong>, and add the subjunctive endings:<br><br>
+        <strong>-AR verbs</strong> (levar → levo → lev-): <em>leve, leves, leve, levemos, levem</em><br>
+        <strong>-ER verbs</strong> (comer → como → com-): <em>coma, comas, coma, comamos, comam</em><br>
+        <strong>-IR verbs</strong> (partir → parto → part-): <em>parta, partas, parta, partamos, partam</em><br><br>
+        <strong>Irregular verbs</strong> (memorise these — they're frequent):<br>
+        ser → <em>seja</em> · estar → <em>esteja</em> · ir → <em>vá</em> · ter → <em>tenha</em> · querer → <em>queira</em> · poder → <em>possa</em>
+      </div>
+    </div>
+
+    <!-- Focus 2: Expressions -->
+    <div class="focus-block">
+      <div class="focus-label">Focus 2</div>
+      <div class="focus-title">Key Expressions from the Dialogue</div>
+      <div class="focus-subtitle">Health, pregnancy, and colloquial speech</div>
+
+      <table>
+        <tr><th>Portuguese</th><th>English</th><th>Notes</th></tr>
+        <tr><td><strong>Pálida</strong></td><td>Pale (fem.)</td><td>Masculine: <em>pálido</em>. Common symptom description.</td></tr>
+        <tr><td><strong>Náuseas</strong></td><td>Nausea</td><td>Always plural in BP: <em>estou com náuseas</em> = I'm nauseous.</td></tr>
+        <tr><td><strong>A sensação passa</strong></td><td>The feeling passes</td><td><em>Passar</em> = to pass / go away. Used for symptoms: <em>a dor passa</em>.</td></tr>
+        <tr><td><strong>Não é preciso</strong></td><td>It's not necessary / No need</td><td>Polite refusal. Also: <em>não tem necessidade</em>.</td></tr>
+        <tr><td><strong>O que eu quero mesmo</strong></td><td>What I really want</td><td><em>Mesmo</em> adds emphasis: <em>eu quero mesmo</em> = I really want.</td></tr>
+        <tr><td><strong>Chupar limão</strong></td><td>To suck on a lemon</td><td>A classic pregnancy craving in Brazil. <em>Chupar</em> = suck/eat (lollipops, fruit).</td></tr>
+        <tr><td><strong>Não sei não, hein?</strong></td><td>I don't know, you know?</td><td>Double negative for softening. <em>Hein?</em> = "you know? / right?" Casual tag.</td></tr>
+        <tr><td><strong>Viu?</strong></td><td>You see? / Got it?</td><td>From <em>ver</em> (to see). Colloquial tag question, very common in BP.</td></tr>
+        <tr><td><strong>Que que é?</strong></td><td>So what is it?</td><td>Colloquial form of <em>o que que é?</em> — double <em>que</em> is informal but natural.</td></tr>
+        <tr><td><strong>Grávida</strong></td><td>Pregnant</td><td>Adjective only (feminine). <em>Estou grávida.</em> Never: <em>sou grávida</em>.</td></tr>
+        <tr><td><strong>Meu bem / Querido</strong></td><td>Sweetheart / Honey</td><td>Terms of endearment. <em>Meu bem</em> = lit. "my good one." Very warm.</td></tr>
+      </table>
+
+      <div class="callout callout-culture">
+        <span class="callout-title">🇧🇷 Cultura — Gravidez e os primeiros sintomas</span>
+        The wife's craving for lemon (<em>chupar limão</em>) is a very recognisable image in Brazilian popular culture — citrus cravings in early pregnancy are a common trope. The dialogue also shows something culturally real: the husband's well-meaning but clueless reactions (offering water, calling her boss) are played for comedy. The tension between a wife trying to share big news and a husband who can't connect the dots is a classic comedic premise that resonates across Brazilian families.
+      </div>
+
+      <div class="callout callout-phonology">
+        <span class="callout-title">🔊 Fonologia — Palatalização do /d/ e /t/ antes de /i/</span>
+        One of the most distinctive features of Brazilian Portuguese: the sounds /t/ and /d/ become <strong>palatalised</strong> (softer, more like "ch" and "dj") before an unstressed /i/ sound. Listen carefully in the dialogue:<br><br>
+        <strong>doente</strong> → /dʒoẽtʃi/ — the 'd' sounds like "dj" and the final 'te' sounds like "chi"<br>
+        <strong>grávida</strong> → /ˈgɾavida/ — the final 'da' also palatalises: /dʒa/<br><br>
+        This does NOT happen in European Portuguese, which makes it one of the clearest markers of the Brazilian accent. Listen to the episode and focus on every word that ends in -<em>de</em>, -<em>te</em>, or -<em>di</em>.
+      </div>
+    </div>
+  </div>
+
+  <hr class="step-divider">
+
+  <!-- ── STEP 4: EXERCISES ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Exercises</div>
+    </div>
+
+    <!-- Exercise 1: Comprehension -->
+    <div class="ex-block">
+      <div class="ex-num">Exercise 1 — Comprehension check</div>
+      <div class="ex-title">What happens in the dialogue?</div>
+      <p class="ex-instruction">Choose the correct answer based on the dialogue. Only one answer is correct for each question.</p>
+
+      <div class="mc-question">
+        <div class="mc-question-text">1. Por que a pessoa A acha que B está doente?</div>
+        <label class="mc-option"><input type="radio" name="q1" value="a"> <label>B disse que está com dor de cabeça e febre.</label></label>
+        <label class="mc-option"><input type="radio" name="q1" value="b"> <label>B parece um pouco pálida e tem náuseas toda manhã.</label></label>
+        <label class="mc-option"><input type="radio" name="q1" value="c"> <label>B não foi trabalhar e ficou em casa.</label></label>
+      </div>
+
+      <div class="mc-question">
+        <div class="mc-question-text">2. O que B quer comer/beber no diálogo?</div>
+        <label class="mc-option"><input type="radio" name="q2" value="a"> <label>Água com açúcar.</label></label>
+        <label class="mc-option"><input type="radio" name="q2" value="b"> <label>Limão.</label></label>
+        <label class="mc-option"><input type="radio" name="q2" value="c"> <label>Sopa quente.</label></label>
+      </div>
+
+      <div class="mc-question">
+        <div class="mc-question-text">3. O que A sugere fazer para ajudar B?</div>
+        <label class="mc-option"><input type="radio" name="q3" value="a"> <label>Chamar um médico em casa.</label></label>
+        <label class="mc-option"><input type="radio" name="q3" value="b"> <label>Levar B ao médico, B ficar em casa e ligar para o chefe de B.</label></label>
+        <label class="mc-option"><input type="radio" name="q3" value="c"> <label>Fazer chá e comprar remédio.</label></label>
+      </div>
+
+      <div class="mc-question">
+        <div class="mc-question-text">4. Qual é a notícia que B quer dar a A?</div>
+        <label class="mc-option"><input type="radio" name="q4" value="a"> <label>B vai mudar de emprego.</label></label>
+        <label class="mc-option"><input type="radio" name="q4" value="b"> <label>B está grávida.</label></label>
+        <label class="mc-option"><input type="radio" name="q4" value="c"> <label>B tem uma doença grave.</label></label>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 2: Subjuntivo forms -->
+    <div class="ex-block">
+      <div class="ex-num">Exercise 2 — Subjuntivo presente: forms</div>
+      <div class="ex-title">Complete the sentences</div>
+      <p class="ex-instruction">Write the correct <strong>subjuntivo presente</strong> form of the verb in parentheses. Use the tip from Focus 1: take the <em>eu</em> form → drop the <em>-o</em> → add the subjunctive ending.</p>
+
+      <div class="gap-fill-item">
+        <p>1. O médico quer que você <span style="color:#888;font-style:italic;">(ficar)</span> em repouso por dois dias.</p>
+        <input class="gap-input" id="s1" type="text" placeholder="subjuntivo de ficar (você)">
+        <div class="gap-hint">Dica: ficar → fico → fic- → fique / fiques / fique…</div>
+      </div>
+
+      <div class="gap-fill-item">
+        <p>2. É importante que ela <span style="color:#888;font-style:italic;">(beber)</span> muita água.</p>
+        <input class="gap-input" id="s2" type="text" placeholder="subjuntivo de beber (ela)">
+        <div class="gap-hint">Dica: beber → bebo → beb- → beba…</div>
+      </div>
+
+      <div class="gap-fill-item">
+        <p>3. Não é possível que eles não <span style="color:#888;font-style:italic;">(saber)</span> a notícia ainda.</p>
+        <input class="gap-input" id="s3" type="text" placeholder="subjuntivo de saber (eles)">
+        <div class="gap-hint">Dica: saber → sei → saib- → saibam…</div>
+      </div>
+
+      <div class="gap-fill-item">
+        <p>4. Ela espera que o marido <span style="color:#888;font-style:italic;">(entender)</span> logo.</p>
+        <input class="gap-input" id="s4" type="text" placeholder="subjuntivo de entender (ele)">
+        <div class="gap-hint">Dica: entender → entendo → entend- → entenda…</div>
+      </div>
+
+      <div class="gap-fill-item">
+        <p>5. É melhor que vocês <span style="color:#888;font-style:italic;">(ir)</span> ao médico juntos.</p>
+        <input class="gap-input" id="s5" type="text" placeholder="subjuntivo de ir (vocês) — irregular!">
+        <div class="gap-hint">Dica: ir → vão no indicativo, mas no subjuntivo: <em>vá / vás / vá / vamos / vão</em></div>
+      </div>
+
+      <div class="gap-fill-item">
+        <p>6. É possível que ela <span style="color:#888;font-style:italic;">(estar)</span> com náuseas por causa da gravidez.</p>
+        <input class="gap-input" id="s6" type="text" placeholder="subjuntivo de estar (ela) — irregular!">
+        <div class="gap-hint">Dica: estar → irregular: <em>esteja, estejas, esteja, estejamos, estejam</em></div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <button class="reset-btn" onclick="resetEx2()">↺ Reset</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3: Triggers -->
+    <div class="ex-block">
+      <div class="ex-num">Exercise 3 — Trigger phrases</div>
+      <div class="ex-title">Choose the right trigger</div>
+      <p class="ex-instruction">Choose the most natural trigger phrase to complete each sentence. More than one may be grammatically possible — choose the one that fits the meaning best.</p>
+
+      <div class="drop-item">
+        1. <select class="drop-select" id="d1">
+          <option value="">— escolha —</option>
+          <option value="a">É melhor que</option>
+          <option value="b">É possível que</option>
+          <option value="c">Queremos que</option>
+        </select> você descanse um pouco — parece cansada.
+      </div>
+
+      <div class="drop-item">
+        2. <select class="drop-select" id="d2">
+          <option value="">— escolha —</option>
+          <option value="a">É importante que</option>
+          <option value="b">É possível que</option>
+          <option value="c">Espero que</option>
+        </select> ela já saiba a notícia — não tenho certeza.
+      </div>
+
+      <div class="drop-item">
+        3. O médico pediu <select class="drop-select" id="d3">
+          <option value="">— escolha —</option>
+          <option value="a">que ela</option>
+          <option value="b">para ela</option>
+          <option value="c">ela</option>
+        </select> fizesse um exame de sangue.
+      </div>
+
+      <div class="drop-item">
+        4. <select class="drop-select" id="d4">
+          <option value="">— escolha —</option>
+          <option value="a">Espero que</option>
+          <option value="b">É melhor que</option>
+          <option value="c">É possível que</option>
+        </select> tudo fique bem com a gravidez.
+      </div>
+
+      <div class="drop-item">
+        5. <select class="drop-select" id="d5">
+          <option value="">— escolha —</option>
+          <option value="a">É importante que</option>
+          <option value="b">Espero que</option>
+          <option value="c">É possível que</option>
+        </select> o marido entenda logo — ela está ficando frustrada!
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <button class="reset-btn" onclick="resetEx3()">↺ Reset</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4: Expressions -->
+    <div class="ex-block">
+      <div class="ex-num">Exercise 4 — Expressions from the dialogue</div>
+      <div class="ex-title">What does it mean?</div>
+      <p class="ex-instruction">Match each expression on the left with its correct meaning on the right. Select the best answer for each.</p>
+
+      <div style="margin-bottom: 16px;">
+        <div class="gap-fill-item">
+          <p><strong>1. "Não é preciso."</strong></p>
+          <select class="match-select" id="m1">
+            <option value="">— escolha —</option>
+            <option value="a">I can't be precise / accurate.</option>
+            <option value="b">It's not necessary. / No need.</option>
+            <option value="c">It's not possible.</option>
+          </select>
+        </div>
+
+        <div class="gap-fill-item">
+          <p><strong>2. "A sensação passa."</strong></p>
+          <select class="match-select" id="m2">
+            <option value="">— escolha —</option>
+            <option value="a">The sensation is getting worse.</option>
+            <option value="b">The feeling passes / goes away.</option>
+            <option value="c">She passes through the sensation.</option>
+          </select>
+        </div>
+
+        <div class="gap-fill-item">
+          <p><strong>3. "Viu?"</strong></p>
+          <select class="match-select" id="m3">
+            <option value="">— escolha —</option>
+            <option value="a">Did you watch? (referring to TV)</option>
+            <option value="b">You see? / Got it? (colloquial tag)</option>
+            <option value="c">Look over there!</option>
+          </select>
+        </div>
+
+        <div class="gap-fill-item">
+          <p><strong>4. "Que que é?"</strong></p>
+          <select class="match-select" id="m4">
+            <option value="">— escolha —</option>
+            <option value="a">What on earth happened?</option>
+            <option value="b">So what is it then? (colloquial)</option>
+            <option value="c">What do you want?</option>
+          </select>
+        </div>
+
+        <div class="gap-fill-item">
+          <p><strong>5. "Estou com náuseas."</strong></p>
+          <select class="match-select" id="m5">
+            <option value="">— escolha —</option>
+            <option value="a">I'm nauseous / feeling sick.</option>
+            <option value="b">I have a headache.</option>
+            <option value="c">I'm tired of feeling sick.</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+      <button class="reset-btn" onclick="resetEx4()">↺ Reset</button>
+      <div id="ex4-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 5: Free production -->
+    <div class="ex-block">
+      <div class="ex-num">Exercise 5 — Your turn</div>
+      <div class="ex-title">Break the big news!</div>
+      <p class="ex-instruction">Write a short dialogue (6–10 lines) in which one person has a surprising piece of news to share, but the other person misunderstands completely — just like in this episode. Use at least <strong>two subjuntivo presente</strong> structures and <strong>three expressions</strong> from Focus 2. Be creative!</p>
+
+      <textarea id="free1" placeholder="Escreva o seu diálogo aqui..."></textarea>
+    </div>
+
+    <!-- SUBMIT FORM -->
+    <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+      <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+        <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+    </div>
+    <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+      <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+      <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+      <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+    </div>
+    <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+    <!-- Back to index -->
+    <div class="nav-link">
+      <div>
+        <div class="nav-link-label">Série B1</div>
+        <div class="nav-link-title">Língua da Gente — Intermediário I</div>
+      </div>
+      <a href="../b1/index.html" class="nav-btn">← Voltar ao índice B1</a>
+    </div>
+
+  </div><!-- /step 4 -->
+
+</div><!-- /main -->
+
+<script>
+// ── EXERCISE 1: Comprehension (multiple choice) ──
+var ex1Correct = { q1: 'b', q2: 'b', q3: 'b', q4: 'b' };
+var ex1Labels = {
+  q1: 'B parece um pouco pálida e tem náuseas toda manhã.',
+  q2: 'Limão.',
+  q3: 'Levar B ao médico, B ficar em casa e ligar para o chefe de B.',
+  q4: 'B está grávida.'
+};
+
+function checkEx1() {
+  var correct = 0; var total = 4;
+  var html = '';
+  ['q1','q2','q3','q4'].forEach(function(q, i) {
+    var chosen = document.querySelector('input[name="' + q + '"]:checked');
+    var val = chosen ? chosen.value : null;
+    var ok = val === ex1Correct[q];
+    if (ok) correct++;
+    var optEls = document.querySelectorAll('input[name="' + q + '"]');
+    optEls.forEach(function(el) {
+      el.closest('.mc-option').classList.remove('correct-opt','wrong-opt');
+      if (el.value === ex1Correct[q]) el.closest('.mc-option').classList.add('correct-opt');
+      else if (el.checked && !ok) el.closest('.mc-option').classList.add('wrong-opt');
+    });
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + ex1Labels[q] + '</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!' : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 2: Subjuntivo forms ──
+var ex2Answers = [
+  { id: 's1', key: 'fique',   display: '<strong>fique</strong> — ficar → fico → fic- → fique' },
+  { id: 's2', key: 'beba',    display: '<strong>beba</strong> — beber → bebo → beb- → beba' },
+  { id: 's3', key: 'saibam',  display: '<strong>saibam</strong> — saber → sei → saib- → saibam (eles)' },
+  { id: 's4', key: 'entenda', display: '<strong>entenda</strong> — entender → entendo → entend- → entenda' },
+  { id: 's5', key: 'vao',     display: '<strong>vão</strong> — ir → irregular: vá/vás/vá/vamos/vão' },
+  { id: 's6', key: 'esteja',  display: '<strong>esteja</strong> — estar → irregular: esteja' },
+];
+
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === norm(a.key);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  var allOk = correct === ex2Answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex2Answers.length + ' correct!'
+             : correct + ' of ' + ex2Answers.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+function resetEx2() {
+  ex2Answers.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    el.value = ''; el.classList.remove('correct','wrong');
+  });
+  var res = document.getElementById('ex2-result');
+  res.style.display = 'none'; res.innerHTML = '';
+}
+
+// ── EXERCISE 3: Trigger phrases ──
+var ex3Answers = [
+  { id: 'd1', key: 'a', display: '<strong>É melhor que</strong> você descanse — judgement/recommendation.' },
+  { id: 'd2', key: 'b', display: '<strong>É possível que</strong> ela já saiba — possibility/uncertainty.' },
+  { id: 'd3', key: 'a', display: '<strong>que ela</strong> fizesse — pedir que + subjuntivo. (Note: here in imperfect subjunctive — pediu que = past trigger)' },
+  { id: 'd4', key: 'a', display: '<strong>Espero que</strong> tudo fique bem — hope/wish.' },
+  { id: 'd5', key: 'a', display: '<strong>É importante que</strong> o marido entenda logo — emphasis on importance.' },
+];
+
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = el.value;
+    var ok = val === a.key;
+    el.classList.remove('correct','wrong');
+    if (val) { el.classList.toggle('correct', ok); el.classList.toggle('wrong', !ok); }
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  var allOk = correct === ex3Answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex3Answers.length + ' correct!'
+             : correct + ' of ' + ex3Answers.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+function resetEx3() {
+  ex3Answers.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    el.value = ''; el.classList.remove('correct','wrong');
+  });
+  var res = document.getElementById('ex3-result');
+  res.style.display = 'none'; res.innerHTML = '';
+}
+
+// ── EXERCISE 4: Matching ──
+var ex4Answers = [
+  { id: 'm1', key: 'b', display: '<strong>Não é preciso.</strong> → It\'s not necessary. / No need.' },
+  { id: 'm2', key: 'b', display: '<strong>A sensação passa.</strong> → The feeling passes / goes away.' },
+  { id: 'm3', key: 'b', display: '<strong>Viu?</strong> → You see? / Got it? (colloquial tag question)' },
+  { id: 'm4', key: 'b', display: '<strong>Que que é?</strong> → So what is it then? (colloquial)' },
+  { id: 'm5', key: 'a', display: '<strong>Estou com náuseas.</strong> → I\'m nauseous / feeling sick.' },
+];
+
+function checkEx4() {
+  var correct = 0; var html = '';
+  ex4Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = el.value;
+    var ok = val === a.key;
+    el.classList.remove('correct','wrong');
+    if (val) { el.classList.toggle('correct', ok); el.classList.toggle('wrong', !ok); }
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex4-result');
+  var allOk = correct === ex4Answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex4Answers.length + ' correct!'
+             : correct + ' of ' + ex4Answers.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+function resetEx4() {
+  ex4Answers.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    el.value = ''; el.classList.remove('correct','wrong');
+  });
+  var res = document.getElementById('ex4-result');
+  res.style.display = 'none'; res.innerHTML = '';
+}
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor = '#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor = '';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx + 1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx + 1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, data: d }; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
