@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronomes Sujeito — A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --level: #4E551D; /* A1 — floresta */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* REFERENCE BOX */
+    .ref-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 40px; }
+    .ref-box h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 16px; }
+
+    /* PRONOUN TABLE */
+    .pronoun-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+    .pronoun-table th { background: var(--level); color: white; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pronoun-table th:first-child { border-radius: 8px 0 0 0; }
+    .pronoun-table th:last-child { border-radius: 0 8px 0 0; }
+    .pronoun-table td { padding: 12px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .pronoun-table tr:last-child td { border-bottom: none; }
+    .pronoun-table tr:nth-child(even) td { background: #faf8f4; }
+    .pronoun-table td strong { font-weight: 700; color: var(--nanquim); }
+
+    /* NOTE BOX */
+    .note-box { background: rgba(78,85,29,0.07); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+    .note-box strong { color: var(--nanquim); }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+
+    /* SENTENCE ROWS */
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2; }
+    .hint { font-size: 12px; color: #bbb; font-style: italic; }
+
+    /* TEXT INPUTS (inline gap fill) */
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; width: 110px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+
+    /* WORD BANK */
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; background: var(--off-white); border-radius: 10px; margin-bottom: 20px; }
+    .word-bank-label { font-size: 11px; font-weight: 700; color: #999; width: 100%; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .wb-word { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+
+    /* CORRECTION ROWS */
+    .correction-row { margin-bottom: 20px; }
+    .correction-sentence { font-size: 15px; color: var(--nanquim); margin-bottom: 8px; line-height: 1.7; }
+    .wrong-word { text-decoration: underline wavy var(--pitomba); color: var(--pitomba); font-weight: 600; }
+    .correction-input-wrap { display: flex; align-items: center; gap: 10px; }
+    .correction-label { font-size: 13px; color: #999; font-style: italic; white-space: nowrap; }
+    .correction-input { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 8px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); width: 180px; outline: none; transition: border-color 0.2s; background: var(--baunilha); }
+    .correction-input:focus { border-color: var(--level); }
+    .correction-input.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); color: var(--floresta); }
+    .correction-input.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+
+    /* RESULT PANEL */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* FREE WRITE */
+    .free-textarea { width: 100%; min-height: 160px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 18px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.8; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block, .ref-box { padding: 20px 18px; }
+      .fill-input { width: 90px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Gramática · Exercícios</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Pronomes Sujeito <em>· Iniciante I</em></h1>
+  <div class="hero-sub">Subject pronouns and the verb <em>ser</em> in Brazilian Portuguese — who's who and how to talk about them.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">eu · você · ele · ela</span>
+    <span class="hero-tag">nós · a gente · vocês</span>
+    <span class="hero-tag">verbo ser</span>
+    <span class="hero-tag">A1 · Gramática</span>
+  </div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- GRAMMAR REFERENCE -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Subject Pronouns in Brazilian Portuguese</h2>
+    <p style="font-size:14px;color:#777;margin-bottom:18px;line-height:1.7;">Subject pronouns tell you <em>who</em> is performing the action. Brazilian Portuguese often <strong>drops the pronoun</strong> in speech because the verb ending already shows the person — but using it is always correct and adds emphasis or clarity.</p>
+
+    <table class="pronoun-table">
+      <thead>
+        <tr><th>Pessoa</th><th>Singular</th><th>Plural</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1ª pessoa</td>
+          <td>eu <strong>sou</strong></td>
+          <td>nós <strong>somos</strong> &nbsp;/&nbsp; a gente <strong>é</strong></td>
+        </tr>
+        <tr>
+          <td>2ª pessoa</td>
+          <td>você / tu / o senhor / a senhora <strong>é</strong></td>
+          <td>vocês <strong>são</strong></td>
+        </tr>
+        <tr>
+          <td>3ª pessoa</td>
+          <td>ele / ela <strong>é</strong></td>
+          <td>eles / elas <strong>são</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>▶ Você / vocês</strong> — 2nd person pronouns, but they take 3rd person verb forms.<br>
+      <strong>▶ A gente</strong> — means "we" and is very common in everyday Brazilian Portuguese. It always takes a 3rd person <em>singular</em> verb: <em>a gente <strong>é</strong></em>, not <em>a gente somos</em>.<br>
+      <strong>▶ Tu</strong> — used in some regions of Brazil (North, Northeast, South). More informal than <em>você</em>.<br>
+      <strong>▶ Vós</strong> — archaic. Avoid in Brazilian Portuguese.
+    </div>
+  </div>
+
+  <!-- ─────────── EXERCISE 1 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Fill in the blank with the correct subject pronoun</h3>
+    <p class="ex-instruction">The person and number are given in parentheses. For item 3, fill in <em>both</em> forms.</p>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt"><input class="fill-input" id="e1-1" type="text" placeholder="…"> sou a professora de português. <span class="hint">(1ª pessoa / singular)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt"><input class="fill-input" id="e1-2" type="text" placeholder="…" style="width:130px;"> é o Carlos? Sim, sou eu. <span class="hint">(2ª pessoa / singular — formal, homem)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">
+        <input class="fill-input" id="e1-3a" type="text" placeholder="…"> somos o Pedro e a Bia.
+        &nbsp;/&nbsp;
+        <input class="fill-input" id="e1-3b" type="text" placeholder="…" style="width:120px;"> é o Pedro e a Bia.
+        <span class="hint">(1ª pessoa / plural — two forms possible)</span>
+      </span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt"><input class="fill-input" id="e1-4" type="text" placeholder="…"> são amigas. <span class="hint">(3ª pessoa / plural — só mulheres)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt"><input class="fill-input" id="e1-5" type="text" placeholder="…"> é a Lara. <span class="hint">(3ª pessoa / singular — mulher)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">6.</span>
+      <span class="txt"><input class="fill-input" id="e1-6" type="text" placeholder="…"> são amigos? <span class="hint">(2ª pessoa / plural)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">7.</span>
+      <span class="txt"><input class="fill-input" id="e1-7" type="text" placeholder="…"> és o Rafael? <span class="hint">(2ª pessoa / singular — informal, região sul)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">8.</span>
+      <span class="txt"><input class="fill-input" id="e1-8" type="text" placeholder="…"> são o João e a Clara. <span class="hint">(3ª pessoa / plural — homem e mulher)</span></span>
+    </div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 2 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Which pronoun to use?</h3>
+    <p class="ex-instruction">Read each situation and choose the correct pronoun from the word bank below. Type it in the blank.</p>
+
+    <div class="word-bank">
+      <div class="word-bank-label">Word bank</div>
+      <span class="wb-word">eu</span>
+      <span class="wb-word">você</span>
+      <span class="wb-word">tu</span>
+      <span class="wb-word">o senhor</span>
+      <span class="wb-word">a senhora</span>
+      <span class="wb-word">ele</span>
+      <span class="wb-word">ela</span>
+      <span class="wb-word">nós</span>
+      <span class="wb-word">a gente</span>
+      <span class="wb-word">vocês</span>
+      <span class="wb-word">eles</span>
+      <span class="wb-word">elas</span>
+    </div>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt">You're introducing yourself: "<input class="fill-input" id="e2-1" type="text" placeholder="…"> sou a Sarah."</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt">You're asking an elderly man his name at a formal event: "<input class="fill-input" id="e2-2" type="text" placeholder="…" style="width:130px;"> é o Ramos?"</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">You're talking about two female colleagues: "<input class="fill-input" id="e2-3" type="text" placeholder="…"> são minhas colegas."</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt">
+        You and a friend are introducing yourselves together (two forms):<br>
+        &nbsp;&nbsp;"<input class="fill-input" id="e2-4a" type="text" placeholder="…"> somos a Ana e o Tom."
+        &nbsp;/&nbsp;
+        "<input class="fill-input" id="e2-4b" type="text" placeholder="…" style="width:120px;"> é a Ana e o Tom."
+      </span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt">You're asking a group of classmates: "<input class="fill-input" id="e2-5" type="text" placeholder="…"> são alunos de português?"</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">6.</span>
+      <span class="txt">You're talking about your male teacher: "<input class="fill-input" id="e2-6" type="text" placeholder="…"> é o meu professor."</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">7.</span>
+      <span class="txt">You're pointing to your female friend and saying: "<input class="fill-input" id="e2-7" type="text" placeholder="…"> é a minha amiga."</span>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 3 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">Correct the errors</h3>
+    <p class="ex-instruction">Each sentence has an incorrect word (underlined in orange). Write the correct word in the box. In item 6, the error is in the verb, not the pronoun — same principle!</p>
+
+    <div class="correction-row">
+      <div class="correction-sentence">1. <span class="wrong-word">Elas</span> são o Paulo e o Bruno.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-1" type="text" placeholder="correct pronoun">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">2. <span class="wrong-word">Nós</span> sou a Maria.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-2" type="text" placeholder="correct pronoun">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">3. <span class="wrong-word">Vocês</span> é a professora?</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-3" type="text" placeholder="correct pronoun">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">4. <span class="wrong-word">Eu</span> somos amigos.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-4" type="text" placeholder="correct pronoun">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">5. <span class="wrong-word">Ele</span> são a Bia e a Carla.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-5" type="text" placeholder="correct pronoun">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">6. A gente <span class="wrong-word">vamos</span> ao café hoje. <span class="hint">(⚠ the error is in the verb!)</span></div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-6" type="text" placeholder="correct verb form">
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 4 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Free production</h3>
+    <p class="ex-instruction">Write 5 sentences in Portuguese introducing yourself and people you know. Use 5 <strong>different</strong> subject pronouns — include <strong>a gente</strong> at least once.</p>
+
+    <div class="note-box" style="margin-bottom:20px;">
+      <strong>Useful patterns:</strong><br>
+      Eu sou o/a _____. &nbsp;·&nbsp; Eu sou _____ <em>(profession / nationality)</em>.<br>
+      _____ é o/a _____. &nbsp;·&nbsp; _____ é _____.<br>
+      A gente é _____ <em>(e.g., colegas, amigos)</em>.<br>
+      _____ são _____.
+    </div>
+
+    <textarea class="free-textarea" id="e4-free" placeholder="Write your 5 sentences here…"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- FORMSPREE SUBMIT BLOCK -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── NORMALISE ──
+function norm(s) {
+  return (s || '').toLowerCase().trim()
+    .replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íì]/g,'i').replace(/[óôõö]/g,'o')
+    .replace(/[úù]/g,'u').replace(/ç/g,'c')
+    .replace(/\s+/g,' ');
+}
+
+// ── EXERCISE 1 ──
+var ex1 = [
+  { id:'e1-1',  accept:['eu'],               display:'Eu' },
+  { id:'e1-2',  accept:['o senhor'],         display:'O senhor' },
+  { id:'e1-3a', accept:['nos'],              display:'Nós' },
+  { id:'e1-3b', accept:['a gente'],          display:'A gente' },
+  { id:'e1-4',  accept:['elas'],             display:'Elas' },
+  { id:'e1-5',  accept:['ela'],              display:'Ela' },
+  { id:'e1-6',  accept:['voces'],            display:'Vocês' },
+  { id:'e1-7',  accept:['tu'],               display:'Tu' },
+  { id:'e1-8',  accept:['eles'],             display:'Eles' }
+];
+
+function checkEx1() {
+  var html = '';
+  var correct = 0;
+  var labels = ['1.','2.','3a.','3b.','4.','5.','6.','7.','8.'];
+  ex1.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;">'
+      + '<strong>' + labels[i] + '</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  var allOk = correct === ex1.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex1.length + ' correct!'
+             : correct + ' of ' + ex1.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 2 ──
+var ex2 = [
+  { id:'e2-1',  accept:['eu'],             display:'Eu' },
+  { id:'e2-2',  accept:['o senhor'],       display:'O senhor' },
+  { id:'e2-3',  accept:['elas'],           display:'Elas' },
+  { id:'e2-4a', accept:['nos'],            display:'Nós' },
+  { id:'e2-4b', accept:['a gente'],        display:'A gente' },
+  { id:'e2-5',  accept:['voces'],          display:'Vocês' },
+  { id:'e2-6',  accept:['ele'],            display:'Ele' },
+  { id:'e2-7',  accept:['ela'],            display:'Ela' }
+];
+
+function checkEx2() {
+  var html = '';
+  var correct = 0;
+  var labels = ['1.','2.','3.','4a.','4b.','5.','6.','7.'];
+  ex2.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;">'
+      + '<strong>' + labels[i] + '</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  var allOk = correct === ex2.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex2.length + ' correct!'
+             : correct + ' of ' + ex2.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 3 ──
+var ex3 = [
+  { id:'e3-1', accept:['eles'],          display:'Eles — Paulo and Bruno are male names' },
+  { id:'e3-2', accept:['eu'],            display:'Eu — 1st person singular uses sou, not somos' },
+  { id:'e3-3', accept:['voce','você'],   display:'Você — singular, not plural vocês' },
+  { id:'e3-4', accept:['nos','a gente'], display:'Nós / A gente — plural subject matches somos' },
+  { id:'e3-5', accept:['elas'],          display:'Elas — Bia and Carla are female names' },
+  { id:'e3-6', accept:['vai'],           display:'vai — a gente takes 3rd person singular' }
+];
+
+function checkEx3() {
+  var html = '';
+  var correct = 0;
+  ex3.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+      + '<strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  var allOk = correct === ex3.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex3.length + ' correct!'
+             : correct + ' of ' + ex3.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  // Collect all answers
+  var closedInputs = [
+    { key:'Ex1-1 (1ª sg)', id:'e1-1' },
+    { key:'Ex1-2 (2ª sg formal m)', id:'e1-2' },
+    { key:'Ex1-3a (1ª pl — nós)', id:'e1-3a' },
+    { key:'Ex1-3b (1ª pl — a gente)', id:'e1-3b' },
+    { key:'Ex1-4 (3ª pl f)', id:'e1-4' },
+    { key:'Ex1-5 (3ª sg f)', id:'e1-5' },
+    { key:'Ex1-6 (2ª pl)', id:'e1-6' },
+    { key:'Ex1-7 (2ª sg tu)', id:'e1-7' },
+    { key:'Ex1-8 (3ª pl mf)', id:'e1-8' },
+    { key:'Ex2-1 (self-intro)', id:'e2-1' },
+    { key:'Ex2-2 (formal elderly man)', id:'e2-2' },
+    { key:'Ex2-3 (two female colleagues)', id:'e2-3' },
+    { key:'Ex2-4a (nós form)', id:'e2-4a' },
+    { key:'Ex2-4b (a gente form)', id:'e2-4b' },
+    { key:'Ex2-5 (group of classmates)', id:'e2-5' },
+    { key:'Ex2-6 (male teacher)', id:'e2-6' },
+    { key:'Ex2-7 (female friend)', id:'e2-7' },
+    { key:'Ex3-1 (Elas → Paulo e Bruno)', id:'e3-1' },
+    { key:'Ex3-2 (Nós sou → Maria)', id:'e3-2' },
+    { key:'Ex3-3 (Vocês é → professora)', id:'e3-3' },
+    { key:'Ex3-4 (Eu somos → amigos)', id:'e3-4' },
+    { key:'Ex3-5 (Ele → Bia e Carla)', id:'e3-5' },
+    { key:'Ex3-6 (a gente vamos)', id:'e3-6' }
+  ];
+
+  var payload = { 'Nome do aluno': name, 'Material': material };
+  var summaryLines = [];
+
+  closedInputs.forEach(function(item) {
+    var el = document.getElementById(item.id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    payload[item.key] = val;
+    summaryLines.push('<strong>' + item.key + ':</strong> ' + (el && el.value.trim() ? el.value.trim() : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var freeEl = document.getElementById('e4-free');
+  var freeVal = freeEl ? (freeEl.value.trim() || '(sem resposta)') : '(sem resposta)';
+  payload['Ex4 — Produção livre'] = freeVal;
+  summaryLines.push('<strong>Ex4 — Produção livre:</strong><br>' + (freeEl && freeEl.value.trim() ? freeEl.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') : '<em style="color:#999">sem resposta</em>'));
+
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok: r.ok, data: d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
