@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marquinhos Fez Xixi na Cama Outra Vez! — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --level: #967E63; /* B1 — marrom */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* PLAYER */
+    .player-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; margin-bottom: 36px; }
+    .player-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); padding: 16px 24px 0; }
+    .player-block iframe { display: block; width: 100%; border: none; }
+
+    /* DIALOGUE */
+    .dialogue-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .dialogue-block h2 { font-size: 18px; color: var(--nanquim); margin-bottom: 20px; }
+    .dialogue-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .dialogue-table tr { border-bottom: 1px solid var(--light-gray); }
+    .dialogue-table tr:last-child { border-bottom: none; }
+    .dialogue-table td { padding: 12px 10px; vertical-align: top; line-height: 1.65; }
+    .dialogue-table td:first-child { font-weight: 700; color: var(--level); width: 32px; padding-right: 4px; white-space: nowrap; }
+    .dialogue-table td:nth-child(2) { padding-right: 20px; }
+    .dialogue-table td:nth-child(3) { color: #888; font-style: italic; border-left: 1px solid var(--light-gray); padding-left: 20px; }
+    .hl { background: rgba(150,126,99,0.12); border-radius: 3px; padding: 1px 4px; font-weight: 600; color: var(--nanquim); }
+
+    /* FOCUS BLOCKS */
+    .focus-block { border-radius: 14px; padding: 26px 30px; margin-bottom: 24px; }
+    .focus-gram { background: rgba(38,91,139,0.06); border: 1.5px solid rgba(38,91,139,0.15); }
+    .focus-expr { background: rgba(150,126,99,0.08); border: 1.5px solid rgba(150,126,99,0.2); }
+    .focus-fon  { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.18); }
+    .focus-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+    .focus-gram .focus-label { color: var(--cobalto); }
+    .focus-expr .focus-label { color: var(--level); }
+    .focus-fon  .focus-label { color: var(--floresta); }
+    .focus-block h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 12px; }
+    .focus-block p { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 10px; }
+    .focus-block p:last-child { margin-bottom: 0; }
+
+    /* GRAMMAR TABLE */
+    .gram-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+    .gram-table th { background: rgba(38,91,139,0.1); color: var(--cobalto); padding: 8px 12px; font-weight: 700; font-size: 11px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gram-table td { padding: 10px 12px; border-bottom: 1px solid rgba(38,91,139,0.1); }
+    .gram-table tr:last-child td { border-bottom: none; }
+    .gram-table .trigger { font-weight: 700; color: var(--cobalto); }
+    .gram-table .subj { font-weight: 700; color: var(--pitomba); }
+
+    /* SUBJ FORMATION */
+    .subj-box { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+    .subj-col { flex: 1; min-width: 180px; background: rgba(38,91,139,0.05); border-radius: 10px; padding: 14px 16px; font-size: 13px; }
+    .subj-col-title { font-size: 11px; font-weight: 700; color: var(--cobalto); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .subj-col code { background: rgba(38,91,139,0.1); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: var(--cobalto); }
+
+    /* EXPRESSIONS TABLE */
+    .expr-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
+    .expr-table td { padding: 10px 12px; border-bottom: 1px solid rgba(150,126,99,0.15); vertical-align: top; }
+    .expr-table tr:last-child td { border-bottom: none; }
+    .expr-table .expr { font-weight: 700; color: var(--nanquim); width: 40%; }
+    .expr-table .meaning { color: #555; }
+    .expr-table .example { font-style: italic; color: #888; font-size: 13px; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+
+    /* T/F EXERCISE */
+    .tf-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; font-size: 15px; }
+    .tf-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .tf-statement { flex: 1; line-height: 1.6; }
+    .tf-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .tf-btn { padding: 5px 14px; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; background: white; color: #999; font-family: 'Manrope', sans-serif; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.selected-v { background: rgba(78,85,29,0.12); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.selected-f { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+    .tf-btn.correct-answer { background: rgba(78,85,29,0.12); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.wrong-answer { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    /* MULTIPLE CHOICE */
+    .mc-row { margin-bottom: 20px; }
+    .mc-question { font-size: 15px; color: var(--nanquim); margin-bottom: 10px; line-height: 1.55; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--light-gray); border-radius: 10px; cursor: pointer; font-size: 14px; transition: border-color 0.15s; background: white; }
+    .mc-option:hover { border-color: var(--level); }
+    .mc-option.correct { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .mc-option.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.07); color: var(--pitomba); }
+    .mc-letter { font-weight: 700; min-width: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* FILL INPUT */
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; min-width: 100px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+
+    /* SENTENCE ROW */
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2.1; }
+    .verb-hint { font-size: 12px; color: #bbb; font-style: italic; }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+
+    /* RESULT */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* FREE WRITE */
+    .free-textarea { width: 100%; min-height: 160px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 18px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.8; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    /* NOTE BOX */
+    .note-box { background: rgba(150,126,99,0.08); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; line-height: 1.75; }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block, .dialogue-block, .focus-block { padding: 20px 18px; }
+      .dialogue-table td:nth-child(3) { display: none; }
+      .tf-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1 · Ep 2</span>
+    <span class="badge badge-type">LÍNGUA DA GENTE · Podcast</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Marquinhos Fez Xixi na Cama <em>Outra Vez!</em></h1>
+  <div class="hero-sub">Potty training, parenting worries, and real Brazilian conversations. Subjuntivo presente with new trigger expressions — plus the expressions Brazilians use when they're trying not to panic.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Subjuntivo presente</span>
+    <span class="hero-tag">é normal que · evitando que</span>
+    <span class="hero-tag">sem querer · entrar em pânico</span>
+    <span class="hero-tag">Vogais nasais</span>
+  </div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PLAYER -->
+  <div class="player-block">
+    <div class="player-label">Língua da Gente · Intermediate 02</div>
+    <iframe
+      src="https://embed.podcasts.apple.com/br/podcast/intermediate-02-marquinhos-wet-the-bed-again/id862545884?i=1000347351575&theme=auto"
+      height="175"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+      allow="autoplay *; encrypted-media *; clipboard-write"
+      style="overflow:hidden;border-radius:0 0 12px 12px;background:transparent;">
+    </iframe>
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="dialogue-block">
+    <h2>Diálogo · Bilingual transcript</h2>
+    <table class="dialogue-table">
+      <tbody>
+        <tr>
+          <td>A</td>
+          <td>Ô Antônio, o Marquinhos <span class="hl">fez xixi na cama</span> outra vez. Já não sei mais o que fazer.</td>
+          <td>Oh Antonio, Mark wet the bed again. I don't know what to do anymore.</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Bom, eu nem sei — até que idade <span class="hl">é normal que</span> criança <span class="hl">faça</span> xixi na cama?</td>
+          <td>Well, I'm not sure — up to what age is it normal for kids to wet the bed?</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>Sei, não. A Marina me disse que criança até 5 anos ainda pode fazer xixi uma ou duas vezes por semana.</td>
+          <td>I don't know. Marina told me that kids up to five can still wet the bed once or twice a week.</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Então, o Marquinhos <span class="hl">está nessa faixa</span> ainda. Agora, no caso dele, você acha que ele faz <span class="hl">sem querer</span>, ou é só preguiça dele mesmo?</td>
+          <td>So Mark is still within that range. Now, do you think he does it on accident, or is he just being lazy?</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>Não sei, <span class="hl">viu?</span> De dia não tem problema nenhum. É só à noite mesmo. E de dia ele já vem correndo até da casa dos amiguinhos.</td>
+          <td>I don't know, you know? During the day there's no problem at all. It's really just at night. During the day he even runs in from his friend's house.</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Bom, <span class="hl">acho melhor</span> então não entrar em pânico ainda. Vamos começar <span class="hl">evitando que</span> ele <span class="hl">tome</span> líquidos depois das 18h. Vamos ver se isso ajuda, né?</td>
+          <td>Well, I think it's better not to panic yet. Let's start by making sure he doesn't drink any liquids after 6pm. Let's see if that helps, right?</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>E <span class="hl">é super importante também</span> valorizar cada noite que ele passa sem fazer xixi. Eu poderia preparar um calendário para botar adesivos — umas estrelas para premiar cada noite que ele acordar sequinho, né?</td>
+          <td>And it's also super important to praise him for every dry night. I could make a calendar to put stickers — little stars to reward him for every night he wakes up dry, right?</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Concordo. A gente não pode ficar com raiva, nem xingar ele, nem humilhá-lo, não é? Acho que com tempo, isso se resolve <span class="hl">sem maiores problemas</span>.</td>
+          <td>I agree. We shouldn't get upset, or yell at him, or embarrass him. I think with time this will sort itself out without any major issues.</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>Sim, é verdade.</td>
+          <td>Yes, that's true.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOCUS 1: GRAMMAR -->
+  <div class="focus-block focus-gram">
+    <div class="focus-label">Foco Gramatical</div>
+    <h3>Subjuntivo Presente — novos gatilhos</h3>
+    <p>You saw the <em>subjuntivo presente</em> in Episode 01 with <em>querer que, é melhor que, é possível que</em>. This episode brings three new trigger expressions — same pattern, new contexts.</p>
+
+    <table class="gram-table">
+      <thead>
+        <tr><th>Trigger expression</th><th>Example from the dialogue</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="trigger">é normal que</span></td>
+          <td>…até que idade é normal que criança <span class="subj">faça</span> xixi na cama?</td>
+        </tr>
+        <tr>
+          <td><span class="trigger">evitando que</span></td>
+          <td>Vamos começar evitando que ele <span class="subj">tome</span> líquidos depois das 18h.</td>
+        </tr>
+        <tr>
+          <td><span class="trigger">é importante que</span></td>
+          <td>É super importante que a gente <span class="subj">valorize</span> cada noite seca.</td>
+        </tr>
+        <tr>
+          <td><span class="trigger">acho melhor que</span></td>
+          <td>Acho melhor que a gente não <span class="subj">entre</span> em pânico.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:14px;"><strong>How to form it:</strong> take the <em>eu</em> form of the verb in the present tense, drop the <strong>-o</strong>, and add the opposite vowel endings.</p>
+    <div class="subj-box">
+      <div class="subj-col">
+        <div class="subj-col-title">-AR verbs → endings in -E</div>
+        tomar → tomo → <code>tome</code><br>
+        valorizar → valorizo → <code>valorize</code><br>
+        entrar → entro → <code>entre</code>
+      </div>
+      <div class="subj-col">
+        <div class="subj-col-title">-ER / -IR verbs → endings in -A</div>
+        fazer → faço → <code>faça</code><br>
+        beber → bebo → <code>beba</code><br>
+        partir → parto → <code>parta</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOCUS 2: EXPRESSIONS -->
+  <div class="focus-block focus-expr">
+    <div class="focus-label">Expressões do Diálogo</div>
+    <h3>Five expressions worth remembering</h3>
+    <table class="expr-table">
+      <tbody>
+        <tr>
+          <td class="expr">fazer xixi na cama</td>
+          <td class="meaning">to wet the bed<br><span class="example">O Marquinhos fez xixi na cama outra vez.</span></td>
+        </tr>
+        <tr>
+          <td class="expr">sem querer</td>
+          <td class="meaning">accidentally / without meaning to<br><span class="example">Você acha que ele faz sem querer?</span></td>
+        </tr>
+        <tr>
+          <td class="expr">estar nessa faixa</td>
+          <td class="meaning">to be within that range / bracket<br><span class="example">O Marquinhos está nessa faixa ainda.</span></td>
+        </tr>
+        <tr>
+          <td class="expr">entrar em pânico</td>
+          <td class="meaning">to panic / to freak out<br><span class="example">Acho melhor não entrar em pânico ainda.</span></td>
+        </tr>
+        <tr>
+          <td class="expr">sem maiores problemas</td>
+          <td class="meaning">without any major issues / smoothly<br><span class="example">Com tempo, isso se resolve sem maiores problemas.</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box">
+      <strong>💬 botar vs. colocar</strong> — Both mean "to put/place", but <em>botar</em> is the everyday informal choice across Brazil: <em>para botar adesivos</em> (to put stickers). You'll hear it constantly in casual speech.
+    </div>
+  </div>
+
+  <!-- FOCUS 3: PHONOLOGY -->
+  <div class="focus-block focus-fon">
+    <div class="focus-label">Foco Fonológico</div>
+    <h3>Vogais nasais — the sound that marks Brazilian Portuguese</h3>
+    <p>This dialogue is full of Brazil's most distinctive sounds: <strong>nasal vowels</strong>. Unlike English, where nasality is a side-effect of nasal consonants (m, n), Portuguese has <em>intrinsically nasal vowels</em> — the nose vibrates even without a following consonant.</p>
+    <p>Listen for these in the dialogue: <strong>não</strong>, <strong>Antônio</strong>, <strong>criança</strong>, <strong>também</strong>, <strong>amiguinhos</strong>, <strong>nenhum</strong>. Notice how the vowel itself hums — it's not just the -n- doing the work.</p>
+    <p>The three nasal sounds to practice:<br>
+    <strong>/ã/</strong> — criança, cama, Antônio ✦ <strong>/ão/</strong> — não, então, Antônio ✦ <strong>/ẽ/</strong> — também, nenhum, tem</p>
+  </div>
+
+  <!-- ─────────── EXERCISE 1 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Verdadeiro ou Falso?</h3>
+    <p class="ex-instruction">Based on the dialogue, mark each statement True (V) or False (F). Then check your answers.</p>
+
+    <div class="tf-row">
+      <span class="num">1.</span>
+      <span class="tf-statement">Marquinhos wet the bed for the very first time.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,1,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,1,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">2.</span>
+      <span class="tf-statement">According to Marina, children up to 5 years old can still wet the bed once or twice a week.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,2,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,2,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">3.</span>
+      <span class="tf-statement">Marquinhos also has accidents during the day.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,3,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,3,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">4.</span>
+      <span class="tf-statement">They decide to reward Marquinhos with stickers for every dry night.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,4,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,4,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">5.</span>
+      <span class="tf-statement">Antônio says they should get angry and scold Marquinhos to fix the problem.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,5,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,5,'F')">F</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkTF()">✓ Check answers</button>
+    <div id="tf-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 2 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Subjuntivo Presente — complete the sentences</h3>
+    <p class="ex-instruction">Fill in each blank with the correct <em>subjuntivo presente</em> form of the verb in parentheses.</p>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt">É normal que criança <input class="fill-input" id="s1" type="text" placeholder="…"> xixi na cama até os 5 anos. <span class="verb-hint">(fazer)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt">Vamos começar evitando que ele <input class="fill-input" id="s2" type="text" placeholder="…"> líquidos depois das 18h. <span class="verb-hint">(tomar)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">É super importante que os pais <input class="fill-input" id="s3" type="text" placeholder="…"> cada progresso da criança. <span class="verb-hint">(valorizar)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt">Acho melhor que a gente não <input class="fill-input" id="s4" type="text" placeholder="…"> em pânico. <span class="verb-hint">(entrar)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt">É normal que crianças pequenas <input class="fill-input" id="s5" type="text" placeholder="…"> muito à noite. <span class="verb-hint">(beber)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">6.</span>
+      <span class="txt">Evite que ele <input class="fill-input" id="s6" type="text" placeholder="…"> animado demais antes de dormir. <span class="verb-hint">(ficar)</span></span>
+    </div>
+
+    <button class="check-btn" onclick="checkSubj()">✓ Check answers</button>
+    <div id="subj-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 3 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">What do they mean?</h3>
+    <p class="ex-instruction">Choose the best meaning for each expression from the dialogue.</p>
+
+    <div class="mc-row">
+      <div class="mc-question">1. <strong>"Não sei, viu?"</strong> — What is the function of <em>viu?</em> here?</div>
+      <div class="mc-options" id="mc1">
+        <div class="mc-option" onclick="selectMC('mc1','a')"><span class="mc-letter">a</span>She's asking if Antônio saw the wet bed.</div>
+        <div class="mc-option" onclick="selectMC('mc1','b')"><span class="mc-letter">b</span>It's a discourse marker — like "you know?" — inviting agreement or adding warmth.</div>
+        <div class="mc-option" onclick="selectMC('mc1','c')"><span class="mc-letter">c</span>She's surprised and doesn't understand.</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-question">2. <strong>"Você acha que ele faz sem querer?"</strong> — What does <em>sem querer</em> mean?</div>
+      <div class="mc-options" id="mc2">
+        <div class="mc-option" onclick="selectMC('mc2','a')"><span class="mc-letter">a</span>Without wanting to try.</div>
+        <div class="mc-option" onclick="selectMC('mc2','b')"><span class="mc-letter">b</span>Accidentally / unintentionally.</div>
+        <div class="mc-option" onclick="selectMC('mc2','c')"><span class="mc-letter">c</span>On purpose.</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-question">3. <strong>"O Marquinhos está nessa faixa ainda."</strong> — What does <em>faixa</em> mean here?</div>
+      <div class="mc-options" id="mc3">
+        <div class="mc-option" onclick="selectMC('mc3','a')"><span class="mc-letter">a</span>Lane (on a road).</div>
+        <div class="mc-option" onclick="selectMC('mc3','b')"><span class="mc-letter">b</span>Track (on an album).</div>
+        <div class="mc-option" onclick="selectMC('mc3','c')"><span class="mc-letter">c</span>Range / bracket (age range).</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-question">4. <strong>"Isso se resolve sem maiores problemas."</strong> — What does this mean?</div>
+      <div class="mc-options" id="mc4">
+        <div class="mc-option" onclick="selectMC('mc4','a')"><span class="mc-letter">a</span>This will resolve itself without any major issues.</div>
+        <div class="mc-option" onclick="selectMC('mc4','b')"><span class="mc-letter">b</span>This is not a problem at all.</div>
+        <div class="mc-option" onclick="selectMC('mc4','c')"><span class="mc-letter">c</span>This is a small but serious problem.</div>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkMC()">✓ Check answers</button>
+    <div id="mc-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 4 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Rewrite using the subjuntivo trigger</h3>
+    <p class="ex-instruction">Transform each sentence using the trigger expression in brackets. Write the full new sentence.</p>
+
+    <div style="margin-bottom:22px;">
+      <div style="font-size:15px;color:var(--nanquim);margin-bottom:8px;line-height:1.6;">
+        <strong>1.</strong> A criança bebe líquidos à noite. — Vamos evitar isso. &nbsp;<em style="font-size:13px;color:#bbb;">[evitando que]</em>
+      </div>
+      <textarea class="free-textarea" id="r1" style="min-height:70px;" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div style="font-size:15px;color:var(--nanquim);margin-bottom:8px;line-height:1.6;">
+        <strong>2.</strong> A criança toma remédio antes de dormir. — O médico acha certo. &nbsp;<em style="font-size:13px;color:#bbb;">[é normal que]</em>
+      </div>
+      <textarea class="free-textarea" id="r2" style="min-height:70px;" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div style="font-size:15px;color:var(--nanquim);margin-bottom:8px;line-height:1.6;">
+        <strong>3.</strong> Os pais ficam com raiva. — Isso não ajuda. &nbsp;<em style="font-size:13px;color:#bbb;">[é importante que… não]</em>
+      </div>
+      <textarea class="free-textarea" id="r3" style="min-height:70px;" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkRewrite()">✓ Check model answers</button>
+    <div id="rewrite-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 5 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 5</div>
+    <h3 class="ex-title">Free production — Dar conselhos</h3>
+    <p class="ex-instruction">A friend messages you: <em>"My 4-year-old is still wetting the bed. I don't know what to do!"</em> Write 4–5 sentences of advice in Portuguese. Use at least two trigger expressions from the lesson (<em>é normal que, é importante que, evite que, acho melhor que…</em>) and at least one expression from the dialogue (<em>sem querer, entrar em pânico, sem maiores problemas…</em>).</p>
+
+    <textarea class="free-textarea" id="e5-free" placeholder="Write your advice here..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- FORMSPREE SUBMIT BLOCK -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── T/F ──
+var tfAnswers = { 1:'F', 2:'V', 3:'F', 4:'V', 5:'F' };
+var tfSelected = {};
+
+function selectTF(btn, num, val) {
+  var row = btn.closest('.tf-btns');
+  row.querySelectorAll('.tf-btn').forEach(function(b){ b.classList.remove('selected-v','selected-f'); });
+  btn.classList.add(val === 'V' ? 'selected-v' : 'selected-f');
+  tfSelected[num] = val;
+}
+
+function checkTF() {
+  var correct = 0;
+  var html = '';
+  var labels = ['','Marquinhos wet the bed for the very first time.','Kids up to 5 can wet the bed once or twice a week.','Marquinhos also has accidents during the day.','They reward dry nights with stickers.','Antônio says to scold Marquinhos.'];
+  for (var i = 1; i <= 5; i++) {
+    var ans = tfAnswers[i];
+    var sel = tfSelected[i];
+    var ok = sel === ans;
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + i + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + ans + '</strong> — ' + labels[i] + '</div>';
+  }
+  var res = document.getElementById('tf-result');
+  var allOk = correct === 5;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 5 correct!' : correct + ' of 5 correct — answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── MULTIPLE CHOICE ──
+var mcAnswers = { mc1:'b', mc2:'b', mc3:'c', mc4:'a' };
+var mcSelected = {};
+
+function selectMC(groupId, letter) {
+  var group = document.getElementById(groupId);
+  group.querySelectorAll('.mc-option').forEach(function(o){ o.classList.remove('correct','wrong'); });
+  mcSelected[groupId] = letter;
+  var options = group.querySelectorAll('.mc-option');
+  var idx = ['a','b','c'].indexOf(letter);
+  if (idx >= 0) options[idx].classList.add('selected-mc');
+}
+
+function checkMC() {
+  var correct = 0;
+  var html = '';
+  var groups = ['mc1','mc2','mc3','mc4'];
+  var questions = ['"Viu?" is a discourse marker (like "you know?").','Sem querer = accidentally / unintentionally.','Faixa = range / bracket (age range).','Resolve itself without major issues.'];
+  groups.forEach(function(gid, i) {
+    var ans = mcAnswers[gid];
+    var sel = mcSelected[gid];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var group = document.getElementById(gid);
+    var options = group.querySelectorAll('.mc-option');
+    options.forEach(function(o){ o.classList.remove('correct','wrong'); });
+    var ansIdx = ['a','b','c'].indexOf(ans);
+    if (ansIdx >= 0) options[ansIdx].classList.add('correct');
+    if (sel && sel !== ans) {
+      var selIdx = ['a','b','c'].indexOf(sel);
+      if (selIdx >= 0) options[selIdx].classList.add('wrong');
+    }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' (' + ans.toUpperCase() + ') ' + questions[i] + '</div>';
+  });
+  var res = document.getElementById('mc-result');
+  var allOk = correct === 4;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 4 correct!' : correct + ' of 4 correct — answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── SUBJUNTIVO ──
+function norm(s) {
+  return (s||'').toLowerCase().trim()
+    .replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íì]/g,'i').replace(/[óôõö]/g,'o')
+    .replace(/[úù]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+var subjAnswers = [
+  { id:'s1', accept:['faca'], display:'faça' },
+  { id:'s2', accept:['tome'], display:'tome' },
+  { id:'s3', accept:['valorize'], display:'valorize' },
+  { id:'s4', accept:['entre'], display:'entre' },
+  { id:'s5', accept:['beba'], display:'beba' },
+  { id:'s6', accept:['fique'], display:'fique' }
+];
+
+function checkSubj() {
+  var html = '';
+  var correct = 0;
+  subjAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <em>' + a.display + '</em></div>';
+  });
+  var res = document.getElementById('subj-result');
+  var allOk = correct === subjAnswers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 6 correct!' : correct + ' of 6 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── REWRITE MODEL ANSWERS ──
+function checkRewrite() {
+  var models = [
+    'Vamos começar evitando que a criança beba / tome líquidos à noite.',
+    'É normal que a criança tome remédio antes de dormir.',
+    'É importante que os pais não fiquem com raiva.'
+  ];
+  var html = '';
+  models.forEach(function(m, i) {
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '. Model answer:</strong><br>'
+      + '<em style="color:var(--cobalto);">' + m + '</em></div>';
+  });
+  var res = document.getElementById('rewrite-result');
+  res.className = 'result-msg try-again';
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:12px;">Model answers — compare with yours:</div>' + html
+    + '<div style="font-size:13px;color:#888;margin-top:8px;">Your answers may differ — focus on whether the subjuntivo trigger and form are correct.</div>';
+  res.style.display = 'block';
+}
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var payload = { 'Nome do aluno': name, 'Material': material };
+  var summaryLines = [];
+
+  // T/F answers
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i] || '(sem resposta)';
+    payload['Ex1-T/F-' + i] = sel;
+    summaryLines.push('<strong>Ex1-' + i + ':</strong> ' + sel);
+  }
+
+  // Subjuntivo
+  var sIds = ['s1','s2','s3','s4','s5','s6'];
+  sIds.forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    payload['Ex2-Subj-' + (i+1)] = val;
+    summaryLines.push('<strong>Ex2-' + (i+1) + ':</strong> ' + (el && el.value.trim() ? el.value.trim() : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  // MC
+  ['mc1','mc2','mc3','mc4'].forEach(function(gid, i) {
+    var sel = mcSelected[gid] || '(sem resposta)';
+    payload['Ex3-MC-' + (i+1)] = sel;
+    summaryLines.push('<strong>Ex3-' + (i+1) + ':</strong> ' + sel);
+  });
+
+  // Rewrite
+  ['r1','r2','r3'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    payload['Ex4-Rewrite-' + (i+1)] = val;
+    summaryLines.push('<strong>Ex4-' + (i+1) + ':</strong> ' + (el && el.value.trim() ? el.value.trim() : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  // Free production
+  var freeEl = document.getElementById('e5-free');
+  var freeVal = freeEl ? (freeEl.value.trim() || '(sem resposta)') : '(sem resposta)';
+  payload['Ex5 — Produção livre'] = freeVal;
+  summaryLines.push('<strong>Ex5 — Produção livre:</strong><br>' + (freeEl && freeEl.value.trim() ? freeEl.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') : '<em style="color:#999">sem resposta</em>'));
+
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
