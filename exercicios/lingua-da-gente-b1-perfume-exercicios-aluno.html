@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adoro Esse Perfume! — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: #FCF5EB; border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-ep { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 40px; }
+
+    .podcast-embed { margin: 16px 0 8px; border-radius: 14px; overflow: hidden; }
+    .podcast-embed iframe { display: block; width: 100%; border: 0; border-radius: 14px; }
+
+    .dialogue-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
+    .dialogue-table td { padding: 10px 14px; vertical-align: top; border-bottom: 1px solid var(--light-gray); line-height: 1.6; }
+    .dialogue-table td:first-child { width: 28px; font-weight: 700; font-size: 13px; padding-right: 8px; white-space: nowrap; }
+    .dialogue-table td:nth-child(2) { width: 50%; }
+    .dialogue-table td:nth-child(3) { width: 46%; color: #888; font-size: 14px; }
+    .spk-a { color: var(--cobalto); }
+    .spk-b { color: var(--pitomba); }
+
+    .grammar-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 28px 0; }
+    .grammar-box h3 { font-size: 18px; color: var(--nanquim); margin-bottom: 16px; }
+    .grammar-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .grammar-table th { text-align: left; padding: 8px 12px; background: rgba(150,126,99,0.08); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--level); }
+    .grammar-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .grammar-table code { background: rgba(150,126,99,0.12); padding: 2px 7px; border-radius: 4px; font-family: monospace; font-size: 13px; color: var(--nanquim); font-weight: 700; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin: 16px 0; }
+    .vocab-item { background: white; border: 1px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; }
+    .vocab-pt { font-weight: 700; font-size: 14px; color: var(--nanquim); }
+    .vocab-en { font-size: 13px; color: #888; margin-top: 2px; }
+    .vocab-ex { font-size: 12px; color: var(--texto); margin-top: 6px; font-style: italic; border-top: 1px solid var(--light-gray); padding-top: 6px; }
+
+    .hl { background: rgba(255,185,74,0.18); padding: 2px 4px; border-radius: 3px; }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px; margin: 28px 0; }
+    .ex-num { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 300; color: var(--nanquim); margin-bottom: 16px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6; }
+
+    .tf-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .tf-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; background: #FAFAF8; border-radius: 10px; border: 1.5px solid var(--light-gray); }
+    .tf-text { flex: 1; font-size: 15px; line-height: 1.55; }
+    .tf-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .tf-btn { padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--light-gray); background: white; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.15s; font-family: 'Manrope', sans-serif; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.selected-v { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .tf-btn.selected-f { background: var(--pitomba); color: white; border-color: var(--pitomba); }
+
+    .fill-sentence { font-size: 15px; line-height: 2.4; margin-bottom: 8px; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 140px; outline: none; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 14px 16px; background: rgba(150,126,99,0.06); border-radius: 10px; border: 1px dashed rgba(150,126,99,0.3); }
+    .word-chip { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+
+    .mc-group { margin-bottom: 24px; }
+    .mc-question { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { text-align: left; padding: 10px 16px; border-radius: 10px; border: 1.5px solid var(--light-gray); background: white; font-size: 14px; cursor: pointer; transition: all 0.15s; font-family: 'Manrope', sans-serif; line-height: 1.4; }
+    .mc-btn:hover { border-color: var(--level); }
+    .mc-btn.selected { background: rgba(150,126,99,0.12); border-color: var(--level); font-weight: 700; }
+    .mc-btn.correct { background: rgba(78,85,29,0.1); border-color: var(--floresta); color: var(--floresta); font-weight: 700; }
+    .mc-btn.wrong { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    .cond-item { margin-bottom: 18px; }
+    .cond-prompt { font-size: 14px; color: #666; margin-bottom: 6px; font-style: italic; }
+    .cond-sentence { font-size: 15px; line-height: 2.2; }
+
+    .free-textarea { width: 100%; min-height: 130px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    .send-box { background: rgba(166,178,138,0.18); border: 1.5px solid rgba(166,178,138,0.35); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 16px; padding: 16px 20px; border-radius: 10px; font-size: 14px; line-height: 1.8; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .dialogue-table td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1 · Ep 4</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Adoro Esse Perfume! <em>Love that Perfume</em></h1>
+  <div class="hero-sub">Buying a perfume gift is trickier than it looks — citrus vs. floral, base notes, bottle shape. A real conversation at the perfume counter, with a focus on the <strong style="color:rgba(255,255,255,0.9)">polite conditional</strong>: <em>gostaria, poderia, preferiria</em>.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Condicional de polidez</span>
+    <span class="hero-tag">Que tal...?</span>
+    <span class="hero-tag">Vocabulário de perfume</span>
+    <span class="hero-tag">Reduções informais</span>
+    <span class="hero-tag">Língua da Gente · Ep 4</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="sec-label">Língua da Gente · Intermediate 04</div>
+  <div class="podcast-embed">
+    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/intermediate-04-love-that-perfume/id862545884?i=1000347351607&theme=auto"></iframe>
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="sec-label">Diálogo · Bilingual transcript</div>
+  <table class="dialogue-table">
+    <tr><td class="spk-a">A</td><td>Bom dia. Você <span class="hl">gostaria</span> de ver algum perfume hoje?</td><td>Good morning. Would you like to see some perfume today?</td></tr>
+    <tr><td class="spk-b">B</td><td><span class="hl">Gostaria</span> sim.</td><td>Yes, I would.</td></tr>
+    <tr><td class="spk-a">A</td><td>Para homem ou para mulher?</td><td>Is it for a man or a woman?</td></tr>
+    <tr><td class="spk-b">B</td><td>É para minha irmã. O que você sugere?</td><td>It's for my sister. What do you suggest?</td></tr>
+    <tr><td class="spk-a">A</td><td>Bom, vamos ver. Quantos anos ela tem?</td><td>Well, let's see. How old is she?</td></tr>
+    <tr><td class="spk-b">B</td><td>Uns 28–30 anos, por aí.</td><td>Around 28–30 or so.</td></tr>
+    <tr><td class="spk-a">A</td><td>Tá bom. Sabe, perfume é algo muito pessoal. O que agrada uma pessoa, pode não agradar outra. E depende muito também da personalidade da pessoa, viu?</td><td>OK. You know, perfume is a very personal thing. What pleases one person may not please another. And it depends a lot on the person's personality, you know?</td></tr>
+    <tr><td class="spk-b">B</td><td>Sei. Bom, eu sei que ela não gosta das fragrâncias de aroma cítrico. Agora, perfume floral, acho que pode ser.</td><td>I see. Well, I know she doesn't like fragrances with a citrus smell. But floral scents — those might do.</td></tr>
+    <tr><td class="spk-a">A</td><td>Deixa eu ver… Tem algum outro que você sabe que ela gosta?</td><td>Let me see… Are there any others that you know she likes?</td></tr>
+    <tr><td class="spk-b">B</td><td>Ah, sim. Eu sei que ela gosta do Coco Noir da Chanel. Você tem alguma coisa que é mais ou menos igual?</td><td>Ah yes, I know she likes Coco Noir from Chanel. Do you have anything that's more or less like that?</td></tr>
+    <tr><td class="spk-a">A</td><td><span class="hl">Cê</span> está falando desse que tem essências de base de sândalo, almíscar branco e cumaru brasileiro, não é? Ah, é muito bom. <span class="hl">Que tal</span> esse? O perfume Laguna é uma fragrância criada pela marca Salvador Dali. Veja, veja se você gosta.</td><td>You're talking about the one with base notes of sandalwood, white musk, and Brazilian Tonka bean, right? Very nice. How about this one? Laguna is a fragrance by Salvador Dali. Take a look — see if you like it.</td></tr>
+    <tr><td class="spk-b">B</td><td>Deixa eu ver… Não, esse não. <span class="hl">Prefiro</span> alguma coisa um pouco mais… não sei… mais divertida assim.</td><td>Let me see… No, not this one. I prefer something a little more… I don't know… more fun-like.</td></tr>
+    <tr><td class="spk-a">A</td><td>Eu sei, mais alegre. <span class="hl">Que tal</span> o Dot de Marc Jacobs? O que você acha?</td><td>I know, something more playful. How about Dot by Marc Jacobs? What do you think?</td></tr>
+    <tr><td class="spk-b">B</td><td>Deixa eu ver. Nossa! Gostei. Como se chama esse?</td><td>Let me see. Wow! I like it. What's this one called?</td></tr>
+    <tr><td class="spk-a">A</td><td>Dot, de Marc Jacobs. Tem uma fragrância floral de jasmim no coração, mas eu <span class="hl">gosto muito</span> também dos aromas de baunilha e almíscar que tem nele.</td><td>Dot, by Marc Jacobs. It has a floral jasmine heart, but I also love the notes of vanilla and musk in it.</td></tr>
+    <tr><td class="spk-b">B</td><td>Gostei. E esse frasco é interessante, né? Parece uma joaninha. Bom, vou levar esse.</td><td>I like it. And this bottle is so interesting, right? It looks like a ladybug. OK, I'll take this one.</td></tr>
+    <tr><td class="spk-a">A</td><td>Beleza.</td><td>Great.</td></tr>
+  </table>
+
+  <!-- GRAMMAR FOCUS -->
+  <div class="sec-label">Foco Gramatical</div>
+  <div class="grammar-box">
+    <h3>Condicional de Polidez — <em>gostaria, poderia, preferiria</em></h3>
+    <p style="font-size:14px;color:#555;margin-bottom:18px;line-height:1.65;">In Brazilian Portuguese, the <strong>conditional tense</strong> (futuro do pretérito) is the polite way to express desires, requests, and preferences — equivalent to English <em>would like, could, would prefer</em>. In service contexts like shopping, it makes requests sound natural and courteous.</p>
+    <table class="grammar-table">
+      <tr><th>Infinitive</th><th>Conditional (eu / você / ele)</th><th>Example from the dialogue</th></tr>
+      <tr><td>gostar</td><td><code>gostaria</code></td><td>"Você <strong>gostaria</strong> de ver algum perfume hoje?"</td></tr>
+      <tr><td>poder</td><td><code>poderia</code></td><td>"<strong>Poderia</strong> me mostrar outra opção?"</td></tr>
+      <tr><td>preferir</td><td><code>preferiria</code></td><td>"<strong>Preferiria</strong> algo mais floral." (→ <em>Prefiro</em> in the dialogue — less formal)</td></tr>
+      <tr><td>querer</td><td><code>quereria / gostaria</code></td><td>"<strong>Gostaria</strong> sim." (preferred over <em>quereria</em>)</td></tr>
+    </table>
+    <p style="font-size:13px;color:#666;margin-top:4px;"><strong>Formation:</strong> Remove <strong>-r</strong> from the infinitive → add <strong>-ia · -ias · -ia · -íamos · -iam</strong><br>
+    gostar → gosta<strong>ria</strong> · poder → pode<strong>ria</strong> · preferir → preferi<strong>ria</strong></p>
+    <p style="font-size:13px;color:#666;margin-top:10px;"><strong>Que tal...?</strong> is a fixed suggestion structure meaning <em>How about...?</em> — always followed by a noun or infinitive: <em>Que tal esse perfume?</em> / <em>Que tal experimentar o Dot?</em></p>
+  </div>
+
+  <!-- VOCAB FOCUS -->
+  <div class="sec-label">Vocabulário do Diálogo</div>
+  <div class="vocab-grid">
+    <div class="vocab-item"><div class="vocab-pt">fragrância / perfume</div><div class="vocab-en">fragrance / perfume</div><div class="vocab-ex">Tem alguma fragrância floral?</div></div>
+    <div class="vocab-item"><div class="vocab-pt">aroma cítrico</div><div class="vocab-en">citrus scent</div><div class="vocab-ex">Ela não gosta de aroma cítrico.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">sândalo</div><div class="vocab-en">sandalwood</div><div class="vocab-ex">Notas de base de sândalo.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">almíscar</div><div class="vocab-en">musk</div><div class="vocab-ex">Almíscar branco e baunilha.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">baunilha</div><div class="vocab-en">vanilla</div><div class="vocab-ex">Aromas de baunilha no coração.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">frasco</div><div class="vocab-en">bottle (perfume)</div><div class="vocab-ex">Esse frasco parece uma joaninha!</div></div>
+    <div class="vocab-item"><div class="vocab-pt">joaninha</div><div class="vocab-en">ladybug</div><div class="vocab-ex">O frasco do Dot parece uma joaninha.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">agradar</div><div class="vocab-en">to please / to suit</div><div class="vocab-ex">O que agrada uma pessoa pode não agradar outra.</div></div>
+  </div>
+
+  <!-- PHONOLOGY FOCUS -->
+  <div class="sec-label">Foco Fonológico</div>
+  <div class="grammar-box">
+    <h3>Reduções do Português Brasileiro Informal</h3>
+    <p style="font-size:14px;color:#555;margin-bottom:16px;line-height:1.65;">One of the most striking features of everyday Brazilian speech is the reduction of common words. These aren't slang — they're natural contractions that happen in fast, fluent speech. If you only know the "textbook" form, you may not even recognise the word when you hear it.</p>
+    <table class="grammar-table">
+      <tr><th>Full form</th><th>Reduced form</th><th>Example from dialogue</th></tr>
+      <tr><td>você</td><td><code>cê</code></td><td>"<strong>Cê</strong> está falando desse…"</td></tr>
+      <tr><td>está / estou</td><td><code>tá / tô</code></td><td>"<strong>Tá</strong> bom, sabe…"</td></tr>
+      <tr><td>para</td><td><code>pra</code></td><td>"É <strong>pra</strong> minha irmã."</td></tr>
+      <tr><td>deixa eu</td><td><code>deixa eu / daí</code></td><td>"<strong>Deixa eu</strong> ver…" (also written as one chunk in speech)</td></tr>
+      <tr><td>Nossa Senhora!</td><td><code>Nossa!</code></td><td>"<strong>Nossa!</strong> Gostei." (mild surprise / admiration)</td></tr>
+    </table>
+    <p style="font-size:13px;color:#666;margin-top:8px;"><strong>Tip:</strong> When listening to Brazilian Portuguese, train your ear for <em>cê</em> instead of <em>você</em> — it's extremely common and often catches learners off guard.</p>
+  </div>
+
+  <!-- EXERCISE 1 — T/F -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercise 1</div>
+    <div class="ex-title">Verdadeiro ou Falso?</div>
+    <div class="ex-instructions">Based on the dialogue, mark each statement Verdadeiro (V) or Falso (F). Then check your answers.</div>
+    <ul class="tf-list">
+      <li class="tf-item">
+        <div class="tf-text">1. O cliente quer comprar um perfume para ele mesmo.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf1-v" onclick="selectTF(1,'V',this)">V</button>
+          <button class="tf-btn" id="tf1-f" onclick="selectTF(1,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">2. A vendedora diz que perfume é algo muito pessoal.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf2-v" onclick="selectTF(2,'V',this)">V</button>
+          <button class="tf-btn" id="tf2-f" onclick="selectTF(2,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">3. A irmã do cliente gosta de fragrâncias cítricas.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf3-v" onclick="selectTF(3,'V',this)">V</button>
+          <button class="tf-btn" id="tf3-f" onclick="selectTF(3,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">4. O cliente decide levar o perfume Laguna, da marca Salvador Dali.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf4-v" onclick="selectTF(4,'V',this)">V</button>
+          <button class="tf-btn" id="tf4-f" onclick="selectTF(4,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">5. O frasco do Dot de Marc Jacobs tem o formato de uma joaninha.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf5-v" onclick="selectTF(5,'V',this)">V</button>
+          <button class="tf-btn" id="tf5-f" onclick="selectTF(5,'F',this)">F</button>
+        </div>
+      </li>
+    </ul>
+    <button class="check-btn" onclick="checkTF()">✓ Check answers</button>
+    <div class="result-msg" id="tf-result"></div>
+  </div>
+
+  <!-- EXERCISE 2 — VOCAB FILL-IN -->
+  <div class="ex-block" style="border-top:3px solid var(--cobalto);">
+    <div class="ex-num">Exercise 2</div>
+    <div class="ex-title">Vocabulário de Perfumaria — fill in the blanks</div>
+    <div class="ex-instructions">Use the words from the box to complete the sentences. Each word is used once.</div>
+    <div class="word-bank">
+      <span class="word-chip">pessoal</span>
+      <span class="word-chip">fragrâncias</span>
+      <span class="word-chip">sândalo</span>
+      <span class="word-chip">almíscar</span>
+      <span class="word-chip">floral</span>
+      <span class="word-chip">baunilha</span>
+      <span class="word-chip">frasco</span>
+      <span class="word-chip">joaninha</span>
+    </div>
+    <div class="fill-sentence">1. Perfume é algo muito <input class="fill-input" id="v1" placeholder="..."> — o que agrada uma pessoa pode não agradar outra.</div>
+    <div class="fill-sentence">2. Ela não gosta das <input class="fill-input" id="v2" placeholder="..."> de aroma cítrico.</div>
+    <div class="fill-sentence">3. O Coco Noir tem essências de base de <input class="fill-input" id="v3" placeholder="..."> e <input class="fill-input" id="v4" placeholder="..."> branco.</div>
+    <div class="fill-sentence">4. O Dot tem uma fragrância <input class="fill-input" id="v5" placeholder="..."> de jasmim, com aromas de <input class="fill-input" id="v6" placeholder="..."> e almíscar.</div>
+    <div class="fill-sentence">5. O <input class="fill-input" id="v7" placeholder="..."> do Dot parece uma <input class="fill-input" id="v8" placeholder="">.</div>
+    <button class="check-btn" onclick="checkVocab()">✓ Check answers</button>
+    <div class="result-msg" id="vocab-result"></div>
+  </div>
+
+  <!-- EXERCISE 3 — MULTIPLE CHOICE (EXPRESSIONS) -->
+  <div class="ex-block" style="border-top:3px solid var(--pitomba);">
+    <div class="ex-num">Exercise 3</div>
+    <div class="ex-title">What do they mean?</div>
+    <div class="ex-instructions">Choose the best meaning or function for each expression from the dialogue.</div>
+
+    <div class="mc-group">
+      <div class="mc-question">1. <strong>"Uns 28–30 anos, por aí"</strong> — What does <em>por aí</em> mean here?</div>
+      <div class="mc-options" id="mc1-opts">
+        <button class="mc-btn" onclick="selectMC('mc1','a',this)">a) Around that area / nearby</button>
+        <button class="mc-btn" onclick="selectMC('mc1','b',this)">b) Approximately / around that age ✓</button>
+        <button class="mc-btn" onclick="selectMC('mc1','c',this)">c) Over there, in that direction</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-question">2. <strong>"Tá bom, sabe…"</strong> — What is the function of <em>sabe</em> here?</div>
+      <div class="mc-options" id="mc2-opts">
+        <button class="mc-btn" onclick="selectMC('mc2','a',this)">a) It asks whether the customer has knowledge about perfume.</button>
+        <button class="mc-btn" onclick="selectMC('mc2','b',this)">b) It's a filler / discourse marker, like "you know" — keeping the listener engaged. ✓</button>
+        <button class="mc-btn" onclick="selectMC('mc2','c',this)">c) It expresses surprise at what the customer said.</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-question">3. <strong>"Nossa! Gostei."</strong> — What does <em>Nossa!</em> express?</div>
+      <div class="mc-options" id="mc3-opts">
+        <button class="mc-btn" onclick="selectMC('mc3','a',this)">a) Disappointment — he expected something different.</button>
+        <button class="mc-btn" onclick="selectMC('mc3','b',this)">b) Pleasant surprise or admiration — "Wow!" ✓</button>
+        <button class="mc-btn" onclick="selectMC('mc3','c',this)">c) Confusion — he doesn't understand the name.</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-question">4. <strong>"Vou levar esse."</strong> — What does <em>levar</em> mean in a shop context?</div>
+      <div class="mc-options" id="mc4-opts">
+        <button class="mc-btn" onclick="selectMC('mc4','a',this)">a) To carry it out of the store temporarily.</button>
+        <button class="mc-btn" onclick="selectMC('mc4','b',this)">b) To buy it / to take it — the standard way to say "I'll take this" in Brazilian shops. ✓</button>
+        <button class="mc-btn" onclick="selectMC('mc4','c',this)">c) To return it later if he doesn't like it.</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkMC()">✓ Check answers</button>
+    <div class="result-msg" id="mc-result"></div>
+  </div>
+
+  <!-- EXERCISE 4 — CONDICIONAL FILL-IN -->
+  <div class="ex-block" style="border-top:3px solid var(--floresta);">
+    <div class="ex-num">Exercise 4</div>
+    <div class="ex-title">Condicional de Polidez — complete the sentences</div>
+    <div class="ex-instructions">Fill in each blank with the correct conditional form of the verb in parentheses. Use the grammar note above if you need help.</div>
+
+    <div class="cond-item">
+      <div class="cond-prompt">→ gostar (you / formal)</div>
+      <div class="cond-sentence">1. Você <input class="fill-input" id="c1" placeholder="..."> de ver nossos lançamentos? (gostar)</div>
+    </div>
+    <div class="cond-item">
+      <div class="cond-prompt">→ poder (you / formal)</div>
+      <div class="cond-sentence">2. Você <input class="fill-input" id="c2" placeholder="..."> me mostrar uma opção mais floral? (poder)</div>
+    </div>
+    <div class="cond-item">
+      <div class="cond-prompt">→ preferir (I)</div>
+      <div class="cond-sentence">3. Eu <input class="fill-input" id="c3" placeholder="..."> algo com aroma mais suave. (preferir)</div>
+    </div>
+    <div class="cond-item">
+      <div class="cond-prompt">→ gostar (we)</div>
+      <div class="cond-sentence">4. Nós <input class="fill-input" id="c4" placeholder="..."> de levar os dois frascos. (gostar)</div>
+    </div>
+
+    <button class="check-btn" onclick="checkCond()">✓ Check answers</button>
+    <div class="result-msg" id="cond-result"></div>
+  </div>
+
+  <!-- EXERCISE 5 — FREE PRODUCTION -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercise 5</div>
+    <div class="ex-title">Free production — Na perfumaria</div>
+    <div class="ex-instructions">A friend is asking for your help choosing a perfume for their partner. Write 4–5 sentences of advice or a short dialogue in Portuguese. Use at least: one conditional form (<em>gostaria, poderia, preferiria</em>), one <em>Que tal...?</em> suggestion, and one expression from the vocabulary section (<em>agradar, pessoal, fragrância floral,</em> etc.).</div>
+    <textarea class="free-textarea" id="e5-free" placeholder="Escreva sua resposta aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── T/F ──
+var tfSelected = {};
+var tfAnswers = {1:'F', 2:'V', 3:'F', 4:'F', 5:'V'};
+function selectTF(n, val, btn) {
+  tfSelected[n] = val;
+  var v = document.getElementById('tf'+n+'-v');
+  var f = document.getElementById('tf'+n+'-f');
+  v.className = 'tf-btn' + (val==='V' ? ' selected-v' : '');
+  f.className = 'tf-btn' + (val==='F' ? ' selected-f' : '');
+}
+function checkTF() {
+  var correct = 0; var html = '';
+  var labels = {
+    1: 'Falso — é para a irmã dele.',
+    2: 'Verdadeiro.',
+    3: 'Falso — ela não gosta de cítrico.',
+    4: 'Falso — ele leva o Dot de Marc Jacobs.',
+    5: 'Verdadeiro.'
+  };
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i]; var ans = tfAnswers[i];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var vBtn = document.getElementById('tf'+i+'-v');
+    var fBtn = document.getElementById('tf'+i+'-f');
+    if (sel === 'V') { vBtn.className = 'tf-btn ' + (ok ? 'selected-v' : 'wrong-sel'); }
+    if (sel === 'F') { fBtn.className = 'tf-btn ' + (ok ? 'selected-f' : 'wrong-sel'); }
+    html += '<div style="margin-bottom:8px;"><strong>' + i + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + labels[i] + '</div>';
+  }
+  var res = document.getElementById('tf-result');
+  res.className = 'result-msg ' + (correct===5 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===5 ? '✓ All 5 correct!' : correct + ' of 5 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── VOCAB ──
+var vocabAnswers = [
+  {id:'v1', key:'pessoal',    display:'pessoal'},
+  {id:'v2', key:'fragrancias', display:'fragrâncias'},
+  {id:'v3', key:'sandalo',    display:'sândalo'},
+  {id:'v4', key:'almiscar',   display:'almíscar'},
+  {id:'v5', key:'floral',     display:'floral'},
+  {id:'v6', key:'baunilha',   display:'baunilha'},
+  {id:'v7', key:'frasco',     display:'frasco'},
+  {id:'v8', key:'joaninha',   display:'joaninha'}
+];
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+    .replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+function checkVocab() {
+  var correct = 0; var html = '';
+  vocabAnswers.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    var ok = norm(el.value) === norm(a.key);
+    el.className = 'fill-input ' + (ok ? 'correct' : (el.value.trim() ? 'wrong' : ''));
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + a.id.toUpperCase() + ':</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + a.display + '</strong></div>';
+  });
+  var res = document.getElementById('vocab-result');
+  res.className = 'result-msg ' + (correct===8 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===8 ? '✓ All 8 correct!' : correct + ' of 8 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── MC ──
+var mcSelected = {};
+var mcAnswers = {mc1:'b', mc2:'b', mc3:'b', mc4:'b'};
+function selectMC(gid, val, btn) {
+  mcSelected[gid] = val;
+  var opts = document.getElementById(gid+'-opts').querySelectorAll('.mc-btn');
+  opts.forEach(function(b) { b.className = 'mc-btn'; });
+  btn.className = 'mc-btn selected';
+}
+function checkMC() {
+  var correct = 0; var html = '';
+  var explanations = {
+    mc1: '<em>Por aí</em> = approximately / around that — used with quantities and ages.',
+    mc2: '<em>Sabe</em> as a discourse marker is extremely common in Brazilian Portuguese, like "you know?".',
+    mc3: '<em>Nossa!</em> (short for Nossa Senhora!) = Wow! — mild surprise or admiration.',
+    mc4: '<em>Levar</em> = to take / to buy in shop contexts. "Vou levar" = "I\'ll take it."'
+  };
+  ['mc1','mc2','mc3','mc4'].forEach(function(gid, i) {
+    var sel = mcSelected[gid]; var ans = mcAnswers[gid];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var opts = document.getElementById(gid+'-opts').querySelectorAll('.mc-btn');
+    opts.forEach(function(b, idx) {
+      var letter = ['a','b','c'][idx];
+      if (letter === ans) b.className = 'mc-btn correct';
+      else if (letter === sel && !ok) b.className = 'mc-btn wrong';
+      else b.className = 'mc-btn';
+    });
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + explanations[gid] + '</div>';
+  });
+  var res = document.getElementById('mc-result');
+  res.className = 'result-msg ' + (correct===4 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===4 ? '✓ All 4 correct!' : correct + ' of 4 correct:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── CONDICIONAL ──
+var condAnswers = [
+  {id:'c1', key:'gostaria',    display:'gostaria'},
+  {id:'c2', key:'poderia',     display:'poderia'},
+  {id:'c3', key:'preferiria',  display:'preferiria'},
+  {id:'c4', key:'gostariamos', display:'gostaríamos'}
+];
+function checkCond() {
+  var correct = 0; var html = '';
+  condAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var ok = norm(el.value) === norm(a.key);
+    el.className = 'fill-input ' + (ok ? 'correct' : (el.value.trim() ? 'wrong' : ''));
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + a.display + '</strong></div>';
+  });
+  var res = document.getElementById('cond-result');
+  res.className = 'result-msg ' + (correct===4 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===4 ? '✓ All 4 correct!' : correct + ' of 4 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  // Ex1: T/F
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i] || '(sem resposta)';
+    summaryLines.push('<strong>Ex1-'+i+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex1-'+i+':</strong> '+sel+'</p>';
+  }
+  // Ex2: vocab v1-v8
+  ['v1','v2','v3','v4','v5','v6','v7','v8'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex2-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex2-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex3: MC mc1-mc4
+  ['mc1','mc2','mc3','mc4'].forEach(function(gid, i) {
+    var sel = mcSelected[gid] || '(sem resposta)';
+    summaryLines.push('<strong>Ex3-'+(i+1)+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex3-'+(i+1)+':</strong> '+sel+'</p>';
+  });
+  // Ex4: condicional c1-c4
+  ['c1','c2','c3','c4'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex4-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex4-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex5: free production
+  var freeEl = document.getElementById('e5-free');
+  var freeVal = freeEl ? (freeEl.value.trim() || '(sem resposta)') : '(sem resposta)';
+  summaryLines.push('<strong>Ex5:</strong><br>'+(freeEl&&freeEl.value.trim()?freeEl.value.trim().replace(/</g,'&lt;'):'<em style="color:#999">sem resposta</em>'));
+  answersHtml += '<p><strong>Ex5 — Produção livre:</strong><br>'+freeVal+'</p>';
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
