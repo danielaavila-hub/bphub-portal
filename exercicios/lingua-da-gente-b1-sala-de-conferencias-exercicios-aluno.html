@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservando a Sala de Conferências! — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: #FCF5EB; border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-ep { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 40px; }
+
+    .podcast-embed { margin: 16px 0 8px; border-radius: 14px; overflow: hidden; }
+    .podcast-embed iframe { display: block; width: 100%; border: 0; border-radius: 14px; }
+
+    .dialogue-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
+    .dialogue-table td { padding: 10px 14px; vertical-align: top; border-bottom: 1px solid var(--light-gray); line-height: 1.6; }
+    .dialogue-table td:first-child { width: 28px; font-weight: 700; font-size: 13px; padding-right: 8px; white-space: nowrap; }
+    .dialogue-table td:nth-child(2) { width: 50%; }
+    .dialogue-table td:nth-child(3) { width: 46%; color: #888; font-size: 14px; }
+    .spk-a { color: var(--cobalto); }
+    .spk-b { color: var(--pitomba); }
+
+    .grammar-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 28px 0; }
+    .grammar-box h3 { font-size: 18px; color: var(--nanquim); margin-bottom: 16px; }
+    .grammar-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+    .grammar-table th { text-align: left; padding: 8px 12px; background: rgba(150,126,99,0.08); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--level); }
+    .grammar-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .grammar-table code { background: rgba(150,126,99,0.12); padding: 2px 7px; border-radius: 4px; font-family: monospace; font-size: 13px; color: var(--nanquim); font-weight: 700; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin: 16px 0; }
+    .vocab-item { background: white; border: 1px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; }
+    .vocab-pt { font-weight: 700; font-size: 14px; color: var(--nanquim); }
+    .vocab-en { font-size: 13px; color: #888; margin-top: 2px; }
+    .vocab-ex { font-size: 12px; color: var(--texto); margin-top: 6px; font-style: italic; border-top: 1px solid var(--light-gray); padding-top: 6px; }
+
+    .hl { background: rgba(255,185,74,0.18); padding: 2px 4px; border-radius: 3px; }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px; margin: 28px 0; }
+    .ex-num { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 300; color: var(--nanquim); margin-bottom: 16px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6; }
+
+    .tf-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .tf-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; background: #FAFAF8; border-radius: 10px; border: 1.5px solid var(--light-gray); }
+    .tf-text { flex: 1; font-size: 15px; line-height: 1.55; }
+    .tf-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .tf-btn { padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--light-gray); background: white; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.15s; font-family: 'Manrope', sans-serif; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.selected-v { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .tf-btn.selected-f { background: var(--pitomba); color: white; border-color: var(--pitomba); }
+
+    .fill-sentence { font-size: 15px; line-height: 2.4; margin-bottom: 8px; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 160px; outline: none; }
+    .fill-input.wide { width: 210px; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 14px 16px; background: rgba(150,126,99,0.06); border-radius: 10px; border: 1px dashed rgba(150,126,99,0.3); }
+    .word-chip { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+
+    .mc-group { margin-bottom: 24px; }
+    .mc-question { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { text-align: left; padding: 10px 16px; border-radius: 10px; border: 1.5px solid var(--light-gray); background: white; font-size: 14px; cursor: pointer; transition: all 0.15s; font-family: 'Manrope', sans-serif; line-height: 1.4; }
+    .mc-btn:hover { border-color: var(--level); }
+    .mc-btn.selected { background: rgba(150,126,99,0.12); border-color: var(--level); font-weight: 700; }
+    .mc-btn.correct { background: rgba(78,85,29,0.1); border-color: var(--floresta); color: var(--floresta); font-weight: 700; }
+    .mc-btn.wrong { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    .gram-item { margin-bottom: 18px; }
+    .gram-prompt { font-size: 14px; color: #666; margin-bottom: 6px; font-style: italic; }
+    .gram-sentence { font-size: 15px; line-height: 2.2; }
+
+    .free-textarea { width: 100%; min-height: 130px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    .send-box { background: rgba(166,178,138,0.18); border: 1.5px solid rgba(166,178,138,0.35); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 16px; padding: 16px 20px; border-radius: 10px; font-size: 14px; line-height: 1.8; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .dialogue-table td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1 · Ep 5</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Reservando a Sala de Conferências! <em>Reserving the Conference Room</em></h1>
+  <div class="hero-sub">The company has a new conference room — but just try to book it. A real workplace conversation where everything is already reserved, until tomorrow. Focus on <strong style="color:rgba(255,255,255,0.9)">ir + infinitivo</strong> for future plans and the formal address <em>a senhora / o senhor</em>.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Ir + Infinitivo</span>
+    <span class="hero-tag">A senhora / O senhor</span>
+    <span class="hero-tag">Vocabulário de trabalho</span>
+    <span class="hero-tag">Expressões de tempo</span>
+    <span class="hero-tag">Língua da Gente · Ep 5</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="sec-label">Língua da Gente · Intermediate 05</div>
+  <div class="podcast-embed">
+    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/br/podcast/intermediate-05-reserving-the-conference-room/id862545884?i=1000347351605&theme=auto"></iframe>
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="sec-label">Diálogo · Bilingual transcript</div>
+  <table class="dialogue-table">
+    <tr><td class="spk-a">A</td><td>Bom dia Antônio, você sabe se tem alguém usando a <span class="hl">sala de conferências</span>?</td><td>Good morning Antonio, do you know if anyone is using the conference room?</td></tr>
+    <tr><td class="spk-b">B</td><td>Tem sim. O departamento de tecnologia <span class="hl">está usando</span> ela para uma vídeo-conferência.</td><td>Yes, there is. The Technology Department is using it for a video-conference.</td></tr>
+    <tr><td class="spk-a">A</td><td>Você sabe até que horas eles <span class="hl">vão precisar</span> da sala?</td><td>Do you know how long they will need the room?</td></tr>
+    <tr><td class="spk-b">B</td><td>Não sei, mas acho que <span class="hl">vão usá-la</span> até o almoço.</td><td>I don't know, but I believe they will use it until lunchtime.</td></tr>
+    <tr><td class="spk-a">A</td><td>E hoje à tarde? Alguém já <span class="hl">reservou</span> a sala durante a tarde?</td><td>And this afternoon? Has anybody reserved the room for this afternoon?</td></tr>
+    <tr><td class="spk-b">B</td><td>Deixa eu ver aqui. Ah sim, parece que o departamento de vendas <span class="hl">reservou</span> ela das 15 às 16:30 da tarde. <span class="hl">A senhora</span> quer que eu faça a reserva para as 17:00 horas?</td><td>Let me see here. Ah yes, it looks like the Sales Department reserved it from 3:00–4:30 in the afternoon. Would you like me to make a reservation for 5:00?</td></tr>
+    <tr><td class="spk-a">A</td><td>Obrigada, não. Parece que hoje não <span class="hl">vai dar</span> mesmo. E amanhã, alguém já reservou alguma coisa?</td><td>No thanks. It looks like today's not going to work out. And tomorrow, has anybody reserved anything?</td></tr>
+    <tr><td class="spk-b">B</td><td>Deixa eu ver… Carlinhos <span class="hl">vai usá-la</span> amanhã de manhã para fazer as entrevistas com os novos clientes da Argentina. Mas depois das 10:00 não tem nada.</td><td>Let me see… Carlinhos will be using it tomorrow morning to conduct the interviews with the new clients from Argentina. But after 10:00 o'clock there isn't anything.</td></tr>
+    <tr><td class="spk-a">A</td><td>Bom, <span class="hl">faz</span> a reserva para mim para amanhã das 11:00 às 13:00, <span class="hl">beleza</span>? Por favor, <span class="hl">convida</span> também o Jackson, porque <span class="hl">queremos revisar</span> o orçamento que ele mandou na semana passada.</td><td>OK, make the reservation for me for tomorrow from 11:00–1:00, OK? And please invite Jackson too, because we want to review the budget that he sent last week.</td></tr>
+    <tr><td class="spk-b">B</td><td>Sim, <span class="hl">tá bom</span>. Qualquer coisa eu aviso <span class="hl">a senhora</span>.</td><td>Sure, fine. If anything comes up I'll let you know.</td></tr>
+  </table>
+
+  <!-- GRAMMAR FOCUS -->
+  <div class="sec-label">Foco Gramatical</div>
+  <div class="grammar-box">
+    <h3>Ir + Infinitivo — Expressing Future Plans</h3>
+    <p style="font-size:14px;color:#555;margin-bottom:18px;line-height:1.65;">The most common way to talk about future plans and intentions in Brazilian Portuguese is <strong>ir (conjugated) + infinitivo</strong>. It's the equivalent of English <em>going to + verb</em>. This dialogue is packed with examples — notice how the object pronoun can attach directly to the infinitive with a hyphen (<em>usá-la</em>).</p>
+    <table class="grammar-table">
+      <tr><th>Subject</th><th>Ir (present)</th><th>+ Infinitivo</th><th>Example from the dialogue</th></tr>
+      <tr><td>eu</td><td><code>vou</code></td><td>+ verb</td><td>"Não sei, mas <strong>vou</strong> verificar."</td></tr>
+      <tr><td>você / ele / ela</td><td><code>vai</code></td><td>+ verb</td><td>"Carlinhos <strong>vai usá-la</strong> amanhã de manhã."</td></tr>
+      <tr><td>nós</td><td><code>vamos</code></td><td>+ verb</td><td>"<strong>Queremos</strong> revisar o orçamento." (→ <em>vamos revisar</em>)</td></tr>
+      <tr><td>eles / elas</td><td><code>vão</code></td><td>+ verb</td><td>"Eles <strong>vão usá-la</strong> até o almoço."</td></tr>
+    </table>
+    <p style="font-size:13px;color:#666;margin-top:8px;"><strong>Note:</strong> <em>Usá-la</em> = <em>usar + a (ela)</em> — in written and formal speech, the direct object pronoun attaches to the infinitive. In casual speech, Brazilians often say simply <em>"vão usar ela"</em>. Both are correct in different registers.</p>
+    <p style="font-size:13px;color:#666;margin-top:10px;"><strong>Negation:</strong> Put <em>não</em> before <em>ir</em>: <em>"Hoje não vai dar mesmo"</em> — Today it's just not going to work out.</p>
+  </div>
+
+  <!-- VOCAB FOCUS -->
+  <div class="sec-label">Vocabulário do Diálogo</div>
+  <div class="vocab-grid">
+    <div class="vocab-item"><div class="vocab-pt">sala de conferências</div><div class="vocab-en">conference room</div><div class="vocab-ex">A sala de conferências está ocupada.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">vídeo-conferência</div><div class="vocab-en">video conference</div><div class="vocab-ex">Eles têm uma vídeo-conferência às 10h.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">reservar / fazer a reserva</div><div class="vocab-en">to reserve / to book</div><div class="vocab-ex">Faz a reserva para amanhã, por favor.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">orçamento</div><div class="vocab-en">budget / quote</div><div class="vocab-ex">Precisamos revisar o orçamento.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">entrevista</div><div class="vocab-en">interview / meeting</div><div class="vocab-ex">Carlinhos vai fazer entrevistas amanhã.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">revisar</div><div class="vocab-en">to review / to go over</div><div class="vocab-ex">Queremos revisar os números juntos.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">avisar</div><div class="vocab-en">to let know / to notify</div><div class="vocab-ex">Qualquer coisa eu te aviso.</div></div>
+    <div class="vocab-item"><div class="vocab-pt">beleza?</div><div class="vocab-en">OK? / Sounds good?</div><div class="vocab-ex">"Das 11 às 13, beleza?" — informal confirmation.</div></div>
+  </div>
+
+  <!-- PHONOLOGY / PRAGMATICS FOCUS -->
+  <div class="sec-label">Foco Pragmático</div>
+  <div class="grammar-box">
+    <h3>"A senhora" e "O senhor" — Formal Address in Brazilian Workplaces</h3>
+    <p style="font-size:14px;color:#555;margin-bottom:16px;line-height:1.65;">In this dialogue, Antônio consistently calls his boss <em>a senhora</em> — not <em>você</em>. This is the formal register used in many Brazilian professional settings, particularly when speaking to someone of higher status. It's the equivalent of addressing someone as <em>ma'am</em> or <em>sir</em> in English.</p>
+    <table class="grammar-table">
+      <tr><th>Context</th><th>How to address</th><th>Example</th></tr>
+      <tr><td>Casual / peers</td><td><code>você</code></td><td>"Você sabe o horário da reunião?"</td></tr>
+      <tr><td>Formal / senior colleague</td><td><code>a senhora / o senhor</code></td><td>"<strong>A senhora</strong> quer que eu faça a reserva?"</td></tr>
+      <tr><td>Customer service (shops, hotels)</td><td><code>a senhora / o senhor</code></td><td>"<strong>O senhor</strong> gostaria de ver o cardápio?"</td></tr>
+      <tr><td>Elderly person (any context)</td><td><code>a senhora / o senhor</code></td><td>"Posso ajudar <strong>a senhora</strong>?"</td></tr>
+    </table>
+    <p style="font-size:13px;color:#666;margin-top:8px;"><strong>Key rule:</strong> When using <em>a senhora / o senhor</em>, the verb takes the 3rd person singular form — same as <em>ele/ela</em>: <em>"A senhora <strong>quer</strong>…?"</em>, <em>"O senhor <strong>prefere</strong>…?"</em></p>
+    <p style="font-size:13px;color:#666;margin-top:10px;"><strong>Tip:</strong> Not sure which to use? In professional and service contexts, starting with <em>a senhora / o senhor</em> and waiting for the other person to invite a more casual register (<em>"pode me chamar de você"</em>) is always the safer choice.</p>
+  </div>
+
+  <!-- EXERCISE 1 — T/F -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercise 1</div>
+    <div class="ex-title">Verdadeiro ou Falso?</div>
+    <div class="ex-instructions">Based on the dialogue, mark each statement Verdadeiro (V) or Falso (F). Then check your answers.</div>
+    <ul class="tf-list">
+      <li class="tf-item">
+        <div class="tf-text">1. O departamento de vendas está usando a sala de manhã para uma vídeo-conferência.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf1-v" onclick="selectTF(1,'V',this)">V</button>
+          <button class="tf-btn" id="tf1-f" onclick="selectTF(1,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">2. A sala está ocupada das 15:00 às 16:30 hoje à tarde.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf2-v" onclick="selectTF(2,'V',this)">V</button>
+          <button class="tf-btn" id="tf2-f" onclick="selectTF(2,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">3. As entrevistas com os clientes da Argentina vão acontecer amanhã à tarde.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf3-v" onclick="selectTF(3,'V',this)">V</button>
+          <button class="tf-btn" id="tf3-f" onclick="selectTF(3,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">4. A senhora decide reservar a sala para hoje às 17:00.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf4-v" onclick="selectTF(4,'V',this)">V</button>
+          <button class="tf-btn" id="tf4-f" onclick="selectTF(4,'F',this)">F</button>
+        </div>
+      </li>
+      <li class="tf-item">
+        <div class="tf-text">5. O Jackson vai ser convidado para revisar o orçamento na reunião de amanhã.</div>
+        <div class="tf-btns">
+          <button class="tf-btn" id="tf5-v" onclick="selectTF(5,'V',this)">V</button>
+          <button class="tf-btn" id="tf5-f" onclick="selectTF(5,'F',this)">F</button>
+        </div>
+      </li>
+    </ul>
+    <button class="check-btn" onclick="checkTF()">✓ Check answers</button>
+    <div class="result-msg" id="tf-result"></div>
+  </div>
+
+  <!-- EXERCISE 2 — VOCAB FILL-IN -->
+  <div class="ex-block" style="border-top:3px solid var(--cobalto);">
+    <div class="ex-num">Exercise 2</div>
+    <div class="ex-title">Vocabulário de trabalho — complete as frases</div>
+    <div class="ex-instructions">Use the words from the box to complete the sentences. Each word is used once.</div>
+    <div class="word-bank">
+      <span class="word-chip">sala de conferências</span>
+      <span class="word-chip">vídeo-conferência</span>
+      <span class="word-chip">reservou</span>
+      <span class="word-chip">entrevistas</span>
+      <span class="word-chip">orçamento</span>
+      <span class="word-chip">aviso</span>
+    </div>
+    <div class="fill-sentence">1. Antônio, você sabe se tem alguém usando a <input class="fill-input wide" id="v1" placeholder="...">?</div>
+    <div class="fill-sentence">2. O departamento de tecnologia está usando a sala para uma <input class="fill-input wide" id="v2" placeholder="...">.</div>
+    <div class="fill-sentence">3. O departamento de vendas <input class="fill-input" id="v3" placeholder="..."> a sala das 15 às 16:30.</div>
+    <div class="fill-sentence">4. Carlinhos vai usar a sala para fazer as <input class="fill-input" id="v4" placeholder="..."> com os novos clientes.</div>
+    <div class="fill-sentence">5. Queremos revisar o <input class="fill-input" id="v5" placeholder="..."> que Jackson mandou na semana passada.</div>
+    <div class="fill-sentence">6. Qualquer coisa eu <input class="fill-input" id="v6" placeholder="..."> a senhora.</div>
+    <button class="check-btn" onclick="checkVocab()">✓ Check answers</button>
+    <div class="result-msg" id="vocab-result"></div>
+  </div>
+
+  <!-- EXERCISE 3 — MULTIPLE CHOICE -->
+  <div class="ex-block" style="border-top:3px solid var(--pitomba);">
+    <div class="ex-num">Exercise 3</div>
+    <div class="ex-title">Compreensão do diálogo</div>
+    <div class="ex-instructions">Choose the best answer for each question based on the dialogue.</div>
+
+    <div class="mc-group">
+      <div class="mc-question">1. Para que horas Antônio faz a reserva da sala para a senhora?</div>
+      <div class="mc-options" id="mc1-opts">
+        <button class="mc-btn" onclick="selectMC('mc1','a',this)">a) Hoje às 17:00</button>
+        <button class="mc-btn" onclick="selectMC('mc1','b',this)">b) Amanhã das 11:00 às 13:00</button>
+        <button class="mc-btn" onclick="selectMC('mc1','c',this)">c) Amanhã das 10:00 às 12:00</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-question">2. Por que a sala não está disponível hoje de manhã?</div>
+      <div class="mc-options" id="mc2-opts">
+        <button class="mc-btn" onclick="selectMC('mc2','a',this)">a) O departamento de vendas está fazendo entrevistas.</button>
+        <button class="mc-btn" onclick="selectMC('mc2','b',this)">b) Carlinhos está com novos clientes.</button>
+        <button class="mc-btn" onclick="selectMC('mc2','c',this)">c) O departamento de tecnologia está usando para uma vídeo-conferência.</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-question">3. O que significa "Qualquer coisa eu aviso a senhora"?</div>
+      <div class="mc-options" id="mc3-opts">
+        <button class="mc-btn" onclick="selectMC('mc3','a',this)">a) Antônio vai cancelar a reserva se necessário.</button>
+        <button class="mc-btn" onclick="selectMC('mc3','b',this)">b) Antônio vai informar a senhora se algo mudar.</button>
+        <button class="mc-btn" onclick="selectMC('mc3','c',this)">c) Antônio vai convidar a senhora para outra reunião.</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-question">4. Por que Carlinhos vai usar a sala amanhã de manhã?</div>
+      <div class="mc-options" id="mc4-opts">
+        <button class="mc-btn" onclick="selectMC('mc4','a',this)">a) Para revisar o orçamento com Jackson.</button>
+        <button class="mc-btn" onclick="selectMC('mc4','b',this)">b) Para uma vídeo-conferência com a Argentina.</button>
+        <button class="mc-btn" onclick="selectMC('mc4','c',this)">c) Para fazer entrevistas com novos clientes da Argentina.</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkMC()">✓ Check answers</button>
+    <div class="result-msg" id="mc-result"></div>
+  </div>
+
+  <!-- EXERCISE 4 — IR + INFINITIVO -->
+  <div class="ex-block" style="border-top:3px solid var(--floresta);">
+    <div class="ex-num">Exercise 4</div>
+    <div class="ex-title">Ir + Infinitivo — complete as frases</div>
+    <div class="ex-instructions">Fill in each blank with the correct form of <em>ir</em> + the infinitive in parentheses. Check the grammar note above if you need help.</div>
+
+    <div class="gram-item">
+      <div class="gram-prompt">→ eles / chegar</div>
+      <div class="gram-sentence">1. Os clientes da Argentina <input class="fill-input" id="g1" placeholder="..."> amanhã de manhã.</div>
+    </div>
+    <div class="gram-item">
+      <div class="gram-prompt">→ ele / usar</div>
+      <div class="gram-sentence">2. Carlinhos <input class="fill-input" id="g2" placeholder="..."> a sala para fazer as entrevistas.</div>
+    </div>
+    <div class="gram-item">
+      <div class="gram-prompt">→ nós / revisar</div>
+      <div class="gram-sentence">3. Nós <input class="fill-input" id="g3" placeholder="..."> o orçamento juntos na reunião.</div>
+    </div>
+    <div class="gram-item">
+      <div class="gram-prompt">→ ele / avisar</div>
+      <div class="gram-sentence">4. Antônio <input class="fill-input" id="g4" placeholder="..."> a senhora se houver qualquer mudança.</div>
+    </div>
+
+    <button class="check-btn" onclick="checkGram()">✓ Check answers</button>
+    <div class="result-msg" id="gram-result"></div>
+  </div>
+
+  <!-- EXERCISE 5 — FREE PRODUCTION -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercise 5</div>
+    <div class="ex-title">Produção livre — Reserve uma sala</div>
+    <div class="ex-instructions">Imagine you need to reserve a meeting room at work. Write 4–5 sentences in Portuguese describing: what room you need, for how long, who is going to attend, and what you are going to discuss. Use at least one <em>ir + infinitivo</em> construction, one time expression (<em>das X às Y, depois das X, amanhã de manhã,</em> etc.), and the verb <em>reservar</em>.</div>
+    <textarea class="free-textarea" id="e5-free" placeholder="Escreva sua resposta aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── T/F ──
+var tfSelected = {};
+var tfAnswers = {1:'F', 2:'V', 3:'F', 4:'F', 5:'V'};
+function selectTF(n, val, btn) {
+  tfSelected[n] = val;
+  var v = document.getElementById('tf'+n+'-v');
+  var f = document.getElementById('tf'+n+'-f');
+  v.className = 'tf-btn' + (val==='V' ? ' selected-v' : '');
+  f.className = 'tf-btn' + (val==='F' ? ' selected-f' : '');
+}
+function checkTF() {
+  var correct = 0; var html = '';
+  var labels = {
+    1: 'Falso — é o departamento de <em>tecnologia</em>, usando a sala para uma vídeo-conferência.',
+    2: 'Verdadeiro — o departamento de vendas reservou das 15 às 16:30.',
+    3: 'Falso — as entrevistas são amanhã <em>de manhã</em>, não à tarde.',
+    4: 'Falso — ela recusa a reserva para hoje às 17:00 e pede para amanhã das 11:00 às 13:00.',
+    5: 'Verdadeiro — "convida também o Jackson, porque queremos revisar o orçamento."'
+  };
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i]; var ans = tfAnswers[i];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var vBtn = document.getElementById('tf'+i+'-v');
+    var fBtn = document.getElementById('tf'+i+'-f');
+    if (sel === 'V') { vBtn.className = 'tf-btn ' + (ok ? 'selected-v' : 'wrong-sel'); }
+    if (sel === 'F') { fBtn.className = 'tf-btn ' + (ok ? 'selected-f' : 'wrong-sel'); }
+    html += '<div style="margin-bottom:8px;"><strong>' + i + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + labels[i] + '</div>';
+  }
+  var res = document.getElementById('tf-result');
+  res.className = 'result-msg ' + (correct===5 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===5 ? '✓ All 5 correct!' : correct + ' of 5 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── VOCAB ──
+var vocabAnswers = [
+  {id:'v1', key:'sala de conferencias', display:'sala de conferências'},
+  {id:'v2', key:'video-conferencia',    display:'vídeo-conferência'},
+  {id:'v3', key:'reservou',             display:'reservou'},
+  {id:'v4', key:'entrevistas',          display:'entrevistas'},
+  {id:'v5', key:'orcamento',            display:'orçamento'},
+  {id:'v6', key:'aviso',                display:'aviso'}
+];
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+    .replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c')
+    .replace(/[–—-]/g,'-').replace(/\s+/g,' ');
+}
+function checkVocab() {
+  var correct = 0; var html = '';
+  vocabAnswers.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    var ok = norm(el.value) === norm(a.key);
+    el.className = 'fill-input' + (el.classList.contains('wide') ? ' wide' : '') + ' ' + (ok ? 'correct' : (el.value.trim() ? 'wrong' : ''));
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + a.id.toUpperCase() + ':</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + a.display + '</strong></div>';
+  });
+  var res = document.getElementById('vocab-result');
+  res.className = 'result-msg ' + (correct===6 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===6 ? '✓ All 6 correct!' : correct + ' of 6 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── MC ──
+var mcSelected = {};
+var mcAnswers = {mc1:'b', mc2:'c', mc3:'b', mc4:'c'};
+function selectMC(gid, val, btn) {
+  mcSelected[gid] = val;
+  var opts = document.getElementById(gid+'-opts').querySelectorAll('.mc-btn');
+  opts.forEach(function(b) { b.className = 'mc-btn'; });
+  btn.className = 'mc-btn selected';
+}
+function checkMC() {
+  var correct = 0; var html = '';
+  var explanations = {
+    mc1: 'A reserva é para amanhã, das 11:00 às 13:00 — "faz a reserva para mim para amanhã das 11:00 às 13:00."',
+    mc2: 'O departamento de tecnologia está usando a sala para uma vídeo-conferência.',
+    mc3: '"Qualquer coisa eu aviso a senhora" = Antônio vai notificar a senhora se algo mudar.',
+    mc4: 'Carlinhos vai fazer entrevistas com os novos clientes da Argentina amanhã de manhã.'
+  };
+  ['mc1','mc2','mc3','mc4'].forEach(function(gid, i) {
+    var sel = mcSelected[gid]; var ans = mcAnswers[gid];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var opts = document.getElementById(gid+'-opts').querySelectorAll('.mc-btn');
+    opts.forEach(function(b, idx) {
+      var letter = ['a','b','c'][idx];
+      if (letter === ans) b.className = 'mc-btn correct';
+      else if (letter === sel && !ok) b.className = 'mc-btn wrong';
+      else b.className = 'mc-btn';
+    });
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + explanations[gid] + '</div>';
+  });
+  var res = document.getElementById('mc-result');
+  res.className = 'result-msg ' + (correct===4 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===4 ? '✓ All 4 correct!' : correct + ' of 4 correct:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── IR + INFINITIVO ──
+var gramAnswers = [
+  {id:'g1', key:'vao chegar',   display:'vão chegar'},
+  {id:'g2', key:'vai usar',     display:'vai usar'},
+  {id:'g3', key:'vamos revisar',display:'vamos revisar'},
+  {id:'g4', key:'vai avisar',   display:'vai avisar'}
+];
+function checkGram() {
+  var correct = 0; var html = '';
+  gramAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var ok = norm(el.value) === norm(a.key);
+    el.className = 'fill-input ' + (ok ? 'correct' : (el.value.trim() ? 'wrong' : ''));
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + a.display + '</strong></div>';
+  });
+  var res = document.getElementById('gram-result');
+  res.className = 'result-msg ' + (correct===4 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (correct===4 ? '✓ All 4 correct!' : correct + ' of 4 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  // Ex1: T/F
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i] || '(sem resposta)';
+    summaryLines.push('<strong>Ex1-'+i+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex1-'+i+':</strong> '+sel+'</p>';
+  }
+  // Ex2: vocab v1-v6
+  ['v1','v2','v3','v4','v5','v6'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex2-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex2-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex3: MC mc1-mc4
+  ['mc1','mc2','mc3','mc4'].forEach(function(gid, i) {
+    var sel = mcSelected[gid] || '(sem resposta)';
+    summaryLines.push('<strong>Ex3-'+(i+1)+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex3-'+(i+1)+':</strong> '+sel+'</p>';
+  });
+  // Ex4: ir+infinitivo g1-g4
+  ['g1','g2','g3','g4'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex4-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex4-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex5: free production
+  var freeEl = document.getElementById('e5-free');
+  var freeVal = freeEl ? (freeEl.value.trim() || '(sem resposta)') : '(sem resposta)';
+  summaryLines.push('<strong>Ex5:</strong><br>'+(freeEl&&freeEl.value.trim()?freeEl.value.trim().replace(/</g,'&lt;'):'<em style="color:#999">sem resposta</em>'));
+  answersHtml += '<p><strong>Ex5 — Produção livre:</strong><br>'+freeVal+'</p>';
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
