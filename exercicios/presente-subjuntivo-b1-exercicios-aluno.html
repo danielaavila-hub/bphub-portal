@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presente do Subjuntivo — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--level); color: white; }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px,4vw,44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 44px 0; }
+
+    /* GRAMMAR REFERENCE */
+    .gram-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin: 16px 0 20px; }
+    .gram-box h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 16px; }
+
+    /* Formation steps */
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+    .step { background: rgba(150,126,99,0.07); border-radius: 10px; padding: 14px 16px; text-align: center; }
+    .step-num { font-size: 11px; font-weight: 700; color: var(--level); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .step-text { font-size: 13px; line-height: 1.6; }
+    .step-arrow { display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--light-gray); }
+
+    /* Conjugation table */
+    .conj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+    .conj-card { background: rgba(150,126,99,0.06); border-radius: 10px; padding: 14px; }
+    .conj-card h4 { font-size: 13px; font-weight: 700; color: var(--nanquim); margin-bottom: 2px; }
+    .conj-card .conj-rule { font-size: 11px; color: var(--level); margin-bottom: 10px; font-style: italic; }
+    .conj-card table { width: 100%; font-size: 13px; border-collapse: collapse; }
+    .conj-card td { padding: 3px 0; vertical-align: top; }
+    .conj-card td:first-child { color: #999; font-size: 12px; padding-right: 6px; white-space: nowrap; }
+    .ending { color: var(--pitomba); font-weight: 700; }
+
+    /* Irregular table */
+    .irreg-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 6px; }
+    .irreg-table th { text-align: left; padding: 7px 10px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--level); background: rgba(150,126,99,0.06); }
+    .irreg-table td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); }
+    .irreg-table tr:last-child td { border-bottom: none; }
+    .irreg-table code { background: rgba(150,126,99,0.12); padding: 1px 6px; border-radius: 4px; font-size: 13px; font-family: monospace; color: var(--nanquim); }
+
+    /* Trigger expressions */
+    .trigger-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 12px; }
+    .trigger-col { border-radius: 10px; padding: 14px 16px; }
+    .trigger-col.desejo { background: rgba(255,185,74,0.1); border-left: 3px solid var(--ouro); }
+    .trigger-col.duvida { background: rgba(38,91,139,0.08); border-left: 3px solid var(--cobalto); }
+    .trigger-col.sentimento { background: rgba(78,85,29,0.08); border-left: 3px solid var(--floresta); }
+    .trigger-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+    .trigger-col.desejo h4 { color: #9B6E00; }
+    .trigger-col.duvida h4 { color: var(--cobalto); }
+    .trigger-col.sentimento h4 { color: var(--floresta); }
+    .trigger-col ul { list-style: none; font-size: 13.5px; line-height: 2; }
+    .trigger-col li::before { content: '·'; margin-right: 6px; opacity: 0.5; }
+
+    .gram-note { margin-top: 16px; padding: 12px 16px; background: rgba(255,185,74,0.1); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.7; }
+
+    /* WHATSAPP REPLICA */
+    .wapp-wrap { background: #111B21; border-radius: 16px; overflow: hidden; margin: 16px 0; }
+    .wapp-header { background: #1F2C34; padding: 12px 18px; display: flex; align-items: center; gap: 10px; }
+    .wapp-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--erva-doce); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .wapp-group-name { color: white; font-size: 14px; font-weight: 600; }
+    .wapp-members { color: rgba(255,255,255,0.5); font-size: 11px; }
+    .wapp-body { padding: 16px 14px; display: flex; flex-direction: column; gap: 4px; }
+    .wapp-date { text-align: center; margin: 8px 0; }
+    .wapp-date span { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); font-size: 11px; padding: 3px 10px; border-radius: 10px; }
+    .msg { display: flex; flex-direction: column; max-width: 75%; margin-bottom: 4px; }
+    .msg.sent { align-self: flex-end; }
+    .msg.recv { align-self: flex-start; }
+    .msg-sender { font-size: 11px; font-weight: 700; margin-bottom: 2px; padding-left: 4px; }
+    .msg-bubble { border-radius: 8px; padding: 8px 12px 6px; font-size: 13.5px; line-height: 1.55; position: relative; color: #E9EDE8; }
+    .msg.sent .msg-bubble { background: #005C4B; border-radius: 8px 2px 8px 8px; }
+    .msg.recv .msg-bubble { background: #1F2C34; border-radius: 2px 8px 8px 8px; }
+    .msg-time { font-size: 10px; color: rgba(255,255,255,0.45); text-align: right; margin-top: 2px; padding-right: 2px; }
+    .subj-hl { color: #7FD9A8; font-weight: 700; }
+    .msg-sender.bia { color: #25D366; }
+    .msg-sender.rafa { color: #A29BFE; }
+    .msg-sender.julia { color: #FF9F7F; }
+    .msg-sender.caio { color: #74B9FF; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px; margin: 24px 0; }
+    .ex-num { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 300; color: var(--nanquim); margin-bottom: 10px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 22px; line-height: 1.6; }
+
+    /* MC buttons */
+    .mc-group { margin-bottom: 20px; }
+    .mc-sentence { font-size: 15px; margin-bottom: 10px; line-height: 1.65; }
+    .mc-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+    .mc-btn { padding: 8px 18px; border-radius: 20px; border: 1.5px solid var(--light-gray); background: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: all 0.15s; }
+    .mc-btn:hover { border-color: var(--level); }
+    .mc-btn.selected { background: rgba(150,126,99,0.1); border-color: var(--level); color: var(--level); }
+    .mc-btn.correct { background: rgba(78,85,29,0.1); border-color: var(--floresta); color: var(--floresta); font-weight: 700; }
+    .mc-btn.wrong { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    /* Fill-in */
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 12px 16px; background: rgba(150,126,99,0.06); border-radius: 10px; border: 1px dashed rgba(150,126,99,0.35); }
+    .word-chip { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+    .fill-row { margin-bottom: 14px; font-size: 15px; line-height: 2.4; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 160px; outline: none; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+
+    /* Classify exercise */
+    .classify-item { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; padding: 14px 16px; background: #FAFAF8; border-radius: 10px; border: 1.5px solid var(--light-gray); }
+    .classify-sentence { font-size: 15px; font-style: italic; color: var(--nanquim); }
+    .classify-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cls-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--light-gray); background: white; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: all 0.15s; }
+    .cls-btn:hover { opacity: 0.8; }
+    .cls-btn.des { border-color: #9B6E00; color: #9B6E00; background: rgba(255,185,74,0.08); }
+    .cls-btn.duv { border-color: var(--cobalto); color: var(--cobalto); background: rgba(38,91,139,0.07); }
+    .cls-btn.sen { border-color: var(--floresta); color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .cls-btn.selected-des { background: rgba(255,185,74,0.2); border-color: #9B6E00; color: #9B6E00; font-weight: 700; }
+    .cls-btn.selected-duv { background: rgba(38,91,139,0.15); border-color: var(--cobalto); color: var(--cobalto); font-weight: 700; }
+    .cls-btn.selected-sen { background: rgba(78,85,29,0.15); border-color: var(--floresta); color: var(--floresta); font-weight: 700; }
+    .cls-btn.correct-mark { opacity: 1; font-weight: 700; }
+    .cls-btn.wrong-mark { text-decoration: line-through; opacity: 0.6; }
+
+    /* Open production */
+    .prod-prompt { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--nanquim); }
+    .prod-starters { margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .starter-chip { padding: 5px 14px; background: rgba(150,126,99,0.08); border: 1.5px solid rgba(150,126,99,0.3); border-radius: 20px; font-size: 13px; color: var(--level); font-weight: 600; font-style: italic; }
+    .open-textarea { width: 100%; min-height: 100px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .open-textarea:focus { border-color: var(--level); }
+
+    /* Free production */
+    .free-textarea { width: 100%; min-height: 140px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    /* Shared */
+    .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 14px 18px; border-radius: 10px; font-size: 14px; line-height: 1.8; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* Send box */
+    .send-box { background: rgba(166,178,138,0.18); border: 1.5px solid rgba(166,178,138,0.35); border-radius: 14px; padding: 22px 26px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .steps, .conj-grid, .trigger-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <span class="badge">B1 · Gramática</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Presente do Subjuntivo <em>Present Subjunctive</em></h1>
+  <div class="hero-sub">A WhatsApp group chat about planning Carnaval in Salvador — packed with natural subjunctive in context. You'll learn <strong style="color:rgba(255,255,255,0.9)">how to form it, when to use it</strong>, and practise with four interactive exercises.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Quero que · Espero que · Tomara que</span>
+    <span class="hero-tag">Talvez · Duvido que · É possível que</span>
+    <span class="hero-tag">Lamento · Receio · Sinto muito que</span>
+    <span class="hero-tag">B1 · Gramática</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- GRAMMAR REFERENCE -->
+  <div class="sec-label">Referência Gramatical</div>
+
+  <div class="gram-box">
+    <h3>Como formar o presente do subjuntivo</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">Passo 1</div>
+        <div class="step-text">Take the <strong>eu</strong> form of the <em>presente do indicativo</em><br><br>falar → <strong>eu falo</strong><br>ter → <strong>eu tenho</strong><br>vir → <strong>eu venho</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 2</div>
+        <div class="step-text">Drop the final <strong>-o</strong><br><br>fal<strong>o</strong> → <strong>fal</strong><br>tenh<strong>o</strong> → <strong>tenh</strong><br>venh<strong>o</strong> → <strong>venh</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">Passo 3</div>
+        <div class="step-text">Add the subjunctive endings:<br><br><strong>-ar</strong> verbs → <span class="ending">-e / -emos / -em</span><br><strong>-er / -ir</strong> verbs → <span class="ending">-a / -amos / -am</span></div>
+      </div>
+    </div>
+
+    <!-- Regular conjugation -->
+    <p style="font-size:13px;color:#888;margin-bottom:12px;">The <strong>highlighted</strong> part shows where the ending swaps.</p>
+    <div class="conj-grid">
+      <div class="conj-card">
+        <h4>falar <small style="font-weight:400;color:#999">(-ar)</small></h4>
+        <div class="conj-rule">eu falo → fal<span class="ending">e</span></div>
+        <table>
+          <tr><td>eu</td><td>fal<span class="ending">e</span></td></tr>
+          <tr><td>você/ele/ela</td><td>fal<span class="ending">e</span></td></tr>
+          <tr><td>nós</td><td>fal<span class="ending">emos</span></td></tr>
+          <tr><td>vocês/eles/elas</td><td>fal<span class="ending">em</span></td></tr>
+        </table>
+      </div>
+      <div class="conj-card">
+        <h4>beber <small style="font-weight:400;color:#999">(-er)</small></h4>
+        <div class="conj-rule">eu bebo → beb<span class="ending">a</span></div>
+        <table>
+          <tr><td>eu</td><td>beb<span class="ending">a</span></td></tr>
+          <tr><td>você/ele/ela</td><td>beb<span class="ending">a</span></td></tr>
+          <tr><td>nós</td><td>beb<span class="ending">amos</span></td></tr>
+          <tr><td>vocês/eles/elas</td><td>beb<span class="ending">am</span></td></tr>
+        </table>
+      </div>
+      <div class="conj-card">
+        <h4>partir <small style="font-weight:400;color:#999">(-ir)</small></h4>
+        <div class="conj-rule">eu parto → part<span class="ending">a</span></div>
+        <table>
+          <tr><td>eu</td><td>part<span class="ending">a</span></td></tr>
+          <tr><td>você/ele/ela</td><td>part<span class="ending">a</span></td></tr>
+          <tr><td>nós</td><td>part<span class="ending">amos</span></td></tr>
+          <tr><td>vocês/eles/elas</td><td>part<span class="ending">am</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="gram-note">💡 The rule works for most verbs — including ones that look irregular in the indicative: <em>eu faço → faça · eu tenho → tenha · eu posso → possa · eu venho → venha · eu vejo → veja</em></div>
+  </div>
+
+  <!-- Irregular verbs -->
+  <div class="gram-box">
+    <h3>Verbos totalmente irregulares <small style="font-weight:400;font-size:14px;color:#888">(memorise these 4)</small></h3>
+    <table class="irreg-table">
+      <tr><th>Verbo</th><th>eu</th><th>você / ele / ela</th><th>nós</th><th>vocês / eles / elas</th></tr>
+      <tr><td><strong>ser</strong></td><td><code>seja</code></td><td><code>seja</code></td><td><code>sejamos</code></td><td><code>sejam</code></td></tr>
+      <tr><td><strong>estar</strong></td><td><code>esteja</code></td><td><code>esteja</code></td><td><code>estejamos</code></td><td><code>estejam</code></td></tr>
+      <tr><td><strong>dar</strong></td><td><code>dê</code></td><td><code>dê</code></td><td><code>demos</code></td><td><code>deem</code></td></tr>
+      <tr><td><strong>ir</strong></td><td><code>vá</code></td><td><code>vá</code></td><td><code>vamos</code></td><td><code>vão</code></td></tr>
+    </table>
+  </div>
+
+  <!-- Trigger expressions -->
+  <div class="gram-box">
+    <h3>Quando usar: os gatilhos <small style="font-weight:400;font-size:14px;color:#888">(triggers)</small></h3>
+    <p style="font-size:14px;color:#666;margin-bottom:14px;line-height:1.6;">These expressions <strong>trigger</strong> the subjunctive — whenever you start a sentence with one of them, the verb in the following clause must be in the subjunctive.</p>
+    <div class="trigger-grid">
+      <div class="trigger-col desejo">
+        <h4>🎯 Desejo / Vontade</h4>
+        <ul>
+          <li>Quero que</li>
+          <li>Espero que</li>
+          <li>Tomara que</li>
+          <li>Prefiro que</li>
+          <li>Desejo que</li>
+          <li>Peço que</li>
+          <li>Sugiro que</li>
+          <li>Recomendo que</li>
+        </ul>
+      </div>
+      <div class="trigger-col duvida">
+        <h4>🤔 Dúvida / Possibilidade</h4>
+        <ul>
+          <li>Talvez</li>
+          <li>Duvido que</li>
+          <li>É possível que</li>
+          <li>Pode ser que</li>
+          <li>Não acho que</li>
+          <li>Não acredito que</li>
+        </ul>
+      </div>
+      <div class="trigger-col sentimento">
+        <h4>💚 Sentimento / Emoção</h4>
+        <ul>
+          <li>Lamento que</li>
+          <li>Receio que</li>
+          <li>Sinto muito que</li>
+          <li>É pena que</li>
+          <li>Tenho medo que</li>
+          <li>Estou feliz/triste que</li>
+        </ul>
+      </div>
+    </div>
+    <div class="gram-note" style="margin-top:14px;">⚠️ <strong>Achar:</strong> <em>Não acho que ela <strong>venha</strong></em> (subjunctive) — but — <em>Acho que ela <strong>vem</strong></em> (indicative). The negation of achar triggers the subjunctive; the affirmative does not.</div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- WHATSAPP CONVERSATION -->
+  <div class="sec-label">Texto</div>
+  <p style="font-size:14px;color:#666;margin-bottom:14px;">Read the conversation. The <strong style="color:#2ECC71">highlighted verbs</strong> are in the subjunctive — notice the triggers before each one.</p>
+
+  <div class="wapp-wrap">
+    <div class="wapp-header">
+      <div class="wapp-avatar">🎭</div>
+      <div>
+        <div class="wapp-group-name">Carnaval em Salvador 🎭</div>
+        <div class="wapp-members">Bia, Rafa, Júlia, Caio e você</div>
+      </div>
+    </div>
+    <div class="wapp-body">
+      <div class="wapp-date"><span>Hoje, 14:18</span></div>
+
+      <div class="msg recv">
+        <div class="msg-sender bia">Bia</div>
+        <div class="msg-bubble">Galera!! Quero muito que a gente <span class="subj-hl">vá</span> pro Carnaval de Salvador esse ano! 🥳 Já pesquisei hotel e tudo!</div>
+        <div class="msg-time">14:18</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender rafa">Rafa</div>
+        <div class="msg-bubble">Tomara que a gente <span class="subj-hl">consiga</span> ir! Sempre quis ver o Carnaval de Salvador! 🎉</div>
+        <div class="msg-time">14:22</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender julia">Júlia</div>
+        <div class="msg-bubble">Espero que os preços não <span class="subj-hl">estejam</span> absurdos... Quanto tá o hotel?</div>
+        <div class="msg-time">14:25</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender bia">Bia</div>
+        <div class="msg-bubble">Em torno de R$380 por noite. Sugiro que vocês <span class="subj-hl">reservem</span> logo, antes que os preços <span class="subj-hl">subam</span>!</div>
+        <div class="msg-time">14:28</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender caio">Caio</div>
+        <div class="msg-bubble">Quero muito ir, mas talvez eu não <span class="subj-hl">consiga</span> folga no trabalho 😞</div>
+        <div class="msg-time">14:35</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender julia">Júlia</div>
+        <div class="msg-bubble">Receio que <span class="subj-hl">seja</span> difícil encontrar voo barato agora... já tá tarde.</div>
+        <div class="msg-time">14:38</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender rafa">Rafa</div>
+        <div class="msg-bubble">Duvido que <span class="subj-hl">seja</span> impossível! Olha esse voo aqui — R$420 ida e volta 🔗</div>
+        <div class="msg-time">14:41</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender bia">Bia</div>
+        <div class="msg-bubble">Caio, peço que você <span class="subj-hl">fale</span> logo com o seu chefe! Não quero que você <span class="subj-hl">fique</span> de fora 🙏</div>
+        <div class="msg-time">14:45</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender caio">Caio</div>
+        <div class="msg-bubble">Tô pedindo sim! Espero que ele <span class="subj-hl">autorize</span> 🤞</div>
+        <div class="msg-time">14:52</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender julia">Júlia</div>
+        <div class="msg-bubble">Lamento que a Mariana não <span class="subj-hl">possa</span> vir. Ela viajou pra Europa.</div>
+        <div class="msg-time">15:01</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender rafa">Rafa</div>
+        <div class="msg-bubble">Tomara que a gente <span class="subj-hl">tenha</span> um tempo lindo! Carnaval na chuva não é legal 😅</div>
+        <div class="msg-time">15:04</div>
+      </div>
+
+      <div class="msg recv">
+        <div class="msg-sender bia">Bia</div>
+        <div class="msg-bubble">Então tá! Quero que todo mundo <span class="subj-hl">confirme</span> até amanhã, tá? É possível que a gente <span class="subj-hl">feche</span> o hotel essa semana 🎭☀️</div>
+        <div class="msg-time">15:08</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- EXERCISE 1: MC -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercício 1</div>
+    <div class="ex-title">Escolha a forma correta</div>
+    <div class="ex-instructions">Click the correct verb form to complete each sentence. Think about whether the trigger calls for indicativo or subjuntivo.</div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">1. Espero que você _____ cedo à festa.</div>
+      <div class="mc-opts" id="e1_1-opts">
+        <button class="mc-btn" onclick="pickE1('e1_1','a',this)">chega</button>
+        <button class="mc-btn" onclick="pickE1('e1_1','b',this)">chegue</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">2. Talvez eles _____ no bloco amanhã.</div>
+      <div class="mc-opts" id="e1_2-opts">
+        <button class="mc-btn" onclick="pickE1('e1_2','a',this)">venham</button>
+        <button class="mc-btn" onclick="pickE1('e1_2','b',this)">vêm</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">3. Duvido que o hotel _____ disponível.</div>
+      <div class="mc-opts" id="e1_3-opts">
+        <button class="mc-btn" onclick="pickE1('e1_3','a',this)">está</button>
+        <button class="mc-btn" onclick="pickE1('e1_3','b',this)">esteja</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">4. Acho que o Rafa _____ passagens baratas.</div>
+      <div class="mc-opts" id="e1_4-opts">
+        <button class="mc-btn" onclick="pickE1('e1_4','a',this)">encontra</button>
+        <button class="mc-btn" onclick="pickE1('e1_4','b',this)">encontre</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">5. Receio que os preços _____ muito altos.</div>
+      <div class="mc-opts" id="e1_5-opts">
+        <button class="mc-btn" onclick="pickE1('e1_5','a',this)">são</button>
+        <button class="mc-btn" onclick="pickE1('e1_5','b',this)">sejam</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">6. Não acho que ela _____ a viagem tão cedo.</div>
+      <div class="mc-opts" id="e1_6-opts">
+        <button class="mc-btn" onclick="pickE1('e1_6','a',this)">cancela</button>
+        <button class="mc-btn" onclick="pickE1('e1_6','b',this)">cancele</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkE1()">✓ Check answers</button>
+    <div class="result-msg" id="e1-result"></div>
+  </div>
+
+  <!-- EXERCISE 2: FILL-IN -->
+  <div class="ex-block" style="border-top:3px solid var(--level);">
+    <div class="ex-num">Exercício 2</div>
+    <div class="ex-title">Complete com o banco de palavras</div>
+    <div class="ex-instructions">Use each verb from the box once, conjugating it correctly in the presente do subjuntivo.</div>
+    <div class="word-bank">
+      <span class="word-chip">chover</span>
+      <span class="word-chip">fazer</span>
+      <span class="word-chip">saber</span>
+      <span class="word-chip">poder</span>
+      <span class="word-chip">trazer</span>
+      <span class="word-chip">vir</span>
+    </div>
+    <div class="fill-row">1. Tomara que não <input class="fill-input" id="f1" placeholder="verbo"> muito durante o Carnaval.</div>
+    <div class="fill-row">2. Espero que o tempo <input class="fill-input" id="f2" placeholder="verbo"> sol todos os dias!</div>
+    <div class="fill-row">3. Peço que você <input class="fill-input" id="f3" placeholder="verbo"> os ingressos do bloco.</div>
+    <div class="fill-row">4. Duvido que o Caio <input class="fill-input" id="f4" placeholder="verbo"> conosco — ele tem muito trabalho.</div>
+    <div class="fill-row">5. Quero que todo mundo <input class="fill-input" id="f5" placeholder="verbo"> o nome dos blocos de antecedência.</div>
+    <div class="fill-row">6. É possível que a Mariana <input class="fill-input" id="f6" placeholder="verbo"> depois de tudo — tomara!</div>
+
+    <button class="check-btn" onclick="checkE2()">✓ Check answers</button>
+    <div class="result-msg" id="e2-result"></div>
+  </div>
+
+  <!-- EXERCISE 3: CLASSIFY -->
+  <div class="ex-block" style="border-top:3px solid var(--cobalto);">
+    <div class="ex-num">Exercício 3</div>
+    <div class="ex-title">Classifique o gatilho</div>
+    <div class="ex-instructions">Each sentence uses a trigger. Click the category — <strong style="color:#9B6E00">Desejo</strong>, <strong style="color:var(--cobalto)">Dúvida</strong>, or <strong style="color:var(--floresta)">Sentimento</strong> — that best describes its function.</div>
+
+    <div class="classify-item">
+      <div class="classify-sentence">"Tomara que o Caio consiga folga do trabalho!"</div>
+      <div class="classify-opts" id="c1-opts">
+        <button class="cls-btn des" onclick="pickCls('c1','D',this)">🎯 Desejo</button>
+        <button class="cls-btn duv" onclick="pickCls('c1','U',this)">🤔 Dúvida</button>
+        <button class="cls-btn sen" onclick="pickCls('c1','S',this)">💚 Sentimento</button>
+      </div>
+    </div>
+
+    <div class="classify-item">
+      <div class="classify-sentence">"Lamento que a Mariana não possa vir conosco."</div>
+      <div class="classify-opts" id="c2-opts">
+        <button class="cls-btn des" onclick="pickCls('c2','D',this)">🎯 Desejo</button>
+        <button class="cls-btn duv" onclick="pickCls('c2','U',this)">🤔 Dúvida</button>
+        <button class="cls-btn sen" onclick="pickCls('c2','S',this)">💚 Sentimento</button>
+      </div>
+    </div>
+
+    <div class="classify-item">
+      <div class="classify-sentence">"Duvido que seja impossível encontrar passagem barata."</div>
+      <div class="classify-opts" id="c3-opts">
+        <button class="cls-btn des" onclick="pickCls('c3','D',this)">🎯 Desejo</button>
+        <button class="cls-btn duv" onclick="pickCls('c3','U',this)">🤔 Dúvida</button>
+        <button class="cls-btn sen" onclick="pickCls('c3','S',this)">💚 Sentimento</button>
+      </div>
+    </div>
+
+    <div class="classify-item">
+      <div class="classify-sentence">"Peço que você fale logo com o seu chefe!"</div>
+      <div class="classify-opts" id="c4-opts">
+        <button class="cls-btn des" onclick="pickCls('c4','D',this)">🎯 Desejo</button>
+        <button class="cls-btn duv" onclick="pickCls('c4','U',this)">🤔 Dúvida</button>
+        <button class="cls-btn sen" onclick="pickCls('c4','S',this)">💚 Sentimento</button>
+      </div>
+    </div>
+
+    <div class="classify-item">
+      <div class="classify-sentence">"Talvez eu não consiga folga no trabalho."</div>
+      <div class="classify-opts" id="c5-opts">
+        <button class="cls-btn des" onclick="pickCls('c5','D',this)">🎯 Desejo</button>
+        <button class="cls-btn duv" onclick="pickCls('c5','U',this)">🤔 Dúvida</button>
+        <button class="cls-btn sen" onclick="pickCls('c5','S',this)">💚 Sentimento</button>
+      </div>
+    </div>
+
+    <div class="classify-item">
+      <div class="classify-sentence">"Receio que seja difícil encontrar voo barato agora."</div>
+      <div class="classify-opts" id="c6-opts">
+        <button class="cls-btn des" onclick="pickCls('c6','D',this)">🎯 Desejo</button>
+        <button class="cls-btn duv" onclick="pickCls('c6','U',this)">🤔 Dúvida</button>
+        <button class="cls-btn sen" onclick="pickCls('c6','S',this)">💚 Sentimento</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkE3()">✓ Check answers</button>
+    <div class="result-msg" id="e3-result"></div>
+  </div>
+
+  <!-- EXERCISE 4: GUIDED PRODUCTION -->
+  <div class="ex-block" style="border-top:3px solid var(--floresta);">
+    <div class="ex-num">Exercício 4</div>
+    <div class="ex-title">Produção guiada</div>
+    <div class="ex-instructions">For each situation below, write 2–3 sentences in Portuguese using the trigger expressions provided. Focus on using the subjunctive correctly.</div>
+
+    <div style="margin-bottom:22px;">
+      <div class="prod-prompt">Situação A: Você está organizando uma viagem com amigos.</div>
+      <div class="prod-starters">
+        <span class="starter-chip">Quero que…</span>
+        <span class="starter-chip">Espero que…</span>
+        <span class="starter-chip">Sugiro que…</span>
+      </div>
+      <textarea class="open-textarea" id="prod_a" placeholder="Escreva aqui em português..."></textarea>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <div class="prod-prompt">Situação B: Um amigo está doente e não pode sair.</div>
+      <div class="prod-starters">
+        <span class="starter-chip">Sinto muito que…</span>
+        <span class="starter-chip">Espero que…</span>
+        <span class="starter-chip">Tomara que…</span>
+      </div>
+      <textarea class="open-textarea" id="prod_b" placeholder="Escreva aqui em português..."></textarea>
+    </div>
+
+    <div>
+      <div class="prod-prompt">Situação C: Você não tem certeza dos seus planos para o fim de semana.</div>
+      <div class="prod-starters">
+        <span class="starter-chip">Talvez…</span>
+        <span class="starter-chip">É possível que…</span>
+        <span class="starter-chip">Duvido que…</span>
+      </div>
+      <textarea class="open-textarea" id="prod_c" placeholder="Escreva aqui em português..."></textarea>
+    </div>
+  </div>
+
+  <!-- FREE PRODUCTION -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Produção Livre</div>
+    <div class="ex-title">A sua vida agora</div>
+    <div class="ex-instructions">Write 5–6 sentences about your real life right now — your plans, hopes, doubts, and feelings. Use at least four different trigger expressions from the reference table and at least one irregular verb.</div>
+    <textarea class="free-textarea" id="production" placeholder="Escreva aqui em português..."></textarea>
+    <div style="margin-top:12px;font-size:13px;color:#999;line-height:1.7;"><strong>Sugestões:</strong> What do you hope happens at work or at home this week? What are you unsure about? Is there anything you're happy or sad about? What do you want someone to do?</div>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read your answers carefully and give you personalized feedback — pointing out what you did well and helping you go further.
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ─── EXERCISE 1: MC ───
+var e1sel = {};
+var e1ans = { e1_1:'b', e1_2:'a', e1_3:'b', e1_4:'a', e1_5:'b', e1_6:'b' };
+var e1exp = {
+  e1_1:'<strong>chegue</strong> — trigger "espero que" → subjunctivo.',
+  e1_2:'<strong>venham</strong> — "talvez" → subjunctivo.',
+  e1_3:'<strong>esteja</strong> — "duvido que" → subjunctivo.',
+  e1_4:'<strong>encontra</strong> — "acho que" (affirmative) → indicativo.',
+  e1_5:'<strong>sejam</strong> — "receio que" → subjunctivo.',
+  e1_6:'<strong>cancele</strong> — "não acho que" (negative) → subjunctivo.'
+};
+function pickE1(id, val, btn) {
+  e1sel[id] = val;
+  document.getElementById(id+'-opts').querySelectorAll('.mc-btn').forEach(b => b.className='mc-btn');
+  btn.className = 'mc-btn selected';
+}
+function checkE1() {
+  var ok=0, html='';
+  Object.keys(e1ans).forEach(function(id,i) {
+    var sel=e1sel[id], ans=e1ans[id], correct=(sel===ans);
+    if(correct) ok++;
+    document.getElementById(id+'-opts').querySelectorAll('.mc-btn').forEach(function(b,j) {
+      var letter=['a','b'][j];
+      if(letter===ans) b.className='mc-btn correct';
+      else if(letter===sel && !correct) b.className='mc-btn wrong';
+      else b.className='mc-btn';
+    });
+    html+='<div style="margin-bottom:6px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' '+e1exp[id]+'</div>';
+  });
+  var r=document.getElementById('e1-result');
+  r.className='result-msg '+(ok===6?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===6?'✓ Perfeito!':ok+'/6 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── EXERCISE 2: FILL-IN ───
+function norm(s){ return s.trim().toLowerCase().replace(/[áàã]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c'); }
+var e2ans=[
+  {id:'f1',key:'chova',display:'chova'},
+  {id:'f2',key:'faca',display:'faça'},
+  {id:'f3',key:'traga',display:'traga'},
+  {id:'f4',key:'possa',display:'possa'},
+  {id:'f5',key:'saiba',display:'saiba'},
+  {id:'f6',key:'venha',display:'venha'}
+];
+function checkE2(){
+  var ok=0, html='';
+  e2ans.forEach(function(a,i){
+    var el=document.getElementById(a.id);
+    var correct=norm(el.value)===norm(a.key);
+    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
+    if(correct)ok++;
+    html+='<div style="margin-bottom:5px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+a.display+'</strong></div>';
+  });
+  var r=document.getElementById('e2-result');
+  r.className='result-msg '+(ok===6?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===6?'✓ Perfeito!':ok+'/6 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── EXERCISE 3: CLASSIFY ───
+var clsSel={};
+var clsAns={c1:'D',c2:'S',c3:'U',c4:'D',c5:'U',c6:'S'};
+var clsExp={
+  c1:'<em>Tomara que</em> = desejo forte.',
+  c2:'<em>Lamento que</em> = sentimento de tristeza.',
+  c3:'<em>Duvido que</em> = dúvida.',
+  c4:'<em>Peço que</em> = desejo / pedido.',
+  c5:'<em>Talvez</em> = dúvida / possibilidade.',
+  c6:'<em>Receio que</em> = sentimento de preocupação.'
+};
+function pickCls(id,val,btn){
+  clsSel[id]=val;
+  document.getElementById(id+'-opts').querySelectorAll('.cls-btn').forEach(b=>{b.className=b.className.replace(/ selected-\w+/g,'');});
+  var map={D:'selected-des',U:'selected-duv',S:'selected-sen'};
+  btn.className=btn.className+' '+map[val];
+}
+function checkE3(){
+  var ok=0, html='';
+  Object.keys(clsAns).forEach(function(id,i){
+    var sel=clsSel[id], ans=clsAns[id], correct=(sel===ans);
+    if(correct)ok++;
+    html+='<div style="margin-bottom:6px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' '+clsExp[id]+'</div>';
+  });
+  var r=document.getElementById('e3-result');
+  r.className='result-msg '+(ok===6?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===6?'✓ Perfeito!':ok+'/6 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── BREVO SUBMIT ───
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var name=nameEl.value.trim();
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=document.getElementById('bphub-student-email').value.trim();
+  var material='Presente do Subjuntivo — B1';
+  var today=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+
+  // Collect answers
+  var lines=[], html='';
+  // E1
+  var e1labels={e1_1:'Ex1-1',e1_2:'Ex1-2',e1_3:'Ex1-3',e1_4:'Ex1-4',e1_5:'Ex1-5',e1_6:'Ex1-6'};
+  var e1opts={e1_1:['chega','chegue'],e1_2:['venham','vêm'],e1_3:['está','esteja'],e1_4:['encontra','encontre'],e1_5:['são','sejam'],e1_6:['cancela','cancele']};
+  Object.keys(e1labels).forEach(function(id){
+    var val=e1sel[id]?e1opts[id][e1sel[id]==='a'?0:1]:'(sem resposta)';
+    lines.push('<strong>'+e1labels[id]+':</strong> '+val);
+    html+='<p><strong>'+e1labels[id]+':</strong> '+val+'</p>';
+  });
+  // E2
+  e2ans.forEach(function(a,i){
+    var el=document.getElementById(a.id);
+    var val=el.value.trim()||'(sem resposta)';
+    lines.push('<strong>Ex2-'+(i+1)+':</strong> '+val);
+    html+='<p><strong>Ex2-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // E3
+  var clsMap={D:'Desejo',U:'Dúvida',S:'Sentimento'};
+  Object.keys(clsAns).forEach(function(id,i){
+    var val=clsSel[id]?clsMap[clsSel[id]]:'(sem resposta)';
+    lines.push('<strong>Ex3-'+(i+1)+':</strong> '+val);
+    html+='<p><strong>Ex3-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex4
+  ['a','b','c'].forEach(function(l){
+    var el=document.getElementById('prod_'+l);
+    var val=el.value.trim()||'(sem resposta)';
+    lines.push('<strong>Ex4-'+l.toUpperCase()+':</strong><br>'+val);
+    html+='<p><strong>Ex4-'+l.toUpperCase()+':</strong><br>'+val+'</p>';
+  });
+  // Free
+  var free=document.getElementById('production').value.trim()||'(sem resposta)';
+  lines.push('<strong>Produção livre:</strong><br>'+free);
+  html+='<p><strong>Produção livre:</strong><br>'+free+'</p>';
+
+  btn.disabled=true; btn.textContent='A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls=[];
+  if(email){calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:email,name:name}],templateId:1,params:{nome:name,material:material,data:today}})}));}
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},subject:'📝 '+name+' — '+material,htmlContent:'<h2 style="color:#967E63;font-family:Arial">'+name+'</h2><p style="font-family:Arial"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+html})}));
+  Promise.all(calls).then(function(){
+    document.getElementById('bphub-answer-summary').innerHTML=lines.join('<br>');
+    document.getElementById('bphub-success').style.display='block';
+    document.getElementById('bphub-form-area').style.display='none';
+    document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    btn.disabled=false;btn.textContent='Enviar respostas';
+  }).catch(function(){btn.disabled=false;btn.textContent='Enviar respostas';document.getElementById('bphub-error').style.display='block';});
+}
+</script>
+</body>
+</html>
