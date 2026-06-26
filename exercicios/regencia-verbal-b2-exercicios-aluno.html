@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regência Verbal — Exercícios B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #D36D29;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; }
+    .badge { padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--level); color: white; }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #265B8B, #4E551D, #7B5EA7, #C0392B); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px,4vw,44px); color: white; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    hr.div { border: none; border-top: 1px solid var(--light-gray); margin: 44px 0; }
+
+    /* REF LINK */
+    .ref-link-bar { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); border-radius: 10px; padding: 12px 18px; margin: 14px 0; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+    .ref-link-bar a { color: var(--level); font-weight: 700; text-decoration: none; }
+
+    /* LITERARY TEXT (plain, no highlights) */
+    .lit-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin: 16px 0; border-left: 4px solid var(--ouro); }
+    .lit-title { font-size: 21px; color: var(--nanquim); margin-bottom: 4px; }
+    .lit-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; margin-bottom: 16px; }
+    .lit-body p { font-size: 15.5px; line-height: 2.05; margin-bottom: 14px; color: var(--texto); font-family: 'Trirong', serif; font-weight: 300; }
+    .lit-body p:last-child { margin-bottom: 0; }
+    .num-ref { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--level); color: white; font-size: 10px; font-weight: 700; text-align: center; line-height: 20px; vertical-align: middle; margin: 0 1px; font-family: 'Manrope', sans-serif; }
+    .verb-blank { font-weight: 700; color: var(--nanquim); border-bottom: 2px solid var(--light-gray); padding: 0 3px; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 24px 0; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 21px; font-weight: 300; color: var(--nanquim); margin-bottom: 10px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 22px; line-height: 1.65; }
+
+    /* MC */
+    .mc-group { margin-bottom: 20px; }
+    .mc-sentence { font-size: 15px; margin-bottom: 10px; line-height: 1.7; }
+    .mc-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+    .mc-btn { padding: 8px 18px; border-radius: 20px; border: 1.5px solid var(--light-gray); background: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: all 0.15s; }
+    .mc-btn:hover { border-color: var(--level); }
+    .mc-btn.selected { background: rgba(211,109,41,0.08); border-color: var(--level); color: var(--level); }
+    .mc-btn.correct { background: rgba(78,85,29,0.1); border-color: var(--floresta); color: var(--floresta); font-weight: 700; }
+    .mc-btn.wrong { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    /* FILL-IN */
+    .fill-row { margin-bottom: 14px; font-size: 15px; line-height: 2.5; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; outline: none; min-width: 80px; width: auto; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.none-ok { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; font-style: italic; }
+    .fill-row .verb { font-weight: 700; }
+
+    /* CORRECTION */
+    .corr-item { margin-bottom: 16px; }
+    .corr-sentence { font-size: 15px; font-style: italic; background: rgba(192,57,43,0.05); border-left: 3px solid rgba(192,57,43,0.3); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 8px; line-height: 1.7; }
+    .open-textarea { width: 100%; min-height: 72px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea.tall { min-height: 110px; }
+    .open-textarea.xl { min-height: 180px; }
+
+    .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 14px 18px; border-radius: 10px; font-size: 14px; line-height: 1.9; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    .send-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); border-radius: 14px; padding: 22px 26px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <span class="badge">B2 · Exercícios</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Regência Verbal <em>Exercícios</em></h1>
+  <div class="hero-sub">Cinco exercícios progressivos com base no conto "Chegada" — da identificação à produção livre, passando por escolha, preenchimento e correção de erros.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">verbo + a · de · em</span>
+    <span class="hero-tag">sem preposição</span>
+    <span class="hero-tag">casos duplos</span>
+    <span class="hero-tag">B2 · Gramática</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="ref-link-bar">
+    📖 Não sabe a resposta? Consulte o <a href="regencia-verbal-b2-referencia.html" target="_blank">Material de Referência →</a>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Texto âncora · "Chegada"</div>
+  <div class="lit-block">
+    <div class="lit-title">"Chegada"</div>
+    <div class="lit-kicker">Conto · Prosa contemporânea brasileira · Leia com atenção antes de começar</div>
+    <div class="lit-body">
+      <p>Marta <span class="verb-blank">chegou</span> <sup><span class="num-ref">1</span></sup>_____ cidade no início de novembro, quando o calor já se anunciava com insistência. Durante toda a viagem, <span class="verb-blank">havia-se lembrado</span> <sup><span class="num-ref">2</span></sup>_____ cheiro das mangueiras — aquele perfume adocicado que ela teimava em negar que <span class="verb-blank">sentia falta</span> <sup><span class="num-ref">3</span></sup>_____.</p>
+
+      <p><span class="verb-blank">Aspirava</span> <sup><span class="num-ref">4</span></sup>_____ um retorno silencioso, sem cerimônias. Mas a cidade não <span class="verb-blank">obedecia</span> <sup><span class="num-ref">5</span></sup>_____ suas expectativas. Na saída da rodoviária, encontrou Dona Zefinha — a mesma vizinha cujo filho ela <span class="verb-blank">havia namorado</span> <sup><span class="num-ref">6</span></sup>_____ durante dois verões seguidos, e que agora a olhou com a familiaridade de quem nunca deixou de observar. A velha <span class="verb-blank">referiu-se</span> <sup><span class="num-ref">7</span></sup>_____ época com um sorriso que não <span class="verb-blank">precisava</span> <sup><span class="num-ref">8</span></sup>_____ palavras.</p>
+
+      <p>— Você <span class="verb-blank">precisava</span> <sup><span class="num-ref">9</span></sup>_____ avisar que vinha — disse a vizinha, como se Marta ainda <span class="verb-blank">dependesse</span> <sup><span class="num-ref">10</span></sup>_____ aprovação de todos.</p>
+
+      <p>Ela não respondeu. Entrou no primeiro ônibus e foi olhando a cidade desfilar pela janela. <span class="verb-blank">Insistia</span> <sup><span class="num-ref">11</span></sup>_____ não se emocionar. <span class="verb-blank">Havia desistido</span> <sup><span class="num-ref">12</span></sup>_____ sentir nostalgia muito antes de voltar. Mas quando o ônibus parou em frente à escola onde havia estudado, algo nela cedeu.</p>
+
+      <p><span class="verb-blank">Assistiu</span> <sup><span class="num-ref">13</span></sup>_____ vai e vem dos alunos com uma ternura inesperada. <span class="verb-blank">Pensou</span> <sup><span class="num-ref">14</span></sup>_____ professoras que haviam <span class="verb-blank">aludido</span> <sup><span class="num-ref">15</span></sup>_____ sua inteligência — sempre com aquela ressalva implícita: <em>para uma menina da sua situação</em>. <span class="verb-blank">Visava</span> <sup><span class="num-ref">16</span></sup>_____ provar que tinham razão. Não na ressalva. Na inteligência.</p>
+
+      <p>O sol entrou de lado pela janela. Por um instante, ela <span class="verb-blank">esqueceu-se</span> <sup><span class="num-ref">17</span></sup>_____ onde havia chegado — e de por que havia voltado.</p>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- EX 1: IDENTIFY -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercício 1 de 5</div>
+    <div class="ex-title">Complete os espaços do texto</div>
+    <div class="ex-instructions">Volte ao texto acima e preencha cada espaço numerado com a preposição correta (contraída com artigo quando necessário: <em>ao, à, do, da, nas</em>…). Se o verbo não usa preposição, escreva <strong>—</strong>.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;">
+      <div class="fill-row"><span class="num-ref">1</span> chegou _____ cidade <input class="fill-input" id="t1" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">2</span> lembrado _____ cheiro <input class="fill-input" id="t2" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">3</span> sentia falta _____ <input class="fill-input" id="t3" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">4</span> aspirava _____ retorno <input class="fill-input" id="t4" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">5</span> obedecia _____ expectativas <input class="fill-input" id="t5" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">6</span> havia namorado _____ <input class="fill-input" id="t6" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">7</span> referiu-se _____ época <input class="fill-input" id="t7" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">8</span> precisava _____ palavras <input class="fill-input" id="t8" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">9</span> precisava _____ avisar <input class="fill-input" id="t9" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">10</span> dependesse _____ aprovação <input class="fill-input" id="t10" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">11</span> insistia _____ não se emocionar <input class="fill-input" id="t11" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">12</span> desistido _____ sentir <input class="fill-input" id="t12" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">13</span> assistiu _____ vai e vem <input class="fill-input" id="t13" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">14</span> pensou _____ professoras <input class="fill-input" id="t14" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">15</span> aludido _____ inteligência <input class="fill-input" id="t15" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">16</span> visava _____ provar <input class="fill-input" id="t16" size="8" placeholder="prep."></div>
+      <div class="fill-row"><span class="num-ref">17</span> esqueceu-se _____ onde <input class="fill-input" id="t17" size="8" placeholder="prep."></div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Verificar</button>
+    <div class="result-msg" id="ex1-result"></div>
+  </div>
+
+  <!-- EX 2: MC -->
+  <div class="ex-block" style="border-top:3px solid var(--level);">
+    <div class="ex-num">Exercício 2 de 5</div>
+    <div class="ex-title">Escolha a forma correta</div>
+    <div class="ex-instructions">Clique na opção gramaticalmente correta em norma culta escrita.</div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">1. Os funcionários sempre ___ ordens sem questionar.</div>
+      <div class="mc-opts" id="m1">
+        <button class="mc-btn" onclick="pickMC('m1','a',this)">obedeceram</button>
+        <button class="mc-btn" onclick="pickMC('m1','b',this)">obedeceram às</button>
+        <button class="mc-btn" onclick="pickMC('m1','c',this)">obedeceram as</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">2. Ela ___ o namorado há cinco anos e nunca contou para a família.</div>
+      <div class="mc-opts" id="m2">
+        <button class="mc-btn" onclick="pickMC('m2','a',this)">namorou com</button>
+        <button class="mc-btn" onclick="pickMC('m2','b',this)">namorou</button>
+        <button class="mc-btn" onclick="pickMC('m2','c',this)">namorou a</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">3. O projeto ___ reduzir os custos em 30% até o final do ano.</div>
+      <div class="mc-opts" id="m3">
+        <button class="mc-btn" onclick="pickMC('m3','a',this)">visa</button>
+        <button class="mc-btn" onclick="pickMC('m3','b',this)">visa a</button>
+        <button class="mc-btn" onclick="pickMC('m3','c',this)">visa em</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">4. Não consigo ___ onde deixei meu passaporte.</div>
+      <div class="mc-opts" id="m4">
+        <button class="mc-btn" onclick="pickMC('m4','a',this)">lembrar de</button>
+        <button class="mc-btn" onclick="pickMC('m4','b',this)">lembrar</button>
+        <button class="mc-btn" onclick="pickMC('m4','c',this)">me lembrar de</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">5. A proposta ___ todos os investidores presentes na reunião.</div>
+      <div class="mc-opts" id="m5">
+        <button class="mc-btn" onclick="pickMC('m5','a',this)">agradou</button>
+        <button class="mc-btn" onclick="pickMC('m5','b',this)">agradou a</button>
+        <button class="mc-btn" onclick="pickMC('m5','c',this)">agradou em</button>
+      </div>
+    </div>
+
+    <div class="mc-group">
+      <div class="mc-sentence">6. O palestrante ___ os dados da pesquisa sem aprofundar a análise.</div>
+      <div class="mc-opts" id="m6">
+        <button class="mc-btn" onclick="pickMC('m6','a',this)">aludiu</button>
+        <button class="mc-btn" onclick="pickMC('m6','b',this)">aludiu a</button>
+        <button class="mc-btn" onclick="pickMC('m6','c',this)">aludiu aos</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Verificar</button>
+    <div class="result-msg" id="ex2-result"></div>
+  </div>
+
+  <!-- EX 3: CORRECTION -->
+  <div class="ex-block" style="border-top:3px solid var(--cobalto);">
+    <div class="ex-num">Exercício 3 de 5</div>
+    <div class="ex-title">Corrija o erro de regência</div>
+    <div class="ex-instructions">Cada frase tem um erro de regência verbal. Reescreva a frase correta no espaço abaixo.</div>
+
+    <div class="corr-item">
+      <div class="corr-sentence">1. Ela assistiu o discurso do diretor em silêncio absoluto.</div>
+      <textarea class="open-textarea" id="c1" placeholder="Versão correta..."></textarea>
+    </div>
+    <div class="corr-item">
+      <div class="corr-sentence">2. O time não obedeceu as instruções do técnico e perdeu o jogo.</div>
+      <textarea class="open-textarea" id="c2" placeholder="Versão correta..."></textarea>
+    </div>
+    <div class="corr-item">
+      <div class="corr-sentence">3. Namorei com ela por três anos antes de pedir em casamento.</div>
+      <textarea class="open-textarea" id="c3" placeholder="Versão correta..."></textarea>
+    </div>
+    <div class="corr-item">
+      <div class="corr-sentence">4. Toda a equipe aspira em conquistar o prêmio de inovação.</div>
+      <textarea class="open-textarea" id="c4" placeholder="Versão correta..."></textarea>
+    </div>
+    <div class="corr-item" style="margin-bottom:0">
+      <div class="corr-sentence">5. Você esqueceu de fazer o relatório ou simplesmente não quis?</div>
+      <textarea class="open-textarea" id="c5" placeholder="Versão correta (duas opções possíveis)..."></textarea>
+    </div>
+  </div>
+
+  <!-- EX 4: LEMBRAR / ESQUECER -->
+  <div class="ex-block" style="border-top:3px solid var(--floresta);">
+    <div class="ex-num">Exercício 4 de 5</div>
+    <div class="ex-title">Lembrar · Esquecer — casos duplos</div>
+    <div class="ex-instructions">Complete com a forma correta: <em>lembrar, lembrar-se de, esquecer</em> ou <em>esquecer-se de</em>. Atenção ao sentido de cada frase — a escolha muda o significado.</div>
+
+    <div class="fill-row">1. Essa música sempre me <input class="fill-input" id="d1" size="22" placeholder="verbo + prep?"> nossa primeira viagem juntos.</div>
+    <div class="fill-row">2. Eu ainda <input class="fill-input" id="d2" size="22" placeholder="verbo + prep?"> cada detalhe daquele dia.</div>
+    <div class="fill-row">3. Ela <input class="fill-input" id="d3" size="22" placeholder="verbo + prep?"> os documentos em casa e perdeu o voo.</div>
+    <div class="fill-row">4. Ele nunca <input class="fill-input" id="d4" size="22" placeholder="verbo + prep?"> agradecer quem o ajudou.</div>
+    <div class="fill-row">5. Por favor, <input class="fill-input" id="d5" size="22" placeholder="verbo + prep?"> de enviar o contrato até sexta-feira.</div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Verificar</button>
+    <div class="result-msg" id="ex4-result"></div>
+  </div>
+
+  <!-- EX 5: PRODUCTION -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro);">
+    <div class="ex-num">Exercício 5 de 5</div>
+    <div class="ex-title">Produção — use os verbos em contexto</div>
+    <div class="ex-instructions">Escreva frases originais usando os verbos indicados com a regência correta. Cada frase deve ter entre 15 e 30 palavras.</div>
+
+    <div class="corr-item">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--nanquim);">1. <span style="font-style:italic">aspirar a</span> — escreva sobre um objetivo profissional seu</div>
+      <textarea class="open-textarea" id="p1" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="corr-item">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--nanquim);">2. <span style="font-style:italic">referir-se a</span> — sobre algo que você leu ou ouviu recentemente</div>
+      <textarea class="open-textarea" id="p2" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="corr-item">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--nanquim);">3. <span style="font-style:italic">assistir a</span> + <span style="font-style:italic">insistir em</span> — use os dois na mesma frase</div>
+      <textarea class="open-textarea" id="p3" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="corr-item">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--nanquim);">4. <span style="font-style:italic">lembrar-se de / esquecer-se de</span> — dois verbos, um contraste</div>
+      <textarea class="open-textarea" id="p4" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div style="margin-bottom:0">
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--nanquim);">5. Texto livre (4–5 frases) — use pelo menos 4 verbos da tabela de referência</div>
+      <textarea class="open-textarea xl" id="p5" placeholder="Escreva aqui um pequeno parágrafo..."></textarea>
+    </div>
+  </div>
+
+  <div class="send-box">📩 Quando terminar, envie suas respostas para a professora. Ela vai revisar sua regência e apontar os pontos fortes e os que ainda precisam de atenção.</div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#D36D29;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente.</div>
+
+</div>
+
+<script>
+// ─── EX 1: TEXT FILL ───
+function norm(s){ return (s||'').trim().toLowerCase()
+  .replace(/[áàã]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+  .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c'); }
+
+var ex1ans = {
+  t1: ['a','à'],        // chegou à cidade
+  t2: ['do','de'],      // lembrado do cheiro
+  t3: ['de'],           // sentir falta de
+  t4: ['a'],            // aspirava a
+  t5: ['as','às'],      // obedecia às
+  t6: ['—','-',''],     // namorado — sem preposição
+  t7: ['a','à'],        // referiu-se à
+  t8: ['de'],           // precisava de palavras
+  t9: ['de'],           // precisava de avisar
+  t10:['da','de'],      // dependesse da
+  t11:['em'],           // insistia em
+  t12:['de'],           // desistido de
+  t13:['ao','a'],       // assistiu ao
+  t14:['nas','em','nos'],// pensou nas
+  t15:['a','à'],        // aludido à
+  t16:['a'],            // visava a
+  t17:['de']            // esqueceu-se de
+};
+var ex1labels = ['à cidade','do cheiro','de (sentir falta de)','a (um retorno)','às expectativas','— (sem prep.)','à época','de palavras','de (avisar)','da aprovação','em (não se emocionar)','de (sentir nostalgia)','ao vai e vem','nas professoras','à inteligência','a (provar)','de (onde)'];
+
+function checkEx1(){
+  var ok=0, html='';
+  Object.keys(ex1ans).forEach(function(id,i){
+    var el=document.getElementById(id);
+    var val=norm(el.value);
+    var correct=ex1ans[id].some(function(a){return norm(a)===val;});
+    if(correct)ok++;
+    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
+    html+='<div style="margin-bottom:4px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+ex1labels[i]+'</strong></div>';
+  });
+  var r=document.getElementById('ex1-result');
+  r.className='result-msg '+(ok>=15?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===17?'✓ Perfeito!':ok+'/17 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── EX 2: MC ───
+var mcSel={};
+// answers: 1=b(obedeceram às), 2=b(namorou), 3=b(visa a), 4=c(me lembrar de), 5=b(agradou a), 6=c(aludiu aos)
+var mcAns={m1:'b',m2:'b',m3:'b',m4:'c',m5:'b',m6:'c'};
+var mcExp={
+  m1:'<strong>obedeceram às</strong> — obedecer exige preposição <em>a</em>.',
+  m2:'<strong>namorou</strong> — verbo namorar é transitivo direto; "namorar com" não existe na norma culta.',
+  m3:'<strong>visa a</strong> — visar no sentido de "ter como objetivo" exige preposição <em>a</em>.',
+  m4:'<strong>me lembrar de</strong> — "lembrar-se de" = recordar (com pronome reflexivo). Sem pronome: "lembrar algo" (fazer alguém lembrar).',
+  m5:'<strong>agradou a</strong> — agradar no sentido de "satisfazer" exige preposição <em>a</em>.',
+  m6:'<strong>aludiu aos</strong> — aludir exige preposição <em>a</em>; "aos" = a + os (crase masculino plural).'
+};
+function pickMC(id,val,btn){
+  mcSel[id]=val;
+  document.getElementById(id).querySelectorAll('.mc-btn').forEach(b=>b.className='mc-btn');
+  btn.className='mc-btn selected';
+}
+function checkEx2(){
+  var ok=0,html='';
+  Object.keys(mcAns).forEach(function(id,i){
+    var sel=mcSel[id],ans=mcAns[id],correct=(sel===ans);
+    if(correct)ok++;
+    document.getElementById(id).querySelectorAll('.mc-btn').forEach(function(b,j){
+      var letter=['a','b','c'][j];
+      if(letter===ans)b.className='mc-btn correct';
+      else if(letter===sel&&!correct)b.className='mc-btn wrong';
+      else b.className='mc-btn';
+    });
+    html+='<div style="margin-bottom:6px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' '+mcExp[id]+'</div>';
+  });
+  var r=document.getElementById('ex2-result');
+  r.className='result-msg '+(ok===6?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===6?'✓ Perfeito!':ok+'/6 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── EX 4: LEMBRAR/ESQUECER ───
+var ex4ans={
+  d1:['lembrou de','me lembrou de'],
+  d2:['me lembro de','lembro-me de'],
+  d3:['esqueceu','deixou'],
+  d4:['se esquecia de','esquecia-se de','esquecia de'],
+  d5:['lembre-se de','nao se esqueca de','não se esqueça de']
+};
+var ex4labels=[
+  'me lembrou de (= fez recordar)',
+  'me lembro de / lembro-me de (= recordo)',
+  'esqueceu (obj. direto — sem preposição)',
+  'esquecia-se de / se esquecia de',
+  'lembre-se de / não se esqueça de'
+];
+function checkEx4(){
+  var ok=0,html='';
+  Object.keys(ex4ans).forEach(function(id,i){
+    var el=document.getElementById(id);
+    var val=norm(el.value);
+    var correct=ex4ans[id].some(function(a){return val.includes(norm(a));});
+    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
+    if(correct)ok++;
+    html+='<div style="margin-bottom:5px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+ex4labels[i]+'</strong></div>';
+  });
+  var r=document.getElementById('ex4-result');
+  r.className='result-msg '+(ok>=4?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===5?'✓ Perfeito!':ok+'/5 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── BREVO ───
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var name=nameEl.value.trim();
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=document.getElementById('bphub-student-email').value.trim();
+  var material='Regência Verbal — Exercícios B2';
+  var today=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+
+  var html='<h2 style="color:#D36D29;font-family:Arial">'+name+'</h2><p style="font-family:Arial"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>';
+
+  // Ex1
+  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 1 — Preposições do texto</h3>';
+  Object.keys(ex1ans).forEach(function(id,i){
+    var el=document.getElementById(id);
+    html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong> '+(el.value.trim()||'(sem resposta)')+'</p>';
+  });
+
+  // Ex2
+  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 2 — MC</h3>';
+  var mcOpts={m1:['obedeceram','obedeceram às','obedeceram as'],m2:['namorou com','namorou','namorou a'],m3:['visa','visa a','visa em'],m4:['lembrar de','lembrar','me lembrar de'],m5:['agradou','agradou a','agradou em'],m6:['aludiu','aludiu a','aludiu aos']};
+  Object.keys(mcAns).forEach(function(id,i){
+    var sel=mcSel[id];
+    var val=sel?mcOpts[id][['a','b','c'].indexOf(sel)]:'(sem resposta)';
+    html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong> '+val+'</p>';
+  });
+
+  // Ex3
+  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 3 — Correção</h3>';
+  ['c1','c2','c3','c4','c5'].forEach(function(id,i){
+    var el=document.getElementById(id);
+    html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong> '+(el.value.trim()||'(sem resposta)')+'</p>';
+  });
+
+  // Ex4
+  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 4 — Lembrar/Esquecer</h3>';
+  ['d1','d2','d3','d4','d5'].forEach(function(id,i){
+    var el=document.getElementById(id);
+    html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong> '+(el.value.trim()||'(sem resposta)')+'</p>';
+  });
+
+  // Ex5
+  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 5 — Produção</h3>';
+  ['p1','p2','p3','p4','p5'].forEach(function(id,i){
+    var el=document.getElementById(id);
+    html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong><br>'+(el.value.trim()||'(sem resposta)').replace(/\n/g,'<br>')+'</p>';
+  });
+
+  btn.disabled=true; btn.textContent='A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls=[];
+  if(email){calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:email,name:name}],templateId:1,params:{nome:name,material:material,data:today}})}));}
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},subject:'📝 '+name+' — '+material,htmlContent:html})}));
+  Promise.all(calls).then(function(){
+    document.getElementById('bphub-answer-summary').innerHTML=html;
+    document.getElementById('bphub-success').style.display='block';
+    document.getElementById('bphub-form-area').style.display='none';
+    document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    btn.disabled=false; btn.textContent='Enviar respostas';
+  }).catch(function(){btn.disabled=false;btn.textContent='Enviar respostas';document.getElementById('bphub-error').style.display='block';});
+}
+</script>
+</body>
+</html>
