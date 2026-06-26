@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moda Brasileira — Rio Fashion Week | C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--level); color: white; }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--ouro), var(--floresta), var(--erva-doce), var(--nanquim)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px,4vw,44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 44px 0; }
+
+    /* BLOCKS */
+    .content-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 16px 0; }
+    .content-block h3 { font-size: 19px; color: var(--nanquim); margin-bottom: 14px; }
+    .content-block p { font-size: 15px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .content-block p:last-child { margin-bottom: 0; }
+
+    /* VIDEO EMBED */
+    .video-wrap { border-radius: 14px; overflow: hidden; background: #000; margin: 16px 0; display: flex; justify-content: center; }
+    .video-wrap iframe { width: 100%; max-width: 400px; height: 710px; border: none; display: block; }
+
+    /* VIDEO SOURCE INFO */
+    .source-bar { font-size: 12px; color: #888; margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+    .source-bar a { color: var(--level); text-decoration: none; font-weight: 600; }
+
+    /* VOCAB TABLE */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .vocab-table th { text-align: left; padding: 9px 12px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--level); background: rgba(161,68,29,0.06); }
+    .vocab-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table td:first-child { font-weight: 700; color: var(--nanquim); white-space: nowrap; font-size: 13.5px; }
+    .vocab-table td:last-child { color: #555; line-height: 1.65; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 24px 0; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 21px; font-weight: 300; color: var(--nanquim); margin-bottom: 10px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 22px; line-height: 1.65; }
+
+    /* DISCUSSION QUESTIONS */
+    .disc-item { margin-bottom: 22px; }
+    .disc-q { font-size: 15px; font-weight: 600; color: var(--nanquim); margin-bottom: 10px; line-height: 1.6; }
+    .disc-hint { font-size: 13px; color: #888; font-style: italic; margin-bottom: 10px; line-height: 1.6; }
+
+    /* FILL-IN */
+    .fill-row { margin-bottom: 16px; font-size: 15px; line-height: 2.4; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 200px; outline: none; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 12px 16px; background: rgba(161,68,29,0.05); border-radius: 10px; border: 1px dashed rgba(161,68,29,0.3); }
+    .word-chip { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+
+    /* OPEN AREAS */
+    .open-textarea { width: 100%; min-height: 90px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea.tall { min-height: 140px; }
+    .open-textarea.xl { min-height: 200px; }
+
+    /* CHECK BUTTON */
+    .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 14px 18px; border-radius: 10px; font-size: 14px; line-height: 1.9; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* OSKLEN TEXT */
+    .leitura-block { background: #FAFAF5; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 16px 0; border-left: 4px solid var(--level); }
+    .leitura-block h3 { font-size: 20px; color: var(--nanquim); margin-bottom: 6px; }
+    .leitura-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--level); margin-bottom: 14px; }
+    .leitura-block p { font-size: 15px; line-height: 1.9; margin-bottom: 12px; }
+    .leitura-block blockquote { border-left: 3px solid var(--ouro); padding: 8px 16px; margin: 16px 0; font-style: italic; font-size: 15px; color: #555; line-height: 1.75; }
+
+    /* DEBATE */
+    .debate-item { background: rgba(161,68,29,0.05); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; border-left: 3px solid var(--level); }
+    .debate-stmt { font-size: 15px; font-weight: 600; color: var(--nanquim); margin-bottom: 10px; font-style: italic; }
+    .debate-prompt { font-size: 13px; color: #777; margin-bottom: 10px; }
+
+    /* SEND BOX */
+    .send-box { background: rgba(161,68,29,0.07); border: 1.5px solid rgba(161,68,29,0.2); border-radius: 14px; padding: 22px 26px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .video-wrap iframe { max-width: 100%; height: 500px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <span class="badge">C1 · Vocabulário & Debate</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Moda Brasileira <em>Rio Fashion Week 2026</em></h1>
+  <div class="hero-sub">Um vídeo de reportagem sobre o retorno da semana de moda ao Rio de Janeiro — para explorar vocabulário especializado, analisar marcas e debater o papel do Brasil no cenário da moda global.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Alta costura · Prêt-à-porter</span>
+    <span class="hero-tag">Osklen · Salinas</span>
+    <span class="hero-tag">Moda sustentável</span>
+    <span class="hero-tag">Debate de opinião</span>
+    <span class="hero-tag">C1 · Avançado</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- PRÉ-ASSISTIR -->
+  <div class="sec-label">Pré-assistir · Ativando o conhecimento</div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--ouro);">
+    <div class="ex-num">Parte 1 de 5</div>
+    <div class="ex-title">Antes do vídeo — sua relação com a moda</div>
+    <div class="ex-instructions">Responda livremente. Não há respostas certas ou erradas. Use essas perguntas para começar a conversa com sua professora.</div>
+
+    <div class="disc-item">
+      <div class="disc-q">1. Você acompanha semanas de moda? Já assistiu a algum desfile — ao vivo ou online?</div>
+      <textarea class="open-textarea" id="pre1" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">2. Na sua opinião, o que diferencia <em>alta costura</em> de <em>prêt-à-porter</em>? Qual você prefere — e por quê?</div>
+      <textarea class="open-textarea" id="pre2" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">3. Você conhece alguma marca brasileira de moda? O que você sabe sobre ela — história, estética, valores?</div>
+      <textarea class="open-textarea" id="pre3" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">4. Para você, moda é arte, negócio, expressão cultural — ou tudo ao mesmo tempo? Justifique.</div>
+      <textarea class="open-textarea" id="pre4" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- VOCABULÁRIO -->
+  <div class="sec-label">Vocabulário especializado</div>
+
+  <div class="content-block">
+    <h3>Glossário da moda — leia antes de assistir</h3>
+    <p style="font-size:13.5px;color:#777;margin-bottom:16px;">Estude os termos abaixo. Você vai encontrá-los no vídeo e nos exercícios.</p>
+    <table class="vocab-table">
+      <tr><th>Termo</th><th>Definição em português</th></tr>
+      <tr><td>alta costura</td><td>Segmento da moda que produz peças exclusivas, feitas à mão e sob medida, utilizando técnicas artesanais refinadas. Requer altíssimo nível de habilidade técnica e materiais nobres.</td></tr>
+      <tr><td>prêt-à-porter</td><td>Literalmente, "pronto para vestir". Roupas produzidas em série com design sofisticado, tornando o estilo acessível para um público maior sem abrir mão da qualidade.</td></tr>
+      <tr><td>desfile</td><td>Apresentação de uma nova coleção em passarela, com modelos, música e cenografia. É o principal evento de uma semana de moda.</td></tr>
+      <tr><td>estilista</td><td>Profissional responsável pela concepção criativa e desenvolvimento das peças de uma coleção. No Brasil, o termo equivale ao inglês <em>fashion designer</em>.</td></tr>
+      <tr><td>coleção</td><td>Conjunto de peças criadas para uma mesma temporada ou proposta estética. Pode ser identificada por um tema, paleta de cores ou conceito.</td></tr>
+      <tr><td>passarela</td><td>Estrutura elevada por onde as modelos caminham durante um desfile, expondo as peças da coleção para o público e a mídia.</td></tr>
+      <tr><td>eco-luxo</td><td>Tendência que une sustentabilidade ambiental e responsabilidade social ao segmento de luxo, sem abrir mão da qualidade e do design.</td></tr>
+      <tr><td>fast fashion</td><td>Modelo de produção acelerada e de baixo custo de roupas, com ciclos de tendências cada vez mais curtos. Gera impacto ambiental elevado.</td></tr>
+      <tr><td>hiato</td><td>Interrupção ou pausa prolongada em uma atividade, projeto ou carreira.</td></tr>
+      <tr><td>fauna brasileira</td><td>Conjunto de animais típicos do Brasil, muito diverso por conta da extensão territorial e biomas (Amazônia, Cerrado, Mata Atlântica, etc.). Frequentemente usada como fonte de inspiração no design nacional.</td></tr>
+    </table>
+  </div>
+
+  <!-- VOCAB EXERCISE -->
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Exercício de vocabulário</div>
+    <div class="ex-title">Complete com o termo correto</div>
+    <div class="ex-instructions">Use os termos do glossário acima. Atenção: alguns termos podem precisar de flexão (plural, gênero) ou aparecer junto de outra palavra.</div>
+    <div class="word-bank">
+      <span class="word-chip">alta costura</span>
+      <span class="word-chip">coleção</span>
+      <span class="word-chip">desfile</span>
+      <span class="word-chip">eco-luxo</span>
+      <span class="word-chip">estilista</span>
+      <span class="word-chip">fast fashion</span>
+      <span class="word-chip">fauna</span>
+      <span class="word-chip">hiato</span>
+      <span class="word-chip">passarela</span>
+      <span class="word-chip">prêt-à-porter</span>
+    </div>
+
+    <div class="fill-row">1. Após um <input class="fill-input" id="v1" placeholder="?"> de dez anos, o Rio Fashion Week voltou a reunir profissionais e entusiastas da moda na cidade.</div>
+    <div class="fill-row">2. A <input class="fill-input" id="v2" placeholder="?"> Adriana Bozon assinou sua primeira <input class="fill-input" id="v3" placeholder="?"> pela Salinas inspirada na <input class="fill-input" id="v4" placeholder="?"> brasileira.</div>
+    <div class="fill-row">3. No <input class="fill-input" id="v5" placeholder="?">, as modelos desfilaram na <input class="fill-input" id="v6" placeholder="?"> usando peças que traduziam a exuberância tropical.</div>
+    <div class="fill-row">4. Diferente da <input class="fill-input" id="v7" placeholder="?">, que produz peças únicas feitas à mão, o <input class="fill-input" id="v8" placeholder="?"> permite democratizar o design de qualidade.</div>
+    <div class="fill-row">5. A Osklen é pioneira no conceito de <input class="fill-input" id="v9" placeholder="?"> no Brasil — uma resposta sustentável ao modelo destrutivo do <input class="fill-input" id="v10" placeholder="?">.</div>
+
+    <button class="check-btn" onclick="checkVocab()">✓ Verificar respostas</button>
+    <div class="result-msg" id="vocab-result"></div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- VIDEO -->
+  <div class="sec-label">Vídeo · Rio Fashion Week 2026</div>
+  <p style="font-size:14px;color:#666;margin-bottom:14px;">Assista ao vídeo completo antes de responder às questões de compreensão.</p>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/L_eHpWvjtpg" title="Rio Fashion Week 2026 — AstecaNews" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="source-bar">
+    📹 AstecaNews · <a href="https://youtube.com/shorts/L_eHpWvjtpg" target="_blank">Assistir no YouTube</a> · Publicado em abril de 2026
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- COMPREENSÃO -->
+  <div class="sec-label">Compreensão do vídeo</div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Parte 2 de 5</div>
+    <div class="ex-title">O que você entendeu?</div>
+    <div class="ex-instructions">Responda com suas próprias palavras, sem copiar o texto do vídeo. Escreva frases completas.</div>
+
+    <div class="disc-item">
+      <div class="disc-q">1. Onde está sendo realizado o Rio Fashion Week 2026 e qual é a sua importância histórica para a cidade do Rio?</div>
+      <textarea class="open-textarea" id="comp1" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">2. Descreva a coleção apresentada pela Salinas. Quem a assina e qual é o conceito por trás dela?</div>
+      <textarea class="open-textarea" id="comp2" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">3. O que é a exposição "A Alta Costura do Carnaval"? O que o nome dessa exposição sugere sobre a relação entre o carnaval brasileiro e a moda?</div>
+      <textarea class="open-textarea" id="comp3" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">4. Além dos desfiles, quais outras atividades o evento oferece? O que isso diz sobre a proposta do RIOFW como evento?</div>
+      <textarea class="open-textarea" id="comp4" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">5. Com base no vídeo, como você descreveria o tom geral da cobertura? A reportagem é neutra, entusiasmada, crítica? Justifique com exemplos.</div>
+      <textarea class="open-textarea tall" id="comp5" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- ANÁLISE CRÍTICA -->
+  <div class="sec-label">Análise crítica</div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--ouro);">
+    <div class="ex-num">Parte 3 de 5</div>
+    <div class="ex-title">Indo além do vídeo</div>
+    <div class="ex-instructions">Estas perguntas exigem que você relacione o conteúdo do vídeo a conhecimentos prévios, experiências pessoais e perspectivas críticas. Desenvolva suas respostas em pelo menos 3–4 frases.</div>
+
+    <div class="disc-item">
+      <div class="disc-q">1. A Salinas é uma marca de <em>moda praia</em>. Como você acha que isso reflete uma identidade genuinamente brasileira? A moda pode funcionar como expressão cultural de um povo?</div>
+      <textarea class="open-textarea tall" id="ana1" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">2. O evento menciona uma exposição sobre "A Alta Costura do Carnaval". Você acha que o carnaval tem status de alta costura? Quais são os critérios para classificar algo como <em>haute couture</em>?</div>
+      <textarea class="open-textarea tall" id="ana2" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">3. Por que você acha que o Rio deixou de ter uma semana de moda por 10 anos? Que fatores — econômicos, culturais, logísticos — podem ter contribuído para isso?</div>
+      <textarea class="open-textarea tall" id="ana3" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">4. Inspirar-se na "fauna brasileira" é uma escolha estética e também política. O que você acha que a estilista Adriana Bozon quis comunicar com esse conceito para a Coleção Verão 26?</div>
+      <textarea class="open-textarea tall" id="ana4" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- LEITURA: OSKLEN -->
+  <div class="sec-label">Leitura complementar</div>
+
+  <div class="leitura-block">
+    <div class="leitura-kicker">Perfil de marca · Moda brasileira</div>
+    <h3>Osklen: o eco-luxo brasileiro no mapa da moda global</h3>
+    <p>Fundada em 1989 no Rio de Janeiro pelo médico e alpinista Oskar Metsavaht, a Osklen começou como uma marca de artigos esportivos e de montanha. Ao longo das décadas, a grife evoluiu para um conceito próprio que o fundador chama de <em>"Brazilian Sportswear"</em> — uma estética que funde a energia urbana carioca, a liberdade do esporte ao ar livre e a riqueza natural do Brasil.</p>
+    <p>O grande diferencial da Osklen, no entanto, é seu compromisso com a sustentabilidade. A marca é pioneira no uso do <em>e.banism</em> — tecido desenvolvido a partir de sobras de madeira amazônica —, além de trabalhar com algodão orgânico, borracha natural extraída de seringais no Acre e fibras do cerrado. Essa postura rendeu à grife reconhecimento internacional e espaço em desfiles em Nova York e Milão.</p>
+    <blockquote>"A natureza é o nosso maior patrimônio e também a nossa maior fonte de inspiração." — Oskar Metsavaht</blockquote>
+    <p>Para Metsavaht, luxo e responsabilidade ambiental não são conceitos opostos — mas aliados naturais. A Osklen demonstra que é possível criar peças de alto valor agregado sem destruir o ecossistema que as inspira. Presente em mais de 40 países, a marca representa um modelo alternativo ao fast fashion acelerado e se posiciona como uma das mais importantes embaixadoras da moda brasileira no exterior.</p>
+    <p>Ao contrário de grifes europeias que dominam o imaginário do luxo global, a Osklen aposta em uma identidade profundamente brasileira: cores vibrantes, referências tropicais, valorização do artesanato regional e uma narrativa que conecta beleza e consciência. Uma proposta que, cada vez mais, encontra eco em consumidores que exigem mais do que estética — querem valores.</p>
+  </div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Parte 4 de 5</div>
+    <div class="ex-title">Osklen — leitura e análise</div>
+
+    <div class="disc-item">
+      <div class="disc-q">1. Com base no texto, o que torna a Osklen uma marca diferente das grifes de luxo europeias tradicionais? Identifique pelo menos três elementos de distinção.</div>
+      <textarea class="open-textarea tall" id="osk1" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item">
+      <div class="disc-q">2. Oskar Metsavaht afirma que "luxo e responsabilidade ambiental não são conceitos opostos". Você concorda com essa afirmação? É possível ser genuinamente sustentável e ao mesmo tempo operar no mercado de luxo?</div>
+      <textarea class="open-textarea tall" id="osk2" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">3. Compare a proposta da Osklen (eco-luxo, identidade carioca) com a da Salinas apresentada no vídeo (moda praia, fauna brasileira). O que essas marcas têm em comum? Em que diferem na abordagem ao "ser brasileiro"?</div>
+      <textarea class="open-textarea xl" id="osk3" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- DEBATE & PRODUÇÃO -->
+  <div class="sec-label">Debate e produção</div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--nanquim);">
+    <div class="ex-num">Parte 5 de 5</div>
+    <div class="ex-title">Posicione-se — com argumentos</div>
+    <div class="ex-instructions">Escolha <strong>uma</strong> das afirmações abaixo e escreva um texto de opinião bem estruturado (200–300 palavras), defendendo ou refutando a tese. Use vocabulário do glossário e construções argumentativas em português.</div>
+
+    <div class="debate-item">
+      <div class="debate-stmt">"O Brasil ainda ocupa um lugar secundário no cenário da moda global — e dificilmente vai mudar."</div>
+      <div class="debate-prompt">Concorda? Discorda? Quais evidências do vídeo e do texto sobre a Osklen apoiam ou contradizem essa visão?</div>
+    </div>
+
+    <div class="debate-item">
+      <div class="debate-stmt">"Fast fashion e sustentabilidade não podem coexistir. Uma das duas precisa ceder."</div>
+      <div class="debate-prompt">Avalie os dois modelos à luz do que você leu sobre a Osklen. O eco-luxo é uma solução real ou um nicho inacessível para a maioria?</div>
+    </div>
+
+    <div class="debate-item" style="margin-bottom:0">
+      <div class="debate-stmt">"A alta costura do carnaval é tão válida quanto a haute couture de Paris."</div>
+      <div class="debate-prompt">Reflita sobre critérios estéticos, técnicos e culturais. O que legitima uma peça como "alta costura"? É possível ampliar esse conceito além das fronteiras europeias?</div>
+    </div>
+
+    <div style="margin-top:22px;">
+      <div class="disc-q" style="margin-bottom:10px;">Escreva seu texto de opinião:</div>
+      <textarea class="open-textarea xl" id="debate" placeholder="Escreva aqui o seu texto de opinião. Indique qual afirmação você escolheu e desenvolva sua argumentação..."></textarea>
+    </div>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 Quando terminar, envie suas respostas para a professora. Ela vai usar suas reflexões como base para a conversa na aula — prepare-se para defender suas opiniões em voz alta!
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#A1441D;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai ler suas reflexões e discutir com você na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ─── VOCAB CHECK ───
+function norm(s){ return s.trim().toLowerCase()
+  .replace(/[áàã]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+  .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n'); }
+
+var vocabAns = {
+  v1: ['hiato'],
+  v2: ['estilista'],
+  v3: ['colecao','colecoes'],
+  v4: ['fauna'],
+  v5: ['desfile'],
+  v6: ['passarela'],
+  v7: ['alta costura'],
+  v8: ['pret-a-porter','pret a porter'],
+  v9: ['eco-luxo','ecoluxo'],
+  v10: ['fast fashion','fastfashion']
+};
+function checkVocab(){
+  var ok=0, html='';
+  Object.keys(vocabAns).forEach(function(id,i){
+    var el=document.getElementById(id);
+    var val=norm(el.value);
+    var correct=vocabAns[id].some(function(a){return val===norm(a)||val.includes(norm(a));});
+    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
+    if(correct)ok++;
+    html+='<div style="margin-bottom:4px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+vocabAns[id][0]+'</strong></div>';
+  });
+  var r=document.getElementById('vocab-result');
+  r.className='result-msg '+(ok>=8?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===10?'✓ Perfeito!':ok+'/10 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── BREVO SUBMIT ───
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var name=nameEl.value.trim();
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=document.getElementById('bphub-student-email').value.trim();
+  var material='Moda Brasileira — Rio Fashion Week 2026 (C1)';
+  var today=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+
+  var sections=[
+    {label:'PRÉ-ASSISTIR',ids:['pre1','pre2','pre3','pre4'],
+     qs:['1. Acompanha semanas de moda?','2. Alta costura vs prêt-à-porter','3. Marca brasileira que conhece','4. Moda: arte, negócio ou cultura?']},
+    {label:'VOCABULÁRIO (preenchimento)',ids:['v1','v2','v3','v4','v5','v6','v7','v8','v9','v10'],
+     qs:['1','2a','2b','2c','3a','3b','4a','4b','5a','5b']},
+    {label:'COMPREENSÃO DO VÍDEO',ids:['comp1','comp2','comp3','comp4','comp5'],
+     qs:['1. Local e importância histórica','2. Coleção Salinas','3. Exposição alta costura do carnaval','4. Outras atividades do evento','5. Tom da reportagem']},
+    {label:'ANÁLISE CRÍTICA',ids:['ana1','ana2','ana3','ana4'],
+     qs:['1. Identidade brasileira na moda praia','2. Carnaval como alta costura','3. Por que o Rio ficou sem semana de moda?','4. Fauna brasileira — escolha política e estética']},
+    {label:'OSKLEN',ids:['osk1','osk2','osk3'],
+     qs:['1. Diferenciais da Osklen','2. Luxo e sustentabilidade','3. Osklen vs Salinas']},
+    {label:'DEBATE & PRODUÇÃO',ids:['debate'],
+     qs:['Texto de opinião']}
+  ];
+
+  var lines=[], html='';
+  sections.forEach(function(sec){
+    html+='<h3 style="font-family:Arial;color:#A1441D;margin:16px 0 8px">'+sec.label+'</h3>';
+    lines.push('\n'+sec.label);
+    sec.ids.forEach(function(id,i){
+      var el=document.getElementById(id);
+      var val=el?el.value.trim():'';
+      if(!val)val='(sem resposta)';
+      html+='<p style="font-family:Arial;font-size:13px;margin-bottom:10px"><strong>'+sec.qs[i]+':</strong><br>'+val.replace(/\n/g,'<br>')+'</p>';
+      lines.push(sec.qs[i]+': '+val);
+    });
+  });
+
+  btn.disabled=true; btn.textContent='A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls=[];
+  if(email){calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:email,name:name}],templateId:1,params:{nome:name,material:material,data:today}})}));}
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},subject:'📝 '+name+' — '+material,htmlContent:'<h2 style="color:#A1441D;font-family:Arial">'+name+'</h2><p style="font-family:Arial"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+html})}));
+  Promise.all(calls).then(function(){
+    document.getElementById('bphub-answer-summary').innerHTML=html;
+    document.getElementById('bphub-success').style.display='block';
+    document.getElementById('bphub-form-area').style.display='none';
+    document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    btn.disabled=false;btn.textContent='Enviar respostas';
+  }).catch(function(){btn.disabled=false;btn.textContent='Enviar respostas';document.getElementById('bphub-error').style.display='block';});
+}
+</script>
+</body>
+</html>
