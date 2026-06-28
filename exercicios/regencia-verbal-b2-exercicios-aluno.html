@@ -107,10 +107,9 @@
     Verbos + <strong style="font-weight:500">a</strong> &nbsp;·&nbsp;
     Verbos + <strong style="font-weight:500">de</strong> &nbsp;·&nbsp;
     Verbos + <strong style="font-weight:500">em</strong> &nbsp;·&nbsp;
-    Sem preposição &nbsp;·&nbsp;
-    Casos duplos
+    Sem preposição
   </div>
-  <div class="hero-sub">Cinco exercícios progressivos com base no texto "Pertencimento" — da identificação à produção livre, passando por escolha, preenchimento e correção de erros.</div>
+  <div class="hero-sub">Quatro exercícios progressivos com base no texto "Pertencimento" — da identificação à produção livre, passando por escolha, preenchimento e correção de erros.</div>
 </div>
 
 <div class="main">
@@ -252,25 +251,10 @@
     </div>
   </div>
 
-  <!-- EX 4: LEMBRAR / ESQUECER -->
-  <div class="ex-block" style="border-top:3px solid var(--floresta);">
-    <div class="ex-num">Exercício 4 de 5</div>
-    <div class="ex-title">Lembrar · Esquecer — casos duplos</div>
-    <div class="ex-instructions">Complete com a forma correta: <em>lembrar, lembrar-se de, esquecer</em> ou <em>esquecer-se de</em>. Atenção ao sentido de cada frase — a escolha muda o significado.</div>
-
-    <div class="fill-row">1. Essa música sempre me <input class="fill-input" id="d1" size="22" placeholder="verbo + prep?"> nossa primeira viagem juntos.</div>
-    <div class="fill-row">2. Eu ainda <input class="fill-input" id="d2" size="22" placeholder="verbo + prep?"> cada detalhe daquele dia.</div>
-    <div class="fill-row">3. Ela <input class="fill-input" id="d3" size="22" placeholder="verbo + prep?"> os documentos em casa e perdeu o voo.</div>
-    <div class="fill-row">4. Ele nunca <input class="fill-input" id="d4" size="22" placeholder="verbo + prep?"> agradecer quem o ajudou.</div>
-    <div class="fill-row">5. Por favor, <input class="fill-input" id="d5" size="22" placeholder="verbo + prep?"> de enviar o contrato até sexta-feira.</div>
-
-    <button class="check-btn" onclick="checkEx4()">✓ Verificar</button>
-    <div class="result-msg" id="ex4-result"></div>
-  </div>
 
   <!-- EX 5: PRODUCTION -->
   <div class="ex-block" style="border-top:3px solid var(--ouro);">
-    <div class="ex-num">Exercício 5 de 5</div>
+    <div class="ex-num">Exercício 4 de 4</div>
     <div class="ex-title">Produção — use os verbos em contexto</div>
     <div class="ex-instructions">Escreva frases originais usando os verbos indicados com a regência correta. Cada frase deve ter entre 15 e 30 palavras.</div>
 
@@ -391,37 +375,6 @@ function checkEx2(){
   r.style.display='block';
 }
 
-// ─── EX 4: LEMBRAR/ESQUECER ───
-var ex4ans={
-  d1:['lembrou de','me lembrou de'],
-  d2:['me lembro de','lembro-me de'],
-  d3:['esqueceu','deixou'],
-  d4:['se esquecia de','esquecia-se de','esquecia de'],
-  d5:['lembre-se de','nao se esqueca de','não se esqueça de']
-};
-var ex4labels=[
-  'me lembrou de (= fez recordar)',
-  'me lembro de / lembro-me de (= recordo)',
-  'esqueceu (obj. direto — sem preposição)',
-  'esquecia-se de / se esquecia de',
-  'lembre-se de / não se esqueça de'
-];
-function checkEx4(){
-  var ok=0,html='';
-  Object.keys(ex4ans).forEach(function(id,i){
-    var el=document.getElementById(id);
-    var val=norm(el.value);
-    var correct=ex4ans[id].some(function(a){return val.includes(norm(a));});
-    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
-    if(correct)ok++;
-    html+='<div style="margin-bottom:5px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+ex4labels[i]+'</strong></div>';
-  });
-  var r=document.getElementById('ex4-result');
-  r.className='result-msg '+(ok>=4?'good':'try-again');
-  r.innerHTML='<strong>'+(ok===5?'✓ Perfeito!':ok+'/5 corretas')+'</strong><br><br>'+html;
-  r.style.display='block';
-}
-
 // ─── BREVO ───
 function bphubSubmit(){
   var btn=document.getElementById('bphub-submit-btn');
@@ -458,15 +411,9 @@ function bphubSubmit(){
     html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong> '+(el.value.trim()||'(sem resposta)')+'</p>';
   });
 
-  // Ex4
-  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 4 — Lembrar/Esquecer</h3>';
-  ['d1','d2','d3','d4','d5'].forEach(function(id,i){
-    var el=document.getElementById(id);
-    html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong> '+(el.value.trim()||'(sem resposta)')+'</p>';
-  });
 
-  // Ex5
-  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 5 — Produção</h3>';
+  // Ex4
+  html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 4 — Produção</h3>';
   ['p1','p2','p3','p4','p5'].forEach(function(id,i){
     var el=document.getElementById(id);
     html+='<p style="font-family:Arial;font-size:13px"><strong>'+(i+1)+':</strong><br>'+(el.value.trim()||'(sem resposta)').replace(/\n/g,'<br>')+'</p>';
