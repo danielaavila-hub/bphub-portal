@@ -219,14 +219,6 @@
       </div>
     </div>
 
-    <div class="mc-group">
-      <div class="mc-sentence">6. O palestrante ___ os dados da pesquisa sem aprofundar a análise.</div>
-      <div class="mc-opts" id="m6">
-        <button class="mc-btn" onclick="pickMC('m6','a',this)">aludiu</button>
-        <button class="mc-btn" onclick="pickMC('m6','b',this)">aludiu a</button>
-        <button class="mc-btn" onclick="pickMC('m6','c',this)">aludiu aos</button>
-      </div>
-    </div>
 
     <button class="check-btn" onclick="checkEx2()">✓ Verificar</button>
     <div class="result-msg" id="ex2-result"></div>
@@ -366,15 +358,14 @@ function checkEx1(){
 
 // ─── EX 2: MC ───
 var mcSel={};
-// answers: 1=b(obedeceram às), 2=b(namorou), 3=b(visa a), 4=c(me lembrar de), 5=b(agradou a), 6=c(aludiu aos)
-var mcAns={m1:'b',m2:'b',m3:'b',m4:'c',m5:'b',m6:'c'};
+// answers: 1=b(obedeceram às), 2=b(namorou), 3=b(visa a), 4=c(me lembrar de), 5=b(agradou a)
+var mcAns={m1:'b',m2:'b',m3:'b',m4:'c',m5:'b'};
 var mcExp={
   m1:'<strong>obedeceram às</strong> — obedecer exige preposição <em>a</em>.',
   m2:'<strong>namorou</strong> — verbo namorar é transitivo direto; "namorar com" não existe na norma culta.',
   m3:'<strong>visa a</strong> — visar no sentido de "ter como objetivo" exige preposição <em>a</em>.',
   m4:'<strong>me lembrar de</strong> — "lembrar-se de" = recordar (com pronome reflexivo). Sem pronome: "lembrar algo" (fazer alguém lembrar).',
   m5:'<strong>agradou a</strong> — agradar no sentido de "satisfazer" exige preposição <em>a</em>.',
-  m6:'<strong>aludiu aos</strong> — aludir exige preposição <em>a</em>; "aos" = a + os (crase masculino plural).'
 };
 function pickMC(id,val,btn){
   mcSel[id]=val;
@@ -395,8 +386,8 @@ function checkEx2(){
     html+='<div style="margin-bottom:6px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' '+mcExp[id]+'</div>';
   });
   var r=document.getElementById('ex2-result');
-  r.className='result-msg '+(ok===6?'good':'try-again');
-  r.innerHTML='<strong>'+(ok===6?'✓ Perfeito!':ok+'/6 corretas')+'</strong><br><br>'+html;
+  r.className='result-msg '+(ok===5?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===5?'✓ Perfeito!':ok+'/5 corretas')+'</strong><br><br>'+html;
   r.style.display='block';
 }
 
@@ -453,7 +444,7 @@ function bphubSubmit(){
 
   // Ex2
   html+='<h3 style="font-family:Arial;color:#D36D29">Exercício 2 — MC</h3>';
-  var mcOpts={m1:['obedeceram','obedeceram às','obedeceram as'],m2:['namorou com','namorou','namorou a'],m3:['visa','visa a','visa em'],m4:['lembrar de','lembrar','me lembrar de'],m5:['agradou','agradou a','agradou em'],m6:['aludiu','aludiu a','aludiu aos']};
+  var mcOpts={m1:['obedeceram','obedeceram às','obedeceram as'],m2:['namorou com','namorou','namorou a'],m3:['visa','visa a','visa em'],m4:['lembrar de','lembrar','me lembrar de'],m5:['agradou','agradou a','agradou em']};
   Object.keys(mcAns).forEach(function(id,i){
     var sel=mcSel[id];
     var val=sel?mcOpts[id][['a','b','c'].indexOf(sel)]:'(sem resposta)';
