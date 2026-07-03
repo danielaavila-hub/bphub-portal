@@ -30,7 +30,7 @@
     .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
     .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
     .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
-    .hero h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.8em; margin-top: 2px; }
     .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.65; }
     .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
     .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
@@ -109,7 +109,9 @@
 
     .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
     .check-btn:hover { opacity: 0.85; }
-    .result-msg { display: none; margin-top: 16px; padding: 16px 20px; border-radius: 10px; font-size: 14px; line-height: 1.8; }
+    .result-msg { display: none; margin-top: 16px; padding: 16px 20px; border-radius: 10px; font-size: 14px; line-height: 1.8; max-height: 260px; overflow-y: auto; }
+    .q-input.correct, .mistake-input.correct { border-color: var(--floresta); background: rgba(78,85,29,0.06); }
+    .q-input.wrong, .mistake-input.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.06); }
     .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
     .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
 
@@ -217,6 +219,9 @@
       <div class="q-text">5. Qual é a responsabilidade dos motoristas ao ultrapassar um ciclista?</div>
       <textarea class="q-input" id="p1_5" placeholder="Escreva sua resposta aqui..."></textarea>
     </div>
+
+    <button class="check-btn" onclick="checkP1()">✓ Check answers</button>
+    <div class="result-msg" id="p1-result"></div>
   </div>
 
   <hr class="sec-divider">
@@ -329,6 +334,9 @@
       <div class="mistake-label">Corrected sentence →</div>
       <input class="mistake-input" id="ex3_5" type="text" placeholder="Escreva a frase correta aqui...">
     </div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div class="result-msg" id="ex3-result"></div>
   </div>
 
   <hr class="sec-divider">
@@ -435,6 +443,70 @@ function checkEx2() {
   var res = document.getElementById('ex2-result');
   res.className = 'result-msg ' + (correct===6 ? 'good' : 'try-again');
   res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'+(correct===6?'✓ All 6 correct!':correct+' of 6 correct — answers:')+'</div>'+html;
+  res.style.display = 'block';
+}
+
+// ── PART 1: READING COMPREHENSION (flexible keyword matching) ──
+var p1Answers = [
+  { id:'p1_1', keys:['rapida','barata','sustentavel'], display:'Porque é uma opção rápida, barata e sustentável.' },
+  { id:'p1_2', keys:['capacete'], display:'É obrigatório usar capacete.' },
+  { id:'p1_3', keys:['luz'], display:'Devem usar luzes na bicicleta — uma luz branca na frente e uma luz vermelha atrás.' },
+  { id:'p1_4', keys:['na via','direito'], display:'Na via, no lado direito, no mesmo sentido dos carros — não na calçada.' },
+  { id:'p1_5', keys:['distancia','1,5','metro'], display:'Eles devem manter uma distância de pelo menos 1,5 metro ao ultrapassar um ciclista.' }
+];
+function checkP1() {
+  var correct = 0; var html = '';
+  p1Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var v = norm(el.value);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && a.keys.some(function(k){ return v.indexOf(k) !== -1; });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (!filled) { el.classList.remove('correct'); el.classList.remove('wrong'); }
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('p1-result');
+  res.className = 'result-msg ' + (correct===5 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'+(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+'</div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 3: FIND THE MISTAKE ──
+function normSent(s) { return norm(s).replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim(); }
+var ex3Answers = [
+  { id:'ex3_1', keys:['e obrigatorio usar capacete','e obrigatorio os ciclistas usarem capacete','os ciclistas tem que usar capacete'],
+    display:'É obrigatório usar capacete. <span style="color:#888;font-weight:400;">(after "é obrigatório" → infinitive)</span>' },
+  { id:'ex3_2', keys:['os motoristas devem manter distancia dos ciclistas','os motoristas devem manter a distancia dos ciclistas'],
+    display:'Os motoristas devem manter distância dos ciclistas. <span style="color:#888;font-weight:400;">(dever + infinitive, no "a")</span>' },
+  { id:'ex3_3', keys:['e proibido usar o celular ao dirigir'],
+    display:'É proibido usar o celular ao dirigir. <span style="color:#888;font-weight:400;">(ao + infinitive)</span>' },
+  { id:'ex3_4', keys:['pedestres tem que atravessar na faixa','os pedestres tem que atravessar na faixa'],
+    display:'Pedestres têm que atravessar na faixa. <span style="color:#888;font-weight:400;">(ter que + infinitive)</span>' },
+  { id:'ex3_5', keys:['e preciso ter cuidado a noite'],
+    display:'É preciso ter cuidado à noite. <span style="color:#888;font-weight:400;">(ter cuidado, no "a")</span>' }
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var v = normSent(el.value);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && a.keys.some(function(k){ return v === normSent(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (!filled) { el.classList.remove('correct'); el.classList.remove('wrong'); }
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + a.display + '</strong></div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg ' + (correct===5 ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'+(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+'</div>'+html;
   res.style.display = 'block';
 }
 
