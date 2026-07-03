@@ -90,6 +90,7 @@
     .word-chip { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
     .fill-sentence { font-size: 15px; line-height: 2.6; margin-bottom: 4px; }
     .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 220px; outline: none; }
+    .bracket-hint { color: var(--cobalto); font-weight: 600; font-size: 13px; white-space: nowrap; }
     .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
     .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
 
@@ -292,12 +293,12 @@
       <span class="word-chip">atravessar</span>
       <span class="word-chip">respeitar</span>
     </div>
-    <div class="fill-sentence">1. Os ciclistas <input class="fill-input" id="ex2_1" placeholder="dever + verbo"> no lado direito da via.</div>
-    <div class="fill-sentence">2. <input class="fill-input" id="ex2_2" placeholder="é obrigatório + verbo"> na faixa de pedestres.</div>
-    <div class="fill-sentence">3. <input class="fill-input" id="ex2_3" placeholder="é obrigatório + verbo"> no sinal vermelho.</div>
-    <div class="fill-sentence">4. Os motoristas <input class="fill-input" id="ex2_4" placeholder="ter que + verbo"> uma distância de 1,5 metro ao ultrapassar ciclistas.</div>
-    <div class="fill-sentence">5. <input class="fill-input" id="ex2_5" placeholder="é obrigatório + verbo"> capacete ao andar de bicicleta.</div>
-    <div class="fill-sentence">6. Todos <input class="fill-input" id="ex2_6" placeholder="ter que + verbo"> as regras de trânsito.</div>
+    <div class="fill-sentence">1. Os ciclistas <input class="fill-input" id="ex2_1" placeholder="..."> no lado direito da via. <span class="bracket-hint">[dever]</span></div>
+    <div class="fill-sentence">2. <input class="fill-input" id="ex2_2" placeholder="..."> na faixa de pedestres. <span class="bracket-hint">[é obrigatório]</span></div>
+    <div class="fill-sentence">3. <input class="fill-input" id="ex2_3" placeholder="..."> no sinal vermelho. <span class="bracket-hint">[é obrigatório]</span></div>
+    <div class="fill-sentence">4. Os motoristas <input class="fill-input" id="ex2_4" placeholder="..."> uma distância de 1,5 metro ao ultrapassar ciclistas. <span class="bracket-hint">[ter que]</span></div>
+    <div class="fill-sentence">5. <input class="fill-input" id="ex2_5" placeholder="..."> capacete ao andar de bicicleta. <span class="bracket-hint">[é obrigatório]</span></div>
+    <div class="fill-sentence">6. Todos <input class="fill-input" id="ex2_6" placeholder="..."> as regras de trânsito. <span class="bracket-hint">[ter que]</span></div>
 
     <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
     <div class="result-msg" id="ex2-result"></div>
@@ -310,7 +311,7 @@
     <div class="ex-instructions">Each sentence has one error. Find it and rewrite the sentence correctly.</div>
 
     <div class="mistake-item">
-      <div class="mistake-wrong">1. É obrigatório os ciclistas <u>usam</u> capacete.</div>
+      <div class="mistake-wrong">1. É obrigatório <u>usam</u> capacete.</div>
       <div class="mistake-label">Corrected sentence →</div>
       <input class="mistake-input" id="ex3_1" type="text" placeholder="Escreva a frase correta aqui...">
     </div>
@@ -478,7 +479,7 @@ function checkP1() {
 // ── EXERCISE 3: FIND THE MISTAKE ──
 function normSent(s) { return norm(s).replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim(); }
 var ex3Answers = [
-  { id:'ex3_1', keys:['e obrigatorio usar capacete','e obrigatorio os ciclistas usarem capacete','os ciclistas tem que usar capacete'],
+  { id:'ex3_1', keys:['e obrigatorio usar capacete'],
     display:'É obrigatório usar capacete. <span style="color:#888;font-weight:400;">(after "é obrigatório" → infinitive)</span>' },
   { id:'ex3_2', keys:['os motoristas devem manter distancia dos ciclistas','os motoristas devem manter a distancia dos ciclistas'],
     display:'Os motoristas devem manter distância dos ciclistas. <span style="color:#888;font-weight:400;">(dever + infinitive, no "a")</span>' },
