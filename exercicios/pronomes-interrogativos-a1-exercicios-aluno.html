@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronomes Interrogativos — A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #4E551D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #4E551D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #6b6b57; margin-bottom: 20px; }
+    .ex-item { margin-bottom: 14px; }
+
+    .gram-box { background: var(--cobalto-light); border-radius: 14px; padding: 22px 28px; margin-bottom: 36px; font-size: 15px; }
+    .gram-box strong { color: var(--cobalto); }
+    .gram-box .gram-row { margin-bottom: 8px; }
+    .gram-warn { margin-top: 14px; background: rgba(255,185,74,0.18); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 14px; }
+
+    .text-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .text-block h3 { font-size: 22px; color: var(--nanquim); margin-bottom: 4px; }
+    .text-source { font-size: 12.5px; color: #999; font-style: italic; margin-bottom: 16px; }
+    .text-body p { margin-bottom: 12px; font-size: 15.5px; line-height: 1.8; }
+
+    .vocab { font-size: 12.5px; color: #86865f; background: var(--off-white); border-radius: 10px; padding: 10px 14px; margin-top: 14px; line-height: 1.7; }
+
+    .vf-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .vf-text { flex: 1; min-width: 220px; }
+    .vf-btn { width: 42px; height: 34px; border: 1.5px solid rgba(30,29,28,0.25); background: var(--baunilha); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: var(--texto); cursor: pointer; }
+    .vf-btn.selected { background: var(--cobalto); border-color: var(--cobalto); color: white; }
+    .vf-btn.correct { background: #EAF5EE; border-color: #2E7D52; color: #2E7D52; }
+    .vf-btn.wrong { background: #FBEEE3; border-color: var(--pitomba); color: var(--pitomba); }
+
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .word-chip { background: var(--baunilha2); border-radius: 20px; padding: 4px 14px; font-size: 14px; font-weight: 600; color: var(--nanquim); }
+
+    input[type="text"] { font-family: 'Manrope', sans-serif; font-size: 15px; padding: 8px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; outline: none; background: var(--baunilha); color: var(--texto); }
+    input[type="text"]:focus { border-color: var(--cobalto); }
+    .inp-gap { width: 150px; }
+    .inp-line { width: 100%; max-width: 520px; }
+    textarea { font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.7; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; outline: none; background: var(--baunilha); color: var(--texto); width: 100%; resize: vertical; }
+    textarea:focus { border-color: var(--cobalto); }
+    input.correct, textarea.correct { border-color: #2E7D52; background: #EAF5EE; }
+    input.wrong, textarea.wrong { border-color: var(--pitomba); background: #FBEEE3; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .check-btn:hover { background: #3a3835; }
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 16px 20px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEEE3; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .text-block { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Pronomes Interrogativos <em>quem · o que · onde · qual</em></h1>
+  <div class="hero-sub">Learn to ask questions in Portuguese — and meet Rebeca Andrade, Brazil's greatest Olympic medalist.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">question words</span>
+    <span class="hero-tag">entrevista</span>
+    <span class="hero-tag">Rebeca Andrade</span>
+    <span class="hero-tag">~30 min</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE NOTE -->
+  <div class="gram-box">
+    <div class="gram-row"><strong>LANGUAGE NOTE — Question words (pronomes interrogativos)</strong></div>
+    <div class="gram-row">In Portuguese, we ask questions with words like:</div>
+    <div class="gram-row"><strong>quem</strong> (who) · <strong>o que / que</strong> (what) · <strong>qual / quais</strong> (which)</div>
+    <div class="gram-row"><strong>onde</strong> (where) · <strong>quando</strong> (when) · <strong>como</strong> (how)</div>
+    <div class="gram-row"><strong>por que</strong> (why) · <strong>quanto(s) / quanta(s)</strong> (how much / how many)</div>
+    <div class="gram-warn">
+      <strong>Watch out for these:</strong><br>
+      • For proper names, Portuguese uses <strong>Qual</strong>, not <em>O que</em>: <em>Qual é o seu nome?</em><br>
+      • <strong>Que + noun</strong> vs. <strong>O que</strong> (no noun): <em>Que esporte você pratica?</em> / <em>O que você faz?</em><br>
+      • Question words can combine with prepositions — <strong>de onde</strong> (where from), <strong>com quem</strong> (with whom): <em>Com quem você trabalha?</em>
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="sec-label">Leia o texto</div>
+  <div class="text-block">
+    <h3>Rebeca Andrade</h3>
+    <div class="text-source">Adaptado de: Agência Gov / Agência Brasil (gov.br). Reprodução gratuita mediante citação da fonte.</div>
+    <div class="text-body">
+      <p>Rebeca Andrade é ginasta. Ela é brasileira e é de Guarulhos, em São Paulo. Rebeca tem 27 anos. Hoje, ela mora no Rio de Janeiro e treina no clube do Flamengo.</p>
+      <p>Rebeca é a maior medalhista olímpica do Brasil. Ela tem seis medalhas olímpicas! Rebeca também gosta de psicologia e quer estudar na universidade.</p>
+      <p>Ela é tímida, mas muito determinada. A família dela é grande e muito importante para ela.</p>
+    </div>
+    <div class="vocab"><strong>Vocabulário:</strong> ginasta – gymnast · medalhista – medalist · treina – trains · tímida – shy · determinada – determined</div>
+  </div>
+
+  <!-- EXERCÍCIO 1 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 1 · Leitura</div>
+    <h2>Verdadeiro ou falso?</h2>
+    <p class="ex-instr">Read the text and mark V (verdadeiro) or F (falso).</p>
+
+    <div class="vf-row"><span class="vf-text">a) Rebeca Andrade é atriz.</span>
+      <button class="vf-btn" onclick="pickVF('a','V',this)">V</button><button class="vf-btn" onclick="pickVF('a','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">b) Ela é de São Paulo.</span>
+      <button class="vf-btn" onclick="pickVF('b','V',this)">V</button><button class="vf-btn" onclick="pickVF('b','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">c) Rebeca mora no Rio de Janeiro.</span>
+      <button class="vf-btn" onclick="pickVF('c','V',this)">V</button><button class="vf-btn" onclick="pickVF('c','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">d) Ela tem duas medalhas olímpicas.</span>
+      <button class="vf-btn" onclick="pickVF('d','V',this)">V</button><button class="vf-btn" onclick="pickVF('d','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">e) Rebeca gosta de psicologia.</span>
+      <button class="vf-btn" onclick="pickVF('e','V',this)">V</button><button class="vf-btn" onclick="pickVF('e','F',this)">F</button></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 2 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 2 · Compreensão</div>
+    <h2>Responda em português</h2>
+    <p class="ex-instr">Answer in Portuguese, with complete sentences if you can.</p>
+
+    <div class="ex-item">a) De onde a Rebeca é?<br><input type="text" id="q2-1" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">b) Onde ela mora hoje?<br><input type="text" id="q2-2" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">c) Quantas medalhas ela tem?<br><input type="text" id="q2-3" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">d) Onde Rebeca quer estudar?<br><input type="text" id="q2-4" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 3 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 3 · Entrevista</div>
+    <h2>Complete a entrevista</h2>
+    <p class="ex-instr">Complete the interview questions with the correct question word from the box. Use the answers to help you.</p>
+    <div class="word-bank">
+      <span class="word-chip">Qual</span><span class="word-chip">Quantos</span><span class="word-chip">Quantas</span>
+      <span class="word-chip">De onde</span><span class="word-chip">O que</span><span class="word-chip">Onde</span>
+    </div>
+
+    <div class="ex-item">a) — <input type="text" id="q3-1" class="inp-gap"> é o seu nome? &nbsp;— Rebeca Andrade.</div>
+    <div class="ex-item">b) — <input type="text" id="q3-2" class="inp-gap"> anos você tem? &nbsp;— Tenho 27 anos.</div>
+    <div class="ex-item">c) — <input type="text" id="q3-3" class="inp-gap"> você é? &nbsp;— Sou de Guarulhos.</div>
+    <div class="ex-item">d) — <input type="text" id="q3-4" class="inp-gap"> você faz? &nbsp;— Sou ginasta.</div>
+    <div class="ex-item">e) — <input type="text" id="q3-5" class="inp-gap"> você mora? &nbsp;— Moro no Rio de Janeiro.</div>
+    <div class="ex-item">f) — <input type="text" id="q3-6" class="inp-gap"> medalhas olímpicas você tem? &nbsp;— Tenho seis.</div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 4 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 4 · Gramática</div>
+    <h2>QUE ou O QUE?</h2>
+    <p class="ex-instr">Complete with QUE or O QUE. Remember: <strong>que + noun</strong> / <strong>o que + verb</strong>.</p>
+
+    <div class="ex-item">a) <input type="text" id="q4-1" class="inp-gap"> você faz no seu tempo livre?</div>
+    <div class="ex-item">b) <input type="text" id="q4-2" class="inp-gap"> esporte você pratica?</div>
+    <div class="ex-item">c) <input type="text" id="q4-3" class="inp-gap"> você quer estudar na universidade?</div>
+    <div class="ex-item">d) <input type="text" id="q4-4" class="inp-gap"> tipo de música você gosta?</div>
+    <div class="ex-item">e) <input type="text" id="q4-5" class="inp-gap"> você faz nos fins de semana?</div>
+    <div class="ex-item">f) <input type="text" id="q4-6" class="inp-gap"> cor você gosta?</div>
+    <div class="ex-item">g) <input type="text" id="q4-7" class="inp-gap"> você quer comer hoje?</div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 5 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 5 · Preposições</div>
+    <h2>Pergunta com preposição</h2>
+    <p class="ex-instr">Complete the questions with the combination from the box.</p>
+    <div class="word-bank">
+      <span class="word-chip">Com quem</span><span class="word-chip">De onde</span>
+      <span class="word-chip">Para quem</span><span class="word-chip">Por onde</span>
+    </div>
+
+    <div class="ex-item">a) — <input type="text" id="q5-1" class="inp-gap"> você fala? &nbsp;— Falo com a minha amiga.</div>
+    <div class="ex-item">b) — <input type="text" id="q5-2" class="inp-gap"> ele é? &nbsp;— Ele é de Portugal.</div>
+    <div class="ex-item">c) — <input type="text" id="q5-3" class="inp-gap"> é este bolo? &nbsp;— É para você!</div>
+    <div class="ex-item">d) — <input type="text" id="q5-4" class="inp-gap"> você vai: pela escada ou pelo elevador? &nbsp;— Pela escada.</div>
+    <div class="ex-item">e) — <input type="text" id="q5-5" class="inp-gap"> é esta carta? &nbsp;— É para a minha mãe.</div>
+    <div class="ex-item">f) — <input type="text" id="q5-6" class="inp-gap"> elas são? &nbsp;— Elas são do Brasil.</div>
+    <div class="ex-item">g) — <input type="text" id="q5-7" class="inp-gap"> você estuda português? &nbsp;— Estudo com a professora.</div>
+    <div class="ex-item">h) — <input type="text" id="q5-8" class="inp-gap"> o ônibus passa? &nbsp;— Passa pela avenida.</div>
+
+    <button class="check-btn" onclick="checkEx5()">✓ Check answers</button>
+    <div id="ex5-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 6 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 6 · Produção</div>
+    <h2>A sua entrevista</h2>
+    <p class="ex-instr">Imagine you can interview a Brazilian athlete or someone you admire. Write 5 questions for the interview. Use at least four different question words.</p>
+    <textarea id="q6-1" rows="7" placeholder="Escreva suas 5 perguntas aqui...&#10;1.&#10;2.&#10;3.&#10;4.&#10;5."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
+}
+function renderResult(id, correct, total, html) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!' : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+/* EX 1 — V/F */
+var vfSelected = {};
+var ex1Answers = [
+  { l:'a', key:'F', display:'F — Rebeca é ginasta, não é atriz.' },
+  { l:'b', key:'V', display:'V — Ela é de Guarulhos, em São Paulo.' },
+  { l:'c', key:'V', display:'V — Hoje ela mora no Rio de Janeiro.' },
+  { l:'d', key:'F', display:'F — Ela tem seis medalhas olímpicas.' },
+  { l:'e', key:'V', display:'V — Ela gosta de psicologia e quer estudar na universidade.' }
+];
+function pickVF(item, val, btn) {
+  vfSelected[item] = val;
+  var row = btn.closest('.vf-row');
+  row.querySelectorAll('.vf-btn').forEach(function(b){ b.className = 'vf-btn'; });
+  btn.className = 'vf-btn selected';
+}
+function checkEx1() {
+  var html = '', correct = 0;
+  var rows = document.querySelectorAll('.vf-row');
+  ex1Answers.forEach(function(a, i) {
+    var sel = vfSelected[a.l];
+    var ok = sel === a.key;
+    var btns = rows[i].querySelectorAll('.vf-btn');
+    btns.forEach(function(b) {
+      if (b.textContent === a.key) b.className = 'vf-btn correct';
+      else if (b.textContent === sel && !ok) b.className = 'vf-btn wrong';
+      else b.className = 'vf-btn';
+    });
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + a.l + ')</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* EX 2 — keyword matching */
+var ex2Answers = [
+  { keys: ['guarulhos'], display: 'Ela é de Guarulhos (em São Paulo).', l:'a' },
+  { keys: ['rio'], display: 'Hoje ela mora no Rio de Janeiro.', l:'b' },
+  { keys: ['seis','6'], display: 'Ela tem seis medalhas olímpicas.', l:'c' },
+  { keys: ['universidade'], display: 'Ela quer estudar na universidade.', l:'d' }
+];
+function checkEx2() {
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById('q2-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var v = norm(el.value);
+    var ok = filled && a.keys.some(function(k){ return v.indexOf(k) !== -1; });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (!filled) { el.classList.remove('correct'); el.classList.remove('wrong'); }
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + a.l + ')</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* generic exact-match checker for word-bank exercises */
+function checkBank(prefix, answers, resultId) {
+  var html = '', correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(prefix + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === norm(a.key);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + a.l + ')</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  renderResult(resultId, correct, answers.length, html);
+}
+
+/* EX 3 */
+var ex3Answers = [
+  { key:'qual', display:'<strong>Qual</strong> é o seu nome?', l:'a' },
+  { key:'quantos', display:'<strong>Quantos</strong> anos você tem?', l:'b' },
+  { key:'de onde', display:'<strong>De onde</strong> você é?', l:'c' },
+  { key:'o que', display:'<strong>O que</strong> você faz?', l:'d' },
+  { key:'onde', display:'<strong>Onde</strong> você mora?', l:'e' },
+  { key:'quantas', display:'<strong>Quantas</strong> medalhas olímpicas você tem?', l:'f' }
+];
+function checkEx3() { checkBank('q3-', ex3Answers, 'ex3-result'); }
+
+/* EX 4 */
+var ex4Answers = [
+  { key:'o que', display:'<strong>O que</strong> você faz no seu tempo livre? (o que + verb)', l:'a' },
+  { key:'que', display:'<strong>Que</strong> esporte você pratica? (que + noun)', l:'b' },
+  { key:'o que', display:'<strong>O que</strong> você quer estudar na universidade? (o que + verb)', l:'c' },
+  { key:'que', display:'<strong>Que</strong> tipo de música você gosta? (que + noun)', l:'d' },
+  { key:'o que', display:'<strong>O que</strong> você faz nos fins de semana? (o que + verb)', l:'e' },
+  { key:'que', display:'<strong>Que</strong> cor você gosta? (que + noun)', l:'f' },
+  { key:'o que', display:'<strong>O que</strong> você quer comer hoje? (o que + verb)', l:'g' }
+];
+function checkEx4() { checkBank('q4-', ex4Answers, 'ex4-result'); }
+
+/* EX 5 */
+var ex5Answers = [
+  { key:'com quem', display:'<strong>Com quem</strong> você fala? — Falo com a minha amiga.', l:'a' },
+  { key:'de onde', display:'<strong>De onde</strong> ele é? — Ele é de Portugal.', l:'b' },
+  { key:'para quem', display:'<strong>Para quem</strong> é este bolo? — É para você!', l:'c' },
+  { key:'por onde', display:'<strong>Por onde</strong> você vai? — Pela escada.', l:'d' },
+  { key:'para quem', display:'<strong>Para quem</strong> é esta carta? — É para a minha mãe.', l:'e' },
+  { key:'de onde', display:'<strong>De onde</strong> elas são? — Elas são do Brasil.', l:'f' },
+  { key:'com quem', display:'<strong>Com quem</strong> você estuda português? — Com a professora.', l:'g' },
+  { key:'por onde', display:'<strong>Por onde</strong> o ônibus passa? — Pela avenida.', l:'h' }
+];
+function checkEx5() { checkBank('q5-', ex5Answers, 'ex5-result'); }
+
+// ── FORMSPREE SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+
+  // written answers from exercises 2–5
+  [['q2-',4,'Ex. 2'],['q3-',6,'Ex. 3'],['q4-',7,'Ex. 4'],['q5-',8,'Ex. 5']].forEach(function(ex) {
+    for (var i = 1; i <= ex[1]; i++) {
+      var el = document.getElementById(ex[0] + i);
+      if (!el) continue;
+      answers[ex[2] + ' — item ' + i] = (el.value || '').trim() || '(sem resposta)';
+    }
+  });
+  // V/F selections
+  Object.keys(vfSelected).forEach(function(k) { answers['Ex. 1 — ' + k] = vfSelected[k]; });
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
