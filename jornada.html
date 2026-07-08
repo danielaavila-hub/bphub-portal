@@ -305,11 +305,17 @@ A imagem do peixe fora da água é o jeito popular de dizer que não se vive lon
     <p class="hint" style="margin-bottom:12px;">Dê play e clique em <strong>⏱ Marcar estrofe</strong> no momento em que cada estrofe começa a ser cantada. São poucos cliques — uma vez só por música.</p>
     <div class="video-wrap"><div class="yt-slot" id="yt-sync"></div></div>
     <div id="sync-status" class="hidden" style="background:#3A1F1C;border:1.5px solid #C0392B;border-radius:12px;padding:14px 16px;font-size:14px;margin-bottom:14px;line-height:1.7;"></div>
+    <div id="next-stanza" style="background:#181715;border:1.5px solid #2B2A27;border-radius:12px;padding:12px 16px;margin-bottom:12px;">
+      <span style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pitomba);">Próxima estrofe a marcar</span>
+      <p id="next-stanza-text" style="font-family:'Trirong',serif;font-size:17px;color:#F2EBDD;line-height:1.5;white-space:pre-line;margin-top:4px;"></p>
+    </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
-      <button class="btn btn-cobalto" id="mark-btn" onclick="markStanza()">⏱ Marcar estrofe <span id="mark-count"></span></button>
+      <button class="btn btn-cobalto" id="mark-btn" onclick="markStanza()" style="font-size:16px;padding:14px 28px;">⏱ Marcar estrofe <span id="mark-count"></span></button>
+      <button class="btn btn-ghost" id="speed-btn" onclick="toggleSpeed()">🐢 Câmera lenta</button>
       <button class="btn btn-ghost" onclick="resetSync()">↺ Recomeçar</button>
       <button class="btn btn-ghost" onclick="show('s-setup')">← Voltar</button>
     </div>
+    <p class="hint" style="text-align:left;margin-bottom:12px;">💡 Dicas: a tecla <strong>espaço</strong> também marca · pode pausar o vídeo no início da estrofe e marcar com ele pausado · errou uma? Ajuste com −½s / +½s na lista abaixo.</p>
     <div id="sync-list"></div>
     <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
       <button class="btn" onclick="generateLink()">Gerar a Jornada →</button>
@@ -485,9 +491,45 @@ function renderSyncList(){
   document.getElementById('sync-list').innerHTML=CFG.stanzas.map(function(s,i){
     var t=CFG.times[i];
     var cls='sync-line'+(t!=null?' marked':'')+(i===CFG.times.length?' next-up':'');
-    return '<div class="'+cls+'"><span class="time">'+(t!=null?fmtTime(t):'—')+'</span><span class="stz">'+esc(s.pt)+'</span></div>';
+    var nudge=(t!=null)?' <button class="replay-verse" onclick="nudge('+i+',-0.5)" title="meio segundo antes">−½s</button>'
+      +'<button class="replay-verse" onclick="nudge('+i+',0.5)" title="meio segundo depois">+½s</button>'
+      +'<button class="replay-verse" onclick="checkMark('+i+')" title="conferir">▶</button>':'';
+    return '<div class="'+cls+'"><span class="time">'+(t!=null?fmtTime(t):'—')+'</span><span class="stz">'+esc(s.pt)+'</span>'+nudge+'</div>';
   }).join('');
+  var nx=document.getElementById('next-stanza'), nt=document.getElementById('next-stanza-text');
+  if(nx&&nt){
+    if(CFG.times.length<CFG.stanzas.length){
+      nx.style.display='block';
+      nt.textContent=CFG.stanzas[CFG.times.length].pt;
+    } else { nx.style.display='none'; }
+  }
 }
+function nudge(i,d){
+  CFG.times[i]=Math.max(0,CFG.times[i]+d);
+  renderSyncList();
+}
+function checkMark(i){
+  if(!ytSync||CFG.times[i]==null)return;
+  clearInterval(segTimer);
+  ytSync.seekTo(CFG.times[i],true);ytSync.playVideo();
+  var end=CFG.times[i]+4;
+  segTimer=setInterval(function(){
+    if(ytSync.getCurrentTime()>=end){ytSync.pauseVideo();clearInterval(segTimer);}
+  },200);
+}
+var slowMode=false;
+function toggleSpeed(){
+  if(!ytSync||!ytSync.setPlaybackRate)return;
+  slowMode=!slowMode;
+  ytSync.setPlaybackRate(slowMode?0.75:1);
+  document.getElementById('speed-btn').textContent=slowMode?'▶ Velocidade normal':'🐢 Câmera lenta';
+}
+document.addEventListener('keydown',function(e){
+  if(e.code==='Space'&&document.getElementById('s-sync').classList.contains('on')
+     &&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){
+    e.preventDefault();markStanza();
+  }
+});
 function updateMarkBtn(){
   var n=CFG.times.length,total=CFG.stanzas.length;
   document.getElementById('mark-count').textContent='('+n+'/'+total+')';
