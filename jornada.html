@@ -403,8 +403,16 @@ The image of a fish out of water is the folk way of saying you cannot live away 
   <!-- ═══════════ FASE 4: CANTAR ═══════════ -->
   <section class="screen" id="s-cantar">
     <h2 class="center" style="font-size:22px;color:var(--nanquim);">Agora é a sua vez 🎤</h2>
-    <p class="hint center" style="margin-bottom:10px;">Para cada estrofe: ouça 🔊, grave você cantando (ou lendo em voz alta) e compare com o original. Ninguém ouve além de você!</p>
+    <p class="hint center" style="margin-bottom:10px;">Cante junto — a música toca enquanto você grava, karaokê de verdade. Ninguém ouve além de você! 🎧 Com fones, a gravação captura só a sua voz; sem fones, a música entra junto.</p>
     <div class="video-wrap"><div class="yt-slot" id="yt-cantar"></div></div>
+    <div class="sing-row" style="text-align:center;">
+      <p style="text-align:center;">🎶 A música inteira, do primeiro ao último verso</p>
+      <div class="sing-btns" style="justify-content:center;">
+        <button class="btn btn-cobalto rec-btn" id="sing-full" onclick="singAlong(-1)">🎤 Karaokê completo</button>
+        <span id="cmp-full"></span>
+      </div>
+    </div>
+    <div class="sec-label" style="text-align:center;margin-top:18px;">ou estrofe por estrofe</div>
     <div id="sing-rows"></div>
     <div class="actionbar"><button class="btn btn-cobalto" onclick="goPhase(5)">Ver meu álbum →</button></div>
   </section>
@@ -1025,17 +1033,18 @@ function g4Pick(el,w){
   }
 }
 
-/* ═══════════ FASE 4: CANTAR (shadowing com gravação) ═══════════ */
-var ytCantar=null,recMedia=null,recChunks=[],recIdx=-1,recBlobs={};
+/* ═══════════ FASE 4: CANTAR (karaokê com gravação) ═══════════ */
+var ytCantar=null,recMedia=null,recChunks=[],recKey=null,recBtn=null,recBlobs={};
 function initCantar(){
   var el=document.getElementById('sing-rows');
   if(!el.childElementCount){
     el.innerHTML=CFG.stanzas.map(function(s,i){
       var listen=(CFG.times&&CFG.times[i]!=null)
         ?'<button class="btn btn-ghost" onclick="cantarPlay('+i+')">🔊 Ouvir</button>':'';
-      return '<div class="sing-row" id="sing-'+i+'"><p>'+esc(s.pt)+'</p>'
+      return '<div class="sing-row" id="sing-row-'+i+'"><p>'+esc(s.pt)+'</p>'
         +'<div class="sing-btns">'+listen
-        +'<button class="btn btn-cobalto rec-btn" id="rec-'+i+'" onclick="toggleRec('+i+')">🎤 Gravar</button>'
+        +'<button class="btn btn-cobalto rec-btn" id="sing-'+i+'" onclick="singAlong('+i+')">🎤 Cantar junto</button>'
+        +'<button class="btn btn-ghost rec-btn" id="solo-'+i+'" onclick="soloRec('+i+')">🎙 Só a voz</button>'
         +'<span id="cmp-'+i+'"></span>'
         +'</div></div>';
     }).join('');
@@ -1054,37 +1063,65 @@ function cantarPlay(i){
     if(ytCantar.getCurrentTime()>=end){ytCantar.pauseVideo();clearInterval(segTimer);}
   },200);
 }
-function toggleRec(i){
-  var btn=document.getElementById('rec-'+i);
-  if(recMedia&&recMedia.state==='recording'){
-    recMedia.stop();
-    return;
-  }
+function stopRec(){ if(recMedia&&recMedia.state==='recording')recMedia.stop(); }
+function startRec(key,btn,withMusic,i){
   navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
-    recChunks=[];recIdx=i;
+    recChunks=[];recKey=key;recBtn=btn;
+    if(!btn.dataset.lbl)btn.dataset.lbl=btn.textContent;
     recMedia=new MediaRecorder(stream);
     recMedia.ondataavailable=function(e){if(e.data.size)recChunks.push(e.data);};
     recMedia.onstop=function(){
       stream.getTracks().forEach(function(t){t.stop();});
+      clearInterval(segTimer);
+      if(ytCantar&&ytCantar.pauseVideo)try{ytCantar.pauseVideo();}catch(e){}
       var blob=new Blob(recChunks,{type:recMedia.mimeType||'audio/webm'});
-      if(recBlobs[recIdx])URL.revokeObjectURL(recBlobs[recIdx]);
-      recBlobs[recIdx]=URL.createObjectURL(blob);
-      var b=document.getElementById('rec-'+recIdx);
-      b.textContent='🎤 Gravar de novo';b.classList.remove('recording');
-      document.getElementById('cmp-'+recIdx).innerHTML=
-        '<button class="btn" onclick="playRec('+recIdx+')">▶ Minha voz</button> <span class="sing-done">✓</span>';
-      document.getElementById('sing-'+recIdx).classList.add('recorded');
+      if(recBlobs[recKey])URL.revokeObjectURL(recBlobs[recKey]);
+      recBlobs[recKey]=URL.createObjectURL(blob);
+      recBtn.textContent=recBtn.dataset.lbl;recBtn.classList.remove('recording');
+      var cmp=document.getElementById('cmp-'+recKey);
+      if(cmp)cmp.innerHTML='<button class="btn" onclick="playRec(\''+recKey+'\')">▶ Minha voz</button> <span class="sing-done">✓</span>';
+      var row=document.getElementById('sing-row-'+recKey);
+      if(row)row.classList.add('recorded');
     };
     recMedia.start();
     btn.textContent='⏹ Parar';btn.classList.add('recording');
-    if(ytCantar&&ytCantar.pauseVideo)try{ytCantar.pauseVideo();}catch(e){}
+    if(withMusic&&ytCantar){
+      if(i>=0&&CFG.times&&CFG.times[i]!=null){
+        var start=CFG.times[i];
+        var end=(i+1<CFG.times.length)?CFG.times[i+1]:start+15;
+        ytCantar.seekTo(start,true);ytCantar.playVideo();
+        clearInterval(segTimer);
+        segTimer=setInterval(function(){
+          if(ytCantar.getCurrentTime()>=end)stopRec();
+        },200);
+      } else {
+        if(i<0)ytCantar.seekTo(0,true);
+        ytCantar.playVideo();
+        clearInterval(segTimer);
+        segTimer=setInterval(function(){
+          try{ if(ytCantar.getPlayerState()===0)stopRec(); }catch(e){}
+        },500);
+      }
+    } else {
+      if(ytCantar&&ytCantar.pauseVideo)try{ytCantar.pauseVideo();}catch(e){}
+    }
   }).catch(function(){
     alert('Não consegui acessar o microfone. Verifique a permissão do navegador.');
   });
 }
-function playRec(i){
-  if(!recBlobs[i])return;
-  new Audio(recBlobs[i]).play();
+function singAlong(i){
+  var btn=document.getElementById(i<0?'sing-full':'sing-'+i);
+  if(recMedia&&recMedia.state==='recording'){stopRec();return;}
+  startRec(i<0?'full':String(i),btn,true,i);
+}
+function soloRec(i){
+  var btn=document.getElementById('solo-'+i);
+  if(recMedia&&recMedia.state==='recording'){stopRec();return;}
+  startRec(String(i),btn,false,i);
+}
+function playRec(k){
+  if(!recBlobs[k])return;
+  new Audio(recBlobs[k]).play();
 }
 
 /* ═══════════ FASE 5: ÁLBUM (persiste no aparelho) ═══════════ */
