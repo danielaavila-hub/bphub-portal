@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vou querer desse! — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 44px; }
+    .sec-label:first-child { margin-top: 0; }
+
+    .card, .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+    .card h2, .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .card-sub { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    table.ref { width: 100%; border-collapse: collapse; font-size: 15px; }
+    table.ref td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.ref tr:last-child td { border-bottom: none; }
+    table.ref strong { color: var(--cobalto); }
+
+    .note-box { background: var(--baunilha2); border-radius: 10px; padding: 12px 18px; font-size: 14px; margin-top: 16px; line-height: 1.7; }
+
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16.5px; line-height: 1.85; }
+    .text-body strong { color: var(--cobalto); }
+
+    /* Menu replica */
+    .menu-replica { max-width: 480px; background: #FFFDF8; border: 1.5px solid #E4DCC8; border-radius: 4px; padding: 28px 32px; box-shadow: 0 2px 10px rgba(30,29,28,0.07); }
+    .menu-replica .mr-name { font-family: 'Trirong', serif; font-size: 24px; text-align: center; color: var(--nanquim); letter-spacing: 0.06em; }
+    .menu-replica .mr-tag { text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--pitomba); margin-bottom: 18px; }
+    .menu-replica .mr-sec { font-family: 'Trirong', serif; font-size: 16px; font-style: italic; color: var(--cobalto); border-bottom: 1px solid #E4DCC8; padding-bottom: 3px; margin: 16px 0 8px; }
+    .menu-replica .mr-item { display: flex; justify-content: space-between; font-size: 14.5px; margin-bottom: 4px; }
+    .menu-replica .mr-item em { color: #8a8672; font-size: 13px; }
+
+    .q-block { margin-bottom: 20px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 2px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    .gloss { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 8px; }
+
+    textarea { width: 100%; min-height: 60px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 140px; }
+
+    .gap-input { display: inline-block; width: 120px; padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); outline: none; }
+    .gap-input:focus { border-color: var(--cobalto); }
+
+    select.dd { padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); background: #fff; outline: none; cursor: pointer; }
+    select.dd:focus { border-color: var(--cobalto); }
+
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .hint { color: #8a8672; font-size: 14px; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+    .menu-word { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--off-white); border-radius: 10px; padding: 8px 12px; font-size: 14.5px; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Vou querer desse! <em>demonstrativos à mesa</em></h1>
+  <div class="hero-sub">Demonstrative pronouns and the contractions with <strong>de</strong> and <strong>em</strong> — <strong>desse, daquela, nisso, naquele…</strong> — practiced where Brazilians use them most: ordering food and drinks.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">demonstrativos</span>
+    <span class="hero-tag">contrações de · em</span>
+    <span class="hero-tag">restaurante</span>
+    <span class="hero-tag">cafezinho</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="sec-label">Language Reference</div>
+  <div class="card">
+    <h2>DE + demonstrativo → contração</h2>
+    <div class="card-sub">Before you start, read these references. You will use them throughout the activity.</div>
+    <table class="ref">
+      <tr><td>de + esse(s) = <strong>desse(s)</strong></td><td>de + essa(s) = <strong>dessa(s)</strong></td><td>de + isso = <strong>disso</strong></td></tr>
+      <tr><td>de + aquele(s) = <strong>daquele(s)</strong></td><td>de + aquela(s) = <strong>daquela(s)</strong></td><td>de + aquilo = <strong>daquilo</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>EM + demonstrativo → contração</h2>
+    <table class="ref">
+      <tr><td>em + esse(s) = <strong>nesse(s)</strong></td><td>em + essa(s) = <strong>nessa(s)</strong></td><td>em + isso = <strong>nisso</strong></td></tr>
+      <tr><td>em + aquele(s) = <strong>naquele(s)</strong></td><td>em + aquela(s) = <strong>naquela(s)</strong></td><td>em + aquilo = <strong>naquilo</strong></td></tr>
+    </table>
+    <div class="note-box">💡 <strong>este/esta</strong> work the same way: de + este = <strong>deste</strong>, em + esta = <strong>nesta</strong>. In Brazil, people often use <strong>esse</strong> and <strong>este</strong> in the same way when speaking.<br><strong>isso, isto, aquilo</strong> never change (no gender, no plural).</div>
+  </div>
+
+  <div class="card">
+    <h2>Comidas e bebidas</h2>
+    <div class="card-sub">Study the menu — you will use it in the exercises.</div>
+    <div class="menu-replica">
+      <div class="mr-name">RESTAURANTE DO PORTO</div>
+      <div class="mr-tag">Cardápio</div>
+      <div class="mr-sec">Entrada</div>
+      <div class="mr-item"><span>a sopa</span><em>soup</em></div>
+      <div class="mr-item"><span>a salada</span><em>salad</em></div>
+      <div class="mr-sec">Prato principal</div>
+      <div class="mr-item"><span>a feijoada</span><em>black bean &amp; pork stew</em></div>
+      <div class="mr-item"><span>o filé-mignon</span><em>tenderloin steak</em></div>
+      <div class="mr-item"><span>o peixe grelhado</span><em>grilled fish</em></div>
+      <div class="mr-item"><span>o camarão</span><em>shrimp</em></div>
+      <div class="mr-sec">Bebida</div>
+      <div class="mr-item"><span>o suco</span><em>juice</em></div>
+      <div class="mr-item"><span>o refrigerante</span><em>soft drink</em></div>
+      <div class="mr-item"><span>a caipirinha</span><em>lime &amp; cachaça cocktail</em></div>
+      <div class="mr-item"><span>a água</span><em>water</em></div>
+      <div class="mr-sec">Sobremesa</div>
+      <div class="mr-item"><span>o pudim</span><em>flan</em></div>
+      <div class="mr-item"><span>o sorvete</span><em>ice cream</em></div>
+      <div class="mr-item"><span>a mousse</span><em>mousse</em></div>
+    </div>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Text</div>
+  <div class="card text-card">
+    <h2>O cafezinho</h2>
+    <div class="fonte">Fonte: Rubem Braga, "O Cafezinho" (<em>O conde e o passarinho &amp; Morro do isolamento</em>). Texto adaptado para fins didáticos.</div>
+    <div class="text-body">
+      <p>No Brasil, o cafezinho é quase um ritual. Quando a vida fica complicada, o brasileiro diz: "Vou tomar um cafezinho." <strong>Nesse</strong> momento, ele faz uma pequena pausa e esquece os problemas por um instante.</p>
+      <p>Às vezes, a pessoa sai para tomar <strong>esse</strong> café e demora horas para voltar! Mas o carioca gosta muito <strong>desse</strong> hábito: para ele, parar para um cafezinho é uma das delícias do dia.</p>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="sec-label">Part 1 — Compreensão</div>
+  <div class="ex-card">
+    <h2>Understand the text</h2>
+    <div class="card-sub">Answer in Portuguese.</div>
+
+    <div class="q-block">
+      <div class="q"><span class="q-num">1.</span> No Brasil, o cafezinho é quase o quê?</div>
+      <div class="gloss">In Brazil, the cafezinho is almost what?</div>
+      <textarea id="p1-1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">2.</span> O que o brasileiro diz quando a vida fica complicada?</div>
+      <div class="gloss">What does a Brazilian say when life gets complicated?</div>
+      <textarea id="p1-2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">3.</span> O que a pessoa faz nesse momento?</div>
+      <div class="gloss">What does the person do at that moment?</div>
+      <textarea id="p1-3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">4.</span> E você? Você tem um hábito como o cafezinho no seu dia?</div>
+      <div class="gloss">And you? Do you have a habit like the cafezinho in your day? (Personal answer — your teacher will read it.)</div>
+      <textarea id="p1-4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkPart1()">✓ Check answers</button>
+    <div id="p1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="sec-label">Part 2 — Controlled Practice</div>
+
+  <!-- Exercise 1 -->
+  <div class="ex-card">
+    <h2>Exercise 1 — DE + demonstrativo</h2>
+    <div class="card-sub">Write the contraction. The two words are in parentheses.</div>
+
+    <div class="sent"><strong>1.</strong> Vou querer um pouco <input class="gap-input" id="d1" placeholder="..."> <span class="hint">(de + essa)</span> feijoada, por favor.</div>
+    <div class="sent"><strong>2.</strong> Eu gostaria de uma porção <input class="gap-input" id="d2" placeholder="..."> <span class="hint">(de + aquela)</span> salada.</div>
+    <div class="sent"><strong>3.</strong> Você quer um pedaço <input class="gap-input" id="d3" placeholder="..."> <span class="hint">(de + esse)</span> pudim?</div>
+    <div class="sent"><strong>4.</strong> Não gosto <input class="gap-input" id="d4" placeholder="..."> <span class="hint">(de + aquele)</span> suco. É muito doce.</div>
+    <div class="sent"><strong>5.</strong> Vou provar um pouco <input class="gap-input" id="d5" placeholder="..."> <span class="hint">(de + essas)</span> sobremesas.</div>
+    <div class="sent"><strong>6.</strong> Gosto muito <input class="gap-input" id="d6" placeholder="..."> <span class="hint">(de + aqueles)</span> pastéis na vitrine.</div>
+    <div class="sent"><strong>7.</strong> Aquilo parece bom. Vou querer um pouco <input class="gap-input" id="d7" placeholder="..."> <span class="hint">(de + aquilo)</span>.</div>
+    <div class="sent"><strong>8.</strong> Não sei o nome <input class="gap-input" id="d8" placeholder="..."> <span class="hint">(de + isso)</span>. O que é?</div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="ex-card">
+    <h2>Exercise 2 — EM + demonstrativo</h2>
+    <div class="card-sub">Write the contraction. The two words are in parentheses.</div>
+
+    <div class="sent"><strong>1.</strong> As bebidas estão <input class="gap-input" id="e1" placeholder="..."> <span class="hint">(em + aquela)</span> mesa.</div>
+    <div class="sent"><strong>2.</strong> Posso servir a comida <input class="gap-input" id="e2" placeholder="..."> <span class="hint">(em + esse)</span> prato?</div>
+    <div class="sent"><strong>3.</strong> O garçom colocou o gelo <input class="gap-input" id="e3" placeholder="..."> <span class="hint">(em + essa)</span> caipirinha.</div>
+    <div class="sent"><strong>4.</strong> Os pratos quentes ficam <input class="gap-input" id="e4" placeholder="..."> <span class="hint">(em + aquele)</span> balcão.</div>
+    <div class="sent"><strong>5.</strong> Vou pegar as sobremesas <input class="gap-input" id="e5" placeholder="..."> <span class="hint">(em + aquelas)</span> travessas.</div>
+    <div class="sent"><strong>6.</strong> Você já pensou <input class="gap-input" id="e6" placeholder="..."> <span class="hint">(em + isso)</span>? Qual prato vai escolher?</div>
+    <div class="sent"><strong>7.</strong> Tem muito tempero <input class="gap-input" id="e7" placeholder="..."> <span class="hint">(em + esses)</span> camarões.</div>
+    <div class="sent"><strong>8.</strong> Aquilo é uma sobremesa? Tem chocolate <input class="gap-input" id="e8" placeholder="..."> <span class="hint">(em + aquilo)</span>?</div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="ex-card">
+    <h2>Exercise 3 — No menu</h2>
+    <div class="card-sub">Choose the correct part of the menu for each dish.</div>
+
+    <div class="menu-grid">
+      <div class="menu-word"><span>bruschetta</span><select class="dd" id="m1"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>sopa</span><select class="dd" id="m2"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>salada</span><select class="dd" id="m3"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>feijoada</span><select class="dd" id="m4"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>filé-mignon</span><select class="dd" id="m5"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>peixe grelhado</span><select class="dd" id="m6"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>camarão</span><select class="dd" id="m7"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>caipirinha</span><select class="dd" id="m8"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>suco</span><select class="dd" id="m9"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>refrigerante</span><select class="dd" id="m10"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>água</span><select class="dd" id="m11"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>pudim</span><select class="dd" id="m12"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>sorvete</span><select class="dd" id="m13"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+      <div class="menu-word"><span>mousse</span><select class="dd" id="m14"><option value="">—</option><option>Entrada</option><option>Prato principal</option><option>Bebida</option><option>Sobremesa</option></select></div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="sec-label">Part 3 — Written Production</div>
+  <div class="ex-card">
+    <h2>No self-service</h2>
+    <div class="card-sub">You are at a <strong>self-service</strong> restaurant with a friend. Talk about what you want to eat and drink. Write <strong>5 sentences</strong> using <strong>contracted demonstratives</strong> (desse, dessa, naquela…) and these prompts:</div>
+
+    <div class="note-box" style="margin-bottom:16px;margin-top:0;">
+      <strong>Vou querer um pouco (de) …</strong><br>
+      <strong>Acho que vou pegar uma porção (de) …</strong><br>
+      <strong>Você quer provar (de) … ?</strong><br>
+      <strong>A sobremesa está (em) … mesa.</strong><br>
+      <span class="gloss">Example: Vou querer um pouco daquela feijoada, por favor.</span>
+    </div>
+
+    <textarea id="p3-text" class="prod" placeholder="Escreva suas frases aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:"']/g,'').replace(/\s+/g,' ');
+}
+
+function renderResult(id, correct, total, lines) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!'
+             : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + lines;
+  res.style.display = 'block';
+}
+
+function itemLine(n, ok, display) {
+  return '<div style="margin-bottom:8px;font-weight:400;"><strong>' + n + '.</strong> '
+    + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+    + ' ' + display + '</div>';
+}
+
+/* ── PART 1 — keyword matching (Q4 is personal) ── */
+var p1Answers = [
+  { id: 'p1-1', check: function(t){ return t.indexOf('ritual') !== -1; },
+    display: 'Um ritual.' },
+  { id: 'p1-2', check: function(t){ return t.indexOf('cafezinho') !== -1 && (t.indexOf('tomar') !== -1 || t.indexOf('vou') !== -1); },
+    display: '"Vou tomar um cafezinho."' },
+  { id: 'p1-3', check: function(t){ return t.indexOf('pausa') !== -1 || t.indexOf('esquece') !== -1; },
+    display: 'Faz uma pequena pausa e esquece os problemas por um instante.' }
+];
+
+function checkPart1() {
+  var html = '', correct = 0;
+  p1Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var t = norm(el.value);
+    var filled = t.length > 0;
+    var ok = filled && a.check(t);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  html += '<div style="margin-top:10px;font-style:italic;">4. Resposta pessoal — sua professora vai ler e comentar.</div>';
+  renderResult('p1-result', correct, p1Answers.length, html);
+}
+
+/* ── EXERCISE 1 — DE + demonstrativo ── */
+var ex1Answers = [
+  { id: 'd1', key: 'dessa',    display: 'Vou querer um pouco <strong>dessa</strong> feijoada, por favor.' },
+  { id: 'd2', key: 'daquela',  display: 'Eu gostaria de uma porção <strong>daquela</strong> salada.' },
+  { id: 'd3', key: 'desse',    display: 'Você quer um pedaço <strong>desse</strong> pudim?' },
+  { id: 'd4', key: 'daquele',  display: 'Não gosto <strong>daquele</strong> suco. É muito doce.' },
+  { id: 'd5', key: 'dessas',   display: 'Vou provar um pouco <strong>dessas</strong> sobremesas.' },
+  { id: 'd6', key: 'daqueles', display: 'Gosto muito <strong>daqueles</strong> pastéis na vitrine.' },
+  { id: 'd7', key: 'daquilo',  display: 'Vou querer um pouco <strong>daquilo</strong>.' },
+  { id: 'd8', key: 'disso',    display: 'Não sei o nome <strong>disso</strong>. O que é?' }
+];
+
+function checkEx1() { checkGaps(ex1Answers, 'ex1-result'); }
+
+/* ── EXERCISE 2 — EM + demonstrativo ── */
+var ex2Answers = [
+  { id: 'e1', key: 'naquela',  display: 'As bebidas estão <strong>naquela</strong> mesa.' },
+  { id: 'e2', key: 'nesse',    display: 'Posso servir a comida <strong>nesse</strong> prato?' },
+  { id: 'e3', key: 'nessa',    display: 'O garçom colocou o gelo <strong>nessa</strong> caipirinha.' },
+  { id: 'e4', key: 'naquele',  display: 'Os pratos quentes ficam <strong>naquele</strong> balcão.' },
+  { id: 'e5', key: 'naquelas', display: 'Vou pegar as sobremesas <strong>naquelas</strong> travessas.' },
+  { id: 'e6', key: 'nisso',    display: 'Você já pensou <strong>nisso</strong>? Qual prato vai escolher?' },
+  { id: 'e7', key: 'nesses',   display: 'Tem muito tempero <strong>nesses</strong> camarões.' },
+  { id: 'e8', key: 'naquilo',  display: 'Tem chocolate <strong>naquilo</strong>?' }
+];
+
+function checkEx2() { checkGaps(ex2Answers, 'ex2-result'); }
+
+function checkGaps(answers, resultId) {
+  var html = '', correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult(resultId, correct, answers.length, html);
+}
+
+/* ── EXERCISE 3 — menu classification ── */
+var ex3Answers = [
+  { id: 'm1',  key: 'Entrada',         word: 'bruschetta' },
+  { id: 'm2',  key: 'Entrada',         word: 'sopa' },
+  { id: 'm3',  key: 'Entrada',         word: 'salada' },
+  { id: 'm4',  key: 'Prato principal', word: 'feijoada' },
+  { id: 'm5',  key: 'Prato principal', word: 'filé-mignon' },
+  { id: 'm6',  key: 'Prato principal', word: 'peixe grelhado' },
+  { id: 'm7',  key: 'Prato principal', word: 'camarão' },
+  { id: 'm8',  key: 'Bebida',          word: 'caipirinha' },
+  { id: 'm9',  key: 'Bebida',          word: 'suco' },
+  { id: 'm10', key: 'Bebida',          word: 'refrigerante' },
+  { id: 'm11', key: 'Bebida',          word: 'água' },
+  { id: 'm12', key: 'Sobremesa',       word: 'pudim' },
+  { id: 'm13', key: 'Sobremesa',       word: 'sorvete' },
+  { id: 'm14', key: 'Sobremesa',       word: 'mousse' }
+];
+
+function checkEx3() {
+  var html = '', correct = 0;
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value !== '';
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.word + ' → <strong>' + a.key + '</strong>');
+  });
+  renderResult('ex3-result', correct, ex3Answers.length, html);
+}
+
+/* ── FORMSPREE SUBMIT ── */
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
