@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check-in na pousada — A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #4E551D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #4E551D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 44px; }
+    .sec-label:first-child { margin-top: 0; }
+
+    .card, .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+    .card h2, .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .card-sub { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    table.ref { width: 100%; border-collapse: collapse; font-size: 15px; }
+    table.ref th { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--floresta); text-align: left; padding: 8px 12px; border-bottom: 2px solid #E9EBDD; }
+    table.ref td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.ref tr:last-child td { border-bottom: none; }
+
+    .num-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+    .num-chip { background: var(--off-white); border-radius: 10px; padding: 10px 8px; text-align: center; }
+    .num-chip .n { font-family: 'Trirong', serif; font-size: 24px; color: var(--floresta); line-height: 1.2; }
+    .num-chip .w { font-size: 14px; font-weight: 600; }
+
+    .note-box { background: var(--baunilha2); border-radius: 10px; padding: 12px 18px; font-size: 14px; margin-top: 16px; }
+
+    .vocab-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .vocab-item { background: var(--off-white); border-radius: 20px; padding: 5px 14px; font-size: 14px; }
+    .vocab-item strong { color: var(--floresta); }
+    .vocab-item em { color: #8a8672; font-size: 13px; }
+
+    .q-block { margin-bottom: 20px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--floresta); margin-right: 4px; }
+    .gloss { font-size: 13px; color: #8a8672; font-style: italic; }
+
+    textarea { width: 100%; min-height: 60px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--floresta); }
+    textarea.prod { min-height: 140px; }
+
+    .gap-input { display: inline-block; width: 110px; padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); outline: none; }
+    .gap-input:focus { border-color: var(--floresta); }
+
+    select.dd { padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); background: #fff; outline: none; cursor: pointer; }
+    select.dd:focus { border-color: var(--floresta); }
+
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .sent { font-size: 15.5px; margin-bottom: 4px; line-height: 2.1; }
+    .sent-gloss { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 14px; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    /* Hotel card replica */
+    .hotel-card { max-width: 420px; background: #fff; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(30,29,28,0.06); }
+    .hotel-card-top { background: var(--floresta); color: white; padding: 16px 22px; }
+    .hotel-card-top .hc-name { font-family: 'Trirong', serif; font-size: 21px; letter-spacing: 0.04em; }
+    .hotel-card-top .hc-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); }
+    .hotel-card-body { padding: 16px 22px; font-size: 14.5px; line-height: 1.9; }
+    .hotel-card-body strong { color: var(--floresta); }
+
+    /* Picture matching */
+    .pic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .pic-card { background: var(--off-white); border-radius: 12px; padding: 12px; text-align: center; }
+    .pic-card svg { width: 72px; height: 72px; }
+    .pic-letter { font-family: 'Trirong', serif; font-size: 20px; color: var(--floresta); font-weight: 400; }
+    .match-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 15.5px; }
+    .match-word { min-width: 170px; }
+
+    /* Check-in form replica */
+    .form-replica { max-width: 460px; background: #fff; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 26px; }
+    .form-replica .fr-title { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--floresta); margin-bottom: 16px; }
+    .form-replica label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; margin-top: 12px; }
+    .form-replica input { width: 100%; padding: 8px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Check-in na pousada <em>números e gênero</em></h1>
+  <div class="hero-sub">Numbers 0–10 and gender agreement — <strong>um/uma</strong>, <strong>dois/duas</strong> — in a real Brazilian hotel situation: checking in, reading phone numbers, and asking for what you need.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">números 0–10</span>
+    <span class="hero-tag">um · uma · dois · duas</span>
+    <span class="hero-tag">hotel</span>
+    <span class="hero-tag">viagem</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="sec-label">Language Reference</div>
+  <div class="card">
+    <h2>Números 0–10</h2>
+    <div class="card-sub">Before you start, read these references. You will use them throughout the activity.</div>
+    <div class="num-grid">
+      <div class="num-chip"><div class="n">0</div><div class="w">zero</div></div>
+      <div class="num-chip"><div class="n">1</div><div class="w">um</div></div>
+      <div class="num-chip"><div class="n">2</div><div class="w">dois</div></div>
+      <div class="num-chip"><div class="n">3</div><div class="w">três</div></div>
+      <div class="num-chip"><div class="n">4</div><div class="w">quatro</div></div>
+      <div class="num-chip"><div class="n">5</div><div class="w">cinco</div></div>
+      <div class="num-chip"><div class="n">6</div><div class="w">seis</div></div>
+      <div class="num-chip"><div class="n">7</div><div class="w">sete</div></div>
+      <div class="num-chip"><div class="n">8</div><div class="w">oito</div></div>
+      <div class="num-chip"><div class="n">9</div><div class="w">nove</div></div>
+      <div class="num-chip"><div class="n">10</div><div class="w">dez</div></div>
+    </div>
+    <div class="note-box">📞 On the phone or when saying a CEP (zip code), Brazilians often say <strong>meia</strong> instead of <strong>seis</strong> for the digit <strong>6</strong>.</div>
+  </div>
+
+  <div class="card">
+    <h2>Número + gênero (1 and 2)</h2>
+    <div class="card-sub">Only 1 and 2 change with gender in Portuguese.</div>
+    <table class="ref">
+      <tr><th></th><th>Masculino</th><th>Feminino</th></tr>
+      <tr><td><strong>1</strong></td><td><strong>um</strong> travesseiro</td><td><strong>uma</strong> toalha</td></tr>
+      <tr><td><strong>2</strong></td><td><strong>dois</strong> travesseiros</td><td><strong>duas</strong> toalhas</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Vocabulário do quarto</h2>
+    <div class="card-sub">o = masculino &nbsp;·&nbsp; a = feminino</div>
+    <div class="vocab-list">
+      <span class="vocab-item"><strong>o</strong> quarto <em>(room)</em></span>
+      <span class="vocab-item"><strong>o</strong> travesseiro <em>(pillow)</em></span>
+      <span class="vocab-item"><strong>o</strong> sabonete <em>(soap)</em></span>
+      <span class="vocab-item"><strong>o</strong> elevador <em>(elevator)</em></span>
+      <span class="vocab-item"><strong>a</strong> cama <em>(bed)</em></span>
+      <span class="vocab-item"><strong>a</strong> toalha <em>(towel)</em></span>
+      <span class="vocab-item"><strong>a</strong> coberta <em>(blanket)</em></span>
+      <span class="vocab-item"><strong>a</strong> chave <em>(key)</em></span>
+      <span class="vocab-item"><strong>a</strong> garrafa de água <em>(bottle of water)</em></span>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="sec-label">Part 1 — Os números do cartão</div>
+  <div class="ex-card">
+    <h2>The hotel card</h2>
+    <div class="card-sub">Look at the hotel card.</div>
+
+    <div class="hotel-card" style="margin-bottom:22px;">
+      <div class="hotel-card-top">
+        <div class="hc-tag">Pousada</div>
+        <div class="hc-name">POUSADA DA TERRA</div>
+      </div>
+      <div class="hotel-card-body">
+        Rua das Conchas, 2190 — Ponta Negra, Natal (RN)<br>
+        <strong>CEP:</strong> 59090-420<br>
+        <strong>Telefone:</strong> (84) 99692-1771
+      </div>
+    </div>
+    <div class="gloss" style="margin-bottom:22px;">Adapted from a public listing — Pousada da Terra, Natal (RN)</div>
+
+    <div class="q-block">
+      <div class="q"><span class="q-num">A.</span> Write the telephone number in words, one digit at a time: <strong>(84) 99692-1771</strong></div>
+      <textarea id="p1-a" placeholder="oito, quatro, ..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">B.</span> Write the CEP in words, one digit at a time: <strong>59090-420</strong></div>
+      <textarea id="p1-b" placeholder="Escreva os números aqui..."></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkPart1()">✓ Check answers</button>
+    <div id="p1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="sec-label">Part 2 — Controlled Practice</div>
+
+  <!-- Exercise 1 -->
+  <div class="ex-card">
+    <h2>Exercise 1 — um / uma / dois / duas</h2>
+    <div class="card-sub">Complete with the correct word. The quantity is in parentheses.</div>
+
+    <div class="sent"><strong>1.</strong> Eu gostaria de pedir <input class="gap-input" id="g1" placeholder="..."> (1) toalha, por favor.</div>
+    <div class="sent-gloss">I'd like a towel, please.</div>
+    <div class="sent"><strong>2.</strong> Eu gostaria de pedir <input class="gap-input" id="g2" placeholder="..."> (2) travesseiros.</div>
+    <div class="sent-gloss">I'd like two pillows.</div>
+    <div class="sent"><strong>3.</strong> Tem <input class="gap-input" id="g3" placeholder="..."> (1) elevador aqui?</div>
+    <div class="sent-gloss">Is there an elevator here?</div>
+    <div class="sent"><strong>4.</strong> Eu reservei <input class="gap-input" id="g4a" placeholder="..."> (1) quarto para <input class="gap-input" id="g4b" placeholder="..."> (2) noites.</div>
+    <div class="sent-gloss">I've booked a room for two nights.</div>
+    <div class="sent"><strong>5.</strong> Por favor, <input class="gap-input" id="g5" placeholder="..."> (2) garrafas de água.</div>
+    <div class="sent-gloss">Two bottles of water, please.</div>
+    <div class="sent"><strong>6.</strong> Eu gostaria de pedir <input class="gap-input" id="g6" placeholder="..."> (2) cobertas, por favor.</div>
+    <div class="sent-gloss">I'd like two blankets, please.</div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="ex-card">
+    <h2>Exercise 2 — O quarto de hotel</h2>
+    <div class="card-sub">Match each picture to the correct word. Choose the letter.</div>
+
+    <div class="pic-grid">
+      <div class="pic-card"><div class="pic-letter">a</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="24" r="9"/><circle cx="22" cy="24" r="3.5"/><path d="M29 31 L48 50"/><path d="M42 44 L48 38"/><path d="M46 48 L52 42"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">b</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 44 V26"/><path d="M8 38 H56"/><path d="M56 44 V32 Q56 28 52 28 H24 V38"/><rect x="12" y="28" width="10" height="6" rx="3"/><path d="M8 44 H56"/><path d="M10 44 V48 M54 44 V48"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">c</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14 H50"/><path d="M20 14 V46 Q20 50 24 50 H40 Q44 50 44 46 V14"/><path d="M20 24 H44"/><path d="M26 32 H38 M26 38 H38"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">d</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="27" y="6" width="10" height="6" rx="2"/><path d="M28 12 Q24 20 24 26 V52 Q24 56 28 56 H36 Q40 56 40 52 V26 Q40 20 36 12"/><path d="M24 32 H40 M24 44 H40"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">e</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="26" width="32" height="20" rx="8"/><path d="M20 36 H36" opacity="0.5"/><circle cx="48" cy="18" r="3"/><circle cx="54" cy="26" r="2"/><circle cx="46" cy="28" r="1.5"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">f</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20 Q10 32 12 44 Q32 40 52 44 Q54 32 52 20 Q32 24 12 20 Z"/><path d="M12 20 Q10 16 14 16 M52 20 Q54 16 50 16 M12 44 Q10 48 14 48 M52 44 Q54 48 50 48" opacity="0.6"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">g</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="10" width="28" height="46" rx="2"/><circle cx="40" cy="34" r="2" fill="#4E551D"/><rect x="26" y="16" width="12" height="9" rx="1.5"/><path d="M29.5 23 V19.5 Q29.5 18 31 18 Q32.5 18 32.5 19.5 M34.5 21.5 H35" opacity="0"/><text x="32" y="23" text-anchor="middle" font-family="Manrope, sans-serif" font-size="7.5" font-weight="700" fill="#4E551D" stroke="none">7</text><path d="M12 56 H52"/></svg>
+      </div>
+      <div class="pic-card"><div class="pic-letter">h</div>
+        <svg viewBox="0 0 64 64" fill="none" stroke="#4E551D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40 Q10 34 16 34 H48 Q54 34 54 40 V46 H10 Z"/><path d="M10 46 Q10 52 16 52 H54 V46"/><path d="M16 34 Q14 26 22 24 Q30 22 34 26 Q40 20 46 26 Q50 30 48 34" opacity="0.6"/></svg>
+      </div>
+    </div>
+
+    <div class="match-row"><span class="match-word">a cama</span>
+      <select class="dd" id="m1"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">o quarto</span>
+      <select class="dd" id="m2"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">a toalha</span>
+      <select class="dd" id="m3"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">a coberta</span>
+      <select class="dd" id="m4"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">o sabonete</span>
+      <select class="dd" id="m5"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">o travesseiro</span>
+      <select class="dd" id="m6"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">a garrafa de água</span>
+      <select class="dd" id="m7"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+    <div class="match-row"><span class="match-word">a chave</span>
+      <select class="dd" id="m8"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option><option>g</option><option>h</option></select></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="sec-label">Part 3 — Written Production</div>
+  <div class="ex-card">
+    <h2>A. Your check-in form</h2>
+    <div class="card-sub">Complete your check-in form (use fake numbers). Then, practice saying the numbers in Portuguese out loud.</div>
+
+    <div class="form-replica">
+      <div class="fr-title">Formulário de Check-in</div>
+      <label>Número do quarto</label>
+      <input type="text" id="f-quarto" autocomplete="off">
+      <label>Número de telefone</label>
+      <input type="text" id="f-telefone" autocomplete="off">
+      <label>Documento (passaporte/RG)</label>
+      <input type="text" id="f-documento" autocomplete="off">
+      <label>CEP / Zip code</label>
+      <input type="text" id="f-cep" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <h2>B. What do you need?</h2>
+    <div class="card-sub">You just arrived at the hotel. Write <strong>5 sentences</strong> asking for things you need. Use numbers with the correct gender and these two prompts:</div>
+
+    <div class="note-box" style="margin-bottom:16px;margin-top:0;">
+      <strong>Eu gostaria de pedir … , por favor.</strong><br>
+      <strong>Por favor, você tem … ?</strong><br>
+      <span class="gloss">Example: Eu gostaria de pedir duas toalhas, por favor.</span>
+    </div>
+
+    <textarea id="p3-text" class="prod" placeholder="Escreva suas frases aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:"'()\-–—→]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function renderResult(id, correct, total, lines) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!'
+             : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + lines;
+  res.style.display = 'block';
+}
+
+function itemLine(n, ok, display) {
+  return '<div style="margin-bottom:8px;font-weight:400;"><strong>' + n + '.</strong> '
+    + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+    + ' ' + display + '</div>';
+}
+
+/* ── PART 1 — digit-by-digit check ── */
+function checkDigits(elId, expected) {
+  var el = document.getElementById(elId);
+  var words = norm(el.value).split(' ').filter(function(w){ return w.length > 0 && w !== 'e'; });
+  var ok = words.length === expected.length && expected.every(function(exp, i) {
+    return Array.isArray(exp) ? exp.indexOf(words[i]) !== -1 : words[i] === exp;
+  });
+  var filled = el.value.trim().length > 0;
+  el.classList.toggle('correct', ok);
+  el.classList.toggle('wrong', filled && !ok);
+  return ok;
+}
+
+function checkPart1() {
+  var phone = [['oito'],['quatro'],['nove'],['nove'],['seis','meia'],['nove'],['dois'],['um'],['sete'],['sete'],['um']];
+  var cep = [['cinco'],['nove'],['zero'],['nove'],['zero'],['quatro'],['dois'],['zero']];
+  var okA = checkDigits('p1-a', phone);
+  var okB = checkDigits('p1-b', cep);
+  var html = itemLine('A', okA, '(84) 99692-1771 → oito, quatro, nove, nove, <strong>seis/meia</strong>, nove, dois, um, sete, sete, um.')
+           + itemLine('B', okB, '59090-420 → cinco, nove, zero, nove, zero, quatro, dois, zero.');
+  renderResult('p1-result', (okA?1:0)+(okB?1:0), 2, html);
+}
+
+/* ── EXERCISE 1 — um/uma/dois/duas ── */
+var ex1Answers = [
+  { id: 'g1',  key: 'uma',  display: 'Eu gostaria de pedir <strong>uma</strong> toalha, por favor.' },
+  { id: 'g2',  key: 'dois', display: 'Eu gostaria de pedir <strong>dois</strong> travesseiros.' },
+  { id: 'g3',  key: 'um',   display: 'Tem <strong>um</strong> elevador aqui?' },
+  { id: 'g4a', key: 'um',   display: 'Eu reservei <strong>um</strong> quarto...' },
+  { id: 'g4b', key: 'duas', display: '...para <strong>duas</strong> noites.' },
+  { id: 'g5',  key: 'duas', display: 'Por favor, <strong>duas</strong> garrafas de água.' },
+  { id: 'g6',  key: 'duas', display: 'Eu gostaria de pedir <strong>duas</strong> cobertas, por favor.' }
+];
+
+function checkEx1() {
+  var html = '', correct = 0;
+  ex1Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* ── EXERCISE 2 — picture matching ── */
+var ex2Answers = [
+  { id: 'm1', key: 'b', display: 'a cama → <strong>b</strong>' },
+  { id: 'm2', key: 'g', display: 'o quarto → <strong>g</strong>' },
+  { id: 'm3', key: 'c', display: 'a toalha → <strong>c</strong>' },
+  { id: 'm4', key: 'h', display: 'a coberta → <strong>h</strong>' },
+  { id: 'm5', key: 'e', display: 'o sabonete → <strong>e</strong>' },
+  { id: 'm6', key: 'f', display: 'o travesseiro → <strong>f</strong>' },
+  { id: 'm7', key: 'd', display: 'a garrafa de água → <strong>d</strong>' },
+  { id: 'm8', key: 'a', display: 'a chave → <strong>a</strong>' }
+];
+
+function checkEx2() {
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value !== '';
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* ── FORMSPREE SUBMIT ── */
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  // Check-in form fields (Part 3A)
+  ['f-quarto','f-telefone','f-documento','f-cep'].forEach(function(fid, i) {
+    var el = document.getElementById(fid);
+    if (el && el.value.trim()) {
+      var labels = ['Número do quarto','Número de telefone','Documento','CEP'];
+      answers['Check-in — ' + labels[i]] = el.value.trim();
+      summaryLines.push('<strong>' + labels[i] + ':</strong> ' + el.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'));
+    }
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
