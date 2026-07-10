@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internetês e "também" — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 44px; }
+    .sec-label:first-child { margin-top: 0; }
+
+    .card, .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+    .card h2, .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .card-sub { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    table.ref { width: 100%; border-collapse: collapse; font-size: 15px; }
+    table.ref th { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cobalto); text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--cobalto-light); }
+    table.ref td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.ref tr:last-child td { border-bottom: none; }
+    .abbr { font-weight: 700; color: var(--pitomba); font-family: 'Manrope', sans-serif; }
+
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16px; line-height: 1.8; }
+
+    .q-block { margin-bottom: 20px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+
+    textarea { width: 100%; min-height: 60px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 140px; }
+
+    .gap-input { display: inline-block; width: 150px; padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); outline: none; }
+    .gap-input:focus { border-color: var(--cobalto); }
+
+    select.dd { padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); background: #fff; outline: none; cursor: pointer; }
+    select.dd:focus { border-color: var(--cobalto); }
+
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .word-box { background: var(--cobalto-light); border-radius: 10px; padding: 12px 18px; font-size: 15px; font-weight: 600; color: var(--cobalto); margin-bottom: 20px; text-align: center; letter-spacing: 0.02em; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .match-row { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; font-size: 15.5px; }
+    .match-abbr { min-width: 56px; font-weight: 700; color: var(--pitomba); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    .nav-link { padding: 24px 28px; background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .nav-link-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .nav-link-title { font-size: 15px; color: var(--nanquim); font-family: 'Trirong', serif; font-weight: 300; }
+    .nav-btn { display: inline-flex; align-items: center; gap: 8px; color: white; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 10px; text-decoration: none; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card { padding: 22px 20px; }
+      .gap-input { width: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Internetês <em>e "também"</em></h1>
+  <div class="hero-sub">Practice Brazilian chat abbreviations and the connectives <strong>também</strong>, <strong>então</strong>, <strong>mas também</strong> and <strong>também não</strong>.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">internetês</span>
+    <span class="hero-tag">conectivos</span>
+    <span class="hero-tag">WhatsApp</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="sec-label">Language Reference</div>
+  <div class="card">
+    <h2>Internetês</h2>
+    <div class="card-sub">The informal way Brazilians shorten words on WhatsApp and in chats. Before you start, read these references — you will use them throughout the activity.</div>
+    <table class="ref">
+      <tr><th>Abreviação</th><th>Significado</th><th>Abreviação</th><th>Significado</th></tr>
+      <tr><td class="abbr">vc</td><td>você</td><td class="abbr">tbm</td><td>também</td></tr>
+      <tr><td class="abbr">q</td><td>que</td><td class="abbr">pq</td><td>porque</td></tr>
+      <tr><td class="abbr">cmg</td><td>comigo</td><td class="abbr">td</td><td>tudo</td></tr>
+      <tr><td class="abbr">tc</td><td>teclar / conversar</td><td class="abbr">bjs</td><td>beijos</td></tr>
+      <tr><td class="abbr">blz</td><td>beleza</td><td class="abbr">n</td><td>não</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Conectivos</h2>
+    <div class="card-sub">Four small words that connect your ideas.</div>
+    <table class="ref">
+      <tr><th>Termo</th><th>Use</th><th>Exemplo</th></tr>
+      <tr><td><strong>também</strong></td><td>adds a similar idea</td><td>Gosto de café. <strong>Também</strong> gosto de chá.</td></tr>
+      <tr><td><strong>então</strong></td><td>shows a result / consequence</td><td>Estudei muito, <strong>então</strong> passei na prova.</td></tr>
+      <tr><td><strong>mas também</strong></td><td>adds a complementary, often unexpected idea</td><td>Trabalho muito, <strong>mas também</strong> descanso.</td></tr>
+      <tr><td><strong>também não</strong></td><td>negates a similar idea</td><td>Não gosto de frio. <strong>Também não</strong> gosto de chuva.</td></tr>
+    </table>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Text</div>
+  <div class="card text-card">
+    <h2>As vogais estão sumindo</h2>
+    <div class="fonte">Fonte: Martha Medeiros, "Abreviados", <em>Coisas da vida</em>, L&amp;PM, 2005. Texto adaptado para fins didáticos.</div>
+    <div class="text-body">
+      <p>Antes, as pessoas não diziam "você". Elas diziam "Vosmecê". Com o tempo, a palavra ficou mais curta, então "Vosmecê" virou "você".</p>
+      <p>Hoje, as pessoas usam muito o celular e a internet. Elas querem escrever rápido. Então elas tiram as vogais (a, e, i, o, u) das palavras. "Você" virou "vc", "que" virou "q" e "comigo" virou "cmg". Na internet, isso é normal.</p>
+      <p>Nós usamos essas abreviações com os amigos. Mas, em textos formais, também não usamos essas formas: aí escrevemos tudo completo.</p>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="sec-label">Part 1 — Reading Comprehension</div>
+  <div class="ex-card">
+    <h2>Understand the text</h2>
+    <div class="card-sub">Read the text and answer the questions in Portuguese.</div>
+
+    <div class="q-block">
+      <div class="q"><span class="q-num">1.</span> Qual palavra as pessoas usavam antes de "você"?</div>
+      <textarea id="p1-1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">2.</span> Por que hoje as pessoas escrevem abreviações?</div>
+      <textarea id="p1-2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">3.</span> Escreva a frase "vc quer tc cmg?" sem abreviações.</div>
+      <textarea id="p1-3" placeholder="Escreva a frase completa..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">4.</span> O que acontece com as vogais nas palavras abreviadas?</div>
+      <textarea id="p1-4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">5.</span> Quando <em>não</em> usamos essas abreviações?</div>
+      <textarea id="p1-5" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkPart1()">✓ Check answers</button>
+    <div id="p1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="sec-label">Part 2 — Controlled Practice</div>
+
+  <!-- Exercise 1 -->
+  <div class="ex-card">
+    <h2>Exercise 1 — Internetês</h2>
+    <div class="card-sub">Match each abbreviation to its full form.</div>
+
+    <div class="match-row"><span class="match-abbr">1. vc</span>
+      <select class="dd" id="m1"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">2. tbm</span>
+      <select class="dd" id="m2"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">3. pq</span>
+      <select class="dd" id="m3"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">4. cmg</span>
+      <select class="dd" id="m4"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">5. td</span>
+      <select class="dd" id="m5"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">6. q</span>
+      <select class="dd" id="m6"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">7. blz</span>
+      <select class="dd" id="m7"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+    <div class="match-row"><span class="match-abbr">8. bjs</span>
+      <select class="dd" id="m8"><option value="">— choose —</option><option>também</option><option>tudo</option><option>você</option><option>beijos</option><option>porque</option><option>comigo</option><option>que</option><option>beleza</option></select></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="ex-card">
+    <h2>Exercise 2 — Fill in the blanks</h2>
+    <div class="card-sub">Complete the sentences with an expression from the box. Some may be used more than once.</div>
+
+    <div class="word-box">também &nbsp;·&nbsp; então &nbsp;·&nbsp; mas também &nbsp;·&nbsp; também não</div>
+
+    <div class="sent"><strong>1.</strong> Gosto de praia, <input class="gap-input" id="g1" placeholder="..."> gosto de montanha.</div>
+    <div class="sent"><strong>2.</strong> Começou a chover, <input class="gap-input" id="g2" placeholder="..."> levei o guarda-chuva.</div>
+    <div class="sent"><strong>3.</strong> Não como carne. <input class="gap-input" id="g3" placeholder="..."> como frango.</div>
+    <div class="sent"><strong>4.</strong> Quero descansar no fim de semana, <input class="gap-input" id="g4" placeholder="..."> preciso estudar.</div>
+    <div class="sent"><strong>5.</strong> Perdi o celular, <input class="gap-input" id="g5" placeholder="..."> não consegui avisar ninguém.</div>
+    <div class="sent"><strong>6.</strong> Adoro viajar, <input class="gap-input" id="g6" placeholder="..."> adoro conhecer gente nova.</div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="ex-card">
+    <h2>Exercise 3 — Choose the correct option</h2>
+    <div class="card-sub">Select the correct connective.</div>
+
+    <div class="sent"><strong>1.</strong> Gosto de café, e
+      <select class="dd" id="c1"><option value="">— choose —</option><option>também</option><option>então</option></select> gosto de chá.</div>
+    <div class="sent"><strong>2.</strong> Choveu muito,
+      <select class="dd" id="c2"><option value="">— choose —</option><option>mas também</option><option>então</option></select> a rua alagou.</div>
+    <div class="sent"><strong>3.</strong> Não gosto de acordar cedo.
+      <select class="dd" id="c3"><option value="">— choose —</option><option>Também</option><option>Também não</option></select> gosto de dormir tarde.</div>
+    <div class="sent"><strong>4.</strong> Estudo português,
+      <select class="dd" id="c4"><option value="">— choose —</option><option>mas também</option><option>então</option></select> estudo espanhol.</div>
+    <div class="sent"><strong>5.</strong> O ônibus atrasou,
+      <select class="dd" id="c5"><option value="">— choose —</option><option>também</option><option>então</option></select> cheguei tarde.</div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 4 -->
+  <div class="ex-card">
+    <h2>Exercise 4 — From internetês to standard Portuguese</h2>
+    <div class="card-sub">Rewrite this message in full standard Portuguese.</div>
+
+    <div style="background:#e5ddd5;padding:16px;border-radius:12px;max-width:380px;font-family:'Helvetica Neue',sans-serif;font-size:14px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:0 8px 8px 8px;padding:8px 12px;max-width:90%;box-shadow:0 1px 2px rgba(0,0,0,.15);">
+        <p style="margin:0 0 4px;">Oi! Td bem? Vc vai na festa hj? Pq eu tbm quero ir, mas n sei o horário. Me add no grupo, blz? Bjs!</p>
+        <span style="font-size:11px;color:#999;float:right;">10:12 ✓✓</span>
+      </div>
+    </div>
+
+    <textarea id="ex4-text" placeholder="Escreva a mensagem completa, sem abreviações..."></textarea>
+    <button class="check-btn" onclick="checkEx4()" style="margin-top:14px;">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="sec-label">Part 3 — Written Production</div>
+  <div class="ex-card">
+    <h2>Your WhatsApp invitation</h2>
+    <div class="card-sub">You are texting a friend on WhatsApp to invite them to do something this weekend. Write a short message (5–7 lines). Use at least <strong>four abbreviations</strong> and each of the four connectives — <strong>também, então, mas também, também não</strong> — at least once.</div>
+
+    <div style="font-size:14px;color:#8a8672;margin-bottom:14px;line-height:1.8;">
+      <em>Use these questions to guide your writing:</em><br>
+      · How do you greet your friend? &nbsp;· What is the invitation? &nbsp;· Why do you want to go?<br>
+      · What is a small problem or doubt? &nbsp;· How do you say goodbye?
+    </div>
+
+    <textarea id="p3-text" class="prod" placeholder="Escreva sua mensagem aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:"']/g,'').replace(/\s+/g,' ');
+}
+
+function renderResult(id, correct, total, lines) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!'
+             : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + lines;
+  res.style.display = 'block';
+}
+
+function itemLine(n, ok, display) {
+  return '<div style="margin-bottom:8px;font-weight:400;"><strong>' + n + '.</strong> '
+    + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+    + ' ' + display + '</div>';
+}
+
+/* ── PART 1 — keyword matching ── */
+var p1Answers = [
+  { id: 'p1-1', check: function(t){ return t.indexOf('vosmece') !== -1; },
+    display: '"Vosmecê".' },
+  { id: 'p1-2', check: function(t){ return t.indexOf('rapid') !== -1 || (t.indexOf('internet') !== -1 || t.indexOf('celular') !== -1); },
+    display: 'Porque, com a internet e o celular, as pessoas querem escrever tudo mais rápido.' },
+  { id: 'p1-3', check: function(t){ return t.indexOf('voce') !== -1 && (t.indexOf('teclar') !== -1 || t.indexOf('conversar') !== -1) && t.indexOf('comigo') !== -1; },
+    display: '"Você quer teclar/conversar comigo?"' },
+  { id: 'p1-4', check: function(t){ return t.indexOf('vogal') !== -1 || t.indexOf('vogais') !== -1 || t.indexOf('somem') !== -1 || t.indexOf('perdem') !== -1 || t.indexOf('tiram') !== -1; },
+    display: 'As palavras perdem as vogais (ficam quase só as consoantes).' },
+  { id: 'p1-5', check: function(t){ return t.indexOf('forma') !== -1; },
+    display: 'Em textos formais (aí escrevemos tudo completo).' }
+];
+
+function checkPart1() {
+  var html = '', correct = 0;
+  p1Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var t = norm(el.value);
+    var filled = t.length > 0;
+    var ok = filled && a.check(t);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('p1-result', correct, p1Answers.length, html);
+}
+
+/* ── EXERCISE 1 — matching ── */
+var ex1Answers = [
+  { id: 'm1', key: 'você',   display: 'vc → você' },
+  { id: 'm2', key: 'também', display: 'tbm → também' },
+  { id: 'm3', key: 'porque', display: 'pq → porque' },
+  { id: 'm4', key: 'comigo', display: 'cmg → comigo' },
+  { id: 'm5', key: 'tudo',   display: 'td → tudo' },
+  { id: 'm6', key: 'que',    display: 'q → que' },
+  { id: 'm7', key: 'beleza', display: 'blz → beleza' },
+  { id: 'm8', key: 'beijos', display: 'bjs → beijos' }
+];
+
+function checkEx1() {
+  var html = '', correct = 0;
+  ex1Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value !== '';
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* ── EXERCISE 2 — gap fill, exact match ── */
+var ex2Answers = [
+  { id: 'g1', key: 'tambem',     display: 'Gosto de praia, <strong>também</strong> gosto de montanha.' },
+  { id: 'g2', key: 'entao',      display: 'Começou a chover, <strong>então</strong> levei o guarda-chuva.' },
+  { id: 'g3', key: 'tambem nao', display: 'Não como carne. <strong>Também não</strong> como frango.' },
+  { id: 'g4', key: 'mas tambem', display: 'Quero descansar no fim de semana, <strong>mas também</strong> preciso estudar.' },
+  { id: 'g5', key: 'entao',      display: 'Perdi o celular, <strong>então</strong> não consegui avisar ninguém.' },
+  { id: 'g6', key: 'mas tambem', display: 'Adoro viajar, <strong>mas também</strong> adoro conhecer gente nova.' }
+];
+
+function checkEx2() {
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* ── EXERCISE 3 — choose the option ── */
+var ex3Answers = [
+  { id: 'c1', key: 'também',     display: 'Gosto de café, e <strong>também</strong> gosto de chá.' },
+  { id: 'c2', key: 'então',      display: 'Choveu muito, <strong>então</strong> a rua alagou.' },
+  { id: 'c3', key: 'Também não', display: 'Não gosto de acordar cedo. <strong>Também não</strong> gosto de dormir tarde.' },
+  { id: 'c4', key: 'mas também', display: 'Estudo português, <strong>mas também</strong> estudo espanhol.' },
+  { id: 'c5', key: 'então',      display: 'O ônibus atrasou, <strong>então</strong> cheguei tarde.' }
+];
+
+function checkEx3() {
+  var html = '', correct = 0;
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value !== '';
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('ex3-result', correct, ex3Answers.length, html);
+}
+
+/* ── EXERCISE 4 — rewrite, keyword matching ── */
+var ex4Words = [
+  { key: 'tudo',   label: 'td → <strong>tudo</strong>' },
+  { key: 'voce',   label: 'vc → <strong>você</strong>' },
+  { key: 'hoje',   label: 'hj → <strong>hoje</strong>' },
+  { key: 'porque', label: 'pq → <strong>porque</strong>' },
+  { key: 'tambem', label: 'tbm → <strong>também</strong>' },
+  { key: 'nao',    label: 'n → <strong>não</strong>' },
+  { key: 'beleza', label: 'blz → <strong>beleza</strong>' },
+  { key: 'beijo',  label: 'bjs → <strong>beijos</strong>' }
+];
+
+function checkEx4() {
+  var el = document.getElementById('ex4-text');
+  var t = norm(el.value);
+  var html = '', correct = 0;
+  ex4Words.forEach(function(w, i) {
+    var ok = t.indexOf(w.key) !== -1;
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, w.label);
+  });
+  var allOk = correct === ex4Words.length;
+  el.classList.toggle('correct', allOk);
+  el.classList.toggle('wrong', t.length > 0 && !allOk);
+  html += '<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.08);"><strong>Modelo:</strong> "Oi! Tudo bem? Você vai na festa hoje? Porque eu também quero ir, mas não sei o horário. Me adiciona no grupo, beleza? Beijos!"</div>';
+  renderResult('ex4-result', correct, ex4Words.length, html);
+}
+
+/* ── FORMSPREE SUBMIT ── */
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+  if (email) payload['_replyto'] = email;
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  fetch('https://formspree.io/f/xykaydly', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_' + slug, '1');
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
