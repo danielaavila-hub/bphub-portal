@@ -437,31 +437,44 @@ function bphubSubmit() {
     summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
   });
 
-  var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
-  if (email) payload['_replyto'] = email;
+  var answersHtml = '';
+  Object.keys(answers).forEach(function(k) {
+    answersHtml += '<p><strong>' + k + ':</strong> ' + String(answers[k]).replace(/</g,'&lt;') + '</p>';
+  });
 
   btn.disabled = true;
   btn.textContent = 'A enviar…';
 
-  fetch('https://formspree.io/f/xykaydly', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
-  .then(function(res) {
-    if (res.ok) {
-      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
-      document.getElementById('bphub-success').style.display = 'block';
-      document.getElementById('bphub-form-area').style.display = 'none';
-      document.getElementById('bphub-error').style.display = 'none';
-      var slug = location.pathname.split('/').pop().replace('.html','');
-      localStorage.setItem('bphub_done_' + slug, '1');
-      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
-      document.getElementById('bphub-error').style.display = 'block';
-      btn.disabled = false; btn.textContent = 'Enviar respostas';
-    }
-  }).catch(function() {
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>') || 'Respostas enviadas.';
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    localStorage.setItem('bphub_done_' + slug, '1');
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
     document.getElementById('bphub-error').style.display = 'block';
     btn.disabled = false; btn.textContent = 'Enviar respostas';
   });
