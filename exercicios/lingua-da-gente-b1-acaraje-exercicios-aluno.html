@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapaz, Essa É Fácil, Tá na Cara! — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --level: #967E63; /* B1 — marrom */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* PLAYER */
+    .player-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; margin-bottom: 36px; }
+    .player-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); padding: 16px 24px 0; }
+    .player-block iframe { display: block; width: 100%; border: none; }
+
+    /* DIALOGUE */
+    .dialogue-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .dialogue-block h2 { font-size: 18px; color: var(--nanquim); margin-bottom: 20px; }
+    .dialogue-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .dialogue-table tr { border-bottom: 1px solid var(--light-gray); }
+    .dialogue-table tr:last-child { border-bottom: none; }
+    .dialogue-table td { padding: 12px 10px; vertical-align: top; line-height: 1.65; }
+    .dialogue-table td:first-child { font-weight: 700; width: 32px; padding-right: 4px; white-space: nowrap; }
+    .dialogue-table td:nth-child(2) { padding-right: 20px; }
+    .dialogue-table td:nth-child(3) { color: #888; font-style: italic; border-left: 1px solid var(--light-gray); padding-left: 20px; }
+    .hl { background: rgba(255,185,74,0.18); border-radius: 3px; padding: 1px 4px; font-weight: 600; color: var(--nanquim); }
+    .spk-a { color: var(--cobalto); }
+    .spk-b { color: var(--pitomba); }
+
+    /* FOCUS BLOCKS */
+    .focus-block { border-radius: 14px; padding: 26px 30px; margin-bottom: 24px; }
+    .focus-gram { background: rgba(38,91,139,0.06); border: 1.5px solid rgba(38,91,139,0.15); }
+    .focus-expr { background: rgba(150,126,99,0.08); border: 1.5px solid rgba(150,126,99,0.2); }
+    .focus-fon  { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.18); }
+    .focus-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+    .focus-gram .focus-label { color: var(--cobalto); }
+    .focus-expr .focus-label { color: var(--level); }
+    .focus-fon  .focus-label { color: var(--floresta); }
+    .focus-block h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 12px; }
+    .focus-block p { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 10px; }
+    .focus-block p:last-child { margin-bottom: 0; }
+
+    /* GRAMMAR TABLE */
+    .gram-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+    .gram-table th { background: rgba(38,91,139,0.1); color: var(--cobalto); padding: 8px 12px; font-weight: 700; font-size: 11px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gram-table td { padding: 10px 12px; border-bottom: 1px solid rgba(38,91,139,0.1); }
+    .gram-table tr:last-child td { border-bottom: none; }
+    .gram-table .trigger { font-weight: 700; color: var(--cobalto); }
+    .gram-table .subj { font-weight: 700; color: var(--pitomba); }
+
+    /* FORMATION BOX */
+    .subj-box { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+    .subj-col { flex: 1; min-width: 180px; background: rgba(38,91,139,0.05); border-radius: 10px; padding: 14px 16px; font-size: 13px; }
+    .subj-col-title { font-size: 11px; font-weight: 700; color: var(--cobalto); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .subj-col code { background: rgba(38,91,139,0.1); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: var(--cobalto); }
+
+    /* EXPRESSIONS TABLE */
+    .expr-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
+    .expr-table td { padding: 10px 12px; border-bottom: 1px solid rgba(150,126,99,0.15); vertical-align: top; }
+    .expr-table tr:last-child td { border-bottom: none; }
+    .expr-table .expr { font-weight: 700; color: var(--nanquim); width: 40%; }
+    .expr-table .meaning { color: #555; }
+    .expr-table .example { font-style: italic; color: #888; font-size: 13px; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+
+    /* T/F EXERCISE */
+    .tf-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; font-size: 15px; }
+    .tf-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .tf-statement { flex: 1; line-height: 1.6; }
+    .tf-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .tf-btn { padding: 5px 14px; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; background: white; color: #999; font-family: 'Manrope', sans-serif; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.selected-v { background: rgba(78,85,29,0.12); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.selected-f { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+    .tf-btn.correct-answer { background: rgba(78,85,29,0.12); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.wrong-answer { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+
+    /* MULTIPLE CHOICE */
+    .mc-row { margin-bottom: 20px; }
+    .mc-question { font-size: 15px; color: var(--nanquim); margin-bottom: 10px; line-height: 1.55; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--light-gray); border-radius: 10px; cursor: pointer; font-size: 14px; transition: border-color 0.15s; background: white; }
+    .mc-option:hover { border-color: var(--level); }
+    .mc-option.selected { border-color: var(--cobalto); background: rgba(38,91,139,0.08); }
+    .mc-option.correct { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .mc-option.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.07); color: var(--pitomba); }
+    .mc-letter { font-weight: 700; min-width: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* FILL INPUT */
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; min-width: 100px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+
+    /* SENTENCE ROW */
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2.1; }
+    .verb-hint { font-size: 12px; color: #bbb; font-style: italic; }
+
+    /* WORD BANK */
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 14px 18px; background: rgba(150,126,99,0.06); border-radius: 10px; border: 1px dashed rgba(150,126,99,0.3); }
+    .word-bank-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--level); width: 100%; margin-bottom: 4px; }
+    .word-chip { background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; padding: 4px 14px; font-size: 13px; font-weight: 600; color: var(--nanquim); font-family: monospace; }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+
+    /* RESULT */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* FREE WRITE */
+    .free-textarea { width: 100%; min-height: 160px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 18px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.8; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    /* NOTE BOX */
+    .note-box { background: rgba(150,126,99,0.08); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; line-height: 1.75; }
+
+    /* ANGLICISMO TABLE (reused for vocabulário) */
+    .anglo-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+    .anglo-table th { background: rgba(150,126,99,0.12); color: var(--level); padding: 8px 12px; font-weight: 700; font-size: 11px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .anglo-table td { padding: 10px 12px; border-bottom: 1px solid rgba(150,126,99,0.12); vertical-align: top; }
+    .anglo-table tr:last-child td { border-bottom: none; }
+    .anglo-table .word { font-weight: 700; font-family: monospace; font-size: 14px; color: var(--nanquim); }
+    .anglo-table .cat { font-size: 11px; color: var(--level); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* SEND BOX */
+    .send-box { background: rgba(166,178,138,0.18); border: 1.5px solid rgba(166,178,138,0.35); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block, .dialogue-block, .focus-block { padding: 20px 18px; }
+      .dialogue-table td:nth-child(3) { display: none; }
+      .tf-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1 · Ep 8</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Rapaz, Essa É Fácil, <em>Tá na Cara!</em></h1>
+  <div class="hero-sub">Andreia and Antônio debate Bahia's most iconic street food — acarajé versus caruru — using comparatives to defend their favorite dish, plus the impersonal <em>se</em> for describing how food is made.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Comparativo · mais... (do) que</span>
+    <span class="hero-tag">Se indeterminado · processos</span>
+    <span class="hero-tag">Vocabulário: culinária baiana</span>
+    <span class="hero-tag">Cultura: acarajé & baianas de tabuleiro</span>
+  </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PLAYER -->
+  <div class="player-block">
+    <div class="player-label">Língua da Gente · Intermediate 08</div>
+    <iframe
+      src="https://embed.podcasts.apple.com/br/podcast/intermediate-08-food-in-bahia-is-awesome/id1020665354?i=1000376235703&theme=auto"
+      height="175"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+      allow="autoplay *; encrypted-media *; clipboard-write"
+      style="overflow:hidden;border-radius:0 0 12px 12px;background:transparent;">
+    </iframe>
+  </div>
+
+  <!-- DIALOGUE -->
+  <div class="dialogue-block">
+    <h2>Diálogo · Bilingual transcript</h2>
+    <table class="dialogue-table">
+      <tbody>
+        <tr>
+          <td class="spk-a">A</td>
+          <td>Andreia, qual você diria que é a especialidade gastronômica que mais representa a culinária baiana?</td>
+          <td>Andreia, what would you say is the gastronomic specialty that most represents Bahian cooking?</td>
+        </tr>
+        <tr>
+          <td class="spk-b">B</td>
+          <td><span class="hl">Rapaz,</span> essa é fácil, <span class="hl">tá na cara,</span> é o acarajé. Veja só, massa de feijão-fradinho, cebola, sal, frito em azeite-de-dendê, e ainda servido com pimenta, vinagrete, camarão e vatapá. É o típico da cozinha afro-baiana.</td>
+          <td>Man, that's easy, it's as plain as your face, it's acarajé. Just look: black-eyed bean dough, onions, salt, fried in palm oil, and served with peppers, vinaigrette, shrimp and vatapá. It's a typical Afro-Bahian food.</td>
+        </tr>
+        <tr>
+          <td class="spk-a">A</td>
+          <td>Você acha que é <span class="hl">mais típico do que,</span> por exemplo, o caruru? O caruru que é feito com quiabo, camarões secos moídos e azeite de dendê é super típico também, Andreia.</td>
+          <td>Do you think it is more typical than, for example, caruru? Caruru is made from okra, dried ground shrimp, and palm oil — it's super typical too, Andreia.</td>
+        </tr>
+        <tr>
+          <td class="spk-b">B</td>
+          <td>É, mas no caso do acarajé, Antônio, tem toda aquela imagem das baianas com vestimenta africana, vendendo nas ruas. Na minha opinião acho que o acarajé ganha, <span class="hl">viu?</span></td>
+          <td>Right, but in the case of acarajé, Antônio, it has that whole image of the baianas in African clothing, selling on the street. In my opinion, I think acarajé wins, you know?</td>
+        </tr>
+        <tr>
+          <td class="spk-a">A</td>
+          <td><span class="hl">Sei lá,</span> eu nem sei direito, que que é esse o feijão-fradinho. É típico na culinária baiana?</td>
+          <td>I don't know, I don't even really know what this black-eyed bean is. Is it typical of Bahian food?</td>
+        </tr>
+        <tr>
+          <td class="spk-b">B</td>
+          <td>Olha, é um feijão que <span class="hl">se usa</span> muito no nordeste, rapaz. A gente quebra ele num moinho, em pedaços grandes, aí deixa de molho lá na água para tirar a casca. Depois, você passa novamente no moinho para criar uma massa bem fina. É muito trabalho, viu?</td>
+          <td>Look, it's a bean that is used a lot in the northeast, man. We break it in a grinder, into big pieces, then let it soak in water to remove the shell. Then you grind it again to make a really fine dough. It's a lot of work, you know?</td>
+        </tr>
+        <tr>
+          <td class="spk-a">A</td>
+          <td>Sei, e <span class="hl">vem cá,</span> você acha que o sabor vem mais da massa ou mais do azeite-de-dendê que se usa?</td>
+          <td>I see, and tell me, do you think the flavor comes more from the dough or more from the palm oil that's used?</td>
+        </tr>
+        <tr>
+          <td class="spk-b">B</td>
+          <td>É uma boa pergunta. O segredo para o acarajé ficar macio está no tempo que a gente bate a massa. Ela tem que ficar com a aparência quase de espuma. Mas eu concordo com você, o azeite-de-dendê tem um sabor muito característico e ele é <span class="hl">indispensável,</span> viu?</td>
+          <td>That's a good question. The secret to acarajé being soft is in how long you beat the dough. It has to look almost like foam. But I agree with you, palm oil has a very characteristic flavor and it's indispensable, you know?</td>
+        </tr>
+        <tr>
+          <td class="spk-a">A</td>
+          <td>Pois é, e quando eu vejo as baianas preparando o acarajé, parece que o azeite está bem quente.</td>
+          <td>Right, and when I see the baianas preparing acarajé, it seems like the oil is really hot.</td>
+        </tr>
+        <tr>
+          <td class="spk-b">B</td>
+          <td>Isso mesmo, bem quente. E você já viu como elas usam as duas colheres para fritar, uma para pegar a massa e a outra para moldar os bolinhos. Olha, realmente é uma arte.</td>
+          <td>That's right, really hot. And you've seen how they use two spoons to fry it, one to scoop the dough and the other to shape the little balls. It's really an art.</td>
+        </tr>
+        <tr>
+          <td class="spk-a">A</td>
+          <td>É, parece que a arte e o segredo está mesmo no jeito que elas cortam o acarajé no meio e botam o recheio com camarão, vatapá, caruru, e pimenta.</td>
+          <td>Yeah, it seems like the art and the secret is really in the way they cut the acarajé in half and put in the filling with shrimp, vatapá, caruru, and pepper.</td>
+        </tr>
+        <tr>
+          <td class="spk-b">B</td>
+          <td><span class="hl">Tá vendo, te peguei.</span> Você também acha que é a especialidade que mais representa a Bahia, não é?</td>
+          <td>You see, I got you. You also think it's the specialty that most represents Bahia, right?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOCUS 1: GRAMMAR -->
+  <div class="focus-block focus-gram">
+    <div class="focus-label">Foco Gramatical</div>
+    <h3>Comparativo de Superioridade — "mais... (do) que"</h3>
+    <p>Throughout the dialogue, Antônio and Andreia compare acarajé and caruru using the <strong>comparativo de superioridade</strong>: <em>"Você acha que é <strong>mais típico do que</strong>, por exemplo, o caruru?"</em> and <em>"você acha que o sabor vem <strong>mais</strong> da massa ou <strong>mais</strong> do azeite-de-dendê?"</em></p>
+
+    <table class="gram-table">
+      <thead>
+        <tr><th>Structure</th><th>Example from the dialogue</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="trigger">mais</span> + adjetivo + <span class="trigger">do que</span></td>
+          <td>É <span class="subj">mais</span> típico <span class="subj">do que</span> o caruru?</td>
+        </tr>
+        <tr>
+          <td><span class="trigger">mais</span> + substantivo + <span class="trigger">ou mais</span> + substantivo</td>
+          <td>O sabor vem <span class="subj">mais</span> da massa ou <span class="subj">mais</span> do azeite-de-dendê?</td>
+        </tr>
+        <tr>
+          <td>artigo + <span class="trigger">que mais</span> + verbo</td>
+          <td>A especialidade <span class="subj">que mais</span> representa a Bahia.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:14px;"><strong>Note:</strong> in speech, Brazilians often drop <em>do</em> and just say <em>mais típico que</em> — both are correct, but <em>do que</em> is the more standard, "safer" form for writing.</p>
+  </div>
+
+  <!-- FOCUS 2: VOCABULARY & CULTURE -->
+  <div class="focus-block focus-expr">
+    <div class="focus-label">Vocabulário & Cultura</div>
+    <h3>Culinária baiana — do feijão-fradinho ao azeite-de-dendê</h3>
+    <p>This episode is built entirely around Bahian food culture. Notice how the dialogue walks through an entire process — from raw ingredient to finished dish — using everyday vocabulary:</p>
+
+    <table class="anglo-table">
+      <thead>
+        <tr><th>Palavra</th><th>O que é</th><th>Exemplo do diálogo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="word">acarajé</td>
+          <td>fritter of black-eyed bean dough fried in palm oil</td>
+          <td><em>essa é fácil, tá na cara, é o acarajé</em></td>
+        </tr>
+        <tr>
+          <td class="word">feijão-fradinho</td>
+          <td>black-eyed bean, the base of the dough</td>
+          <td><em>que que é esse o feijão-fradinho</em></td>
+        </tr>
+        <tr>
+          <td class="word">azeite-de-dendê</td>
+          <td>palm oil, used both for frying and flavor</td>
+          <td><em>o azeite-de-dendê tem um sabor muito característico</em></td>
+        </tr>
+        <tr>
+          <td class="word">vatapá / caruru</td>
+          <td>traditional Afro-Bahian side dishes served as filling</td>
+          <td><em>botam o recheio com camarão, vatapá, caruru</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>💬 baianas de acarajé</strong> — the street vendors described in the dialogue, traditionally dressed in white, are a recognized symbol of Afro-Brazilian culture in Bahia, historically tied to Candomblé. Their craft has even been registered by IPHAN as part of Brazil's intangible cultural heritage.
+    </div>
+  </div>
+
+  <!-- FOCUS 3: PHONOLOGY -->
+  <div class="focus-block focus-fon">
+    <div class="focus-label">Foco Fonológico</div>
+    <h3>O efeito africado antes de "i"</h3>
+    <p>Listen to how often <strong>a gente</strong> appears in the dialogue — <em>"a gente quebra ele num moinho," "a gente bate a massa."</em> Notice the pronunciation: the unstressed final <em>-e</em> in <strong>gente</strong> is realized as <em>-i</em>, and the <strong>t</strong> before that <em>-i</em> becomes the affricate /tʃi/ — so <em>gente</em> sounds like <strong>"jen-tchi."</strong></p>
+    <p>The same happens with <strong>típico</strong> → "tchípico" and <strong>indispensável</strong> → "indispensavétchi." This is one of the clearest markers of Brazilian (versus European) Portuguese for English speakers to train their ear on.</p>
+  </div>
+
+  <!-- ─────────── EXERCISE 1 ─────────── -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro)">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Verdadeiro ou Falso?</h3>
+    <p class="ex-instruction">Based on the dialogue, mark each statement True (V) or False (F). Then check your answers.</p>
+
+    <div class="tf-row">
+      <span class="num">1.</span>
+      <span class="tf-statement">O acarajé é feito com massa de feijão-fradinho frita em azeite-de-dendê.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,1,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,1,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">2.</span>
+      <span class="tf-statement">No final do diálogo, fica claro que Antônio nunca achou o acarajé especial.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,2,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,2,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">3.</span>
+      <span class="tf-statement">Para fazer a massa fina, o feijão-fradinho passa pelo moinho apenas uma vez.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,3,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,3,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">4.</span>
+      <span class="tf-statement">Segundo Andreia, o segredo do acarajé macio está no tempo em que se bate a massa.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,4,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,4,'F')">F</button>
+      </div>
+    </div>
+    <div class="tf-row">
+      <span class="num">5.</span>
+      <span class="tf-statement">No final, Andreia percebe que Antônio também acha o acarajé a especialidade que mais representa a Bahia.</span>
+      <div class="tf-btns">
+        <button class="tf-btn" onclick="selectTF(this,5,'V')">V</button>
+        <button class="tf-btn" onclick="selectTF(this,5,'F')">F</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkTF()">✓ Check answers</button>
+    <div id="tf-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 2 ─────────── -->
+  <div class="ex-block" style="border-top:3px solid var(--cobalto)">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Vocabulário da culinária baiana</h3>
+    <p class="ex-instruction">Fill in each blank with the correct word from the word bank. Each word is used once.</p>
+
+    <div class="word-bank">
+      <div class="word-bank-label">Word bank</div>
+      <span class="word-chip">acarajé</span>
+      <span class="word-chip">feijão-fradinho</span>
+      <span class="word-chip">azeite-de-dendê</span>
+      <span class="word-chip">vatapá</span>
+      <span class="word-chip">caruru</span>
+      <span class="word-chip">moinho</span>
+    </div>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt">O <input class="fill-input" id="v1" type="text" placeholder="…" style="min-width:90px;"> é frito em azeite-de-dendê e servido com pimenta, vinagrete e camarão.</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt">Para fazer a massa, primeiro você quebra o <input class="fill-input" id="v2" type="text" placeholder="…" style="min-width:120px;"> num moinho, em pedaços grandes.</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">O sabor característico e indispensável do acarajé vem do <input class="fill-input" id="v3" type="text" placeholder="…" style="min-width:130px;">.</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt">O recheio clássico do acarajé leva camarão, <input class="fill-input" id="v4" type="text" placeholder="…" style="min-width:90px;"> e caruru.</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt">Feito com quiabo e camarões secos moídos, o <input class="fill-input" id="v5" type="text" placeholder="…" style="min-width:90px;"> também é super típico da Bahia.</span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">6.</span>
+      <span class="txt">Depois de deixar de molho, a massa passa novamente no <input class="fill-input" id="v6" type="text" placeholder="…" style="min-width:90px;"> para ficar bem fina.</span>
+    </div>
+
+    <button class="check-btn" onclick="checkVocab()">✓ Check answers</button>
+    <div id="vocab-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 3 ─────────── -->
+  <div class="ex-block" style="border-top:3px solid var(--pitomba)">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">What do they mean?</h3>
+    <p class="ex-instruction">Choose the best meaning or explanation for each expression from the dialogue.</p>
+
+    <div class="mc-row">
+      <div class="mc-question">1. <strong>"Tá na cara"</strong> — what does Andreia mean?</div>
+      <div class="mc-options" id="mc1">
+        <div class="mc-option" onclick="selectMC('mc1','a')"><span class="mc-letter">a</span>She needs to check her face in the mirror.</div>
+        <div class="mc-option" onclick="selectMC('mc1','b')"><span class="mc-letter">b</span>It's obvious / plain as day — no doubt about it.</div>
+        <div class="mc-option" onclick="selectMC('mc1','c')"><span class="mc-letter">c</span>She's describing the acarajé's appearance.</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-question">2. <strong>"Rapaz"</strong>, used twice by Andreia, functions here as:</div>
+      <div class="mc-options" id="mc2">
+        <div class="mc-option" onclick="selectMC('mc2','a')"><span class="mc-letter">a</span>A literal address to a young man in the room.</div>
+        <div class="mc-option" onclick="selectMC('mc2','b')"><span class="mc-letter">b</span>An informal filler, like "man" or "dude," used regardless of the listener's gender.</div>
+        <div class="mc-option" onclick="selectMC('mc2','c')"><span class="mc-letter">c</span>A formal title of respect for Antônio.</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-question">3. <strong>"Sei lá, eu nem sei direito..."</strong> — what does "sei lá" express?</div>
+      <div class="mc-options" id="mc3">
+        <div class="mc-option" onclick="selectMC('mc3','a')"><span class="mc-letter">a</span>Confident certainty about the answer.</div>
+        <div class="mc-option" onclick="selectMC('mc3','b')"><span class="mc-letter">b</span>"I don't really know" — mild uncertainty.</div>
+        <div class="mc-option" onclick="selectMC('mc3','c')"><span class="mc-letter">c</span>A polite way of changing the subject.</div>
+      </div>
+    </div>
+
+    <div class="mc-row">
+      <div class="mc-question">4. <strong>"Tá vendo, te peguei!"</strong> at the very end — what is Andreia doing?</div>
+      <div class="mc-options" id="mc4">
+        <div class="mc-option" onclick="selectMC('mc4','a')"><span class="mc-letter">a</span>Literally catching something Antônio threw.</div>
+        <div class="mc-option" onclick="selectMC('mc4','b')"><span class="mc-letter">b</span>Pointing out that she caught him revealing his true opinion.</div>
+        <div class="mc-option" onclick="selectMC('mc4','c')"><span class="mc-letter">c</span>Asking Antônio to watch a video with her.</div>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkMC()">✓ Check answers</button>
+    <div id="mc-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 4 ─────────── -->
+  <div class="ex-block" style="border-top:3px solid var(--floresta)">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Comparativo de superioridade — complete com "mais... (do) que"</h3>
+    <p class="ex-instruction">Complete each sentence with <em>mais + [word given] + do que</em>. "Do que" may be shortened to "que" in speech.</p>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt">Muita gente acha que o acarajé é <input class="fill-input" id="c1" type="text" placeholder="…" style="min-width:170px;"> o caruru, mas para os baianos os dois são igualmente importantes. <span class="verb-hint">(típico)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt">Fazer a massa de feijão-fradinho é <input class="fill-input" id="c2" type="text" placeholder="…" style="min-width:170px;"> simplesmente fritar batata, porque exige moer o feijão duas vezes. <span class="verb-hint">(trabalhoso)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">Para muitos brasileiros, o azeite-de-dendê tem um sabor <input class="fill-input" id="c3" type="text" placeholder="…" style="min-width:170px;"> qualquer outro óleo de cozinha. <span class="verb-hint">(marcante)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt">Andreia acredita que a imagem das baianas de tabuleiro é <input class="fill-input" id="c4" type="text" placeholder="…" style="min-width:170px;"> a receita em si para explicar por que o acarajé "ganha". <span class="verb-hint">(importante)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt">Segundo o diálogo, o acarajé parece ser <input class="fill-input" id="c5" type="text" placeholder="…" style="min-width:170px;"> o caruru na cultura popular da Bahia. <span class="verb-hint">(popular)</span></span>
+    </div>
+
+    <button class="check-btn" onclick="checkComparativo()">✓ Check answers</button>
+    <div id="comp-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 5 ─────────── -->
+  <div class="ex-block" style="border-top:3px solid var(--ouro)">
+    <div class="ex-num">Exercise 5</div>
+    <h3 class="ex-title">Free production — Comparando pratos típicos</h3>
+    <p class="ex-instruction">Think of a traditional or iconic dish from your own country or region, and compare it to another dish (Brazilian or not). Write a short dialogue of 5–6 lines in Portuguese. Include: at least one comparative with <em>mais... (do) que</em>, at least one expression from the lesson (<em>rapaz / tá na cara / sei lá / vem cá</em>), and at least one use of <em>a gente</em> + verb to describe how the dish is made.</p>
+
+    <textarea class="free-textarea" id="e5-free" placeholder="Write your dialogue here..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- FORMSPREE SUBMIT BLOCK -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── T/F ──
+var tfAnswers = { 1:'V', 2:'F', 3:'F', 4:'V', 5:'V' };
+var tfSelected = {};
+
+function selectTF(btn, num, val) {
+  var row = btn.closest('.tf-btns');
+  row.querySelectorAll('.tf-btn').forEach(function(b){ b.classList.remove('selected-v','selected-f'); });
+  btn.classList.add(val === 'V' ? 'selected-v' : 'selected-f');
+  tfSelected[num] = val;
+}
+
+function checkTF() {
+  var correct = 0;
+  var html = '';
+  var labels = [
+    '',
+    'Correct — massa de feijão-fradinho, cebola, sal, frita em azeite-de-dendê.',
+    'False — no final ele mesmo revela que também acha o acarajé especial.',
+    'False — o feijão passa pelo moinho duas vezes: grosso e depois fino.',
+    'Correct — "o segredo... está no tempo que a gente bate a massa."',
+    'Correct — "Tá vendo, te peguei" mostra que ele também acha isso.'
+  ];
+  for (var i = 1; i <= 5; i++) {
+    var ans = tfAnswers[i];
+    var sel = tfSelected[i];
+    var ok = sel === ans;
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + i + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <strong>' + ans + '</strong> — ' + labels[i] + '</div>';
+  }
+  var res = document.getElementById('tf-result');
+  var allOk = correct === 5;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 5 correct!' : correct + ' of 5 correct — answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── MULTIPLE CHOICE ──
+var mcAnswers = { mc1:'b', mc2:'b', mc3:'b', mc4:'b' };
+var mcSelected = {};
+
+function selectMC(groupId, letter) {
+  var group = document.getElementById(groupId);
+  var options = group.querySelectorAll('.mc-option');
+  options.forEach(function(o){ o.classList.remove('correct','wrong','selected'); });
+  var idx = ['a','b','c'].indexOf(letter);
+  if (idx >= 0) options[idx].classList.add('selected');
+  mcSelected[groupId] = letter;
+}
+
+function checkMC() {
+  var correct = 0;
+  var html = '';
+  var groups = ['mc1','mc2','mc3','mc4'];
+  var questions = [
+    '"Tá na cara" = it\'s obvious / plain as day.',
+    '"Rapaz" = informal filler like "man/dude," gender-neutral in use.',
+    '"Sei lá" = "I don\'t really know" — mild uncertainty.',
+    'Andreia is pointing out she caught Antônio revealing his true opinion.'
+  ];
+  groups.forEach(function(gid, i) {
+    var ans = mcAnswers[gid];
+    var sel = mcSelected[gid];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var group = document.getElementById(gid);
+    var options = group.querySelectorAll('.mc-option');
+    options.forEach(function(o){ o.classList.remove('correct','wrong'); });
+    var ansIdx = ['a','b','c'].indexOf(ans);
+    if (ansIdx >= 0) options[ansIdx].classList.add('correct');
+    if (sel && sel !== ans) {
+      var selIdx = ['a','b','c'].indexOf(sel);
+      if (selIdx >= 0) options[selIdx].classList.add('wrong');
+    }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' (' + ans.toUpperCase() + ') ' + questions[i] + '</div>';
+  });
+  var res = document.getElementById('mc-result');
+  var allOk = correct === 4;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 4 correct!' : correct + ' of 4 correct — answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── NORM ──
+function norm(s) {
+  return (s||'').toLowerCase().trim()
+    .replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íì]/g,'i').replace(/[óôõö]/g,'o')
+    .replace(/[úù]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── VOCABULÁRIO ──
+var vocabAnswers = [
+  { id:'v1', accept:['acaraje'],                         display:'acarajé' },
+  { id:'v2', accept:['feijao-fradinho','feijao fradinho'], display:'feijão-fradinho' },
+  { id:'v3', accept:['azeite-de-dende','azeite de dende'], display:'azeite-de-dendê' },
+  { id:'v4', accept:['vatapa'],                          display:'vatapá' },
+  { id:'v5', accept:['caruru'],                          display:'caruru' },
+  { id:'v6', accept:['moinho'],                          display:'moinho' }
+];
+
+function checkVocab() {
+  var html = '';
+  var correct = 0;
+  vocabAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <em>' + a.display + '</em></div>';
+  });
+  var res = document.getElementById('vocab-result');
+  var allOk = correct === vocabAnswers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 6 correct!' : correct + ' of 6 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── COMPARATIVO ──
+var compAnswers = [
+  { id:'c1', accept:['mais tipico do que','mais tipico que'], display:'mais típico do que' },
+  { id:'c2', accept:['mais trabalhoso do que','mais trabalhoso que'], display:'mais trabalhoso do que' },
+  { id:'c3', accept:['mais marcante do que','mais marcante que'], display:'mais marcante do que' },
+  { id:'c4', accept:['mais importante do que','mais importante que'], display:'mais importante do que' },
+  { id:'c5', accept:['mais popular do que','mais popular que'], display:'mais popular do que' }
+];
+
+function checkComparativo() {
+  var html = '';
+  var correct = 0;
+  compAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' <em>' + a.display + '</em></div>';
+  });
+  var res = document.getElementById('comp-result');
+  var allOk = correct === compAnswers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All 5 correct!' : correct + ' of 5 correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  // Ex1: T/F tfSelected[1-5]
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i] || '(sem resposta)';
+    summaryLines.push('<strong>Ex1-'+i+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex1-'+i+':</strong> '+sel+'</p>';
+  }
+  // Ex2: vocabulário v1-v6
+  ['v1','v2','v3','v4','v5','v6'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex2-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex2-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex3: multiple choice mc1-mc4
+  ['mc1','mc2','mc3','mc4'].forEach(function(gid, i) {
+    var sel = mcSelected[gid] || '(sem resposta)';
+    summaryLines.push('<strong>Ex3-'+(i+1)+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex3-'+(i+1)+':</strong> '+sel+'</p>';
+  });
+  // Ex4: comparativo c1-c5
+  ['c1','c2','c3','c4','c5'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex4-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex4-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  // Ex5: free production
+  var freeEl = document.getElementById('e5-free');
+  var freeVal = freeEl ? (freeEl.value.trim() || '(sem resposta)') : '(sem resposta)';
+  summaryLines.push('<strong>Ex5:</strong><br>'+(freeEl&&freeEl.value.trim()?freeEl.value.trim().replace(/</g,'&lt;'):'<em style="color:#999">sem resposta</em>'));
+  answersHtml += '<p><strong>Ex5 — Produção livre:</strong><br>'+freeVal+'</p>';
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
