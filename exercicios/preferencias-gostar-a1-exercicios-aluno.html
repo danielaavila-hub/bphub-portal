@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preferências — Eu gosto de… — A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #4E551D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #4E551D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #6b6b57; margin-bottom: 20px; }
+    .ex-item { margin-bottom: 14px; }
+
+    .gram-box { background: var(--cobalto-light); border-radius: 14px; padding: 22px 28px; margin-bottom: 36px; font-size: 15px; }
+    .gram-box strong { color: var(--cobalto); }
+    .gram-warn { margin-top: 14px; background: rgba(255,185,74,0.18); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 14px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 14px 0; background: white; border-radius: 10px; overflow: hidden; }
+    .ref-table th { background: var(--cobalto); color: white; text-align: left; padding: 8px 14px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .ref-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .ref-table tr:last-child td { border-bottom: none; }
+
+    .text-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .text-block h3 { font-size: 22px; color: var(--nanquim); margin-bottom: 4px; }
+    .text-source { font-size: 12.5px; color: #999; font-style: italic; margin-bottom: 16px; }
+    .text-body p { margin-bottom: 12px; font-size: 15.5px; line-height: 1.8; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-bottom: 36px; }
+    .vocab-item { background: var(--off-white); border-radius: 10px; padding: 8px 14px; font-size: 13.5px; }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); }
+    .vocab-en { color: #86865f; font-style: italic; }
+
+    input[type="text"] { font-family: 'Manrope', sans-serif; font-size: 15px; padding: 8px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; outline: none; background: var(--baunilha); color: var(--texto); }
+    input[type="text"]:focus { border-color: var(--cobalto); }
+    .inp-gap { width: 130px; text-align: center; }
+    .inp-line { width: 100%; max-width: 520px; }
+    select { font-family: 'Manrope', sans-serif; font-size: 14px; padding: 7px 10px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; background: var(--baunilha); color: var(--texto); outline: none; }
+    textarea { font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.7; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; outline: none; background: var(--baunilha); color: var(--texto); width: 100%; resize: vertical; }
+    textarea:focus { border-color: var(--cobalto); }
+    input.correct, select.correct, textarea.correct { border-color: #2E7D52; background: #EAF5EE; }
+    input.wrong, select.wrong, textarea.wrong { border-color: var(--pitomba); background: #FBEEE3; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .check-btn:hover { background: #3a3835; }
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 16px 20px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEEE3; color: var(--texto); }
+
+    .hint-box { background: var(--off-white); border-radius: 10px; padding: 14px 18px; font-size: 14px; margin-bottom: 16px; line-height: 1.8; }
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .text-block { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Preferências <em>gostar de · adorar · amar · detestar</em></h1>
+  <div class="hero-sub">Talk about what you love, like and hate — starting with Brazil's favorite foods: rice, beans and coffee.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">preferências</span>
+    <span class="hero-tag">comida brasileira</span>
+    <span class="hero-tag">verbos -ar</span>
+    <span class="hero-tag">~30 min</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="sec-label">Language Reference</div>
+  <div class="gram-box">
+    <div style="margin-bottom:6px;"><strong>Gostar de, adorar, amar, detestar</strong></div>
+    <div style="font-size:14px;color:#555;margin-bottom:4px;">Before you start, read these references. You will use them throughout the activity.</div>
+    <table class="ref-table">
+      <tr><th>Verbo</th><th>Use</th><th>Exemplo</th></tr>
+      <tr><td><strong>gostar de</strong></td><td>to like (needs "de")</td><td>Gosto <strong>de</strong> café. · Gosto <strong>de</strong> viajar.</td></tr>
+      <tr><td><strong>não gostar de</strong></td><td>to dislike</td><td>Não gosto <strong>de</strong> futebol.</td></tr>
+      <tr><td><strong>adorar / amar</strong></td><td>to love (no "de")</td><td>Adoro açaí. · Amo viajar.</td></tr>
+      <tr><td><strong>detestar</strong></td><td>to hate (no "de")</td><td>Detesto acordar cedo.</td></tr>
+    </table>
+    <div style="margin:14px 0 6px;"><strong>Conjugação — verbos -ar (gostar)</strong></div>
+    <table class="ref-table" style="max-width:420px;">
+      <tr><th>Pessoa</th><th>Forma</th></tr>
+      <tr><td>eu</td><td>gost<strong>o</strong></td></tr>
+      <tr><td>você / ele / ela / a gente</td><td>gost<strong>a</strong></td></tr>
+      <tr><td>nós</td><td>gost<strong>amos</strong></td></tr>
+      <tr><td>vocês / eles / elas</td><td>gost<strong>am</strong></td></tr>
+    </table>
+    <div style="font-size:13.5px;color:#555;"><em>adorar</em>, <em>amar</em> and <em>detestar</em> follow the same pattern.</div>
+    <div class="gram-warn">⚠ <strong>Attention:</strong> <strong>gostar</strong> always needs <strong>de</strong>. <strong>Adorar, amar, detestar</strong> never take <strong>de</strong>.</div>
+  </div>
+
+  <!-- VOCABULÁRIO -->
+  <div class="sec-label">Vocabulário</div>
+  <div class="vocab-grid">
+    <div class="vocab-item"><span class="vocab-pt">o arroz</span> — <span class="vocab-en">rice</span></div>
+    <div class="vocab-item"><span class="vocab-pt">o feijão</span> — <span class="vocab-en">beans</span></div>
+    <div class="vocab-item"><span class="vocab-pt">a comida de todo dia</span> — <span class="vocab-en">everyday food</span></div>
+    <div class="vocab-item"><span class="vocab-pt">o almoço</span> — <span class="vocab-en">lunch</span></div>
+    <div class="vocab-item"><span class="vocab-pt">o prato</span> — <span class="vocab-en">dish, plate</span></div>
+    <div class="vocab-item"><span class="vocab-pt">gostoso</span> — <span class="vocab-en">tasty</span></div>
+    <div class="vocab-item"><span class="vocab-pt">as pessoas mais velhas</span> — <span class="vocab-en">older people</span></div>
+    <div class="vocab-item"><span class="vocab-pt">muita gente</span> — <span class="vocab-en">a lot of people</span></div>
+    <div class="vocab-item"><span class="vocab-pt">a salada</span> — <span class="vocab-en">salad</span></div>
+    <div class="vocab-item"><span class="vocab-pt">a comida saudável</span> — <span class="vocab-en">healthy food</span></div>
+    <div class="vocab-item"><span class="vocab-pt">a fruta</span> — <span class="vocab-en">fruit</span></div>
+    <div class="vocab-item"><span class="vocab-pt">nem todo mundo</span> — <span class="vocab-en">not everyone</span></div>
+    <div class="vocab-item"><span class="vocab-pt">pouca</span> — <span class="vocab-en">little (a small amount)</span></div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="sec-label">Texto</div>
+  <div class="text-block">
+    <h3>A comida favorita do brasileiro</h3>
+    <div class="text-source">Adaptado de: Agência Brasil, "Café, arroz e feijão continuam preferidos pelos brasileiros" (21/08/2020), com base na Pesquisa de Orçamentos Familiares (POF), IBGE.</div>
+    <div class="text-body">
+      <p>No Brasil, o arroz e o feijão são a comida de todo dia. No almoço, muitas pessoas gostam de comer um prato de arroz com feijão. É simples e é gostoso!</p>
+      <p>O café é muito popular também. As pessoas mais velhas adoram tomar café todos os dias.</p>
+      <p>Hoje, muita gente gosta de comer salada e comida saudável. Mas nem todo mundo gosta de fruta: em geral, o brasileiro come pouca fruta.</p>
+      <p>E na sua casa? Do que as pessoas gostam de comer?</p>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 1 · Reading Comprehension</div>
+    <h2>Perguntas sobre o texto</h2>
+    <p class="ex-instr">Read the text and answer the questions in Portuguese.</p>
+
+    <div class="ex-item">1. Qual é a comida de todo dia no Brasil? <span style="color:#999;font-size:13px;">(What is the everyday food in Brazil?)</span><br>
+      <input type="text" id="q1-1" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">2. O que muitas pessoas gostam de comer no almoço? <span style="color:#999;font-size:13px;">(What do many people like to eat for lunch?)</span><br>
+      <input type="text" id="q1-2" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">3. Quem adora tomar café todos os dias? <span style="color:#999;font-size:13px;">(Who loves drinking coffee every day?)</span><br>
+      <input type="text" id="q1-3" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">4. O brasileiro come muita fruta? <span style="color:#999;font-size:13px;">(Does the Brazilian eat a lot of fruit?)</span><br>
+      <input type="text" id="q1-4" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+
+    <button class="check-btn" onclick="checkP1()">✓ Check answers</button>
+    <div id="p1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 · EXERCISE 1 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 2 · Exercise 1</div>
+    <h2>Conjugating gostar</h2>
+    <p class="ex-instr">Complete with <strong>gosto</strong>, <strong>gosta</strong>, <strong>gostamos</strong> or <strong>gostam</strong>.</p>
+
+    <div class="ex-item">1. Eu <input type="text" id="q2-1" class="inp-gap"> de música brasileira.</div>
+    <div class="ex-item">2. Você <input type="text" id="q2-2" class="inp-gap"> de nadar no mar?</div>
+    <div class="ex-item">3. Minha avó <input type="text" id="q2-3" class="inp-gap"> de jogar cartas.</div>
+    <div class="ex-item">4. A gente <input type="text" id="q2-4" class="inp-gap"> de trabalhar.</div>
+    <div class="ex-item">5. Nós <input type="text" id="q2-5" class="inp-gap"> de dançar.</div>
+    <div class="ex-item">6. Meus amigos <input type="text" id="q2-6" class="inp-gap"> de jogar futebol.</div>
+    <div class="ex-item">7. Meus pais <input type="text" id="q2-7" class="inp-gap"> de assistir filmes.</div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 · EXERCISE 2 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 2 · Exercise 2</div>
+    <h2>"De" or nothing?</h2>
+    <p class="ex-instr">Choose <strong>de</strong> only when necessary. Choose <strong>—</strong> when the verb does not take "de".</p>
+
+    <div class="ex-item">1. Eu gosto <select id="q3-1"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> açaí.</div>
+    <div class="ex-item">2. Eu adoro <select id="q3-2"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> açaí.</div>
+    <div class="ex-item">3. Nós detestamos <select id="q3-3"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> trânsito.</div>
+    <div class="ex-item">4. Você gosta <select id="q3-4"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> samba?</div>
+    <div class="ex-item">5. Ela ama <select id="q3-5"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> a praia.</div>
+    <div class="ex-item">6. Meus filhos não gostam <select id="q3-6"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> salada.</div>
+    <div class="ex-item">7. Eu amo <select id="q3-7"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> jogar futebol.</div>
+    <div class="ex-item">8. A gente adora <select id="q3-8"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> pão de queijo.</div>
+    <div class="ex-item">9. Vocês gostam <select id="q3-9"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> viajar de avião?</div>
+    <div class="ex-item">10. Ele detesta <select id="q3-10"><option value="">?</option><option value="de">de</option><option value="nada">—</option></select> chocolate.</div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 · EXERCISE 3 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 2 · Exercise 3</div>
+    <h2>Rewrite with adorar / amar / detestar</h2>
+    <p class="ex-instr">Rewrite each sentence using the verb in brackets. Remember: these verbs do NOT take "de".</p>
+
+    <div class="ex-item">1. Eu gosto de pão de queijo. <strong>[adorar]</strong><br><input type="text" id="q4-1" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">2. Nós gostamos de viajar. <strong>[amar]</strong><br><input type="text" id="q4-2" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">3. Eles não gostam de segunda-feira. <strong>[detestar]</strong><br><input type="text" id="q4-3" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">4. Você gosta de jogar futebol? <strong>[detestar]</strong><br><input type="text" id="q4-4" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">5. Minha irmã gosta de assistir filmes. <strong>[amar]</strong><br><input type="text" id="q4-5" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">6. A gente gosta de praia. <strong>[adorar]</strong><br><input type="text" id="q4-6" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">7. Eu não gosto de trânsito. <strong>[detestar]</strong><br><input type="text" id="q4-7" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item">8. Meus amigos gostam de churrasco. <strong>[adorar]</strong><br><input type="text" id="q4-8" class="inp-line" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 3 · Written Production</div>
+    <h2>As suas preferências</h2>
+    <p class="ex-instr">Write 5 short sentences about <strong>your</strong> own preferences — food and free-time activities. Use <em>gostar de, adorar, amar, detestar</em> and <em>não gostar de</em>. Include at least two foods and two activities.</p>
+    <div class="hint-box">
+      <strong>Use these ideas to guide your writing:</strong><br>
+      • What do you love? (Eu adoro… / Eu amo…)<br>
+      • What do you like? (Eu gosto de…)<br>
+      • What don't you like? (Eu não gosto de…)<br>
+      • What do you hate? (Eu detesto…)<br>
+      <span style="color:#86865f;font-style:italic;">Ex.: Eu adoro tapioca. Não gosto de tomate. Amo ir à praia…</span>
+    </div>
+    <textarea id="q5-1" rows="7" placeholder="Escreva suas frases aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:]/g,'').replace(/-/g,' ').replace(/\s+/g,' ').trim();
+}
+function renderResult(id, correct, total, html) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!' : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+/* PART 1 — keyword matching (all keywords required) */
+var p1Answers = [
+  { keys: ['arroz','feijao'], display: 'É o arroz e o feijão.' },
+  { keys: ['arroz','feijao'], display: 'Gostam de comer (um prato de) arroz com feijão.' },
+  { keys: ['velhas'], display: 'As pessoas mais velhas.' },
+  { keys: ['pouca'], display: 'Não, o brasileiro come pouca fruta.' }
+];
+function checkP1() {
+  var html = '', correct = 0;
+  p1Answers.forEach(function(a, i) {
+    var el = document.getElementById('q1-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var v = norm(el.value);
+    var ok = filled && a.keys.every(function(k){ return v.indexOf(k) !== -1; });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (!filled) { el.classList.remove('correct'); el.classList.remove('wrong'); }
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('p1-result', correct, p1Answers.length, html);
+}
+
+/* EXERCISE 1 — exact match */
+var ex1Answers = [
+  { key: 'gosto', display: 'Eu <strong>gosto</strong> de música brasileira.' },
+  { key: 'gosta', display: 'Você <strong>gosta</strong> de nadar no mar?' },
+  { key: 'gosta', display: 'Minha avó <strong>gosta</strong> de jogar cartas.' },
+  { key: 'gosta', display: 'A gente <strong>gosta</strong> de trabalhar.' },
+  { key: 'gostamos', display: 'Nós <strong>gostamos</strong> de dançar.' },
+  { key: 'gostam', display: 'Meus amigos <strong>gostam</strong> de jogar futebol.' },
+  { key: 'gostam', display: 'Meus pais <strong>gostam</strong> de assistir filmes.' }
+];
+function checkEx1() {
+  var html = '', correct = 0;
+  ex1Answers.forEach(function(a, i) {
+    var el = document.getElementById('q2-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* EXERCISE 2 — de or nothing */
+var ex2Answers = [
+  { key: 'de',   display: 'Eu gosto <strong>de</strong> açaí. (gostar + de)' },
+  { key: 'nada', display: 'Eu adoro <strong>—</strong> açaí. (adorar, sem "de")' },
+  { key: 'nada', display: 'Nós detestamos <strong>—</strong> trânsito. (detestar, sem "de")' },
+  { key: 'de',   display: 'Você gosta <strong>de</strong> samba? (gostar + de)' },
+  { key: 'nada', display: 'Ela ama <strong>—</strong> a praia. (amar, sem "de")' },
+  { key: 'de',   display: 'Meus filhos não gostam <strong>de</strong> salada. (gostar + de)' },
+  { key: 'nada', display: 'Eu amo <strong>—</strong> jogar futebol. (amar, sem "de")' },
+  { key: 'nada', display: 'A gente adora <strong>—</strong> pão de queijo. (adorar, sem "de")' },
+  { key: 'de',   display: 'Vocês gostam <strong>de</strong> viajar de avião? (gostar + de)' },
+  { key: 'nada', display: 'Ele detesta <strong>—</strong> chocolate. (detestar, sem "de")' }
+];
+function checkEx2() {
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById('q3-' + (i + 1));
+    var filled = el.value !== '';
+    var ok = filled && el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* EXERCISE 3 — full sentence, accept small variants */
+var ex3Answers = [
+  { keys: ['eu adoro pao de queijo'], display: 'Eu adoro pão de queijo.' },
+  { keys: ['nos amamos viajar'], display: 'Nós amamos viajar.' },
+  { keys: ['eles detestam segunda feira'], display: 'Eles detestam segunda-feira.' },
+  { keys: ['voce detesta jogar futebol'], display: 'Você detesta jogar futebol?' },
+  { keys: ['minha irma ama assistir filmes'], display: 'Minha irmã ama assistir filmes.' },
+  { keys: ['a gente adora praia','a gente adora a praia'], display: 'A gente adora praia.' },
+  { keys: ['eu detesto transito'], display: 'Eu detesto trânsito.' },
+  { keys: ['meus amigos adoram churrasco'], display: 'Meus amigos adoram churrasco.' }
+];
+function checkEx3() {
+  var html = '', correct = 0;
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById('q4-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var v = norm(el.value);
+    var ok = filled && a.keys.some(function(k){ return v === k; });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex3-result', correct, ex3Answers.length, html);
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+
+  [['q1-',4,'Part 1'],['q2-',7,'Ex. 1'],['q3-',10,'Ex. 2'],['q4-',8,'Ex. 3']].forEach(function(ex) {
+    for (var i = 1; i <= ex[1]; i++) {
+      var el = document.getElementById(ex[0] + i);
+      if (!el) continue;
+      answers[ex[2] + ' — item ' + i] = (el.value || '').trim() || '(sem resposta)';
+    }
+  });
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = 'Part 3 — Produção';
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>' + label + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var answersHtml = '';
+  Object.keys(answers).forEach(function(k) {
+    answersHtml += '<p><strong>' + k + ':</strong> ' + String(answers[k]).replace(/</g,'&lt;') + '</p>';
+  });
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>') || 'Respostas enviadas.';
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    localStorage.setItem('bphub_done_' + slug, '1');
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
