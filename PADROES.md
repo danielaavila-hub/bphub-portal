@@ -76,6 +76,21 @@
 - Textos autênticos sempre com fonte citada (padrão do skill). Agência Brasil/Agência Gov:
   "Reprodução gratuita mediante citação da fonte."
 
+## Músicas — seção "Sons do Brasil"
+
+- Materiais baseados em música **não vão nos índices de nível** (a1/…/c2). Eles ficam na seção
+  própria **`musicas/index.html`** ("Sons do Brasil"), organizada por gênero musical
+  (MPB, Samba & Bossa Nova, Forró, Axé, Rock, Funk, Gospel, Sertanejo…).
+- Nome do arquivo: **`musica-<titulo>-<artista>-exercicios-aluno.html`** em `exercicios/`
+  (ex.: `musica-garota-de-ipanema-`, `musica-brasil-cazuza-`).
+- O card usa o formato **`mus-card`** próprio da seção (não `mat-card`): barra na cor do gênero
+  (`var(--samba)`, `var(--mpb)`…), badge de nível com o hex do nível, linha do artista, tags de
+  gênero/foco, e "Open material →". **Atualizar o contador** `genre-count` da seção manualmente.
+- O topbar do exercício leva o link **"← Músicas"** para `../musicas/index.html`.
+- **Direitos autorais:** nunca reproduzir a letra completa. Embutir o vídeo/gravação oficial
+  (YouTube embed) para a escuta e citar apenas trechos curtos nos exercícios, com fonte
+  (`Autor, "Título" (ano) · Gravação: intérprete`) e a nota "Trechos citados apenas para fins didáticos".
+
 ## Envio de respostas
 
 - O envio é feito via **Brevo** (não mais Formspree — o skill está desatualizado neste ponto).
