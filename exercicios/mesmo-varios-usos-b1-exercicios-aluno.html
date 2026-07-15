@@ -322,6 +322,23 @@ function norm(s){
     .replace(/\s+/g,' ');
 }
 
+// só revela o gabarito depois de todas as respostas preenchidas
+function allAnswered(list, resultId){
+  var missing = 0;
+  list.forEach(function(a){
+    var el = document.getElementById(a.id);
+    if (!el || !el.value || !el.value.trim()) missing++;
+  });
+  if (missing > 0) {
+    var r = document.getElementById(resultId);
+    r.className = 'result-msg try-again';
+    r.innerHTML = '⚠️ Answer all the items before checking — <strong>' + missing + '</strong> still blank. The model answers appear only after you try!';
+    r.style.display = 'block';
+    return false;
+  }
+  return true;
+}
+
 // ── EX 1 ──
 var e1ans = [
   {id:'e1a', key:'mesma',  display:'mesma (empresa — feminine singular)'},
@@ -332,6 +349,7 @@ var e1ans = [
   {id:'e1f', key:'mesma',  display:'mesma (opinião — feminine singular)'},
 ];
 function checkEx1(){
+  if(!allAnswered(e1ans,'ex1-result'))return;
   var correct=0, html='';
   e1ans.forEach(function(a,i){
     var el=document.getElementById(a.id);
@@ -362,6 +380,7 @@ var e2ans = [
   {id:'e2f', key:'F', display:'F — estar na mesma (no change)'},
 ];
 function checkEx2(){
+  if(!allAnswered(e2ans,'ex2-result'))return;
   var correct=0, html='';
   e2ans.forEach(function(a,i){
     var el=document.getElementById(a.id);
@@ -392,6 +411,7 @@ var e3ans = [
   {id:'e3f', key:'mesmo',       display:'mesmo (adverb: really, truly)'},
 ];
 function checkEx3(){
+  if(!allAnswered(e3ans,'ex3-result'))return;
   var correct=0, html='';
   e3ans.forEach(function(a,i){
     var el=document.getElementById(a.id);
@@ -420,6 +440,7 @@ var e4keys = [
   {id:'e4d', keywords:['mesmo software'], model:'A empresa continua usando o mesmo software que implementou em 2020.'},
 ];
 function checkEx4(){
+  if(!allAnswered(e4keys,'ex4-result'))return;
   var correct=0, html='';
   e4keys.forEach(function(a,i){
     var el=document.getElementById(a.id);
