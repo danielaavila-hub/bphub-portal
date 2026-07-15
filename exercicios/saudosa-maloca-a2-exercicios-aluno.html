@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saudosa Maloca — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #6b6b57; margin-bottom: 20px; }
+    .ex-item { margin-bottom: 14px; }
+
+    .culture-box { background: var(--cobalto-light); border-radius: 14px; padding: 22px 28px; margin-bottom: 36px; font-size: 15px; }
+    .culture-box strong { color: var(--cobalto); }
+    .proverb { margin-top: 14px; background: rgba(255,185,74,0.18); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 14.5px; }
+
+    .video-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden; margin-top: 16px; }
+    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .fonte { font-size: 12.5px; color: #999; font-style: italic; margin-top: 12px; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 8px; }
+    .vocab-item { background: var(--off-white); border-radius: 10px; padding: 8px 14px; font-size: 13.5px; }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); }
+    .vocab-en { color: #86865f; font-style: italic; }
+
+    .vf-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .vf-text { flex: 1; min-width: 220px; }
+    .vf-btn { width: 42px; height: 34px; border: 1.5px solid rgba(30,29,28,0.25); background: var(--baunilha); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; color: var(--texto); cursor: pointer; }
+    .vf-btn.selected { background: var(--cobalto); border-color: var(--cobalto); color: white; }
+    .vf-btn.correct { background: #EAF5EE; border-color: #2E7D52; color: #2E7D52; }
+    .vf-btn.wrong { background: #FBEEE3; border-color: var(--pitomba); color: var(--pitomba); }
+
+    .quote { font-family: 'Trirong', serif; font-style: italic; font-size: 16px; color: var(--nanquim); }
+    .quote u { text-decoration-color: var(--pitomba); text-decoration-thickness: 2px; }
+
+    input[type="text"] { font-family: 'Manrope', sans-serif; font-size: 15px; padding: 8px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; outline: none; background: var(--baunilha); color: var(--texto); }
+    input[type="text"]:focus { border-color: var(--cobalto); }
+    .inp-gap { width: 140px; text-align: center; }
+    .inp-line { width: 100%; max-width: 520px; }
+    select { font-family: 'Manrope', sans-serif; font-size: 14px; padding: 7px 10px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; background: var(--baunilha); color: var(--texto); outline: none; max-width: 100%; }
+    textarea { font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.7; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; outline: none; background: var(--baunilha); color: var(--texto); width: 100%; resize: vertical; }
+    textarea:focus { border-color: var(--cobalto); }
+    input.correct, select.correct, textarea.correct { border-color: #2E7D52; background: #EAF5EE; }
+    input.wrong, select.wrong, textarea.wrong { border-color: var(--pitomba); background: #FBEEE3; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .check-btn:hover { background: #3a3835; }
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 16px 20px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEEE3; color: var(--texto); }
+
+    .hint-box { background: var(--off-white); border-radius: 10px; padding: 14px 18px; font-size: 14px; margin-bottom: 16px; line-height: 1.8; }
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .video-block { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Saudosa Maloca <em>Adoniran Barbosa · samba paulista</em></h1>
+  <div class="hero-sub">A classic samba tells the story of a demolished home — and teaches you how Brazilians really speak. Popular register vs. standard Portuguese.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">música</span>
+    <span class="hero-tag">registro popular × padrão</span>
+    <span class="hero-tag">São Paulo</span>
+    <span class="hero-tag">~30 min</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- CULTURE -->
+  <div class="sec-label">Contexto Cultural</div>
+  <div class="culture-box">
+    <strong>Adoniran Barbosa</strong> (1910–1982) is the father of <em>samba paulista</em> — samba from São Paulo. In "Saudosa Maloca" (1951), a man tells the story of the <em>maloca</em> (improvised shack) he built with two friends, Mato Grosso and Joca — until the owner of the land had it demolished to build a tall building. This recording is by <strong>Os Originais do Samba</strong>.
+    <div style="margin-top:12px;">Adoniran wrote his lyrics in the <strong>popular Portuguese of working-class São Paulo</strong> — on purpose. Forms like <em>nóis</em>, <em>as ferramenta</em> and <em>véia</em> are not "mistakes" in the song: they are part of his art and identity. In this activity you will learn to recognize them and connect them to the standard forms you use in writing.</div>
+    <div class="proverb">💬 The song made a Brazilian proverb famous: <em>"Deus dá o frio conforme o cobertor"</em> — literally, "God gives the cold according to the blanket": life only gives you what you can bear.</div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="sec-label">Ouça a música</div>
+  <div class="video-block">
+    <div style="font-size:14px;color:#6b6b57;"><strong>First listen:</strong> just enjoy the story. <strong>Second listen:</strong> pay attention to the words that sound different from "textbook" Portuguese.</div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/g8bN3dmlA0k" title="Saudosa Maloca — Os Originais do Samba" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="fonte">Adoniran Barbosa, "Saudosa Maloca" (1951) · Gravação: Os Originais do Samba. Trechos citados nos exercícios apenas para fins didáticos.</div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="sec-label">Vocabulário</div>
+  <div class="vocab-grid" style="margin-bottom:36px;">
+    <div class="vocab-item"><span class="vocab-pt">a maloca</span> — <span class="vocab-en">improvised shack, humble home</span></div>
+    <div class="vocab-item"><span class="vocab-pt">o palacete</span> — <span class="vocab-en">small palace, elegant house</span></div>
+    <div class="vocab-item"><span class="vocab-pt">o terreno</span> — <span class="vocab-en">plot of land</span></div>
+    <div class="vocab-item"><span class="vocab-pt">as ferramentas</span> — <span class="vocab-en">tools</span></div>
+    <div class="vocab-item"><span class="vocab-pt">derrubar</span> — <span class="vocab-en">to knock down, demolish</span></div>
+    <div class="vocab-item"><span class="vocab-pt">se conformar</span> — <span class="vocab-en">to accept it, come to terms</span></div>
+    <div class="vocab-item"><span class="vocab-pt">a saudade</span> — <span class="vocab-en">longing, missing something</span></div>
+    <div class="vocab-item"><span class="vocab-pt">saudosa</span> — <span class="vocab-en">dearly missed</span></div>
+  </div>
+
+  <!-- EXERCÍCIO 1 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 1 · Compreensão</div>
+    <h2>Verdadeiro ou falso?</h2>
+    <p class="ex-instr">Listen to the song and mark V (verdadeiro) or F (falso).</p>
+
+    <div class="vf-row"><span class="vf-text">a) Antes do edifício alto, havia uma casa velha naquele lugar.</span>
+      <button class="vf-btn" onclick="pickVF('a','V',this)">V</button><button class="vf-btn" onclick="pickVF('a','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">b) O narrador construiu a maloca sozinho.</span>
+      <button class="vf-btn" onclick="pickVF('b','V',this)">V</button><button class="vf-btn" onclick="pickVF('b','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">c) O dono do terreno mandou derrubar a maloca.</span>
+      <button class="vf-btn" onclick="pickVF('c','V',this)">V</button><button class="vf-btn" onclick="pickVF('c','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">d) Os amigos brigaram com os homens das ferramentas.</span>
+      <button class="vf-btn" onclick="pickVF('d','V',this)">V</button><button class="vf-btn" onclick="pickVF('d','F',this)">F</button></div>
+    <div class="vf-row"><span class="vf-text">e) O narrador sente saudade da maloca.</span>
+      <button class="vf-btn" onclick="pickVF('e','V',this)">V</button><button class="vf-btn" onclick="pickVF('e','F',this)">F</button></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 2 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 2 · Vocabulário</div>
+    <h2>O que significa?</h2>
+    <p class="ex-instr">Match each word to its meaning in Portuguese.</p>
+
+    <div class="ex-item" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="min-width:140px;font-weight:600;">1. a maloca</span>
+      <select id="q2-1"><option value="">— escolha —</option><option value="a">a. casa grande e elegante</option><option value="b">b. casa simples e improvisada</option><option value="c">c. instrumentos para construir</option><option value="d">d. destruir, pôr no chão</option><option value="e">e. o pedaço de chão, o lote</option><option value="f">f. que deixa saudade</option></select></div>
+    <div class="ex-item" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="min-width:140px;font-weight:600;">2. o palacete</span>
+      <select id="q2-2"><option value="">— escolha —</option><option value="a">a. casa grande e elegante</option><option value="b">b. casa simples e improvisada</option><option value="c">c. instrumentos para construir</option><option value="d">d. destruir, pôr no chão</option><option value="e">e. o pedaço de chão, o lote</option><option value="f">f. que deixa saudade</option></select></div>
+    <div class="ex-item" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="min-width:140px;font-weight:600;">3. as ferramentas</span>
+      <select id="q2-3"><option value="">— escolha —</option><option value="a">a. casa grande e elegante</option><option value="b">b. casa simples e improvisada</option><option value="c">c. instrumentos para construir</option><option value="d">d. destruir, pôr no chão</option><option value="e">e. o pedaço de chão, o lote</option><option value="f">f. que deixa saudade</option></select></div>
+    <div class="ex-item" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="min-width:140px;font-weight:600;">4. derrubar</span>
+      <select id="q2-4"><option value="">— escolha —</option><option value="a">a. casa grande e elegante</option><option value="b">b. casa simples e improvisada</option><option value="c">c. instrumentos para construir</option><option value="d">d. destruir, pôr no chão</option><option value="e">e. o pedaço de chão, o lote</option><option value="f">f. que deixa saudade</option></select></div>
+    <div class="ex-item" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="min-width:140px;font-weight:600;">5. o terreno</span>
+      <select id="q2-5"><option value="">— escolha —</option><option value="a">a. casa grande e elegante</option><option value="b">b. casa simples e improvisada</option><option value="c">c. instrumentos para construir</option><option value="d">d. destruir, pôr no chão</option><option value="e">e. o pedaço de chão, o lote</option><option value="f">f. que deixa saudade</option></select></div>
+    <div class="ex-item" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span style="min-width:140px;font-weight:600;">6. saudosa</span>
+      <select id="q2-6"><option value="">— escolha —</option><option value="a">a. casa grande e elegante</option><option value="b">b. casa simples e improvisada</option><option value="c">c. instrumentos para construir</option><option value="d">d. destruir, pôr no chão</option><option value="e">e. o pedaço de chão, o lote</option><option value="f">f. que deixa saudade</option></select></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 3 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 3 · Registro</div>
+    <h2>A palavra no padrão</h2>
+    <p class="ex-instr">Adoniran sings in popular Portuguese. Write the <strong>standard form</strong> of each underlined word. The quotes are from the song.</p>
+
+    <div class="ex-item"><span class="quote">1. "Era uma casa <u>véia</u>"</span> → <input type="text" id="q3-1" class="inp-gap" placeholder="..."></div>
+    <div class="ex-item"><span class="quote">2. "Esse edifício <u>arto</u>"</span> → <input type="text" id="q3-2" class="inp-gap" placeholder="..."></div>
+    <div class="ex-item"><span class="quote">3. "Dá licença de <u>contá</u>"</span> → <input type="text" id="q3-3" class="inp-gap" placeholder="..."></div>
+    <div class="ex-item"><span class="quote">4. "O dono <u>mandô</u> derrubá"</span> → <input type="text" id="q3-4" class="inp-gap" placeholder="..."></div>
+    <div class="ex-item"><span class="quote">5. "O dono mandô <u>derrubá</u>"</span> → <input type="text" id="q3-5" class="inp-gap" placeholder="..."></div>
+    <div class="ex-item"><span class="quote">6. "Veio os <u>home</u> com as ferramenta"</span> → <input type="text" id="q3-6" class="inp-gap" placeholder="..."></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 4 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 4 · Registro</div>
+    <h2>A frase no padrão</h2>
+    <p class="ex-instr">Now rewrite the full lines in standard Portuguese. Pay attention to verb agreement and plurals.</p>
+
+    <div class="ex-item"><span class="quote">1. "Veio os home com as ferramenta."</span><br>
+      <input type="text" id="q4-1" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="quote">2. "Peguemo todas nossas coisa."</span><br>
+      <input type="text" id="q4-2" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="quote">3. "Nóis se conformemo."</span><br>
+      <input type="text" id="q4-3" class="inp-line" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 5 -->
+  <div class="ex-card">
+    <div class="sec-label">Exercise 5 · Produção</div>
+    <h2>Um lugar que deixa saudade</h2>
+    <p class="ex-instr">Think of a place from your life that no longer exists or that you miss — a house, a school, a café, a city. Write 4–6 sentences about it in Portuguese.</p>
+    <div class="hint-box">
+      <strong>Use these ideas:</strong><br>
+      • Eu sinto saudade de… <span style="color:#86865f;">(I miss…)</span><br>
+      • O lugar era… <span style="color:#86865f;">(The place was…)</span><br>
+      • Lá tinha… <span style="color:#86865f;">(There was/were…)</span><br>
+      • Eu morava / estudava / ia lá… <span style="color:#86865f;">(I used to live / study / go there…)</span>
+    </div>
+    <textarea id="q5-1" rows="7" placeholder="Escreva sua resposta aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:"]/g,'').replace(/-/g,' ').replace(/\s+/g,' ').trim();
+}
+function renderResult(id, correct, total, html) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!' : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+/* EX 1 — V/F */
+var vfSelected = {};
+var ex1Answers = [
+  { l:'a', key:'V', display:'V — Havia uma casa velha ("casa véia"), um palacete assobradado.' },
+  { l:'b', key:'F', display:'F — Ele construiu a maloca com dois amigos: Mato Grosso e o Joca.' },
+  { l:'c', key:'V', display:'V — O dono do terreno mandou derrubar a maloca.' },
+  { l:'d', key:'F', display:'F — Eles não brigaram: se conformaram e foram embora com as suas coisas.' },
+  { l:'e', key:'V', display:'V — Por isso a maloca é "saudosa": ele lembra dos dias felizes que passou lá.' }
+];
+function pickVF(item, val, btn) {
+  vfSelected[item] = val;
+  var row = btn.closest('.vf-row');
+  row.querySelectorAll('.vf-btn').forEach(function(b){ b.className = 'vf-btn'; });
+  btn.className = 'vf-btn selected';
+}
+function checkEx1() {
+  var html = '', correct = 0;
+  var rows = document.querySelectorAll('.vf-row');
+  ex1Answers.forEach(function(a, i) {
+    var sel = vfSelected[a.l];
+    var ok = sel === a.key;
+    var btns = rows[i].querySelectorAll('.vf-btn');
+    btns.forEach(function(b) {
+      if (b.textContent === a.key) b.className = 'vf-btn correct';
+      else if (b.textContent === sel && !ok) b.className = 'vf-btn wrong';
+      else b.className = 'vf-btn';
+    });
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + a.l + ')</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* EX 2 — vocabulary match */
+var ex2Answers = [
+  { key:'b', display:'a maloca → <strong>b. casa simples e improvisada</strong>' },
+  { key:'a', display:'o palacete → <strong>a. casa grande e elegante</strong>' },
+  { key:'c', display:'as ferramentas → <strong>c. instrumentos para construir</strong>' },
+  { key:'d', display:'derrubar → <strong>d. destruir, pôr no chão</strong>' },
+  { key:'e', display:'o terreno → <strong>e. o pedaço de chão, o lote</strong>' },
+  { key:'f', display:'saudosa → <strong>f. que deixa saudade</strong>' }
+];
+function checkEx2() {
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById('q2-' + (i + 1));
+    var filled = el.value !== '';
+    var ok = filled && el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* EX 3 — standard word */
+var ex3Answers = [
+  { keys:['velha'], display:'véia → <strong>velha</strong>' },
+  { keys:['alto'], display:'arto → <strong>alto</strong>' },
+  { keys:['contar'], display:'contá → <strong>contar</strong>' },
+  { keys:['mandou'], display:'mandô → <strong>mandou</strong>' },
+  { keys:['derrubar'], display:'derrubá → <strong>derrubar</strong>' },
+  { keys:['homens','os homens'], display:'home → <strong>homens</strong>' }
+];
+function checkEx3() {
+  var html = '', correct = 0;
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById('q3-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var v = norm(el.value);
+    var ok = filled && a.keys.some(function(k){ return v === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex3-result', correct, ex3Answers.length, html);
+}
+
+/* EX 4 — full sentence */
+var ex4Answers = [
+  { keys:['vieram os homens com as ferramentas'],
+    display:'Vieram os homens com as ferramentas. <span style="color:#888;font-weight:400;">(vieram + plural)</span>' },
+  { keys:['pegamos todas as nossas coisas','pegamos todas nossas coisas','nos pegamos todas as nossas coisas'],
+    display:'Pegamos todas as nossas coisas.' },
+  { keys:['nos nos conformamos','a gente se conformou'],
+    display:'Nós nos conformamos. / A gente se conformou.' }
+];
+function checkEx4() {
+  var html = '', correct = 0;
+  ex4Answers.forEach(function(a, i) {
+    var el = document.getElementById('q4-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var v = norm(el.value);
+    var ok = filled && a.keys.some(function(k){ return v === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex4-result', correct, ex4Answers.length, html);
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+
+  Object.keys(vfSelected).forEach(function(k) { answers['Ex. 1 — ' + k] = vfSelected[k]; });
+  [['q2-',6,'Ex. 2'],['q3-',6,'Ex. 3'],['q4-',3,'Ex. 4']].forEach(function(ex) {
+    for (var i = 1; i <= ex[1]; i++) {
+      var el = document.getElementById(ex[0] + i);
+      if (!el) continue;
+      answers[ex[2] + ' — item ' + i] = (el.value || '').trim() || '(sem resposta)';
+    }
+  });
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = 'Ex. 5 — Produção';
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>' + label + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var answersHtml = '';
+  Object.keys(answers).forEach(function(k) {
+    answersHtml += '<p><strong>' + k + ':</strong> ' + String(answers[k]).replace(/</g,'&lt;') + '</p>';
+  });
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>') || 'Respostas enviadas.';
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    localStorage.setItem('bphub_done_' + slug, '1');
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
