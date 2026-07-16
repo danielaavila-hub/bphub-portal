@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A maior festa do mundo! — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #6b6b57; margin-bottom: 20px; }
+    .ex-item { margin-bottom: 14px; }
+
+    .gram-box { background: var(--cobalto-light); border-radius: 14px; padding: 22px 28px; margin-bottom: 36px; font-size: 15px; }
+    .gram-box strong { color: var(--cobalto); }
+    .formula { background: white; border-radius: 10px; padding: 14px 18px; margin: 12px 0; text-align: center; font-family: 'Trirong', serif; font-size: 17px; color: var(--nanquim); }
+    .formula strong { color: var(--pitomba); }
+    .gram-warn { margin-top: 14px; background: rgba(255,185,74,0.18); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 14px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 14px 0; background: white; border-radius: 10px; overflow: hidden; }
+    .ref-table th { background: var(--cobalto); color: white; text-align: left; padding: 8px 14px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .ref-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .ref-table tr:last-child td { border-bottom: none; }
+
+    .text-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .text-block h3 { font-size: 22px; color: var(--nanquim); margin-bottom: 4px; }
+    .text-source { font-size: 12.5px; color: #999; font-style: italic; margin-bottom: 16px; }
+    .text-body p { margin-bottom: 12px; font-size: 15.5px; line-height: 1.8; }
+    .text-body strong { color: var(--cobalto); }
+
+    .vocab-group { margin-bottom: 14px; }
+    .vocab-group-title { font-size: 13px; font-weight: 700; color: var(--cobalto); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+    .vocab-item { background: var(--off-white); border-radius: 10px; padding: 8px 14px; font-size: 13.5px; }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); }
+    .vocab-en { color: #86865f; font-style: italic; }
+
+    input[type="text"] { font-family: 'Manrope', sans-serif; font-size: 15px; padding: 8px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; outline: none; background: var(--baunilha); color: var(--texto); }
+    input[type="text"]:focus { border-color: var(--cobalto); }
+    .inp-gap { width: 190px; text-align: center; }
+    .inp-line { width: 100%; max-width: 560px; }
+    textarea { font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.7; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; outline: none; background: var(--baunilha); color: var(--texto); width: 100%; resize: vertical; }
+    textarea:focus { border-color: var(--cobalto); }
+    input.correct, textarea.correct { border-color: #2E7D52; background: #EAF5EE; }
+    input.wrong, textarea.wrong { border-color: var(--pitomba); background: #FBEEE3; }
+
+    .build-words { font-family: 'Trirong', serif; font-style: italic; font-size: 15.5px; color: var(--nanquim); }
+    .wrong-sent { font-family: 'Trirong', serif; font-style: italic; font-size: 15.5px; color: var(--nanquim); background: #FBEEE3; border-radius: 8px; padding: 8px 14px; display: inline-block; margin-bottom: 6px; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .check-btn:hover { background: #3a3835; }
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 16px 20px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEEE3; color: var(--texto); }
+
+    .hint-box { background: var(--off-white); border-radius: 10px; padding: 14px 18px; font-size: 14px; margin-bottom: 16px; line-height: 1.8; }
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .text-block { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>A maior festa do mundo! <em>superlativo relativo · São João de Campina Grande</em></h1>
+  <div class="hero-sub">Say what's the biggest, the best and the most famous — with the world's largest June festival as your guide.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">superlativo</span>
+    <span class="hero-tag">festa junina</span>
+    <span class="hero-tag">turismo</span>
+    <span class="hero-tag">~30 min</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="sec-label">Language Reference</div>
+  <div class="gram-box">
+    <div style="margin-bottom:4px;"><strong>Superlativo relativo — como formar</strong></div>
+    <div style="font-size:14px;color:#555;">Before you start, read these references. You will use them throughout the activity.</div>
+    <div class="formula">artigo (o / a / os / as) + <strong>mais / menos</strong> + adjetivo + <strong>(de)</strong></div>
+    <div style="font-size:14.5px;">Campina Grande tem a festa <strong>mais famosa do</strong> Nordeste. · Galante é o polo <strong>menos movimentado da</strong> festa.</div>
+
+    <div style="margin:16px 0 4px;"><strong>Irregulares</strong></div>
+    <table class="ref-table" style="max-width:560px;">
+      <tr><th>Adjetivo</th><th>Superlativo</th><th>Exemplo</th></tr>
+      <tr><td>grande</td><td><strong>o maior / a maior</strong></td><td>o <strong>maior</strong> arraial do Brasil</td></tr>
+      <tr><td>pequeno</td><td><strong>o menor / a menor</strong></td><td>o <strong>menor</strong> polo da festa</td></tr>
+      <tr><td>bom / boa</td><td><strong>o melhor / a melhor</strong></td><td>o <strong>melhor</strong> forró da cidade</td></tr>
+      <tr><td>mau / má / ruim</td><td><strong>o pior / a pior</strong></td><td>a <strong>pior</strong> viagem do ano</td></tr>
+    </table>
+
+    <div class="gram-warn">⚠ The irregular forms (<strong>maior, menor, melhor, pior</strong>) come <strong>before</strong> the noun: <em>a maior festa</em> — never <em>a mais grande festa</em>. With regular adjectives, the adjective normally comes <strong>after</strong> the noun: <em>a festa mais famosa</em>.</div>
+    <div class="gram-warn">⚠ The <strong>de</strong> after a superlative contracts with the article: de + o = <strong>do</strong> · de + a = <strong>da</strong> · de + os = <strong>dos</strong> · de + as = <strong>das</strong>.</div>
+  </div>
+
+  <!-- VOCABULÁRIO -->
+  <div class="sec-label">Vocabulário — festa junina e turismo</div>
+  <div style="margin-bottom:36px;">
+    <div class="vocab-group">
+      <div class="vocab-group-title">A festa</div>
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="vocab-pt">o arraial</span> — <span class="vocab-en">June festival grounds</span></div>
+        <div class="vocab-item"><span class="vocab-pt">a fogueira</span> — <span class="vocab-en">bonfire</span></div>
+        <div class="vocab-item"><span class="vocab-pt">a quadrilha</span> — <span class="vocab-en">square dance</span></div>
+        <div class="vocab-item"><span class="vocab-pt">o forró</span> — <span class="vocab-en">music and dance from the Northeast</span></div>
+        <div class="vocab-item"><span class="vocab-pt">o palco</span> — <span class="vocab-en">stage</span></div>
+        <div class="vocab-item"><span class="vocab-pt">a barraca</span> — <span class="vocab-en">food stall</span></div>
+        <div class="vocab-item"><span class="vocab-pt">o público</span> — <span class="vocab-en">audience, crowd</span></div>
+      </div>
+    </div>
+    <div class="vocab-group">
+      <div class="vocab-group-title">A comida</div>
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="vocab-pt">a pamonha</span> — <span class="vocab-en">sweet corn dough</span></div>
+        <div class="vocab-item"><span class="vocab-pt">a canjica</span> — <span class="vocab-en">sweet corn pudding</span></div>
+        <div class="vocab-item"><span class="vocab-pt">a comida típica</span> — <span class="vocab-en">traditional food</span></div>
+      </div>
+    </div>
+    <div class="vocab-group">
+      <div class="vocab-group-title">Adjetivos</div>
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="vocab-pt">movimentado</span> — <span class="vocab-en">busy</span></div>
+        <div class="vocab-item"><span class="vocab-pt">animado</span> — <span class="vocab-en">lively</span></div>
+        <div class="vocab-item"><span class="vocab-pt">famoso</span> — <span class="vocab-en">famous</span></div>
+        <div class="vocab-item"><span class="vocab-pt">tradicional</span> — <span class="vocab-en">traditional</span></div>
+        <div class="vocab-item"><span class="vocab-pt">caro</span> — <span class="vocab-en">expensive</span></div>
+        <div class="vocab-item"><span class="vocab-pt">gostoso</span> — <span class="vocab-en">tasty</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="sec-label">Texto</div>
+  <div class="text-block">
+    <h3>O maior São João do mundo</h3>
+    <div class="text-source">Adaptado de: "Campina Grande sedia evolução do maior São João do mundo", Agência Brasil (EBC), 24 jun. 2025, e "São João de Campina Grande divulga programação de 2026", Radioagência Nacional, abr. 2026.</div>
+    <div class="text-body">
+      <p>Campina Grande, na Paraíba, é a segunda <strong>maior</strong> cidade do estado. Todos os anos, em junho, a cidade recebe o "Maior São João do Mundo", uma das festas <strong>mais famosas</strong> do Brasil.</p>
+      <p>No começo, a festa era pequena: as pessoas faziam fogueiras nas ruas e dançavam forró na frente de casa. Em 1986, a prefeitura construiu o Parque do Povo. Hoje, o parque tem quase 40 mil metros quadrados e é <strong>o maior</strong> arraial do país.</p>
+      <p>A festa dura mais de 30 dias e recebe mais de 3 milhões de pessoas. O nome "o maior do mundo" é também uma propaganda: ele atrai turistas de todo o Brasil. Para muitos campinenses, junho é <strong>o mês mais importante</strong> do ano.</p>
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 1 · Compreensão</div>
+    <h2>Perguntas sobre o texto</h2>
+    <p class="ex-instr">Read the text and answer in Portuguese.</p>
+
+    <div class="ex-item">1. Onde fica Campina Grande? <span style="color:#999;font-size:13px;">(Where is Campina Grande?)</span><br>
+      <input type="text" id="q1-1" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">2. Como era a festa no começo? <span style="color:#999;font-size:13px;">(What was the festival like in the beginning?)</span><br>
+      <input type="text" id="q1-2" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">3. Quantas pessoas a festa recebe hoje? <span style="color:#999;font-size:13px;">(How many people does the festival receive today?)</span><br>
+      <input type="text" id="q1-3" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+    <div class="ex-item">4. Por que o nome "o maior do mundo" é também uma propaganda? <span style="color:#999;font-size:13px;">(Why is the name also an advertisement?)</span><br>
+      <input type="text" id="q1-4" class="inp-line" placeholder="Escreva sua resposta aqui..."></div>
+
+    <button class="check-btn" onclick="checkP1()">✓ Check answers</button>
+    <div id="p1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 · EXERCISE 1 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 2 · Exercise 1</div>
+    <h2>Superlativo relativo</h2>
+    <p class="ex-instr">Complete with the superlative of the adjective in brackets. Pay attention to gender, number and word order.</p>
+
+    <div class="ex-item">1. O Parque do Povo é <input type="text" id="q2-1" class="inp-gap" placeholder="..."> arraial do Brasil. <strong>[grande]</strong></div>
+    <div class="ex-item">2. Junho é o mês <input type="text" id="q2-2" class="inp-gap" placeholder="..."> do ano em Campina Grande. <strong>[movimentado]</strong></div>
+    <div class="ex-item">3. Para muita gente, o forró pé de serra é <input type="text" id="q2-3" class="inp-gap" placeholder="..."> ritmo da festa. <strong>[bom]</strong></div>
+    <div class="ex-item">4. Galante é <input type="text" id="q2-4" class="inp-gap" placeholder="..."> polo do São João. <strong>[pequeno]</strong></div>
+    <div class="ex-item">5. As comidas <input type="text" id="q2-5" class="inp-gap" placeholder="..."> do arraial são a pamonha e a canjica. <strong>[típico]</strong></div>
+    <div class="ex-item">6. Aquele foi <input type="text" id="q2-6" class="inp-gap" placeholder="..."> dia da viagem: choveu o tempo todo. <strong>[ruim]</strong></div>
+    <div class="ex-item">7. Elba Ramalho é uma das cantoras <input type="text" id="q2-7" class="inp-gap" placeholder="..."> do Nordeste. <strong>[famoso]</strong></div>
+    <div class="ex-item">8. Essa é a barraca <input type="text" id="q2-8" class="inp-gap" placeholder="..."> do parque. <strong>[caro]</strong></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 · EXERCISE 2 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 2 · Exercise 2</div>
+    <h2>Escreva no superlativo</h2>
+    <p class="ex-instr">Write one sentence with a relative superlative, using all the words given.<br>
+    <span style="color:#86865f;font-style:italic;">Example: Campina Grande / cidade / animado / Paraíba → Campina Grande é a cidade mais animada da Paraíba.</span></p>
+
+    <div class="ex-item"><span class="build-words">1. o Parque do Povo / palco / importante / festa</span><br>
+      <input type="text" id="q3-1" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="build-words">2. o forró / ritmo / popular / Nordeste</span><br>
+      <input type="text" id="q3-2" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="build-words">3. essa quadrilha / grupo / bom / bairro</span><br>
+      <input type="text" id="q3-3" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="build-words">4. a pamonha / comida / gostoso / festa junina</span><br>
+      <input type="text" id="q3-4" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="build-words">5. junho / mês / movimentado / ano</span><br>
+      <input type="text" id="q3-5" class="inp-line" placeholder="Escreva a frase completa..."></div>
+    <div class="ex-item"><span class="build-words">6. essa barraca / lugar / caro / parque</span><br>
+      <input type="text" id="q3-6" class="inp-line" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 · EXERCISE 3 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 2 · Exercise 3</div>
+    <h2>Encontre o erro</h2>
+    <p class="ex-instr">Each sentence has one mistake. Rewrite it correctly.</p>
+
+    <div class="ex-item"><span class="wrong-sent">1. Campina Grande tem a mais grande festa junina do Brasil.</span><br>
+      <input type="text" id="q4-1" class="inp-line" placeholder="Escreva a frase correta aqui..."></div>
+    <div class="ex-item"><span class="wrong-sent">2. Esse é o mais bom forró da cidade.</span><br>
+      <input type="text" id="q4-2" class="inp-line" placeholder="Escreva a frase correta aqui..."></div>
+    <div class="ex-item"><span class="wrong-sent">3. O Parque do Povo é o maior arraial de o país.</span><br>
+      <input type="text" id="q4-3" class="inp-line" placeholder="Escreva a frase correta aqui..."></div>
+    <div class="ex-item"><span class="wrong-sent">4. As comidas mais típico da festa são a pamonha e a canjica.</span><br>
+      <input type="text" id="q4-4" class="inp-line" placeholder="Escreva a frase correta aqui..."></div>
+    <div class="ex-item"><span class="wrong-sent">5. Aquela foi a mais ruim viagem da minha vida.</span><br>
+      <input type="text" id="q4-5" class="inp-line" placeholder="Escreva a frase correta aqui..."></div>
+    <div class="ex-item"><span class="wrong-sent">6. Essa é a barraca mais cara de o parque.</span><br>
+      <input type="text" id="q4-6" class="inp-line" placeholder="Escreva a frase correta aqui..."></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="ex-card">
+    <div class="sec-label">Part 3 · Written Production</div>
+    <h2>A propaganda da sua festa</h2>
+    <p class="ex-instr">You work for the tourism office of a Brazilian city. Write a short advertisement (5 sentences) to convince tourists to visit your city's festival. Use at least <strong>four relative superlatives</strong>, and at least one must be an <strong>irregular</strong> form (maior, menor, melhor, pior).</p>
+    <div class="hint-box">
+      <strong>Mention in your ad:</strong> a festa · a música · a comida · o público · o preço
+    </div>
+    <textarea id="q5-1" rows="7" placeholder="Escreva sua propaganda aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:"]/g,'').replace(/-/g,' ').replace(/\s+/g,' ').trim();
+}
+function renderResult(id, correct, total, html) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!' : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+// só revela o gabarito depois de todas as respostas preenchidas
+function allAnswered(prefix, total, resultId) {
+  var missing = 0;
+  for (var i = 1; i <= total; i++) {
+    var el = document.getElementById(prefix + i);
+    if (!el || !el.value || !el.value.trim()) missing++;
+  }
+  if (missing > 0) {
+    var r = document.getElementById(resultId);
+    r.className = 'result-msg try-again';
+    r.innerHTML = '⚠️ Answer all the items before checking — <strong>' + missing + '</strong> still blank. The model answers appear only after you try!';
+    r.style.display = 'block';
+    return false;
+  }
+  return true;
+}
+
+/* PART 1 — keyword matching */
+var p1Answers = [
+  { keys: [['paraiba']], display: 'Campina Grande fica na Paraíba, no Nordeste do Brasil.' },
+  { keys: [['pequena'],['fogueiras'],['frente de casa']], display: 'Era pequena: as pessoas faziam fogueiras nas ruas e dançavam forró na frente de casa.' },
+  { keys: [['3 milhoes'],['tres milhoes'],['milhoes']], display: 'Mais de 3 milhões de pessoas.' },
+  { keys: [['turistas']], display: 'Porque atrai turistas de todo o Brasil.' }
+];
+function checkP1() {
+  if (!allAnswered('q1-', 4, 'p1-result')) return;
+  var html = '', correct = 0;
+  p1Answers.forEach(function(a, i) {
+    var el = document.getElementById('q1-' + (i + 1));
+    var v = norm(el.value);
+    var ok = a.keys.some(function(group){ return group.every(function(k){ return v.indexOf(k) !== -1; }); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('p1-result', correct, p1Answers.length, html);
+}
+
+/* EX 1 — superlative gap fill */
+var ex1Answers = [
+  { keys:['o maior'], display:'O Parque do Povo é <strong>o maior</strong> arraial do Brasil. (irregular, antes do substantivo)' },
+  { keys:['mais movimentado'], display:'Junho é o mês <strong>mais movimentado</strong> do ano.' },
+  { keys:['o melhor'], display:'O forró pé de serra é <strong>o melhor</strong> ritmo da festa. (bom → melhor)' },
+  { keys:['o menor'], display:'Galante é <strong>o menor</strong> polo do São João. (pequeno → menor)' },
+  { keys:['mais tipicas'], display:'As comidas <strong>mais típicas</strong> do arraial… (feminine plural)' },
+  { keys:['o pior'], display:'Aquele foi <strong>o pior</strong> dia da viagem. (ruim → pior)' },
+  { keys:['mais famosas'], display:'…uma das cantoras <strong>mais famosas</strong> do Nordeste. (feminine plural)' },
+  { keys:['mais cara'], display:'Essa é a barraca <strong>mais cara</strong> do parque. (feminine singular)' }
+];
+function checkEx1() {
+  if (!allAnswered('q2-', 8, 'ex1-result')) return;
+  var html = '', correct = 0;
+  ex1Answers.forEach(function(a, i) {
+    var el = document.getElementById('q2-' + (i + 1));
+    var v = norm(el.value);
+    var ok = a.keys.some(function(k){ return v === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* EX 2 — build the sentence */
+var ex2Answers = [
+  { keys:['o parque do povo e o palco mais importante da festa'],
+    display:'O Parque do Povo é o palco mais importante da festa.' },
+  { keys:['o forro e o ritmo mais popular do nordeste'],
+    display:'O forró é o ritmo mais popular do Nordeste.' },
+  { keys:['essa quadrilha e o melhor grupo do bairro'],
+    display:'Essa quadrilha é o melhor grupo do bairro.' },
+  { keys:['a pamonha e a comida mais gostosa da festa junina'],
+    display:'A pamonha é a comida mais gostosa da festa junina.' },
+  { keys:['junho e o mes mais movimentado do ano'],
+    display:'Junho é o mês mais movimentado do ano.' },
+  { keys:['essa barraca e o lugar mais caro do parque'],
+    display:'Essa barraca é o lugar mais caro do parque.' }
+];
+function checkEx2() {
+  if (!allAnswered('q3-', 6, 'ex2-result')) return;
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById('q3-' + (i + 1));
+    var v = norm(el.value);
+    var ok = a.keys.some(function(k){ return v === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* EX 3 — find the mistake */
+var ex3Answers = [
+  { keys:['campina grande tem a maior festa junina do brasil'],
+    display:'Campina Grande tem <strong>a maior festa</strong> junina do Brasil. <span style="color:#888;font-weight:400;">(grande → maior, antes do substantivo)</span>' },
+  { keys:['esse e o melhor forro da cidade'],
+    display:'Esse é <strong>o melhor forró</strong> da cidade. <span style="color:#888;font-weight:400;">(bom → melhor)</span>' },
+  { keys:['o parque do povo e o maior arraial do pais'],
+    display:'O Parque do Povo é o maior arraial <strong>do</strong> país. <span style="color:#888;font-weight:400;">(de + o = do)</span>' },
+  { keys:['as comidas mais tipicas da festa sao a pamonha e a canjica'],
+    display:'As comidas <strong>mais típicas</strong> da festa são a pamonha e a canjica. <span style="color:#888;font-weight:400;">(concordância: feminino plural)</span>' },
+  { keys:['aquela foi a pior viagem da minha vida'],
+    display:'Aquela foi <strong>a pior viagem</strong> da minha vida. <span style="color:#888;font-weight:400;">(ruim → pior)</span>' },
+  { keys:['essa e a barraca mais cara do parque'],
+    display:'Essa é a barraca mais cara <strong>do</strong> parque. <span style="color:#888;font-weight:400;">(de + o = do)</span>' }
+];
+function checkEx3() {
+  if (!allAnswered('q4-', 6, 'ex3-result')) return;
+  var html = '', correct = 0;
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById('q4-' + (i + 1));
+    var v = norm(el.value);
+    var ok = a.keys.some(function(k){ return v === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  renderResult('ex3-result', correct, ex3Answers.length, html);
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var answers = {};
+  var summaryLines = [];
+
+  [['q1-',4,'Part 1'],['q2-',8,'Ex. 1'],['q3-',6,'Ex. 2'],['q4-',6,'Ex. 3']].forEach(function(ex) {
+    for (var i = 1; i <= ex[1]; i++) {
+      var el = document.getElementById(ex[0] + i);
+      if (!el) continue;
+      answers[ex[2] + ' — item ' + i] = (el.value || '').trim() || '(sem resposta)';
+    }
+  });
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = 'Part 3 — Propaganda';
+    var val = ta.value.trim() || '(sem resposta)';
+    answers['R' + (idx+1) + ' — ' + label] = val;
+    summaryLines.push('<strong>' + label + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+  });
+
+  var answersHtml = '';
+  Object.keys(answers).forEach(function(k) {
+    answersHtml += '<p><strong>' + k + ':</strong> ' + String(answers[k]).replace(/</g,'&lt;') + '</p>';
+  });
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>') || 'Respostas enviadas.';
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    localStorage.setItem('bphub_done_' + slug, '1');
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
