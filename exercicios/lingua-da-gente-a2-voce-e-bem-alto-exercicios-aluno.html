@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Você É Bem Alto! — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+    .dialogue-en { font-size: 0.82rem; color: #999; font-style: italic; margin: 0 0 14px 0; line-height: 1.5; }
+
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    .conj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+    .conj-col { background: var(--cobalto-light); border-radius: 10px; padding: 14px 16px; font-size: 0.84rem; }
+    .conj-col h4 { font-family: 'Trirong', serif; font-size: 0.9rem; font-weight: 400; color: var(--cobalto); margin-bottom: 8px; border-bottom: 1px solid rgba(38,91,139,0.2); padding-bottom: 6px; }
+    .conj-col p { margin-bottom: 3px; line-height: 1.65; }
+    .conj-col .form { font-weight: 700; color: var(--nanquim); }
+
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.75; }
+
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 190px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 210px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 300px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row, .conj-grid { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Você É <em>Bem Alto!</em></h1>
+  <div class="hero-sub">Orlando gets asked about his exact height and weight — and has to convert from feet/pounds to meters/kilos on the spot. The intensifier <em>bem + adjetivo</em>, <em>dever + infinitivo</em> for guessing, and measurement vocabulary.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">bem + adjetivo</span>
+    <span class="hero-tag">dever + infinitivo (suposição)</span>
+    <span class="hero-tag">medidas: pés, libras, metros, quilos</span>
+    <span class="hero-tag">expressões de aproximação</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 13</div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">1</div><div class="step-title">Listen to the episode</div></div>
+    <div class="podcast-wrap">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:14px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-13-you-are-really-tall/id1020665354?i=1000371651995">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/elementary-13-you-are-really-tall/id1020665354?i=1000371651995" target="_blank">Open in Apple Podcasts →</a></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">2</div><div class="step-title">Read the dialogue</div></div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">A friend is curious about Orlando's exact height and weight — which means switching from feet and pounds to meters and kilos.</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> Você é <span class="kw">bem alto</span> Orlando. <span class="kw">Qual é sua altura?</span></p>
+        <p class="dialogue-en">You are really tall Orlando. How tall are you?</p>
+        <p><span class="spk">B:</span> Seis pés e 4 polegadas.</p>
+        <p class="dialogue-en">Six feet and four inches.</p>
+        <p><span class="spk">A:</span> E quanto é isso em metros? Você <span class="kw">deve ter</span> uns dois metros, <span class="kw">não é</span>?</p>
+        <p class="dialogue-en">And how much is that in meters? You are probably about two meters tall, right?</p>
+        <p><span class="spk">B:</span> Nem tanto. <span class="kw">Se não me engano</span>, é 1 metro e 93 ou 94 centímetros, <span class="kw">por aí</span>.</p>
+        <p class="dialogue-en">Not quite. If I'm not mistaken, that is 1.93 or 1.94 meters, around there.</p>
+        <p><span class="spk">A:</span> Mesmo assim, você é <span class="kw">bem alto</span>. E <span class="kw">quanto você pesa</span>?</p>
+        <p class="dialogue-en">Still, you are really tall. And how much do you weigh?</p>
+        <p><span class="spk">B:</span> Entre 200 e 205 libras.</p>
+        <p class="dialogue-en">Between 200 and 205 pounds.</p>
+        <p><span class="spk">A:</span> Eu não entendo nada de libras. Quanto é isso em quilos?</p>
+        <p class="dialogue-en">I don't understand anything about pounds. How much is that in kilos?</p>
+        <p><span class="spk">B:</span> <span class="kw">Quem sabe</span> mais ou menos uns 90 a 93 quilos.</p>
+        <p class="dialogue-en">Maybe more or less 90 to 93 kilos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">3</div><div class="step-title">Language focus</div></div>
+    <div class="focus-grid">
+
+      <!-- CARD 1: bem + adjetivo -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Bem + adjetivo — a common intensifier</div>
+        <div class="focus-card-en">English: really / quite (+ adjective)</div>
+        <div class="focus-card-note">
+          Placed right before an adjective, <b>bem</b> works as an intensifier meaning "really/quite" — a more conversational alternative to <em>muito</em>. <em>"Você é <b>bem</b> alto"</em> = "You are really tall." Don't confuse this with the adverb <b>bem</b> meaning "well," which follows a verb instead: <em>"ele fala <b>bem</b>"</em> (he speaks well). Word order is the clue.
+        </div>
+        <div class="conj-grid">
+          <div class="conj-col">
+            <h4>Bem = really (intensifier)</h4>
+            <p><span class="form">bem</span> alto</p>
+            <p><span class="form">bem</span> gelado <small style="opacity:.7;">(Ep. 04!)</small></p>
+          </div>
+          <div class="conj-col">
+            <h4>Bem = well (advérbio)</h4>
+            <p>dormir <span class="form">bem</span> <small style="opacity:.7;">(Ep. 01!)</small></p>
+            <p>falar <span class="form">bem</span> português</p>
+          </div>
+        </div>
+        <div class="focus-ex">
+          Você é <em>bem alto</em>.<br>
+          <small>You are really tall.</small>
+          Mesmo assim, você é <em>bem alto</em>.<br>
+          <small>Still, you are really tall.</small>
+        </div>
+      </div>
+
+      <!-- CARD 2: dever + infinitivo -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Dever + infinitivo — guessing and assuming</div>
+        <div class="focus-card-en">English: must be / is probably (a supposition, not an obligation)</div>
+        <div class="focus-card-note">
+          <b>Dever + infinitivo</b> usually means "should" (obligation), but it also expresses a logical guess based on evidence — like English "must be." <em>"Você <b>deve ter</b> uns dois metros"</em> = "You must be about two meters tall" (a reasonable assumption, not a command).
+        </div>
+        <div class="conj-grid">
+          <div class="conj-col">
+            <h4>Presente — suposição</h4>
+            <p><span class="form">devo</span> (eu)</p>
+            <p><span class="form">deve</span> (você/ele/ela)</p>
+          </div>
+          <div class="conj-col">
+            <h4>&nbsp;</h4>
+            <p><span class="form">devemos</span> (nós)</p>
+            <p><span class="form">devem</span> (eles/elas)</p>
+          </div>
+        </div>
+        <div class="focus-ex">
+          Você <em>deve ter</em> uns dois metros, não é?<br>
+          <small>You must be about two meters tall, right?</small>
+          Ele <em>deve pesar</em> uns 90 quilos.<br>
+          <small>He's probably about 90 kilos.</small>
+        </div>
+      </div>
+
+      <!-- CARD 3: vocabulário e expressões -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Medidas & expressões de aproximação</div>
+        <div class="focus-card-en">Measurement vocabulary & hedging expressions</div>
+        <div class="focus-card-note">Talking about height and weight in Brazil means switching your mental units — and hedging your answer, since exact numbers rarely matter as much as the ballpark.</div>
+        <div class="focus-ex">
+          <em>Altura</em> — height<br>
+          <em>Pé / polegada</em> — foot / inch<br>
+          <em>Metro / centímetro</em> — meter / centimeter<br>
+          <em>Libra / quilo</em> — pound / kilo<br>
+          <em>Pesar</em> — to weigh<br>
+          <br>
+          <em>Se não me engano</em> — if I'm not mistaken<br>
+          <em>Por aí</em> — around there / thereabouts<br>
+          <em>Mais ou menos</em> — more or less<br>
+          <em>Quem sabe</em> — maybe / who knows
+        </div>
+
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">🌎 Culture note</span>
+            Brazil uses the metric system exclusively — <em>metros</em> and <em>quilos</em>, never feet or pounds. Conversations like this one, converting units for an American friend, are extremely common between Brazilians and English speakers, so it's worth knowing your own height and weight in metric!
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Phonology note</span>
+            The tag question <b>"não é?"</b> ("right?"/"isn't it?") is everywhere in spoken Brazilian Portuguese, and in fast, informal speech it often reduces to just <b>"né?"</b> — you'll hear both forms constantly.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">4</div><div class="step-title">Exercises</div></div>
+
+    <!-- EX 1 — COMPREHENSION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. Quanto Orlando mede, em pés e polegadas?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> Seis pés e 4 polegadas.</label>
+          <label><input type="radio" name="q1" value="b"> Cinco pés e 10 polegadas.</label>
+          <label><input type="radio" name="q1" value="c"> Sete pés.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. Quanto é isso em metros, aproximadamente?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> 1,70 metro.</label>
+          <label><input type="radio" name="q2" value="b"> 1,93 ou 1,94 metro.</label>
+          <label><input type="radio" name="q2" value="c"> 2,10 metros.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. Quanto Orlando pesa, mais ou menos, em quilos?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> 70 a 75 quilos.</label>
+          <label><input type="radio" name="q3" value="b"> 90 a 93 quilos.</label>
+          <label><input type="radio" name="q3" value="c"> 100 a 110 quilos.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — DEVER + INFINITIVO -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Conjugating <em>dever</em> (suposição)</div>
+      <div class="ex-instr">Fill in the gap with the correct form of <b>dever</b>, expressing a guess or assumption.</div>
+
+      <div class="ex-item">
+        1. Ele <input type="text" class="gap" id="g1" placeholder="..."> ter uns 30 anos, pelo jeito que fala.
+      </div>
+      <div class="ex-item">
+        2. Nós <input type="text" class="gap" id="g2" placeholder="..."> pesar mais ou menos a mesma coisa.
+      </div>
+      <div class="ex-item">
+        3. Elas <input type="text" class="gap" id="g3" placeholder="..."> ser irmãs, são parecidíssimas.
+      </div>
+      <div class="ex-item">
+        4. Você <input type="text" class="gap" id="g4" placeholder="..."> ter uns dois metros, não é?
+      </div>
+      <div class="ex-item">
+        5. Eu <input type="text" class="gap" id="g5" placeholder="..."> ter uns 1,70m, mais ou menos.
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — VOCABULARY MATCH -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Medidas e expressões</div>
+      <div class="ex-instr">Match each Portuguese word or expression to its English meaning.</div>
+
+      <div class="ex-item">
+        <label>1. <b>Polegada</b></label>
+        <select id="m1">
+          <option value="">— choose —</option>
+          <option value="a">Foot</option>
+          <option value="b">Inch</option>
+          <option value="c">Pound</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>2. <b>Pé (medida)</b></label>
+        <select id="m2">
+          <option value="">— choose —</option>
+          <option value="a">Foot</option>
+          <option value="b">Meter</option>
+          <option value="c">Kilo</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>3. <b>Libra</b></label>
+        <select id="m3">
+          <option value="">— choose —</option>
+          <option value="a">Kilo</option>
+          <option value="b">Centimeter</option>
+          <option value="c">Pound</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>4. <b>Se não me engano</b></label>
+        <select id="m4">
+          <option value="">— choose —</option>
+          <option value="a">If I'm not mistaken</option>
+          <option value="b">I'm absolutely sure</option>
+          <option value="c">I have no idea</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>5. <b>Por aí</b></label>
+        <select id="m5">
+          <option value="">— choose —</option>
+          <option value="a">Over there (a place)</option>
+          <option value="b">Around there / thereabouts</option>
+          <option value="c">Right here</option>
+        </select>
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — Your turn</div>
+      <div class="ex-instr">Write 4–6 sentences in Portuguese about your own height and weight (or a friend's). Use <b>bem + adjetivo</b>, <b>dever + infinitivo</b> to make a guess, and at least one hedging expression (<em>mais ou menos</em>, <em>por aí</em>, <em>se não me engano</em>, <em>quem sabe</em>).</div>
+      <textarea id="free1" style="min-height:120px;" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div>
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 — Comprehension ──
+var ex1A = { q1:'a', q2:'b', q3:'b' };
+var ex1E = {
+  q1: 'A — "Seis pés e 4 polegadas."',
+  q2: 'B — "1 metro e 93 ou 94 centímetros, por aí."',
+  q3: 'B — "Mais ou menos uns 90 a 93 quilos."'
+};
+function checkEx1() {
+  var correct = 0; var html = '';
+  ['q1','q2','q3'].forEach(function(q,i){
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1A[q];
+    if (ok) correct++;
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl){
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1A[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+ex1E[q]+'</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — Dever conjugation ──
+var ex2A = [
+  { id:'g1', keys:['deve'],    display:'<b>deve</b> (ele)' },
+  { id:'g2', keys:['devemos'], display:'<b>devemos</b> (nós)' },
+  { id:'g3', keys:['devem'],   display:'<b>devem</b> (elas)' },
+  { id:'g4', keys:['deve'],    display:'<b>deve</b> (você)' },
+  { id:'g5', keys:['devo'],    display:'<b>devo</b> (eu)' },
+];
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — Vocabulary match ──
+var ex3A = [
+  { id:'m1', key:'b', display:'<b>Polegada</b> = Inch.' },
+  { id:'m2', key:'a', display:'<b>Pé (medida)</b> = Foot.' },
+  { id:'m3', key:'c', display:'<b>Libra</b> = Pound.' },
+  { id:'m4', key:'a', display:'<b>Se não me engano</b> = If I\'m not mistaken.' },
+  { id:'m5', key:'b', display:'<b>Por aí</b> = Around there / thereabouts.' },
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var emailEl = document.getElementById('bphub-student-email');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join("");
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' enviou exercícios — '+material,
+      htmlContent:'<h2>'+name+' enviou os exercícios</h2><p><strong>Material:</strong> '+material+'</p><p><strong>Email:</strong> '+(email||'não informado')+'</p><p><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function(responses){ return Promise.all(responses.map(function(r){ return r.ok ? Promise.resolve(true) : r.json().then(function(d){ return {ok:false,err:d}; }); })); })
+  .then(function(results){
+    var allOk = results.every(function(r){ return r === true; });
+    if (allOk) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
