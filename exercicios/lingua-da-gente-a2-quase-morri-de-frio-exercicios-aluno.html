@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quase Morri de Frio! — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+    .dialogue-en { font-size: 0.82rem; color: #999; font-style: italic; margin: 0 0 14px 0; line-height: 1.5; }
+
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    .conj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+    .conj-col { background: var(--cobalto-light); border-radius: 10px; padding: 14px 16px; font-size: 0.84rem; }
+    .conj-col h4 { font-family: 'Trirong', serif; font-size: 0.9rem; font-weight: 400; color: var(--cobalto); margin-bottom: 8px; border-bottom: 1px solid rgba(38,91,139,0.2); padding-bottom: 6px; }
+    .conj-col p { margin-bottom: 3px; line-height: 1.65; }
+    .conj-col .form { font-weight: 700; color: var(--nanquim); }
+
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.75; }
+
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 190px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 210px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 300px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row, .conj-grid { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Quase Morri <em>de Frio!</em></h1>
+  <div class="hero-sub">Marcos survives a brutal New York winter and lives to tell the tale — the near-miss pattern <em>quase + pretérito perfeito</em>, <em>poderia</em> for hypothetical (in)ability, and cold-weather vocabulary.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">quase + pretérito perfeito</span>
+    <span class="hero-tag">poderia (condicional de poder)</span>
+    <span class="hero-tag">vocabulário: frio e inverno</span>
+    <span class="hero-tag">nunca... na vida</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 20</div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">1</div><div class="step-title">Listen to the episode</div></div>
+    <div class="podcast-wrap">
+      <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:14px;"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.podcasts.apple.com/br/podcast/elementary-20-i-nearly-froze-to-death/id1020665354?i=1000371652039">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Can't see the player? <a href="https://podcasts.apple.com/br/podcast/elementary-20-i-nearly-froze-to-death/id1020665354?i=1000371652039" target="_blank">Open in Apple Podcasts →</a></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">2</div><div class="step-title">Read the dialogue</div></div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">Marcos is back from a freezing trip to New York, and his friend can't resist saying "I told you so."</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> Oi Marcos, você gostou de Nova Iorque?</p>
+        <p class="dialogue-en">Hi Marcos, did you like New York?</p>
+        <p><span class="spk">B:</span> Gostei, mas <span class="kw">nunca</span> passei tanto frio <span class="kw">na vida</span>.</p>
+        <p class="dialogue-en">I did, but I've never been so cold in my life.</p>
+        <p><span class="spk">A:</span> Cara, eu te avisei, lembra? Faz um frio danado em Nova Iorque.</p>
+        <p class="dialogue-en">I told you man, remember? It gets really cold in New York.</p>
+        <p><span class="spk">B:</span> Sei, e eu que cheguei com um casaco, luvas, gorro e tudo mais, mesmo assim, quando eu saí do táxi, <span class="kw">quase morri</span> de frio.</p>
+        <p class="dialogue-en">I know, and I got there with a coat, gloves, a hat, everything, but despite that, when I got out of the taxi the cold almost killed me.</p>
+        <p><span class="spk">A:</span> E é aquele um frio que penetra, dói na gente, não é mesmo?</p>
+        <p class="dialogue-en">And it's a cold that penetrates, it hurts you, isn't that right?</p>
+        <p><span class="spk">B:</span> É, realmente, e eu não sei como eles vivem num lugar assim. Eu simplesmente <span class="kw">não poderia aguentar</span>.</p>
+        <p class="dialogue-en">Yeah, I really don't know how people live in a place like that. I simply wouldn't be able to take it.</p>
+        <p><span class="spk">A:</span> É, rapaz, eu lembro que uma vez quando eu saí do hotel, o ar que saiu da minha boca congelou.</p>
+        <p class="dialogue-en">And, man, I remember one time when I left my hotel, the air that came out of my mouth froze.</p>
+        <p><span class="spk">B:</span> Não! É impossível! E o efeito do vento, foi horrível.</p>
+        <p class="dialogue-en">No! That's impossible! And the effect of the wind, it was horrible.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">3</div><div class="step-title">Language focus</div></div>
+    <div class="focus-grid">
+
+      <!-- CARD 1: quase + perfeito -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Quase + pretérito perfeito — "I almost..."</div>
+        <div class="focus-card-en">English: I almost/nearly did X (something that didn't quite happen)</div>
+        <div class="focus-card-note">
+          <b>Quase</b> + pretérito perfeito describes something that came close to happening but didn't: <em>"quase morri de frio"</em> = "I nearly died of cold" (obviously, he survived!). This dramatic, everyday pattern works with any verb in the perfeito.
+        </div>
+        <div class="focus-ex">
+          Quando eu saí do táxi, <em>quase morri</em> de frio.<br>
+          <small>When I got out of the taxi, I nearly died of cold.</small>
+          <em>Quase perdi</em> o ônibus hoje!<br>
+          <small>I almost missed the bus today!</small>
+        </div>
+      </div>
+
+      <!-- CARD 2: poderia -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Poderia — condicional de poder</div>
+        <div class="focus-card-en">English: could / would be able to (hypothetical ability or inability)</div>
+        <div class="focus-card-note">
+          <b>Poderia</b> (the condicional of <b>poder</b>) expresses a hypothetical ability — or, negated, a firm sense of inability: <em>"eu simplesmente não poderia aguentar"</em> = "I simply wouldn't be able to stand it." It's also used to make polite requests softer and less direct.
+        </div>
+        <div class="focus-ex">
+          Eu simplesmente <em>não poderia aguentar</em>.<br>
+          <small>I simply wouldn't be able to take it.</small>
+          Você <em>poderia</em> me ajudar com isso?<br>
+          <small>Could you help me with this? (a polite request)</small>
+        </div>
+      </div>
+
+      <!-- CARD 3: vocabulário e expressões -->
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Vocabulário do frio & expressões do diálogo</div>
+        <div class="focus-card-en">Cold-weather vocabulary & everyday expressions</div>
+        <div class="focus-card-note">Key vocabulary and conversational patterns for describing an extreme weather experience.</div>
+        <div class="focus-ex">
+          <em>Casaco</em> — coat<br>
+          <em>Luvas</em> — gloves<br>
+          <em>Gorro</em> — winter hat / beanie<br>
+          <em>Congelar</em> — to freeze<br>
+          <em>Doer</em> — to hurt<br>
+          <em>Vento</em> — wind<br>
+          <br>
+          <em>Nunca... na vida</em> — never in my life (emphatic superlative)<br>
+          <em>Não é mesmo?</em> — isn't that right? (tag question, variant of não é?/viu?)
+        </div>
+
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">❄️ Culture note</span>
+            Most of Brazil never sees freezing temperatures, so genuinely cold winters — like a New York winter — are a real shock for many Brazilians. Stories about "how cold it really got" are a classic travel-conversation topic.
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Phonology note</span>
+            Notice the diphthong in <em>frio</em> (fri-o) — the "io" glides smoothly from "i" to "o" in one syllable, unlike English, which would tend to separate them. Practice saying it as one quick, connected sound.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">4</div><div class="step-title">Exercises</div></div>
+
+    <!-- EX 1 — COMPREHENSION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. O que aconteceu quando Marcos saiu do táxi?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> Ele quase morreu de frio.</label>
+          <label><input type="radio" name="q1" value="b"> Ele perdeu as malas.</label>
+          <label><input type="radio" name="q1" value="c"> Ele escorregou no gelo.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. O que Marcos acha que não conseguiria fazer?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> Viajar de novo para Nova Iorque.</label>
+          <label><input type="radio" name="q2" value="b"> Viver num lugar tão frio.</label>
+          <label><input type="radio" name="q2" value="c"> Comprar um casaco.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. O que A diz que aconteceu quando ele saiu do hotel?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> O ar que saiu da boca dele congelou.</label>
+          <label><input type="radio" name="q3" value="b"> Ele escorregou na neve.</label>
+          <label><input type="radio" name="q3" value="c"> Ele perdeu o casaco.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — QUASE + PERFEITO / PODERIA -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Quase + perfeito ou poderia?</div>
+      <div class="ex-instr">Fill in the gap with <b>quase</b> + the correct pretérito perfeito form, or <b>poderia</b>.</div>
+
+      <div class="ex-item">
+        1. Quando eu saí do táxi, <input type="text" class="gap" id="g1" placeholder="..."> (morrer) de frio.
+      </div>
+      <div class="ex-item">
+        2. Ele <input type="text" class="gap" id="g2" placeholder="..."> (perder) o ônibus, mas conseguiu pegar no último minuto.
+      </div>
+      <div class="ex-item">
+        3. Eu simplesmente não <input type="text" class="gap" id="g3" placeholder="..."> (poder) aguentar esse frio.
+      </div>
+      <div class="ex-item">
+        4. Você <input type="text" class="gap" id="g4" placeholder="..."> (poder) me ajudar com isso, por favor?
+      </div>
+      <div class="ex-item">
+        5. Nós <input type="text" class="gap" id="g5" placeholder="..."> (esquecer) as luvas em casa!
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — VOCABULARY MATCH -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Vocabulário do frio</div>
+      <div class="ex-instr">Match each Portuguese word to its English meaning.</div>
+
+      <div class="ex-item">
+        <label>1. <b>Casaco</b></label>
+        <select id="m1">
+          <option value="">— choose —</option>
+          <option value="a">Coat</option>
+          <option value="b">Scarf</option>
+          <option value="c">Boots</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>2. <b>Luvas</b></label>
+        <select id="m2">
+          <option value="">— choose —</option>
+          <option value="a">Socks</option>
+          <option value="b">Gloves</option>
+          <option value="c">Hat</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>3. <b>Gorro</b></label>
+        <select id="m3">
+          <option value="">— choose —</option>
+          <option value="a">Winter hat / beanie</option>
+          <option value="b">Scarf</option>
+          <option value="c">Boots</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>4. <b>Congelar</b></label>
+        <select id="m4">
+          <option value="">— choose —</option>
+          <option value="a">To melt</option>
+          <option value="b">To freeze</option>
+          <option value="c">To warm up</option>
+        </select>
+      </div>
+      <div class="ex-item">
+        <label>5. <b>Doer</b></label>
+        <select id="m5">
+          <option value="">— choose —</option>
+          <option value="a">To hurt</option>
+          <option value="b">To rest</option>
+          <option value="c">To sleep</option>
+        </select>
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — Your turn</div>
+      <div class="ex-instr">Write 4–6 sentences in Portuguese about an extreme weather experience (hot or cold). Use <b>quase + pretérito perfeito</b> for a near miss, <b>poderia</b> for something you wouldn't be able to do, and at least one word from Focus 3.</div>
+      <textarea id="free1" style="min-height:120px;" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div>
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 — Comprehension ──
+var ex1A = { q1:'a', q2:'b', q3:'a' };
+var ex1E = {
+  q1: 'A — "Quando eu saí do táxi, quase morri de frio."',
+  q2: 'B — "Eu simplesmente não poderia aguentar" viver num lugar tão frio.',
+  q3: 'A — "O ar que saiu da minha boca congelou."'
+};
+function checkEx1() {
+  var correct = 0; var html = '';
+  ['q1','q2','q3'].forEach(function(q,i){
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1A[q];
+    if (ok) correct++;
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl){
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1A[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+ex1E[q]+'</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — Quase + perfeito / Poderia ──
+var ex2A = [
+  { id:'g1', keys:['quase morri'],    display:'<b>quase morri</b> (eu)' },
+  { id:'g2', keys:['quase perdeu'],   display:'<b>quase perdeu</b> (ele)' },
+  { id:'g3', keys:['poderia'],        display:'<b>poderia</b> (eu)' },
+  { id:'g4', keys:['poderia'],        display:'<b>poderia</b> (você)' },
+  { id:'g5', keys:['quase esquecemos'], display:'<b>quase esquecemos</b> (nós)' },
+];
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — Vocabulary match ──
+var ex3A = [
+  { id:'m1', key:'a', display:'<b>Casaco</b> = Coat.' },
+  { id:'m2', key:'b', display:'<b>Luvas</b> = Gloves.' },
+  { id:'m3', key:'a', display:'<b>Gorro</b> = Winter hat / beanie.' },
+  { id:'m4', key:'b', display:'<b>Congelar</b> = To freeze.' },
+  { id:'m5', key:'a', display:'<b>Doer</b> = To hurt.' },
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var emailEl = document.getElementById('bphub-student-email');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join("");
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' enviou exercícios — '+material,
+      htmlContent:'<h2>'+name+' enviou os exercícios</h2><p><strong>Material:</strong> '+material+'</p><p><strong>Email:</strong> '+(email||'não informado')+'</p><p><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function(responses){ return Promise.all(responses.map(function(r){ return r.ok ? Promise.resolve(true) : r.json().then(function(d){ return {ok:false,err:d}; }); })); })
+  .then(function(results){
+    var allOk = results.every(function(r){ return r === true; });
+    if (allOk) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
