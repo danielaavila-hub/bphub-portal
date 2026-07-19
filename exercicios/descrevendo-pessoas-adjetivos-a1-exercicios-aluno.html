@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descrevendo Pessoas: Adjetivos — BPHUB A1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --baunilha:   #FCF5EB;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --areia:      #E5E0D0;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --marrom:     #967E63;
+      --marrom2:    #A1441D;
+      --goiaba:     #FCA290;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --card-bg:    #FFFFFF;
+      --radius:     12px;
+
+      /* A1 — Iniciante I */
+      --level-color: #4E551D;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--texto); }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 500;
+      background: var(--giz);
+      border-bottom: 1px solid #E8E4DE;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+    }
+    .topbar-logo img { height: 40px; width: auto; display: block; }
+    .topbar-student { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+    .topbar-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--level-color); color: #fff;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .topbar-name  { font-size: 13px; color: #555; font-family: sans-serif; }
+    .topbar-back  { font-size: 12px; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .topbar-back:hover { color: var(--level-color); }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      background: var(--level-color); color: #fff;
+      padding: 48px 40px 40px; text-align: left;
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300; line-height: 1.25; margin-bottom: 14px;
+      color: white;
+    }
+    .page-hero > p {
+      font-size: 15px; color: rgba(255,255,255,.88); max-width: 620px;
+      margin: 0 0 20px; font-family: 'Manrope', sans-serif; line-height: 1.6;
+    }
+    .student-meta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
+    .meta-pill {
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; font-family: 'Manrope', sans-serif;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); display: inline-block; }
+
+    /* ── Main ── */
+    .main { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    /* ── Section header ── */
+    .sec-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 40px; margin-bottom: 20px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--areia);
+    }
+    .sec-header.first { margin-top: 0; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--level-color); color: #fff; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sec-header h2 { font-size: 1.1rem; color: var(--texto); }
+    .sec-header p  { font-size: 13px; color: #666; font-family: 'Manrope', sans-serif; margin-top: 2px; }
+
+    /* ── Grammar box ── */
+    .grammar-box {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--areia); padding: 28px; margin-bottom: 24px;
+    }
+    .grammar-box p { margin-bottom: 14px; font-size: 15px; }
+    .grammar-box p:last-child { margin-bottom: 0; }
+
+    /* ── Tables ── */
+    .gram-table {
+      width: 100%; border-collapse: collapse;
+      margin: 18px 0; font-size: 14px; font-family: 'Manrope', sans-serif;
+    }
+    .gram-table th {
+      background: var(--level-color); color: #fff;
+      padding: 10px 12px; text-align: left; font-weight: 600;
+    }
+    .gram-table th:first-child { border-radius: 6px 0 0 0; }
+    .gram-table th:last-child  { border-radius: 0 6px 0 0; }
+    .gram-table td { padding: 10px 12px; border-bottom: 1px solid var(--areia); vertical-align: middle; }
+    .gram-table tr:last-child td { border-bottom: none; }
+    .gram-table tr:nth-child(even) td { background: var(--off-white); }
+    .loc-tag {
+      display: inline-block; border-radius: 4px;
+      padding: 2px 8px; font-size: 12px; font-weight: 700;
+    }
+    .loc-aqui { background: var(--erva-doce);  color: #2a2e0a; }
+    .loc-ai   { background: var(--cobalto);    color: #fff; }
+    .loc-la   { background: var(--marrom);     color: #fff; }
+
+    /* ── Callout ── */
+    .callout {
+      background: rgba(78,85,29,.07); border-left: 4px solid var(--erva-doce);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 18px 0;
+      font-size: 14px; line-height: 1.7;
+    }
+    .callout strong { color: var(--level-color); }
+
+    /* ── WhatsApp replica ── */
+    .wapp-outer { margin-bottom: 8px; display: flex; justify-content: center; }
+    .whatsapp-wrap {
+      background: #e5ddd5; padding: 20px 16px; border-radius: 14px;
+      width: 100%; max-width: 420px;
+      font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px;
+    }
+    .wapp-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .wapp-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; flex-shrink: 0;
+    }
+    .wapp-name   { font-weight: 700; font-size: 14px; }
+    .wapp-status { font-size: 12px; color: #666; }
+    .msg-received {
+      background: #fff; border-radius: 0 8px 8px 8px;
+      padding: 8px 12px; margin-bottom: 8px; max-width: 84%;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+    .msg-sent {
+      background: #dcf8c6; border-radius: 8px 0 8px 8px;
+      padding: 8px 12px; margin-bottom: 8px; max-width: 84%; margin-left: auto;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    }
+    .msg-time { font-size: 11px; color: #999; float: right; margin-left: 12px; margin-top: 4px; }
+    .msg-text { margin: 0; line-height: 1.45; }
+    .hl { font-weight: 700; color: #2d5a0e; background: rgba(45,90,14,.13); padding: 0 3px; border-radius: 3px; }
+    .wapp-fonte { font-size: 11px; color: #888; text-align: center; margin-top: 6px; font-style: italic; }
+
+    /* ── Exercise block ── */
+    .exercise-block {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--areia); padding: 28px 28px 24px; margin-bottom: 28px;
+    }
+    .ex-label {
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--level-color); font-family: 'Manrope', sans-serif; font-weight: 700; margin-bottom: 6px;
+    }
+    .ex-title   { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .ex-instruction { font-size: 14px; color: #555; margin-bottom: 20px; font-family: 'Manrope', sans-serif; line-height: 1.6; }
+
+    .ex-item { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+    .ex-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--level-color); color: #fff;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .ex-text { font-size: 14px; line-height: 1.7; flex: 1; }
+
+    /* ── Inputs ── */
+    select, input[type=text] {
+      border: 1.5px solid var(--areia); border-radius: 6px;
+      padding: 6px 10px; font-size: 14px; font-family: 'Manrope', sans-serif;
+      background: #fff; cursor: pointer;
+    }
+    select { min-width: 130px; }
+    input[type=text] { width: 150px; }
+    select:focus, input[type=text]:focus { outline: none; border-color: var(--level-color); }
+    .correct { border-color: var(--floresta) !important; background: rgba(78,85,29,.06) !important; }
+    .wrong   { border-color: var(--pitomba)  !important; background: rgba(211,109,41,.06) !important; }
+
+    textarea {
+      border: 1.5px solid var(--areia); border-radius: 8px;
+      padding: 12px; font-size: 14px; font-family: 'Manrope', sans-serif;
+      width: 100%; min-height: 110px; resize: vertical; background: #fff; margin-top: 8px;
+    }
+    textarea:focus { outline: none; border-color: var(--level-color); }
+
+    .check-btn {
+      background: var(--level-color); color: #fff;
+      border: none; border-radius: 6px;
+      padding: 10px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; margin-top: 16px; font-family: 'Manrope', sans-serif;
+    }
+    .check-btn:hover { opacity: .88; }
+
+    .result-msg {
+      display: none; margin-top: 14px; padding: 14px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      max-height: 260px; overflow-y: auto;
+    }
+    .result-msg.good      { background: rgba(78,85,29,.08);   border: 1px solid rgba(78,85,29,.25);   color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,.08); border: 1px solid rgba(211,109,41,.25); color: var(--pitomba); }
+
+    /* ── Contact box ── */
+    .contact-box {
+      margin-top: 48px; background: var(--baunilha2); border-radius: var(--radius);
+      border: 1px solid rgba(78,85,29,.18);
+      padding: 24px 28px; text-align: left;
+      font-family: 'Manrope', sans-serif; font-size: 14px; color: #5a4a30;
+    }
+    .contact-box strong { color: var(--texto); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .topbar  { padding: 8px 16px; }
+      .page-hero { padding: 32px 20px 28px; }
+      .main    { padding: 24px 16px 48px; }
+      .exercise-block { padding: 20px 16px; }
+      .gram-table { font-size: 12px; }
+      .gram-table th, .gram-table td { padding: 7px 8px; }
+      select { min-width: 100px; }
+      input[type=text] { width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png"
+           alt="BPHUB" onerror="this.outerHTML='<span style=\'font-family:Trirong,serif;font-weight:500;font-size:20px;color:#4E551D;letter-spacing:0.04em;\'>BPHUB</span>'">
+    </a>
+  </div>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← A1 materials</a>
+</div>
+
+<!-- ══ PAGE HERO ══ -->
+<div class="page-hero">
+  <div class="page-eyebrow">Materials Portal</div>
+  <h1>Descrevendo Pessoas<br>
+    <em style="font-style:normal;font-weight:300;color:var(--ouro);">adjetivos e concordância</em>
+  </h1>
+  <p>Learn to describe people's appearance and personality in Portuguese — and make adjectives agree with the noun's gender.</p>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Concordância de gênero (-o / -a)</span>
+    <span class="meta-pill"><span class="dot"></span>muito · um pouco · muito pouco</span>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+
+  <!-- ─ GRAMMAR NOTE ─ -->
+  <div class="sec-header first">
+    <div class="sec-icon" style="background:var(--level-color);">📖</div>
+    <div>
+      <h2>Grammar Note</h2>
+      <p>Read this before doing the exercises.</p>
+    </div>
+  </div>
+
+  <div class="grammar-box">
+    <p><strong>Adjective agreement — gender.</strong> Variable adjectives change their ending to match the noun: <strong>-o</strong> (masc.) → <strong>-a</strong> (fem.). Invariable adjectives stay the same for both genders — these often end in <strong>-e, -l, -z,</strong> or <strong>-m</strong>.</p>
+
+    <table class="gram-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Masculine</th>
+          <th>Feminine</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Variable</strong></td>
+          <td>alto</td>
+          <td>alta</td>
+          <td><em>Pedrinho é alto. Narizinho é alta.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Variable</strong></td>
+          <td>bonito</td>
+          <td>bonita</td>
+          <td><em>O sofá é bonito. A casa é bonita.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Invariable</strong></td>
+          <td colspan="2" style="text-align:center;">inteligente</td>
+          <td><em>Ele é inteligente. Ela é inteligente.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Invariable</strong></td>
+          <td colspan="2" style="text-align:center;">gentil · feliz · jovem · alegre</td>
+          <td><em>Dona Benta é muito gentil.</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Intensifiers</strong> (placed before the adjective): <strong>muito</strong> = very &nbsp;·&nbsp; <strong>um pouco</strong> = a little (usually a mild or negative trait) &nbsp;·&nbsp; <strong>muito pouco</strong> = very little.<br><br>
+      <em>Dona Benta é muito querida.</em> — Dona Benta is very dear.<br>
+      <em>Pedrinho é um pouco teimoso.</em> — Pedrinho is a little stubborn.
+    </div>
+
+    <p style="margin-top:18px;"><strong>Vocabulário — adjetivos de descrição:</strong></p>
+    <table class="gram-table">
+      <thead>
+        <tr><th>Português</th><th>English</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>alto / alta</td><td>tall</td></tr>
+        <tr><td>magro / magra</td><td>thin</td></tr>
+        <tr><td>moreno / morena</td><td>dark-haired</td></tr>
+        <tr><td>calmo / calma</td><td>calm</td></tr>
+        <tr><td>sério / séria</td><td>serious</td></tr>
+        <tr><td>corajoso / corajosa</td><td>brave</td></tr>
+        <tr><td>teimoso / teimosa</td><td>stubborn</td></tr>
+        <tr><td>alegre</td><td>cheerful</td></tr>
+        <tr><td>inteligente</td><td>intelligent</td></tr>
+        <tr><td>falante</td><td>talkative</td></tr>
+        <tr><td>feliz</td><td>happy</td></tr>
+        <tr><td>gentil</td><td>kind</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─ ANCHOR TEXT ─ -->
+  <div class="sec-header">
+    <div class="sec-icon" style="background:var(--cobalto);">📚</div>
+    <div>
+      <h2>Read the text</h2>
+      <p>An excerpt from a Brazilian children's classic. Notice the highlighted adjectives.</p>
+    </div>
+  </div>
+
+  <div class="grammar-box" style="border-left:4px solid var(--cobalto);">
+    <p style="font-family:'Trirong',serif;font-size:1.02rem;line-height:2.0;">
+      Numa casinha branca, no Sítio do Picapau Amarelo, mora uma velhinha muito <span class="hl">simpática</span>. Ela se chama Dona Benta. Dona Benta é uma avó <span class="hl">calma</span> e muito <span class="hl">querida</span>. Ela adora contar histórias.<br><br>
+      Dona Benta mora com a neta, Lúcia. Todos chamam a menina de Narizinho. Narizinho tem sete anos. Ela é <span class="hl">morena</span> e muito <span class="hl">alegre</span>. O primo dela, Pedrinho, é um menino da cidade. Ele é <span class="hl">alto</span>, <span class="hl">corajoso</span> e um pouco <span class="hl">teimoso</span>.<br><br>
+      Emília é uma boneca de pano. Ela é <span class="hl">pequena</span>, muito <span class="hl">falante</span> e um pouco atrevida. O Visconde de Sabugosa é <span class="hl">magro</span>, <span class="hl">sério</span> e muito <span class="hl">inteligente</span>.
+    </p>
+    <p class="wapp-fonte" style="text-align:left;margin-top:14px;">Adaptado de Monteiro Lobato, <em>Reinações de Narizinho</em> (1931). Domínio público.</p>
+  </div>
+
+  <!-- ─ EXERCISES ─ -->
+  <div class="sec-header">
+    <div class="sec-icon" style="background:var(--marrom);">✏️</div>
+    <div>
+      <h2>Exercises</h2>
+      <p>Practice describing people — check your answers when you're done.</p>
+    </div>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 1 — Comprehension</div>
+    <div class="ex-title">Mark V (verdadeiro) or F (falso).</div>
+    <div class="ex-instruction">Based on the text above, choose V (true) or F (false) for each statement.</div>
+
+    <div class="ex-item">
+      <span class="ex-num">1</span>
+      <div class="ex-text">
+        Dona Benta é uma avó calma.&nbsp;
+        <select id="e1q1"><option value="">—</option><option value="V">V</option><option value="F">F</option></select>
+      </div>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">2</span>
+      <div class="ex-text">
+        Narizinho é loira.&nbsp;
+        <select id="e1q2"><option value="">—</option><option value="V">V</option><option value="F">F</option></select>
+      </div>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">3</span>
+      <div class="ex-text">
+        Pedrinho é um pouco teimoso.&nbsp;
+        <select id="e1q3"><option value="">—</option><option value="V">V</option><option value="F">F</option></select>
+      </div>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">4</span>
+      <div class="ex-text">
+        Emília é muito falante.&nbsp;
+        <select id="e1q4"><option value="">—</option><option value="V">V</option><option value="F">F</option></select>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 2 — Matching</div>
+    <div class="ex-title">Match each character to a description.</div>
+    <div class="ex-instruction">Choose the description that matches each character.</div>
+
+    <div class="ex-item">
+      <span class="ex-num">1</span>
+      <div class="ex-text">
+        Dona Benta &nbsp;
+        <select id="e2q1">
+          <option value="">—</option>
+          <option value="a">alto e corajoso</option>
+          <option value="b">pequena e muito falante</option>
+          <option value="c">magro e muito inteligente</option>
+          <option value="d">muito querida</option>
+        </select>
+      </div>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">2</span>
+      <div class="ex-text">
+        Pedrinho &nbsp;
+        <select id="e2q2">
+          <option value="">—</option>
+          <option value="a">alto e corajoso</option>
+          <option value="b">pequena e muito falante</option>
+          <option value="c">magro e muito inteligente</option>
+          <option value="d">muito querida</option>
+        </select>
+      </div>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">3</span>
+      <div class="ex-text">
+        Emília &nbsp;
+        <select id="e2q3">
+          <option value="">—</option>
+          <option value="a">alto e corajoso</option>
+          <option value="b">pequena e muito falante</option>
+          <option value="c">magro e muito inteligente</option>
+          <option value="d">muito querida</option>
+        </select>
+      </div>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">4</span>
+      <div class="ex-text">
+        O Visconde de Sabugosa &nbsp;
+        <select id="e2q4">
+          <option value="">—</option>
+          <option value="a">alto e corajoso</option>
+          <option value="b">pequena e muito falante</option>
+          <option value="c">magro e muito inteligente</option>
+          <option value="d">muito querida</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 3 — Write</div>
+    <div class="ex-title">Write the feminine form.</div>
+    <div class="ex-instruction">Change each masculine adjective to its feminine form.</div>
+
+    <div class="ex-item"><span class="ex-num">1</span><div class="ex-text">alto → <input type="text" id="e3q1" placeholder="Escreva aqui..."></div></div>
+    <div class="ex-item"><span class="ex-num">2</span><div class="ex-text">moreno → <input type="text" id="e3q2" placeholder="Escreva aqui..."></div></div>
+    <div class="ex-item"><span class="ex-num">3</span><div class="ex-text">sério → <input type="text" id="e3q3" placeholder="Escreva aqui..."></div></div>
+    <div class="ex-item"><span class="ex-num">4</span><div class="ex-text">corajoso → <input type="text" id="e3q4" placeholder="Escreva aqui..."></div></div>
+    <div class="ex-item"><span class="ex-num">5</span><div class="ex-text">teimoso → <input type="text" id="e3q5" placeholder="Escreva aqui..."></div></div>
+    <div class="ex-item"><span class="ex-num">6</span><div class="ex-text">calmo → <input type="text" id="e3q6" placeholder="Escreva aqui..."></div></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 4 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 4 — Classify</div>
+    <div class="ex-title">Variável or invariável?</div>
+    <div class="ex-instruction">Choose whether each adjective changes for gender (variável) or stays the same (invariável).</div>
+
+    <div class="ex-item"><span class="ex-num">1</span><div class="ex-text">inteligente &nbsp;<select id="e4q1"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">2</span><div class="ex-text">alto &nbsp;<select id="e4q2"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">3</span><div class="ex-text">alegre &nbsp;<select id="e4q3"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">4</span><div class="ex-text">magro &nbsp;<select id="e4q4"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">5</span><div class="ex-text">gentil &nbsp;<select id="e4q5"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">6</span><div class="ex-text">sério &nbsp;<select id="e4q6"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">7</span><div class="ex-text">feliz &nbsp;<select id="e4q7"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">8</span><div class="ex-text">corajoso &nbsp;<select id="e4q8"><option value="">—</option><option>Variável</option><option>Invariável</option></select></div></div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 5 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 5 — Intensifiers</div>
+    <div class="ex-title">Complete with muito, um pouco, or muito pouco.</div>
+    <div class="ex-instruction">The cue in parentheses shows the degree you should express.</div>
+
+    <div class="ex-item"><span class="ex-num">a</span><div class="ex-text">O Visconde é &nbsp;<select id="e5q1"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; inteligente. <em>(very)</em></div></div>
+    <div class="ex-item"><span class="ex-num">b</span><div class="ex-text">O Pedrinho é &nbsp;<select id="e5q2"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; teimoso. <em>(a little)</em></div></div>
+    <div class="ex-item"><span class="ex-num">c</span><div class="ex-text">A Emília é &nbsp;<select id="e5q3"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; falante. <em>(very)</em></div></div>
+    <div class="ex-item"><span class="ex-num">d</span><div class="ex-text">A Dona Benta é &nbsp;<select id="e5q4"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; apressada. <em>(very little)</em></div></div>
+    <div class="ex-item"><span class="ex-num">e</span><div class="ex-text">A Narizinho é &nbsp;<select id="e5q5"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; alegre. <em>(very)</em></div></div>
+    <div class="ex-item"><span class="ex-num">f</span><div class="ex-text">A Emília é &nbsp;<select id="e5q6"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; tímida. <em>(very little)</em></div></div>
+    <div class="ex-item"><span class="ex-num">g</span><div class="ex-text">O Pedrinho é &nbsp;<select id="e5q7"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; calmo. <em>(a little)</em></div></div>
+    <div class="ex-item"><span class="ex-num">h</span><div class="ex-text">O Visconde é &nbsp;<select id="e5q8"><option value="">—</option><option>muito</option><option>um pouco</option><option>muito pouco</option></select>&nbsp; atrevido. <em>(very little)</em></div></div>
+
+    <button class="check-btn" onclick="checkEx5()">✓ Check answers</button>
+    <div id="ex5-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 6 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 6 — Write</div>
+    <div class="ex-title">Describe a person you like.</div>
+    <div class="ex-instruction">
+      Describe a friend, a relative, or a favorite character. Include their appearance, two personality traits, and one thing they love. Use <strong>muito / um pouco / muito pouco</strong> at least twice.<br><br>
+      <em>Example: "A minha amiga Marina é alta, magra e morena. Ela é muito alegre e gentil, mas é um pouco teimosa. A Marina adora viajar."</em>
+    </div>
+    <textarea id="e6response" placeholder="Escreva sua descrição aqui..."></textarea>
+  </div>
+
+  <div style="max-width:760px;margin:0 auto;padding:0 16px 48px;">
+<div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+</div>
+
+</div><!-- /.main -->
+<script>
+  function norm(s) {
+    return s.toLowerCase().trim()
+      .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+      .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+      .replace(/ç/g,'c').replace(/\s+/g,' ');
+  }
+
+  /* ── Exercise 1 — V/F ── */
+  var e1 = [
+    { id:'e1q1', key:'V', display:'V — "Dona Benta é uma avó calma e muito querida."' },
+    { id:'e1q2', key:'F', display:'F — o texto diz que Narizinho é morena, não loira.' },
+    { id:'e1q3', key:'V', display:'V — "Ele é alto, corajoso e um pouco teimoso."' },
+    { id:'e1q4', key:'V', display:'V — "Ela é pequena, muito falante e um pouco atrevida."' }
+  ];
+  function checkEx1() {
+    var html = ''; var correct = 0;
+    e1.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex1-result');
+    var allOk = correct === e1.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e1.length + ' correct!'
+               : correct + ' of ' + e1.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* ── Exercise 2 — Matching ── */
+  var e2 = [
+    { id:'e2q1', key:'d', display:'Dona Benta → muito querida' },
+    { id:'e2q2', key:'a', display:'Pedrinho → alto e corajoso' },
+    { id:'e2q3', key:'b', display:'Emília → pequena e muito falante' },
+    { id:'e2q4', key:'c', display:'O Visconde de Sabugosa → magro e muito inteligente' }
+  ];
+  function checkEx2() {
+    var html = ''; var correct = 0;
+    e2.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex2-result');
+    var allOk = correct === e2.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e2.length + ' correct!'
+               : correct + ' of ' + e2.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* ── Exercise 3 — Feminine form ── */
+  var e3 = [
+    { id:'e3q1', key:'alta',     display:'alta' },
+    { id:'e3q2', key:'morena',   display:'morena' },
+    { id:'e3q3', key:'séria',    display:'séria' },
+    { id:'e3q4', key:'corajosa', display:'corajosa' },
+    { id:'e3q5', key:'teimosa',  display:'teimosa' },
+    { id:'e3q6', key:'calma',    display:'calma' }
+  ];
+  function checkEx3() {
+    var html = ''; var correct = 0;
+    e3.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var filled = el.value.trim().length > 0;
+      var ok = filled && norm(el.value) === norm(a.key);
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', filled && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex3-result');
+    var allOk = correct === e3.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e3.length + ' correct!'
+               : correct + ' of ' + e3.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* ── Exercise 4 — Variável/Invariável ── */
+  var e4 = [
+    { id:'e4q1', key:'Invariável', display:'inteligente → Invariável' },
+    { id:'e4q2', key:'Variável',   display:'alto → Variável' },
+    { id:'e4q3', key:'Invariável', display:'alegre → Invariável' },
+    { id:'e4q4', key:'Variável',   display:'magro → Variável' },
+    { id:'e4q5', key:'Invariável', display:'gentil → Invariável' },
+    { id:'e4q6', key:'Variável',   display:'sério → Variável' },
+    { id:'e4q7', key:'Invariável', display:'feliz → Invariável' },
+    { id:'e4q8', key:'Variável',   display:'corajoso → Variável' }
+  ];
+  function checkEx4() {
+    var html = ''; var correct = 0;
+    e4.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex4-result');
+    var allOk = correct === e4.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e4.length + ' correct!'
+               : correct + ' of ' + e4.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* ── Exercise 5 — Intensifiers ── */
+  var e5 = [
+    { id:'e5q1', key:'muito',       display:'muito — O Visconde é muito inteligente.' },
+    { id:'e5q2', key:'um pouco',    display:'um pouco — O Pedrinho é um pouco teimoso.' },
+    { id:'e5q3', key:'muito',       display:'muito — A Emília é muito falante.' },
+    { id:'e5q4', key:'muito pouco', display:'muito pouco — A Dona Benta é muito pouco apressada.' },
+    { id:'e5q5', key:'muito',       display:'muito — A Narizinho é muito alegre.' },
+    { id:'e5q6', key:'muito pouco', display:'muito pouco — A Emília é muito pouco tímida.' },
+    { id:'e5q7', key:'um pouco',    display:'um pouco — O Pedrinho é um pouco calmo.' },
+    { id:'e5q8', key:'muito pouco', display:'muito pouco — O Visconde é muito pouco atrevido.' }
+  ];
+  function checkEx5() {
+    var html = ''; var correct = 0;
+    e5.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (String.fromCharCode(97+i)) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex5-result');
+    var allOk = correct === e5.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e5.length + ' correct!'
+               : correct + ' of ' + e5.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
