@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrícula na Academia — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3; --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21; --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A; --floresta: #4E551D; --erva-doce: #A6B28A; --giz: #FCF5EB; --level: #967E63; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .player-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; margin-bottom: 36px; }
+    .player-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); padding: 16px 24px 0; }
+    .player-block audio { display: block; width: calc(100% - 48px); margin: 0 24px 16px; }
+    .dialogue-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 36px; }
+    .dialogue-block h2 { font-size: 18px; color: var(--nanquim); margin-bottom: 20px; }
+    .dialogue-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .dialogue-table tr { border-bottom: 1px solid var(--light-gray); }
+    .dialogue-table tr:last-child { border-bottom: none; }
+    .dialogue-table td { padding: 12px 10px; vertical-align: top; line-height: 1.65; }
+    .dialogue-table td:first-child { font-weight: 700; width: 32px; padding-right: 4px; white-space: nowrap; }
+    .dialogue-table td:nth-child(2) { padding-right: 20px; }
+    .dialogue-table td:nth-child(3) { color: #888; font-style: italic; border-left: 1px solid var(--light-gray); padding-left: 20px; }
+    .hl { background: rgba(255,185,74,0.18); border-radius: 3px; padding: 1px 4px; font-weight: 600; color: var(--nanquim); }
+    .spk-a { color: var(--cobalto); }
+    .spk-b { color: var(--pitomba); }
+    .focus-block { border-radius: 14px; padding: 26px 30px; margin-bottom: 24px; }
+    .focus-gram { background: rgba(38,91,139,0.06); border: 1.5px solid rgba(38,91,139,0.15); }
+    .focus-expr { background: rgba(150,126,99,0.08); border: 1.5px solid rgba(150,126,99,0.2); }
+    .focus-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+    .focus-gram .focus-label { color: var(--cobalto); }
+    .focus-expr .focus-label { color: var(--level); }
+    .focus-block h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 12px; }
+    .focus-block p { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 10px; }
+    .focus-block p:last-child { margin-bottom: 0; }
+    .gram-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+    .gram-table th { background: rgba(38,91,139,0.1); color: var(--cobalto); padding: 8px 12px; font-weight: 700; font-size: 11px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gram-table td { padding: 10px 12px; border-bottom: 1px solid rgba(38,91,139,0.1); }
+    .gram-table tr:last-child td { border-bottom: none; }
+    .gram-table .trigger { font-weight: 700; color: var(--cobalto); }
+    .gram-table .subj { font-weight: 700; color: var(--pitomba); }
+    .expr-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
+    .expr-table td { padding: 10px 12px; border-bottom: 1px solid rgba(150,126,99,0.15); vertical-align: top; }
+    .expr-table tr:last-child td { border-bottom: none; }
+    .expr-table .expr { font-weight: 700; color: var(--nanquim); width: 40%; }
+    .expr-table .meaning { color: #555; }
+    .expr-table .example { font-style: italic; color: #888; font-size: 13px; }
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+    .tf-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; font-size: 15px; }
+    .tf-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .tf-statement { flex: 1; line-height: 1.6; }
+    .tf-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .tf-btn { padding: 5px 14px; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; background: white; color: #999; font-family: 'Manrope', sans-serif; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.selected-v { background: rgba(78,85,29,0.12); border-color: var(--floresta); color: var(--floresta); }
+    .tf-btn.selected-f { background: rgba(211,109,41,0.1); border-color: var(--pitomba); color: var(--pitomba); }
+    .mc-row { margin-bottom: 20px; }
+    .mc-question { font-size: 15px; color: var(--nanquim); margin-bottom: 10px; line-height: 1.55; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--light-gray); border-radius: 10px; cursor: pointer; font-size: 14px; transition: border-color 0.15s; background: white; }
+    .mc-option:hover { border-color: var(--level); }
+    .mc-option.selected { border-color: var(--cobalto); background: rgba(38,91,139,0.08); }
+    .mc-option.correct { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .mc-option.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.07); color: var(--pitomba); }
+    .mc-letter { font-weight: 700; min-width: 18px; flex-shrink: 0; margin-top: 1px; }
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; min-width: 100px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2.1; }
+    .verb-hint { font-size: 12px; color: #bbb; font-style: italic; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 14px 18px; background: rgba(150,126,99,0.06); border-radius: 10px; border: 1px dashed rgba(150,126,99,0.3); }
+    .word-bank-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--level); width: 100%; margin-bottom: 4px; }
+    .word-chip { background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; padding: 4px 14px; font-size: 13px; font-weight: 600; color: var(--nanquim); font-family: monospace; }
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+    .free-textarea { width: 100%; min-height: 160px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 18px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.8; }
+    .free-textarea:focus { border-color: var(--level); }
+    .note-box { background: rgba(150,126,99,0.08); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; line-height: 1.75; }
+    .send-box { background: rgba(166,178,138,0.18); border: 1.5px solid rgba(166,178,138,0.35); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    @media (max-width: 700px) { .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; } .ex-block, .dialogue-block, .focus-block { padding: 20px 18px; } .dialogue-table td:nth-child(3) { display: none; } .tf-row { flex-wrap: wrap; } }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;"><span class="badge badge-level">B1 · Ep 26</span></div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Matrícula na <em>Academia</em></h1>
+  <div class="hero-sub">A friend gives practical advice on signing up for a gym — focus on informal imperative for advice-giving (tenta, pede, verifica) and gym membership vocabulary.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Imperativo informal (conselhos)</span>
+    <span class="hero-tag">Duvido que + subjuntivo</span>
+    <span class="hero-tag">Vocabulário de academia</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="player-block">
+    <div class="player-label">Língua da Gente · Intermediate 26</div>
+    <audio controls preload="none">
+      <source src="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-int26-lesson.mp3" type="audio/mpeg">
+      Seu navegador não suporta o elemento de áudio.
+    </audio>
+  </div>
+
+  <div class="dialogue-block">
+    <h2>Diálogo · Bilingual transcript</h2>
+    <table class="dialogue-table">
+      <tbody>
+        <tr><td class="spk-a">A</td><td>Ô Diana, para entrar numa academia, que que tem que fazer?</td><td>Hey Diana, to sign up for a gym, what do you need to do?</td></tr>
+        <tr><td class="spk-b">B</td><td>Você prefere começar exercícios na máquina, pesos livres, ou exercícios aeróbicos?</td><td>Do you prefer to start with machine exercises, free weights, or aerobic exercises?</td></tr>
+        <tr><td class="spk-a">A</td><td>Não, o que quero dizer, você tem que assinar um contrato, pagar a mensalidade, o que tem que fazer para fazer a matrícula?</td><td>No, what I mean is, you have to sign a contract, pay a monthly fee, what do you have to do to sign up?</td></tr>
+        <tr><td class="spk-b">B</td><td>Ah, bom, <span class="hl">tenta buscar</span> um lugar que tenha contrato anual, pra ser cobrada só uma vez ao ano. É mais barato do que o mensal.</td><td>OK, well, try to find a place that has an annual contract, to be charged just once a year. It's cheaper than the monthly one.</td></tr>
+        <tr><td class="spk-a">A</td><td>E o que que é uma taxa de adesão?</td><td>And what is a sign-up fee?</td></tr>
+        <tr><td class="spk-b">B</td><td>Esse é um valor adicional, cobrado ao realizar a matrícula. Mas muitas vezes tem uma promoção que elimina a taxa de adesão, <span class="hl">tenta evitá-la</span>.</td><td>That's an extra amount, charged when you sign up. But often there's a promotion that eliminates the sign-up fee, try to avoid it.</td></tr>
+        <tr><td class="spk-a">A</td><td>Preciso pegar algo do médico?</td><td>Do I need to get anything from the doctor?</td></tr>
+        <tr><td class="spk-b">B</td><td>Às vezes pedem um atestado médico para provar que você está apta para praticar atividades físicas, mas isso depende do local e da idade da pessoa, <span class="hl">duvido que</span> você precise.</td><td>Sometimes they ask for a medical statement to prove you're fit for physical activity, but this depends on the location and age, I doubt you'll need it.</td></tr>
+        <tr><td class="spk-a">A</td><td>Mais alguma coisa?</td><td>Anything else?</td></tr>
+        <tr><td class="spk-b">B</td><td><span class="hl">Pede pra verificar</span> que tem vestiário com armários, assim vai ser mais fácil guardar as suas coisas.</td><td>Check to make sure they have a locker room, that way it's easier to store your things.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="focus-block focus-gram">
+    <div class="focus-label">Foco Gramatical</div>
+    <h3>Imperativo informal para dar conselhos</h3>
+    <p>When giving casual advice, Brazilians often use the <strong>imperativo informal</strong> (identical to the "você" form of the present indicative): <em>"<strong>tenta</strong> buscar," "<strong>tenta</strong> evitá-la," "<strong>pede</strong> pra verificar."</em> This is much more common in speech than the grammatically "correct" subjunctive-based imperative (busque, evite, peça).</p>
+    <table class="gram-table">
+      <thead><tr><th>Verbo</th><th>Imperativo informal (você)</th><th>Exemplo do diálogo</th></tr></thead>
+      <tbody>
+        <tr><td>tentar</td><td><span class="subj">tenta</span></td><td><span class="subj">tenta</span> buscar um lugar que tenha contrato anual</td></tr>
+        <tr><td>pedir</td><td><span class="subj">pede</span></td><td><span class="subj">pede</span> pra verificar que tem vestiário</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;"><strong>Duvido que</strong> + subjuntivo also appears here: <em>"duvido que você precise"</em> — expressing the speaker's doubt that something will be necessary.</p>
+  </div>
+
+  <div class="focus-block focus-expr">
+    <div class="focus-label">Vocabulário</div>
+    <h3>Vocabulário de matrícula em academia</h3>
+    <table class="expr-table">
+      <tbody>
+        <tr><td class="expr">Matrícula</td><td class="meaning">enrollment/sign-up</td><td class="example">o que tem que fazer para fazer a matrícula?</td></tr>
+        <tr><td class="expr">Mensalidade</td><td class="meaning">monthly fee</td><td class="example">pagar a mensalidade</td></tr>
+        <tr><td class="expr">Taxa de adesão</td><td class="meaning">sign-up fee</td><td class="example">o que que é uma taxa de adesão?</td></tr>
+        <tr><td class="expr">Atestado médico</td><td class="meaning">medical statement/certificate</td><td class="example">pedem um atestado médico</td></tr>
+        <tr><td class="expr">Vestiário</td><td class="meaning">locker room</td><td class="example">tem vestiário com armários</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><strong>💬 "Que que...?"</strong> — a very colloquial contraction of "o que é que...?" heard constantly in spoken Brazilian Portuguese, especially before a verb: "que que tem que fazer?", "que que é isso?"</div>
+  </div>
+
+  <div class="ex-block" style="border-top:3px solid var(--ouro)">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Verdadeiro ou Falso?</h3>
+    <p class="ex-instruction">Based on the dialogue, mark each statement True (V) or False (F).</p>
+    <div class="tf-row"><span class="num">1.</span><span class="tf-statement">B primeiro entende errado a pergunta de A, achando que é sobre tipo de exercício.</span><div class="tf-btns"><button class="tf-btn" onclick="selectTF(this,1,'V')">V</button><button class="tf-btn" onclick="selectTF(this,1,'F')">F</button></div></div>
+    <div class="tf-row"><span class="num">2.</span><span class="tf-statement">Um contrato anual é mais caro do que pagar mês a mês.</span><div class="tf-btns"><button class="tf-btn" onclick="selectTF(this,2,'V')">V</button><button class="tf-btn" onclick="selectTF(this,2,'F')">F</button></div></div>
+    <div class="tf-row"><span class="num">3.</span><span class="tf-statement">A taxa de adesão é cobrada apenas na matrícula.</span><div class="tf-btns"><button class="tf-btn" onclick="selectTF(this,3,'V')">V</button><button class="tf-btn" onclick="selectTF(this,3,'F')">F</button></div></div>
+    <div class="tf-row"><span class="num">4.</span><span class="tf-statement">Toda academia sempre exige atestado médico, sem exceção.</span><div class="tf-btns"><button class="tf-btn" onclick="selectTF(this,4,'V')">V</button><button class="tf-btn" onclick="selectTF(this,4,'F')">F</button></div></div>
+    <div class="tf-row"><span class="num">5.</span><span class="tf-statement">B recomenda verificar se a academia tem vestiário com armários.</span><div class="tf-btns"><button class="tf-btn" onclick="selectTF(this,5,'V')">V</button><button class="tf-btn" onclick="selectTF(this,5,'F')">F</button></div></div>
+    <button class="check-btn" onclick="checkTF()">✓ Check answers</button>
+    <div id="tf-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-block" style="border-top:3px solid var(--cobalto)">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Vocabulário de academia</h3>
+    <p class="ex-instruction">Fill in each blank with the correct word from the word bank. Each word is used once.</p>
+    <div class="word-bank"><div class="word-bank-label">Word bank</div><span class="word-chip">matrícula</span><span class="word-chip">mensalidade</span><span class="word-chip">taxa de adesão</span><span class="word-chip">atestado médico</span><span class="word-chip">vestiário</span></div>
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">O que tem que fazer para fazer a <input class="fill-input" id="v1" type="text" placeholder="…">?</span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">Um contrato anual é mais barato do que pagar a <input class="fill-input" id="v2" type="text" placeholder="…"> todo mês.</span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">Às vezes tem uma promoção que elimina a <input class="fill-input" id="v3" type="text" placeholder="…" style="width:150px;">.</span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">Pedem um <input class="fill-input" id="v4" type="text" placeholder="…" style="width:150px;"> para provar que você está apta.</span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">Verifique se tem <input class="fill-input" id="v5" type="text" placeholder="…"> com armários.</span></div>
+    <button class="check-btn" onclick="checkVocab()">✓ Check answers</button>
+    <div id="vocab-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-block" style="border-top:3px solid var(--pitomba)">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">What do they mean?</h3>
+    <p class="ex-instruction">Choose the best meaning for each expression from the dialogue.</p>
+    <div class="mc-row"><div class="mc-question">1. <strong>"Tenta buscar"</strong> here functions as:</div>
+      <div class="mc-options" id="mc1"><div class="mc-option" onclick="selectMC('mc1','a')"><span class="mc-letter">a</span>Informal advice — "try to find."</div><div class="mc-option" onclick="selectMC('mc1','b')"><span class="mc-letter">b</span>A formal, official command.</div><div class="mc-option" onclick="selectMC('mc1','c')"><span class="mc-letter">c</span>A question.</div></div>
+    </div>
+    <div class="mc-row"><div class="mc-question">2. <strong>"Duvido que você precise"</strong> expresses:</div>
+      <div class="mc-options" id="mc2"><div class="mc-option" onclick="selectMC('mc2','a')"><span class="mc-letter">a</span>The speaker thinks it's unlikely to be necessary.</div><div class="mc-option" onclick="selectMC('mc2','b')"><span class="mc-letter">b</span>Certainty that it's necessary.</div><div class="mc-option" onclick="selectMC('mc2','c')"><span class="mc-letter">c</span>A direct order.</div></div>
+    </div>
+    <div class="mc-row"><div class="mc-question">3. <strong>"Mais alguma coisa?"</strong> means:</div>
+      <div class="mc-options" id="mc3"><div class="mc-option" onclick="selectMC('mc3','a')"><span class="mc-letter">a</span>Anything else?</div><div class="mc-option" onclick="selectMC('mc3','b')"><span class="mc-letter">b</span>How much does it cost?</div><div class="mc-option" onclick="selectMC('mc3','c')"><span class="mc-letter">c</span>Where is it?</div></div>
+    </div>
+    <button class="check-btn" onclick="checkMC()">✓ Check answers</button>
+    <div id="mc-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-block" style="border-top:3px solid var(--floresta)">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Imperativo informal — Complete a frase</h3>
+    <p class="ex-instruction">Fill in each blank with the correct informal imperative (você form).</p>
+    <div class="sentence-row"><span class="num">1.</span><span class="txt"><input class="fill-input" id="c1" type="text" placeholder="…"> buscar uma academia perto de casa. <span class="verb-hint">(tentar)</span></span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt"><input class="fill-input" id="c2" type="text" placeholder="…"> para ver o contrato antes de assinar. <span class="verb-hint">(pedir)</span></span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt"><input class="fill-input" id="c3" type="text" placeholder="…"> se tem estacionamento também. <span class="verb-hint">(verificar)</span></span></div>
+    <button class="check-btn" onclick="checkGram()">✓ Check answers</button>
+    <div id="gram-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-block" style="border-top:3px solid var(--ouro)">
+    <div class="ex-num">Exercise 5</div>
+    <h3 class="ex-title">Free production — Dando conselhos</h3>
+    <p class="ex-instruction">Write 5–6 lines in Portuguese giving advice to a friend about signing up for a service (gym, phone plan, streaming, etc.), using at least two informal imperatives (tenta, pede, verifica...).</p>
+    <textarea class="free-textarea" id="e5-free" placeholder="Escreva sua resposta aqui..."></textarea>
+  </div>
+
+  <div class="send-box">📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!</div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div>
+
+<script>
+var tfAnswers = { 1:'V', 2:'F', 3:'V', 4:'F', 5:'V' };
+var tfSelected = {};
+function selectTF(btn, num, val) {
+  var row = btn.closest('.tf-btns');
+  row.querySelectorAll('.tf-btn').forEach(function(b){ b.classList.remove('selected-v','selected-f'); });
+  btn.classList.add(val === 'V' ? 'selected-v' : 'selected-f');
+  tfSelected[num] = val;
+}
+function checkTF() {
+  var correct = 0; var html = '';
+  var labels = ['', 'Correct — B asks about machine/free weights/aerobic before A clarifies.', 'False — "é mais barato do que o mensal."', 'Correct — "cobrado ao realizar a matrícula."', 'False — "isso depende do local e da idade da pessoa, duvido que você precise."', 'Correct — "pede pra verificar que tem vestiário com armários."'];
+  for (var i = 1; i <= 5; i++) {
+    var ok = tfSelected[i] === tfAnswers[i];
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + i + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' <strong>' + tfAnswers[i] + '</strong> — ' + labels[i] + '</div>';
+  }
+  var res = document.getElementById('tf-result');
+  var allOk = correct === 5;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ All 5 correct!' : correct + ' of 5 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+function norm(s) {
+  return (s||'').toLowerCase().trim().replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e').replace(/[íì]/g,'i').replace(/[óôõö]/g,'o').replace(/[úù]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+var vocabAnswers = [
+  { id:'v1', accept:['matricula'], display:'matrícula' },
+  { id:'v2', accept:['mensalidade'], display:'mensalidade' },
+  { id:'v3', accept:['taxa de adesao'], display:'taxa de adesão' },
+  { id:'v4', accept:['atestado medico'], display:'atestado médico' },
+  { id:'v5', accept:['vestiario'], display:'vestiário' }
+];
+function checkVocab() {
+  var html = ''; var correct = 0;
+  vocabAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i + 1) + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' <em>' + a.display + '</em></div>';
+  });
+  var res = document.getElementById('vocab-result');
+  var allOk = correct === vocabAnswers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ All 5 correct!' : correct + ' of 5 correct — model answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+var mcAnswers = { mc1:'a', mc2:'a', mc3:'a' };
+var mcSelected = {};
+function selectMC(groupId, letter) {
+  var group = document.getElementById(groupId);
+  var options = group.querySelectorAll('.mc-option');
+  options.forEach(function(o){ o.classList.remove('correct','wrong','selected'); });
+  var idx = ['a','b','c'].indexOf(letter);
+  if (idx >= 0) options[idx].classList.add('selected');
+  mcSelected[groupId] = letter;
+}
+function checkMC() {
+  var correct = 0; var html = '';
+  var groups = ['mc1','mc2','mc3'];
+  var questions = ['"Tenta buscar" = informal advice, "try to find."', '"Duvido que você precise" = unlikely to be necessary.', '"Mais alguma coisa?" = anything else?'];
+  groups.forEach(function(gid, i) {
+    var ans = mcAnswers[gid];
+    var sel = mcSelected[gid];
+    var ok = sel === ans;
+    if (ok) correct++;
+    var group = document.getElementById(gid);
+    var options = group.querySelectorAll('.mc-option');
+    options.forEach(function(o){ o.classList.remove('correct','wrong'); });
+    var ansIdx = ['a','b','c'].indexOf(ans);
+    if (ansIdx >= 0) options[ansIdx].classList.add('correct');
+    if (sel && sel !== ans) { var selIdx = ['a','b','c'].indexOf(sel); if (selIdx >= 0) options[selIdx].classList.add('wrong'); }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' (' + ans.toUpperCase() + ') ' + questions[i] + '</div>';
+  });
+  var res = document.getElementById('mc-result');
+  var allOk = correct === 3;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ All 3 correct!' : correct + ' of 3 correct — answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+var gramAnswers = [
+  { id:'c1', accept:['tenta'], display:'Tenta' },
+  { id:'c2', accept:['pede'], display:'Pede' },
+  { id:'c3', accept:['verifica'], display:'Verifica' }
+];
+function checkGram() {
+  var html = ''; var correct = 0;
+  gramAnswers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i + 1) + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' <em>' + a.display + '</em></div>';
+  });
+  var res = document.getElementById('gram-result');
+  var allOk = correct === gramAnswers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ All 3 correct!' : correct + ' of 3 correct — model answers:') + '</div>' + html;
+  res.style.display = 'block';
+}
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  for (var i = 1; i <= 5; i++) {
+    var sel = tfSelected[i] || '(sem resposta)';
+    summaryLines.push('<strong>Ex1-'+i+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex1-'+i+':</strong> '+sel+'</p>';
+  }
+  ['v1','v2','v3','v4','v5'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex2-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex2-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  ['mc1','mc2','mc3'].forEach(function(gid, i) {
+    var sel = mcSelected[gid] || '(sem resposta)';
+    summaryLines.push('<strong>Ex3-'+(i+1)+':</strong> '+sel);
+    answersHtml += '<p><strong>Ex3-'+(i+1)+':</strong> '+sel+'</p>';
+  });
+  ['c1','c2','c3'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var val = el ? (el.value.trim() || '(sem resposta)') : '(sem resposta)';
+    summaryLines.push('<strong>Ex4-'+(i+1)+':</strong> '+(el&&el.value.trim()?el.value.trim():'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>Ex4-'+(i+1)+':</strong> '+val+'</p>';
+  });
+  var freeEl = document.getElementById('e5-free');
+  var freeVal = freeEl ? (freeEl.value.trim() || '(sem resposta)') : '(sem resposta)';
+  summaryLines.push('<strong>Ex5:</strong><br>'+(freeEl&&freeEl.value.trim()?freeEl.value.trim().replace(/</g,'&lt;'):'<em style="color:#999">sem resposta</em>'));
+  answersHtml += '<p><strong>Ex5 — Produção livre:</strong><br>'+freeVal+'</p>';
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', { method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY}, body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} }) }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({ to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}], sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'}, subject:'📝 '+name+' — '+material, htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml })
+  }));
+  Promise.all(calls).then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  }).catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
