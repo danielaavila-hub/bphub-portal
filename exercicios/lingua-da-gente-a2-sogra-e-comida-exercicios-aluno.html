@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Não Aguento Mais Comer — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --marrom: #967E63;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-level { padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cobalto); color: white; }
+    .topbar-back { font-size: 12px; font-weight: 600; color: var(--cobalto); text-decoration: none; opacity: 0.75; }
+    .topbar-back:hover { opacity: 1; }
+
+    .hero { background: var(--cobalto); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 760px; padding: 52px 48px 100px; margin: 0 auto; }
+    .step { margin-bottom: 48px; }
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Trirong', serif; font-size: 1.2rem; font-weight: 300; color: var(--nanquim); }
+
+    .podcast-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(30,29,28,0.1); }
+
+    .dialogue-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 28px 32px; }
+    .dialogue-scene { font-size: 0.82rem; color: #aaa; font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .dialogue { font-family: 'Trirong', serif; font-size: 0.97rem; line-height: 2.2; }
+    .dialogue p { margin-bottom: 2px; }
+    .spk { font-weight: 500; color: var(--marrom); margin-right: 6px; }
+    .kw { color: var(--cobalto); font-weight: 700; }
+    .dialogue-translation { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--light-gray); font-size: 0.84rem; color: #888; line-height: 2.0; font-style: italic; }
+    .dialogue-en { font-size: 0.82rem; color: #999; font-style: italic; margin: 0 0 14px 0; line-height: 1.5; }
+
+    .focus-grid { display: grid; gap: 16px; }
+    .focus-card { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid var(--cobalto); border-radius: 12px; padding: 22px 26px; }
+    .focus-card-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 4px; }
+    .focus-card-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 3px; }
+    .focus-card-en { font-size: 0.8rem; color: var(--pitomba); font-weight: 600; margin-bottom: 10px; }
+    .focus-card-note { font-size: 0.86rem; color: #555; margin-bottom: 12px; line-height: 1.65; }
+    .focus-ex { background: var(--cobalto-light); border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; padding: 10px 16px; font-family: 'Trirong', serif; font-size: 0.92rem; line-height: 2.1; }
+    .focus-ex em { color: var(--cobalto); font-style: normal; font-weight: 700; }
+    .focus-ex small { display: block; color: #888; font-style: italic; font-size: 0.78rem; }
+
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .cult-box, .phon-box { border-radius: 10px; padding: 16px 18px; font-size: 0.84rem; line-height: 1.65; }
+    .cult-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); }
+    .phon-box { background: rgba(78,85,29,0.07); border: 1.5px solid rgba(78,85,29,0.2); }
+    .box-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .cult-box .box-lbl { color: var(--pitomba); }
+    .phon-box .box-lbl { color: var(--floresta); }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin-bottom: 20px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 0.86rem; color: #666; margin-bottom: 18px; line-height: 1.6; }
+    .ex-item { margin-bottom: 14px; font-size: 0.93rem; line-height: 1.75; }
+
+    input[type="text"], select, textarea {
+      font-family: 'Manrope', sans-serif; font-size: 14px;
+      border: 1.5px solid #D0CEC5; border-radius: 8px; padding: 8px 12px;
+      background: var(--baunilha); color: var(--nanquim); outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--cobalto); }
+    input[type="text"].gap { width: 150px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    select { min-width: 210px; }
+    input.correct, select.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    input.wrong,   select.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .radio-group label { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.15s; }
+    .radio-group label:hover { border-color: var(--cobalto); }
+    .radio-group label.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); }
+    .radio-group label.wrong   { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    .check-btn { margin-top: 16px; background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .check-btn:hover { opacity: 0.88; }
+
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 0.88rem; line-height: 1.75; max-height: 300px; overflow-y: auto; }
+    .result-msg.good      { background: rgba(78,85,29,0.1); border: 1.5px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1.5px solid rgba(211,109,41,0.25); color: var(--nanquim); }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .box-row, .conj-grid { grid-template-columns: 1fr; }
+      input[type="text"].gap { width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div class="topbar-right">
+    <a class="topbar-back" href="../a2/index.html">← A2</a>
+    <span class="topbar-level">A2 — Iniciante II</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Não Aguento Mais <em>Comer</em></h1>
+  <div class="hero-sub">A mother-in-law insists her guest eat more — practicing <em>não aguentar mais</em>, imperatives to keep offering food, and Brazilian hospitality customs.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">não aguentar mais</span><span class="hero-tag">imperativo (pega dois)</span><span class="hero-tag">hospitalidade brasileira</span>
+  </div>
+  <div class="hero-note">🎧 Língua da Gente · Ep. 64</div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">1</div><div class="step-title">Listen to the episode</div></div>
+    <div class="podcast-wrap" style="background:white;padding:22px 26px;">
+      <audio controls preload="none" style="width:100%;">
+        <source src="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-ele64-lesson.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+      </audio>
+    </div>
+    <p style="margin-top:12px;font-size:0.83rem;color:#aaa;">Áudio: COERLL · University of Texas at Austin · <a href="https://linguadagente.coerll.utexas.edu/elementary-mother-in-laws-and-food/" target="_blank">Ver a lição completa no COERLL →</a></p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">2</div><div class="step-title">Read the dialogue</div></div>
+    <div class="dialogue-card">
+      <p class="dialogue-scene">A mother-in-law figure keeps insisting her guest eat more, despite his protests that he's already full.</p>
+      <div class="dialogue">
+        <p><span class="spk">A:</span> Filho, você não quer mais, não? Por quê? Cê não gostou?</p>
+        <p class="dialogue-en">Son, don't you want any more? Why? Didn't you like it?</p>
+        <p><span class="spk">B:</span> Gostei Dona Rose, gostei, mas é que eu já comi em casa.</p>
+        <p class="dialogue-en">I liked it Dona Rose, I liked it, but I already ate at home.</p>
+        <p><span class="spk">A:</span> Sabia! Estava ruim, né?</p>
+        <p class="dialogue-en">I knew it, it was terrible, right?</p>
+        <p><span class="spk">B:</span> Tá bom, me dá mais um pouquinho desse bife então.</p>
+        <p class="dialogue-en">OK, give me a little more of this beef then.</p>
+        <p><span class="spk">A:</span> Você é muito magro, <span class="kw">pega dois</span>.</p>
+        <p class="dialogue-en">You are very skinny, take two.</p>
+        <p><span class="spk">B:</span> Não Dona Rose, por favor, eu <span class="kw">não aguento mais</span> comer.</p>
+        <p class="dialogue-en">No Dona Rose, please, I can't handle eating any more.</p>
+        <p><span class="spk">A:</span> É, como eu te disse, você não gostou mesmo, hein?</p>
+        <p class="dialogue-en">Yep, it's like I said, you really didn't like it, did you?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">3</div><div class="step-title">Language focus</div></div>
+    <div class="focus-grid">
+
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 1</div>
+        <div class="focus-card-title">Não aguentar mais — Can't take/handle it anymore</div>
+        <div class="focus-card-en">English: can't take/handle it anymore (reaching one's limit)</div>
+        <div class="focus-card-note"><b>Não aguentar mais</b> + infinitive expresses reaching a physical or emotional limit — here, being too full to eat another bite.</div>
+        <div class="focus-ex">Eu não aguento mais comer.<br><small>I can't handle eating anymore.</small>Não aguento mais esperar.<br><small>I can't stand waiting anymore.</small></div>
+      </div>
+
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 2</div>
+        <div class="focus-card-title">Pega dois — Imperativo para insistir em servir comida</div>
+        <div class="focus-card-en">English: take two! (imperative, insisting someone eat more)</div>
+        <div class="focus-card-note"><b>Pega dois</b> (casual imperative) exemplifies the classic Brazilian hostess move of insisting guests eat more, regardless of protests.</div>
+        <div class="focus-ex">Você é muito magro, pega dois.<br><small>You're too skinny, take two.</small></div>
+      </div>
+
+      <div class="focus-card">
+        <div class="focus-card-num">Focus 3</div>
+        <div class="focus-card-title">Hospitalidade brasileira — Brazilian hospitality with food</div>
+        <div class="focus-card-en">English: Brazilian hospitality customs around food</div>
+        <div class="focus-card-note">This dialogue humorously captures a very real cultural pattern: hosts (especially mothers/mothers-in-law) interpreting any refusal of food as secretly not liking the meal!</div>
+        <div class="focus-ex">Sabia! Estava ruim, né?<br><small>I knew it, it was bad, right?</small>Você não gostou mesmo, hein?<br><small>You really didn't like it, did you?</small></div>
+        <div class="box-row">
+          <div class="cult-box">
+            <span class="box-lbl">🍖 Insistência hospitaleira</span>
+            In many Brazilian households, especially with older relatives, declining seconds is often (jokingly or not) taken as a sign you didn't enjoy the food — leading to charmingly persistent food-pushing, as in this dialogue!
+          </div>
+          <div class="phon-box">
+            <span class="box-lbl">🔊 Cê não gostou?</span>
+            <i>Cê</i> (casual contraction of <i>você</i>) appears again here, reinforcing how common this shortened form is in relaxed, familiar speech.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STEP 4: EXERCISES -->
+  <div class="step">
+    <div class="step-head"><div class="step-num">4</div><div class="step-title">Exercises</div></div>
+
+    <!-- EX 1 — COMPREHENSION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 1 — Comprehension check</div>
+      <div class="ex-instr">Choose the correct answer based on the dialogue.</div>
+
+      <div class="ex-item">
+        <label>1. Por que B diz que não quer mais comida no início?</label>
+        <div class="radio-group" id="q1">
+          <label><input type="radio" name="q1" value="a"> Porque já comeu em casa.</label>
+          <label><input type="radio" name="q1" value="b"> Porque não gostou da comida.</label>
+          <label><input type="radio" name="q1" value="c"> Porque está de dieta.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>2. Como Dona Rose interpreta a recusa de B?</label>
+        <div class="radio-group" id="q2">
+          <label><input type="radio" name="q2" value="a"> Que ele não gostou da comida.</label>
+          <label><input type="radio" name="q2" value="b"> Que ele está satisfeito e feliz.</label>
+          <label><input type="radio" name="q2" value="c"> Que ele precisa ir embora.</label>
+        </div>
+      </div>
+
+      <div class="ex-item">
+        <label>3. O que B diz no final sobre comer mais?</label>
+        <div class="radio-group" id="q3">
+          <label><input type="radio" name="q3" value="a"> Que não aguenta mais comer.</label>
+          <label><input type="radio" name="q3" value="b"> Que quer comer mais um pouco.</label>
+          <label><input type="radio" name="q3" value="c"> Que vai levar comida para casa.</label>
+        </div>
+      </div>
+
+      <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 2 — FILL IN THE BLANK -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 2 — Não aguento mais, pega dois, ou hospitalidade?</div>
+      <div class="ex-instr">Fill in each gap to complete the sentence with the correct word(s).</div>
+
+      <div class="ex-item">
+        1. 1. Você é muito magro, <input type="text" class="gap" id="g1" placeholder="..." style="width:150px;">.
+      </div>
+      <div class="ex-item">
+        2. 2. Eu <input type="text" class="gap" id="g2" placeholder="..." style="width:230px;"> comer.
+      </div>
+      <div class="ex-item">
+        3. 3. Me dá mais um <input type="text" class="gap" id="g3" placeholder="..." style="width:150px;"> desse bife.
+      </div>
+
+      <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+      <div id="ex2-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 3 — VOCABULARY MATCH -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 3 — Vocabulário de refeições em família</div>
+      <div class="ex-instr">Match each Portuguese word to its English meaning.</div>
+
+      <div class="ex-item">
+        <label>1. <b>Bife</b></label>
+        <select id="m1">
+          <option value="">— choose —</option>
+          <option value="a">Steak</option>
+          <option value="b">Rice</option>
+          <option value="c">Bread</option>
+        </select>
+      </div>
+
+      <div class="ex-item">
+        <label>2. <b>Magro</b></label>
+        <select id="m2">
+          <option value="">— choose —</option>
+          <option value="a">Skinny/thin</option>
+          <option value="b">Fat</option>
+          <option value="c">Tall</option>
+        </select>
+      </div>
+
+      <div class="ex-item">
+        <label>3. <b>Aguentar</b></label>
+        <select id="m3">
+          <option value="">— choose —</option>
+          <option value="a">To handle/endure</option>
+          <option value="b">To enjoy</option>
+          <option value="c">To avoid</option>
+        </select>
+      </div>
+
+      <div class="ex-item">
+        <label>4. <b>Sogra</b></label>
+        <select id="m4">
+          <option value="">— choose —</option>
+          <option value="a">Mother-in-law</option>
+          <option value="b">Aunt</option>
+          <option value="c">Grandmother</option>
+        </select>
+      </div>
+
+      <div class="ex-item">
+        <label>5. <b>Servir</b></label>
+        <select id="m5">
+          <option value="">— choose —</option>
+          <option value="a">To serve</option>
+          <option value="b">To cook</option>
+          <option value="c">To wash</option>
+        </select>
+      </div>
+
+      <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+      <div id="ex3-result" class="result-msg"></div>
+    </div>
+
+    <!-- EX 4 — FREE PRODUCTION -->
+    <div class="ex-block">
+      <div class="ex-title">Exercise 4 — Your turn</div>
+      <div class="ex-instr">Write 4–6 sentences about a time someone insisted you eat more (or a similar hospitable gesture). Use <b>não aguentar mais</b> and an imperative like <b>pega dois</b>.</div>
+      <textarea id="free1" style="min-height:120px;" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div>
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim()
+    .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+    .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+// ── EX 1 — Comprehension ──
+var ex1A = {q1:"a", q2:"a", q3:"a"};
+var ex1E = {
+  q1: "B — \"é que eu já comi em casa.\"",
+  q2: "A — \"Sabia! Estava ruim, né?\" / \"você não gostou mesmo, hein?\"",
+  q3: "B — \"eu não aguento mais comer.\""
+};
+function checkEx1() {
+  var correct = 0; var html = '';
+  var ids = ["q1", "q2", "q3"];
+  ids.forEach(function(q,i){
+    var sel = document.querySelector('input[name="'+q+'"]:checked');
+    var val = sel ? sel.value : '';
+    var ok = val === ex1A[q];
+    if (ok) correct++;
+    document.querySelectorAll('#'+q+' label').forEach(function(lbl){
+      lbl.classList.remove('correct','wrong');
+      var inp = lbl.querySelector('input');
+      if (inp && inp.value === ex1A[q]) lbl.classList.add('correct');
+      else if (inp && inp.checked && !ok) lbl.classList.add('wrong');
+    });
+    html += '<div style="margin-bottom:6px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+ex1E[q]+'</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 2 — Fill in the blank ──
+var ex2A = [
+  { id:"g1", keys:["pega dois"], display:"<b>pega dois</b> (Você é muito magro, pega dois.)" },
+  { id:"g2", keys:["nao aguento mais"], display:"<b>não aguento mais</b> (Eu não aguento mais comer.)" },
+  { id:"g3", keys:["pouquinho"], display:"<b>pouquinho</b> (Me dá mais um pouquinho desse bife.)" }
+];
+function checkEx2() {
+  var correct = 0; var html = '';
+  ex2A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var n = norm(el.value);
+    var ok = a.keys.some(function(k){ return n === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', !ok && el.value.trim().length > 0);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg '+(correct===3?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===3?'✓ All 3 correct!':correct+' of 3 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── EX 3 — Vocabulary match ──
+var ex3A = [
+  { id:"m1", key:"a", display:"<b>Bife</b> = Steak." },
+  { id:"m2", key:"a", display:"<b>Magro</b> = Skinny/thin." },
+  { id:"m3", key:"a", display:"<b>Aguentar</b> = To handle/endure." },
+  { id:"m4", key:"a", display:"<b>Sogra</b> = Mother-in-law." },
+  { id:"m5", key:"a", display:"<b>Servir</b> = To serve." }
+];
+function checkEx3() {
+  var correct = 0; var html = '';
+  ex3A.forEach(function(a,i){
+    var el = document.getElementById(a.id);
+    var ok = el.value === a.key;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value !== '' && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '
+      +(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          :'<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      +' '+a.display+'</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg '+(correct===5?'good':'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    +(correct===5?'✓ All 5 correct!':correct+' of 5 correct — model answers:')+' </div>'+html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var emailEl = document.getElementById('bphub-student-email');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim()?ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;'):'<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join("");
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' enviou exercícios — '+material,
+      htmlContent:'<h2>'+name+' enviou os exercícios</h2><p><strong>Material:</strong> '+material+'</p><p><strong>Email:</strong> '+(email||'não informado')+'</p><p><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function(responses){ return Promise.all(responses.map(function(r){ return r.ok ? Promise.resolve(true) : r.json().then(function(d){ return {ok:false,err:d}; }); })); })
+  .then(function(results){
+    var allOk = results.every(function(r){ return r === true; });
+    if (allOk) {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      localStorage.setItem('bphub_done_'+slug,'1');
+      document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    } else {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    }
+  }).catch(function(){
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
