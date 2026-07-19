@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="version" content="2.1.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Língua da Gente — Tô Cansada pra Caramba | Iniciante I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --giz:        #FCF5EB;
+    --baunilha:   #FDE7C4;
+    --musgo:      #3C3C21;
+    --floresta:   #4E551D;
+    --erva-doce:  #A6B28A;
+    --cobalto:    #265B8B;
+    --terracota:  #D36D29;
+    --telha:      #A1441D;
+    --ouro:       #FFB94A;
+    --rosa-cha:   #FFD8C5;
+    --goiaba:     #FCA290;
+    --pitomba:    #967E63;
+  }
+  body { background: var(--giz); color: var(--musgo); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 0; }
+  .card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(60,60,33,.07); }
+  .section-title { font-family: 'Trirong', serif; font-size: 1.05rem; color: var(--floresta); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 32px 0 10px; padding-left: 12px; border-left: 3px solid var(--terracota); }
+  .card-title { font-family: 'Trirong', serif; font-size: 1.1rem; color: var(--terracota); margin-bottom: 14px; font-weight: 600; }
+  .instr { background: var(--baunilha); border-radius: 8px; padding: 12px 16px; font-size: .87rem; margin-bottom: 16px; line-height: 1.6; }
+  .instr strong { color: var(--terracota); }
+  .audio-label { font-size: .8rem; color: #999; margin-bottom: 8px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .dialogue { margin: 16px 0; }
+  .dialogue-line { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--giz); align-items: baseline; }
+  .dialogue-line:last-child { border-bottom: none; }
+  .speaker { font-weight: 700; color: var(--floresta); font-size: .85rem; min-width: 28px; text-transform: uppercase; }
+  .line-pt { font-size: 1rem; color: var(--musgo); flex: 1; }
+  .line-en { font-size: .82rem; color: #999; margin-top: 2px; font-style: italic; }
+  .gram-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  .gram-table th { background: var(--floresta); color: #fff; padding: 10px 14px; text-align: left; font-family: 'Trirong', serif; font-weight: 600; }
+  .gram-table td { padding: 9px 14px; border-bottom: 1px solid var(--giz); vertical-align: top; }
+  .gram-table tr:last-child td { border-bottom: none; }
+  .gram-table tr:nth-child(even) td { background: var(--giz); }
+  .gram-table .pt { font-weight: 700; color: var(--musgo); }
+  .gram-table .en { color: #888; font-style: italic; }
+  .gram-table .note { color: var(--pitomba); font-size: .8rem; }
+  .phon-box { background: var(--rosa-cha); border-left: 4px solid var(--goiaba); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .phon-box strong { color: var(--telha); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cult-box { background: #EEF4EC; border-left: 4px solid var(--floresta); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: .9rem; }
+  .cult-box strong { color: var(--floresta); display: block; margin-bottom: 6px; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ex-num { display: inline-block; background: var(--terracota); color: #fff; border-radius: 50%; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: .8rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .ex-title { font-family: 'Trirong', serif; font-size: 1rem; color: var(--musgo); font-weight: 600; display: flex; align-items: center; margin-bottom: 14px; }
+  .fill-line { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; line-height: 2; font-size: .97rem; }
+  .fill-line input { border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: .97rem; color: var(--musgo); padding: 2px 6px; width: 120px; text-align: center; outline: none; transition: border-color .2s; }
+  .fill-line input:focus { border-color: var(--terracota); }
+  .fill-line input.correct { border-color: #4caf50; background: #f0fff0; }
+  .fill-line input.wrong   { border-color: #e53935; background: #fff0f0; }
+  .word-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1.5px solid var(--erva-doce); border-radius: 10px; margin-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+  .word-item .pt-word { font-weight: 700; font-size: 1rem; color: var(--musgo); min-width: 200px; }
+  .word-item .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice-btn { background: var(--giz); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 6px 13px; font-family: 'Manrope', sans-serif; font-size: .84rem; font-weight: 700; color: var(--musgo); cursor: pointer; transition: background .15s, border-color .15s; }
+  .choice-btn:hover { background: var(--baunilha); border-color: var(--terracota); }
+  .choice-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .choice-btn.wrong   { background: #ffebee; border-color: #e53935; color: #b71c1c; }
+  .choice-btn.disabled { opacity: .55; cursor: default; pointer-events: none; }
+  .word-item .feedback { font-size: .82rem; color: var(--pitomba); font-style: italic; display: none; width: 100%; }
+  .word-item .feedback.show { display: block; }
+  .match-select { width: 100%; border: 2px solid var(--erva-doce); border-radius: 8px; padding: 9px 12px; font-family: 'Manrope', sans-serif; font-size: .9rem; color: var(--musgo); background: #fff; outline: none; transition: border-color .2s; cursor: pointer; }
+  .match-select:focus { border-color: var(--terracota); }
+  .match-select.correct { border-color: #4caf50; background: #f0fff0; }
+  .match-select.wrong   { border-color: #e53935; background: #fff0f0; }
+  .prod-textarea { width: 100%; border: 2px solid var(--erva-doce); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: .95rem; color: var(--musgo); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; margin-top: 10px; }
+  .prod-textarea:focus { border-color: var(--terracota); }
+  .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-check { background: var(--terracota); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 700; cursor: pointer; transition: opacity .2s; }
+  .btn-check:hover { opacity: .88; }
+  .btn-reset { background: transparent; color: var(--pitomba); border: 1.5px solid var(--pitomba); border-radius: 8px; padding: 10px 18px; font-family: 'Manrope', sans-serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn-reset:hover { opacity: .72; }
+  .score-badge { display: none; align-items: center; gap: 6px; background: var(--baunilha); border-radius: 8px; padding: 10px 16px; font-size: .88rem; font-weight: 700; color: var(--musgo); }
+  .score-badge.visible { display: inline-flex; }
+  @media(max-width:600px) { .card { padding: 20px 18px; } .word-item { flex-direction: column; align-items: flex-start; } }
+  .tq { color: var(--telha); font-weight: 800; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: var(--giz); border-bottom: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .topbar-logo a { display: block; line-height: 0; }
+  .topbar-logo img { height: 40px; width: auto; display: block; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .topbar-level { background: var(--floresta); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; font-family: 'Manrope', sans-serif; }
+  .topbar-back { font-size: 12px; color: #999; text-decoration: none; transition: color .2s; }
+  .topbar-back:hover { color: var(--floresta); }
+  .page-hero { background: var(--floresta); padding: 40px 28px 36px; }
+  .page-hero h1 { font-family: 'Trirong', serif; font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 300; line-height: 1.3; margin-bottom: 16px; color: #fff; }
+  .page-attribution { font-size: 12px; color: rgba(255,255,255,0.75); font-family: 'Manrope', sans-serif; line-height: 1.7; }
+  .page-attribution a { color: rgba(255,255,255,0.9); text-decoration: underline; }
+  .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 16px; }
+  .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.20); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; font-family: 'Manrope', sans-serif; }
+  .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: white; opacity: .65; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
+    </a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">A1 — Iniciante I</span>
+    <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Tô Cansada pra Caramba</h1>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>Episódio 62</span>
+    <span class="meta-pill"><span class="dot"></span>Língua da Gente</span>
+    <span class="meta-pill"><span class="dot"></span>Descrever estados físicos e cansaço</span>
+  </div>
+  <div class="page-attribution">Orlando R. Kelm · COERLL / University of Texas at Austin · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
+</section>
+
+<div class="container">
+
+  <p class="section-title">Step 1 — Listen</p>
+  <div class="card">
+    <div class="card-title">🎧 Listen to the podcast episode</div>
+    <div class="instr">
+      <strong>First listen:</strong> Why does she want to go to bed? Is her partner ready too?
+    </div>
+    <div class="audio-label">Língua da Gente · Episode 62</div>
+    <audio controls preload="none" style="width:100%;">
+      <source src="https://media.la.utexas.edu/brazilpod/linguadagente/linguadagente-beg62-lesson.mp3" type="audio/mpeg">
+      Seu navegador não suporta o elemento de áudio.
+    </audio>
+  </div>
+
+  <p class="section-title">Step 2 — Read the Dialogue</p>
+  <div class="card">
+    <div class="card-title">💬 The Conversation</div>
+    <div class="instr">
+      <strong>Read along</strong> while listening. Notice <em>estar com + noun</em> for physical states and the intensifier <em>pra caramba</em>.
+    </div>
+    <div class="dialogue">
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Eduardo, vamos dormir, tô cansada <span class="tq">pra caramba</span>.</div>
+          <div class="line-en">Eduardo, let's go to bed, I'm really tired.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Mas ainda é cedo.</div>
+          <div class="line-en">But it's early still.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">A</span>
+        <div>
+          <div class="line-pt">Eu sei, mas <span class="tq">estou com sono</span>.</div>
+          <div class="line-en">I know, but I'm really sleepy.</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <span class="speaker">B</span>
+        <div>
+          <div class="line-pt">Tá bom, já tô indo.</div>
+          <div class="line-en">OK, I'm coming.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Step 3 — Language Focus</p>
+
+  <div class="card">
+    <div class="card-title">📖 Estar com + noun — Physical states</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A says <em>"<strong>estou com sono</strong>"</em> — Portuguese uses <em>estar com</em> + noun (not an adjective!) for many physical states, unlike English "to be sleepy/hungry/thirsty."</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Expression</th>
+        <th>English</th>
+      </tr>
+      <tr>
+        <td>estar com sono</td>
+        <td><span class="en">to be sleepy</span></td>
+      </tr>
+      <tr>
+        <td>estar com fome</td>
+        <td><span class="en">to be hungry</span></td>
+      </tr>
+      <tr>
+        <td>estar com sede</td>
+        <td><span class="en">to be thirsty</span></td>
+      </tr>
+      <tr>
+        <td>estar com calor/frio</td>
+        <td><span class="en">to be hot/cold</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Grammar -->
+  <div class="card">
+    <div class="card-title">📖 Pra caramba — A very common intensifier</div>
+    <p style="font-size:.9rem;color:#666;margin-bottom:16px;">A says she's tired <em>"<strong>pra caramba</strong>"</em> — a casual, mild-swear-adjacent intensifier meaning "a lot / really," used constantly in informal Brazilian speech.</p>
+
+    <table class="gram-table">
+      <tr>
+        <th>Phrase</th>
+        <th>Meaning</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td>pra caramba</td>
+        <td><span class="en">a whole lot / really</span></td>
+        <td><span class="pt">Tô cansada <span class="tq">pra caramba</span>.</span></td>
+      </tr>
+      <tr>
+        <td>já tô indo</td>
+        <td><span class="en">I'm coming / on my way</span></td>
+        <td><span class="pt">Resposta comum quando alguém chama.</span></td>
+      </tr>
+    </table>
+    <div class="cult-box">
+      <strong>💤 Tô = Estou</strong>
+      In very casual speech, <em>estou</em> is almost always shortened to <em>tô</em> — you'll hear this constantly in real conversations, though it's not used in formal writing.
+    </div>
+  </div>
+
+  <p class="section-title">Step 4 — Practice</p>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">1</span> Estar com + Noun Quiz</div>
+    <div class="instr">Choose the correct physical state expression.</div>
+
+    <div class="word-item" id="w1">
+      <span class="pt-word">Tô cansada ___.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w1','a','a')">pra caramba</button>
+        <button class="choice-btn" onclick="checkChoice('w1','b','a')">com sono</button>
+        <button class="choice-btn" onclick="checkChoice('w1','c','a')">com fome</button>
+      </div>
+      <span class="feedback" id="fb1">✅ Correct! <em>Pra caramba</em> intensifies "tired."</span>
+    </div>
+
+    <div class="word-item" id="w2">
+      <span class="pt-word">Estou ___ sono, preciso dormir.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w2','a','a')">com</button>
+        <button class="choice-btn" onclick="checkChoice('w2','b','a')">de</button>
+        <button class="choice-btn" onclick="checkChoice('w2','c','a')">em</button>
+      </div>
+      <span class="feedback" id="fb2">✅ Correct! <em>Estar com sono</em> = to be sleepy.</span>
+    </div>
+
+    <div class="word-item" id="w3">
+      <span class="pt-word">Já tô indo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w3','a','a')">I'm coming.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','b','a')">I already went.</button>
+        <button class="choice-btn" onclick="checkChoice('w3','c','a')">I'm not going.</button>
+      </div>
+      <span class="feedback" id="fb3">✅ Correct! <em>Já tô indo</em> = I'm on my way.</span>
+    </div>
+
+    <div class="word-item" id="w4">
+      <span class="pt-word">Ainda é cedo.</span>
+      <div class="btn-group">
+        <button class="choice-btn" onclick="checkChoice('w4','a','a')">It's still early.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','b','a')">It's already late.</button>
+        <button class="choice-btn" onclick="checkChoice('w4','c','a')">It's midnight.</button>
+      </div>
+      <span class="feedback" id="fb4">✅ Correct! <em>Ainda</em> + adjective = still.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">2</span> Complete the Dialogue</div>
+    <div class="instr">
+      Fill in the blanks with the missing words.<br>
+      <strong>Word bank:</strong> <em>pra caramba · com sono · já tô indo · cedo</em>
+    </div>
+    <div class="fill-line">— Vamos dormir, tô cansada <input type="text" id="f1" placeholder="___">.</div>
+    <div class="fill-line">— Mas ainda é <input type="text" id="f2" placeholder="___">.</div>
+    <div class="fill-line">— Eu sei, mas estou <input type="text" id="f3" placeholder="___">.</div>
+    <div class="fill-line">— Tá bom, <input type="text" id="f4" placeholder="___">.</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill()">Check answers</button>
+      <button class="btn-reset" onclick="resetFill()">Reset</button>
+      <span class="score-badge" id="fill-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">3</span> Estados Físicos</div>
+    <div class="instr">
+      Choose the correct physical state expression.
+    </div>
+    <div style="display:grid;gap:14px;margin-top:8px;">
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">Saying you're hungry.</p>
+        <select class="match-select" id="ms1">
+          <option value="">— escolha —</option>
+          <option value="a">Estou com fome.</option>
+          <option value="b">Sou com fome.</option>
+          <option value="c">Tenho fome frio.</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">Saying you're really thirsty (intensified).</p>
+        <select class="match-select" id="ms2">
+          <option value="">— escolha —</option>
+          <option value="a">Estou com sede pra caramba.</option>
+          <option value="b">Sou sede pra caramba.</option>
+          <option value="c">Tenho sede de caramba.</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">Saying you're cold.</p>
+        <select class="match-select" id="ms3">
+          <option value="">— escolha —</option>
+          <option value="a">Estou com frio.</option>
+          <option value="b">Sou frio.</option>
+          <option value="c">Tenho frio de mim.</option>
+        </select>
+      </div>
+      <div>
+        <p style="font-size:.95rem;color:var(--musgo);margin-bottom:8px;">Telling someone you're on your way.</p>
+        <select class="match-select" id="ms4">
+          <option value="">— escolha —</option>
+          <option value="a">Já tô indo.</option>
+          <option value="b">Já fui.</option>
+          <option value="c">Vou já ir.</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatch()">Check answers</button>
+      <button class="btn-reset" onclick="resetMatch()">Reset</button>
+      <span class="score-badge" id="match-score"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ex-title"><span class="ex-num">4</span> Your Turn — Como você está?</div>
+    <div class="instr"><strong>Write in Portuguese.</strong><br>Write 4–6 sentences describing how you feel physically right now, using <em>estar com + noun</em> and <em>pra caramba</em>.</div>
+    <textarea class="prod-textarea" placeholder="Example:
+Hoje estou com sono pra caramba, porque dormi pouco. Também estou com fome, já é hora do almoço. Mais tarde vou estar com frio, porque sempre esfria à noite. Agora vou descansar um pouco!"></textarea>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function checkChoice(wordId, chosen, correct) {
+    var item = document.getElementById(wordId);
+    var btns = item.querySelectorAll('.choice-btn');
+    var fbNum = wordId.replace('w','');
+    var fb = document.getElementById('fb' + fbNum);
+    btns.forEach(function(b){ b.classList.add('disabled'); });
+    btns.forEach(function(b){
+      var match = b.getAttribute('onclick').match(/'([^']+)','([^']+)'/);
+      if(match && match[1] === chosen) { b.classList.add(chosen === correct ? 'correct' : 'wrong'); }
+      if(match && match[1] === correct && chosen !== correct) { b.classList.add('correct'); }
+    });
+    if(chosen === correct) {
+      fb.classList.add('show');
+    } else {
+      fb.textContent = '❌ Not quite — try again.';
+      fb.style.color = '#c62828';
+      fb.classList.add('show');
+    }
+    item.style.borderColor = chosen === correct ? '#4caf50' : '#e53935';
+  }
+
+  var fillAnswers = {f1:'pra caramba', f2:'cedo', f3:'com sono', f4:'já tô indo'};
+  function normalise(s){ return s.trim().toLowerCase().replace(/[çc]/g,'c').replace(/[éêèë]/g,'e').replace(/[áàâãä]/g,'a').replace(/[íìîï]/g,'i').replace(/[óòôõö]/g,'o').replace(/[úùûü]/g,'u').replace(/ã/g,'a').replace(/õ/g,'o'); }
+  function checkFill(){
+    var ids = ['f1', 'f2', 'f3', 'f4'];
+    var score = 0;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      var val = normalise(el.value);
+      var ans = fillAnswers[id].split('|').map(normalise);
+      var ok = ans.some(function(a){ return val === a; });
+      el.classList.remove('correct','wrong');
+      el.classList.add(ok ? 'correct' : 'wrong');
+      if(ok) score++;
+    });
+    var badge = document.getElementById('fill-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetFill(){
+    ['f1', 'f2', 'f3', 'f4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('fill-score').classList.remove('visible');
+  }
+
+  var matchAnswers = {ms1:'a', ms2:'a', ms3:'a', ms4:'a'};
+  function checkMatch(){
+    var score = 0;
+    ['ms1', 'ms2', 'ms3', 'ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.classList.remove('correct','wrong');
+      if(el.value === matchAnswers[id]){ el.classList.add('correct'); score++; }
+      else if(el.value){ el.classList.add('wrong'); }
+    });
+    var badge = document.getElementById('match-score');
+    badge.textContent = score + ' / 4 correct';
+    badge.classList.add('visible');
+  }
+  function resetMatch(){
+    ['ms1', 'ms2', 'ms3', 'ms4'].forEach(function(id){
+      var el = document.getElementById(id);
+      el.value = '';
+      el.classList.remove('correct','wrong');
+    });
+    document.getElementById('match-score').classList.remove('visible');
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 20px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
