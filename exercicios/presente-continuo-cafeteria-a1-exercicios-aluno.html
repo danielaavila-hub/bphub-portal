@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presente Contínuo numa Cafeteria — BPHUB A1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --baunilha:   #FCF5EB;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --areia:      #E5E0D0;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --pitomba:    #D36D29;
+      --marrom:     #967E63;
+      --marrom2:    #A1441D;
+      --goiaba:     #FCA290;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --card-bg:    #FFFFFF;
+      --radius:     12px;
+
+      /* A1 — Iniciante I */
+      --level-color: #4E551D;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--texto); }
+
+    /* -- Topbar -- */
+    .topbar {
+      position: sticky; top: 0; z-index: 500;
+      background: var(--giz);
+      border-bottom: 1px solid #E8E4DE;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+    }
+    .topbar-logo img { height: 40px; width: auto; display: block; }
+    .topbar-student { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+    .topbar-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--level-color); color: #fff;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .topbar-name  { font-size: 13px; color: #555; font-family: sans-serif; }
+    .topbar-back  { font-size: 12px; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .topbar-back:hover { color: var(--level-color); }
+
+    /* -- Page Hero -- */
+    .page-hero {
+      background: var(--level-color); color: #fff;
+      padding: 48px 40px 40px; text-align: left;
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300; line-height: 1.25; margin-bottom: 14px;
+      color: white;
+    }
+    .page-hero > p {
+      font-size: 15px; color: rgba(255,255,255,.88); max-width: 620px;
+      margin: 0 0 20px; font-family: 'Manrope', sans-serif; line-height: 1.6;
+    }
+    .student-meta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
+    .meta-pill {
+      background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; font-family: 'Manrope', sans-serif;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); display: inline-block; }
+
+    /* -- Main -- */
+    .main { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    /* -- Section header -- */
+    .sec-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 40px; margin-bottom: 20px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--areia);
+    }
+    .sec-header.first { margin-top: 0; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--level-color); color: #fff; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sec-header h2 { font-size: 1.1rem; color: var(--texto); }
+    .sec-header p  { font-size: 13px; color: #666; font-family: 'Manrope', sans-serif; margin-top: 2px; }
+
+    /* -- Grammar box -- */
+    .grammar-box {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--areia); padding: 28px; margin-bottom: 24px;
+    }
+    .grammar-box p { margin-bottom: 14px; font-size: 15px; }
+    .grammar-box p:last-child { margin-bottom: 0; }
+
+    /* -- Tables -- */
+    .gram-table {
+      width: 100%; border-collapse: collapse;
+      margin: 18px 0; font-size: 14px; font-family: 'Manrope', sans-serif;
+    }
+    .gram-table th {
+      background: var(--level-color); color: #fff;
+      padding: 10px 12px; text-align: left; font-weight: 600;
+    }
+    .gram-table th:first-child { border-radius: 6px 0 0 0; }
+    .gram-table th:last-child  { border-radius: 0 6px 0 0; }
+    .gram-table td { padding: 10px 12px; border-bottom: 1px solid var(--areia); vertical-align: middle; }
+    .gram-table tr:last-child td { border-bottom: none; }
+    .gram-table tr:nth-child(even) td { background: var(--off-white); }
+
+    /* -- Callout -- */
+    .callout {
+      background: rgba(78,85,29,.07); border-left: 4px solid var(--erva-doce);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 18px 0;
+      font-size: 14px; line-height: 1.7;
+    }
+    .callout strong { color: var(--level-color); }
+
+    /* -- Photo card -- */
+    .photo-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--areia); margin-bottom: 6px; }
+    .photo-wrap img { width: 100%; display: block; }
+    .photo-credit { font-size: 11px; color: #888; text-align: right; margin-top: 6px; font-style: italic; }
+    .hl { font-weight: 700; color: #2d5a0e; background: rgba(45,90,14,.13); padding: 0 3px; border-radius: 3px; }
+
+    /* -- Exercise block -- */
+    .exercise-block {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--areia); padding: 28px 28px 24px; margin-bottom: 28px;
+    }
+    .ex-label {
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--level-color); font-family: 'Manrope', sans-serif; font-weight: 700; margin-bottom: 6px;
+    }
+    .ex-title   { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .ex-instruction { font-size: 14px; color: #555; margin-bottom: 20px; font-family: 'Manrope', sans-serif; line-height: 1.6; }
+
+    .ex-item { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+    .ex-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--level-color); color: #fff;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .ex-text { font-size: 14px; line-height: 1.7; flex: 1; }
+
+    /* -- Inputs -- */
+    select, input[type=text] {
+      border: 1.5px solid var(--areia); border-radius: 6px;
+      padding: 6px 10px; font-size: 14px; font-family: 'Manrope', sans-serif;
+      background: #fff; cursor: pointer;
+    }
+    select { min-width: 130px; }
+    input[type=text] { width: 170px; }
+    select:focus, input[type=text]:focus { outline: none; border-color: var(--level-color); }
+    .correct { border-color: var(--floresta) !important; background: rgba(78,85,29,.06) !important; }
+    .wrong   { border-color: var(--pitomba)  !important; background: rgba(211,109,41,.06) !important; }
+
+    textarea {
+      border: 1.5px solid var(--areia); border-radius: 8px;
+      padding: 12px; font-size: 14px; font-family: 'Manrope', sans-serif;
+      width: 100%; min-height: 130px; resize: vertical; background: #fff; margin-top: 8px;
+    }
+    textarea:focus { outline: none; border-color: var(--level-color); }
+
+    .check-btn {
+      background: var(--level-color); color: #fff;
+      border: none; border-radius: 6px;
+      padding: 10px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; margin-top: 16px; font-family: 'Manrope', sans-serif;
+    }
+    .check-btn:hover { opacity: .88; }
+
+    .result-msg {
+      display: none; margin-top: 14px; padding: 14px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      max-height: 260px; overflow-y: auto;
+    }
+    .result-msg.good      { background: rgba(78,85,29,.08);   border: 1px solid rgba(78,85,29,.25);   color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,.08); border: 1px solid rgba(211,109,41,.25); color: var(--pitomba); }
+
+    /* -- Contact box -- */
+    .contact-box {
+      margin-top: 48px; background: var(--baunilha2); border-radius: var(--radius);
+      border: 1px solid rgba(78,85,29,.18);
+      padding: 24px 28px; text-align: left;
+      font-family: 'Manrope', sans-serif; font-size: 14px; color: #5a4a30;
+    }
+    .contact-box strong { color: var(--texto); }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .topbar  { padding: 8px 16px; }
+      .page-hero { padding: 32px 20px 28px; }
+      .main    { padding: 24px 16px 48px; }
+      .exercise-block { padding: 20px 16px; }
+      .gram-table { font-size: 12px; }
+      .gram-table th, .gram-table td { padding: 7px 8px; }
+      select { min-width: 100px; }
+      input[type=text] { width: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../index.html">
+      <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png"
+           alt="BPHUB" onerror="this.outerHTML='<span style=\'font-family:Trirong,serif;font-weight:500;font-size:20px;color:#4E551D;letter-spacing:0.04em;\'>BPHUB</span>'">
+    </a>
+  </div>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← A1 materials</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">Materials Portal</div>
+  <h1>Presente Contínuo<br>
+    <em style="font-style:normal;font-weight:300;color:var(--ouro);">numa cafeteria</em>
+  </h1>
+  <p>Learn to describe actions happening right now in Portuguese, using <strong>estar + gerúndio</strong> — and practice by describing a real photo of a busy café.</p>
+  <div class="student-meta">
+    <span class="meta-pill"><span class="dot"></span>estar + gerúndio</span>
+    <span class="meta-pill"><span class="dot"></span>-ando · -endo · -indo</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- GRAMMAR NOTE -->
+  <div class="sec-header first">
+    <div class="sec-icon" style="background:var(--level-color);">📖</div>
+    <div>
+      <h2>Grammar Note</h2>
+      <p>Read this before doing the exercises.</p>
+    </div>
+  </div>
+
+  <div class="grammar-box">
+    <p><strong>Presente contínuo (present continuous).</strong> To describe an action happening right now, use <strong>estar</strong> (conjugated) + the main verb in the <strong>gerúndio</strong> form. This is different from the simple present, which describes habits or general facts.</p>
+
+    <table class="gram-table">
+      <thead><tr><th>Pronoun</th><th>estar</th></tr></thead>
+      <tbody>
+        <tr><td>eu</td><td>estou</td></tr>
+        <tr><td>você / ele / ela</td><td>está</td></tr>
+        <tr><td>nós</td><td>estamos</td></tr>
+        <tr><td>vocês / eles / elas</td><td>estão</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:18px;"><strong>Forming the gerúndio:</strong> remove the -ar / -er / -ir ending and add the ending below.</p>
+    <table class="gram-table">
+      <thead><tr><th>Group</th><th>Ending</th><th>Infinitive → Gerúndio</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="4"><strong>-ar</strong></td><td rowspan="4">-ando</td><td>falar → falando</td><td>speaking</td></tr>
+        <tr><td>tomar → tomando</td><td>having / drinking</td></tr>
+        <tr><td>conversar → conversando</td><td>chatting</td></tr>
+        <tr><td>olhar → olhando</td><td>looking</td></tr>
+        <tr><td rowspan="3"><strong>-er</strong></td><td rowspan="3">-endo</td><td>comer → comendo</td><td>eating</td></tr>
+        <tr><td>ler → lendo</td><td>reading</td></tr>
+        <tr><td>escrever → escrevendo</td><td>writing</td></tr>
+        <tr><td rowspan="3"><strong>-ir</strong></td><td rowspan="3">-indo</td><td>abrir → abrindo</td><td>opening</td></tr>
+        <tr><td>pedir → pedindo</td><td>ordering / asking</td></tr>
+        <tr><td>sorrir → sorrindo</td><td>smiling</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Examples:</strong><br>
+      <em>Ela está tomando um café.</em> — She is having a coffee. (happening right now)<br>
+      <em>Eles estão conversando perto da janela.</em> — They are chatting near the window.<br><br>
+      <strong>Contraste com o presente simples:</strong> <em>Ela toma café todos os dias</em> (habit) vs. <em>Ela está tomando café agora</em> (right now).<br><br>
+      <strong>Poucas exceções:</strong> <em>pôr → pondo</em>. The vast majority of verbs — including all the ones above — are regular in the gerúndio.
+    </div>
+  </div>
+
+  <!-- PHOTO -->
+  <div class="sec-header">
+    <div class="sec-icon" style="background:var(--cobalto);">📸</div>
+    <div>
+      <h2>Look at the photo</h2>
+      <p>A busy café in London. Read the model description below and notice the gerúndio forms.</p>
+    </div>
+  </div>
+
+  <div class="grammar-box" style="border-left:4px solid var(--cobalto);">
+    <div class="photo-wrap">
+      <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?fm=jpg&q=80&w=1400&auto=format&fit=crop" alt="Interior de uma cafeteria movimentada, com várias pessoas sentadas e em pé">
+    </div>
+    <p class="photo-credit">Foto: Toa Heftiba, Unsplash License</p>
+
+    <p style="margin-top:18px;line-height:1.9;">
+      Na mesa da frente, a mulher de blusa clara está <span class="hl">olhando</span> para o celular. Um pouco atrás dela, dois homens estão em pé perto de uma mesa — o da mochila também está <span class="hl">olhando</span> para o celular. No centro do café, uma mulher de cabelo escuro está sentada e também <span class="hl">olhando</span> para o celular.<br><br>
+      À direita, um homem de camisa estampada está <span class="hl">conversando</span> com uma mulher de cabelo vermelho: ele está <span class="hl">fazendo</span> um gesto com a mão, e ela está <span class="hl">ouvindo</span>, com os braços cruzados. Mais à direita, um homem de camisa azul está <span class="hl">sorrindo</span> e <span class="hl">conversando</span> com a mulher ao lado, que está <span class="hl">lendo</span> um cardápio.
+    </p>
+  </div>
+
+  <!-- EXERCISES -->
+  <div class="sec-header">
+    <div class="sec-icon" style="background:var(--marrom);">✏️</div>
+    <div>
+      <h2>Exercises</h2>
+      <p>Practice the presente contínuo — check your answers when you're done.</p>
+    </div>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 1 — Comprehension</div>
+    <div class="ex-title">Mark V (verdadeiro) or F (falso).</div>
+    <div class="ex-instruction">Based on the description above, choose V (true) or F (false) for each statement.</div>
+
+    <div class="ex-item"><span class="ex-num">1</span><div class="ex-text">A mulher de blusa clara está olhando para o celular.&nbsp; <select id="e1q1"><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">2</span><div class="ex-text">O homem da mochila está dormindo.&nbsp; <select id="e1q2"><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">3</span><div class="ex-text">O homem de camisa estampada está conversando e fazendo um gesto com a mão.&nbsp; <select id="e1q3"><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div></div>
+    <div class="ex-item"><span class="ex-num">4</span><div class="ex-text">A mulher ao lado do homem de camisa azul está lendo um cardápio.&nbsp; <select id="e1q4"><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 2 — Matching</div>
+    <div class="ex-title">Match each person to what they are doing.</div>
+    <div class="ex-instruction">Choose the correct action (presente contínuo) for each person in the photo.</div>
+
+    <div class="ex-item"><span class="ex-num">1</span><div class="ex-text">A mulher de blusa clara (mesa da frente) &nbsp;
+      <select id="e2q1">
+        <option value="">—</option>
+        <option value="a">está olhando para o celular</option>
+        <option value="b">está conversando e fazendo um gesto</option>
+        <option value="c">está ouvindo, com os braços cruzados</option>
+        <option value="d">está sorrindo e conversando</option>
+        <option value="e">está lendo um cardápio</option>
+      </select></div></div>
+    <div class="ex-item"><span class="ex-num">2</span><div class="ex-text">O homem de camisa estampada &nbsp;
+      <select id="e2q2">
+        <option value="">—</option>
+        <option value="a">está olhando para o celular</option>
+        <option value="b">está conversando e fazendo um gesto</option>
+        <option value="c">está ouvindo, com os braços cruzados</option>
+        <option value="d">está sorrindo e conversando</option>
+        <option value="e">está lendo um cardápio</option>
+      </select></div></div>
+    <div class="ex-item"><span class="ex-num">3</span><div class="ex-text">A mulher de cabelo vermelho &nbsp;
+      <select id="e2q3">
+        <option value="">—</option>
+        <option value="a">está olhando para o celular</option>
+        <option value="b">está conversando e fazendo um gesto</option>
+        <option value="c">está ouvindo, com os braços cruzados</option>
+        <option value="d">está sorrindo e conversando</option>
+        <option value="e">está lendo um cardápio</option>
+      </select></div></div>
+    <div class="ex-item"><span class="ex-num">4</span><div class="ex-text">O homem de camisa azul (à direita) &nbsp;
+      <select id="e2q4">
+        <option value="">—</option>
+        <option value="a">está olhando para o celular</option>
+        <option value="b">está conversando e fazendo um gesto</option>
+        <option value="c">está ouvindo, com os braços cruzados</option>
+        <option value="d">está sorrindo e conversando</option>
+        <option value="e">está lendo um cardápio</option>
+      </select></div></div>
+    <div class="ex-item"><span class="ex-num">5</span><div class="ex-text">A mulher ao lado do homem de camisa azul &nbsp;
+      <select id="e2q5">
+        <option value="">—</option>
+        <option value="a">está olhando para o celular</option>
+        <option value="b">está conversando e fazendo um gesto</option>
+        <option value="c">está ouvindo, com os braços cruzados</option>
+        <option value="d">está sorrindo e conversando</option>
+        <option value="e">está lendo um cardápio</option>
+      </select></div></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 3 — Write</div>
+    <div class="ex-title">Complete with the correct gerúndio form.</div>
+    <div class="ex-instruction">Write the gerúndio form of the verb in parentheses.</div>
+
+    <div class="ex-item"><span class="ex-num">1</span><div class="ex-text">A garçonete está <input type="text" id="e3q1" placeholder="falar"> (falar) com o cliente.</div></div>
+    <div class="ex-item"><span class="ex-num">2</span><div class="ex-text">Nós estamos <input type="text" id="e3q2" placeholder="comer"> (comer) um bolo delicioso.</div></div>
+    <div class="ex-item"><span class="ex-num">3</span><div class="ex-text">Ele está <input type="text" id="e3q3" placeholder="abrir"> (abrir) a porta do café.</div></div>
+    <div class="ex-item"><span class="ex-num">4</span><div class="ex-text">Eu estou <input type="text" id="e3q4" placeholder="tomar"> (tomar) um cappuccino.</div></div>
+    <div class="ex-item"><span class="ex-num">5</span><div class="ex-text">Elas estão <input type="text" id="e3q5" placeholder="escrever"> (escrever) um cartão postal.</div></div>
+    <div class="ex-item"><span class="ex-num">6</span><div class="ex-text">Você está <input type="text" id="e3q6" placeholder="pedir"> (pedir) mais um café.</div></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 4 -->
+  <div class="exercise-block">
+    <div class="ex-label">Exercise 4 — Describe the photo</div>
+    <div class="ex-title">What are the other people in the photo doing?</div>
+    <div class="ex-instruction">
+      Look at the photo again. Choose at least <strong>5 different people</strong> you haven't described yet (for example: the man in the black "LONDON" t-shirt, the woman in the far back, the man near the shelves) and write a sentence for each, using <strong>estar + gerúndio</strong>.<br><br>
+      <em>Example: "O homem da camiseta preta está em pé, perto da mesa. Ele está esperando."</em>
+    </div>
+    <textarea id="e4response" placeholder="Escreva suas frases aqui..."></textarea>
+  </div>
+
+  <div style="max-width:760px;margin:0 auto;padding:0 16px 48px;">
+<div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+</div>
+
+</div><!-- /.main -->
+<script>
+  function norm(s) {
+    return s.toLowerCase().trim()
+      .replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+      .replace(/[í]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+      .replace(/ç/g,'c').replace(/\s+/g,' ');
+  }
+
+  /* -- Exercise 1 -- V/F -- */
+  var e1 = [
+    { id:'e1q1', key:'V', display:'V — "a mulher de blusa clara está olhando para o celular."' },
+    { id:'e1q2', key:'F', display:'F — ele está olhando para o celular, não dormindo.' },
+    { id:'e1q3', key:'V', display:'V — "ele está fazendo um gesto com a mão."' },
+    { id:'e1q4', key:'V', display:'V — "que está lendo um cardápio."' }
+  ];
+  function checkEx1() {
+    var html = ''; var correct = 0;
+    e1.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex1-result');
+    var allOk = correct === e1.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e1.length + ' correct!'
+               : correct + ' of ' + e1.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* -- Exercise 2 -- Matching -- */
+  var e2 = [
+    { id:'e2q1', key:'a', display:'A mulher de blusa clara → está olhando para o celular' },
+    { id:'e2q2', key:'b', display:'O homem de camisa estampada → está conversando e fazendo um gesto' },
+    { id:'e2q3', key:'c', display:'A mulher de cabelo vermelho → está ouvindo, com os braços cruzados' },
+    { id:'e2q4', key:'d', display:'O homem de camisa azul → está sorrindo e conversando' },
+    { id:'e2q5', key:'e', display:'A mulher ao lado dele → está lendo um cardápio' }
+  ];
+  function checkEx2() {
+    var html = ''; var correct = 0;
+    e2.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var ok = el.value === a.key;
+      el.className = ok ? 'correct' : 'wrong';
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex2-result');
+    var allOk = correct === e2.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e2.length + ' correct!'
+               : correct + ' of ' + e2.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  /* -- Exercise 3 -- Gerúndio -- */
+  var e3 = [
+    { id:'e3q1', key:'falando',    display:'falando' },
+    { id:'e3q2', key:'comendo',    display:'comendo' },
+    { id:'e3q3', key:'abrindo',    display:'abrindo' },
+    { id:'e3q4', key:'tomando',    display:'tomando' },
+    { id:'e3q5', key:'escrevendo', display:'escrevendo' },
+    { id:'e3q6', key:'pedindo',    display:'pedindo' }
+  ];
+  function checkEx3() {
+    var html = ''; var correct = 0;
+    e3.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var filled = el.value.trim().length > 0;
+      var ok = filled && norm(el.value) === norm(a.key);
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', filled && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;font-weight:400;"><strong>' + (i+1) + '.</strong> '
+            + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                  : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+            + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('ex3-result');
+    var allOk = correct === e3.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+      + (allOk ? '✓ All ' + e3.length + ' correct!'
+               : correct + ' of ' + e3.length + ' correct — model answers:')
+      + '</div>' + html;
+    res.style.display = 'block';
+  }
+</script>
+
+<script>
+// -- BREVO SUBMIT --
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
