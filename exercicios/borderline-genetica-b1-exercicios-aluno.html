@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borderline: Origem Genética? | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cobalto: #265B8B;
+      --cobalto-light: #EAF2FA;
+      --pitomba: #D36D29;
+      --pitomba-light: #FDF0E7;
+      --dark: #1A1A2E;
+      --mid: #4A5568;
+      --light: #F7F9FC;
+      --border: #DDE3ED;
+      --green: #2D7D46;
+      --green-light: #E8F5EE;
+      --red: #C0392B;
+      --red-light: #FDECEA;
+      --marrom: #967E63;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+    /* TOPBAR */
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:64px; border-bottom: 1px solid #E8E4DE; background:#FCF5EB; position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
+    /* HERO */
+    .hero { background: #967E63; color: white; padding: 48px 48px 40px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .hero h1 { font-family: 'Trirong', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 300; margin-bottom: 0; line-height: 1.15; }
+    .hero .subtitle { font-size: 1rem; color: rgba(255,255,255,0.88); max-width: 600px; margin-top: 14px; margin-bottom: 18px; line-height: 1.6; }
+    .tags { display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap; }
+    .tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 12px; padding: 4px 12px; border-radius: 12px; }
+
+    .container { max-width: 880px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    /* SECTION */
+    .section { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 28px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+    .section-num { background: var(--cobalto); color: white; font-size: 12px; font-weight: 700; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-header h2 { font-family: 'Trirong', serif; font-weight: 400; font-size: 1.3rem; color: var(--dark); }
+
+    /* ARTICLE TEXT */
+    .article-text p { font-size: 15px; margin-bottom: 16px; line-height: 1.85; }
+    .article-text p:last-child { margin-bottom: 0; }
+    .hl { background: rgba(211,109,41,0.14); color: var(--pitomba); font-weight: 700; padding: 0 3px; border-radius: 3px; }
+    .article-source { font-size: 12px; color: var(--mid); font-style: italic; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--border); }
+
+    /* VOCAB TABLE */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 4px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 9px 14px; text-align: left; font-size: 12px; font-weight: 700; }
+    .vocab-table th:first-child { border-radius: 6px 0 0 0; }
+    .vocab-table th:last-child { border-radius: 0 6px 0 0; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--light); }
+
+    /* GRAMMAR BLOCKS */
+    .gram-block { border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin-bottom: 18px; background: var(--light); }
+    .gram-block:last-child { margin-bottom: 0; }
+    .gram-block-title { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cobalto); margin-bottom: 12px; }
+    .formula-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .formula-pill { background: var(--cobalto); color: white; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 16px; }
+    .formula-pill.gray { background: var(--mid); }
+    .formula-plus { color: var(--mid); font-weight: 700; }
+    .formula-alt { font-size: 12px; color: var(--mid); font-style: italic; }
+    .example-list { list-style: none; margin-top: 8px; }
+    .example-list li { font-size: 14px; padding: 6px 0 6px 18px; position: relative; line-height: 1.6; }
+    .example-list li::before { content: "→"; position: absolute; left: 0; color: var(--pitomba); font-weight: 700; }
+    .example-list li em { color: var(--mid); }
+
+    /* REF BOX */
+    .ref-box { background: var(--cobalto-light); border: 1px solid #b8d4ea; border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; font-size: 14px; line-height: 1.7; }
+    .ref-box strong { color: var(--cobalto); }
+
+    /* EXERCISE BLOCKS (auto-check) */
+    .exercise { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 26px 28px; margin-bottom: 22px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 2px solid var(--border); }
+    .ex-num { background: var(--pitomba); color: white; font-size: 13px; font-weight: 800; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ex-meta { flex: 1; }
+    .ex-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--pitomba); margin-bottom: 3px; }
+    .ex-instruction { font-size: 14.5px; font-weight: 500; color: var(--dark); line-height: 1.5; }
+    .ex-note { font-size: 12px; color: var(--mid); font-style: italic; margin-top: 4px; }
+    .ex-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; background: var(--green-light); color: var(--green); border: 1px solid #a8d5b8; }
+
+    .btn { border: none; cursor: pointer; font-family: 'Manrope', sans-serif; font-weight: 700; border-radius: 8px; padding: 9px 20px; font-size: 13px; transition: opacity .15s; }
+    .btn:hover { opacity: .85; }
+    .btn-check { background: var(--green); color: white; }
+    .btn-retry { background: var(--border); color: var(--mid); }
+    .btn-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+    .score-bar { display: none; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-top: 14px; font-size: 14px; font-weight: 600; text-align: center; }
+    .score-bar.visible { display: block; }
+    .score-bar.perfect { background: var(--green-light); border-color: #a8d5b8; color: var(--green); }
+    .score-bar.good { background: #FFF8E1; border-color: #FFD54F; color: #856404; }
+    .score-bar.retry { background: var(--red-light); border-color: #e8a09a; color: var(--red); }
+
+    /* GAP FILL */
+    .gap-list { list-style: none; counter-reset: item; }
+    .gap-list li { counter-increment: item; padding: 12px 0 12px 36px; border-bottom: 1px solid var(--border); font-size: 14.5px; line-height: 2; position: relative; }
+    .gap-list li:last-child { border-bottom: none; }
+    .gap-list li::before { content: counter(item) "."; position: absolute; left: 8px; top: 13px; font-weight: 700; color: var(--pitomba); font-size: 13px; }
+    .gap-input { display: inline-block; min-width: 170px; border: none; border-bottom: 2px solid var(--border); padding: 2px 6px; font-size: 14px; font-family: 'Manrope', sans-serif; background: transparent; outline: none; color: var(--dark); transition: border-color .2s; }
+    .gap-input:focus { border-bottom-color: var(--pitomba); }
+    .gap-input.correct { border-bottom-color: var(--green); background: var(--green-light); border-radius: 4px 4px 0 0; color: var(--green); font-weight: 700; }
+    .gap-input.wrong { border-bottom-color: var(--red); background: var(--red-light); border-radius: 4px 4px 0 0; color: var(--red); }
+    .feedback-msg { font-size: 12px; font-weight: 700; margin-left: 6px; }
+    .feedback-msg.ok { color: var(--green); }
+    .feedback-msg.no { color: var(--red); }
+    .correct-ans { font-size: 12px; color: var(--green); font-weight: 700; margin-left: 4px; font-style: italic; }
+
+    /* MULTIPLE CHOICE */
+    .mc-list { list-style: none; counter-reset: mcitem; }
+    .mc-item { counter-increment: mcitem; padding: 14px 0 14px 36px; border-bottom: 1px solid var(--border); position: relative; }
+    .mc-item:last-child { border-bottom: none; }
+    .mc-item::before { content: counter(mcitem) "."; position: absolute; left: 8px; top: 16px; font-weight: 700; color: var(--pitomba); font-size: 13px; }
+    .mc-q { font-size: 14.5px; margin-bottom: 10px; line-height: 1.6; }
+    .mc-options { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mc-opt { border: 2px solid var(--border); border-radius: 8px; padding: 7px 16px; font-size: 13.5px; cursor: pointer; background: white; font-family: 'Manrope', sans-serif; font-weight: 500; transition: all .15s; color: var(--dark); }
+    .mc-opt:hover { border-color: var(--pitomba); background: var(--pitomba-light); }
+    .mc-opt.selected-correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; cursor: default; }
+    .mc-opt.selected-wrong { background: var(--red-light); border-color: var(--red); color: var(--red); cursor: default; }
+    .mc-opt.show-correct { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: 700; }
+    .mc-opt.disabled { cursor: default; opacity: .6; }
+    .mc-feedback { font-size: 12px; font-weight: 700; margin-top: 8px; }
+    .mc-feedback.ok { color: var(--green); }
+    .mc-feedback.no { color: var(--red); }
+
+    /* TRUE/FALSE */
+    .tf-list { list-style: none; counter-reset: tfitem; }
+    .tf-item { counter-increment: tfitem; padding: 14px 0 14px 36px; border-bottom: 1px solid var(--border); position: relative; }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-item::before { content: counter(tfitem) "."; position: absolute; left: 8px; top: 16px; font-weight: 700; color: var(--pitomba); font-size: 13px; }
+    .tf-sentence { font-size: 14.5px; margin-bottom: 10px; line-height: 1.6; font-style: italic; }
+    .tf-buttons { display: flex; gap: 10px; align-items: center; }
+    .tf-btn { border: 2px solid var(--border); border-radius: 8px; padding: 6px 20px; font-size: 14px; font-weight: 700; cursor: pointer; background: white; font-family: 'Manrope', sans-serif; transition: all .15s; }
+    .tf-btn.v:hover { border-color: var(--green); background: var(--green-light); color: var(--green); }
+    .tf-btn.f:hover { border-color: var(--red); background: var(--red-light); color: var(--red); }
+    .tf-btn.correct-pick { background: var(--green-light); border-color: var(--green); color: var(--green); cursor: default; }
+    .tf-btn.wrong-pick { background: var(--red-light); border-color: var(--red); color: var(--red); cursor: default; }
+    .tf-btn.show-correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+    .tf-btn.disabled { cursor: default; opacity: .5; }
+    .tf-feedback { font-size: 12px; font-weight: 700; margin-left: 4px; }
+    .tf-feedback.ok { color: var(--green); }
+    .tf-feedback.no { color: var(--red); }
+    .tf-correction { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 6px; background: var(--green-light); border-radius: 6px; padding: 6px 10px; display: none; }
+    .tf-correction.visible { display: block; }
+
+    /* MATCHING */
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media(max-width:600px){ .match-grid { grid-template-columns: 1fr; } }
+    .match-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px; background: white; }
+    .match-base { font-size: 14px; color: var(--mid); margin-bottom: 8px; }
+    .match-base strong { color: var(--dark); }
+    .match-select { width: 100%; border: 2px solid var(--border); border-radius: 6px; padding: 7px 10px; font-size: 13px; font-family: 'Manrope', sans-serif; background: white; color: var(--dark); outline: none; cursor: pointer; transition: border-color .2s; }
+    .match-select:focus { border-color: var(--pitomba); }
+    .match-select.correct { border-color: var(--green); background: var(--green-light); color: var(--green); font-weight: 700; }
+    .match-select.wrong { border-color: var(--red); background: var(--red-light); }
+
+    /* OPEN / DISCUSSION */
+    .gdocs-note { background: var(--cobalto-light); border: 1px solid #b8d4ea; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+    .gdocs-note .icon { font-size: 24px; flex-shrink: 0; }
+    .gdocs-note p, .gdocs-note span { font-size: 14px; line-height: 1.6; }
+    .discussion-list { list-style: none; counter-reset: op; }
+    .discussion-list li { counter-increment: op; padding: 14px 0 14px 36px; border-bottom: 1px solid var(--border); font-size: 14.5px; line-height: 1.65; position: relative; }
+    .discussion-list li:last-child { border-bottom: none; }
+    .discussion-list li::before { content: counter(op) "."; position: absolute; left: 8px; top: 14px; font-weight: 700; color: var(--cobalto); font-size: 13px; }
+    .answer-box { margin-top: 10px; }
+    .answer-textarea { width: 100%; height: 110px; resize: vertical; border: 1px solid #ccc; border-radius: 8px; padding: 10px 14px; font-size: 14px; font-family: 'Manrope', sans-serif; line-height: 1.6; background: #faf9f4; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 32px 20px 28px; }
+      .container { padding: 28px 16px 48px; }
+      .section { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="page-eyebrow">Materials Portal</div>
+  <h1>Borderline<em style="font-style:italic;font-weight:300;color:#FFB94A;font-size:1.5rem;display:block;margin-top:2px;margin-bottom:14px;">pode ter origem genética?</em></h1>
+  <p class="subtitle">A real 2026 science news story about the genetic roots of borderline personality disorder — explored through vocabulary, the passive voice, and comparative frequency structures relevant to clinical Portuguese.</p>
+  <div class="tags">
+    <span class="tag">🧬 Genética</span>
+    <span class="tag">🧠 Psiquiatria</span>
+    <span class="tag">📰 Notícia científica</span>
+    <span class="tag">🗣️ Voz passiva</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== SECTION 1: TEXT ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Leia o texto</h2>
+    </div>
+
+    <div class="article-text">
+      <p>Um estudo internacional, publicado em julho de 2026 na revista científica <em>Nature Genetics</em>, é considerado o maior já realizado sobre a origem genética do <span class="hl">transtorno de personalidade borderline</span> (ou limítrofe). A pesquisa <span class="hl">foi conduzida</span> por uma equipe liderada por cientistas do Instituto Central de Saúde Mental de Mannheim, na Alemanha, e reuniu dados de 27 estudos anteriores — com mais de 12 mil pessoas diagnosticadas com o transtorno e mais de um milhão de pessoas sem o diagnóstico, usadas como grupo de comparação.</p>
+
+      <p>Segundo os pesquisadores, onze regiões do <span class="hl">genoma</span> humano <span class="hl">foram associadas</span> a um risco maior de desenvolver o transtorno. Perto dessas regiões, nove genes <span class="hl">foram identificados</span> como possivelmente relacionados à condição. Antes deste trabalho, apenas um outro estudo genético sobre o borderline <span class="hl">tinha sido publicado</span> — e nenhuma <span class="hl">variante</span> significativa havia sido encontrada.</p>
+
+      <p>O transtorno de personalidade borderline afeta até 2% da população em países ocidentais e <span class="hl">é diagnosticado</span> cerca de três vezes mais em mulheres do que em homens. Ele costuma ser identificado por um padrão duradouro de <span class="hl">instabilidade emocional</span>, distorções na forma de pensar e perceber a realidade, e relacionamentos interpessoais instáveis. Em muitos casos, os pacientes passam por crises agudas que podem levar à internação.</p>
+
+      <p>De acordo com os autores, as variantes genéticas recém-descobertas explicam cerca de 17% do risco herdado do transtorno. Pesquisas anteriores, feitas com famílias e gêmeos, já haviam estimado que a <span class="hl">herdabilidade</span> do borderline varia entre 46% e 69%. Ou seja: a genética é importante, mas está longe de explicar tudo — <span class="hl">fatores ambientais</span>, como experiências de vida, continuam tendo um papel fundamental.</p>
+
+      <p>Para os pesquisadores, essa descoberta pode abrir novos caminhos para o estudo e o tratamento do transtorno — algo que já aconteceu com outras condições psiquiátricas, como a esquizofrenia, a depressão e o transtorno bipolar, depois de avanços semelhantes na genética.</p>
+
+      <p class="article-source">Fonte: informações baseadas na reportagem "Borderline pode ter origem genética, aponta maior estudo já feito sobre o transtorno" (G1 Saúde, 21/07/2026) e no estudo original de Streit et al., publicado na <em>Nature Genetics</em> (20/07/2026). Texto adaptado para fins didáticos.</p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: VOCABULARY ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Vocabulário clínico e científico</h2>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td>transtorno de personalidade borderline / limítrofe</td><td>borderline personality disorder</td></tr>
+        <tr><td>instabilidade emocional</td><td>emotional instability</td></tr>
+        <tr><td>distorções cognitivas e perceptivas</td><td>cognitive and perceptual distortions</td></tr>
+        <tr><td>relacionamentos interpessoais instáveis</td><td>unstable interpersonal relationships</td></tr>
+        <tr><td>crise aguda / internação</td><td>acute crisis / hospitalization</td></tr>
+        <tr><td>genoma / gene</td><td>genome / gene</td></tr>
+        <tr><td>variante genética</td><td>genetic variant</td></tr>
+        <tr><td>herdabilidade / herdado</td><td>heritability / inherited</td></tr>
+        <tr><td>predisposição genética</td><td>genetic predisposition</td></tr>
+        <tr><td>fator de risco</td><td>risk factor</td></tr>
+        <tr><td>fatores ambientais</td><td>environmental factors</td></tr>
+        <tr><td>amostra (de participantes)</td><td>sample (of participants)</td></tr>
+        <tr><td>diagnosticado / diagnóstico</td><td>diagnosed / diagnosis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== SECTION 3: GRAMMAR ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Voz passiva e comparações de frequência</h2>
+    </div>
+
+    <div class="gram-block">
+      <span class="gram-block-title">1. Voz passiva analítica — ser + particípio</span>
+      <div class="formula-row">
+        <span class="formula-pill gray">sujeito</span>
+        <span class="formula-plus">+</span>
+        <span class="formula-pill">ser (conjugado)</span>
+        <span class="formula-plus">+</span>
+        <span class="formula-pill gray">particípio</span>
+        <span class="formula-alt">(concorda em gênero e número com o sujeito)</span>
+      </div>
+      <ul class="example-list">
+        <li>Onze regiões do genoma <strong>foram associadas</strong> a um risco maior. <em>(pretérito perfeito)</em></li>
+        <li>O transtorno <strong>é diagnosticado</strong> mais em mulheres. <em>(presente)</em></li>
+        <li>Um outro estudo <strong>tinha sido publicado</strong> antes deste. <em>(mais-que-perfeito composto)</em></li>
+      </ul>
+    </div>
+
+    <div class="gram-block">
+      <span class="gram-block-title">2. Voz passiva sintética / impessoal — se + verbo</span>
+      <div class="formula-row">
+        <span class="formula-pill">estima-se que</span>
+        <span class="formula-alt">/</span>
+        <span class="formula-pill">sabe-se que</span>
+        <span class="formula-alt">/</span>
+        <span class="formula-pill">acredita-se que</span>
+        <span class="formula-plus">+</span>
+        <span class="formula-pill gray">oração</span>
+      </div>
+      <ul class="example-list">
+        <li><strong>Estima-se que</strong> a herdabilidade do borderline varie entre 46% e 69%.</li>
+        <li><strong>Acredita-se que</strong> fatores ambientais também tenham um papel importante.</li>
+      </ul>
+    </div>
+
+    <div class="gram-block">
+      <span class="gram-block-title">3. Comparações de frequência</span>
+      <div class="formula-row">
+        <span class="formula-pill">X vezes mais / menos</span>
+        <span class="formula-plus">+</span>
+        <span class="formula-pill gray">adjetivo/advérbio</span>
+        <span class="formula-plus">+</span>
+        <span class="formula-pill">do que</span>
+      </div>
+      <ul class="example-list">
+        <li>O borderline é diagnosticado <strong>três vezes mais</strong> em mulheres <strong>do que</strong> em homens.</li>
+        <li>Este estudo é <strong>muito maior do que</strong> o estudo anterior sobre o mesmo transtorno.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: EXERCISES ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Exercícios</h2>
+    </div>
+
+    <!-- EX 1 -->
+    <div class="exercise" id="ex1">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div class="ex-meta">
+          <p class="ex-type">Complete a voz passiva</p>
+          <p class="ex-instruction">Fill in the blank with the correct passive-voice form of the verb in parentheses.</p>
+          <p class="ex-note">Remember: the participle agrees in gender and number with the subject.</p>
+        </div>
+        <span class="ex-badge">✓ Auto-check</span>
+      </div>
+      <ol class="gap-list">
+        <li data-answers="foram associadas">Onze regiões do genoma <input class="gap-input" type="text" placeholder="(associar)"> a um risco maior do transtorno.<span class="feedback-msg"></span><span class="correct-ans"></span></li>
+        <li data-answers="foi publicado">O estudo <input class="gap-input" type="text" placeholder="(publicar)"> na revista Nature Genetics.<span class="feedback-msg"></span><span class="correct-ans"></span></li>
+        <li data-answers="foram identificados">Nove genes <input class="gap-input" type="text" placeholder="(identificar)"> como relacionados à condição.<span class="feedback-msg"></span><span class="correct-ans"></span></li>
+        <li data-answers="e diagnosticado">O transtorno <input class="gap-input" type="text" placeholder="(diagnosticar)"> três vezes mais em mulheres.<span class="feedback-msg"></span><span class="correct-ans"></span></li>
+        <li data-answers="tinha sido publicado,havia sido publicado">Antes deste estudo, apenas um outro trabalho genético <input class="gap-input" type="text" placeholder="(publicar)">.<span class="feedback-msg"></span><span class="correct-ans"></span></li>
+        <li data-answers="tinha sido encontrada,havia sido encontrada">Nenhuma variante significativa <input class="gap-input" type="text" placeholder="(encontrar)"> antes.<span class="feedback-msg"></span><span class="correct-ans"></span></li>
+      </ol>
+      <div class="btn-actions">
+        <button class="btn btn-check" onclick="checkGapFill()">Verificar respostas</button>
+        <button class="btn btn-retry" onclick="resetGapFill()">Tentar de novo</button>
+      </div>
+      <div class="score-bar" id="ex1Score"></div>
+    </div>
+
+    <!-- EX 2 -->
+    <div class="exercise" id="ex2">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div class="ex-meta">
+          <p class="ex-type">Múltipla escolha</p>
+          <p class="ex-instruction">Choose the correct answer, based on the text and vocabulary above.</p>
+        </div>
+        <span class="ex-badge">✓ Auto-check</span>
+      </div>
+      <ol class="mc-list">
+        <li class="mc-item"><p class="mc-q">"Herdabilidade" significa:</p><div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">herdar heranças financeiras</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">o grau em que uma característica é influenciada pela genética</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">um tipo de terapia psicológica</button>
+        </div><p class="mc-feedback"></p></li>
+        <li class="mc-item"><p class="mc-q">As variantes genéticas recém-descobertas explicam:</p><div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">100% do risco do transtorno</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">cerca de 17% do risco herdado</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">50% do risco do transtorno</button>
+        </div><p class="mc-feedback"></p></li>
+        <li class="mc-item"><p class="mc-q">O borderline afeta, em países ocidentais, até:</p><div class="mc-options">
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">2% da população</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">20% da população</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">0,2% da população</button>
+        </div><p class="mc-feedback"></p></li>
+        <li class="mc-item"><p class="mc-q">"Amostra", no contexto de uma pesquisa científica, significa:</p><div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">um pedaço pequeno de comida</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">o grupo de participantes estudado</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">um tipo de medicamento</button>
+        </div><p class="mc-feedback"></p></li>
+        <li class="mc-item"><p class="mc-q">O estudo foi conduzido por pesquisadores baseados:</p><div class="mc-options">
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">no Brasil</button>
+          <button class="mc-opt" data-correct="true" onclick="checkMC(this)">na Alemanha</button>
+          <button class="mc-opt" data-correct="false" onclick="checkMC(this)">nos Estados Unidos</button>
+        </div><p class="mc-feedback"></p></li>
+      </ol>
+    </div>
+
+    <!-- EX 3 -->
+    <div class="exercise" id="ex3">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div class="ex-meta">
+          <p class="ex-type">Verdadeiro ou falso</p>
+          <p class="ex-instruction">Mark whether each statement is true (V) or false (F), based on the text.</p>
+        </div>
+        <span class="ex-badge">✓ Auto-check</span>
+      </div>
+      <ol class="tf-list">
+        <li class="tf-item"><p class="tf-sentence">Este é o maior estudo genético já feito sobre o borderline.</p><div class="tf-buttons"><button class="tf-btn v" data-correct="V" onclick="checkTF(this,'V')">V</button><button class="tf-btn f" data-correct="V" onclick="checkTF(this,'F')">F</button><span class="tf-feedback"></span></div><div class="tf-correction"></div></li>
+        <li class="tf-item"><p class="tf-sentence">O estudo não encontrou nenhuma região do genoma associada ao transtorno.</p><div class="tf-buttons"><button class="tf-btn v" data-correct="F" onclick="checkTF(this,'V')">V</button><button class="tf-btn f" data-correct="F" onclick="checkTF(this,'F')">F</button><span class="tf-feedback"></span></div><div class="tf-correction">Onze regiões do genoma foram associadas ao transtorno.</div></li>
+        <li class="tf-item"><p class="tf-sentence">Mulheres são diagnosticadas com borderline com mais frequência do que homens.</p><div class="tf-buttons"><button class="tf-btn v" data-correct="V" onclick="checkTF(this,'V')">V</button><button class="tf-btn f" data-correct="V" onclick="checkTF(this,'F')">F</button><span class="tf-feedback"></span></div><div class="tf-correction"></div></li>
+        <li class="tf-item"><p class="tf-sentence">As variantes genéticas encontradas explicam 100% do risco do transtorno.</p><div class="tf-buttons"><button class="tf-btn v" data-correct="F" onclick="checkTF(this,'V')">V</button><button class="tf-btn f" data-correct="F" onclick="checkTF(this,'F')">F</button><span class="tf-feedback"></span></div><div class="tf-correction">Elas explicam cerca de 17% do risco herdado — fatores ambientais também são importantes.</div></li>
+        <li class="tf-item"><p class="tf-sentence">Segundo os pesquisadores, fatores ambientais continuam sendo importantes.</p><div class="tf-buttons"><button class="tf-btn v" data-correct="V" onclick="checkTF(this,'V')">V</button><button class="tf-btn f" data-correct="V" onclick="checkTF(this,'F')">F</button><span class="tf-feedback"></span></div><div class="tf-correction"></div></li>
+      </ol>
+    </div>
+
+    <!-- EX 4 -->
+    <div class="exercise" id="ex4">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div class="ex-meta">
+          <p class="ex-type">Combine os termos</p>
+          <p class="ex-instruction">Match each term to its correct English definition.</p>
+        </div>
+        <span class="ex-badge">✓ Auto-check</span>
+      </div>
+      <div class="match-grid" id="matchGrid">
+        <div class="match-card"><p class="match-base"><strong>Herdabilidade</strong></p>
+          <select class="match-select" data-correct="a" onchange="checkMatchSelect(this)">
+            <option value="">—</option>
+            <option value="a">the degree to which a trait is influenced by genetics</option>
+            <option value="b">a specific version of a gene</option>
+            <option value="c">the group of participants studied</option>
+            <option value="d">emotional instability</option>
+            <option value="e">risk factor</option>
+          </select></div>
+        <div class="match-card"><p class="match-base"><strong>Variante genética</strong></p>
+          <select class="match-select" data-correct="b" onchange="checkMatchSelect(this)">
+            <option value="">—</option>
+            <option value="a">the degree to which a trait is influenced by genetics</option>
+            <option value="b">a specific version of a gene</option>
+            <option value="c">the group of participants studied</option>
+            <option value="d">emotional instability</option>
+            <option value="e">risk factor</option>
+          </select></div>
+        <div class="match-card"><p class="match-base"><strong>Amostra</strong></p>
+          <select class="match-select" data-correct="c" onchange="checkMatchSelect(this)">
+            <option value="">—</option>
+            <option value="a">the degree to which a trait is influenced by genetics</option>
+            <option value="b">a specific version of a gene</option>
+            <option value="c">the group of participants studied</option>
+            <option value="d">emotional instability</option>
+            <option value="e">risk factor</option>
+          </select></div>
+        <div class="match-card"><p class="match-base"><strong>Instabilidade emocional</strong></p>
+          <select class="match-select" data-correct="d" onchange="checkMatchSelect(this)">
+            <option value="">—</option>
+            <option value="a">the degree to which a trait is influenced by genetics</option>
+            <option value="b">a specific version of a gene</option>
+            <option value="c">the group of participants studied</option>
+            <option value="d">emotional instability</option>
+            <option value="e">risk factor</option>
+          </select></div>
+        <div class="match-card"><p class="match-base"><strong>Fator de risco</strong></p>
+          <select class="match-select" data-correct="e" onchange="checkMatchSelect(this)">
+            <option value="">—</option>
+            <option value="a">the degree to which a trait is influenced by genetics</option>
+            <option value="b">a specific version of a gene</option>
+            <option value="c">the group of participants studied</option>
+            <option value="d">emotional instability</option>
+            <option value="e">risk factor</option>
+          </select></div>
+      </div>
+      <div class="score-bar" id="ex4Score"></div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 5: DISCUSSION ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>Vamos conversar</h2>
+    </div>
+
+    <div class="gdocs-note">
+      <span class="icon">📝</span>
+      <span>Prepare your answers in your <strong>Google Docs</strong> before the lesson, or write them directly below — you can bring your notes to the conversation.</span>
+    </div>
+
+    <ul class="discussion-list">
+      <li>Como você explicaria essa descoberta genética para um paciente com diagnóstico de borderline, usando uma linguagem simples e acessível?
+        <div class="answer-box"><textarea class="answer-textarea" placeholder="Your answer…"></textarea></div>
+      </li>
+      <li>Na sua experiência profissional, como fatores genéticos e ambientais interagem no desenvolvimento de transtornos de personalidade?
+        <div class="answer-box"><textarea class="answer-textarea" placeholder="Your answer…"></textarea></div>
+      </li>
+      <li>Você acha que saber que existe um componente genético pode mudar a forma como um paciente entende o próprio diagnóstico? Por quê?
+        <div class="answer-box"><textarea class="answer-textarea" placeholder="Your answer…"></textarea></div>
+      </li>
+      <li>Descreva, em suas palavras e usando a <strong>voz passiva</strong>, os principais resultados do estudo.
+        <div class="answer-box"><textarea class="answer-textarea" placeholder="Your answer…"></textarea></div>
+      </li>
+      <li>Que outras áreas da psiquiatria você acredita que poderiam se beneficiar de pesquisas genéticas semelhantes?
+        <div class="answer-box"><textarea class="answer-textarea" placeholder="Your answer…"></textarea></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CONTACT / SEND BOX -->
+  <div style="background:#FDE7C4;border:1px solid rgba(211,109,41,0.20);border-radius:12px;padding:28px 32px;margin-bottom:20px;">
+    <p style="font-size:14px;color:#3C3C21;line-height:1.65;margin-bottom:24px;">When you're done, <strong>send your answers to your teacher.</strong> She will read them carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further.</p>
+    <div id="bphub-form-area" style="padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+      <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+        <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+      </div>
+    </div>
+    <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+      <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+      <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+      <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+    </div>
+    <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+  </div>
+
+</div>
+
+<script>
+  function norm(s) {
+    return s.trim().toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/\s+/g, ' ');
+  }
+
+  function checkGapFill() {
+    const items = document.querySelectorAll('#ex1 .gap-list li');
+    let correct = 0;
+    items.forEach(li => {
+      const input = li.querySelector('.gap-input');
+      const fb = li.querySelector('.feedback-msg');
+      const ca = li.querySelector('.correct-ans');
+      const answers = li.dataset.answers.split(',');
+      const userVal = norm(input.value);
+      const isOk = answers.some(a => norm(a) === userVal);
+      input.classList.remove('correct','wrong');
+      if (isOk) {
+        input.classList.add('correct'); fb.className = 'feedback-msg ok'; fb.textContent = '✓'; ca.textContent = ''; correct++;
+      } else if (input.value.trim() === '') {
+        fb.className = 'feedback-msg no'; fb.textContent = '⚠ não preenchido'; ca.textContent = '→ ' + answers[0]; input.classList.add('wrong');
+      } else {
+        input.classList.add('wrong'); fb.className = 'feedback-msg no'; fb.textContent = '✗'; ca.textContent = '→ ' + answers[0];
+      }
+    });
+    const score = document.getElementById('ex1Score');
+    score.className = 'score-bar visible ' + (correct === items.length ? 'perfect' : correct >= items.length/2 ? 'good' : 'retry');
+    score.textContent = correct === items.length ? '🎉 Perfeito! ' + correct + '/' + items.length + ' corretas!' : correct + '/' + items.length + ' corretas — tente de novo!';
+  }
+
+  function resetGapFill() {
+    document.querySelectorAll('#ex1 .gap-input').forEach(i => { i.value = ''; i.className = 'gap-input'; });
+    document.querySelectorAll('#ex1 .feedback-msg').forEach(f => f.textContent = '');
+    document.querySelectorAll('#ex1 .correct-ans').forEach(c => c.textContent = '');
+    const score = document.getElementById('ex1Score'); score.className = 'score-bar'; score.textContent = '';
+  }
+
+  function checkMC(btn) {
+    const group = btn.closest('.mc-item');
+    if (group.querySelector('.selected-correct, .selected-wrong')) return;
+    const allOpts = group.querySelectorAll('.mc-opt');
+    const fb = group.querySelector('.mc-feedback');
+    const isCorrect = btn.dataset.correct === 'true';
+    allOpts.forEach(o => o.classList.add('disabled'));
+    if (isCorrect) {
+      btn.classList.add('selected-correct'); fb.className = 'mc-feedback ok'; fb.textContent = '✓ Correto!';
+    } else {
+      btn.classList.add('selected-wrong'); fb.className = 'mc-feedback no'; fb.textContent = '✗ Veja a resposta correta abaixo:';
+      allOpts.forEach(o => { if (o.dataset.correct === 'true') o.classList.add('show-correct'); });
+    }
+  }
+
+  function checkTF(btn, picked) {
+    const item = btn.closest('.tf-item');
+    if (item.querySelector('.correct-pick, .wrong-pick')) return;
+    const allBtns = item.querySelectorAll('.tf-btn');
+    const fb = item.querySelector('.tf-feedback');
+    const correction = item.querySelector('.tf-correction');
+    const correct = btn.dataset.correct;
+    const isOk = picked === correct;
+    allBtns.forEach(b => b.classList.add('disabled'));
+    if (isOk) {
+      btn.classList.add('correct-pick'); fb.className = 'tf-feedback ok'; fb.textContent = '✓ Correto!';
+    } else {
+      btn.classList.add('wrong-pick'); fb.className = 'tf-feedback no'; fb.textContent = '✗';
+      allBtns.forEach(b => { if (b.dataset.correct === correct && !b.classList.contains('wrong-pick')) b.classList.add('show-correct'); });
+      if (correction && correction.textContent.trim()) correction.classList.add('visible');
+    }
+  }
+
+  function checkMatchSelect(sel) {
+    const isOk = sel.value === sel.dataset.correct;
+    sel.classList.remove('correct','wrong');
+    sel.classList.add(isOk ? 'correct' : 'wrong');
+    const all = document.querySelectorAll('#matchGrid .match-select');
+    const filled = [...all].filter(s => s.value !== '');
+    if (filled.length === all.length) {
+      const corrects = [...all].filter(s => s.classList.contains('correct')).length;
+      const score = document.getElementById('ex4Score');
+      score.className = 'score-bar visible ' + (corrects === all.length ? 'perfect' : corrects >= all.length/2 ? 'good' : 'retry');
+      score.textContent = corrects === all.length ? '🎉 Perfeito! Todos os termos corretos!' : corrects + '/' + all.length + ' corretos — revise o vocabulário acima!';
+    }
+  }
+</script>
+
+<script>
+// -- BREVO SUBMIT --
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'\U0001F4DD '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
