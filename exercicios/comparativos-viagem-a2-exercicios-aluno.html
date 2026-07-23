@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparativos — Onde o brasileiro gasta mais? — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 44px; }
+    .sec-label:first-child { margin-top: 0; }
+
+    .card, .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+    .card h2, .ex-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .card-sub { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    table.ref { width: 100%; border-collapse: collapse; font-size: 15px; }
+    table.ref td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.ref tr:last-child td { border-bottom: none; }
+    table.ref strong { color: var(--cobalto); }
+
+    table.data { width: 100%; border-collapse: collapse; font-size: 14.5px; margin-top: 4px; }
+    table.data th { background: var(--cobalto); color: white; padding: 9px 14px; text-align: left; font-size: 12px; font-weight: 700; }
+    table.data th:first-child { border-radius: 6px 0 0 0; }
+    table.data th:last-child { border-radius: 0 6px 0 0; }
+    table.data td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    table.data tr:last-child td { border-bottom: none; font-weight: 700; background: var(--off-white); }
+    table.data tr:nth-child(even):not(:last-child) td { background: var(--off-white); }
+
+    .note-box { background: var(--baunilha2); border-radius: 10px; padding: 12px 18px; font-size: 14px; margin-top: 16px; line-height: 1.7; }
+
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16.5px; line-height: 1.85; }
+    .text-body strong { color: var(--cobalto); }
+
+    .q-block { margin-bottom: 20px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 2px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    .gloss { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 8px; }
+
+    textarea { width: 100%; min-height: 60px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 140px; }
+
+    .gap-input { display: inline-block; width: 100px; padding: 6px 10px; border: 1.5px solid rgba(30,29,28,0.25); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); outline: none; }
+    .gap-input:focus { border-color: var(--cobalto); }
+    .gap-input.wide { width: 100%; margin-top: 6px; }
+
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .sent { font-size: 15.5px; margin-bottom: 16px; line-height: 2.1; }
+    .hint { color: #8a8672; font-size: 14px; }
+    .transform-item { margin-bottom: 18px; }
+    .transform-prompt { font-size: 15px; margin-bottom: 6px; }
+    .transform-prompt .arrow { color: var(--pitomba); font-weight: 700; margin: 0 4px; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Comparativos <em>onde o brasileiro gasta mais?</em></h1>
+  <div class="hero-sub">Comparatives of superiority, inferiority, and equality — <strong>mais... do que, menos... do que, tão... quanto</strong> — practiced with real IBGE data about travel spending across Brazil's regions.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">comparativos</span>
+    <span class="hero-tag">superioridade · inferioridade · igualdade</span>
+    <span class="hero-tag">viagens</span>
+    <span class="hero-tag">IBGE</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="sec-label">Language Reference</div>
+  <div class="card">
+    <h2>Comparative structures</h2>
+    <div class="card-sub">Before you start, read these references. You will use them throughout the activity.</div>
+    <table class="ref">
+      <tr><td><strong>Comparative of superiority</strong></td><td><strong>mais</strong> + adjective + (do) que</td><td>O Nordeste é <strong>mais</strong> caro <strong>do que</strong> o Norte.</td></tr>
+      <tr><td><strong>Comparative of inferiority</strong></td><td><strong>menos</strong> + adjective + (do) que</td><td>O Norte é <strong>menos</strong> caro <strong>do que</strong> o Nordeste.</td></tr>
+      <tr><td rowspan="2"><strong>Comparative of equality</strong></td><td><strong>tão</strong> + adjective + <strong>quanto</strong></td><td>O Sudeste é <strong>tão</strong> caro <strong>quanto</strong> o Centro-Oeste.</td></tr>
+      <tr><td><strong>tanto/tanta/tantos/tantas</strong> + noun + <strong>quanto</strong></td><td>O Sul não tem <strong>tantos</strong> turistas <strong>quanto</strong> o Sudeste.</td></tr>
+    </table>
+    <div class="note-box">💡 The word <strong>do</strong> is optional: <strong>mais caro que</strong> = <strong>mais caro do que</strong>.</div>
+  </div>
+
+  <div class="card">
+    <h2>Irregular forms</h2>
+    <table class="ref">
+      <tr><td>bom / boa</td><td>→</td><td><strong>melhor</strong></td></tr>
+      <tr><td>mau / má / ruim</td><td>→</td><td><strong>pior</strong></td></tr>
+      <tr><td>grande</td><td>→</td><td><strong>maior</strong></td></tr>
+      <tr><td>pequeno</td><td>→</td><td><strong>menor</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Also in the text — how journalists compare</h2>
+    <table class="ref">
+      <tr><td><strong>ficar acima da média</strong></td><td>to be above average</td></tr>
+      <tr><td><strong>ficar abaixo da média</strong></td><td>to be below average</td></tr>
+      <tr><td><strong>superar</strong></td><td>to exceed, to be higher than</td></tr>
+      <tr><td><strong>o dobro de</strong></td><td>double / twice as much as</td></tr>
+    </table>
+    <div class="note-box">
+      <em>O Sul <strong>superou</strong> a média nacional.</em> → The South exceeded the national average.<br>
+      <em>O Norte <strong>fica abaixo</strong> da média.</em> → The North is below the average.
+    </div>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Text</div>
+  <div class="card text-card">
+    <h2>Onde o brasileiro gasta mais em viagens?</h2>
+    <div class="fonte">Adaptado de: Bruno de Freitas Moura, "Gasto de brasileiros com viagens nacionais subiu 11,7% em 2024". Agência Brasil, 2 out. 2025.</div>
+    <div class="text-body">
+      <p>Em 2024, os brasileiros gastaram R$ 22,8 bilhões com viagens no país. Esse valor é 11,7% <strong>maior do que</strong> o de 2023.</p>
+      <p>O número de viagens não cresceu: foram 20,6 milhões, o mesmo número do ano anterior. Mas cada viagem ficou mais cara. O gasto médio por viagem foi de R$ 1.843, acima dos R$ 1.706 de 2023. Por dia, cada pessoa gastou R$ 268. Para o pesquisador do IBGE William Kratochwill, "as viagens aconteceram com gastos maiores".</p>
+      <p>O Nordeste é a região onde as pessoas mais gastam: R$ 2.523 por viagem. O Sul (R$ 1.943) também <strong>superou</strong> a média nacional. O Sudeste, o Centro-Oeste e o Norte ficam <strong>abaixo da média</strong>.</p>
+      <p>Alagoas é o estado onde os turistas gastam mais: R$ 3.790 por viagem. Rondônia é o estado com o gasto menor: R$ 930.</p>
+      <p>E por que muita gente não viaja? Quatro em cada dez pessoas (39,2%) responderam: falta de dinheiro. Esse motivo é quase <strong>o dobro</strong> do segundo, falta de tempo (19,1%).</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Gasto médio por viagem, por região</h2>
+    <div class="card-sub">IBGE, 2024 — study this table before doing Exercise 1.</div>
+    <table class="data">
+      <tr><th>Região</th><th>Gasto médio</th></tr>
+      <tr><td>Nordeste</td><td>R$ 2.523</td></tr>
+      <tr><td>Sul</td><td>R$ 1.943</td></tr>
+      <tr><td>Centro-Oeste</td><td>R$ 1.704</td></tr>
+      <tr><td>Sudeste</td><td>R$ 1.684</td></tr>
+      <tr><td>Norte</td><td>R$ 1.263</td></tr>
+      <tr><td>Média do Brasil</td><td>R$ 1.843</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Vocabulário</h2>
+    <table class="ref">
+      <tr><td><strong>o gasto</strong></td><td>spending, expense</td></tr>
+      <tr><td><strong>a viagem</strong></td><td>trip</td></tr>
+      <tr><td><strong>o pernoite</strong></td><td>overnight stay</td></tr>
+      <tr><td><strong>a média</strong></td><td>average</td></tr>
+      <tr><td><strong>a renda</strong></td><td>income</td></tr>
+      <tr><td><strong>caro / barato</strong></td><td>expensive / cheap</td></tr>
+      <tr><td><strong>a pesquisa</strong></td><td>survey</td></tr>
+      <tr><td><strong>o dobro</strong></td><td>double, twice as much</td></tr>
+    </table>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="sec-label">Part 1 — Compreensão</div>
+  <div class="ex-card">
+    <h2>Understand the text</h2>
+    <div class="card-sub">Answer in Portuguese, using complete sentences.</div>
+
+    <div class="q-block">
+      <div class="q"><span class="q-num">1.</span> Quanto os brasileiros gastaram com viagens nacionais em 2024?</div>
+      <textarea id="p1-1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">2.</span> O número de viagens aumentou em 2024? Explique.</div>
+      <textarea id="p1-2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">3.</span> Qual é a região onde as pessoas mais gastam por viagem?</div>
+      <textarea id="p1-3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">4.</span> Quais regiões gastam menos do que a média nacional?</div>
+      <textarea id="p1-4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">5.</span> Qual é o estado mais caro e qual é o mais barato para o turista?</div>
+      <textarea id="p1-5" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q"><span class="q-num">6.</span> Qual é o principal motivo que impede as pessoas de viajar?</div>
+      <textarea id="p1-6" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkPart1()">✓ Check answers</button>
+    <div id="p1-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="sec-label">Part 2 — Prática</div>
+
+  <!-- Exercise 1 -->
+  <div class="ex-card">
+    <h2>Exercise 1 — Complete with mais, menos, tão/quanto and do que</h2>
+    <div class="card-sub">Look at the table above and complete each sentence.</div>
+
+    <div class="sent"><strong>1.</strong> O Nordeste é <input class="gap-input" id="c1a" placeholder="..."> caro <input class="gap-input" id="c1b" placeholder="..."> o Sul.</div>
+    <div class="sent"><strong>2.</strong> O Norte é <input class="gap-input" id="c2a" placeholder="..."> caro <input class="gap-input" id="c2b" placeholder="..."> todas as outras regiões.</div>
+    <div class="sent"><strong>3.</strong> O Sudeste é <input class="gap-input" id="c3a" placeholder="..."> caro <input class="gap-input" id="c3b" placeholder="..."> o Centro-Oeste.</div>
+    <div class="sent"><strong>4.</strong> O Sul é <input class="gap-input" id="c4a" placeholder="..."> caro <input class="gap-input" id="c4b" placeholder="..."> o Nordeste, mas <input class="gap-input" id="c4c" placeholder="..."> caro <input class="gap-input" id="c4d" placeholder="..."> o Sudeste.</div>
+    <div class="sent"><strong>5.</strong> Viajar para o Centro-Oeste custa <input class="gap-input" id="c5a" placeholder="..."> <input class="gap-input" id="c5b" placeholder="..."> viajar para o Nordeste.</div>
+    <div class="sent"><strong>6.</strong> O gasto no Sul é <input class="gap-input" id="c6a" placeholder="..."> alto <input class="gap-input" id="c6b" placeholder="..."> a média do Brasil.</div>
+    <div class="sent"><strong>7.</strong> O gasto no Sudeste é <input class="gap-input" id="c7a" placeholder="..."> alto <input class="gap-input" id="c7b" placeholder="..."> a média do Brasil.</div>
+    <div class="sent"><strong>8.</strong> Uma viagem ao Norte é <input class="gap-input" id="c8a" placeholder="..."> cara <input class="gap-input" id="c8b" placeholder="..."> uma viagem ao Sudeste.</div>
+    <div class="sent"><strong>9.</strong> Alagoas é <input class="gap-input" id="c9a" placeholder="..."> caro <input class="gap-input" id="c9b" placeholder="..."> Rondônia.</div>
+    <div class="sent"><strong>10.</strong> O Centro-Oeste é quase <input class="gap-input" id="c10a" placeholder="..."> caro <input class="gap-input" id="c10b" placeholder="..."> o Sudeste.</div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="ex-card">
+    <h2>Exercise 2 — Compare using the irregular form</h2>
+    <div class="card-sub">Compare the two items using the adjective in brackets and the irregular comparative form.<br><em>Example: o Brasil / Portugal (grande) → O Brasil é maior do que Portugal.</em></div>
+
+    <div class="transform-item"><div class="transform-prompt"><strong>1.</strong> o gasto de 2024 <span class="arrow">/</span> o gasto de 2023 <span class="hint">(grande)</span></div><input class="gap-input wide" id="t1" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>2.</strong> o gasto de Rondônia <span class="arrow">/</span> o gasto de Alagoas <span class="hint">(pequeno)</span></div><input class="gap-input wide" id="t2" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>3.</strong> 2024, para o turismo <span class="arrow">/</span> 2021 <span class="hint">(bom)</span></div><input class="gap-input wide" id="t3" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>4.</strong> não ter dinheiro <span class="arrow">/</span> não ter tempo <span class="hint">(ruim)</span></div><input class="gap-input wide" id="t4" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>5.</strong> o gasto médio do Nordeste <span class="arrow">/</span> o gasto médio do Sul <span class="hint">(grande)</span></div><input class="gap-input wide" id="t5" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>6.</strong> uma viagem de dois dias <span class="arrow">/</span> uma viagem de dez dias <span class="hint">(pequeno)</span></div><input class="gap-input wide" id="t6" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>7.</strong> o resultado de 2021 <span class="arrow">/</span> o resultado de 2023 <span class="hint">(ruim)</span></div><input class="gap-input wide" id="t7" placeholder="Escreva a frase completa..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>8.</strong> a renda do Distrito Federal <span class="arrow">/</span> a renda média do país <span class="hint">(grande)</span></div><input class="gap-input wide" id="t8" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="ex-card">
+    <h2>Exercise 3 — Find and correct the mistake</h2>
+    <div class="card-sub">Seven of these sentences contain a mistake. Find it and correct it. One sentence is already correct — write it exactly as it is.</div>
+
+    <div class="transform-item"><div class="transform-prompt"><strong>1.</strong> O Nordeste é mais caro que o Norte.</div><input class="gap-input wide" id="f1" placeholder="Escreva a frase corrigida (ou a mesma, se já estiver correta)..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>2.</strong> Alagoas é mais grande caro do que Rondônia.</div><input class="gap-input wide" id="f2" placeholder="Escreva a frase corrigida..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>3.</strong> O Sudeste é tão caro do que o Centro-Oeste.</div><input class="gap-input wide" id="f3" placeholder="Escreva a frase corrigida..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>4.</strong> Viajar em janeiro é mais bom do que viajar em julho.</div><input class="gap-input wide" id="f4" placeholder="Escreva a frase corrigida..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>5.</strong> O Norte é menos caro quanto o Sul.</div><input class="gap-input wide" id="f5" placeholder="Escreva a frase corrigida..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>6.</strong> Este hotel é mais pequeno do que a pousada.</div><input class="gap-input wide" id="f6" placeholder="Escreva a frase corrigida..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>7.</strong> O gasto de 2023 foi menor de que o de 2024.</div><input class="gap-input wide" id="f7" placeholder="Escreva a frase corrigida..."></div>
+    <div class="transform-item"><div class="transform-prompt"><strong>8.</strong> A passagem de ônibus é tão cara quanto do que a de avião.</div><input class="gap-input wide" id="f8" placeholder="Escreva a frase corrigida..."></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="sec-label">Part 3 — Produção escrita</div>
+  <div class="ex-card">
+    <h2>Duas viagens</h2>
+    <div class="card-sub">Read the model below. Then write your own text (60–80 words).</div>
+
+    <div class="note-box" style="margin-bottom:16px;">
+      <strong>Modelo</strong><br>
+      No ano passado, viajei duas vezes: fui para Florianópolis em janeiro e para Belo Horizonte em julho. A viagem a Florianópolis foi mais cara do que a de Belo Horizonte, porque janeiro é alta temporada e o hotel custou quase o dobro. Em Belo Horizonte, o hotel era mais confortável porque o quarto era maior. A viagem ao Sul também foi mais longa: cinco dias contra três. A comida mineira é melhor do que a catarinense. No fim, prefiro Florianópolis: o clima estava melhor e eu curti mais.
+    </div>
+
+    <div class="card-sub" style="margin-bottom:8px;">Sua vez. Escreva sobre duas viagens que você fez (ou quer fazer). Fale sobre:</div>
+    <ul style="margin:0 0 16px 20px;font-size:14.5px;line-height:1.9;color:#444;">
+      <li>os dois destinos</li>
+      <li>o preço de cada um</li>
+      <li>a duração de cada viagem</li>
+      <li>a comida, o hotel ou o clima</li>
+      <li>qual você prefere e por quê</li>
+    </ul>
+
+    <textarea id="p3-text" class="prod" placeholder="Escreva seu texto aqui..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:"']/g,'').replace(/\s+/g,' ');
+}
+
+function renderResult(id, correct, total, lines) {
+  var res = document.getElementById(id);
+  var allOk = correct === total;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + total + ' correct!'
+             : correct + ' of ' + total + ' correct — model answers:')
+    + '</div>' + lines;
+  res.style.display = 'block';
+}
+
+function itemLine(n, ok, display) {
+  return '<div style="margin-bottom:8px;font-weight:400;"><strong>' + n + '.</strong> '
+    + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+          : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+    + ' ' + display + '</div>';
+}
+
+/* ── PART 1 — keyword matching ── */
+var p1Answers = [
+  { id: 'p1-1', check: function(t){ return t.indexOf('228') !== -1 || t.indexOf('22 8') !== -1 || (t.indexOf('bilh') !== -1 && t.indexOf('22') !== -1); },
+    display: 'Os brasileiros gastaram R$ 22,8 bilhões.' },
+  { id: 'p1-2', check: function(t){ return (t.indexOf('nao') !== -1 || t.indexOf('mesmo numero') !== -1) && (t.indexOf('206') !== -1 || t.indexOf('20 6') !== -1 || t.indexOf('mesmo') !== -1); },
+    display: 'Não. O número ficou em 20,6 milhões, o mesmo do ano anterior; só o gasto aumentou.' },
+  { id: 'p1-3', check: function(t){ return t.indexOf('nordeste') !== -1; },
+    display: 'O Nordeste (R$ 2.523 por viagem).' },
+  { id: 'p1-4', check: function(t){ return t.indexOf('sudeste') !== -1 && t.indexOf('centro') !== -1 && t.indexOf('norte') !== -1; },
+    display: 'O Sudeste, o Centro-Oeste e o Norte.' },
+  { id: 'p1-5', check: function(t){ return t.indexOf('alagoas') !== -1 && t.indexOf('rondonia') !== -1; },
+    display: 'Alagoas (R$ 3.790) é o mais caro; Rondônia (R$ 930) é o mais barato.' },
+  { id: 'p1-6', check: function(t){ return t.indexOf('dinheiro') !== -1; },
+    display: 'Falta de dinheiro (39,2% das respostas).' }
+];
+
+function checkPart1() {
+  var html = '', correct = 0;
+  p1Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var t = norm(el.value);
+    var filled = t.length > 0;
+    var ok = filled && a.check(t);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, a.display);
+  });
+  renderResult('p1-result', correct, p1Answers.length, html);
+}
+
+/* ── EXERCISE 1 — mais/menos/tão-quanto + do que ── */
+var ex1Answers = [
+  { ids: ['c1a','c1b'],   keys: ['mais','doque'],   display: 'O Nordeste é <strong>mais</strong> caro <strong>do que</strong> o Sul.' },
+  { ids: ['c2a','c2b'],   keys: ['menos','doque'],  display: 'O Norte é <strong>menos</strong> caro <strong>do que</strong> todas as outras regiões.' },
+  { ids: ['c3a','c3b'],   keys: ['tao','quanto'],   display: 'O Sudeste é <strong>tão</strong> caro <strong>quanto</strong> o Centro-Oeste.' },
+  { ids: ['c4a','c4b','c4c','c4d'], keys: ['menos','doque','mais','doque'], display: 'O Sul é <strong>menos</strong> caro <strong>do que</strong> o Nordeste, mas <strong>mais</strong> caro <strong>do que</strong> o Sudeste.' },
+  { ids: ['c5a','c5b'],   keys: ['menos','doque'],  display: 'Viajar para o Centro-Oeste custa <strong>menos</strong> <strong>do que</strong> viajar para o Nordeste.' },
+  { ids: ['c6a','c6b'],   keys: ['mais','doque'],   display: 'O gasto no Sul é <strong>mais</strong> alto <strong>do que</strong> a média do Brasil.' },
+  { ids: ['c7a','c7b'],   keys: ['menos','doque'],  display: 'O gasto no Sudeste é <strong>menos</strong> alto <strong>do que</strong> a média do Brasil.' },
+  { ids: ['c8a','c8b'],   keys: ['menos','doque'],  display: 'Uma viagem ao Norte é <strong>menos</strong> cara <strong>do que</strong> uma viagem ao Sudeste.' },
+  { ids: ['c9a','c9b'],   keys: ['mais','doque'],   display: 'Alagoas é <strong>mais</strong> caro <strong>do que</strong> Rondônia.' },
+  { ids: ['c10a','c10b'], keys: ['tao','quanto'],   display: 'O Centro-Oeste é quase <strong>tão</strong> caro <strong>quanto</strong> o Sudeste.' }
+];
+
+function normGap(s) {
+  return norm(s).replace(/\s+/g, '');
+}
+
+function checkEx1() {
+  var html = '', correct = 0;
+  ex1Answers.forEach(function(a, i) {
+    var allOk = true;
+    a.ids.forEach(function(id, gi) {
+      var el = document.getElementById(id);
+      var val = normGap(el.value);
+      var key = a.keys[gi];
+      // accept "que" as valid alternative to "doque"
+      var ok = (key === 'doque') ? (val === 'doque' || val === 'que') : (val === key);
+      el.classList.toggle('correct', ok && el.value.trim() !== '');
+      el.classList.toggle('wrong', !ok && el.value.trim() !== '');
+      if (!ok) allOk = false;
+    });
+    if (allOk) correct++;
+    html += itemLine(i + 1, allOk, a.display);
+  });
+  renderResult('ex1-result', correct, ex1Answers.length, html);
+}
+
+/* ── EXERCISE 2 — irregular comparative transform ── */
+var ex2Answers = [
+  { id: 't1', keys: ['o gasto de 2024 foi maior do que o de 2023', 'o gasto de 2024 foi maior que o de 2023'] },
+  { id: 't2', keys: ['o gasto de rondonia e menor do que o de alagoas', 'o gasto de rondonia e menor que o de alagoas'] },
+  { id: 't3', keys: ['2024 foi melhor do que 2021 para o turismo', '2024 foi melhor que 2021 para o turismo'] },
+  { id: 't4', keys: ['nao ter dinheiro e pior do que nao ter tempo', 'nao ter dinheiro e pior que nao ter tempo'] },
+  { id: 't5', keys: ['o gasto medio do nordeste e maior do que o do sul', 'o gasto medio do nordeste e maior que o do sul'] },
+  { id: 't6', keys: ['uma viagem de dois dias e menor do que uma viagem de dez dias', 'uma viagem de dois dias e menor que uma viagem de dez dias'] },
+  { id: 't7', keys: ['o resultado de 2021 foi pior do que o de 2023', 'o resultado de 2021 foi pior que o de 2023'] },
+  { id: 't8', keys: ['a renda do distrito federal e maior do que a renda media do pais', 'a renda do distrito federal e maior que a renda media do pais'] }
+];
+var ex2Display = [
+  'O gasto de 2024 foi <strong>maior do que</strong> o de 2023.',
+  'O gasto de Rondônia é <strong>menor do que</strong> o de Alagoas.',
+  '2024 foi <strong>melhor do que</strong> 2021 para o turismo.',
+  'Não ter dinheiro é <strong>pior do que</strong> não ter tempo.',
+  'O gasto médio do Nordeste é <strong>maior do que</strong> o do Sul.',
+  'Uma viagem de dois dias é <strong>menor do que</strong> uma viagem de dez dias.',
+  'O resultado de 2021 foi <strong>pior do que</strong> o de 2023.',
+  'A renda do Distrito Federal é <strong>maior do que</strong> a renda média do país.'
+];
+
+function checkEx2() {
+  var html = '', correct = 0;
+  ex2Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var filled = val.length > 0;
+    var ok = filled && a.keys.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, ex2Display[i]);
+  });
+  renderResult('ex2-result', correct, ex2Answers.length, html);
+}
+
+/* ── EXERCISE 3 — find and correct the mistake ── */
+var ex3Answers = [
+  { id: 'f1', keys: ['o nordeste e mais caro que o norte'] },
+  { id: 'f2', keys: ['alagoas e mais caro do que rondonia', 'alagoas e mais caro que rondonia'] },
+  { id: 'f3', keys: ['o sudeste e tao caro quanto o centrooeste', 'o sudeste e tao caro quanto o centro oeste'] },
+  { id: 'f4', keys: ['viajar em janeiro e melhor do que viajar em julho', 'viajar em janeiro e melhor que viajar em julho'] },
+  { id: 'f5', keys: ['o norte e menos caro do que o sul', 'o norte e menos caro que o sul'] },
+  { id: 'f6', keys: ['este hotel e menor do que a pousada', 'este hotel e menor que a pousada'] },
+  { id: 'f7', keys: ['o gasto de 2023 foi menor do que o de 2024', 'o gasto de 2023 foi menor que o de 2024'] },
+  { id: 'f8', keys: ['a passagem de onibus e tao cara quanto a de aviao'] }
+];
+var ex3Display = [
+  'O Nordeste é mais caro <strong>que</strong> o Norte. (já estava correta — "que" já é aceitável sozinho)',
+  'Alagoas é <strong>mais caro do que</strong> Rondônia. <span class="hint">(remove "grande")</span>',
+  'O Sudeste é <strong>tão caro quanto</strong> o Centro-Oeste. <span class="hint">(tão...quanto, não tão...do que)</span>',
+  'Viajar em janeiro é <strong>melhor do que</strong> viajar em julho. <span class="hint">(melhor, não mais bom)</span>',
+  'O Norte é <strong>menos caro do que</strong> o Sul. <span class="hint">(menos...do que, não menos...quanto)</span>',
+  'Este hotel é <strong>menor do que</strong> a pousada. <span class="hint">(menor, não mais pequeno)</span>',
+  'O gasto de 2023 foi <strong>menor do que</strong> o de 2024. <span class="hint">(do que, não "de que")</span>',
+  'A passagem de ônibus é <strong>tão cara quanto</strong> a de avião. <span class="hint">(remove "do que" extra)</span>'
+];
+
+function checkEx3() {
+  var html = '', correct = 0;
+  ex3Answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = normGap(el.value);
+    var filled = val.length > 0;
+    var ok = filled && a.keys.some(function(k){ return normGap(k) === val; });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += itemLine(i + 1, ok, ex3Display[i]);
+  });
+  renderResult('ex3-result', correct, ex3Answers.length, html);
+}
+</script>
+
+<script>
+/* ── BREVO SUBMIT ── */
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R' + (idx+1) + ' — ' + label + ':</strong><br>' + val + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
