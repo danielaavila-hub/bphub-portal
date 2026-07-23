@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Um Apólogo — Machado de Assis | BPHUB B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #D36D29;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; }
+    .badge { padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--level); color: white; }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #265B8B, #4E551D, #7B5EA7, #C0392B); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px,4vw,44px); color: white; line-height: 1.2; margin-bottom: 6px; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-byline { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+    .hero-chip { display: inline-block; background: rgba(255,185,74,0.15); color: var(--ouro); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; margin: 3px 3px 0 0; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 620px; line-height: 1.65; margin-top: 10px; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    hr.div { border: none; border-top: 1px solid var(--light-gray); margin: 44px 0; }
+
+    .note-block { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); border-radius: 10px; padding: 16px 20px; margin: 14px 0 0; font-size: 14px; line-height: 1.75; }
+    .note-block strong { color: var(--level); }
+
+    /* LITERARY TEXT */
+    .lit-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 30px 34px; margin: 16px 0; border-left: 4px solid var(--ouro); }
+    .lit-title { font-size: 22px; color: var(--nanquim); margin-bottom: 4px; font-family: 'Trirong', serif; font-weight: 300; }
+    .lit-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; margin-bottom: 18px; }
+    .lit-body p { font-size: 15.5px; line-height: 2.05; margin-bottom: 14px; color: var(--texto); font-family: 'Manrope', sans-serif; font-weight: 400; text-align: justify; }
+    .lit-body p:last-child { margin-bottom: 0; }
+    .lit-source { font-size: 12px; color: #999; font-style: italic; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--light-gray); }
+
+    /* VOCAB */
+    .ref-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 30px; margin: 16px 0; }
+    .voc-item { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--light-gray); font-size: 14.5px; align-items: baseline; }
+    .voc-item:last-child { border-bottom: none; }
+    .voc-term { font-weight: 700; color: var(--nanquim); min-width: 210px; flex-shrink: 0; }
+    .voc-def { color: #555; line-height: 1.6; }
+
+    /* DISCUSSION */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 24px 0; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 21px; font-weight: 300; color: var(--nanquim); margin-bottom: 10px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 22px; line-height: 1.65; }
+    .q-item { margin-bottom: 22px; padding-left: 34px; position: relative; counter-increment: q; }
+    .q-item::before { content: counter(q); position: absolute; left: 0; top: 2px; width: 24px; height: 24px; border-radius: 50%; background: var(--level); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .q-list { counter-reset: q; }
+    .q-text { font-size: 15px; margin-bottom: 10px; line-height: 1.7; }
+    .open-textarea { width: 100%; min-height: 90px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .open-textarea:focus { border-color: var(--level); }
+
+    .send-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); border-radius: 14px; padding: 22px 26px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .voc-item { flex-direction: column; gap: 2px; }
+      .voc-term { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <span class="badge">B2 · Leitura</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Um Apólogo <em>Machado de Assis</em></h1>
+  <div class="hero-byline">1885 · Domínio público · Literatura brasileira</div>
+  <div class="hero-sub">Uma fábula curtíssima sobre orgulho e reconhecimento desigual — a discussão entre uma agulha e um novelo de linha sobre quem realmente merece o crédito pelo trabalho.</div>
+  <div style="margin-top:18px;">
+    <span class="hero-chip">📖 Conto · Domínio público</span>
+    <span class="hero-chip">Literatura do século XIX</span>
+    <span class="hero-chip">Diálogo e ironia</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="sec-label">Sobre o texto</div>
+  <div class="note-block">
+    <strong>Nível:</strong> este texto usa vocabulário e sintaxe do século XIX (ex.: "arregaçava", ordem invertida das frases) — recomendado para alunos de nível B2 ou superior.<br><br>
+    Machado de Assis (1839–1908) é considerado o maior escritor brasileiro. "Um Apólogo" é uma fábula curtíssima — uma conversa entre uma agulha e um novelo de linha, cada um reivindicando o mérito pelo trabalho de uma costureira — terminando numa moral irônica sobre orgulho e reconhecimento desigual.
+  </div>
+
+  <hr class="div">
+
+  <div class="sec-label">Texto âncora · Machado de Assis</div>
+  <div class="lit-block">
+    <div class="lit-title">Um Apólogo</div>
+    <div class="lit-kicker">Machado de Assis · 1885 · Domínio público · Leia com atenção antes de responder às perguntas</div>
+    <div class="lit-body">
+      <p>Era uma vez uma agulha, que disse a um novelo de linha:</p>
+      <p>— Por que está você com esse ar, toda cheia de si, toda enrolada, para fingir que vale alguma coisa neste mundo?</p>
+      <p>— Deixe-me, senhora.</p>
+      <p>— Que a deixe? Que a deixe, por quê? Porque lhe digo que está com um ar insuportável? Repito que sim, e falarei sempre que me der na cabeça.</p>
+      <p>— Que cabeça, senhora? A senhora não é alfinete, é agulha. Agulha não tem cabeça. Que lhe importa o meu ar? Cada qual tem o ar que Deus lhe deu. Importe-se com a sua vida e deixe a dos outros.</p>
+      <p>— Mas você é orgulhosa.</p>
+      <p>— Decerto que sou.</p>
+      <p>— Mas por quê?</p>
+      <p>— É boa! Porque coso. Então os vestidos e enfeites de nossa ama, quem é que os cose, senão eu?</p>
+      <p>— Você? Esta agora é melhor. Você é que os cose? Você ignora que quem os cose sou eu, e muito eu?</p>
+      <p>— Você fura o pano, nada mais; eu é que coso, prendo um pedaço ao outro, dou feição aos babados...</p>
+      <p>— Sim, mas que vale isso? Eu é que furo o pano, vou adiante, puxando por você, que vem atrás, obedecendo ao que eu faço e mando...</p>
+      <p>— Também os batedores vão adiante do imperador.</p>
+      <p>— Você é imperador?</p>
+      <p>— Não digo isso. Mas a verdade é que você faz um papel subalterno, indo adiante; vai só mostrando o caminho, vai fazendo o trabalho obscuro e ínfimo. Eu é que prendo, ligo, ajunto...</p>
+      <p>Estavam nisto, quando a costureira chegou à casa da baronesa. Não sei se disse que isto se passava em casa de uma baronesa, que tinha a modista ao pé de si, para não andar atrás dela. Chegou a costureira, pegou do pano, pegou da agulha, pegou da linha, enfiou a linha na agulha, e entrou a coser. Uma e outra iam andando orgulhosas, pelo pano adiante, que era a melhor das sedas, entre os dedos da costureira, ágeis como os galgos de Diana — para dar a isto uma cor poética. E dizia a agulha:</p>
+      <p>— Então, senhora linha, ainda teima no que dizia há pouco? Não repara que esta distinta costureira só se importa comigo; eu é que vou aqui entre os dedos dela, unidinha a eles, furando abaixo e acima.</p>
+      <p>A linha não respondia nada; ia andando. Buraco aberto pela agulha era logo enchido por ela, silenciosa e ativa como quem sabe o que faz, e não está para ouvir palavras loucas. A agulha vendo que ela não lhe dava resposta, calou-se também, e foi andando. E era tudo silêncio na saleta de costura; não se ouvia mais que o plic-plic plic-plic da agulha no pano. Caindo o sol, a costureira dobrou a costura, para o dia seguinte; continuou ainda nesse e no outro, até que no quarto acabou a obra, e ficou esperando o baile.</p>
+      <p>Veio a noite do baile, e a baronesa vestiu-se. A costureira, que a ajudou a vestir-se, levava a agulha espetada no corpinho, para dar algum ponto necessário. E quando compunha o vestido da bela dama, e puxava a um lado ou outro, arregaçava daqui ou dali, alisando, abotoando, acolchetando, a linha, para mofar da agulha, perguntou-lhe:</p>
+      <p>— Ora agora, diga-me quem é que vai ao baile, no corpo da baronesa, fazendo parte do vestido e da elegância? Quem é que vai dançar com ministros e diplomatas, enquanto você volta para a caixinha da costureira, antes de ir para o balaio das mucamas? Vamos, diga lá.</p>
+      <p>Parece que a agulha não disse nada; mas um alfinete, de cabeça grande e não menor experiência, murmurou à pobre agulha:</p>
+      <p>— Anda, aprende, tola. Cansas-te em abrir caminho para ela e ela é que vai gozar da vida, enquanto aí ficas na caixinha de costura. Faze como eu, que não abro caminho para ninguém. Onde me espetam, fico.</p>
+      <p>Contei esta história a um professor de melancolia, que me disse, abanando a cabeça:</p>
+      <p>— Também eu tenho servido de agulha a muita linha ordinária!</p>
+      <div class="lit-source">Fonte: Machado de Assis, "Um Apólogo", Contos Consagrados, Coleção Prestígio, Ediouro (domínio público).</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <div class="sec-label">Vocabulário</div>
+  <div class="ref-block">
+    <div class="voc-item"><span class="voc-term">agulha</span><span class="voc-def">instrumento fino de metal usado para costurar</span></div>
+    <div class="voc-item"><span class="voc-term">novelo de linha</span><span class="voc-def">fio enrolado em forma de bola</span></div>
+    <div class="voc-item"><span class="voc-term">costureira</span><span class="voc-def">profissional que costura roupas</span></div>
+    <div class="voc-item"><span class="voc-term">baronesa</span><span class="voc-def">título de nobreza feminino; esposa (ou detentora) do título de barão</span></div>
+    <div class="voc-item"><span class="voc-term">enrolada</span><span class="voc-def">cheia de si, convencida — jogo de palavras com "enrolar" (o fio)</span></div>
+    <div class="voc-item"><span class="voc-term">orgulhosa</span><span class="voc-def">que sente orgulho excessivo de si mesma</span></div>
+    <div class="voc-item"><span class="voc-term">alfinete</span><span class="voc-def">pequeno objeto pontiagudo usado para prender tecido</span></div>
+    <div class="voc-item"><span class="voc-term">babados</span><span class="voc-def">enfeites franzidos numa roupa</span></div>
+    <div class="voc-item"><span class="voc-term">teimar</span><span class="voc-def">insistir de forma obstinada</span></div>
+    <div class="voc-item"><span class="voc-term">mofar (de alguém)</span><span class="voc-def">zombar, debochar de alguém</span></div>
+    <div class="voc-item"><span class="voc-term">balaio das mucamas</span><span class="voc-def">cesto das empregadas domésticas — expressão que reflete a sociedade escravocrata do Brasil do século XIX</span></div>
+    <div class="voc-item"><span class="voc-term">apólogo</span><span class="voc-def">pequena fábula alegórica que termina com uma moral</span></div>
+    <div class="voc-item"><span class="voc-term">abanando a cabeça</span><span class="voc-def">balançando a cabeça, geralmente em sinal de dúvida ou negação</span></div>
+  </div>
+
+  <hr class="div">
+
+  <div class="sec-label">Perguntas para discussão</div>
+  <div class="ex-block">
+    <div class="ex-num">Discussão</div>
+    <div class="ex-title">Reflita sobre o texto</div>
+    <div class="ex-instructions">Responda com suas próprias palavras. Não há resposta certa ou errada — o objetivo é praticar argumentação e vocabulário em português.</div>
+    <div class="q-list">
+      <div class="q-item"><div class="q-text">Qual é a moral (a lição) deste apólogo? Como você a explicaria com suas próprias palavras?</div><textarea class="open-textarea" id="q1" placeholder="Sua resposta..."></textarea></div>
+      <div class="q-item"><div class="q-text">O que a agulha e a linha representam, na sua opinião? Você consegue pensar num exemplo da vida real parecido com essa discussão?</div><textarea class="open-textarea" id="q2" placeholder="Sua resposta..."></textarea></div>
+      <div class="q-item"><div class="q-text">Por que você acha que Machado de Assis termina a história com o comentário do "professor de melancolia"?</div><textarea class="open-textarea" id="q3" placeholder="Sua resposta..."></textarea></div>
+      <div class="q-item"><div class="q-text">Repare no uso do diálogo — como Machado de Assis constrói a personalidade de cada personagem (a agulha, a linha, o alfinete) só pela fala deles?</div><textarea class="open-textarea" id="q4" placeholder="Sua resposta..."></textarea></div>
+      <div class="q-item" style="margin-bottom:0"><div class="q-text">Você já discutiu com alguém sobre quem merecia mais crédito por um trabalho feito em conjunto? O que aconteceu?</div><textarea class="open-textarea" id="q5" placeholder="Sua resposta..."></textarea></div>
+    </div>
+  </div>
+
+  <div class="send-box">📩 Quando terminar, envie suas respostas para a professora. Ela vai ler com atenção e comentar na próxima aula.</div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#D36D29;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente.</div>
+
+</div>
+
+<script>
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var name=nameEl.value.trim();
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=document.getElementById('bphub-student-email').value.trim();
+  var material='Um Apólogo — Machado de Assis (B2)';
+  var today=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+
+  var qTexts={
+    q1:'Qual é a moral (a lição) deste apólogo? Como você a explicaria com suas próprias palavras?',
+    q2:'O que a agulha e a linha representam, na sua opinião? Você consegue pensar num exemplo da vida real parecido com essa discussão?',
+    q3:'Por que você acha que Machado de Assis termina a história com o comentário do "professor de melancolia"?',
+    q4:'Repare no uso do diálogo — como Machado de Assis constrói a personalidade de cada personagem (a agulha, a linha, o alfinete) só pela fala deles?',
+    q5:'Você já discutiu com alguém sobre quem merecia mais crédito por um trabalho feito em conjunto? O que aconteceu?'
+  };
+
+  var html='<h2 style="color:#D36D29;font-family:Arial">'+name+'</h2><p style="font-family:Arial"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>';
+  Object.keys(qTexts).forEach(function(id,i){
+    var el=document.getElementById(id);
+    html+='<p style="font-family:Arial;font-size:13px"><strong>P'+(i+1)+' — '+qTexts[id]+'</strong><br>'+(el.value.trim()||'(sem resposta)').replace(/\n/g,'<br>')+'</p>';
+  });
+
+  btn.disabled=true; btn.textContent='A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls=[];
+  if(email){calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:email,name:name}],sender:{name:'Daniela',email:'daniela.avila@brazilianportuguesehub.com'},subject:'Recebemos suas respostas — Um Apólogo',htmlContent:'<p>Oi '+name+',</p><p>Recebemos suas respostas sobre \'Um Apólogo\'. Vou revisar com carinho antes da próxima aula.</p>'})}));}
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},subject:'📝 '+name+' — '+material,htmlContent:html})}));
+  Promise.all(calls).then(function(){
+    document.getElementById('bphub-answer-summary').innerHTML=html;
+    document.getElementById('bphub-success').style.display='block';
+    document.getElementById('bphub-form-area').style.display='none';
+    document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    btn.disabled=false; btn.textContent='Enviar respostas';
+  }).catch(function(){btn.disabled=false;btn.textContent='Enviar respostas';document.getElementById('bphub-error').style.display='block';});
+}
+</script>
+</body>
+</html>
