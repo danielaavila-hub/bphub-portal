@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronomes Objeto — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #265B8B;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .ref-table th { text-align: left; padding: 8px 12px; background: rgba(38,91,139,0.07); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--cobalto); }
+    .ref-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; text-align: center; }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+    .example-line { background: var(--off-white); border-radius: 8px; padding: 10px 16px; margin: 8px 0; font-size: 14.5px; }
+    .example-line strong { color: var(--cobalto); }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16px; line-height: 1.85; font-family: 'Trirong', serif; }
+    .text-body p:last-child { margin-bottom: 0; }
+    .moral { font-style: italic; color: var(--pitomba); border-top: 1px solid var(--light-gray); padding-top: 12px; margin-top: 4px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 140px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .gap-input { display: inline-block; width: 60px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--cobalto); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--cobalto); }
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--cobalto); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+    <a href="../a2/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para os materiais A2</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Pronomes <em>Objeto</em></h1>
+  <div class="hero-sub">Direct and indirect object pronouns — <strong>o, a, os, as</strong> and <strong>lhe, lhes</strong> — through a classic Brazilian fable.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">o · a · os · as</span>
+    <span class="hero-tag">lhe · lhes</span>
+    <span class="hero-tag">fábula</span>
+    <span class="hero-tag">A2 · Gramática</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Language Reference</p>
+  <div class="gram-ref">
+    <h3>Object Pronouns — o, a, os, as / lhe, lhes</h3>
+    <p>Portuguese uses object pronouns to replace a noun already mentioned, so you don't have to repeat it. This makes a text flow and sound organized.</p>
+    <table class="ref-table">
+      <tr><th>Function</th><th>Forms</th><th>Agreement</th></tr>
+      <tr><td>Direct object</td><td><strong>o · a · os · as</strong></td><td>gender and number</td></tr>
+      <tr><td>Indirect object</td><td><strong>lhe · lhes</strong></td><td>number only</td></tr>
+    </table>
+    <p><strong>Direct object</strong> — the thing/person directly affected by the verb:</p>
+    <div class="example-line">Você leu o livro? — Sim, eu <strong>o</strong> li. &nbsp;/&nbsp; Vi a Ana. — Eu <strong>a</strong> vi.</div>
+    <p style="margin-top:14px;"><strong>Indirect object</strong> — the person introduced by <em>a / para</em> (the "to whom"):</p>
+    <div class="example-line">Falei com o professor. → Eu <strong>lhe</strong> falei. &nbsp;/&nbsp; Dei um presente aos meus pais. → Eu <strong>lhes</strong> dei um presente.</div>
+    <div class="ref-note"><strong>A note on real usage.</strong> In everyday spoken Brazilian Portuguese, people often avoid these pronouns and say <em>ele/ela</em> or <em>pra ele / pra gente</em> instead (<em>Eu vi ele; Dá comida pra ele</em>). The clitic forms o / a / lhe belong mostly to writing and careful speech — which is exactly where you meet them in the text below.</div>
+  </div>
+
+  <p class="sec-label">Texto</p>
+  <div class="card text-card">
+    <div class="text-body">
+      <p>Um gato de nome Faro-Fino deu de fazer tal destroço na rataria de uma casa velha que os sobreviventes, sem ânimo de sair das tocas, estavam a ponto de morrer de fome.</p>
+      <p>Tornando-se muito sério o caso, resolveram reunir-se em assembleia para estudar a questão. Aguardaram para isso certa noite em que Faro-Fino andava aos mios pelo telhado, fazendo sonetos à Lua.</p>
+      <p>— Acho — disse um deles — que o meio de nos defendermos de Faro-Fino é atarmos um guizo ao pescoço. Assim que ele se aproxime, o guizo o denuncia e põe-nos ao fresco a tempo.</p>
+      <p>Palmas e bravos saudaram a luminosa ideia. O projeto foi aprovado com delírio. Só votou contra um rato casmurro, que pediu a palavra e disse:</p>
+      <p>— Está tudo muito direito. Mas quem vai amarrar o guizo no pescoço de Faro-Fino?</p>
+      <p>Silêncio geral. Um desculpou-se por não saber dar nó. Outro, porque não era tolo. Todos, porque não tinham coragem. E a assembleia dissolveu-se no meio de geral consternação.</p>
+      <p class="moral">Moral: Dizer é fácil, fazer é que são elas!</p>
+    </div>
+    <p class="fonte" style="margin-top:16px;">Monteiro Lobato. <em>Fábulas</em> (1922). Domínio público.</p>
+  </div>
+
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">rataria</td><td>the rats, the whole pack of rats</td></tr>
+        <tr><td class="vocab-pt">tocas</td><td>burrows, holes</td></tr>
+        <tr><td class="vocab-pt">guizo</td><td>small bell</td></tr>
+        <tr><td class="vocab-pt">atar</td><td>to tie</td></tr>
+        <tr><td class="vocab-pt">pôr-se ao fresco</td><td>to run off, to escape</td></tr>
+        <tr><td class="vocab-pt">casmurro</td><td>stubborn</td></tr>
+        <tr><td class="vocab-pt">dar nó</td><td>to tie a knot</td></tr>
+        <tr><td class="vocab-pt">consternação</td><td>dismay</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="sec-label">Part 1 — Compreensão</p>
+  <div class="ex-card">
+    <h2>Understand the text</h2>
+    <p class="ex-instr">Read the text and answer in Portuguese.</p>
+
+    <div class="q-block">
+      <p class="q"><span class="q-num">1.</span> Por que os ratos decidiram se reunir em assembleia? <em style="color:#999;font-size:13px;">(Why did the rats decide to hold a meeting?)</em></p>
+      <textarea id="c1" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">2.</span> Qual foi a ideia aprovada pela assembleia? <em style="color:#999;font-size:13px;">(What idea did the assembly approve?)</em></p>
+      <textarea id="c2" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">3.</span> Por que, no fim, ninguém pôs o guizo no gato? <em style="color:#999;font-size:13px;">(Why did no one put the bell on the cat in the end?)</em></p>
+      <textarea id="c3" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">4.</span> No trecho "o guizo <strong>o</strong> denuncia", a quem se refere "o"? <em style="color:#999;font-size:13px;">(In "...", to whom does "o" refer?)</em></p>
+      <textarea id="c4" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+
+    <button class="check-btn" onclick="checkComp()">✓ Check answers</button>
+    <div id="comp-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 2 — Prática Controlada</p>
+
+  <div class="ex-card">
+    <h2>Exercise 1</h2>
+    <p class="ex-instr">Complete with the correct object pronoun: o, a, os, as, lhe, lhes.</p>
+    <div class="sent"><span class="q-num">1.</span> O guizo era a solução: se o gato se aproximasse, o barulho <input class="gap-input" id="g1" maxlength="4"> denunciaria.</div>
+    <div class="sent"><span class="q-num">2.</span> A rataria estava com fome, porque Faro-Fino <input class="gap-input" id="g2" maxlength="4"> atacava toda noite.</div>
+    <div class="sent"><span class="q-num">3.</span> Os ratos se escondiam nas tocas, e o gato não <input class="gap-input" id="g3" maxlength="4"> via de dia.</div>
+    <div class="sent"><span class="q-num">4.</span> As ideias eram muitas, mas a assembleia <input class="gap-input" id="g4" maxlength="4"> discutia sem pressa.</div>
+    <div class="sent"><span class="q-num">5.</span> O rato casmurro fez uma pergunta difícil, mas ninguém <input class="gap-input" id="g5" maxlength="4"> deu uma resposta.</div>
+    <div class="sent"><span class="q-num">6.</span> Os ratos queriam avisar os vizinhos e <input class="gap-input" id="g6" maxlength="4"> contaram o plano.</div>
+    <div class="sent"><span class="q-num">7.</span> O gato dormia de dia; por isso os ratos só <input class="gap-input" id="g7" maxlength="4"> temiam à noite.</div>
+    <div class="sent"><span class="q-num">8.</span> A assembleia aprovou a ideia, mas depois ninguém <input class="gap-input" id="g8" maxlength="4"> pôs em prática.</div>
+    <button class="check-btn" onclick="checkGaps()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetGaps()">Refazer</button>
+    <div id="gap-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 2</h2>
+    <p class="ex-instr">Rewrite each sentence, replacing the highlighted term with an object pronoun. Mind the agreement.</p>
+    <div class="q-block">
+      <p class="q"><span class="q-num">1.</span> Os ratos não encontraram <strong>uma saída</strong>.</p>
+      <textarea id="e2-1" placeholder="Escreva a frase completa…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">2.</span> A assembleia aprovou <strong>o projeto</strong> com entusiasmo.</p>
+      <textarea id="e2-2" placeholder="Escreva a frase completa…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">3.</span> O gato perseguia <strong>os ratos</strong> sem parar.</p>
+      <textarea id="e2-3" placeholder="Escreva a frase completa…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">4.</span> Faro-Fino assustava <strong>as ratinhas</strong> também.</p>
+      <textarea id="e2-4" placeholder="Escreva a frase completa…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">5.</span> O rato velho deu um conselho <strong>aos companheiros</strong>.</p>
+      <textarea id="e2-5" placeholder="Escreva a frase completa…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">6.</span> Ninguém quis contar a verdade <strong>ao chefe da assembleia</strong>.</p>
+      <textarea id="e2-6" placeholder="Escreva a frase completa…"></textarea>
+    </div>
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 3</h2>
+    <p class="ex-instr">For each sentence, write what the highlighted pronoun stands for, as in the model.</p>
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:14px;">Modelo: O guizo <strong>o</strong> denuncia. → o = o gato</p>
+    <div class="q-block">
+      <p class="q"><span class="q-num">1.</span> Os ratos <strong>o</strong> temiam.</p>
+      <input class="gap-input" id="r1" style="width:220px;text-align:left;">
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">2.</span> O rato velho <strong>lhes</strong> deu um conselho.</p>
+      <input class="gap-input" id="r2" style="width:220px;text-align:left;">
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">3.</span> A assembleia <strong>a</strong> aprovou.</p>
+      <input class="gap-input" id="r3" style="width:220px;text-align:left;">
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">4.</span> Ninguém <strong>lhe</strong> respondeu.</p>
+      <input class="gap-input" id="r4" style="width:220px;text-align:left;">
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">5.</span> O gato <strong>os</strong> perseguia.</p>
+      <input class="gap-input" id="r5" style="width:220px;text-align:left;">
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">6.</span> Os ratos <strong>lhes</strong> contaram o plano.</p>
+      <input class="gap-input" id="r6" style="width:220px;text-align:left;">
+    </div>
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 3 — Produção Escrita</p>
+  <div class="ex-card">
+    <h2>Um aviso de mural</h2>
+    <p class="ex-instr">You are going to write a short notice (um aviso) to post on a community mural — in your building, school, or workplace. Think about: Where is the mural? Who will read it? What is the purpose of your message (a lost item, a sale, an invitation, a warning)? Write a fluid, well-connected notice, using at least three third-person object pronouns (o, a, os, as / lhe, lhes) so you don't repeat the same nouns.</p>
+    <div class="example-line" style="margin-bottom:16px;">
+      Gatinha do apt 402 (bloco B) saiu de casa e não voltou mais. Ela é branca e cinza, tem os olhos cor de mel e atende por Liz. Se você <strong>a</strong> viu, por favor, entre em contato conosco.<br>Há uma criança chorando por ela!
+    </div>
+    <textarea class="prod" id="producao" placeholder="Escreva seu aviso aqui…"></textarea>
+  </div>
+
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+</div>
+
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,''); }
+function hasAny(s, keys) { var n = norm(s); return keys.some(function(k){ return n.indexOf(norm(k)) !== -1; }); }
+
+// ── Part 1: Comprehension (keyword-based) ──
+var compKeys = {
+  c1: { keys: ['fome','morrer'], model: 'Porque o gato Faro-Fino atacava tanto que os ratos sobreviventes estavam a ponto de morrer de fome.' },
+  c2: { keys: ['guizo','pescoco'], model: 'Atar (colocar) um guizo no pescoço do gato, para ouvi-lo se aproximar e fugir a tempo.' },
+  c3: { keys: ['coragem'], model: 'Porque nenhum rato teve coragem de amarrar o guizo no gato.' },
+  c4: { keys: ['gato','farofino'], model: 'ao gato Faro-Fino — objeto direto (o guizo denuncia o gato).' }
+};
+function checkComp() {
+  var html = '';
+  Object.keys(compKeys).forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && hasAny(el.value, compKeys[id].keys);
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:#2E7D52;font-weight:700;">✓</span>' : '<span style="color:var(--pitomba,#D36D29);font-weight:700;">✗</span>')
+      + ' Resposta modelo: ' + compKeys[id].model + '</div>';
+  });
+  var res = document.getElementById('comp-result');
+  res.className = 'result-msg show good';
+  res.innerHTML = html;
+}
+
+// ── Exercise 1: gap fill (exact match) ──
+var gapKey = { g1:['o'], g2:['os'], g3:['os'], g4:['as'], g5:['lhe'], g6:['lhes'], g7:['o'], g8:['a'] };
+function checkGaps() {
+  var correct = 0, total = Object.keys(gapKey).length;
+  Object.keys(gapKey).forEach(function(id) {
+    var inp = document.getElementById(id);
+    inp.classList.remove('correct','wrong');
+    var ok = gapKey[id].some(function(a){ return norm(inp.value) === norm(a); });
+    if (ok) { inp.classList.add('correct'); correct++; } else if (inp.value.trim()) { inp.classList.add('wrong'); }
+  });
+  var res = document.getElementById('gap-result');
+  res.className = 'result-msg show ' + (correct === total ? 'good' : 'try-again');
+  res.innerHTML = '<strong>' + correct + ' / ' + total + ' corretas.</strong> Gabarito: 1. o · 2. os · 3. os · 4. as · 5. lhe · 6. lhes · 7. o · 8. a';
+}
+function resetGaps() {
+  Object.keys(gapKey).forEach(function(id){ var inp = document.getElementById(id); inp.value=''; inp.classList.remove('correct','wrong'); });
+  document.getElementById('gap-result').className = 'result-msg';
+}
+
+// ── Exercise 2: rewrite with pronoun (keyword-based, shows model) ──
+var ex2Keys = {
+  'e2-1': { keys: ['a encontraram','nao a encontraram'], model: 'Os ratos não a encontraram.' },
+  'e2-2': { keys: ['o aprovou'], model: 'A assembleia o aprovou com entusiasmo.' },
+  'e2-3': { keys: ['os perseguia'], model: 'O gato os perseguia sem parar.' },
+  'e2-4': { keys: ['as assustava'], model: 'Faro-Fino as assustava também.' },
+  'e2-5': { keys: ['lhes deu'], model: 'O rato velho lhes deu um conselho.' },
+  'e2-6': { keys: ['lhe contar','quis lhe'], model: 'Ninguém quis lhe contar a verdade.' }
+};
+function checkEx2() {
+  var html = '';
+  Object.keys(ex2Keys).forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && hasAny(el.value, ex2Keys[id].keys);
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:#2E7D52;font-weight:700;">✓</span>' : '<span style="color:var(--pitomba,#D36D29);font-weight:700;">✗</span>')
+      + ' Resposta modelo: ' + ex2Keys[id].model + '</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  res.className = 'result-msg show good';
+  res.innerHTML = html;
+}
+
+// ── Exercise 3: what does the pronoun refer to (keyword-based) ──
+var ex3Keys = {
+  r1: { keys: ['gato'], model: 'o gato (Faro-Fino)' },
+  r2: { keys: ['companheiros','ratos'], model: 'aos companheiros' },
+  r3: { keys: ['ideia','projeto'], model: 'a ideia / o projeto' },
+  r4: { keys: ['casmurro','rato'], model: 'ao rato casmurro' },
+  r5: { keys: ['ratos'], model: 'os ratos' },
+  r6: { keys: ['vizinhos'], model: 'aos vizinhos' }
+};
+function checkEx3() {
+  var html = '';
+  Object.keys(ex3Keys).forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && hasAny(el.value, ex3Keys[id].keys);
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '.</strong> '
+      + (ok ? '<span style="color:#2E7D52;font-weight:700;">✓</span>' : '<span style="color:var(--pitomba,#D36D29);font-weight:700;">✗</span>')
+      + ' Resposta modelo: ' + ex3Keys[id].model + '</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  res.className = 'result-msg show good';
+  res.innerHTML = html;
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input, input[type="text"]').forEach(function(inp, idx) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
