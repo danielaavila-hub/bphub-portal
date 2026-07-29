@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Que Beleza — Tim Maia | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--cobalto:#265B8B;--cobalto-light:#EBF1F8;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--cobalto)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--cobalto);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--cobalto);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.8rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalto);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .lyric-block{background:var(--giz);border-radius:8px;padding:20px 24px;margin:12px 0;font-size:.95rem;line-height:2.1;font-family:'Trirong',serif}
+  .lyric-stanza{margin-bottom:18px}
+  .lyric-stanza:last-child{margin-bottom:0}
+  .lyric-highlight{border-left:3px solid var(--cobalto);padding-left:14px;border-radius:0 4px 4px 0}
+  .lyric-ellipsis{color:#bbb;font-style:italic;font-size:.85rem;margin:6px 0 12px}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo)}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--cobalto);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--cobalto)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--cobalto);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalto);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--cobalto);color:var(--cobalto)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--cobalto);color:#fff;border-color:var(--cobalto)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--cobalto);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:140px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--cobalto)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .word-bank{background:var(--baunilha);border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .word-bank strong{color:var(--musgo);margin-right:4px}
+  .wb-word{background:#fff;border:1.5px solid var(--pitomba);border-radius:4px;padding:2px 10px;font-size:.85rem;font-family:'Manrope',sans-serif;color:var(--nanquim)}
+  .prod-item{margin-bottom:18px;font-size:.93rem}
+  .prod-item p{margin-bottom:4px;line-height:1.5}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--cobalto)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--cobalto);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none;max-height:260px;overflow-y:auto}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">A2</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">MPB · Soul</span>
+  <span class="badge">Tim Maia</span>
+  <span class="badge">1975</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Que Beleza</h1>
+    <p class="fonte">Tim Maia · "Imunização Racional (Que Beleza)", álbum <em>Racional Vol. 1</em>, 1975</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">Tim Maia é um dos maiores cantores da música brasileira — pioneiro em misturar soul, funk e MPB com um jeito único de cantar. Nos anos 1970, ele passou por uma fase muito pessoal e espiritual de sua vida e gravou dois discos chamados "Racional", cheios de mensagens sobre autoconhecimento e otimismo. "Que Beleza" é uma das canções mais alegres desse período: fala sobre a beleza simples de viver, sentir e conhecer a si mesmo.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Que Beleza</p>
+    <p class="instr">Ouça a música antes de ler os trechos abaixo. Qual é o sentimento geral da canção? Alegre, triste, calmo, animado?</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Nq_AOktdhts"
+        title="Que Beleza — Tim Maia" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- LYRICS FRAGMENTS -->
+  <div class="card">
+    <p class="section-label">Trechos da letra</p>
+    <div class="lyric-block">
+      <div class="lyric-stanza lyric-highlight">
+        A beleza de sentir a natureza<br>
+        A beleza de ter certeza<br>
+        Pra onde vai e de onde vem
+      </div>
+      <div class="lyric-ellipsis">…</div>
+      <div class="lyric-stanza lyric-highlight">
+        A beleza de saber seu nome<br>
+        Sua origem, seu passado e seu futuro
+      </div>
+      <div class="lyric-ellipsis">…</div>
+      <div class="lyric-stanza">
+        Uh! Uh! Uh! Que beleza!
+      </div>
+    </div>
+    <p style="font-size:.72rem;color:#aaa;margin-top:8px;">© Tim Maia — "Imunização Racional (Que Beleza)", 1975. Trechos citados apenas para fins didáticos.</p>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Vocabulário da música</p>
+    <table class="vocab-table">
+      <thead>
+        <tr><th>Português</th><th>Significado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="vocab-pt">beleza</td><td>qualidade do que é bonito; aqui, também usado como "coisa boa, algo maravilhoso" <span style="color:#999;">(beauty)</span></td></tr>
+        <tr><td class="vocab-pt">sentir</td><td>perceber com os sentidos ou com o coração <span style="color:#999;">(to feel)</span></td></tr>
+        <tr><td class="vocab-pt">natureza</td><td>o mundo natural — plantas, animais, paisagens <span style="color:#999;">(nature)</span></td></tr>
+        <tr><td class="vocab-pt">ter certeza</td><td>não ter dúvida sobre algo <span style="color:#999;">(to be sure)</span></td></tr>
+        <tr><td class="vocab-pt">origem</td><td>de onde uma pessoa vem — sua família, cidade, cultura <span style="color:#999;">(origin)</span></td></tr>
+        <tr><td class="vocab-pt">passado / futuro</td><td>o tempo que já passou / o tempo que ainda vai vir</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURAL CONTEXT -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>🎤 Tim Maia — o "Síndico" da Soul Music brasileira</strong><br>
+      Tim Maia (1942–1998) foi um dos artistas mais influentes da música popular brasileira, conhecido por sua voz potente e por trazer o soul e o funk americanos para o Brasil, misturados com samba e MPB. Sua carreira é cheia de clássicos que até hoje tocam no rádio e em festas por todo o país.
+    </div>
+    <div class="cult-box">
+      <strong>✨ A fase "Racional"</strong><br>
+      Em meados dos anos 1970, Tim Maia se aproximou de um movimento espiritual chamado Cultura Racional e gravou dois álbuns — conhecidos como "Racional Vol. 1" e "Racional Vol. 2" — com letras sobre autoconhecimento, otimismo e transformação pessoal. Embora ele tenha se afastado do movimento pouco depois, esses discos são hoje considerados obras-primas da música soul brasileira, e "Que Beleza" é uma das canções mais celebradas desse período.
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">"A beleza de + infinitivo"</p>
+    <div class="gram-box">
+      <strong>Na música:</strong>
+      <div style="background:rgba(255,255,255,.6);border-radius:6px;padding:12px 16px;margin:10px 0;font-family:'Trirong',serif;font-size:1rem;line-height:2.1">
+        A beleza de <strong>sentir</strong> a natureza<br>
+        A beleza de <strong>ter</strong> certeza<br>
+        A beleza de <strong>saber</strong> seu nome
+      </div>
+      Em português, usamos <strong>substantivo + de + verbo no infinitivo</strong> para falar sobre "a beleza/o prazer/a alegria de fazer algo". O verbo depois de "de" fica sempre no infinitivo — nunca conjugado.<br><br>
+
+      <strong>A mesma estrutura com outras palavras:</strong>
+      <table>
+        <thead><tr><th>Estrutura</th><th>Exemplo</th><th>Em inglês</th></tr></thead>
+        <tbody>
+          <tr><td><strong>a beleza de</strong></td><td>a beleza de viajar</td><td>the beauty of traveling</td></tr>
+          <tr><td><strong>o prazer de</strong></td><td>o prazer de estudar português</td><td>the pleasure of studying Portuguese</td></tr>
+          <tr><td><strong>a alegria de</strong></td><td>a alegria de estar em família</td><td>the joy of being with family</td></tr>
+          <tr><td><strong>a vontade de</strong></td><td>a vontade de aprender coisas novas</td><td>the desire to learn new things</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EX 1: T/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro ou Falso?</p>
+    <p class="ex-instr">Com base no tema geral da música (ouvida e descrita acima), escolha <strong>V</strong> (Verdadeiro) ou <strong>F</strong> (Falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>A música fala sobre a beleza de coisas simples da vida.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>O clima geral da música é triste e melancólico.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>A letra fala sobre conhecer sua origem, seu passado e seu futuro.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>Tim Maia é considerado um dos pioneiros do soul brasileiro.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>"Que Beleza" faz parte de um álbum lançado nos anos 1990.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: Gap fill (from the quoted fragments only) -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Complete os trechos</p>
+    <p class="ex-instr">Complete os espaços com os verbos no infinitivo do banco abaixo — todos tirados diretamente dos trechos que você já leu acima.</p>
+    <div class="word-bank">
+      <strong>Banco de palavras:</strong>
+      <span class="wb-word">sentir</span>
+      <span class="wb-word">ter</span>
+      <span class="wb-word">saber</span>
+    </div>
+    <div id="gap-area">
+      <div class="gap-row">
+        <span class="gap-num">1.</span>
+        <span>A beleza de</span>
+        <input class="gap-input" id="g1" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>a natureza.</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">2.</span>
+        <span>A beleza de</span>
+        <input class="gap-input" id="g2" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>certeza pra onde vai e de onde vem.</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">3.</span>
+        <span>A beleza de</span>
+        <input class="gap-input" id="g3" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>seu nome, sua origem, seu passado e seu futuro.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps()">Refazer</button>
+    </div>
+    <div id="gap-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Production — a beleza de + infinitivo -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">E pra você, qual é a beleza de...?</p>
+    <p class="ex-instr">Escreva 3 frases usando a estrutura <strong>"a beleza de / o prazer de / a alegria de + infinitivo"</strong> para falar sobre coisas simples que trazem felicidade para você.</p>
+    <div class="prod-item">
+      <p><strong>1.</strong> Escreva sobre algo do seu dia a dia.</p>
+      <textarea class="prod" placeholder="A beleza de..."></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>2.</strong> Escreva sobre algo relacionado à sua família ou amigos.</p>
+      <textarea class="prod" placeholder="A alegria de..."></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>3.</strong> Escreva sobre aprender português (ou outro idioma).</p>
+      <textarea class="prod" placeholder="O prazer de..."></textarea>
+    </div>
+  </div>
+
+  <!-- EX 4: Personal questions -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Fale sobre você!</p>
+    <p class="ex-instr">Responda em português. Não existe resposta certa ou errada — use as suas próprias palavras.</p>
+
+    <div class="prod-item">
+      <p><strong>1.</strong> Você sabe qual é a sua origem — de onde vem sua família?</p>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>2.</strong> O que te deixa mais feliz na natureza: a praia, a montanha, o campo, a cidade?</p>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tfKey={1:'T',2:'F',3:'T',4:'T',5:'F'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'')}
+const gapKey={g1:['sentir'],g2:['ter'],g3:['saber']};
+function checkGaps(){
+  let ok=0,tot=Object.keys(gapKey).length;
+  for(const id in gapKey){const inp=document.getElementById(id);const correct=gapKey[id].some(a=>norm(inp.value)===norm(a));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetGaps(){for(const id in gapKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap-msg');msg.className='result-msg';msg.textContent='';}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
