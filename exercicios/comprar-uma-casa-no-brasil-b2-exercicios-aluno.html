@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprar uma Casa no Brasil | B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --nanquim: #1E1D1C; --texto: #3C3C21; --floresta: #4E551D;
+      --pitomba: #D36D29; --ouro: #FFB94A; --level: #D36D29;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--level); color: white; }
+    .topbar-back { font-size: 12px; color: #aaa; text-decoration: none; }
+    .topbar-back:hover { color: var(--level); }
+
+    .hero { background: var(--level); padding: 44px 48px 38px; position: relative; }
+    .hero h1 { font-size: clamp(24px,3.6vw,38px); color: white; margin-bottom: 10px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 14.5px; color: rgba(255,255,255,0.85); max-width: 600px; line-height: 1.6; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 860px; margin: 0 auto; padding: 0 48px 90px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 36px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 34px 0; }
+
+    .content-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 14px 0; }
+    .content-block h3 { font-size: 18px; color: var(--nanquim); margin-bottom: 12px; }
+    .content-block p { font-size: 14.5px; line-height: 1.75; color: var(--texto); margin-bottom: 8px; }
+
+    .steps-list { counter-reset: step; }
+    .step-item { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--light-gray); }
+    .step-item:last-child { border-bottom: none; }
+    .step-num { counter-increment: step; flex-shrink: 0; width: 27px; height: 27px; border-radius: 50%; background: var(--level); color: white; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+    .step-num::before { content: counter(step); }
+    .step-text { font-size: 14px; line-height: 1.65; }
+    .step-text strong { color: var(--nanquim); }
+
+    .video-wrap { border-radius: 14px; overflow: hidden; background: #000; margin: 14px 0; aspect-ratio: 16/9; }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    .source-bar { font-size: 12px; color: #888; margin-top: 8px; }
+    .source-bar a { color: var(--level); text-decoration: none; font-weight: 600; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 10px 0; }
+    .vocab-table th { text-align: left; padding: 8px 10px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--level); background: rgba(211,109,41,0.06); }
+    .vocab-table td { padding: 9px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table td:first-child { font-weight: 700; color: var(--nanquim); white-space: nowrap; font-size: 13px; }
+    .vocab-table td:last-child { color: #555; line-height: 1.6; }
+
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 20px 0; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 19px; font-weight: 300; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instructions { font-size: 13.5px; color: #666; margin-bottom: 18px; line-height: 1.6; }
+
+    .disc-item { margin-bottom: 18px; }
+    .disc-q { font-size: 14.5px; font-weight: 600; color: var(--nanquim); margin-bottom: 8px; line-height: 1.55; }
+
+    .fill-row { margin-bottom: 14px; font-size: 14.5px; line-height: 2.3; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 14.5px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 170px; outline: none; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; padding: 10px 14px; background: rgba(211,109,41,0.05); border-radius: 10px; border: 1px dashed rgba(211,109,41,0.3); }
+    .word-chip { padding: 4px 12px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 12.5px; font-weight: 600; color: var(--nanquim); }
+
+    .open-textarea { width: 100%; min-height: 80px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 11px 13px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.65; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea.tall { min-height: 130px; }
+
+    .check-btn { margin-top: 14px; padding: 9px 20px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 13.5px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 12px; padding: 12px 16px; border-radius: 10px; font-size: 13.5px; line-height: 1.85; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    .gram-box { background: #FAFAF5; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 14px 0; border-left: 4px solid var(--level); }
+    .gram-box h3 { font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .gram-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--level); margin-bottom: 12px; }
+    .gram-box p { font-size: 14.5px; line-height: 1.8; margin-bottom: 10px; }
+    .gram-example { background: rgba(255,255,255,.7); border-radius: 8px; padding: 9px 14px; margin: 6px 0; font-size: 14px; }
+    .gram-example strong { color: var(--level); }
+
+    .send-box { background: rgba(211,109,41,0.07); border: 1.5px solid rgba(211,109,41,0.2); border-radius: 14px; padding: 18px 22px; margin-top: 8px; font-size: 14.5px; color: var(--nanquim); line-height: 1.7; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .content-block, .ex-block, .gram-box { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge">B2 · Vocabulário</span>
+    <a href="../b2/index.html" class="topbar-back">&#8592; Voltar para os materiais B2</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;">Materials Portal</div>
+  <h1>Comprar uma Casa <em>no Brasil</em></h1>
+  <div class="hero-sub">Vocabulário e etapas essenciais da compra de um imóvel no Brasil, com um tour em vídeo por uma casa à venda no Rio de Janeiro.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Vocabulário imobiliário</span>
+    <span class="hero-tag">Voz passiva</span>
+    <span class="hero-tag">B2</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="sec-label">Antes de assistir</div>
+  <div class="ex-block" style="border-top: 3px solid var(--ouro);">
+    <div class="disc-item">
+      <div class="disc-q">1. Como funciona, de forma geral, comprar uma casa no seu país?</div>
+      <textarea class="open-textarea" id="pre1" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">2. Você prefere morar em casa ou apartamento? Por quê?</div>
+      <textarea class="open-textarea" id="pre2" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <div class="sec-label">Vocabulário do processo de compra</div>
+  <div class="content-block">
+    <table class="vocab-table">
+      <tr><th>Termo</th><th>Definição</th></tr>
+      <tr><td>o corretor de imóveis</td><td>Profissional que ajuda a encontrar e negociar o imóvel.</td></tr>
+      <tr><td>o sinal</td><td>Valor pago para reservar o imóvel antes do pagamento total.</td></tr>
+      <tr><td>a entrada</td><td>Valor pago à vista no início da compra.</td></tr>
+      <tr><td>o financiamento</td><td>Empréstimo do banco para pagar o imóvel aos poucos.</td></tr>
+      <tr><td>a escritura</td><td>Documento oficial que transfere a propriedade para o comprador.</td></tr>
+      <tr><td>o registro de imóveis</td><td>Cartório onde a escritura é registrada oficialmente.</td></tr>
+      <tr><td>o ITBI</td><td>Imposto pago pelo comprador na transferência do imóvel.</td></tr>
+      <tr><td>a vistoria</td><td>Inspeção do imóvel antes da compra, para verificar seu estado.</td></tr>
+      <tr><td>quitar</td><td>Pagar uma dívida ou financiamento por completo.</td></tr>
+      <tr><td>o condomínio</td><td>Taxa mensal para manutenção de áreas comuns do prédio.</td></tr>
+    </table>
+  </div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Exercício de vocabulário</div>
+    <div class="ex-title">Complete com o termo correto</div>
+    <div class="word-bank">
+      <span class="word-chip">entrada</span>
+      <span class="word-chip">escritura</span>
+      <span class="word-chip">financiamento</span>
+      <span class="word-chip">ITBI</span>
+      <span class="word-chip">quitar</span>
+      <span class="word-chip">vistoria</span>
+    </div>
+    <div class="fill-row">1. O casal pagou a <input class="fill-input" id="v1" placeholder="?"> e vai financiar o resto em 30 anos.</div>
+    <div class="fill-row">2. O banco aprovou o <input class="fill-input" id="v2" placeholder="?"> depois de analisar os documentos.</div>
+    <div class="fill-row">3. Antes de comprar, é importante fazer uma <input class="fill-input" id="v3" placeholder="?"> para checar o estado do imóvel.</div>
+    <div class="fill-row">4. A <input class="fill-input" id="v4" placeholder="?"> foi assinada em cartório na sexta-feira.</div>
+    <div class="fill-row">5. O comprador precisa pagar o <input class="fill-input" id="v5" placeholder="?"> antes de registrar o imóvel.</div>
+    <div class="fill-row">6. Depois de quinze anos, a família finalmente conseguiu <input class="fill-input" id="v6" placeholder="?"> o financiamento.</div>
+    <button class="check-btn" onclick="checkVocab()">✓ Verificar respostas</button>
+    <div class="result-msg" id="vocab-result"></div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <div class="sec-label">As etapas da compra</div>
+  <div class="content-block">
+    <div class="steps-list">
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Visita ao imóvel</strong> — com ou sem corretor.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Negociação</strong> do valor e das condições.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Pagamento do sinal</strong> para reservar o imóvel.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Financiamento</strong>, se necessário.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Escritura</strong> assinada em cartório.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Pagamento do ITBI</strong> à prefeitura.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Registro</strong> do imóvel — só aí a compra é oficial.</div></div>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <div class="sec-label">Gramática</div>
+  <div class="gram-box">
+    <div class="gram-kicker">Foco gramatical</div>
+    <h3>Voz passiva</h3>
+    <p>No processo de compra, usamos muito a <strong>voz passiva</strong> — porque o foco está na ação, não em quem a faz:</p>
+    <div class="gram-example">A escritura <strong>é assinada</strong> em cartório. &nbsp;·&nbsp; O imóvel <strong>foi registrado</strong> na semana passada. &nbsp;·&nbsp; O financiamento <strong>foi aprovado</strong> pelo banco.</div>
+  </div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Exercício de gramática</div>
+    <div class="ex-title">Transforme para a voz passiva</div>
+    <div class="disc-item">
+      <div class="disc-q">1. O banco aprovou o financiamento.</div>
+      <textarea class="open-textarea" id="g1" placeholder="O financiamento..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">2. O cartório registrou o imóvel ontem.</div>
+      <textarea class="open-textarea" id="g2" placeholder="O imóvel..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <div class="sec-label">Vídeo · Uma casa à venda no Rio de Janeiro</div>
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/Zr8Eljou47M" title="Casa à venda no Rio de Janeiro — Cristiano Piquet" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="source-bar">📹 Cristiano Piquet · <a href="https://www.youtube.com/watch?v=Zr8Eljou47M" target="_blank">Assistir no YouTube</a></div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level); margin-top:18px;">
+    <div class="ex-title">Compreensão do vídeo</div>
+    <div class="disc-item">
+      <div class="disc-q">1. Quais características do imóvel são mostradas no vídeo?</div>
+      <textarea class="open-textarea" id="comp1" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">2. Você compraria essa casa? Por quê (ou por que não)?</div>
+      <textarea class="open-textarea" id="comp2" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <div class="sec-label">Produção</div>
+  <div class="ex-block" style="border-top: 3px solid var(--nanquim);">
+    <div class="ex-title">Sua casa ideal</div>
+    <div class="ex-instructions">Escreva um texto curto (80–120 palavras) descrevendo a casa dos seus sonhos, usando pelo menos 3 palavras do vocabulário desta aula.</div>
+    <textarea class="open-textarea tall" id="prod" placeholder="Escreva aqui..."></textarea>
+  </div>
+
+  <div class="send-box">📩 Quando terminar, envie suas respostas para a professora.</div>
+
+  <div id="bphub-form-area" style="margin-top:36px;padding:22px 26px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#D36D29;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai ler suas respostas e comentar na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div>
+
+<script>
+function norm(s){ return s.trim().toLowerCase()
+  .replace(/[áàã]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+  .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c'); }
+
+var vocabAns = {
+  v1: ['entrada'],
+  v2: ['financiamento'],
+  v3: ['vistoria'],
+  v4: ['escritura'],
+  v5: ['itbi'],
+  v6: ['quitar']
+};
+function checkVocab(){
+  var ok=0, html='';
+  Object.keys(vocabAns).forEach(function(id,i){
+    var el=document.getElementById(id);
+    var val=norm(el.value);
+    var correct=vocabAns[id].some(function(a){return val===norm(a)||val.includes(norm(a));});
+    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
+    if(correct)ok++;
+    html+='<div style="margin-bottom:4px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+vocabAns[id][0]+'</strong></div>';
+  });
+  var r=document.getElementById('vocab-result');
+  r.className='result-msg '+(ok>=5?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===6?'✓ Perfeito!':ok+'/6 corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var name=nameEl.value.trim();
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=document.getElementById('bphub-student-email').value.trim();
+  var material='Comprar uma Casa no Brasil (B2)';
+  var today=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+
+  var sections=[
+    {label:'ANTES DE ASSISTIR',ids:['pre1','pre2'],
+     qs:['1. Compra de casa no país de origem','2. Casa ou apartamento']},
+    {label:'VOCABULÁRIO (preenchimento)',ids:['v1','v2','v3','v4','v5','v6'],
+     qs:['1','2','3','4','5','6']},
+    {label:'GRAMÁTICA — voz passiva',ids:['g1','g2'],
+     qs:['1. Financiamento aprovado','2. Imóvel registrado']},
+    {label:'COMPREENSÃO DO VÍDEO',ids:['comp1','comp2'],
+     qs:['1. Características do imóvel','2. Compraria essa casa?']},
+    {label:'PRODUÇÃO',ids:['prod'],
+     qs:['Descrição da casa ideal']}
+  ];
+
+  var lines=[], html='';
+  sections.forEach(function(sec){
+    html+='<h3 style="font-family:Arial;color:#D36D29;margin:16px 0 8px">'+sec.label+'</h3>';
+    sec.ids.forEach(function(id,i){
+      var el=document.getElementById(id);
+      var val=el?el.value.trim():'';
+      if(!val)val='(sem resposta)';
+      html+='<p style="font-family:Arial;font-size:13px;margin-bottom:10px"><strong>'+sec.qs[i]+':</strong><br>'+val.replace(/\n/g,'<br>')+'</p>';
+    });
+  });
+
+  btn.disabled=true; btn.textContent='A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls=[];
+  if(email){calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:email,name:name}],templateId:1,params:{nome:name,material:material,data:today}})}));}
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},subject:'📝 '+name+' — '+material,htmlContent:'<h2 style="color:#D36D29;font-family:Arial">'+name+'</h2><p style="font-family:Arial"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+html})}));
+  Promise.all(calls).then(function(){
+    document.getElementById('bphub-answer-summary').innerHTML=html;
+    document.getElementById('bphub-success').style.display='block';
+    document.getElementById('bphub-form-area').style.display='none';
+    document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    btn.disabled=false;btn.textContent='Enviar respostas';
+  }).catch(function(){btn.disabled=false;btn.textContent='Enviar respostas';document.getElementById('bphub-error').style.display='block';});
+}
+</script>
+</body>
+</html>
