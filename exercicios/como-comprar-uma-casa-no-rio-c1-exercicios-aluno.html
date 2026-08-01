@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como Comprar uma Casa no Rio | C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --level: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--baunilha); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--level); color: white; }
+    .topbar-back { font-size: 12px; color: #aaa; text-decoration: none; }
+    .topbar-back:hover { color: var(--level); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--ouro), var(--floresta), var(--erva-doce), var(--nanquim)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px,4vw,44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 620px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 44px 0; }
+
+    /* BLOCKS */
+    .content-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 16px 0; }
+    .content-block h3 { font-size: 19px; color: var(--nanquim); margin-bottom: 14px; }
+    .content-block p { font-size: 15px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .content-block p:last-child { margin-bottom: 0; }
+
+    /* STEPS TIMELINE */
+    .steps-list { counter-reset: step; }
+    .step-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .step-item:last-child { border-bottom: none; }
+    .step-num { counter-increment: step; flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--level); color: white; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+    .step-num::before { content: counter(step); }
+    .step-text strong { color: var(--nanquim); }
+    .step-text { font-size: 14.5px; line-height: 1.7; }
+
+    /* VIDEO EMBED */
+    .video-wrap { border-radius: 14px; overflow: hidden; background: #000; margin: 16px 0; aspect-ratio: 16/9; }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    .source-bar { font-size: 12px; color: #888; margin-top: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .source-bar a { color: var(--level); text-decoration: none; font-weight: 600; }
+
+    /* VOCAB TABLE */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .vocab-table th { text-align: left; padding: 9px 12px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--level); background: rgba(161,68,29,0.06); }
+    .vocab-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table td:first-child { font-weight: 700; color: var(--nanquim); white-space: nowrap; font-size: 13.5px; }
+    .vocab-table td:last-child { color: #555; line-height: 1.65; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 24px 0; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+    .ex-title { font-family: 'Trirong', serif; font-size: 21px; font-weight: 300; color: var(--nanquim); margin-bottom: 10px; }
+    .ex-instructions { font-size: 14px; color: #666; margin-bottom: 22px; line-height: 1.65; }
+
+    /* DISCUSSION QUESTIONS */
+    .disc-item { margin-bottom: 22px; }
+    .disc-q { font-size: 15px; font-weight: 600; color: var(--nanquim); margin-bottom: 10px; line-height: 1.6; }
+
+    /* FILL-IN */
+    .fill-row { margin-bottom: 16px; font-size: 15px; line-height: 2.4; }
+    .fill-input { border: none; border-bottom: 2px solid var(--level); background: transparent; font-size: 15px; font-family: 'Manrope', sans-serif; color: var(--nanquim); padding: 0 4px; width: 200px; outline: none; }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.06); border-radius: 4px 4px 0 0; }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.06); border-radius: 4px 4px 0 0; }
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; padding: 12px 16px; background: rgba(161,68,29,0.05); border-radius: 10px; border: 1px dashed rgba(161,68,29,0.3); }
+    .word-chip { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+
+    /* OPEN AREAS */
+    .open-textarea { width: 100%; min-height: 90px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: #FAFAF8; resize: vertical; outline: none; line-height: 1.7; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea.tall { min-height: 140px; }
+    .open-textarea.xl { min-height: 200px; }
+
+    /* CHECK BUTTON */
+    .check-btn { margin-top: 18px; padding: 10px 22px; background: var(--nanquim); color: white; border: none; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 14px 18px; border-radius: 10px; font-size: 14px; line-height: 1.9; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* GRAMMAR BLOCK */
+    .gram-box { background: #FAFAF5; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin: 16px 0; border-left: 4px solid var(--level); }
+    .gram-box h3 { font-size: 20px; color: var(--nanquim); margin-bottom: 6px; }
+    .gram-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--level); margin-bottom: 14px; }
+    .gram-box p { font-size: 15px; line-height: 1.85; margin-bottom: 12px; }
+    .gram-example { background: rgba(255,255,255,.7); border-radius: 8px; padding: 10px 16px; margin: 8px 0; font-size: 14.5px; }
+    .gram-example strong { color: var(--level); }
+
+    /* DEBATE */
+    .debate-item { background: rgba(161,68,29,0.05); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; border-left: 3px solid var(--level); }
+    .debate-stmt { font-size: 15px; font-weight: 600; color: var(--nanquim); margin-bottom: 10px; font-style: italic; }
+    .debate-prompt { font-size: 13px; color: #777; margin-bottom: 10px; }
+
+    /* SEND BOX */
+    .send-box { background: rgba(161,68,29,0.07); border: 1.5px solid rgba(161,68,29,0.2); border-radius: 14px; padding: 22px 26px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero { padding-left: 20px; padding-right: 20px; }
+      .main { padding-left: 20px; padding-right: 20px; }
+      .content-block, .ex-block, .gram-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge">C1 · Vocabulário & Processo</span>
+    <a href="../c1/index.html" class="topbar-back">&#8592; Voltar para os materiais C1</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Como Comprar uma Casa <em>no Rio</em></h1>
+  <div class="hero-sub">O vocabulário, os verbos e as etapas legais da compra de um imóvel no Brasil — do sinal à escritura, passando por hipoteca, alienação fiduciária e averbação — explorados através de um tour em vídeo pela Casa Joá, uma das mansões mais impressionantes à venda no Rio de Janeiro.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Escritura · Registro · ITBI</span>
+    <span class="hero-tag">Financiamento · Hipoteca</span>
+    <span class="hero-tag">Voz passiva · Nominalização · Condicionais formais</span>
+    <span class="hero-tag">C1 · Avançado</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- PRÉ-ASSISTIR -->
+  <div class="sec-label">Pré-leitura · Ativando o conhecimento</div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--ouro);">
+    <div class="ex-num">Parte 1 de 6</div>
+    <div class="ex-title">Antes de começar</div>
+    <div class="ex-instructions">Responda livremente. Use essas perguntas para começar a conversa com sua professora.</div>
+
+    <div class="disc-item">
+      <div class="disc-q">1. Como funciona o processo de comprar uma casa no seu país? Quais são as principais etapas?</div>
+      <textarea class="open-textarea" id="pre1" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="disc-item">
+      <div class="disc-q">2. Você já comprou (ou pensou em comprar) um imóvel? O que mais te preocupa nesse tipo de decisão?</div>
+      <textarea class="open-textarea" id="pre2" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">3. Na sua opinião, comprar um imóvel deveria ser um processo simples e rápido, ou é razoável que envolva burocracia e verificação cuidadosa? Por quê?</div>
+      <textarea class="open-textarea" id="pre3" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- VOCABULÁRIO -->
+  <div class="sec-label">Vocabulário do processo de compra</div>
+
+  <div class="content-block">
+    <h3>Glossário imobiliário e jurídico</h3>
+    <p style="font-size:13.5px;color:#777;margin-bottom:16px;">Estude os termos abaixo. Você vai encontrá-los nas etapas da compra, no vídeo e nos exercícios.</p>
+    <table class="vocab-table">
+      <tr><th>Termo</th><th>Definição</th></tr>
+      <tr><td>o corretor de imóveis</td><td>Profissional licenciado (com registro no CRECI) que intermedia a compra e venda de imóveis.</td></tr>
+      <tr><td>o CRECI</td><td>Conselho Regional de Corretores de Imóveis — órgão que registra e fiscaliza corretores no Brasil.</td></tr>
+      <tr><td>o sinal / as arras</td><td>Valor pago pelo comprador para reservar o imóvel e formalizar o compromisso de compra, antes da quitação total.</td></tr>
+      <tr><td>a matrícula do imóvel</td><td>Documento único que identifica o imóvel e registra seu histórico completo de proprietários, ônus e transações.</td></tr>
+      <tr><td>a análise documental / due diligence</td><td>Verificação da documentação do imóvel e do vendedor, para garantir que não há dívidas, penhoras ou processos pendentes.</td></tr>
+      <tr><td>o contrato de compra e venda</td><td>Documento particular que formaliza os termos do negócio antes da escritura definitiva.</td></tr>
+      <tr><td>o financiamento imobiliário</td><td>Empréstimo bancário de longo prazo para a compra do imóvel, pago em parcelas mensais com juros.</td></tr>
+      <tr><td>a entrada</td><td>Valor pago à vista pelo comprador, correspondente a uma porcentagem do valor total do imóvel.</td></tr>
+      <tr><td>a escritura pública</td><td>Documento lavrado em cartório que formaliza legalmente a transferência de propriedade.</td></tr>
+      <tr><td>o cartório de registro de imóveis</td><td>Órgão onde a escritura é registrada, tornando a transferência de propriedade oficial e pública.</td></tr>
+      <tr><td>o ITBI</td><td>Imposto de Transmissão de Bens Imóveis — imposto municipal pago pelo comprador na transferência da propriedade.</td></tr>
+      <tr><td>o IPTU</td><td>Imposto Predial e Territorial Urbano — imposto municipal anual sobre a propriedade do imóvel.</td></tr>
+      <tr><td>a vistoria</td><td>Inspeção técnica do imóvel para verificar seu estado de conservação e possíveis problemas estruturais.</td></tr>
+      <tr><td>quitar</td><td>Pagar integralmente uma dívida ou financiamento.</td></tr>
+      <tr><td>outorgar</td><td>Conceder formalmente, por meio de um documento legal — usado para "outorgar a escritura".</td></tr>
+      <tr><td>lavrar (a escritura)</td><td>Redigir formalmente um documento oficial em cartório.</td></tr>
+      <tr><td>averbar / a averbação</td><td>Anotar oficialmente uma alteração (construção, reforma, casamento) na matrícula do imóvel.</td></tr>
+      <tr><td>a hipoteca</td><td>Garantia que dá ao credor o direito sobre o imóvel caso a dívida não seja paga.</td></tr>
+      <tr><td>a alienação fiduciária</td><td>Modalidade de garantia usada na maioria dos financiamentos atuais: o imóvel fica em nome do banco até a quitação total.</td></tr>
+      <tr><td>o ônus real / o gravame</td><td>Qualquer restrição ou dívida registrada sobre o imóvel (hipoteca, penhora, usufruto).</td></tr>
+      <tr><td>o laudo de avaliação</td><td>Documento técnico que estima o valor de mercado do imóvel, geralmente exigido pelo banco.</td></tr>
+      <tr><td>o condomínio</td><td>Taxa mensal cobrada para a manutenção de áreas comuns em edifícios ou condomínios fechados.</td></tr>
+    </table>
+  </div>
+
+  <!-- VOCAB EXERCISE -->
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Exercício de vocabulário</div>
+    <div class="ex-title">Complete com o termo correto</div>
+    <div class="ex-instructions">Use os termos do glossário acima. Atenção: alguns termos podem precisar de flexão (plural, gênero, conjugação).</div>
+    <div class="word-bank">
+      <span class="word-chip">alienação fiduciária</span>
+      <span class="word-chip">arras</span>
+      <span class="word-chip">averbada</span>
+      <span class="word-chip">CRECI</span>
+      <span class="word-chip">escritura</span>
+      <span class="word-chip">financiamento</span>
+      <span class="word-chip">hipoteca</span>
+      <span class="word-chip">ITBI</span>
+      <span class="word-chip">laudo de avaliação</span>
+      <span class="word-chip">lavrada</span>
+      <span class="word-chip">matrícula</span>
+      <span class="word-chip">ônus</span>
+      <span class="word-chip">quitar</span>
+      <span class="word-chip">registrada</span>
+      <span class="word-chip">vistoria</span>
+    </div>
+
+    <div class="fill-row">1. Antes de fazer qualquer proposta, é essencial pedir a <input class="fill-input" id="v1" placeholder="?"> do imóvel para verificar seu histórico completo.</div>
+    <div class="fill-row">2. O comprador pagou as <input class="fill-input" id="v2" placeholder="?"> para reservar o apartamento enquanto organizava a documentação.</div>
+    <div class="fill-row">3. Todo corretor precisa ter registro ativo no <input class="fill-input" id="v3" placeholder="?"> para atuar legalmente.</div>
+    <div class="fill-row">4. Como o comprador não tinha o valor total em espécie, ele solicitou um <input class="fill-input" id="v4" placeholder="?"> ao banco.</div>
+    <div class="fill-row">5. A <input class="fill-input" id="v5" placeholder="?"> foi <input class="fill-input" id="v6" placeholder="?"> em cartório e, em seguida, <input class="fill-input" id="v7" placeholder="?"> no Cartório de Registro de Imóveis.</div>
+    <div class="fill-row">6. O comprador ainda precisa pagar o <input class="fill-input" id="v8" placeholder="?"> à prefeitura antes de finalizar a transferência.</div>
+    <div class="fill-row">7. Uma boa <input class="fill-input" id="v9" placeholder="?"> técnica pode revelar problemas estruturais escondidos no imóvel.</div>
+    <div class="fill-row">8. Depois de vinte anos, a família finalmente conseguiu <input class="fill-input" id="v10" placeholder="?"> o financiamento do apartamento.</div>
+    <div class="fill-row">9. O banco exigiu um <input class="fill-input" id="v11" placeholder="?"> antes de aprovar o valor do empréstimo.</div>
+    <div class="fill-row">10. Na maioria dos financiamentos atuais, usa-se a <input class="fill-input" id="v12" placeholder="?"> como garantia — e não mais a <input class="fill-input" id="v13" placeholder="?"> tradicional.</div>
+    <div class="fill-row">11. Antes de comprar, o advogado verificou se havia algum <input class="fill-input" id="v14" placeholder="?"> registrado sobre o imóvel.</div>
+    <div class="fill-row">12. A reforma da cozinha precisa ser <input class="fill-input" id="v15" placeholder="?"> na matrícula do imóvel.</div>
+
+    <button class="check-btn" onclick="checkVocab()">✓ Verificar respostas</button>
+    <div class="result-msg" id="vocab-result"></div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- ETAPAS -->
+  <div class="sec-label">As etapas da compra de um imóvel no Brasil</div>
+  <div class="content-block">
+    <h3>Do interesse às chaves — passo a passo</h3>
+    <p style="font-size:13.5px;color:#777;margin-bottom:8px;">Esse é o processo padrão — ele se aplica tanto a um pequeno apartamento quanto a uma mansão de milhões de reais, como a do vídeo a seguir.</p>
+    <div class="steps-list">
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Escolha e visita ao imóvel</strong> — o comprador visita o imóvel, muitas vezes acompanhado por um corretor de imóveis.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Negociação e proposta</strong> — as partes negociam o valor e as condições de pagamento.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Pagamento do sinal (arras)</strong> — o comprador reserva o imóvel com um pagamento inicial.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Análise documental</strong> — verifica-se a matrícula do imóvel e a situação do vendedor, para garantir que não há pendências.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Contrato de compra e venda</strong> — as condições do negócio são formalizadas por escrito.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Financiamento (se necessário)</strong> — o comprador solicita e obtém a aprovação do banco.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Escritura pública</strong> — o documento definitivo de transferência é lavrado em cartório.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Pagamento do ITBI</strong> — o imposto de transmissão é pago à prefeitura.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Registro no Cartório de Registro de Imóveis</strong> — só depois desse registro a propriedade é, de fato, transferida.</div></div>
+      <div class="step-item"><div class="step-num"></div><div class="step-text"><strong>Entrega das chaves</strong> — o novo proprietário toma posse do imóvel.</div></div>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- GRAMÁTICA -->
+  <div class="sec-label">Gramática</div>
+
+  <div class="gram-box">
+    <div class="gram-kicker">Foco gramatical</div>
+    <h3>Voz passiva e orações condicionais no registro formal/jurídico</h3>
+    <p>O vocabulário imobiliário e jurídico usa com frequência a <strong>voz passiva</strong> — porque, nesses contextos, o processo em si importa mais do que quem o executa.</p>
+    <div class="gram-example">A escritura <strong>é lavrada</strong> em cartório. &nbsp;·&nbsp; O imóvel <strong>é registrado</strong> após o pagamento do ITBI. &nbsp;·&nbsp; O financiamento <strong>foi aprovado</strong> pelo banco.</div>
+    <p style="margin-top:16px;">Contratos e regras também usam <strong>orações condicionais formais</strong>, muitas vezes com o subjuntivo, para descrever situações hipotéticas ou exceções:</p>
+    <div class="gram-example"><strong>Caso</strong> o comprador não cumpra as condições do contrato, a venda <strong>poderá</strong> ser cancelada. &nbsp;·&nbsp; <strong>A menos que</strong> haja alguma pendência na matrícula, a transferência ocorre normalmente. &nbsp;·&nbsp; <strong>Desde que</strong> toda a documentação esteja em ordem, a escritura pode ser lavrada em poucos dias.</div>
+    <p style="margin-top:16px;font-size:13.5px;color:#777;"><strong>Conectivos formais úteis:</strong> caso, a menos que, desde que, salvo se, ressalvado o disposto em contrato, no que tange a.</p>
+  </div>
+
+  <!-- GRAMMAR EXERCISE -->
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Exercício de gramática</div>
+    <div class="ex-title">Transforme para a voz passiva</div>
+    <div class="ex-instructions">Reescreva cada frase na voz passiva, mantendo o mesmo tempo verbal.</div>
+    <div class="disc-item">
+      <div class="disc-q">1. O cartório registrou o imóvel na semana passada.</div>
+      <textarea class="open-textarea" id="g1" placeholder="O imóvel..."></textarea>
+    </div>
+    <div class="disc-item">
+      <div class="disc-q">2. O banco aprovou o financiamento em três dias.</div>
+      <textarea class="open-textarea" id="g2" placeholder="O financiamento..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">3. O tabelião lavrou a escritura pública ontem de manhã.</div>
+      <textarea class="open-textarea" id="g3" placeholder="A escritura pública..."></textarea>
+    </div>
+  </div>
+
+  <div class="gram-box">
+    <div class="gram-kicker">Foco gramatical 2</div>
+    <h3>Nominalização no registro jurídico-formal</h3>
+    <p>Textos jurídicos e imobiliários preferem <strong>substantivos abstratos</strong> a verbos — um traço típico do registro formal escrito. Em vez de descrever a ação diretamente com um verbo, "transforma-se" o verbo em substantivo:</p>
+    <div class="gram-example">registrar → <strong>o registro</strong> &nbsp;·&nbsp; financiar → <strong>o financiamento</strong> &nbsp;·&nbsp; transferir → <strong>a transferência</strong> &nbsp;·&nbsp; avaliar → <strong>a avaliação</strong> &nbsp;·&nbsp; averbar → <strong>a averbação</strong></div>
+    <p style="margin-top:16px;">Compare o mesmo conteúdo nos dois estilos:</p>
+    <div class="gram-example">Estilo verbal (mais informal): <em>O banco avaliou o imóvel antes de financiar a compra.</em><br>Estilo nominal (registro formal): <strong>A avaliação do imóvel</strong> antecedeu <strong>o financiamento da compra</strong>.</div>
+  </div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level);">
+    <div class="ex-num">Exercício de gramática 2</div>
+    <div class="ex-title">Do estilo verbal ao estilo nominal</div>
+    <div class="ex-instructions">Reescreva cada frase substituindo o verbo destacado por um substantivo, no estilo formal/jurídico.</div>
+    <div class="disc-item">
+      <div class="disc-q">1. O cartório <strong>registrou</strong> o imóvel em dois dias.</div>
+      <textarea class="open-textarea" id="n1" placeholder="O ... do imóvel..."></textarea>
+    </div>
+    <div class="disc-item">
+      <div class="disc-q">2. O comprador precisa <strong>quitar</strong> o financiamento em trinta anos.</div>
+      <textarea class="open-textarea" id="n2" placeholder="A ... do financiamento..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">3. O engenheiro <strong>avaliou</strong> o imóvel antes da venda.</div>
+      <textarea class="open-textarea" id="n3" placeholder="A ... do imóvel..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- VÍDEO -->
+  <div class="sec-label">Vídeo · A Casa Joá, à venda no Rio de Janeiro</div>
+  <p style="font-size:14px;color:#666;margin-bottom:14px;">Assista ao tour completo pela Casa Joá, de Márcio Garcia. Este é um exemplo extremo — uma das casas mais caras do Brasil — mas o vocabulário e o processo legal descritos acima se aplicam a qualquer compra de imóvel.</p>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/Zr8Eljou47M" title="Casa Joá — a melhor casa do Rio de Janeiro (à venda) — Cristiano Piquet" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="source-bar">
+    📹 Cristiano Piquet · <a href="https://www.youtube.com/watch?v=Zr8Eljou47M" target="_blank">Assistir no YouTube</a>
+  </div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--level); margin-top:20px;">
+    <div class="ex-num">Parte 2 de 6</div>
+    <div class="ex-title">Compreensão do vídeo</div>
+    <div class="ex-instructions">Responda com suas próprias palavras. Escreva frases completas.</div>
+
+    <div class="disc-item">
+      <div class="disc-q">1. Quais características do imóvel são destacadas no vídeo (tamanho, vista, área de lazer, localização)?</div>
+      <textarea class="open-textarea" id="comp1" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="disc-item">
+      <div class="disc-q">2. O apresentador menciona informações sobre o preço, o condomínio ou impostos do imóvel? O quê, especificamente?</div>
+      <textarea class="open-textarea" id="comp2" placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="disc-item" style="margin-bottom:0">
+      <div class="disc-q">3. Na sua opinião, o que justifica (ou não justifica) um preço tão alto para um imóvel? Que fatores, além da localização, influenciam esse valor?</div>
+      <textarea class="open-textarea tall" id="comp3" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- DEBATE & PRODUÇÃO -->
+  <div class="sec-label">Debate e produção</div>
+
+  <div class="ex-block" style="border-top: 3px solid var(--nanquim);">
+    <div class="ex-num">Parte 3 de 6</div>
+    <div class="ex-title">Posicione-se — com argumentos</div>
+    <div class="ex-instructions">Escolha <strong>uma</strong> das opções abaixo e escreva um texto bem estruturado (150–250 palavras), usando vocabulário do glossário e pelo menos duas construções na voz passiva.</div>
+
+    <div class="debate-item">
+      <div class="debate-stmt">Compare o processo de comprar um imóvel no Brasil com o processo no seu país de origem.</div>
+      <div class="debate-prompt">Quais etapas são semelhantes? Quais são mais burocráticas ou mais simples em cada país?</div>
+    </div>
+    <div class="debate-item" style="margin-bottom:0">
+      <div class="debate-stmt">Escreva um diálogo de negociação entre um comprador e um corretor de imóveis sobre a casa do vídeo.</div>
+      <div class="debate-prompt">Inclua pelo menos uma pergunta sobre documentação, uma sobre o financiamento e uma proposta de valor.</div>
+    </div>
+
+    <div style="margin-top:22px;">
+      <div class="disc-q" style="margin-bottom:10px;">Escreva seu texto:</div>
+      <textarea class="open-textarea xl" id="debate" placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 Quando terminar, envie suas respostas para a professora. Ela vai ler com atenção e te dar um feedback pessoal, ajudando você a evoluir ainda mais no português.
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#A1441D;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;">
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai ler suas reflexões e discutir com você na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ─── VOCAB CHECK ───
+function norm(s){ return s.trim().toLowerCase()
+  .replace(/[áàã]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i')
+  .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n'); }
+
+var vocabAns = {
+  v1: ['matricula'],
+  v2: ['arras','o sinal','sinal'],
+  v3: ['creci'],
+  v4: ['financiamento'],
+  v5: ['escritura'],
+  v6: ['lavrada'],
+  v7: ['registrada'],
+  v8: ['itbi'],
+  v9: ['vistoria'],
+  v10: ['quitar'],
+  v11: ['laudo de avaliacao','laudo'],
+  v12: ['alienacao fiduciaria','alienacao'],
+  v13: ['hipoteca'],
+  v14: ['onus','gravame'],
+  v15: ['averbada']
+};
+function checkVocab(){
+  var total=Object.keys(vocabAns).length;
+  var ok=0, html='';
+  Object.keys(vocabAns).forEach(function(id,i){
+    var el=document.getElementById(id);
+    var val=norm(el.value);
+    var correct=vocabAns[id].some(function(a){return val===norm(a)||val.includes(norm(a));});
+    el.className='fill-input '+(correct?'correct':(el.value.trim()?'wrong':''));
+    if(correct)ok++;
+    html+='<div style="margin-bottom:4px"><strong>'+(i+1)+'.</strong> '+(correct?'<span style="color:var(--floresta)">✓</span>':'<span style="color:var(--pitomba)">✗</span>')+' <strong>'+vocabAns[id][0]+'</strong></div>';
+  });
+  var r=document.getElementById('vocab-result');
+  r.className='result-msg '+(ok>=Math.ceil(total*0.7)?'good':'try-again');
+  r.innerHTML='<strong>'+(ok===total?'✓ Perfeito!':ok+'/'+total+' corretas')+'</strong><br><br>'+html;
+  r.style.display='block';
+}
+
+// ─── BREVO SUBMIT ───
+function bphubSubmit(){
+  var btn=document.getElementById('bphub-submit-btn');
+  var nameEl=document.getElementById('bphub-student-name');
+  var name=nameEl.value.trim();
+  if(!name){nameEl.style.borderColor='#C0392B';nameEl.focus();return;}
+  nameEl.style.borderColor='';
+  var email=document.getElementById('bphub-student-email').value.trim();
+  var material='Como Comprar uma Casa no Rio (C1)';
+  var today=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+
+  var sections=[
+    {label:'PRÉ-LEITURA',ids:['pre1','pre2','pre3'],
+     qs:['1. Processo no país de origem','2. Experiência ou preocupações pessoais','3. Simples vs burocrático']},
+    {label:'VOCABULÁRIO (preenchimento)',ids:['v1','v2','v3','v4','v5','v6','v7','v8','v9','v10','v11','v12','v13','v14','v15'],
+     qs:['1','2','3','4','5a','5b','5c','6','7','8','9','10a','10b','11','12']},
+    {label:'COMPREENSÃO DO VÍDEO',ids:['comp1','comp2','comp3'],
+     qs:['1. Características do imóvel','2. Preço/condomínio/impostos mencionados','3. O que justifica o preço']},
+    {label:'GRAMÁTICA 1 — voz passiva',ids:['g1','g2','g3'],
+     qs:['1. Registro do imóvel','2. Aprovação do financiamento','3. Escritura lavrada']},
+    {label:'GRAMÁTICA 2 — nominalização',ids:['n1','n2','n3'],
+     qs:['1. Registro do imóvel','2. Quitação do financiamento','3. Avaliação do imóvel']},
+    {label:'DEBATE & PRODUÇÃO',ids:['debate'],
+     qs:['Texto de opinião ou diálogo']}
+  ];
+
+  var lines=[], html='';
+  sections.forEach(function(sec){
+    html+='<h3 style="font-family:Arial;color:#A1441D;margin:16px 0 8px">'+sec.label+'</h3>';
+    lines.push('\n'+sec.label);
+    sec.ids.forEach(function(id,i){
+      var el=document.getElementById(id);
+      var val=el?el.value.trim():'';
+      if(!val)val='(sem resposta)';
+      html+='<p style="font-family:Arial;font-size:13px;margin-bottom:10px"><strong>'+sec.qs[i]+':</strong><br>'+val.replace(/\n/g,'<br>')+'</p>';
+      lines.push(sec.qs[i]+': '+val);
+    });
+  });
+
+  btn.disabled=true; btn.textContent='A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls=[];
+  if(email){calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:email,name:name}],templateId:1,params:{nome:name,material:material,data:today}})}));}
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'Content-Type':'application/json','api-key':BKEY},body:JSON.stringify({to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},subject:'📝 '+name+' — '+material,htmlContent:'<h2 style="color:#A1441D;font-family:Arial">'+name+'</h2><p style="font-family:Arial"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+html})}));
+  Promise.all(calls).then(function(){
+    document.getElementById('bphub-answer-summary').innerHTML=html;
+    document.getElementById('bphub-success').style.display='block';
+    document.getElementById('bphub-form-area').style.display='none';
+    document.getElementById('bphub-success').scrollIntoView({behavior:'smooth',block:'center'});
+    btn.disabled=false;btn.textContent='Enviar respostas';
+  }).catch(function(){btn.disabled=false;btn.textContent='Enviar respostas';document.getElementById('bphub-error').style.display='block';});
+}
+</script>
+</body>
+</html>
