@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronomes Possessivos — A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --level: #4E551D; /* A1 — floresta */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+    .topbar-back { font-size: 12px; color: #aaa; text-decoration: none; }
+    .topbar-back:hover { color: var(--level); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* REFERENCE BOX */
+    .ref-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 40px; }
+    .ref-box h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 16px; }
+
+    /* PRONOUN TABLE */
+    .pronoun-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+    .pronoun-table th { background: var(--level); color: white; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pronoun-table th:first-child { border-radius: 8px 0 0 0; }
+    .pronoun-table th:last-child { border-radius: 0 8px 0 0; }
+    .pronoun-table td { padding: 12px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .pronoun-table tr:last-child td { border-bottom: none; }
+    .pronoun-table tr:nth-child(even) td { background: #faf8f4; }
+    .pronoun-table td strong { font-weight: 700; color: var(--nanquim); }
+
+    /* NOTE BOX */
+    .note-box { background: rgba(78,85,29,0.07); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+    .note-box strong { color: var(--nanquim); }
+
+    /* HIGHLIGHT BOX (for the "Nossa!" note) */
+    .highlight-box { background: var(--baunilha2); border: 1.5px dashed var(--pitomba); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+    .highlight-box strong { color: var(--pitomba); }
+    .compare-row { display: flex; gap: 14px; margin-top: 12px; flex-wrap: wrap; }
+    .compare-card { flex: 1; min-width: 220px; background: white; border-radius: 8px; padding: 12px 16px; border: 1px solid var(--light-gray); }
+    .compare-card .tag { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 6px; display: block; }
+    .compare-card.ok .tag { color: var(--floresta); }
+    .compare-card p { font-size: 14px; line-height: 1.6; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+
+    /* SENTENCE ROWS */
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2; }
+    .hint { font-size: 12px; color: #bbb; font-style: italic; }
+
+    /* TEXT INPUTS (inline gap fill) */
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; width: 110px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+
+    /* WORD BANK */
+    .word-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; background: var(--off-white); border-radius: 10px; margin-bottom: 20px; }
+    .word-bank-label { font-size: 11px; font-weight: 700; color: #999; width: 100%; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .wb-word { padding: 4px 14px; background: white; border: 1.5px solid var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--nanquim); }
+
+    /* CORRECTION ROWS */
+    .correction-row { margin-bottom: 20px; }
+    .correction-sentence { font-size: 15px; color: var(--nanquim); margin-bottom: 8px; line-height: 1.7; }
+    .wrong-word { text-decoration: underline wavy var(--pitomba); color: var(--pitomba); font-weight: 600; }
+    .correction-input-wrap { display: flex; align-items: center; gap: 10px; }
+    .correction-label { font-size: 13px; color: #999; font-style: italic; white-space: nowrap; }
+    .correction-input { border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 8px 14px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); width: 180px; outline: none; transition: border-color 0.2s; background: var(--baunilha); }
+    .correction-input:focus { border-color: var(--level); }
+    .correction-input.correct { border-color: var(--floresta); background: rgba(78,85,29,0.07); color: var(--floresta); }
+    .correction-input.wrong { border-color: var(--pitomba); background: rgba(211,109,41,0.07); }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+
+    /* RESULT PANEL */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* FREE WRITE */
+    .free-textarea { width: 100%; min-height: 140px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 18px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.8; }
+    .free-textarea:focus { border-color: var(--level); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block, .ref-box { padding: 20px 18px; }
+      .fill-input { width: 90px; }
+      .compare-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Gramática · Exercícios</span>
+    <a href="../a1/index.html" class="topbar-back">&#8592; My Materials</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Pronomes <em>Possessivos</em></h1>
+  <div class="hero-sub">Possessive pronouns in Brazilian Portuguese — meu, minha, seu, sua, nosso, nossa — and the famous exclamation "Nossa!" that has nothing to do with possession at all.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">meu · minha</span>
+    <span class="hero-tag">seu · sua</span>
+    <span class="hero-tag">nosso · nossa</span>
+    <span class="hero-tag">A1 · Gramática</span>
+  </div>
+  <div class="hero-note">📝 Complete após a aula</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- GRAMMAR REFERENCE -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Possessive Pronouns in Brazilian Portuguese</h2>
+    <p style="font-size:14px;color:#777;margin-bottom:18px;line-height:1.7;">Possessive pronouns show who something belongs to — <em>my</em>, <em>your</em>, <em>our</em>. In Portuguese, they <strong>agree with the thing owned</strong> (gender and number of the noun) — <strong>not</strong> with the owner. This is different from English!</p>
+
+    <table class="pronoun-table">
+      <thead>
+        <tr><th>Owner</th><th>Masculine</th><th>Feminine</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>eu <span class="hint">(my)</span></td>
+          <td><strong>meu</strong> / meus</td>
+          <td><strong>minha</strong> / minhas</td>
+        </tr>
+        <tr>
+          <td>você / ele / ela <span class="hint">(your / his / her)</span></td>
+          <td><strong>seu</strong> / seus</td>
+          <td><strong>sua</strong> / suas</td>
+        </tr>
+        <tr>
+          <td>nós <span class="hint">(our)</span></td>
+          <td><strong>nosso</strong> / nossos</td>
+          <td><strong>nossa</strong> / nossas</td>
+        </tr>
+        <tr>
+          <td>vocês / eles / elas <span class="hint">(your (pl) / their)</span></td>
+          <td><strong>seu</strong> / seus</td>
+          <td><strong>sua</strong> / suas</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>▶ Agreement is with the object, not the owner.</strong> <em>Ela</em> is feminine, but if she owns a <em>carro</em> (masculine), you say <em>seu carro</em> — not "sua carro."<br>
+      <strong>▶ Seu/sua can be ambiguous</strong> — it can mean "your," "his," "her," or "their." When it's unclear, Brazilians often say <em>o carro dele</em> (his car), <em>a casa dela</em> (her house), or <em>o cachorro deles</em> (their dog) instead.<br>
+      <strong>▶ Meu amor, minha filha…</strong> — possessives are also used in affectionate terms of address, very common in everyday speech.
+    </div>
+  </div>
+
+  <!-- THE "NOSSA!" NOTE -->
+  <div class="ref-box">
+    <div class="sec-label">Atenção · False Friend</div>
+    <h2>"Nossa!" is not always possessive</h2>
+    <p style="font-size:14px;color:#777;margin-bottom:14px;line-height:1.7;">Confusingly, the exact same word <strong>"Nossa"</strong> is also one of the most common exclamations in Brazilian Portuguese — and in that case, it has <strong>nothing to do with possession</strong>.</p>
+
+    <div class="highlight-box">
+      <strong>Nossa!</strong> is short for <em>"Nossa Senhora!"</em> (Our Lady! — a religious expression), but today it's used the way English speakers use <em>"Wow!"</em>, <em>"Oh my gosh!"</em> or <em>"No way!"</em> — to show surprise, admiration, or shock. It's used constantly, in almost every conversation, and doesn't need a noun after it.
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-card">
+        <span class="tag">Possessivo (our)</span>
+        <p><strong>Nossa</strong> casa é grande. <span class="hint">(Our house is big.)</span></p>
+      </div>
+      <div class="compare-card ok">
+        <span class="tag">Interjeição (wow!)</span>
+        <p><strong>Nossa!</strong> Que casa grande! <span class="hint">(Wow! What a big house!)</span></p>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#999;margin-top:12px;">👉 Tip: if "Nossa" is followed directly by a noun (nossa casa, nosso carro), it's possessive. If it stands alone or comes before an exclamation, it's the interjection — like "Wow!"</p>
+  </div>
+
+  <!-- ─────────── EXERCISE 1 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Fill in the blank with the correct possessive</h3>
+    <p class="ex-instruction">The owner is given in parentheses. Remember: agreement is with the object (the word after the blank), not with the owner!</p>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt">Este é <input class="fill-input" id="e1-1" type="text" placeholder="…"> livro. <span class="hint">(eu)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt">Esta é <input class="fill-input" id="e1-2" type="text" placeholder="…"> casa. <span class="hint">(nós)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">Ele adora <input class="fill-input" id="e1-3" type="text" placeholder="…"> cachorro. <span class="hint">(ele)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt">Qual é <input class="fill-input" id="e1-4" type="text" placeholder="…" style="width:130px;"> telefone? <span class="hint">(você)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt">Ela ama <input class="fill-input" id="e1-5" type="text" placeholder="…"> filhos. <span class="hint">(ela)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">6.</span>
+      <span class="txt"><input class="fill-input" id="e1-6" type="text" placeholder="…"> professora é ótima! <span class="hint">(nós)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">7.</span>
+      <span class="txt">Eu perdi <input class="fill-input" id="e1-7" type="text" placeholder="…"> mochila. <span class="hint">(eu)</span></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">8.</span>
+      <span class="txt">Onde estão <input class="fill-input" id="e1-8" type="text" placeholder="…" style="width:130px;"> chaves? <span class="hint">(vocês)</span></span>
+    </div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 2 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Possessivo ou Interjeição?</h3>
+    <p class="ex-instruction">Read each sentence. Decide if "nossa/nosso" is being used as a possessive (my/our something) or as the exclamation "Wow!" — type <strong>possessivo</strong> or <strong>interjeição</strong>.</p>
+
+    <div class="sentence-row">
+      <span class="num">1.</span>
+      <span class="txt">"Nossa! Que dia lindo!" <input class="fill-input" id="e2-1" type="text" placeholder="…" style="width:150px;"></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">2.</span>
+      <span class="txt">"Nosso carro está na garagem." <input class="fill-input" id="e2-2" type="text" placeholder="…" style="width:150px;"></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">3.</span>
+      <span class="txt">"Nossa, você fala português muito bem!" <input class="fill-input" id="e2-3" type="text" placeholder="…" style="width:150px;"></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">4.</span>
+      <span class="txt">"Esta é a nossa casa nova." <input class="fill-input" id="e2-4" type="text" placeholder="…" style="width:150px;"></span>
+    </div>
+    <div class="sentence-row">
+      <span class="num">5.</span>
+      <span class="txt">"Nossa! Esse bolo está delicioso!" <input class="fill-input" id="e2-5" type="text" placeholder="…" style="width:150px;"></span>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 3 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">Correct the errors</h3>
+    <p class="ex-instruction">Each sentence has an incorrect possessive (underlined in orange) — the gender doesn't match the object. Write the correct word in the box.</p>
+
+    <div class="correction-row">
+      <div class="correction-sentence">1. <span class="wrong-word">Minha</span> carro é novo.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-1" type="text" placeholder="correct word">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">2. <span class="wrong-word">Seu</span> casa é muito bonita.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-2" type="text" placeholder="correct word">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">3. <span class="wrong-word">Nosso</span> família mora em São Paulo.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-3" type="text" placeholder="correct word">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">4. Ele perdeu <span class="wrong-word">minhas</span> chaves. <span class="hint">(as chaves são dele, não minhas!)</span></div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-4" type="text" placeholder="correct word">
+      </div>
+    </div>
+
+    <div class="correction-row">
+      <div class="correction-sentence">5. <span class="wrong-word">Meus</span> mochila está aqui.</div>
+      <div class="correction-input-wrap">
+        <span class="correction-label">Correction →</span>
+        <input class="correction-input" id="e3-5" type="text" placeholder="correct word">
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- ─────────── EXERCISE 4 ─────────── -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Free production</h3>
+    <p class="ex-instruction">Write 5 sentences in Portuguese about your life — your family, your things, your city. Use at least 4 different possessives (meu, minha, seu, sua, nosso, nossa). In your last sentence, use <strong>"Nossa!"</strong> as an exclamation (not a possessive)!</p>
+
+    <div class="note-box" style="margin-bottom:20px;">
+      <strong>Useful patterns:</strong><br>
+      Meu/Minha ___ é ___. &nbsp;·&nbsp; Este é o meu ___. &nbsp;·&nbsp; Esta é a minha ___.<br>
+      Nossa cidade é ___. &nbsp;·&nbsp; Nosso ___ está em ___.<br>
+      Nossa! Que ___!
+    </div>
+
+    <textarea class="free-textarea" id="e4-free" placeholder="Write your 5 sentences here…"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── NORMALISE ──
+function norm(s) {
+  return (s || '').toLowerCase().trim()
+    .replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íì]/g,'i').replace(/[óôõö]/g,'o')
+    .replace(/[úù]/g,'u').replace(/ç/g,'c')
+    .replace(/\s+/g,' ');
+}
+
+// ── EXERCISE 1 ──
+var ex1 = [
+  { id:'e1-1', accept:['meu'],   display:'meu' },
+  { id:'e1-2', accept:['nossa'], display:'nossa' },
+  { id:'e1-3', accept:['seu'],   display:'seu' },
+  { id:'e1-4', accept:['seu'],   display:'seu' },
+  { id:'e1-5', accept:['seus'],  display:'seus' },
+  { id:'e1-6', accept:['nossa'], display:'nossa' },
+  { id:'e1-7', accept:['minha'], display:'minha' },
+  { id:'e1-8', accept:['suas'],  display:'suas' }
+];
+
+function checkEx1() {
+  var html = '';
+  var correct = 0;
+  ex1.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;">'
+      + '<strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex1-result');
+  var allOk = correct === ex1.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex1.length + ' correct!'
+             : correct + ' of ' + ex1.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 2 ──
+var ex2 = [
+  { id:'e2-1', accept:['interjeicao','interjeição'], display:'interjeição — "Wow!"' },
+  { id:'e2-2', accept:['possessivo'],                 display:'possessivo — "our car"' },
+  { id:'e2-3', accept:['interjeicao','interjeição'], display:'interjeição — "Wow!"' },
+  { id:'e2-4', accept:['possessivo'],                 display:'possessivo — "our new house"' },
+  { id:'e2-5', accept:['interjeicao','interjeição'], display:'interjeição — "Wow!"' }
+];
+
+function checkEx2() {
+  var html = '';
+  var correct = 0;
+  ex2.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;">'
+      + '<strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  var allOk = correct === ex2.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex2.length + ' correct!'
+             : correct + ' of ' + ex2.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 3 ──
+var ex3 = [
+  { id:'e3-1', accept:['meu'],   display:'Meu — carro is masculine' },
+  { id:'e3-2', accept:['sua'],   display:'Sua — casa is feminine' },
+  { id:'e3-3', accept:['nossa'], display:'Nossa — família is feminine' },
+  { id:'e3-4', accept:['suas'],  display:'Suas — the keys are his, not mine' },
+  { id:'e3-5', accept:['minha'], display:'Minha — mochila is feminine' }
+];
+
+function checkEx3() {
+  var html = '';
+  var correct = 0;
+  ex3.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+      + '<strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+            : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById('ex3-result');
+  var allOk = correct === ex3.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex3.length + ' correct!'
+             : correct + ' of ' + ex3.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+  var closedInputs = [
+    { key:'Ex1-1 (eu + livro)', id:'e1-1' },
+    { key:'Ex1-2 (nós + casa)', id:'e1-2' },
+    { key:'Ex1-3 (ele + cachorro)', id:'e1-3' },
+    { key:'Ex1-4 (você + telefone)', id:'e1-4' },
+    { key:'Ex1-5 (ela + filhos)', id:'e1-5' },
+    { key:'Ex1-6 (nós + professora)', id:'e1-6' },
+    { key:'Ex1-7 (eu + mochila)', id:'e1-7' },
+    { key:'Ex1-8 (vocês + chaves)', id:'e1-8' },
+    { key:'Ex2-1 (Nossa! Que dia lindo!)', id:'e2-1' },
+    { key:'Ex2-2 (Nosso carro...)', id:'e2-2' },
+    { key:'Ex2-3 (Nossa, você fala...)', id:'e2-3' },
+    { key:'Ex2-4 (a nossa casa nova)', id:'e2-4' },
+    { key:'Ex2-5 (Nossa! Esse bolo...)', id:'e2-5' },
+    { key:'Ex3-1 (Minha carro → correção)', id:'e3-1' },
+    { key:'Ex3-2 (Seu casa → correção)', id:'e3-2' },
+    { key:'Ex3-3 (Nosso família → correção)', id:'e3-3' },
+    { key:'Ex3-4 (minhas chaves → correção)', id:'e3-4' },
+    { key:'Ex3-5 (Meus mochila → correção)', id:'e3-5' }
+  ];
+
+  var summaryLines = [];
+  closedInputs.forEach(function(item) {
+    var el = document.getElementById(item.id);
+    var val = el && el.value.trim() ? el.value.trim() : '(sem resposta)';
+    summaryLines.push('<strong>' + item.key + ':</strong> ' + val);
+  });
+
+  var freeEl = document.getElementById('e4-free');
+  var freeVal = freeEl && freeEl.value.trim() ? freeEl.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>') : '(sem resposta)';
+  summaryLines.push('<strong>Ex4 — Produção livre:</strong><br>' + freeVal);
+
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric', month:'long', year:'numeric'});
+  var BKEY = [120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var htmlBody = '<h2 style="color:#4E551D;font-family:Arial">' + name + '</h2><p style="font-family:Arial"><strong>Material:</strong> ' + material + '<br><strong>Data:</strong> ' + today + '</p><hr>' + summaryLines.map(function(l){return '<p style="font-family:Arial;font-size:13px">'+l+'</p>';}).join('');
+
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'api-key': BKEY },
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'api-key': BKEY },
+    body: JSON.stringify({
+      to: [{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender: {name:'Portal BPHUB', email:'daniela.avila@brazilianportuguesehub.com'},
+      subject: '📝 ' + name + ' — ' + material,
+      htmlContent: htmlBody
+    })
+  }));
+
+  Promise.all(calls).then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false;
+    btn.textContent = 'Enviar respostas';
+  }).catch(function() {
+    document.getElementById('bphub-error').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Enviar respostas';
+  });
+}
+</script>
+</body>
+</html>
