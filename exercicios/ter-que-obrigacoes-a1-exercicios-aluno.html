@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ter Que — Obrigações e Compromissos | A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --level: #4E551D; /* A1 — floresta */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* REFERENCE BOX */
+    .ref-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+    .ref-box h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 16px; }
+
+    /* PRONOUN / DATA TABLE */
+    .pronoun-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+    .pronoun-table th { background: var(--level); color: white; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pronoun-table th:first-child { border-radius: 8px 0 0 0; }
+    .pronoun-table th:last-child { border-radius: 0 8px 0 0; }
+    .pronoun-table td { padding: 12px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .pronoun-table tr:last-child td { border-bottom: none; }
+    .pronoun-table tr:nth-child(even) td { background: #faf8f4; }
+    .pronoun-table td strong { font-weight: 700; color: var(--nanquim); }
+
+    /* NOTE BOX */
+    .note-box { background: rgba(78,85,29,0.07); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+    .note-box strong { color: var(--nanquim); }
+    .note-box:last-child { margin-bottom: 0; }
+
+    /* EXAMPLE PAIRS */
+    .examples-block { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 6px 0; font-size: 14.5px; }
+    .ex-pt { flex: 1; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; color: #888; font-style: italic; }
+
+    /* TEXT CARD */
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 30px 34px; margin-bottom: 32px; }
+    .text-card-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-card-byline { font-size: 12px; color: #aaa; margin-bottom: 22px; }
+    .text-card p { font-size: 15.5px; line-height: 1.95; margin-bottom: 12px; color: var(--texto); }
+    .text-card p:last-child { margin-bottom: 0; }
+    .text-card p strong { color: var(--level); }
+
+    /* VOCAB TABLE */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+
+    /* SENTENCE ROWS */
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2; }
+    .hint { font-size: 12px; color: #bbb; font-style: italic; }
+
+    /* TEXT INPUTS (inline gap fill) */
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; width: 90px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; margin-right: 10px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+
+    /* RESULT PANEL */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* FREE WRITE */
+    .free-textarea { width: 100%; min-height: 90px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.7; margin-top: 8px; }
+    .free-textarea:focus { border-color: var(--level); }
+    .free-textarea.big { min-height: 170px; }
+
+    /* MODEL ANSWERS REVEAL */
+    .model-answers-block { display:none; margin-top:16px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:10px; background: rgba(78,85,29,0.06); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; background: transparent; border: 1.5px solid var(--level); color: var(--level); border-radius: 10px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s; }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block, .ref-box, .text-card { padding: 20px 18px; }
+      .fill-input { width: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Gramática · Exercícios</span>
+    <a href="../a1/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; My Materials</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Ter Que <em>Obrigações e Compromissos</em></h1>
+  <div class="hero-sub">Talking about obligations and commitments with <em>ter que + infinitive</em> — plus the days of the week, and how to say "on Monday" versus "every Monday."</div>
+  <div class="hero-tags">
+    <span class="hero-tag">ter que + infinitivo</span>
+    <span class="hero-tag">dias da semana</span>
+    <span class="hero-tag">na/no × às/aos</span>
+    <span class="hero-tag">A1 · Gramática</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- REFERENCE 1 — TER QUE -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Talking about obligations: ter que + infinitive</h2>
+    <p style="font-size:14px;color:#777;margin-bottom:6px;line-height:1.7;">We use <strong>ter que + infinitive</strong> to talk about obligations and commitments — things we must do.</p>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Tenho que ligar para a minha mãe.</span><span class="ex-en">I have to call my mother.</span></div>
+      <div class="ex-pair"><span class="ex-pt">A gente tem que ir ao aeroporto.</span><span class="ex-en">We have to go to the airport.</span></div>
+    </div>
+
+    <div class="note-box">The second verb never changes: it always stays in the infinitive.</div>
+
+    <table class="pronoun-table" style="margin-top:18px;">
+      <thead><tr><th>Pessoa</th><th>Verbo ter</th><th>Pessoa</th><th>Verbo ter</th></tr></thead>
+      <tbody>
+        <tr><td>eu</td><td><strong>tenho</strong></td><td>nós</td><td><strong>temos</strong></td></tr>
+        <tr><td>tu</td><td><strong>tens</strong></td><td>vocês</td><td><strong>têm</strong></td></tr>
+        <tr><td>você / ele / ela</td><td><strong>tem</strong></td><td>eles / elas</td><td><strong>têm</strong></td></tr>
+        <tr><td>a gente</td><td><strong>tem</strong></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Note:</strong> in the plural, <em>tem</em> is written <em>têm</em>, but the pronunciation is the same.<br>
+      <strong>A gente</strong> means "we" in everyday Brazilian Portuguese, but it takes the same verb form as <em>ele / ela</em>.
+    </div>
+  </div>
+
+  <!-- REFERENCE 2 — DIAS DA SEMANA -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Days of the week / Os dias da semana</h2>
+
+    <table class="pronoun-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td>domingo</td><td>Sunday</td></tr>
+        <tr><td>segunda-feira</td><td>Monday</td></tr>
+        <tr><td>terça-feira</td><td>Tuesday</td></tr>
+        <tr><td>quarta-feira</td><td>Wednesday</td></tr>
+        <tr><td>quinta-feira</td><td>Thursday</td></tr>
+        <tr><td>sexta-feira</td><td>Friday</td></tr>
+        <tr><td>sábado</td><td>Saturday</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      • Days of the week are written in lowercase.<br>
+      • In everyday speech, <em>feira</em> is often dropped: <em>na segunda, na sexta</em>.<br>
+      • Saturday and Sunday together = <em>o final de semana / o fim de semana</em>.
+    </div>
+  </div>
+
+  <!-- REFERENCE 3 — PREPOSITIONS -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Which preposition?</h2>
+
+    <table class="pronoun-table">
+      <thead><tr><th>One specific day</th><th>Every week</th></tr></thead>
+      <tbody>
+        <tr><td>na segunda / terça / quarta / quinta / sexta-feira</td><td>às segundas / terças / quartas-feiras</td></tr>
+        <tr><td>no sábado / no domingo</td><td>aos sábados / aos domingos</td></tr>
+      </tbody>
+    </table>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Tenho que ir ao médico na terça-feira.</span><span class="ex-en">next Tuesday</span></div>
+      <div class="ex-pair"><span class="ex-pt">Tenho que ir ao médico às terças-feiras.</span><span class="ex-en">every Tuesday</span></div>
+    </div>
+
+    <div class="note-box">We also use <strong>às</strong> for clock time: <em>às 9 horas</em> (at 9 o'clock).</div>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Texto / Text</div>
+  <div class="text-card">
+    <div class="text-card-title">A semana da Camila</div>
+    <div class="text-card-byline">A week in Camila's life</div>
+    <p>Oi! Eu sou a Camila. Eu sou de Salvador, mas esta semana eu estou em São Paulo. Eu estou no Hotel Estrela, no quarto número 7.</p>
+    <p>Esta semana eu tenho muitos compromissos:</p>
+    <p>Na <strong>segunda-feira</strong>, eu tenho que ligar para a minha mãe.<br>
+    Na <strong>terça-feira</strong>, eu tenho que ir ao médico.<br>
+    Na <strong>quarta-feira</strong>, eu tenho que tomar um café com a Ana. A Ana é a minha amiga. Ela é de São Paulo.<br>
+    Na <strong>quinta-feira</strong>, eu tenho que visitar o Museu do Ipiranga.<br>
+    Na <strong>sexta-feira</strong>, eu tenho que fazer o check-out do hotel.<br>
+    No <strong>sábado</strong>, eu e a Ana temos que ir ao aeroporto. A gente tem que estar lá às 9 horas.<br>
+    No <strong>domingo</strong>, eu não tenho compromissos. Eu gosto muito de domingo!</p>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="sec-label">Vocabulário / Vocabulary</div>
+  <div class="ref-box">
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">o compromisso</td><td>commitment, appointment</td></tr>
+        <tr><td class="vocab-pt">o quarto</td><td>room</td></tr>
+        <tr><td class="vocab-pt">o aeroporto</td><td>airport</td></tr>
+        <tr><td class="vocab-pt">o museu</td><td>museum</td></tr>
+        <tr><td class="vocab-pt">a amiga / o amigo</td><td>friend</td></tr>
+        <tr><td class="vocab-pt">ligar para</td><td>to call (someone)</td></tr>
+        <tr><td class="vocab-pt">tomar um café</td><td>to have a coffee</td></tr>
+        <tr><td class="vocab-pt">comprar comida</td><td>to buy food</td></tr>
+        <tr><td class="vocab-pt">visitar</td><td>to visit</td></tr>
+        <tr><td class="vocab-pt">fazer o check-out</td><td>to check out</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────── PART 1 — COMPREENSÃO ─────────── -->
+  <div class="sec-label" style="margin-top:8px;">Part 1 — Compreensão / Comprehension</div>
+  <div class="ex-block">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Answer the questions in Portuguese</h3>
+    <p class="ex-instruction">Answer the questions in Portuguese, using information from the text.</p>
+
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">1. De onde é a Camila? <span style="font-weight:400;color:#999;">(Where is Camila from?)</span></label>
+      <textarea class="free-textarea" id="q1" placeholder="Ela é de..."></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">2. Onde a Camila está esta semana? <span style="font-weight:400;color:#999;">(Where is Camila this week?)</span></label>
+      <textarea class="free-textarea" id="q2" placeholder="Ela está..."></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">3. O que a Camila tem que fazer na terça-feira? <span style="font-weight:400;color:#999;">(What does Camila have to do on Tuesday?)</span></label>
+      <textarea class="free-textarea" id="q3" placeholder="Ela tem que..."></textarea>
+    </div>
+    <div>
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">4. Em que dia a Camila não tem compromissos? <span style="font-weight:400;color:#999;">(On which day does Camila have no commitments?)</span></label>
+      <textarea class="free-textarea" id="q4" placeholder="No..."></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex1-answers', this)">👁 See model answers</button>
+    <div class="model-answers-block" id="ex1-answers">
+      <div class="model-answer-item"><div class="model-label">Question 1</div><p>Ela é de Salvador.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ela está em São Paulo, no Hotel Estrela (no quarto número 7).</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 3</div><p>Ela tem que ir ao médico.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 4</div><p>No domingo.</p></div>
+    </div>
+  </div>
+
+  <!-- ─────────── PART 2 — PRÁTICA CONTROLADA ─────────── -->
+  <div class="sec-label" style="margin-top:8px;">Part 2 — Prática Controlada / Controlled Practice</div>
+
+  <!-- Exercise 2 -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Complete with the correct form of the verb ter</h3>
+    <p class="ex-instruction">Complete the sentences with the correct form of the verb ter.</p>
+
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">Eu <input class="fill-input" id="e2-1" type="text" placeholder="…"> que ligar para o hotel na segunda-feira. <span class="hint">(I have to call the hotel on Monday.)</span></span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">A gente <input class="fill-input" id="e2-2" type="text" placeholder="…"> que ir ao aeroporto no sábado. <span class="hint">(We have to go to the airport on Saturday.)</span></span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">A Camila <input class="fill-input" id="e2-3" type="text" placeholder="…"> que fazer o check-out na sexta-feira. <span class="hint">(Camila has to check out on Friday.)</span></span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">Nós <input class="fill-input" id="e2-4" type="text" placeholder="…"> que estar no hotel às 9 horas. <span class="hint">(We have to be at the hotel at 9 o'clock.)</span></span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">Vocês <input class="fill-input" id="e2-5" type="text" placeholder="…"> que visitar o museu na quinta-feira? <span class="hint">(Do you have to visit the museum on Thursday?)</span></span></div>
+    <div class="sentence-row"><span class="num">6.</span><span class="txt">O Pedro e a Ana <input class="fill-input" id="e2-6" type="text" placeholder="…"> que comprar comida no domingo. <span class="hint">(Pedro and Ana have to buy food on Sunday.)</span></span></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">Complete with na, no, às or aos</h3>
+    <p class="ex-instruction">Complete the sentences with na, no, às or aos.</p>
+
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">Esta semana, eu tenho que ir ao médico <input class="fill-input" id="e3-1" type="text" placeholder="…" style="width:60px;"> terça-feira. <span class="hint">(this week, on Tuesday)</span></span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">Todas as semanas, a Camila tem que ligar para a mãe <input class="fill-input" id="e3-2" type="text" placeholder="…" style="width:60px;"> segundas-feiras. <span class="hint">(every Monday)</span></span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">Todos os fins de semana, a gente tem que comprar comida <input class="fill-input" id="e3-3" type="text" placeholder="…" style="width:60px;"> sábados. <span class="hint">(every Saturday)</span></span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">Nós temos que estar no aeroporto <input class="fill-input" id="e3-4" type="text" placeholder="…" style="width:60px;"> domingo, dia 6. <span class="hint">(this Sunday)</span></span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">Esta semana, você tem que fazer o check-in <input class="fill-input" id="e3-5" type="text" placeholder="…" style="width:60px;"> quarta-feira? <span class="hint">(this Wednesday)</span></span></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 4 -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Write complete sentences with ter que</h3>
+    <p class="ex-instruction">Use the words given to write a complete sentence with ter que + infinitive.</p>
+
+    <div class="examples-block" style="margin-bottom:20px;">
+      <div class="ex-pair" style="flex-direction:column;align-items:flex-start;gap:2px;"><span class="ex-pt">Ex.: eu / ligar para a Ana / quinta-feira → Eu tenho que ligar para a Ana na quinta-feira.</span></div>
+      <div class="ex-pair" style="flex-direction:column;align-items:flex-start;gap:2px;margin-top:8px;"><span class="ex-pt">Ex.: você / visitar o museu / domingo → Você tem que visitar o museu no domingo?</span></div>
+    </div>
+
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">1. a Camila / fazer o check-out / sexta-feira</label><input class="fill-input" id="e4-1" type="text" placeholder="A Camila tem que..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">2. nós / ir ao médico / terça-feira</label><input class="fill-input" id="e4-2" type="text" placeholder="Nós temos que..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">3. a gente / comprar comida / sábado</label><input class="fill-input" id="e4-3" type="text" placeholder="A gente tem que..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">4. vocês / visitar o museu / domingo</label><input class="fill-input" id="e4-4" type="text" placeholder="Vocês têm que..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">5. o Pedro / tomar um café com a Ana / quarta-feira</label><input class="fill-input" id="e4-5" type="text" placeholder="O Pedro tem que..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">6. você / fazer o check-in / quarta-feira?</label><input class="fill-input" id="e4-6" type="text" placeholder="Você tem que...?" style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">7. vocês / estar no aeroporto / 9 horas?</label><input class="fill-input" id="e4-7" type="text" placeholder="Vocês têm que...?" style="width:100%;"></div>
+    <div style="margin-bottom:0;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">8. o que / a Camila / fazer / sexta-feira?</label><input class="fill-input" id="e4-8" type="text" placeholder="O que..." style="width:100%;"></div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex4-answers', this)">👁 See model answers</button>
+    <div class="model-answers-block" id="ex4-answers">
+      <div class="model-answer-item"><div class="model-label">1</div><p>A Camila tem que fazer o check-out na sexta-feira.</p></div>
+      <div class="model-answer-item"><div class="model-label">2</div><p>Nós temos que ir ao médico na terça-feira.</p></div>
+      <div class="model-answer-item"><div class="model-label">3</div><p>A gente tem que comprar comida no sábado.</p></div>
+      <div class="model-answer-item"><div class="model-label">4</div><p>Vocês têm que visitar o museu no domingo.</p></div>
+      <div class="model-answer-item"><div class="model-label">5</div><p>O Pedro tem que tomar um café com a Ana na quarta-feira.</p></div>
+      <div class="model-answer-item"><div class="model-label">6</div><p>Você tem que fazer o check-in na quarta-feira?</p></div>
+      <div class="model-answer-item"><div class="model-label">7</div><p>Vocês têm que estar no aeroporto às 9 horas?</p></div>
+      <div class="model-answer-item"><div class="model-label">8</div><p>O que a Camila tem que fazer na sexta-feira?</p></div>
+    </div>
+  </div>
+
+  <!-- ─────────── PART 3 — PRODUÇÃO ESCRITA ─────────── -->
+  <div class="sec-label" style="margin-top:8px;">Part 3 — Produção Escrita / Written Production</div>
+  <div class="ex-block">
+    <div class="ex-num">Exercise 5</div>
+    <h3 class="ex-title">Write about your own week</h3>
+    <p class="ex-instruction">Write about your own week. What do you have to do? Write at least six sentences in Portuguese. Include at least one commitment that repeats every week.</p>
+
+    <div class="note-box">
+      <strong>Look at the example:</strong><br>
+      Na segunda-feira, eu tenho que ligar para a minha mãe. Na terça-feira, eu tenho que ir ao médico. Na quarta-feira, a gente tem que comprar comida. Às quintas-feiras, eu tenho que visitar a minha avó. Na sexta-feira, eu tenho que tomar um café com a Ana. No sábado, nós temos que ir ao aeroporto. No domingo, eu não tenho compromissos!
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>Temas possíveis / Possible topics:</strong> a família e os amigos (family and friends) · a saúde (health) · a casa e as compras (home and shopping) · a cidade (the city) · a viagem (travel)
+    </div>
+
+    <textarea class="free-textarea big" id="e5-free" placeholder="Escreva sobre a sua semana. O que você tem que fazer?"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- BREVO SUBMIT BLOCK -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── NORMALISE ──
+function norm(s) {
+  return (s || '').toLowerCase().trim()
+    .replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íì]/g,'i').replace(/[óôõö]/g,'o')
+    .replace(/[úù]/g,'u').replace(/ç/g,'c')
+    .replace(/\s+/g,' ');
+}
+
+// ── TOGGLE MODEL ANSWERS (Ex 1, Ex 4) ──
+function toggleAnswers(id, btn) {
+  var block = document.getElementById(id);
+  var visible = block.classList.toggle('visible');
+  btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+}
+
+// ── EXERCISE 2 — ter conjugation ──
+var ex2 = [
+  { id:'e2-1', accept:['tenho'], display:'tenho' },
+  { id:'e2-2', accept:['tem'],   display:'tem' },
+  { id:'e2-3', accept:['tem'],   display:'tem' },
+  { id:'e2-4', accept:['temos'], display:'temos' },
+  { id:'e2-5', accept:['tem','têm','tem'], display:'têm' },
+  { id:'e2-6', accept:['tem','têm'], display:'têm' }
+];
+function checkEx2() {
+  var correct = 0;
+  ex2.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.map(norm).indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+  });
+  var res = document.getElementById('ex2-result');
+  var allOk = correct === ex2.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = (allOk ? '✓ All ' + ex2.length + ' correct!' : correct + ' of ' + ex2.length + ' correct.') + ' Gabarito: 1. tenho · 2. tem · 3. tem · 4. temos · 5. têm · 6. têm';
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 3 — preposition ──
+var ex3 = [
+  { id:'e3-1', accept:['na'] },
+  { id:'e3-2', accept:['as','às'] },
+  { id:'e3-3', accept:['aos'] },
+  { id:'e3-4', accept:['no'] },
+  { id:'e3-5', accept:['na'] }
+];
+function checkEx3() {
+  var correct = 0;
+  ex3.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.map(norm).indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+  });
+  var res = document.getElementById('ex3-result');
+  var allOk = correct === ex3.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = (allOk ? '✓ All ' + ex3.length + ' correct!' : correct + ' of ' + ex3.length + ' correct.') + ' Gabarito: 1. na · 2. às · 3. aos · 4. no · 5. na';
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| .*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('.free-textarea').forEach(function(ta, idx) {
+    var label = '';
+    var block = ta.closest('div');
+    if (block) {
+      var lbl = block.querySelector('label');
+      if (lbl) label = lbl.textContent.replace(/\s+/g,' ').trim().substring(0,90);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>'+label+':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>'+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.fill-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY = [120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#4E551D;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls).then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  }).catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
