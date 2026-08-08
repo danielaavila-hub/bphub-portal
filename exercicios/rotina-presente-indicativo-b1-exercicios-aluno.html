@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotina e Presente do Indicativo — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --marrom: #967E63; --marrom-light: #F1EBE5;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+    p { margin-bottom: 14px; }
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--marrom); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+    .hero { background: var(--marrom); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 12px; }
+    .text-card h2 { font-size: 24px; color: var(--nanquim); margin-bottom: 6px; }
+    .text-card .fonte { font-size: 12px; color: #8a8a7a; font-style: italic; margin-bottom: 20px; }
+    .text-card p { font-size: 15.5px; line-height: 1.85; color: var(--texto); }
+    .exercise { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-top: 28px; }
+    .exercise h3 { font-size: 18px; color: var(--nanquim); margin-bottom: 6px; }
+    .exercise .instructions { font-size: 13.5px; color: #6b6b5c; margin-bottom: 18px; line-height: 1.6; }
+    .wordbank { background: var(--marrom-light); border-radius: 10px; padding: 12px 16px; font-size: 14px; margin-bottom: 18px; color: var(--nanquim); }
+    .wordbank strong { color: var(--marrom); }
+    .q-row { margin-bottom: 14px; font-size: 15px; }
+    .q-row label { display: block; margin-bottom: 6px; color: var(--nanquim); }
+    input[type="text"].gap {
+      border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 6px 10px;
+      font-family: 'Manrope', sans-serif; font-size: 14px; width: 160px; outline: none;
+    }
+    input[type="text"].gap:focus { border-color: var(--marrom); }
+    input.correct { border-color: var(--floresta) !important; background: #EAF5EE; }
+    input.wrong { border-color: var(--pitomba) !important; background: #FBEDE3; }
+    textarea {
+      width: 100%; min-height: 90px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px;
+      padding: 12px 14px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; resize: vertical;
+    }
+    textarea:focus { border-color: var(--marrom); }
+    .check-btn {
+      background: var(--marrom); color: white; border: none; border-radius: 10px;
+      padding: 10px 20px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700;
+      cursor: pointer; margin-top: 6px;
+    }
+    .check-btn:hover { opacity: 0.9; }
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 14px 18px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEDE3; color: #7a4a1f; }
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 32px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .text-card, .exercise { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1</span>
+    <span class="badge badge-type">Texto + Exercícios</span>
+    <a href="../b1/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; My Materials</a>
+  </div>
+</div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Presente do Indicativo <em>e a rotina do dia a dia</em></h1>
+  <div class="hero-sub">Practice the present indicative — especially irregular verbs — through a text about daily routine, using expressions of frequency like sempre, nunca, and eventualmente.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">presente do indicativo</span>
+    <span class="hero-tag">verbos irregulares</span>
+    <span class="hero-tag">expressões de frequência</span>
+    <span class="hero-tag">rotina</span>
+  </div>
+</div>
+<!-- MAIN -->
+<div class="main">
+  <div class="sec-label">Leitura</div>
+  <div class="text-card">
+    <h2>Minha Rotina (Quase) Perfeita</h2>
+    <div class="fonte">[Texto elaborado para fins didáticos, no estilo da crônica brasileira contemporânea]</div>
+    <p>Todo mundo tem uma rotina. A minha, confesso, não é lá essas coisas, mas funciona — mais ou menos.</p>
+    <p>De segunda a sexta, saio da cama às sete horas, nunca antes. Faço isso com muito custo, diga-se de passagem. Ponho o despertador para tocar três vezes e só levanto na terceira, quando já não há mais desculpa.</p>
+    <p>Vou direto para a cozinha e faço um café bem forte — sem café, eu não sou gente. Às vezes, quando estou com pressa, nem tomo café da manhã direito: como uma fruta e saio correndo. Mas isso é raro; geralmente eu me sento, tomo meu café com calma e vejo as notícias no celular.</p>
+    <p>Depois, visto a roupa do dia, pego a bolsa, as chaves, o computador, e vou para o trabalho. Trabalho em casa três dias por semana e, nos outros dois, vou até o escritório. Prefiro o escritório, para ser sincera: em casa, sempre acabo lavando roupa ou arrumando gaveta em vez de trabalhar.</p>
+    <p>No meio da manhã, paro, dou uma volta pelo quarteirão e, quase sempre, ligo para minha mãe. Ela sempre pergunta a mesma coisa: "Você já almoçou?" E eu sempre digo que não, porque ainda são dez da manhã.</p>
+    <p>Almoço por volta do meio-dia. Às vezes cozinho, mas, na maioria das vezes, peço alguma coisa pelo aplicativo — não tenho papas na língua para admitir isso. Depois do almoço, volto ao trabalho e fico até as seis, mais ou menos.</p>
+    <p>À noite é quando a minha rotina fica interessante. Duas vezes por semana, vou à academia; nas outras noites, prefiro ficar em casa. Eventualmente, saio para jantar com amigos ou vou ao cinema, mas isso não é uma coisa que faço toda semana — dinheiro também tem seus limites.</p>
+    <p>Antes de dormir, sempre leio um pouco, mesmo que sejam só duas páginas. Nunca durmo sem isso; é o meu ritual particular, uma forma de dizer ao dia: "Pode ir, amanhã eu volto para mais."</p>
+    <p>No fim de semana, tudo muda. Não ponho despertador, não saio da cama antes das nove e, quando dá, fico de pijama até o almoço. É o meu jeito de compensar a rotina da semana — e, sinceramente, acho que todo mundo merece isso.</p>
+  </div>
+  <!-- EXERCÍCIO 1 -->
+  <div class="exercise">
+    <h3>Exercício 1 — Comprehension</h3>
+    <div class="instructions">Answer the questions below in Portuguese, based on the text.</div>
+    <div class="q-row">
+      <label>1. Segundo o texto, a que horas a narradora costuma sair da cama durante a semana?</label>
+      <textarea id="c1-1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-row">
+      <label>2. Por que ela prefere trabalhar no escritório em vez de trabalhar em casa?</label>
+      <textarea id="c1-2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-row">
+      <label>3. E a sua rotina? Ela muda muito no fim de semana? O que muda?</label>
+      <textarea id="c1-3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </div>
+  <!-- EXERCÍCIO 2 -->
+  <div class="exercise">
+    <h3>Exercício 2 — Irregular verbs (eu form)</h3>
+    <div class="instructions">Complete each sentence with the correct verb from the word bank, conjugated in the present indicative, "eu" form.</div>
+    <div class="wordbank"><strong>Banco de palavras:</strong> fazer · pôr · ir · dar · pedir · dormir · preferir · ver · ter · dizer</div>
+    <div class="q-row"><label>1. Eu sempre <input type="text" class="gap" id="ex2-1"> exercício antes do café da manhã.</label></div>
+    <div class="q-row"><label>2. Todos os dias eu <input type="text" class="gap" id="ex2-2"> o celular para carregar antes de dormir.</label></div>
+    <div class="q-row"><label>3. Aos sábados, eu <input type="text" class="gap" id="ex2-3"> à feira comprar frutas.</label></div>
+    <div class="q-row"><label>4. De manhã, eu sempre <input type="text" class="gap" id="ex2-4"> uma volta pelo quarteirão.</label></div>
+    <div class="q-row"><label>5. Quando estou sem tempo, eu <input type="text" class="gap" id="ex2-5"> comida pelo aplicativo.</label></div>
+    <div class="q-row"><label>6. Eu <input type="text" class="gap" id="ex2-6"> oito horas por noite, no mínimo.</label></div>
+    <div class="q-row"><label>7. Eu <input type="text" class="gap" id="ex2-7"> chá a café à noite.</label></div>
+    <div class="q-row"><label>8. Eu <input type="text" class="gap" id="ex2-8"> as notícias assim que acordo.</label></div>
+    <div class="q-row"><label>9. Eu não <input type="text" class="gap" id="ex2-9"> paciência para acordar cedo aos domingos.</label></div>
+    <div class="q-row"><label>10. Eu nunca <input type="text" class="gap" id="ex2-10"> mentira para meus amigos.</label></div>
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+  <!-- EXERCÍCIO 3 -->
+  <div class="exercise">
+    <h3>Exercício 3 — Expressions of frequency</h3>
+    <div class="instructions">Complete each sentence with the frequency expression that best matches the meaning in parentheses.</div>
+    <div class="wordbank"><strong>Banco de palavras:</strong> sempre · nunca · às vezes · geralmente · eventualmente · raramente</div>
+    <div class="q-row"><label>1. Eu <input type="text" class="gap" id="ex3-1"> escovo os dentes depois de comer. (100% of the time)</label></div>
+    <div class="q-row"><label>2. Eu <input type="text" class="gap" id="ex3-2"> saio de casa sem tomar café. (0% of the time)</label></div>
+    <div class="q-row"><label>3. Eu <input type="text" class="gap" id="ex3-3"> almoço em casa, mas de vez em quando como fora. (most of the time, not always)</label></div>
+    <div class="q-row"><label>4. <input type="text" class="gap" id="ex3-4"> eu janto fora com amigos, mas não é uma coisa comum. (once in a while, not often)</label></div>
+    <div class="q-row"><label>5. Eu <input type="text" class="gap" id="ex3-5"> chego atrasado ao trabalho — talvez uma vez por ano. (very rarely)</label></div>
+    <div class="q-row"><label>6. <input type="text" class="gap" id="ex3-6"> eu trabalho até mais tarde, quando tenho um projeto urgente. (sometimes, unpredictably)</label></div>
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+  <!-- EXERCÍCIO 4 -->
+  <div class="exercise">
+    <h3>Exercício 4 — Verb conjugation</h3>
+    <div class="instructions">Write the correct "eu" form (present indicative) for each verb.</div>
+    <div class="q-row"><label>1. fazer → eu <input type="text" class="gap" id="ex4-1"></label></div>
+    <div class="q-row"><label>2. dizer → eu <input type="text" class="gap" id="ex4-2"></label></div>
+    <div class="q-row"><label>3. pedir → eu <input type="text" class="gap" id="ex4-3"></label></div>
+    <div class="q-row"><label>4. dormir → eu <input type="text" class="gap" id="ex4-4"></label></div>
+    <div class="q-row"><label>5. pôr → eu <input type="text" class="gap" id="ex4-5"></label></div>
+    <div class="q-row"><label>6. dar → eu <input type="text" class="gap" id="ex4-6"></label></div>
+    <div class="q-row"><label>7. ver → eu <input type="text" class="gap" id="ex4-7"></label></div>
+    <div class="q-row"><label>8. ir → eu <input type="text" class="gap" id="ex4-8"></label></div>
+    <div class="q-row"><label>9. sair → eu <input type="text" class="gap" id="ex4-9"></label></div>
+    <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+  <!-- EXERCÍCIO 5 -->
+  <div class="exercise">
+    <h3>Exercício 5 — Now it's your turn</h3>
+    <div class="instructions">Describe your own daily routine in Portuguese. Use at least 5 irregular verbs in the present indicative ("eu" form) and at least 3 expressions of frequency (sempre, nunca, às vezes, geralmente, eventualmente, raramente, de vez em quando...). Write at least 80 words.</div>
+    <textarea id="ex5-production" placeholder="Escreva sua rotina aqui..." style="min-height:150px;"></textarea>
+  </div>
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /main -->
+<script>
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+function runCheck(prefix, answers) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(prefix + '-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var ok = filled && a.keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;font-weight:400;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a.display + '</div>';
+  });
+  var res = document.getElementById(prefix + '-result');
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + answers.length + ' correct!'
+             : correct + ' of ' + answers.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+function checkEx2() {
+  runCheck('ex2', [
+    { keys: ['faço'], display: 'faço' },
+    { keys: ['ponho'], display: 'ponho' },
+    { keys: ['vou'], display: 'vou' },
+    { keys: ['dou'], display: 'dou' },
+    { keys: ['peço'], display: 'peço' },
+    { keys: ['durmo'], display: 'durmo' },
+    { keys: ['prefiro'], display: 'prefiro' },
+    { keys: ['vejo'], display: 'vejo' },
+    { keys: ['tenho'], display: 'tenho' },
+    { keys: ['digo'], display: 'digo' }
+  ]);
+}
+function checkEx3() {
+  runCheck('ex3', [
+    { keys: ['sempre'], display: 'sempre' },
+    { keys: ['nunca'], display: 'nunca' },
+    { keys: ['geralmente'], display: 'geralmente' },
+    { keys: ['eventualmente', 'às vezes', 'as vezes'], display: 'eventualmente (ou "às vezes")' },
+    { keys: ['raramente'], display: 'raramente' },
+    { keys: ['às vezes', 'as vezes', 'eventualmente'], display: 'às vezes (ou "eventualmente")' }
+  ]);
+}
+function checkEx4() {
+  runCheck('ex4', [
+    { keys: ['faço'], display: 'faço' },
+    { keys: ['digo'], display: 'digo' },
+    { keys: ['peço'], display: 'peço' },
+    { keys: ['durmo'], display: 'durmo' },
+    { keys: ['ponho'], display: 'ponho' },
+    { keys: ['dou'], display: 'dou' },
+    { keys: ['vejo'], display: 'vejo' },
+    { keys: ['vou'], display: 'vou' },
+    { keys: ['saio'], display: 'saio' }
+  ]);
+}
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| .*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('input.gap').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls).then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  }).catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
