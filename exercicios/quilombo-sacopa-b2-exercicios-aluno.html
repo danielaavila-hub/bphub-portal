@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Quilombo que Resiste — Quilombo Sacopã — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #D36D29; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #D36D29; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 620px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .watch-box { background: var(--nanquim); border-radius: 16px; padding: 28px 32px; margin: 8px 0 32px; }
+    .watch-box p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px; line-height: 1.7; }
+    .watch-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; padding: 13px 26px; border-radius: 10px; text-decoration: none; }
+    .watch-meta { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin-bottom: 28px; }
+    .card h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 6px; }
+    .card .instrucao { font-size: 13.5px; color: #8a8a78; margin-bottom: 20px; }
+
+    .texto-box { font-family: 'Trirong', serif; font-size: 16px; line-height: 1.95; color: var(--nanquim); }
+    .texto-box p { margin-bottom: 16px; }
+    .texto-box .fala { border-left: 3px solid var(--pitomba); padding-left: 16px; font-style: italic; margin: 18px 0; }
+    .texto-box .autor { display: block; font-style: normal; font-family: 'Manrope', sans-serif; font-size: 12.5px; color: var(--pitomba); margin-top: 6px; font-weight: 600; }
+    .fonte-cita { font-size: 12.5px; color: #999; margin-top: 18px; font-family: 'Manrope', sans-serif; }
+
+    .cult-box { background: var(--baunilha2); border-left: 4px solid var(--erva-doce); border-radius: 0 10px 10px 0; padding: 18px 22px; margin: 18px 0; font-size: 14.5px; line-height: 1.75; }
+    .cult-box strong { color: var(--floresta); }
+
+    .item { margin-bottom: 16px; }
+    .item label { display: block; font-size: 15px; margin-bottom: 6px; }
+    .item input[type="text"] {
+      width: 100%; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px;
+      font-family: 'Manrope', sans-serif; font-size: 14px; outline: none;
+    }
+    .item input.correct { border-color: var(--floresta); background: #F1F5EA; }
+    .item input.wrong { border-color: var(--pitomba); background: #FCEFE6; }
+
+    textarea {
+      width: 100%; min-height: 90px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2);
+      border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none; resize: vertical;
+    }
+
+    .vf-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .vf-row:last-child { border-bottom: none; }
+    .vf-text { font-size: 15px; flex: 1; }
+    .vf-opts { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-opts button {
+      padding: 7px 16px; border-radius: 8px; border: 1.5px solid rgba(30,29,28,0.2); background: white;
+      font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--nanquim);
+    }
+    .vf-opts button.selected-v { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .vf-opts button.selected-f { background: var(--pitomba); color: white; border-color: var(--pitomba); }
+
+    .match-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .match-term { min-width: 210px; font-weight: 600; font-size: 14.5px; }
+    .match-select { flex: 1; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; }
+    .match-select.correct { border-color: var(--floresta); }
+    .match-select.wrong { border-color: var(--pitomba); }
+
+    .check-btn { background: var(--pitomba); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 18px; padding: 16px 18px; border-radius: 10px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; }
+    .result-msg.try-again { background: #FDF3E9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .vf-row { flex-direction: column; align-items: flex-start; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+      .match-term { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>O Quilombo que Resiste <em>Quilombo Sacopã — Lagoa, Rio de Janeiro</em></h1>
+  <div class="hero-sub">Reportagem real da BBC News Brasil sobre a comunidade quilombola Sacopã — resistência, ancestralidade e samba em uma das áreas mais valorizadas do Rio. Subjuntivo em julgamentos e estimativas, e gerúndio de ação simultânea.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">quilombos e cultura afro-brasileira</span>
+    <span class="hero-tag">subjuntivo em julgamento/estimativa</span>
+    <span class="hero-tag">gerúndio de ação simultânea</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="watch-box">
+    <p>Antes de fazer os exercícios, assista ao vídeo da reportagem na página original da BBC News Brasil (a matéria inclui fotos e vídeo da comunidade).</p>
+    <a class="watch-btn" href="https://www.bbc.com/portuguese/brasil-36972179" target="_blank" rel="noopener">▶ Ver reportagem: "O quilombo que resiste..."</a>
+    <div class="watch-meta">BBC News Brasil · Série "Hidden Rio — Rio Escondido"</div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Texto</div>
+    <h2>A reportagem</h2>
+    <div class="instrucao">Leia o texto com atenção. Ele é a transcrição/adaptação direta da reportagem da BBC News Brasil.</div>
+
+    <div class="texto-box">
+      <p>Manter um quilombo em um dos pedaços mais valorizados do Brasil. Essa foi a conquista da comunidade quilombola Sacopã, que reúne 28 pessoas em plena Lagoa Rodrigo de Freitas, na Zona Sul do Rio de Janeiro.</p>
+
+      <p>A posse da terra, obtida recentemente, era uma das reivindicações dos residentes com base na Constituição de 1988, que garante aos descendentes de escravos a posse da terra para onde fugiram da escravidão.</p>
+
+      <div class="fala">"Fomos resistindo, ficamos. Nós ganhamos a posse da terra e foi uma luta insana. Mas conseguimos vencer a especulação imobiliária."<span class="autor">— Luiz Sacopã, líder da comunidade</span></div>
+
+      <p>O Brasil foi o principal destino para os escravos nas Américas. Estima-se que tenha recebido 5 milhões de pessoas vindas da África.</p>
+
+      <div class="fala">"Estamos na sexta geração. Nós somos da Nigéria. Fiz um exame há pouco tempo de DNA e deu 98,5% africano. Somos negros, no meio de brancos."<span class="autor">— Luiz Sacopã</span></div>
+
+      <p>O músico diz que não podia deixar de fazer música com a situação de opressão a que os cidadãos de mesma raça e classe são submetidos no Brasil.</p>
+
+      <div class="fala">"Tinha de fazer música e cair em cima dos racistas, em cima da elite. Música de protesto falando em respeito de quilombo, falando em respeito de negro."<span class="autor">— Luiz Sacopã</span></div>
+
+      <p>No Carnaval, Sacopã comanda um bloco para 70 mil pessoas. O músico considera irônico que a maior parte dos seus fãs sejam parte "dessa mesma elite branca".</p>
+
+      <div class="fala">"São eles mesmo se divertindo lá, cantando, me abraçando, me cumprimentando… Isso para mim foi genial. Eu metendo pau neles, e eles lá rebolando e dizendo: 'ah, Sacopã, valeu…'"<span class="autor">— Luiz Sacopã</span></div>
+
+      <p class="fonte-cita">Fonte: BBC News Brasil, "O quilombo que resiste em uma das áreas mais valorizadas do Rio", 5 ago. 2016 — série "Hidden Rio". Vídeo, reportagem e edição: Gibby Zobel.</p>
+    </div>
+
+    <div class="cult-box">
+      <strong>Nota cultural:</strong> quilombos como o Sacopã carregam, além da luta pela terra, uma forte dimensão cultural: o samba e o carnaval funcionam como formas de resistência e afirmação identitária, e muitas comunidades quilombolas também mantêm vínculos com religiões de matriz africana, como o Candomblé e a Umbanda, praticadas como parte da preservação da ancestralidade. Essa combinação — terra, música e religiosidade — é típica de comunidades quilombolas urbanas no Brasil.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 1</div>
+    <h2>Vocabulário essencial</h2>
+    <div class="instrucao">Relacione cada palavra ou expressão ao seu significado, com base no texto.</div>
+
+    <div class="match-row">
+      <div class="match-term">quilombo / quilombola</div>
+      <select class="match-select" id="m1">
+        <option value="">Escolha...</option>
+        <option value="a">comunidade formada por descendentes de escravos, e seu descendente/morador</option>
+        <option value="b">tipo de festa popular</option>
+        <option value="c">órgão do governo federal</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">especulação imobiliária</div>
+      <select class="match-select" id="m2">
+        <option value="">Escolha...</option>
+        <option value="a">prática de comprar/valorizar terrenos visando lucro, pressionando comunidades a saírem</option>
+        <option value="b">investimento em ações na bolsa de valores</option>
+        <option value="c">construção de moradias populares pelo governo</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">reivindicação</div>
+      <select class="match-select" id="m3">
+        <option value="">Escolha...</option>
+        <option value="a">pedido ou exigência formal por um direito</option>
+        <option value="b">documento de identidade</option>
+        <option value="c">celebração religiosa</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">posse da terra</div>
+      <select class="match-select" id="m4">
+        <option value="">Escolha...</option>
+        <option value="a">direito legal de ocupar e permanecer em um terreno</option>
+        <option value="b">aluguel mensal de um imóvel</option>
+        <option value="c">imposto sobre propriedade rural</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">ancestralidade</div>
+      <select class="match-select" id="m5">
+        <option value="">Escolha...</option>
+        <option value="a">vínculo com os antepassados e sua herança cultural</option>
+        <option value="b">planejamento para o futuro</option>
+        <option value="c">organização hierárquica de uma empresa</option>
+      </select>
+    </div>
+
+    <button class="check-btn" onclick="checkVocab()">✓ Verificar respostas</button>
+    <div id="vocab-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 2</div>
+    <h2>Verdadeiro ou falso</h2>
+    <div class="instrucao">Com base no texto, marque V (verdadeiro) ou F (falso).</div>
+
+    <div class="vf-row">
+      <div class="vf-text">1. O Quilombo Sacopã fica na Zona Sul do Rio, às margens da Lagoa Rodrigo de Freitas.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(1,'V',this)" id="vf1-V" data-v="V">V</button>
+        <button onclick="setVF(1,'V',this)" id="vf1-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">2. A comunidade conseguiu a posse legal da terra há muitas décadas, sem dificuldades.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(2,'F',this)" id="vf2-V" data-v="V">V</button>
+        <button onclick="setVF(2,'F',this)" id="vf2-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">3. Luiz Sacopã afirma ter ascendência nigeriana, confirmada por teste de DNA.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(3,'V',this)" id="vf3-V" data-v="V">V</button>
+        <button onclick="setVF(3,'V',this)" id="vf3-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">4. O bloco de carnaval de Sacopã é pequeno e reúne apenas os moradores do quilombo.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(4,'F',this)" id="vf4-V" data-v="V">V</button>
+        <button onclick="setVF(4,'F',this)" id="vf4-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">5. Sacopã acha irônico que boa parte do público do seu bloco seja da mesma elite branca que ele critica em suas músicas.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(5,'V',this)" id="vf5-V" data-v="V">V</button>
+        <button onclick="setVF(5,'V',this)" id="vf5-F" data-v="F">F</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkVF()">✓ Verificar respostas</button>
+    <div id="vf-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 3</div>
+    <h2>Gramática: subjuntivo em julgamento e estimativa</h2>
+    <div class="instrucao">O texto usa o subjuntivo depois de expressões que fazem uma estimativa ("estima-se que...") ou um julgamento de valor ("considera irônico que..."). Complete as frases conjugando o verbo entre parênteses no subjuntivo.</div>
+
+    <div class="item">
+      <label>1. Estima-se que o Brasil ___________ (receber) cerca de 5 milhões de africanos escravizados.</label>
+      <input type="text" id="g1" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>2. Sacopã considera irônico que grande parte de seus fãs ___________ (ser) da mesma elite que ele critica.</label>
+      <input type="text" id="g2" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>3. É significativo que a comunidade ___________ (conseguir) a posse da terra depois de décadas de luta.</label>
+      <input type="text" id="g3" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>4. Muita gente acha estranho que um quilombo ainda ___________ (existir) em uma das áreas mais caras do Rio.</label>
+      <input type="text" id="g4" placeholder="Complete a frase...">
+    </div>
+
+    <button class="check-btn" onclick="checkGram1()">✓ Verificar respostas</button>
+    <div id="gram1-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 4</div>
+    <h2>Gramática: gerúndio de ação simultânea</h2>
+    <div class="instrucao">No texto, Sacopã descreve a cena do bloco de carnaval usando vários gerúndios em sequência ("cantando, me abraçando, me cumprimentando... rebolando e dizendo"). Complete as frases com o gerúndio do verbo indicado.</div>
+
+    <div class="item">
+      <label>1. "Fomos ___________ (resistir), ficamos" — o verbo <em>ir + gerúndio</em> mostra uma ação que continuou ao longo do tempo.</label>
+      <input type="text" id="g5" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>2. Durante o bloco, os foliões passam a tarde ___________ (cantar), ___________ (dançar) e ___________ (se divertir) ao som do bloco de Sacopã.</label>
+      <input type="text" id="g6" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>3. Sacopã descreve a cena: "eles lá ___________ (rebolar) e ___________ (dizer): 'ah, Sacopã, valeu!'"</label>
+      <input type="text" id="g7" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>4. Transforme: "Nós resistimos ao longo de décadas" → "Fomos ___________ (resistir) ao longo de décadas."</label>
+      <input type="text" id="g8" placeholder="Complete a frase...">
+    </div>
+
+    <button class="check-btn" onclick="checkGram2()">✓ Verificar respostas</button>
+    <div id="gram2-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 5</div>
+    <h2>Discussão e produção pessoal</h2>
+    <div class="instrucao">Responda com suas próprias palavras, em português.</div>
+
+    <div class="item">
+      <label>1. Na sua opinião, por que Sacopã acha irônico que grande parte do público do seu bloco seja da "elite branca"?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>2. Muitas comunidades quilombolas mantêm forte ligação com o samba, o carnaval e religiões afro-brasileiras como o Candomblé e a Umbanda. Por que você acha que a música e a religião são tão importantes para a resistência e a identidade dessas comunidades?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>3. Descreva, usando pelo menos três gerúndios, uma cena de uma festa popular do seu país (pode ser um carnaval, uma festa junina, um festival etc.).</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:110px;"></textarea>
+    </div>
+    <div class="item">
+      <label>4. Você conhece alguma comunidade, no seu país ou em outro lugar, que luta para preservar suas terras ou sua cultura de forma parecida com o Quilombo Sacopã? Comente.</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <div class="send-box" style="margin-top:24px;">
+    📩 Depois de enviar, a professora vai ler com atenção e te dar um retorno personalizado — apontando o que você fez bem e ajudando a melhorar ainda mais o seu português. Essa troca é uma das partes mais importantes do processo de aprendizagem!
+  </div>
+
+</div>
+
+<script>
+  var vocabAnswers = { m1: 'a', m2: 'a', m3: 'a', m4: 'a', m5: 'a' };
+  function checkVocab() {
+    var correct = 0, total = 0, html = '';
+    var labels = {
+      m1: 'quilombo / quilombola → comunidade formada por descendentes de escravos, e seu descendente/morador',
+      m2: 'especulação imobiliária → prática de comprar/valorizar terrenos visando lucro, pressionando comunidades a saírem',
+      m3: 'reivindicação → pedido ou exigência formal por um direito',
+      m4: 'posse da terra → direito legal de ocupar e permanecer em um terreno',
+      m5: 'ancestralidade → vínculo com os antepassados e sua herança cultural'
+    };
+    Object.keys(vocabAnswers).forEach(function(id) {
+      total++;
+      var el = document.getElementById(id);
+      var ok = el.value === vocabAnswers[id];
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', el.value !== '' && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;">' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' ' + labels[id] + '</div>';
+    });
+    var res = document.getElementById('vocab-result');
+    var allOk = correct === total;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + total + ' corretas — respostas certas:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  var vfAnswers = { 1: 'V', 2: 'F', 3: 'V', 4: 'F', 5: 'V' };
+  var vfSelected = {};
+  function setVF(n, correctVal, btn) {
+    var chosen = btn.getAttribute('data-v');
+    vfSelected[n] = chosen;
+    var vBtn = document.getElementById('vf' + n + '-V');
+    var fBtn = document.getElementById('vf' + n + '-F');
+    vBtn.classList.remove('selected-v', 'selected-f');
+    fBtn.classList.remove('selected-v', 'selected-f');
+    btn.classList.add(chosen === 'V' ? 'selected-v' : 'selected-f');
+  }
+  function checkVF() {
+    var correct = 0, total = 0, html = '';
+    var texts = {
+      1: 'O Quilombo Sacopã fica na Zona Sul do Rio, às margens da Lagoa Rodrigo de Freitas. → Verdadeiro',
+      2: 'A comunidade conseguiu a posse legal da terra há muitas décadas, sem dificuldades. → Falso (foi recente e após uma luta insana)',
+      3: 'Luiz Sacopã afirma ter ascendência nigeriana, confirmada por teste de DNA. → Verdadeiro',
+      4: 'O bloco de carnaval de Sacopã é pequeno e reúne apenas os moradores do quilombo. → Falso (reúne 70 mil pessoas)',
+      5: 'Sacopã acha irônico que boa parte do público do seu bloco seja da mesma elite branca que ele critica. → Verdadeiro'
+    };
+    Object.keys(vfAnswers).forEach(function(n) {
+      total++;
+      var ok = vfSelected[n] === vfAnswers[n];
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;">' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' ' + texts[n] + '</div>';
+    });
+    var res = document.getElementById('vf-result');
+    var allOk = correct === total;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + total + ' corretas — respostas certas:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  function norm(s) {
+    return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+            .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+            .replace(/ç/g,'c').replace(/\s+/g,' ');
+  }
+
+  var gram1Answers = [
+    { id: 'g1', display: 'Estima-se que o Brasil tenha recebido cerca de 5 milhões de africanos escravizados.' },
+    { id: 'g2', display: 'Sacopã considera irônico que grande parte de seus fãs seja da mesma elite que ele critica.' },
+    { id: 'g3', display: 'É significativo que a comunidade tenha conseguido a posse da terra depois de décadas de luta.' },
+    { id: 'g4', display: 'Muita gente acha estranho que um quilombo ainda exista em uma das áreas mais caras do Rio.' }
+  ];
+  function checkGram1() { runGramCheck(gram1Answers, 'gram1-result'); }
+
+  var gram2Answers = [
+    { id: 'g5', display: 'Fomos resistindo, ficamos.' },
+    { id: 'g6', display: 'Durante o bloco, os foliões passam a tarde cantando, dançando e se divertindo ao som do bloco de Sacopã.' },
+    { id: 'g7', display: 'eles lá rebolando e dizendo: "ah, Sacopã, valeu!"' },
+    { id: 'g8', display: 'Fomos resistindo ao longo de décadas.' }
+  ];
+  function checkGram2() { runGramCheck(gram2Answers, 'gram2-result'); }
+
+  function runGramCheck(answers, resultId) {
+    var html = '', correct = 0;
+    answers.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var filled = el.value.trim().length > 0;
+      var okWords = norm(a.display).split(' ').filter(function(w){ return w.length > 3; });
+      var userNorm = norm(el.value);
+      var hits = okWords.filter(function(w){ return userNorm.indexOf(w) !== -1; }).length;
+      var ok = filled && hits >= Math.ceil(okWords.length * 0.5);
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', filled && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById(resultId);
+    var allOk = correct === answers.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + answers.length + ' corretas — frases-modelo:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  // ── FORMSPREE SUBMIT ──
+  function bphubSubmit() {
+    var btn = document.getElementById('bphub-submit-btn');
+    var nameEl = document.getElementById('bphub-student-name');
+    var emailEl = document.getElementById('bphub-student-email');
+    var name = nameEl ? nameEl.value.trim() : '';
+    if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+    if (nameEl) nameEl.style.borderColor='';
+
+    var email = emailEl ? emailEl.value.trim() : '';
+    var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+    var answers = {};
+    var summaryLines = [];
+    document.querySelectorAll('textarea').forEach(function(ta, idx) {
+      var label = '';
+      var parent = ta.closest('.item');
+      if (parent) {
+        var clone = parent.cloneNode(true);
+        clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); });
+        label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+      }
+      if (!label) label = 'Campo ' + (idx+1);
+      var val = ta.value.trim() || '(sem resposta)';
+      answers['R' + (idx+1) + ' — ' + label] = val;
+      summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    });
+
+    var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+    if (email) payload['_replyto'] = email;
+
+    btn.disabled = true;
+    btn.textContent = 'A enviar…';
+
+    fetch('https://formspree.io/f/xykaydly', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+    .then(function(res) {
+      if (res.ok) {
+        document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+        document.getElementById('bphub-success').style.display = 'block';
+        document.getElementById('bphub-form-area').style.display = 'none';
+        document.getElementById('bphub-error').style.display = 'none';
+        var slug = location.pathname.split('/').pop().replace('.html','');
+        localStorage.setItem('bphub_done_' + slug, '1');
+        document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        document.getElementById('bphub-error').style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Enviar respostas';
+      }
+    }).catch(function() {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    });
+  }
+</script>
+
+</body>
+</html>
