@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descobri que meu cabeleireiro é meu irmão — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #D36D29; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #D36D29; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .listen-box { background: var(--nanquim); border-radius: 16px; padding: 28px 32px; margin: 8px 0 40px; }
+    .listen-box p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px; line-height: 1.7; }
+    .listen-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; padding: 13px 26px; border-radius: 10px; text-decoration: none; }
+    .listen-meta { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin-bottom: 28px; }
+    .card h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 6px; }
+    .card .instrucao { font-size: 13.5px; color: #8a8a78; margin-bottom: 20px; }
+
+    .item { margin-bottom: 16px; }
+    .item label { display: block; font-size: 15px; margin-bottom: 6px; }
+    .item input[type="text"] {
+      width: 100%; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px;
+      font-family: 'Manrope', sans-serif; font-size: 14px; outline: none;
+    }
+    .item input.correct { border-color: var(--floresta); background: #F1F5EA; }
+    .item input.wrong { border-color: var(--pitomba); background: #FCEFE6; }
+
+    textarea {
+      width: 100%; min-height: 90px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2);
+      border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none; resize: vertical;
+    }
+
+    .vf-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .vf-row:last-child { border-bottom: none; }
+    .vf-text { font-size: 15px; flex: 1; }
+    .vf-opts { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-opts button {
+      padding: 7px 16px; border-radius: 8px; border: 1.5px solid rgba(30,29,28,0.2); background: white;
+      font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--nanquim);
+    }
+    .vf-opts button.selected-v { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .vf-opts button.selected-f { background: var(--pitomba); color: white; border-color: var(--pitomba); }
+
+    .match-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .match-term { min-width: 190px; font-weight: 600; font-size: 14.5px; }
+    .match-select { flex: 1; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; }
+    .match-select.correct { border-color: var(--floresta); }
+    .match-select.wrong { border-color: var(--pitomba); }
+
+    .check-btn { background: var(--pitomba); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 18px; padding: 16px 18px; border-radius: 10px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; }
+    .result-msg.try-again { background: #FDF3E9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .vf-row { flex-direction: column; align-items: flex-start; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+      .match-term { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Descobri que meu cabeleireiro <em>é meu irmão</em></h1>
+  <div class="hero-sub">Compreensão auditiva a partir de um episódio real do podcast <em>Que História!</em> — uma descoberta de família por meio de teste de DNA.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">relações familiares</span>
+    <span class="hero-tag">pretérito perfeito x imperfeito</span>
+    <span class="hero-tag">compreensão auditiva</span>
+  </div>
+  <div class="hero-note">🎧 Ouça o episódio e complete os exercícios abaixo</div>
+</div>
+
+<div class="main">
+
+  <div class="listen-box">
+    <p>Antes de fazer os exercícios, ouça o episódio na íntegra (cerca de 13 minutos). Não é necessário anotar tudo — foque na história geral.</p>
+    <a class="listen-btn" href="https://podcasts.apple.com/us/podcast/descobri-que-meu-cabeleireiro-%C3%A9-meu-irm%C3%A3o/id1492686435?i=1000525989624" target="_blank" rel="noopener">▶ Ouvir "Descobri que meu cabeleireiro é meu irmão"</a>
+    <div class="listen-meta">Podcast: Que História! · Fonte: Apple Podcasts</div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 1</div>
+    <h2>Vocabulário essencial</h2>
+    <div class="instrucao">Antes de ouvir, relacione cada palavra ou expressão ao seu significado. Isso vai ajudar na compreensão do episódio.</div>
+
+    <div class="match-row">
+      <div class="match-term">teste de DNA</div>
+      <select class="match-select" id="m1">
+        <option value="">Escolha...</option>
+        <option value="a">exame genético que revela relações de parentesco</option>
+        <option value="b">consulta médica de rotina</option>
+        <option value="c">tipo de corte de cabelo</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">meio-irmão / meia-irmã</div>
+      <select class="match-select" id="m2">
+        <option value="">Escolha...</option>
+        <option value="a">amigo muito próximo</option>
+        <option value="b">irmão ou irmã que compartilha apenas um dos pais</option>
+        <option value="c">colega de trabalho</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">dar à luz / ser dado(a) para adoção</div>
+      <select class="match-select" id="m3">
+        <option value="">Escolha...</option>
+        <option value="a">quando uma criança passa a ser criada por outra família</option>
+        <option value="b">quando alguém muda de emprego</option>
+        <option value="c">quando alguém se muda de cidade</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">laços de sangue <span style="font-weight:400;color:#8a8a78;">(blood ties)</span></div>
+      <select class="match-select" id="m4">
+        <option value="">Escolha...</option>
+        <option value="a">vínculo criado por parentesco biológico</option>
+        <option value="b">amizade de longa data</option>
+        <option value="c">contrato comercial</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">coincidência</div>
+      <select class="match-select" id="m5">
+        <option value="">Escolha...</option>
+        <option value="a">plano cuidadosamente organizado</option>
+        <option value="b">acontecimento inesperado e surpreendente, sem explicação aparente</option>
+        <option value="c">discussão entre familiares</option>
+      </select>
+    </div>
+
+    <button class="check-btn" onclick="checkVocab()">✓ Verificar respostas</button>
+    <div id="vocab-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 2</div>
+    <h2>Compreensão geral</h2>
+    <div class="instrucao">Depois de ouvir o episódio, responda às perguntas com suas próprias palavras, em português.</div>
+
+    <div class="item">
+      <label>1. Quem conta essa história e por que essa pessoa decidiu fazer um teste de DNA?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>2. Como as duas pessoas se conheceram, antes de descobrirem o parentesco?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>3. O que exatamente o resultado do teste revelou?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>4. Como cada um reagiu ao descobrir a verdade?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>5. Que outros parentes foram descobertos por causa dessa investigação?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 3</div>
+    <h2>Verdadeiro ou falso</h2>
+    <div class="instrucao">Com base no que você ouviu, marque V (verdadeiro) ou F (falso). Clique na opção escolhida.</div>
+
+    <div class="vf-row">
+      <div class="vf-text">1. A protagonista já sabia, desde criança, que tinha um irmão biológico.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(1,'F',this)" id="vf1-V" data-v="V">V</button>
+        <button onclick="setVF(1,'F',this)" id="vf1-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">2. O pai da protagonista havia sido adotado quando bebê.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(2,'V',this)" id="vf2-V" data-v="V">V</button>
+        <button onclick="setVF(2,'V',this)" id="vf2-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">3. Ela conheceu seu meio-irmão pela primeira vez em um salão de cabeleireiro.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(3,'V',this)" id="vf3-V" data-v="V">V</button>
+        <button onclick="setVF(3,'V',this)" id="vf3-F" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">4. O teste de DNA não revelou nenhum outro parente além dos dois.</div>
+      <div class="vf-opts">
+        <button onclick="setVF(4,'F',this)" id="vf4-V" data-v="V">V</button>
+        <button onclick="setVF(4,'F',this)" id="vf4-F" data-v="F">F</button>
+      </div>
+    </div>
+
+    <button class="check-btn" onclick="checkVF()">✓ Verificar respostas</button>
+    <div id="vf-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 4</div>
+    <h2>Gramática: pretérito perfeito x imperfeito</h2>
+    <div class="instrucao">Complete as frases sobre histórias de descobertas familiares, conjugando o verbo no pretérito perfeito ou imperfeito, conforme o contexto.</div>
+
+    <div class="item">
+      <label>1. Ela sempre <em>(achar)</em> ___________ que não tinha irmãos, até o dia em que o resultado do exame ___________ (chegar).</label>
+      <input type="text" id="g1" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>2. Enquanto ela ___________ (fazer) o teste de DNA por curiosidade, ela não ___________ (imaginar) o que ia descobrir.</label>
+      <input type="text" id="g2" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>3. Naquela tarde, quando o resultado ___________ (aparecer) na tela, ela ___________ (sentir) um misto de choque e emoção.</label>
+      <input type="text" id="g3" placeholder="Complete a frase...">
+    </div>
+    <div class="item">
+      <label>4. Antes de descobrir a verdade, os dois já ___________ (ter) uma relação de amizade, sem saber do parentesco.</label>
+      <input type="text" id="g4" placeholder="Complete a frase...">
+    </div>
+
+    <button class="check-btn" onclick="checkGram()">✓ Verificar respostas</button>
+    <div id="gram-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 5</div>
+    <h2>Produção pessoal</h2>
+    <div class="instrucao">Reflita e escreva uma resposta pessoal, em português.</div>
+
+    <div class="item">
+      <label>Você conhece alguma história parecida — de coincidência, adoção ou descoberta familiar? Ou: o que você faria se descobrisse um parente que não sabia que existia? Escreva um parágrafo contando ou imaginando essa situação.</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:130px;"></textarea>
+    </div>
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <div class="send-box" style="margin-top:24px;">
+    📩 Depois de enviar, a professora vai ler com atenção e te dar um retorno personalizado — apontando o que você fez bem e ajudando a melhorar ainda mais o seu português. Essa troca é uma das partes mais importantes do processo de aprendizagem!
+  </div>
+
+</div>
+
+<script>
+  var vocabAnswers = { m1: 'a', m2: 'b', m3: 'a', m4: 'a', m5: 'b' };
+  function checkVocab() {
+    var correct = 0, total = 0, html = '';
+    var labels = {
+      m1: 'teste de DNA → exame genético que revela relações de parentesco',
+      m2: 'meio-irmão / meia-irmã → irmão ou irmã que compartilha apenas um dos pais',
+      m3: 'dar à luz / ser dado(a) para adoção → quando uma criança passa a ser criada por outra família',
+      m4: 'laços de sangue → vínculo criado por parentesco biológico',
+      m5: 'coincidência → acontecimento inesperado e surpreendente, sem explicação aparente'
+    };
+    Object.keys(vocabAnswers).forEach(function(id) {
+      total++;
+      var el = document.getElementById(id);
+      var ok = el.value === vocabAnswers[id];
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', el.value !== '' && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;">' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' ' + labels[id] + '</div>';
+    });
+    var res = document.getElementById('vocab-result');
+    var allOk = correct === total;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + total + ' corretas — respostas certas:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  var vfAnswers = { 1: 'F', 2: 'V', 3: 'V', 4: 'F' };
+  var vfSelected = {};
+  function setVF(n, correctVal, btn) {
+    var chosen = btn.getAttribute('data-v');
+    vfSelected[n] = chosen;
+    var vBtn = document.getElementById('vf' + n + '-V');
+    var fBtn = document.getElementById('vf' + n + '-F');
+    vBtn.classList.remove('selected-v', 'selected-f');
+    fBtn.classList.remove('selected-v', 'selected-f');
+    btn.classList.add(chosen === 'V' ? 'selected-v' : 'selected-f');
+  }
+  function checkVF() {
+    var correct = 0, total = 0, html = '';
+    var texts = {
+      1: 'A protagonista já sabia, desde criança, que tinha um irmão biológico. → Falso',
+      2: 'O pai da protagonista havia sido adotado quando bebê. → Verdadeiro',
+      3: 'Ela conheceu seu meio-irmão pela primeira vez em um salão de cabeleireiro. → Verdadeiro',
+      4: 'O teste de DNA não revelou nenhum outro parente além dos dois. → Falso'
+    };
+    Object.keys(vfAnswers).forEach(function(n) {
+      total++;
+      var ok = vfSelected[n] === vfAnswers[n];
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;">' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' ' + texts[n] + '</div>';
+    });
+    var res = document.getElementById('vf-result');
+    var allOk = correct === total;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + total + ' corretas — respostas certas:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  var gramAnswers = [
+    { id: 'g1', display: 'Ela sempre achava que não tinha irmãos, até o dia em que o resultado do exame chegou.' },
+    { id: 'g2', display: 'Enquanto ela fazia o teste de DNA por curiosidade, ela não imaginava o que ia descobrir.' },
+    { id: 'g3', display: 'Naquela tarde, quando o resultado apareceu na tela, ela sentiu um misto de choque e emoção.' },
+    { id: 'g4', display: 'Antes de descobrir a verdade, os dois já tinham uma relação de amizade, sem saber do parentesco.' }
+  ];
+  function norm(s) {
+    return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+            .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+            .replace(/ç/g,'c').replace(/\s+/g,' ');
+  }
+  function checkGram() {
+    var html = '', correct = 0;
+    gramAnswers.forEach(function(a, i) {
+      var el = document.getElementById(a.id);
+      var filled = el.value.trim().length > 0;
+      var okWords = norm(a.display).split(' ').filter(function(w){ return w.length > 3; });
+      var userNorm = norm(el.value);
+      var hits = okWords.filter(function(w){ return userNorm.indexOf(w) !== -1; }).length;
+      var ok = filled && hits >= Math.ceil(okWords.length * 0.5);
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', filled && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' ' + a.display + '</div>';
+    });
+    var res = document.getElementById('gram-result');
+    var allOk = correct === gramAnswers.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + gramAnswers.length + ' corretas — frases-modelo:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+
+  // ── FORMSPREE SUBMIT ──
+  function bphubSubmit() {
+    var btn = document.getElementById('bphub-submit-btn');
+    var nameEl = document.getElementById('bphub-student-name');
+    var emailEl = document.getElementById('bphub-student-email');
+    var name = nameEl ? nameEl.value.trim() : '';
+    if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+    if (nameEl) nameEl.style.borderColor='';
+
+    var email = emailEl ? emailEl.value.trim() : '';
+    var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+
+    var answers = {};
+    var summaryLines = [];
+    document.querySelectorAll('textarea').forEach(function(ta, idx) {
+      var label = '';
+      var parent = ta.closest('.item');
+      if (parent) {
+        var clone = parent.cloneNode(true);
+        clone.querySelectorAll('textarea, button').forEach(function(el){ el.remove(); });
+        label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+      }
+      if (!label) label = 'Campo ' + (idx+1);
+      var val = ta.value.trim() || '(sem resposta)';
+      answers['R' + (idx+1) + ' — ' + label] = val;
+      summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    });
+
+    var payload = Object.assign({ 'Nome do aluno': name, 'Material': material }, answers);
+    if (email) payload['_replyto'] = email;
+
+    btn.disabled = true;
+    btn.textContent = 'A enviar…';
+
+    fetch('https://formspree.io/f/xykaydly', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+    .then(function(res) {
+      if (res.ok) {
+        document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+        document.getElementById('bphub-success').style.display = 'block';
+        document.getElementById('bphub-form-area').style.display = 'none';
+        document.getElementById('bphub-error').style.display = 'none';
+        var slug = location.pathname.split('/').pop().replace('.html','');
+        localStorage.setItem('bphub_done_' + slug, '1');
+        document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        document.getElementById('bphub-error').style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Enviar respostas';
+      }
+    }).catch(function() {
+      document.getElementById('bphub-error').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    });
+  }
+</script>
+
+</body>
+</html>
