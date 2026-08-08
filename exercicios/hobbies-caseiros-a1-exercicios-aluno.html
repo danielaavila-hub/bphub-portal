@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hobbies Caseiros — O Dia em Casa | A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB;
+      --level: #4E551D; /* A1 — floresta */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* REFERENCE BOX */
+    .ref-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 32px; }
+    .ref-box h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 16px; }
+
+    /* PRONOUN / DATA TABLE */
+    .pronoun-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+    .pronoun-table th { background: var(--level); color: white; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 12px; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pronoun-table th:first-child { border-radius: 8px 0 0 0; }
+    .pronoun-table th:last-child { border-radius: 0 8px 0 0; }
+    .pronoun-table td { padding: 12px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .pronoun-table tr:last-child td { border-bottom: none; }
+    .pronoun-table tr:nth-child(even) td { background: #faf8f4; }
+    .pronoun-table td strong { font-weight: 700; color: var(--nanquim); }
+
+    /* NOTE BOX */
+    .note-box { background: rgba(78,85,29,0.07); border-left: 3px solid var(--level); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+    .note-box strong { color: var(--nanquim); }
+    .note-box:last-child { margin-bottom: 0; }
+
+    /* EXAMPLE PAIRS */
+    .examples-block { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 6px 0; font-size: 14.5px; }
+    .ex-pt { flex: 1; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; color: #888; font-style: italic; }
+
+    /* TEXT CARD */
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 30px 34px; margin-bottom: 10px; }
+    .text-card-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-card-byline { font-size: 12px; color: #aaa; margin-bottom: 22px; }
+    .text-card p { font-size: 15.5px; line-height: 1.95; margin-bottom: 12px; color: var(--texto); }
+    .text-card p:last-child { margin-bottom: 0; }
+    .text-card p strong { color: var(--level); }
+    .fonte-cita { font-size: 12px; color: #999; font-style: italic; margin: 0 0 32px 4px; }
+
+    /* VOCAB TABLE */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    /* EXERCISE BLOCKS */
+    .ex-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-num { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 6px; }
+    .ex-title { font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .ex-instruction { font-size: 14px; color: #777; font-style: italic; line-height: 1.65; margin-bottom: 22px; }
+
+    /* SENTENCE ROWS */
+    .sentence-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; font-size: 15px; }
+    .sentence-row .num { font-weight: 700; color: var(--level); min-width: 22px; flex-shrink: 0; }
+    .sentence-row .txt { flex: 1; line-height: 2; }
+    .hint { font-size: 12px; color: #bbb; font-style: italic; }
+
+    /* TEXT INPUTS (inline gap fill) */
+    .fill-input { display: inline-block; border: none; border-bottom: 2px solid #ccc; padding: 2px 6px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: transparent; width: 110px; outline: none; transition: border-color 0.2s; vertical-align: middle; }
+    .fill-input:focus { border-bottom-color: var(--level); }
+    .fill-input.correct { border-bottom-color: var(--floresta); background: rgba(78,85,29,0.08); border-radius: 4px 4px 0 0; color: var(--floresta); }
+    .fill-input.wrong { border-bottom-color: var(--pitomba); background: rgba(211,109,41,0.07); border-radius: 4px 4px 0 0; }
+
+    /* CHECK BUTTON */
+    .check-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; margin-right: 10px; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+
+    /* RESULT PANEL */
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: rgba(78,85,29,0.09); border: 1px solid rgba(78,85,29,0.2); }
+    .result-msg.try-again { background: rgba(211,109,41,0.07); border: 1px solid rgba(211,109,41,0.2); }
+
+    /* FREE WRITE */
+    .free-textarea { width: 100%; min-height: 90px; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 12px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); background: var(--baunilha); outline: none; resize: vertical; transition: border-color 0.2s; line-height: 1.7; margin-top: 8px; }
+    .free-textarea:focus { border-color: var(--level); }
+    .free-textarea.big { min-height: 170px; }
+
+    /* MODEL ANSWERS REVEAL */
+    .model-answers-block { display:none; margin-top:16px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:10px; background: rgba(78,85,29,0.06); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; background: transparent; border: 1.5px solid var(--level); color: var(--level); border-radius: 10px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s; }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    /* CONJUGATION FILL TABLE */
+    .conj-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 6px 0 4px; }
+    .conj-table th { background: var(--level); color: white; padding: 9px 12px; font-size: 11.5px; text-align: left; letter-spacing: 0.04em; text-transform: uppercase; }
+    .conj-table td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); }
+    .conj-table tr:nth-child(even) td { background: #faf8f4; }
+    .conj-table .fill-input { width: 100px; }
+
+    /* WORD BANK */
+    .word-bank { background: var(--off-white); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .word-bank strong { color: var(--level); margin-right: 4px; }
+    .wb-word { background: #fff; border: 1.5px solid var(--erva-doce); border-radius: 5px; padding: 3px 12px; font-size: 13.5px; font-family: 'Manrope', sans-serif; color: var(--nanquim); }
+
+    /* SEND BOX */
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-block, .ref-box, .text-card { padding: 20px 18px; }
+      .fill-input { width: 90px; }
+      .conj-table { font-size: 12.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Gramática · Exercícios</span>
+    <a href="../a1/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; My Materials</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Hobbies Caseiros <em>O Dia em Casa</em></h1>
+  <div class="hero-sub">Talking about your activities at home and saying what time of day you do them, using the present tense of regular <em>-ER</em> and <em>-IR</em> verbs.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">presente do indicativo · -ER / -IR</span>
+    <span class="hero-tag">momentos do dia</span>
+    <span class="hero-tag">A1 · Gramática</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- REFERENCE 1 — VERBOS -ER / -IR -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Presente do indicativo: verbos regulares em -ER e -IR</h2>
+
+    <table class="pronoun-table">
+      <thead><tr><th>Pessoa</th><th>comER (to eat)</th><th>assistIR (to watch)</th></tr></thead>
+      <tbody>
+        <tr><td>eu</td><td><strong>como</strong></td><td><strong>assisto</strong></td></tr>
+        <tr><td>você / ele / ela / a gente</td><td><strong>come</strong></td><td><strong>assiste</strong></td></tr>
+        <tr><td>nós</td><td><strong>comemos</strong></td><td><strong>assistimos</strong></td></tr>
+        <tr><td>vocês / eles / elas</td><td><strong>comem</strong></td><td><strong>assistem</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Notice:</strong> -ER and -IR verbs have the same endings in every form except <strong>nós</strong>: com<strong>emos</strong> but assist<strong>imos</strong>.<br>
+      <strong>Watch out:</strong> <em>a gente</em> means "we", but it takes the same form as <em>ele / ela</em> → a gente come, a gente assiste.
+    </div>
+  </div>
+
+  <!-- REFERENCE 2 — MOMENTOS DO DIA -->
+  <div class="ref-box">
+    <div class="sec-label">Language Reference</div>
+    <h2>Momentos do dia / Times of day</h2>
+
+    <table class="pronoun-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td>de manhã</td><td>in the morning</td></tr>
+        <tr><td>de tarde / à tarde</td><td>in the afternoon</td></tr>
+        <tr><td>de noite / à noite</td><td>in the evening / at night</td></tr>
+        <tr><td>no final de semana / nos finais de semana</td><td>at the weekend / on weekends</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">These expressions usually come at the beginning or at the end of the sentence: <em>De noite eu como pizza. / Eu como pizza de noite.</em></div>
+  </div>
+
+  <!-- TEXT -->
+  <div class="sec-label">Texto / Text</div>
+  <div class="text-card">
+    <div class="text-card-title">Enquete: E em casa, como é o seu tempo livre?</div>
+    <div class="text-card-byline">Programa Fim de Tarde — respostas dos ouvintes</div>
+    <p>Os ouvintes do programa escrevem para a rádio e contam as suas atividades em casa. <em>(Listeners write in to the station and share what they do at home.)</em></p>
+    <p><strong>Otávio — Curitiba (PR)</strong><br>
+    "De manhã, eu bebo chá e cuido das plantas. De tarde, eu trabalho e escrevo no computador. De noite eu assisto séries. Nos finais de semana, eu cozinho para os meus amigos."</p>
+    <p><strong>Lívia — Belém (PA)</strong><br>
+    "Eu não gosto de TV! De manhã eu toco violão e, de tarde, eu cozinho. De noite, eu como biscoitos caseiros e curto a conversa com os meus amigos."</p>
+    <p><strong>Rafael e Bia — Recife (PE)</strong><br>
+    "Nós trabalhamos de manhã e de tarde. De noite, nós assistimos filmes e comemos pizza. Nos finais de semana, nós ouvimos música ao vivo e curtimos o nosso gato."</p>
+  </div>
+  <div class="fonte-cita">Texto construído para fins pedagógicos — Brazilian Portuguese Hub. Nenhuma fonte autêntica está disponível dentro do repertório lexical e gramatical deste nível.</div>
+
+  <!-- VOCAB -->
+  <div class="sec-label">Vocabulário / Vocabulary</div>
+  <div class="ref-box">
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">o tempo livre</td><td>free time</td></tr>
+        <tr><td class="vocab-pt">beber chá</td><td>to drink tea</td></tr>
+        <tr><td class="vocab-pt">cuidar das plantas</td><td>to take care of the plants</td></tr>
+        <tr><td class="vocab-pt">escrever no computador</td><td>to write on the computer</td></tr>
+        <tr><td class="vocab-pt">assistir séries / filmes</td><td>to watch series / films</td></tr>
+        <tr><td class="vocab-pt">comer biscoitos caseiros</td><td>to eat homemade biscuits</td></tr>
+        <tr><td class="vocab-pt">curtir a conversa</td><td>to enjoy the conversation</td></tr>
+        <tr><td class="vocab-pt">ouvir música ao vivo</td><td>to listen to live music</td></tr>
+        <tr><td class="vocab-pt">tocar violão</td><td>to play the guitar</td></tr>
+        <tr><td class="vocab-pt">abrir a porta</td><td>to open the door</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────── PART 1 — COMPREENSÃO ─────────── -->
+  <div class="sec-label" style="margin-top:8px;">Part 1 — Compreensão / Comprehension</div>
+  <div class="ex-block">
+    <div class="ex-num">Exercise 1</div>
+    <h3 class="ex-title">Answer the questions in Portuguese</h3>
+    <p class="ex-instruction">Answer the questions in Portuguese, using complete sentences based on the text.</p>
+
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">1. O que o Otávio bebe de manhã? <span style="font-weight:400;color:#999;">(What does Otávio drink in the morning?)</span></label>
+      <textarea class="free-textarea" id="q1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">2. Quando o Otávio assiste a séries? <span style="font-weight:400;color:#999;">(When does Otávio watch series?)</span></label>
+      <textarea class="free-textarea" id="q2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">3. Quem não gosta de TV? <span style="font-weight:400;color:#999;">(Who doesn't like TV?)</span></label>
+      <textarea class="free-textarea" id="q3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">4. O que a Lívia come de noite? <span style="font-weight:400;color:#999;">(What does Lívia eat at night?)</span></label>
+      <textarea class="free-textarea" id="q4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div>
+      <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:4px;">5. O que o Rafael e a Bia ouvem nos finais de semana? <span style="font-weight:400;color:#999;">(What do Rafael and Bia listen to on weekends?)</span></label>
+      <textarea class="free-textarea" id="q5" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex1-answers', this)">👁 See model answers</button>
+    <div class="model-answers-block" id="ex1-answers">
+      <div class="model-answer-item"><div class="model-label">Question 1</div><p>Ele bebe chá. / O Otávio bebe chá de manhã.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ele assiste séries de noite.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 3</div><p>A Lívia não gosta de TV.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 4</div><p>Ela come biscoitos caseiros. / A Lívia come biscoitos caseiros de noite.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 5</div><p>Eles ouvem música ao vivo. / O Rafael e a Bia ouvem música ao vivo nos finais de semana.</p></div>
+    </div>
+  </div>
+
+  <!-- ─────────── PART 2 — PRÁTICA CONTROLADA ─────────── -->
+  <div class="sec-label" style="margin-top:8px;">Part 2 — Prática Controlada / Controlled Practice</div>
+
+  <!-- Exercise 2 — Infinitivos -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 2</div>
+    <h3 class="ex-title">Do texto para o infinitivo</h3>
+    <p class="ex-instruction">These verb forms appear in the text. Write the infinitive of each one.</p>
+
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">bebo → <input class="fill-input" id="a2-1" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">cuido → <input class="fill-input" id="a2-2" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">escrevo → <input class="fill-input" id="a2-3" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">assisto → <input class="fill-input" id="a2-4" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">cozinho → <input class="fill-input" id="a2-5" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">6.</span><span class="txt">toco → <input class="fill-input" id="a2-6" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">7.</span><span class="txt">como → <input class="fill-input" id="a2-7" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">8.</span><span class="txt">curto → <input class="fill-input" id="a2-8" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">9.</span><span class="txt">trabalhamos → <input class="fill-input" id="a2-9" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">10.</span><span class="txt">assistimos → <input class="fill-input" id="a2-10" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">11.</span><span class="txt">comemos → <input class="fill-input" id="a2-11" type="text" placeholder="…"></span></div>
+    <div class="sentence-row"><span class="num">12.</span><span class="txt">ouvimos → <input class="fill-input" id="a2-12" type="text" placeholder="…"></span></div>
+
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 3 — Complete a tabela -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 3</div>
+    <h3 class="ex-title">Complete a tabela</h3>
+    <p class="ex-instruction">Complete the conjugation tables in the present tense.</p>
+
+    <table class="conj-table">
+      <thead><tr><th></th><th>comER</th><th>escrevER</th><th>curtIR</th><th>abrIR</th></tr></thead>
+      <tbody>
+        <tr><td>eu</td><td><input class="fill-input" id="b3-1" type="text" placeholder="…"></td><td>escrevo</td><td><input class="fill-input" id="b3-2" type="text" placeholder="…"></td><td>abro</td></tr>
+        <tr><td>você / ele / ela / a gente</td><td>come</td><td><input class="fill-input" id="b3-3" type="text" placeholder="…"></td><td>curte</td><td><input class="fill-input" id="b3-4" type="text" placeholder="…"></td></tr>
+        <tr><td>nós</td><td><input class="fill-input" id="b3-5" type="text" placeholder="…"></td><td>escrevemos</td><td><input class="fill-input" id="b3-6" type="text" placeholder="…"></td><td><input class="fill-input" id="b3-7" type="text" placeholder="…"></td></tr>
+        <tr><td>vocês / eles / elas</td><td>comem</td><td><input class="fill-input" id="b3-8" type="text" placeholder="…"></td><td><input class="fill-input" id="b3-9" type="text" placeholder="…"></td><td>abrem</td></tr>
+      </tbody>
+    </table>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 4 — Complete as frases -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 4</div>
+    <h3 class="ex-title">Complete as frases</h3>
+    <p class="ex-instruction">Complete the sentences with the correct present tense form of the verb in brackets.</p>
+
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">Eu <input class="fill-input" id="c4-1" type="text" placeholder="…"> (beber) chá de manhã. <span class="hint">(I drink tea in the morning.)</span></span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">A Sofia <input class="fill-input" id="c4-2" type="text" placeholder="…"> (comer) frutas de tarde. <span class="hint">(Sofia eats fruit in the afternoon.)</span></span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">Nós <input class="fill-input" id="c4-3" type="text" placeholder="…"> (assistir) filmes de noite. <span class="hint">(We watch films at night.)</span></span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">Vocês <input class="fill-input" id="c4-4" type="text" placeholder="…"> (curtir) as séries brasileiras? <span class="hint">(Do you enjoy Brazilian series?)</span></span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">A gente <input class="fill-input" id="c4-5" type="text" placeholder="…"> (escrever) no computador de tarde. <span class="hint">(We write on the computer in the afternoon.)</span></span></div>
+    <div class="sentence-row"><span class="num">6.</span><span class="txt">Eles <input class="fill-input" id="c4-6" type="text" placeholder="…"> (ouvir) música ao vivo nos finais de semana. <span class="hint">(They listen to live music on weekends.)</span></span></div>
+    <div class="sentence-row"><span class="num">7.</span><span class="txt">Você <input class="fill-input" id="c4-7" type="text" placeholder="…"> (abrir) a porta de manhã? <span class="hint">(Do you open the door in the morning?)</span></span></div>
+    <div class="sentence-row"><span class="num">8.</span><span class="txt">O Paulo <input class="fill-input" id="c4-8" type="text" placeholder="…"> (assistir) séries de noite. <span class="hint">(Paulo watches series at night.)</span></span></div>
+    <div class="sentence-row"><span class="num">9.</span><span class="txt">Nós <input class="fill-input" id="c4-9" type="text" placeholder="…"> (cozinhar) nos finais de semana. <span class="hint">(We cook on weekends.)</span></span></div>
+    <div class="sentence-row"><span class="num">10.</span><span class="txt">Eu <input class="fill-input" id="c4-10" type="text" placeholder="…"> (tocar) violão de noite. <span class="hint">(I play the guitar at night.)</span></span></div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Check answers</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 5 — Desafio do nós -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 5</div>
+    <h3 class="ex-title">O desafio do <em>nós</em></h3>
+    <p class="ex-instruction">Complete all the sentences with the <em>nós</em> form of the verb in brackets.</p>
+
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">Nós <input class="fill-input" id="d5-1" type="text" placeholder="…"> (comer) pizza de noite.</span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">Nós <input class="fill-input" id="d5-2" type="text" placeholder="…"> (assistir) séries no computador.</span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">Nós <input class="fill-input" id="d5-3" type="text" placeholder="…"> (beber) chá de manhã.</span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">Nós <input class="fill-input" id="d5-4" type="text" placeholder="…"> (curtir) o tempo livre em casa.</span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">Nós <input class="fill-input" id="d5-5" type="text" placeholder="…"> (escrever) para a rádio.</span></div>
+    <div class="sentence-row"><span class="num">6.</span><span class="txt">Nós <input class="fill-input" id="d5-6" type="text" placeholder="…"> (abrir) a porta de tarde.</span></div>
+
+    <div class="note-box">O ponto crítico: verbos em -IR mantêm o -i- na forma de nós (assist<strong>imos</strong>, abr<strong>imos</strong>), enquanto os em -ER usam <strong>-emos</strong>.</div>
+
+    <button class="check-btn" onclick="checkEx5()">✓ Check answers</button>
+    <div id="ex5-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 6 — Encontre o erro -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 6</div>
+    <h3 class="ex-title">Encontre o erro</h3>
+    <p class="ex-instruction">Each sentence has one incorrect verb form. Rewrite the sentence correctly.</p>
+
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">1. Eu bebe chá de manhã.</label><input class="fill-input" id="e6-1" type="text" placeholder="Escreva a frase corrigida..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">2. Nós assistemos filmes de noite.</label><input class="fill-input" id="e6-2" type="text" placeholder="Escreva a frase corrigida..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">3. A gente curtem o tempo livre.</label><input class="fill-input" id="e6-3" type="text" placeholder="Escreva a frase corrigida..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">4. Vocês come biscoitos caseiros.</label><input class="fill-input" id="e6-4" type="text" placeholder="Escreva a frase corrigida..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">5. Nós abremos a porta de manhã.</label><input class="fill-input" id="e6-5" type="text" placeholder="Escreva a frase corrigida..." style="width:100%;"></div>
+    <div style="margin-bottom:0;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">6. Eles escreve no computador.</label><input class="fill-input" id="e6-6" type="text" placeholder="Escreva a frase corrigida..." style="width:100%;"></div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex6-answers', this)">👁 See model answers</button>
+    <div class="model-answers-block" id="ex6-answers">
+      <div class="model-answer-item"><div class="model-label">1</div><p>Eu bebo chá de manhã.</p></div>
+      <div class="model-answer-item"><div class="model-label">2</div><p>Nós assistimos filmes de noite.</p></div>
+      <div class="model-answer-item"><div class="model-label">3</div><p>A gente curte o tempo livre.</p></div>
+      <div class="model-answer-item"><div class="model-label">4</div><p>Vocês comem biscoitos caseiros.</p></div>
+      <div class="model-answer-item"><div class="model-label">5</div><p>Nós abrimos a porta de manhã.</p></div>
+      <div class="model-answer-item"><div class="model-label">6</div><p>Eles escrevem no computador.</p></div>
+    </div>
+  </div>
+
+  <!-- Exercise 7 — Qual é o verbo -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 7</div>
+    <h3 class="ex-title">Qual é o verbo?</h3>
+    <p class="ex-instruction">Choose the correct verb form from the box. There are two extra forms you will not use. Each form is used only once.</p>
+
+    <div class="word-bank">
+      <strong>Banco de palavras:</strong>
+      <span class="wb-word">assiste</span><span class="wb-word">bebem</span><span class="wb-word">comemos</span><span class="wb-word">curte</span><span class="wb-word">escrevo</span><span class="wb-word">abrem</span><span class="wb-word">ouve</span><span class="wb-word">cozinha</span><span class="wb-word">trabalham</span><span class="wb-word">toco</span>
+    </div>
+
+    <div class="sentence-row"><span class="num">1.</span><span class="txt">De noite, o Otávio <input class="fill-input" id="f7-1" type="text" placeholder="…"> séries no computador.</span></div>
+    <div class="sentence-row"><span class="num">2.</span><span class="txt">Nós <input class="fill-input" id="f7-2" type="text" placeholder="…"> pizza nos finais de semana.</span></div>
+    <div class="sentence-row"><span class="num">3.</span><span class="txt">Eu <input class="fill-input" id="f7-3" type="text" placeholder="…"> violão de tarde.</span></div>
+    <div class="sentence-row"><span class="num">4.</span><span class="txt">Os meus amigos <input class="fill-input" id="f7-4" type="text" placeholder="…"> chá de manhã.</span></div>
+    <div class="sentence-row"><span class="num">5.</span><span class="txt">A Lívia <input class="fill-input" id="f7-5" type="text" placeholder="…"> a conversa com os amigos.</span></div>
+    <div class="sentence-row"><span class="num">6.</span><span class="txt">Eu <input class="fill-input" id="f7-6" type="text" placeholder="…"> para a rádio de noite.</span></div>
+    <div class="sentence-row"><span class="num">7.</span><span class="txt">Você <input class="fill-input" id="f7-7" type="text" placeholder="…"> música ao vivo nos finais de semana?</span></div>
+    <div class="sentence-row"><span class="num">8.</span><span class="txt">Eles <input class="fill-input" id="f7-8" type="text" placeholder="…"> a porta de manhã.</span></div>
+
+    <button class="check-btn" onclick="checkEx7()">✓ Check answers</button>
+    <div id="ex7-result" class="result-msg"></div>
+  </div>
+
+  <!-- Exercise 8 — Troque o sujeito -->
+  <div class="ex-block">
+    <div class="ex-num">Exercise 8</div>
+    <h3 class="ex-title">Troque o sujeito</h3>
+    <p class="ex-instruction">Rewrite each sentence with the new subject. Change only the verb.</p>
+
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">1. Eu bebo chá de manhã. → <span style="color:var(--cobalto);">Nós</span></label><input class="fill-input" id="g8-1" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">2. A Lívia come biscoitos caseiros de noite. → <span style="color:var(--cobalto);">A Lívia e o Otávio</span></label><input class="fill-input" id="g8-2" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">3. Nós assistimos filmes no computador. → <span style="color:var(--cobalto);">Eu</span></label><input class="fill-input" id="g8-3" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">4. Vocês curtem o tempo livre em casa. → <span style="color:var(--cobalto);">Você</span></label><input class="fill-input" id="g8-4" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">5. Eles escrevem de tarde. → <span style="color:var(--cobalto);">A gente</span></label><input class="fill-input" id="g8-5" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">6. Você abre a porta de manhã. → <span style="color:var(--cobalto);">Vocês</span></label><input class="fill-input" id="g8-6" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:14px;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">7. Nós ouvimos música ao vivo. → <span style="color:var(--cobalto);">Eles</span></label><input class="fill-input" id="g8-7" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+    <div style="margin-bottom:0;"><label style="font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:4px;">8. Eu como frutas de manhã. → <span style="color:var(--cobalto);">A Bia</span></label><input class="fill-input" id="g8-8" type="text" placeholder="Escreva a frase completa..." style="width:100%;"></div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex8-answers', this)">👁 See model answers</button>
+    <div class="model-answers-block" id="ex8-answers">
+      <div class="model-answer-item"><div class="model-label">1</div><p>Nós bebemos chá de manhã.</p></div>
+      <div class="model-answer-item"><div class="model-label">2</div><p>A Lívia e o Otávio comem biscoitos caseiros de noite.</p></div>
+      <div class="model-answer-item"><div class="model-label">3</div><p>Eu assisto filmes no computador.</p></div>
+      <div class="model-answer-item"><div class="model-label">4</div><p>Você curte o tempo livre em casa.</p></div>
+      <div class="model-answer-item"><div class="model-label">5</div><p>A gente escreve de tarde.</p></div>
+      <div class="model-answer-item"><div class="model-label">6</div><p>Vocês abrem a porta de manhã.</p></div>
+      <div class="model-answer-item"><div class="model-label">7</div><p>Eles ouvem música ao vivo.</p></div>
+      <div class="model-answer-item"><div class="model-label">8</div><p>A Bia come frutas de manhã.</p></div>
+    </div>
+  </div>
+
+  <!-- ─────────── PART 3 — PRODUÇÃO ESCRITA ─────────── -->
+  <div class="sec-label" style="margin-top:8px;">Part 3 — Produção Escrita / Written Production</div>
+  <div class="ex-block">
+    <div class="ex-num">Exercise 9</div>
+    <h3 class="ex-title">Write your own answer to the radio survey</h3>
+    <p class="ex-instruction">Talk about your activities at home and say at what time of day you do them. Write 5–6 sentences. Read the example below first.</p>
+
+    <div class="note-box">
+      <strong>Modelo:</strong><br>
+      "De manhã eu bebo um suco e cuido das plantas. De tarde eu trabalho no computador e curto o meu gato. De noite eu como pizza e assisto filmes. Nos finais de semana eu cozinho e toco violão. Eu não gosto de TV. Eu amo o meu tempo livre em casa!"
+    </div>
+
+    <div class="note-box" style="margin-top:14px;">
+      <strong>Escreva sobre:</strong> de manhã · de tarde · de noite · nos finais de semana
+    </div>
+
+    <textarea class="free-textarea big" id="e9-free" placeholder="Escreva sobre o seu tempo livre em casa..."></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- BREVO SUBMIT BLOCK -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── NORMALISE ──
+function norm(s) {
+  return (s || '').toLowerCase().trim()
+    .replace(/[áàãâä]/g,'a').replace(/[éê]/g,'e')
+    .replace(/[íì]/g,'i').replace(/[óôõö]/g,'o')
+    .replace(/[úù]/g,'u').replace(/ç/g,'c')
+    .replace(/\s+/g,' ');
+}
+
+// ── TOGGLE MODEL ANSWERS ──
+function toggleAnswers(id, btn) {
+  var block = document.getElementById(id);
+  var visible = block.classList.toggle('visible');
+  btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+}
+
+function runCheck(answers, resultId) {
+  var correct = 0;
+  var lines = [];
+  answers.forEach(function(a) {
+    var el = document.getElementById(a.id);
+    var val = norm(el.value);
+    var ok = a.accept.map(norm).indexOf(val) !== -1;
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', el.value.trim().length > 0 && !ok);
+    if (ok) correct++;
+    lines.push((ok ? '✓' : '✗') + ' ' + a.display);
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:8px;">' + (allOk ? '✓ All ' + answers.length + ' correct!' : correct + ' of ' + answers.length + ' correct — gabarito:') + '</div>' + lines.join('<br>');
+  res.style.display = 'block';
+}
+
+// ── EXERCISE 2 — infinitivos ──
+var ex2 = [
+  { id:'a2-1', accept:['beber'], display:'bebo → beber' },
+  { id:'a2-2', accept:['cuidar'], display:'cuido → cuidar' },
+  { id:'a2-3', accept:['escrever'], display:'escrevo → escrever' },
+  { id:'a2-4', accept:['assistir'], display:'assisto → assistir' },
+  { id:'a2-5', accept:['cozinhar'], display:'cozinho → cozinhar' },
+  { id:'a2-6', accept:['tocar'], display:'toco → tocar' },
+  { id:'a2-7', accept:['comer'], display:'como → comer' },
+  { id:'a2-8', accept:['curtir'], display:'curto → curtir' },
+  { id:'a2-9', accept:['trabalhar'], display:'trabalhamos → trabalhar' },
+  { id:'a2-10', accept:['assistir'], display:'assistimos → assistir' },
+  { id:'a2-11', accept:['comer'], display:'comemos → comer' },
+  { id:'a2-12', accept:['ouvir'], display:'ouvimos → ouvir' }
+];
+function checkEx2() { runCheck(ex2, 'ex2-result'); }
+
+// ── EXERCISE 3 — tabela ──
+var ex3 = [
+  { id:'b3-1', accept:['como'], display:'eu / comER → como' },
+  { id:'b3-2', accept:['curto'], display:'eu / curtIR → curto' },
+  { id:'b3-3', accept:['escreve'], display:'você-ele-ela / escrevER → escreve' },
+  { id:'b3-4', accept:['abre'], display:'você-ele-ela / abrIR → abre' },
+  { id:'b3-5', accept:['comemos'], display:'nós / comER → comemos' },
+  { id:'b3-6', accept:['curtimos'], display:'nós / curtIR → curtimos' },
+  { id:'b3-7', accept:['abrimos'], display:'nós / abrIR → abrimos' },
+  { id:'b3-8', accept:['escrevem'], display:'vocês-eles-elas / escrevER → escrevem' },
+  { id:'b3-9', accept:['curtem'], display:'vocês-eles-elas / curtIR → curtem' }
+];
+function checkEx3() { runCheck(ex3, 'ex3-result'); }
+
+// ── EXERCISE 4 — complete as frases ──
+var ex4 = [
+  { id:'c4-1', accept:['bebo'], display:'1. bebo' },
+  { id:'c4-2', accept:['come'], display:'2. come' },
+  { id:'c4-3', accept:['assistimos'], display:'3. assistimos' },
+  { id:'c4-4', accept:['curtem'], display:'4. curtem' },
+  { id:'c4-5', accept:['escreve'], display:'5. escreve' },
+  { id:'c4-6', accept:['ouvem'], display:'6. ouvem' },
+  { id:'c4-7', accept:['abre'], display:'7. abre' },
+  { id:'c4-8', accept:['assiste'], display:'8. assiste' },
+  { id:'c4-9', accept:['cozinhamos'], display:'9. cozinhamos' },
+  { id:'c4-10', accept:['toco'], display:'10. toco' }
+];
+function checkEx4() { runCheck(ex4, 'ex4-result'); }
+
+// ── EXERCISE 5 — desafio do nós ──
+var ex5 = [
+  { id:'d5-1', accept:['comemos'], display:'1. comemos' },
+  { id:'d5-2', accept:['assistimos'], display:'2. assistimos' },
+  { id:'d5-3', accept:['bebemos'], display:'3. bebemos' },
+  { id:'d5-4', accept:['curtimos'], display:'4. curtimos' },
+  { id:'d5-5', accept:['escrevemos'], display:'5. escrevemos' },
+  { id:'d5-6', accept:['abrimos'], display:'6. abrimos' }
+];
+function checkEx5() { runCheck(ex5, 'ex5-result'); }
+
+// ── EXERCISE 7 — qual é o verbo ──
+var ex7 = [
+  { id:'f7-1', accept:['assiste'], display:'1. assiste' },
+  { id:'f7-2', accept:['comemos'], display:'2. comemos' },
+  { id:'f7-3', accept:['toco'], display:'3. toco' },
+  { id:'f7-4', accept:['bebem'], display:'4. bebem' },
+  { id:'f7-5', accept:['curte'], display:'5. curte' },
+  { id:'f7-6', accept:['escrevo'], display:'6. escrevo' },
+  { id:'f7-7', accept:['ouve'], display:'7. ouve' },
+  { id:'f7-8', accept:['abrem'], display:'8. abrem' }
+];
+function checkEx7() { runCheck(ex7, 'ex7-result'); }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| .*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('.free-textarea').forEach(function(ta, idx) {
+    var label = '';
+    var block = ta.closest('div');
+    if (block) {
+      var lbl = block.querySelector('label');
+      if (lbl) label = lbl.textContent.replace(/\s+/g,' ').trim().substring(0,90);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>'+label+':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>'+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.fill-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY = [120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#4E551D;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls).then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  }).catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
