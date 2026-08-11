@@ -44,6 +44,9 @@
 - B2: tudo em português; permitidas apenas glosas inglesas inline de exemplos, entre parênteses,
   em cinza (`color:#999`).
 - C1–C2: tudo em português, sem exceção.
+- **Exceção — materiais de música (`musicas/index.html`):** a regra de instruções em inglês vale
+  apenas para **A1 e A2**. A partir de **B1** (inclusive), os materiais de música seguem instruções
+  e conteúdo em português, como B2+ nos índices de nível regulares.
 
 ## Exercícios interativos
 
