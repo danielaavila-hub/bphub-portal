@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colo de Menina — Rastapé | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--forro:#D36D29;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--forro);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--terracota);color:var(--terracota)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--terracota);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:150px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:80px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--terracota);color:var(--terracota);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--terracota);color:#fff}
+  .model-answers-block{display:none;margin-top:14px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:8px;background:var(--baunilha);border-left:3px solid var(--terracota);border-radius:0 6px 6px 0;padding:8px 12px}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--telha);margin-bottom:2px}
+  .model-answer-item p{font-size:.85rem;color:var(--nanquim);line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Forró · Xote</span>
+  <span class="badge">Rastapé</span>
+  <span class="badge">2005</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Colo de Menina</h1>
+    <p class="fonte">Rastapé · do álbum <em>Fale Comigo</em>, 2005</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">"Colo de Menina" é um dos maiores clássicos de São João do Brasil, tocado há mais de duas décadas em festas juninas por todo o país. A curiosidade é que a música — hoje o maior sucesso da banda — foi composta em apenas 40 minutos, no início de carreira do grupo.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Colo de Menina (Ao Vivo, Estúdio Showlivre 2019)</p>
+    <p class="instr">Ouça a música inteira pelo menos uma vez. É um xote — um ritmo de forró mais lento, tradicionalmente dançado em casais, bem diferente do forró eletrônico mais acelerado.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1q2NPHds8xs"
+        title="Colo de Menina — Rastapé" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da música</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">o colo</td><td>the lap, the embrace — used both for a mother holding a child and for a romantic embrace</td></tr>
+        <tr><td class="vocab-pt">o gingado</td><td>the sway, the swing — the characteristic rhythmic movement of Brazilian dance</td></tr>
+        <tr><td class="vocab-pt">o calor</td><td>the warmth, the heat — here used figuratively, for passion</td></tr>
+        <tr><td class="vocab-pt">perturbado</td><td>restless, troubled, unable to focus</td></tr>
+        <tr><td class="vocab-pt">a rotina</td><td>the routine</td></tr>
+        <tr><td class="vocab-pt">conquistar</td><td>to win over, to conquer (someone's heart)</td></tr>
+        <tr><td class="vocab-pt">o sertão</td><td>the backlands — the dry, rural interior of Northeastern Brazil, a recurring image in forró</td></tr>
+        <tr><td class="vocab-pt">convencer</td><td>to convince</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURAL CONTEXT -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>👨‍👩‍👦 Uma banda de família</strong><br>
+      O Rastapé nasceu em 1999, em São Paulo, da ideia do acordeonista Jorge Lunguinho de formar uma banda de pé-de-serra com os próprios filhos: Jorge Filho no vocal e composição, Tico na guitarra e Maza na zabumba. O grupo surgiu no mesmo momento em que o forró virou febre nas festas universitárias paulistas — ao lado de bandas como o Falamansa —, o que rendeu ao Rastapé o rótulo de "forró universitário". Hoje, mais de 25 anos depois, a banda prefere ser chamada de forró raiz.
+    </div>
+    <div class="cult-box">
+      <strong>🎉 O hino do São João</strong><br>
+      "Colo de Menina" já foi regravada por artistas como Xand Avião e João Gomes, e é praticamente unânime nas festas de São João em qualquer região do Brasil. É um xote — um dos ritmos tradicionais do forró, geralmente mais lento e romântico, dançado bem coladinho, em contraste com ritmos mais acelerados como o baião ou o forró eletrônico/piseiro.
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">"Não quero... só quero" — preferência e contraste</p>
+    <div class="gram-box">
+      O refrão da música gira em torno de uma escolha: entre o conforto conhecido (o colo de mamãe, a rotina) e algo novo e desejado (o colo de menina). Essa ideia é construída com uma estrutura simples e muito usada no português falado: <strong>não quero + [coisa A], só quero + [coisa B]</strong>.
+      <table>
+        <thead><tr><th>Estrutura</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Não quero + substantivo</td><td>Não quero <strong>problema</strong>.</td></tr>
+          <tr><td>Só quero + substantivo</td><td>Só quero <strong>paz</strong>.</td></tr>
+          <tr><td>Não quero + infinitivo</td><td>Não quero <strong>brigar</strong>.</td></tr>
+          <tr><td>Só quero + infinitivo</td><td>Só quero <strong>conversar</strong>.</td></tr>
+        </tbody>
+      </table>
+      <br>
+      Repare também na forma coloquial de reforçar uma negação, comum na fala e em música: repetir o <strong>"não"</strong> no fim da frase — <em>"Não quero, não"</em>. Esse segundo "não" não muda o significado, só deixa a negação mais enfática, mais forte.
+    </div>
+  </div>
+
+  <!-- EX 1: T/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro ou Falso?</p>
+    <p class="ex-instr">Com base no que você ouviu e leu acima, escolha <strong>V</strong> (Verdadeiro) ou <strong>F</strong> (Falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>O Rastapé é formado por três irmãos, filhos do fundador da banda.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>"Colo de Menina" levou meses para ser composta.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>O xote costuma ser mais lento e romântico que o forró eletrônico.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>A música nunca foi regravada por outros artistas.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>O Rastapé nasceu no interior do Nordeste.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: não quero / só quero -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Não quero... só quero...</p>
+    <p class="ex-instr">Complete cada frase com "não quero" ou "só quero", de acordo com o sentido.</p>
+    <div id="gap-area">
+      <div class="gap-row"><span class="gap-num">1.</span><input class="gap-input" id="g1" type="text" placeholder="___________" style="width:110px;"><span>ficar em casa hoje. <strong>Só quero</strong> sair e dançar.</span></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span><strong>Não quero</strong> discutir mais.</span><input class="gap-input" id="g2" type="text" placeholder="___________" style="width:110px;"><span>paz.</span></div>
+      <div class="gap-row"><span class="gap-num">3.</span><input class="gap-input" id="g3" type="text" placeholder="___________" style="width:110px;"><span>desculpas. <strong>Só quero</strong> uma resposta sincera.</span></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span><strong>Só quero</strong> dançar essa música.</span><input class="gap-input" id="g4" type="text" placeholder="___________" style="width:110px;"><span>ficar sentado o show inteiro.</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps()">Refazer</button>
+    </div>
+    <div id="gap-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Compreensão auditiva -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">Compreensão auditiva</p>
+    <p class="ex-instr">Ouça a música de novo (vídeo acima) e responda com suas próprias palavras — não copie nenhuma linha da letra, descreva o que você entende.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. Sobre o que é a música, de forma geral? O que a pessoa que canta está sentindo e buscando?</label>
+      <textarea class="prod" rows="3" id="q1"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. Como você descreveria o ritmo do xote, comparado com outros ritmos de forró que você já ouviu neste curso (como o piseiro, por exemplo)?</label>
+      <textarea class="prod" rows="3" id="q2"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. No vídeo ao vivo, como é a interação entre a banda e o público?</label>
+      <textarea class="prod" rows="3" id="q3"></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex3-answers', this)">👁 Ver respostas modelo</button>
+    <div class="model-answers-block" id="ex3-answers">
+      <div class="model-answer-item"><div class="model-label">Questão 1</div><p>Resposta livre — espera-se que o aluno perceba que é uma música sobre se apaixonar e querer sair da rotina/proteção infantil para viver um amor romântico e adulto.</p></div>
+      <div class="model-answer-item"><div class="model-label">Questão 2</div><p>Resposta livre — o xote costuma ser mais lento e melódico, ideal pra dançar em casal, diferente do ritmo mais acelerado e eletrônico do piseiro.</p></div>
+      <div class="model-answer-item"><div class="model-label">Questão 3</div><p>Resposta livre — em vídeos ao vivo de forró, é comum o público cantar junto e dançar em casais durante o show.</p></div>
+    </div>
+  </div>
+
+  <!-- EX 4: Discussão e produção pessoal -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Discussão e produção pessoal</p>
+    <p class="ex-instr">Responda em português, com suas próprias palavras.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. "Colo de Menina" é considerada o "hino" de São João no Brasil inteiro. No seu país, existe alguma festa tradicional com uma música específica que todo mundo associa a ela? Qual?</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. O Rastapé é uma banda formada por pai e filhos. Você conhece outros exemplos de bandas ou artistas de família, no Brasil ou no seu país?</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. Usando "não quero... só quero...", escreva de três a cinco frases sobre o que você não quer e o que você realmente quer na sua vida agora.</label>
+      <textarea class="prod" rows="4"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tfKey={1:'T',2:'F',3:'T',4:'F',5:'F'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,'').trim()}
+
+const gapKey={g1:['naoquero'],g2:['soquero'],g3:['naoquero'],g4:['naoquero']};
+function checkGaps(){
+  let ok=0,tot=Object.keys(gapKey).length;
+  for(const id in gapKey){const inp=document.getElementById(id);const val=norm(inp.value).replace(/\s/g,'');const correct=gapKey[id].some(a=>val===norm(a).replace(/\s/g,''));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetGaps(){for(const id in gapKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap-msg');msg.className='result-msg';msg.textContent='';}
+
+function toggleAnswers(id,btn){
+  const block=document.getElementById(id);
+  const visible=block.classList.toggle('visible');
+  btn.textContent=visible?'🙈 Esconder respostas modelo':'👁 Ver respostas modelo';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
