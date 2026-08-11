@@ -47,6 +47,9 @@
 - **Exceção — materiais de música (`musicas/index.html`):** a regra de instruções em inglês vale
   apenas para **A1 e A2**. A partir de **B1** (inclusive), os materiais de música seguem instruções
   e conteúdo em português, como B2+ nos índices de nível regulares.
+- **Verdadeiro ou Falso (A1–A2):** apenas o **enunciado** do exercício ("Choose V/F...") vai em
+  inglês. As **frases a avaliar** ficam em português — traduzi-las para inglês tornaria o exercício
+  fácil demais, já que o aluno acertaria sem precisar compreender o português.
 
 ## Exercícios interativos
 
