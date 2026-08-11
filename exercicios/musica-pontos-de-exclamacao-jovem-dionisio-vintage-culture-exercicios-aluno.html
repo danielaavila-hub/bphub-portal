@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pontos de Exclamação — Jovem Dionisio (Vintage Culture Remix) | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--eletronica:#00A8CC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--eletronica);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.25);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--terracota);color:var(--terracota)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--terracota);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:150px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:80px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--terracota);color:var(--terracota);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--terracota);color:#fff}
+  .model-answers-block{display:none;margin-top:14px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:8px;background:var(--baunilha);border-left:3px solid var(--terracota);border-radius:0 6px 6px 0;padding:8px 12px}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--telha);margin-bottom:2px}
+  .model-answer-item p{font-size:.85rem;color:var(--nanquim);line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Música Eletrônica</span>
+  <span class="badge">Jovem Dionisio × Vintage Culture</span>
+  <span class="badge">2020</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Pontos de Exclamação</h1>
+    <p class="fonte">Jovem Dionisio · remix de Vintage Culture &amp; Future Class, 2020</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">"Pontos de Exclamação" nasceu como uma música indie/pop da banda curitibana Jovem Dionisio, e ganhou uma segunda vida quando o DJ brasileiro Vintage Culture, ao lado de Future Class, transformou a faixa em um remix de música eletrônica. É um ótimo exemplo de como a cena eletrônica brasileira dialoga com outros gêneros nacionais.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Pontos de Exclamação (Vintage Culture & Future Class Remix)</p>
+    <p class="instr">Ouça a música inteira pelo menos uma vez. Compare o clima da música original (mais calmo, indie) com o clima do remix eletrônico.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/P6myfudg7Mo"
+        title="Pontos de Exclamação — Jovem Dionisio (Vintage Culture & Future Class Remix)" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da música</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">a saudade</td><td>longing, missing someone/something (a famously hard-to-translate word)</td></tr>
+        <tr><td class="vocab-pt">curtir</td><td>to "like" (on social media); also, colloquially, to enjoy/have fun</td></tr>
+        <tr><td class="vocab-pt">posar</td><td>to pose (for a photo)</td></tr>
+        <tr><td class="vocab-pt">doer o peito</td><td>for one's chest to hurt (used figuratively for strong emotion)</td></tr>
+        <tr><td class="vocab-pt">o destino</td><td>destiny, fate</td></tr>
+        <tr><td class="vocab-pt">o remix</td><td>remix — a reworked version of a song, often in a different musical genre</td></tr>
+        <tr><td class="vocab-pt">a pista (de dança)</td><td>the dance floor</td></tr>
+        <tr><td class="vocab-pt">o festival</td><td>festival (music festival)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURAL CONTEXT -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>🎸 Jovem Dionisio</strong><br>
+      Jovem Dionisio é uma banda de Curitiba (Paraná), formada por cinco amigos de infância. O som da banda mistura indie rock com referências de MPB e bossa nova, e "Pontos de Exclamação" é uma de suas músicas mais conhecidas — uma canção sobre saudade e admiração à distância, contada através da linguagem das redes sociais.
+    </div>
+    <div class="cult-box">
+      <strong>🎧 Vintage Culture: do interior do Brasil para o mundo</strong><br>
+      Vintage Culture é o nome artístico de Lukas Ruiz Hespanhol, nascido em Mundo Novo (Mato Grosso do Sul). Ele largou a faculdade de Direito para se dedicar à música eletrônica e hoje é um dos DJs brasileiros mais respeitados internacionalmente, com apresentações no Tomorrowland, Lollapalooza e Rock in Rio. Seu nome artístico é uma homenagem à sua paixão por bandas dos anos 1980, como New Order e Depeche Mode, cuja influência aparece nas suas produções de deep house.
+    </div>
+    <div class="cult-box">
+      <strong>🌐 O remix como ponte entre gêneros</strong><br>
+      Remixes como este mostram como a música eletrônica brasileira frequentemente dialoga com outros estilos nacionais — pop, indie, sertanejo, funk — criando versões novas que levam essas canções para pistas de dança e festivais por todo o país e o mundo.
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">Imperativo afirmativo/negativo · Querer que + subjuntivo</p>
+    <div class="gram-box">
+      A letra combina dois pedidos: um comando direto (imperativo) e um desejo expresso com o verbo "querer" seguido de subjuntivo.
+      <table>
+        <thead><tr><th>Estrutura</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Imperativo afirmativo (você)</td><td><strong>Segure</strong> firme essa oportunidade.</td></tr>
+          <tr><td>Imperativo negativo (você)</td><td>Não <strong>solte</strong> esse sonho.</td></tr>
+        </tbody>
+      </table>
+      <br>
+      Quando usamos "querer que" para expressar um desejo sobre a ação de outra pessoa, o segundo verbo vai para o <strong>subjuntivo</strong> (não o indicativo):
+      <table>
+        <tbody>
+          <tr><td>Eu quero que você <strong>diga</strong> a verdade.</td><td>(dizer → diga)</td></tr>
+          <tr><td>Nós queremos que vocês <strong>sejam</strong> felizes.</td><td>(ser → sejam)</td></tr>
+        </tbody>
+      </table>
+      Repare: usamos "quero que você diga" (subjuntivo), e não "quero que você diz" (indicativo) — esse é um erro comum de quem está aprendendo.
+    </div>
+  </div>
+
+  <!-- EX 1: T/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro ou Falso?</p>
+    <p class="ex-instr">Com base no que você ouviu e leu acima, escolha <strong>V</strong> (Verdadeiro) ou <strong>F</strong> (Falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>Jovem Dionisio é uma banda de Curitiba.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>Vintage Culture estudou Direito antes de se dedicar à música.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Vintage Culture nunca se apresentou fora do Brasil.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>A versão original de "Pontos de Exclamação" é uma faixa de música eletrônica.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>O nome "Vintage Culture" é uma homenagem a bandas dos anos 1980.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: Imperativo -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Imperativo afirmativo e negativo</p>
+    <p class="ex-instr">Complete as frases com o imperativo (forma de você) do verbo indicado.</p>
+    <div id="gap-area">
+      <div class="gap-row"><span class="gap-num">1.</span><span>___________ (segurar) essa chance com força!</span><input class="gap-input" id="g1" type="text" placeholder="___________" style="width:150px;"></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Não ___________ (soltar) esse sonho, continue lutando.</span><input class="gap-input" id="g2" type="text" placeholder="___________" style="width:150px;"></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>___________ (aproveitar) o momento com quem você ama.</span><input class="gap-input" id="g3" type="text" placeholder="___________" style="width:150px;"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps()">Refazer</button>
+    </div>
+    <div id="gap-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Querer que + subjuntivo -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">Quero que... — querer + subjuntivo</p>
+    <p class="ex-instr">Complete com o presente do subjuntivo do verbo indicado.</p>
+    <div id="gap2-area">
+      <div class="gap-row"><span class="gap-num">1.</span><span>Eu quero que você ___________ (dizer) o que sente.</span><input class="gap-input" id="p1" type="text" placeholder="___________" style="width:110px;"></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Nós queremos que vocês ___________ (ser) felizes.</span><input class="gap-input" id="p2" type="text" placeholder="___________" style="width:110px;"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps2()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps2()">Refazer</button>
+    </div>
+    <div id="gap2-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: Compreensão auditiva -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Compreensão auditiva</p>
+    <p class="ex-instr">Ouça a música de novo (vídeo acima) e responda com suas próprias palavras — não copie nenhuma linha da letra, descreva o que você entende.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. Como você descreveria o clima geral da música — calmo, animado, romântico, dançante?</label>
+      <textarea class="prod" rows="3" id="q1"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. Que elementos você reconhece como típicos da música eletrônica (batida, sintetizadores, drops)?</label>
+      <textarea class="prod" rows="3" id="q2"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. Na sua opinião, esse remix funciona bem para dançar ou é mais para ouvir com atenção? Justifique.</label>
+      <textarea class="prod" rows="3" id="q3"></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex4-answers', this)">👁 Ver respostas modelo</button>
+    <div class="model-answers-block" id="ex4-answers">
+      <div class="model-answer-item"><div class="model-label">Questão 1</div><p>Resposta livre — o remix tem um clima mais animado e dançante do que a versão original, mais calma.</p></div>
+      <div class="model-answer-item"><div class="model-label">Questão 2</div><p>Resposta livre — batida eletrônica constante, sintetizadores, camadas de som que crescem em intensidade.</p></div>
+      <div class="model-answer-item"><div class="model-label">Questão 3</div><p>Resposta livre — muitos alunos vão dizer que funciona bem para dançar, por causa da batida marcada.</p></div>
+    </div>
+  </div>
+
+  <!-- EX 5: Discussão e produção pessoal -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 5</p>
+    <p class="ex-title">Discussão e produção pessoal</p>
+    <p class="ex-instr">Responda em português, com suas próprias palavras.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. Você gosta de remixes de música? Prefere sempre a versão original ou às vezes o remix é melhor? Dê um exemplo.</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. No seu país, existe uma cena de música eletrônica forte? Você já foi a algum festival de música eletrônica?</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. Usando "eu quero que", escreva de três a cinco frases sobre desejos que você tem para pessoas importantes na sua vida.</label>
+      <textarea class="prod" rows="4"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tfKey={1:'T',2:'T',3:'F',4:'F',5:'T'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,'').trim()}
+
+const gapKey={g1:['segure'],g2:['solte'],g3:['aproveite']};
+function checkGaps(){
+  let ok=0,tot=Object.keys(gapKey).length;
+  for(const id in gapKey){const inp=document.getElementById(id);const val=norm(inp.value).replace(/\s/g,'');const correct=gapKey[id].some(a=>val===norm(a).replace(/\s/g,''));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s). Gabarito: 1. Segure 2. solte 3. Aproveite';
+}
+function resetGaps(){for(const id in gapKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap-msg');msg.className='result-msg';msg.textContent='';}
+
+const gap2Key={p1:['diga'],p2:['sejam']};
+function checkGaps2(){
+  let ok=0,tot=Object.keys(gap2Key).length;
+  for(const id in gap2Key){const inp=document.getElementById(id);const val=norm(inp.value).replace(/\s/g,'');const correct=gap2Key[id].some(a=>val===norm(a).replace(/\s/g,''));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap2-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s). Gabarito: 1. diga 2. sejam';
+}
+function resetGaps2(){for(const id in gap2Key){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap2-msg');msg.className='result-msg';msg.textContent='';}
+
+function toggleAnswers(id,btn){
+  const block=document.getElementById(id);
+  const visible=block.classList.toggle('visible');
+  btn.textContent=visible?'🙈 Esconder respostas modelo':'👁 Ver respostas modelo';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
