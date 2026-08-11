@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Pedaço de Pecado — João Gomes | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--forro:#D36D29;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--forro);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--terracota);color:var(--terracota)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--terracota);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:150px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:80px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--terracota);color:var(--terracota);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--terracota);color:#fff}
+  .model-answers-block{display:none;margin-top:14px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:8px;background:var(--baunilha);border-left:3px solid var(--terracota);border-radius:0 6px 6px 0;padding:8px 12px}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--telha);margin-bottom:2px}
+  .model-answer-item p{font-size:.85rem;color:var(--nanquim);line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Piseiro</span>
+  <span class="badge">João Gomes</span>
+  <span class="badge">2021</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Meu Pedaço de Pecado</h1>
+    <p class="fonte">João Gomes · do álbum <em>Eu Tenho a Senha</em>, 2021</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">João Gomes nasceu em Serrita, uma cidade pequena do interior de Pernambuco, e começou a ficar conhecido postando vídeos na internet quase de brincadeira. Hoje ele é um dos maiores nomes do piseiro, o ritmo que hoje domina o streaming no Brasil. "Meu Pedaço de Pecado" foi um dos primeiros grandes sucessos dele: em 2021, chegou a ser a música mais tocada do Brasil no Spotify.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Meu Pedaço de Pecado (Ao Vivo em Fortaleza)</p>
+    <p class="instr">Ouça a música inteira pelo menos uma vez, prestando atenção no clima geral: é uma música calma, agitada, romântica, triste? Repare também em como o cantor fala — o jeito de cantar é bem informal, do jeito que se fala no dia a dia.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/H1DEczvTjgE"
+        title="Meu Pedaço de Pecado — João Gomes" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da música</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">o pecado</td><td>the sin — often used playfully in Brazilian Portuguese to describe someone very attractive ("ser um pecado")</td></tr>
+        <tr><td class="vocab-pt">colado / de corpo colado</td><td>glued, stuck close together — dancing very close to someone</td></tr>
+        <tr><td class="vocab-pt">o namorado / a namorada</td><td>boyfriend / girlfriend</td></tr>
+        <tr><td class="vocab-pt">o vaqueiro</td><td>the cowherd — a very common figure in Northeastern Brazilian culture and music</td></tr>
+        <tr><td class="vocab-pt">o desejo</td><td>desire, wish</td></tr>
+        <tr><td class="vocab-pt">a saudade</td><td>longing, missing someone — a feeling considered untranslatable, central to Brazilian music</td></tr>
+        <tr><td class="vocab-pt">enlouquecer</td><td>to drive crazy, to go crazy</td></tr>
+        <tr><td class="vocab-pt">paquerar</td><td>to flirt</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURAL CONTEXT -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>🎹 O que é piseiro?</strong><br>
+      O piseiro nasceu no Nordeste do Brasil como uma evolução da pisadinha e do forró eletrônico. A sonoridade é marcada por teclados eletrônicos e uma batida forte e repetitiva, que convida à dança. As letras costumam ser diretas e fáceis de cantar junto, falando sobre amor, festa e a vida no interior. Nos últimos anos, o piseiro se tornou um dos gêneros mais ouvidos do Brasil nas plataformas de streaming, saindo do Nordeste e conquistando o país inteiro.
+    </div>
+    <div class="cult-box">
+      <strong>🌵 João Gomes — do interior de Pernambuco pro Brasil todo</strong><br>
+      João nasceu em Serrita, cidade pequena do sertão de Pernambuco, e começou cantando em festas locais antes de viralizar na internet. Ele traz uma pegada mais intimista ao piseiro, com letras sobre sentimentos e relações pessoais, misturando o gênero com forró e brega funk. É considerado hoje um dos artistas que mais representam essa nova geração da música nordestina no cenário nacional — já chegou a ser indicado ao Grammy Latino.
+    </div>
+  </div>
+
+  <!-- GRAMMAR 1: IMPERATIVO INFORMAL -->
+  <div class="card">
+    <p class="section-label">Gramática 1</p>
+    <p class="card-title">O imperativo informal — "vem", "faz", "vai"</p>
+    <div class="gram-box">
+      Na música, na fala do dia a dia e em quase toda letra de piseiro/forró, é comum ouvir formas de imperativo diferentes das que aparecem nos livros de gramática. Em vez da forma "correta" de <em>você</em> (venha, faça, vá), o uso coloquial usa a forma de <em>tu</em>, mesmo quando a pessoa está falando com alguém que trataria de "você".
+      <table>
+        <thead><tr><th>Imperativo "de livro" (você)</th><th>Imperativo coloquial (tu)</th></tr></thead>
+        <tbody>
+          <tr><td>venha</td><td><strong>vem</strong></td></tr>
+          <tr><td>faça</td><td><strong>faz</strong></td></tr>
+          <tr><td>vá</td><td><strong>vai</strong></td></tr>
+          <tr><td>diga</td><td><strong>diz</strong></td></tr>
+          <tr><td>ponha</td><td><strong>põe</strong></td></tr>
+          <tr><td>dê</td><td><strong>dá</strong></td></tr>
+        </tbody>
+      </table>
+      <br>
+      Essa forma coloquial é extremamente comum em música popular, em conversas informais e nas redes sociais — mas normalmente <strong>não</strong> é o que se ensina primeiro em sala de aula, porque soa muito informal. Reconhecer as duas formas ajuda você a entender letras de música, memes e conversas reais no Brasil.
+    </div>
+  </div>
+
+  <!-- GRAMMAR 2: TÔ + GERÚNDIO -->
+  <div class="card">
+    <p class="section-label">Gramática 2</p>
+    <p class="card-title">"Tô" + gerúndio — o presente progressivo informal</p>
+    <div class="gram-box">
+      <strong>Tô</strong> é a contração falada de <em>estou</em>, usadíssima na fala informal e em música. Combinada com o gerúndio, ela forma o presente progressivo coloquial — muito comum pra falar de um desejo ou uma ação que está acontecendo <em>agora</em>, com uma carga emocional maior do que o presente simples.
+      <table>
+        <thead><tr><th>Forma escrita/formal</th><th>Forma falada/informal</th></tr></thead>
+        <tbody>
+          <tr><td>Eu estou querendo...</td><td><strong>Tô querendo...</strong></td></tr>
+          <tr><td>Eu estou pensando...</td><td><strong>Tô pensando...</strong></td></tr>
+          <tr><td>Eu estou trabalhando...</td><td><strong>Tô trabalhando...</strong></td></tr>
+        </tbody>
+      </table>
+      <br>
+      Note a diferença de intensidade: <em>"Eu quero te ver"</em> é um desejo simples. <em>"Tô querendo te ver"</em> soa mais pessoal e imediato — como se o desejo estivesse "acontecendo" dentro da pessoa naquele momento.
+    </div>
+  </div>
+
+  <!-- EX 1: T/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro ou Falso?</p>
+    <p class="ex-instr">Com base no que você ouviu e leu acima, escolha <strong>V</strong> (Verdadeiro) ou <strong>F</strong> (Falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>João Gomes nasceu em uma capital grande do Nordeste.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>O piseiro é uma evolução da pisadinha e do forró eletrônico.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>"Meu Pedaço de Pecado" é uma música do início da carreira de João Gomes.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>O imperativo coloquial ("vem", "faz") é a forma que normalmente se ensina primeiro nos livros de gramática.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>"Tô querendo" é a contração falada de "eu estou querendo".</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: Imperativo formal → informal -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Do imperativo "de livro" ao coloquial</p>
+    <p class="ex-instr">Transforme cada ordem da forma formal de <em>você</em> para a forma coloquial de <em>tu</em>, como se ouvisse em uma música ou numa conversa informal.</p>
+    <div id="gap-area">
+      <div class="gap-row"><span class="gap-num">1.</span><span>Venha</span><input class="gap-input" id="g1" type="text" placeholder="___________"><span>dançar comigo.</span></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Faça</span><input class="gap-input" id="g2" type="text" placeholder="___________"><span>silêncio, por favor.</span></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>Vá</span><input class="gap-input" id="g3" type="text" placeholder="___________"><span>embora daqui.</span></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span>Diga</span><input class="gap-input" id="g4" type="text" placeholder="___________"><span>a verdade.</span></div>
+      <div class="gap-row"><span class="gap-num">5.</span><span>Ponha</span><input class="gap-input" id="g5" type="text" placeholder="___________"><span>a música mais alta.</span></div>
+      <div class="gap-row"><span class="gap-num">6.</span><span>Dê</span><input class="gap-input" id="g6" type="text" placeholder="___________"><span>um jeito nisso.</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps()">Refazer</button>
+    </div>
+    <div id="gap-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Tô + gerúndio -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">"Tô" + gerúndio</p>
+    <p class="ex-instr">Reescreva cada frase usando a forma coloquial "tô" + gerúndio, no lugar de "estou" + gerúndio.</p>
+    <div id="gap2-area">
+      <div class="gap-row"><span class="gap-num">1.</span><span>Eu estou pensando em você.</span><span>→</span><input class="gap-input" id="p1" type="text" placeholder="___________" style="width:220px;"></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Eu estou trabalhando muito essa semana.</span><span>→</span><input class="gap-input" id="p2" type="text" placeholder="___________" style="width:220px;"></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>Eu estou querendo sair hoje à noite.</span><span>→</span><input class="gap-input" id="p3" type="text" placeholder="___________" style="width:220px;"></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span>Eu estou estudando português.</span><span>→</span><input class="gap-input" id="p4" type="text" placeholder="___________" style="width:220px;"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps2()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps2()">Refazer</button>
+    </div>
+    <div id="gap2-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: Compreensão auditiva -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Compreensão auditiva</p>
+    <p class="ex-instr">Ouça a música de novo (vídeo acima) e responda com suas próprias palavras — não copie nenhuma linha da letra, descreva o que você entende.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. Sobre o que é a música, de forma geral? Quem fala com quem, e o que essa pessoa quer?</label>
+      <textarea class="prod" rows="3" id="q1"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. Que instrumentos ou sons você reconhece no piseiro, comparado com o que você já ouviu de forró ou de música sertaneja?</label>
+      <textarea class="prod" rows="3" id="q2"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. O público no vídeo (Ao Vivo em Fortaleza) reage de que jeito? O que isso mostra sobre a popularidade do piseiro hoje?</label>
+      <textarea class="prod" rows="3" id="q3"></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex4-answers', this)">👁 Ver respostas modelo</button>
+    <div class="model-answers-block" id="ex4-answers">
+      <div class="model-answer-item"><div class="model-label">Questão 1</div><p>Resposta livre — espera-se que o aluno identifique que é uma música de convite/paquera, em que quem canta demonstra desejo e vontade de estar perto da outra pessoa.</p></div>
+      <div class="model-answer-item"><div class="model-label">Questão 2</div><p>Resposta livre — o piseiro costuma ter teclados eletrônicos bem marcados e uma batida rápida e repetitiva, diferente do forró tradicional de sanfona, zabumba e triângulo.</p></div>
+      <div class="model-answer-item"><div class="model-label">Questão 3</div><p>Resposta livre — normalmente o público canta junto e dança, mostrando o quanto o piseiro já é parte do repertório popular no Brasil hoje.</p></div>
+    </div>
+  </div>
+
+  <!-- EX 5: Discussão e produção pessoal -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 5</p>
+    <p class="ex-title">Discussão e produção pessoal</p>
+    <p class="ex-instr">Responda em português, com suas próprias palavras.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. João Gomes começou postando vídeos na internet quase de brincadeira e hoje é um artista de sucesso nacional. Você conhece outros exemplos, no Brasil ou no seu país, de artistas que ficaram famosos assim, pela internet?</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. O piseiro é um gênero do interior do Nordeste que "conquistou" o Brasil inteiro nas plataformas de streaming. No seu país existe algum gênero musical regional que passou por um processo parecido, de se tornar popular em nível nacional (ou até internacional)?</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. Você percebe, na sua própria língua, formas de falar mais informais que aparecem em música e nas redes sociais, mas que não seriam usadas em um contexto formal (parecido com "vem" no lugar de "venha")? Dê um exemplo.</label>
+      <textarea class="prod" rows="3"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tfKey={1:'F',2:'T',3:'F',4:'F',5:'T'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,'').trim()}
+
+const gapKey={g1:['vem'],g2:['faz'],g3:['vai'],g4:['diz'],g5:['poe','põe'],g6:['da','dá']};
+function checkGaps(){
+  let ok=0,tot=Object.keys(gapKey).length;
+  for(const id in gapKey){const inp=document.getElementById(id);const val=norm(inp.value).replace(/\s/g,'');const correct=gapKey[id].some(a=>val===norm(a).replace(/\s/g,''));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetGaps(){for(const id in gapKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap-msg');msg.className='result-msg';msg.textContent='';}
+
+const gap2Key={p1:['topensando'],p2:['totrabalhando'],p3:['toquerendo'],p4:['toestudando']};
+function checkGaps2(){
+  let ok=0,tot=Object.keys(gap2Key).length;
+  for(const id in gap2Key){const inp=document.getElementById(id);const val=norm(inp.value).replace(/\s/g,'');const correct=gap2Key[id].some(a=>val.indexOf(norm(a).replace(/\s/g,''))!==-1);inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap2-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s). Gabarito: 1. Tô pensando em você. 2. Tô trabalhando muito essa semana. 3. Tô querendo sair hoje à noite. 4. Tô estudando português.';
+}
+function resetGaps2(){for(const id in gap2Key){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap2-msg');msg.className='result-msg';msg.textContent='';}
+
+function toggleAnswers(id,btn){
+  const block=document.getElementById(id);
+  const visible=block.classList.toggle('visible');
+  btn.textContent=visible?'🙈 Esconder respostas modelo':'👁 Ver respostas modelo';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
