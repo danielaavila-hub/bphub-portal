@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sábado em casa — o verbo FAZER — A1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #4E551D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #4E551D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; }
+    .card h2 { font-size: 22px; margin-bottom: 16px; color: var(--nanquim); }
+    .card h3 { font-size: 16px; margin: 18px 0 8px; color: var(--nanquim); font-weight: 500; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: 14px; }
+    table td, table th { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); text-align: left; }
+    table th { font-weight: 700; color: var(--floresta); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+    .note-box { background: var(--cobalto-light); border-radius: 10px; padding: 14px 18px; font-size: 14px; color: var(--nanquim); margin: 12px 0; }
+
+    .blog-post { background: var(--off-white); border-radius: 12px; padding: 24px 26px; margin: 14px 0; }
+    .blog-post .blog-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--floresta); margin-bottom: 2px; }
+    .blog-post h3 { margin: 0 0 12px; font-size: 20px; }
+    .blog-post p { margin-bottom: 10px; font-size: 15px; }
+    .blog-post .source { font-size: 12px; color: #8a8a7a; margin-top: 10px; }
+
+    .q-item { margin-bottom: 18px; }
+    .q-item .q-text { font-size: 15px; margin-bottom: 4px; }
+    .q-text .en { color: #8a8a7a; font-size: 13px; display: block; margin-top: 2px; }
+    textarea, input[type=text] { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; padding: 10px 14px; border: 1.5px solid var(--light-gray); border-radius: 8px; outline: none; resize: vertical; }
+    textarea:focus, input[type=text]:focus { border-color: var(--cobalto); }
+    .reveal-btn { background: none; border: none; color: var(--cobalto); font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; padding: 4px 0; margin-top: 4px; }
+    .model-answer { display: none; margin-top: 6px; padding: 10px 14px; background: var(--cobalto-light); border-radius: 8px; font-size: 14px; color: var(--nanquim); }
+
+    .gap-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; font-size: 15px; }
+    .gap-line input { width: 130px; display: inline-block; }
+    .gap-line input.correct { border-color: var(--floresta); background: #EEF3E6; }
+    .gap-line input.wrong { border-color: var(--pitomba); background: #FBEDE3; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; padding: 16px 18px; border-radius: 10px; max-height: 260px; overflow-y: auto; font-size: 14px; }
+    .result-msg.good { background: #EAF5EE; }
+    .result-msg.try-again { background: var(--baunilha2); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .gap-line input { width: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../a1/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A1</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Sábado em casa <em>o verbo fazer</em></h1>
+  <div class="hero-sub">Talk about what you and other people do at home, and at what time of day — using the irregular verb FAZER.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">presente do indicativo</span>
+    <span class="hero-tag">verbo irregular</span>
+    <span class="hero-tag">rotina doméstica</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LANGUAGE REFERENCE -->
+  <div class="card">
+    <div class="sec-label">Language Reference</div>
+    <h2>FAZER — presente do indicativo</h2>
+    <table>
+      <tr><td>eu</td><td><strong>faço</strong></td></tr>
+      <tr><td>você / ele / ela / a gente</td><td><strong>faz</strong></td></tr>
+      <tr><td>nós</td><td><strong>fazemos</strong></td></tr>
+      <tr><td>vocês / eles / elas</td><td><strong>fazem</strong></td></tr>
+    </table>
+    <div class="note-box">FAZER is irregular. In the <em>eu</em> form, the <em>z</em> becomes <em>ç</em>: <strong>faço</strong>. All other forms keep the <em>z</em>. Note that <strong>a gente</strong> means "we" in everyday Brazilian Portuguese, but takes the same verb form as <em>ele / ela</em>: <strong>a gente faz</strong>.</div>
+
+    <h3>Combinações com FAZER</h3>
+    <table>
+      <tr><td>fazer um bolo / um café / um pão</td><td>to make a cake / a coffee / bread</td></tr>
+      <tr><td>fazer um churrasco</td><td>to have a barbecue</td></tr>
+      <tr><td>fazer exercício</td><td>to exercise</td></tr>
+      <tr><td>fazer yoga</td><td>to do yoga</td></tr>
+      <tr><td>fazer palavra cruzada</td><td>to do a crossword</td></tr>
+      <tr><td>fazer barulho</td><td>to make noise</td></tr>
+      <tr><td>não fazer nada</td><td>to do nothing</td></tr>
+    </table>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="card">
+    <div class="sec-label">Texto</div>
+    <h2>Blog da Nara</h2>
+    <div class="blog-post">
+      <div class="blog-title">Blog da Nara</div>
+      <h3>Sábado em casa</h3>
+      <p>Eu amo o sábado! De manhã, eu faço um bolo de fubá e um café. A minha irmã não faz bolo, mas ela come tudo!</p>
+      <p>De tarde, nós fazemos palavra cruzada na sala. A gente ouve música e cuida das plantas. O nosso gato não faz nada: ele dorme o dia inteiro.</p>
+      <p>De noite, os meus vizinhos fazem um churrasco e a gente conversa na varanda. Eles fazem muito barulho, mas eu gosto. Nós fazemos isso todos os sábados!</p>
+      <div class="source">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</div>
+    </div>
+
+    <h3>Vocabulário</h3>
+    <table>
+      <tr><td>o bolo de fubá</td><td>cornmeal cake (traditional Brazilian cake)</td></tr>
+      <tr><td>o churrasco</td><td>barbecue (a Brazilian gathering around grilled meat)</td></tr>
+      <tr><td>o barulho</td><td>noise</td></tr>
+      <tr><td>a varanda</td><td>balcony, porch</td></tr>
+      <tr><td>o dia inteiro</td><td>all day long</td></tr>
+      <tr><td>todos os sábados</td><td>every Saturday</td></tr>
+    </table>
+  </div>
+
+  <!-- PART 1 — COMPREENSÃO -->
+  <div class="card">
+    <div class="sec-label">Part 1 · Compreensão</div>
+    <h2>Answer in Portuguese, using complete sentences.</h2>
+
+    <div class="q-item">
+      <div class="q-text">1. O que a Nara faz de manhã? <span class="en">What does Nara do in the morning?</span></div>
+      <textarea rows="2" id="c1"></textarea>
+      <button class="reveal-btn" onclick="toggleModel('m1')">Ver resposta modelo</button>
+      <div class="model-answer" id="m1">Ela faz um bolo de fubá e um café.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-text">2. A irmã da Nara faz bolo? <span class="en">Does Nara's sister make cake?</span></div>
+      <textarea rows="2" id="c2"></textarea>
+      <button class="reveal-btn" onclick="toggleModel('m2')">Ver resposta modelo</button>
+      <div class="model-answer" id="m2">Não, ela não faz bolo.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-text">3. O que a Nara e a irmã dela fazem de tarde? <span class="en">What do Nara and her sister do in the afternoon?</span></div>
+      <textarea rows="2" id="c3"></textarea>
+      <button class="reveal-btn" onclick="toggleModel('m3')">Ver resposta modelo</button>
+      <div class="model-answer" id="m3">Elas fazem palavra cruzada.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-text">4. O que o gato faz o dia inteiro? <span class="en">What does the cat do all day long?</span></div>
+      <textarea rows="2" id="c4"></textarea>
+      <button class="reveal-btn" onclick="toggleModel('m4')">Ver resposta modelo</button>
+      <div class="model-answer" id="m4">Ele não faz nada: ele dorme.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-text">5. O que os vizinhos fazem de noite? <span class="en">What do the neighbours do at night?</span></div>
+      <textarea rows="2" id="c5"></textarea>
+      <button class="reveal-btn" onclick="toggleModel('m5')">Ver resposta modelo</button>
+      <div class="model-answer" id="m5">Eles fazem um churrasco.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-text">6. A Nara gosta do barulho dos vizinhos? <span class="en">Does Nara like the neighbours' noise?</span></div>
+      <textarea rows="2" id="c6"></textarea>
+      <button class="reveal-btn" onclick="toggleModel('m6')">Ver resposta modelo</button>
+      <div class="model-answer" id="m6">Sim, ela gosta.</div>
+    </div>
+  </div>
+
+  <!-- PART 2 — PRÁTICA CONTROLADA -->
+  <div class="card">
+    <div class="sec-label">Part 2 · Prática Controlada</div>
+    <h2>Exercise 1 — Complete the sentences with the correct form of FAZER.</h2>
+
+    <div class="gap-line">1. Eu <input type="text" id="e1-1"> um café de manhã.</div>
+    <div class="gap-line">2. A minha vizinha <input type="text" id="e1-2"> bolo no sábado.</div>
+    <div class="gap-line">3. Nós <input type="text" id="e1-3"> palavra cruzada de tarde.</div>
+    <div class="gap-line">4. Os meus amigos <input type="text" id="e1-4"> um churrasco no domingo.</div>
+    <div class="gap-line">5. Você <input type="text" id="e1-5"> exercício em casa?</div>
+    <div class="gap-line">6. A gente <input type="text" id="e1-6"> muito barulho na sala.</div>
+    <div class="gap-line">7. Vocês <input type="text" id="e1-7"> yoga de manhã?</div>
+    <div class="gap-line">8. A minha irmã não <input type="text" id="e1-8"> nada no domingo.</div>
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Exercise 2 — Choose the most suitable verb and write it in the correct form.</h2>
+
+    <div class="gap-line">1. Eu <input type="text" id="e2-1"> (fazer / tomar) banho de noite.</div>
+    <div class="gap-line">2. A Nara <input type="text" id="e2-2"> (fazer / tocar) violão muito bem.</div>
+    <div class="gap-line">3. Nós <input type="text" id="e2-3"> (fazer / cozinhar) um churrasco no sábado.</div>
+    <div class="gap-line">4. Os meus vizinhos <input type="text" id="e2-4"> (fazer / beber) muito barulho.</div>
+    <div class="gap-line">5. Vocês <input type="text" id="e2-5"> (fazer / comer) chá de tarde?</div>
+    <div class="gap-line">6. A gente <input type="text" id="e2-6"> (fazer / cuidar) das plantas de manhã.</div>
+    <div class="gap-line">7. Você <input type="text" id="e2-7"> (fazer / beber) palavra cruzada?</div>
+    <div class="gap-line">8. Eles <input type="text" id="e2-8"> (fazer / comer) exercício no parque.</div>
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Exercise 3 — Complete the mini-dialogues with the correct form of FAZER.</h2>
+
+    <div class="gap-line">1. — O que você <input type="text" id="e3-1"> de manhã?</div>
+    <div class="gap-line">— Eu <input type="text" id="e3-2"> um café e cuido das plantas.</div>
+    <div class="gap-line">2. — A sua irmã <input type="text" id="e3-3"> bolo?</div>
+    <div class="gap-line">— Não, ela não <input type="text" id="e3-4"> bolo. Ela só come!</div>
+    <div class="gap-line">3. — Vocês <input type="text" id="e3-5"> palavra cruzada?</div>
+    <div class="gap-line">— Sim, nós <input type="text" id="e3-6"> palavra cruzada de tarde.</div>
+    <div class="gap-line">4. — Os seus vizinhos <input type="text" id="e3-7"> barulho de noite?</div>
+    <div class="gap-line">— Fazem! Mas a gente também <input type="text" id="e3-8"> barulho.</div>
+    <button class="check-btn" onclick="checkEx3()">✓ Check answers</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </div>
+
+  <!-- PART 3 — PRODUÇÃO ESCRITA -->
+  <div class="card">
+    <div class="sec-label">Part 3 · Produção Escrita</div>
+    <h2>Exercise 4 — Write your own post for the blog "Sábado em casa"</h2>
+    <p style="font-size:14px;margin-bottom:12px;">Tell what you do at home on Saturday, and at what time of day. Write 5–7 sentences.</p>
+
+    <div class="blog-post">
+      <div class="blog-title">Blog do Tomás</div>
+      <h3 style="font-size:16px;">Sábado em casa</h3>
+      <p style="font-size:14px;">De manhã eu faço um pão e bebo um chá. A minha filha não faz nada de manhã: ela dorme! De tarde nós cuidamos das plantas e ouvimos música. De noite eu faço um churrasco e a gente conversa na sala. Nós fazemos isso todos os sábados. Eu amo o sábado!</p>
+    </div>
+
+    <div class="note-box">Include in your post: <em>de manhã / de tarde / de noite</em> · uma coisa que você faz sozinho(a) · uma coisa que você faz com outra pessoa · uma coisa que você <strong>NÃO</strong> faz</div>
+
+    <textarea rows="6" id="producao" placeholder="Escreva o seu post aqui..." style="margin-top:10px;"></textarea>
+  </div>
+
+  <!-- SEND BOX -->
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+function toggleModel(id) {
+  var el = document.getElementById(id);
+  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+function norm(s) {
+  return (s||'').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/\s+/g,' ');
+}
+
+function runCheck(prefix, resultId, answers) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(prefix + '-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === norm(a);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:6px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>'
+                : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+          + ' ' + a + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + answers.length + ' correct!'
+             : correct + ' of ' + answers.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+function checkEx1() {
+  runCheck('e1', 'ex1-result', ['faço','faz','fazemos','fazem','faz','faz','fazem','faz']);
+}
+function checkEx2() {
+  runCheck('e2', 'ex2-result', ['tomo','toca','fazemos','fazem','fazem','cuida','faz','fazem']);
+}
+function checkEx3() {
+  runCheck('e3', 'ex3-result', ['faz','faço','faz','faz','fazem','fazemos','fazem','faz']);
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+    }
+    if (!label) label = 'Campo ' + (idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R' + (idx+1) + ' — ' + label + ':</strong><br>' + val + '</p>';
+  });
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 ' + name + ' — ' + material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">' + name + '</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> ' + material + '<br><strong>Data:</strong> ' + today + '</p><hr>' + answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
