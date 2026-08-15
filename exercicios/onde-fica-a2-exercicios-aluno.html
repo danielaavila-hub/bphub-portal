@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onde Fica…? | A2 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #265B8B;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: var(--cobalto-light); border: 1.5px solid rgba(38,91,139,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* info table (grammar reference tables) */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 480px; border-collapse: collapse; }
+    .info-table th { background: var(--cobalto); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--cobalto); }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--cobalto); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--cobalto); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--cobalto); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--cobalto); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 70px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 70px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--cobalto); font-weight: 700; }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--level); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; margin-bottom: 8px; }
+    .model-text-box p:last-child { margin-bottom: 0; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--cobalto); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(38,91,139,.06); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid var(--level); color: var(--level);
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A2</div>
+    <span class="topbar-name">Básico II</span>
+  </div>
+  <a href="../a2/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Onde Fica<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">…?</em></h1>
+    <p>Talking about where places are — <strong style="color:white;">ficar</strong> vs. <strong style="color:white;">estar</strong> vs. <strong style="color:white;">ser</strong>, and the prepositions you need to describe a neighbourhood.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Ficar · estar · ser</span>
+      <span class="meta-pill"><span class="dot"></span>Expressões de lugar</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Ficar, estar and ser — and the prepositions of place</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Asking where a place is</div>
+      <p style="margin-bottom:4px;">Use <strong>fica</strong> for one place and <strong>ficam</strong> for two or more places.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Pergunta</th><th>Resposta</th></tr></thead>
+        <tbody>
+          <tr><td>Onde fica a padaria?</td><td>A padaria fica na esquina.</td></tr>
+          <tr><td>Onde ficam os bancos?</td><td>Os bancos ficam no centro.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Ficar, estar or ser?</div>
+      <p style="margin-bottom:0;">In spoken Brazilian Portuguese you will also hear <em>ser</em> with places — <em>O museu é ao lado do banco.</em> Both are correct; <strong>ficar</strong> is the most common choice when you ask or say where a place is.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Verbo</th><th>Usamos para…</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>ficar</td><td>places that do not move (buildings, streets, cities)</td><td>A farmácia fica ao lado do supermercado.</td></tr>
+          <tr><td>estar</td><td>people, animals and objects that move</td><td>As chaves estão na gaveta.</td></tr>
+          <tr><td>ser</td><td>events (parties, markets, classes, shows)</td><td>A feira é na praça.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Expressões de lugar</div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Expressão</th><th>Exemplo</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>em (+ o/a) → no / na</td><td>O correio fica na Avenida Rio Branco.</td><td>on / in</td></tr>
+          <tr><td>ao lado de (+ o/a) → do / da</td><td>A farmácia fica ao lado do mercado.</td><td>next to</td></tr>
+          <tr><td>em frente a (+ o/a) → ao / à</td><td>O hotel fica em frente à praça.</td><td>in front of / opposite</td></tr>
+          <tr><td>atrás de → do / da</td><td>O ponto de ônibus fica atrás da igreja.</td><td>behind</td></tr>
+          <tr><td>perto de → do / da</td><td>O parque fica perto do metrô.</td><td>near</td></tr>
+          <tr><td>longe de → do / da</td><td>A praia fica longe do centro.</td><td>far from</td></tr>
+          <tr><td>à direita de / à esquerda de</td><td>A livraria fica à direita do café.</td><td>to the right / left of</td></tr>
+          <tr><td>do lado oposto a → ao / à</td><td>O museu fica do lado oposto ao banco.</td><td>on the opposite side of</td></tr>
+          <tr><td>entre</td><td>A escola fica entre a praça e a igreja.</td><td>between</td></tr>
+          <tr><td>na esquina de → do / da</td><td>A padaria fica na esquina da Rua Bahia.</td><td>on the corner of</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="time-note">
+      <strong>Atenção:</strong> <em>entre</em> never contracts — <em>entre a escola e a igreja</em>.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the welcome note carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Bem-vindos ao apartamento!</div>
+      <div class="text-byline">Recado deixado por Cláudia para Sarah e Tom, em Florianópolis</div>
+
+      <p>Oi, Sarah! Oi, Tom!</p>
+      <p>Que bom receber vocês aqui em Florianópolis. Deixei este recado na porta da geladeira com algumas informações sobre o bairro.</p>
+      <p>As chaves extras <mark>estão</mark> na gaveta da cozinha, do lado do fogão.</p>
+      <p>Quase tudo <mark>fica</mark> bem perto do prédio. A padaria <mark>fica</mark> na esquina, à direita de quem sai daqui. O pão sai do forno às seis e meia da manhã.</p>
+      <p>O supermercado <mark>fica</mark> do outro lado da avenida, em frente à praça. Ao lado do supermercado tem uma farmácia, aberta até as dez da noite.</p>
+      <p>O ponto de ônibus <mark>fica</mark> atrás da praça, perto da banca de jornal. Os ônibus para o centro passam a cada quinze minutos.</p>
+      <p>A feira <mark>é</mark> aos sábados, na rua entre a escola e a igreja. As frutas de lá são as melhores do bairro.</p>
+      <p>A praia <mark>fica</mark> um pouco mais longe, mas dá para ir a pé em vinte minutos.</p>
+      <p>Qualquer dúvida, meu telefone <mark>está</mark> na mesa da sala.</p>
+      <p>Abraço,<br>Cláudia</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions in Portuguese, based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Onde fica a padaria?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where is the bakery?</span>
+        <textarea class="open-textarea" placeholder="A padaria fica..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. O que fica ao lado do supermercado?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What is next to the supermarket?</span>
+        <textarea class="open-textarea" placeholder="Ao lado do supermercado..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Onde estão as chaves extras?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where are the spare keys?</span>
+        <textarea class="open-textarea" placeholder="As chaves extras..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Onde é a feira aos sábados?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where is the street market on Saturdays?</span>
+        <textarea class="open-textarea" placeholder="A feira é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. O que fica perto do ponto de ônibus?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What is near the bus stop?</span>
+        <textarea class="open-textarea" placeholder="Perto do ponto de ônibus..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">6. Qual fica mais perto do prédio: a praia ou a padaria?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Which is closer to the building: the beach or the bakery?</span>
+        <textarea class="open-textarea" placeholder="A..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>A padaria fica na esquina, à direita de quem sai do prédio.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ao lado do supermercado fica uma farmácia.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>As chaves extras estão na gaveta da cozinha, do lado do fogão.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>A feira é na rua entre a escola e a igreja.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Perto do ponto de ônibus fica a banca de jornal. Também: a praça.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 6</div><p>A padaria fica mais perto.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Contractions -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Controlled practice — contractions</h3>
+          <p>Complete the sentences with: do, da, dos, das, ao, à, no, na</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct contraction.</p>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><span>O hospital fica ao lado</span><input class="blank-input" data-answer="da" placeholder="___"><span>escola.</span></li>
+        <li><span class="item-num">2.</span><span>A livraria fica em frente</span><input class="blank-input" data-answer="ao" placeholder="___"><span>museu.</span></li>
+        <li><span class="item-num">3.</span><span>O restaurante fica</span><input class="blank-input" data-answer="na" placeholder="___"><span>esquina da Rua Bahia.</span></li>
+        <li><span class="item-num">4.</span><span>A academia fica atrás</span><input class="blank-input" data-answer="do" placeholder="___"><span>posto de gasolina.</span></li>
+        <li><span class="item-num">5.</span><span>O cinema fica perto</span><input class="blank-input" data-answer="da" placeholder="___"><span>estação de metrô.</span></li>
+        <li><span class="item-num">6.</span><span>A pizzaria fica do lado oposto</span><input class="blank-input" data-answer="à" placeholder="___"><span>praça.</span></li>
+        <li><span class="item-num">7.</span><span>O correio fica</span><input class="blank-input" data-answer="na" placeholder="___"><span>Avenida Getúlio Vargas.</span></li>
+        <li><span class="item-num">8.</span><span>A padaria fica à direita</span><input class="blank-input" data-answer="do" placeholder="___"><span>banco.</span></li>
+        <li><span class="item-num">9.</span><span>O parque fica atrás</span><input class="blank-input" data-answer="dos" placeholder="___"><span>prédios azuis.</span></li>
+        <li><span class="item-num">10.</span><span>A farmácia fica perto</span><input class="blank-input" data-answer="das" placeholder="___"><span>lojas de roupa.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-2','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-2','blanks-result-2')" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — fica/ficam/está/estão -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Controlled practice — fica, ficam, está or estão</h3>
+          <p>Choose the correct form for each sentence</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with fica, ficam, está or estão.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><span>O correio</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>na Rua Sete de Setembro.</span></li>
+        <li><span class="item-num">2.</span><span>Onde</span><input class="blank-input" data-answer="está" placeholder="___________"><span>o meu guarda-chuva?</span></li>
+        <li><span class="item-num">3.</span><span>As lojas de roupa</span><input class="blank-input" data-answer="ficam" placeholder="___________"><span>no centro da cidade.</span></li>
+        <li><span class="item-num">4.</span><span>Os meus documentos</span><input class="blank-input" data-answer="estão" placeholder="___________"><span>dentro da mochila.</span></li>
+        <li><span class="item-num">5.</span><span>A biblioteca</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>atrás da universidade.</span></li>
+        <li><span class="item-num">6.</span><span>O Rafael</span><input class="blank-input" data-answer="está" placeholder="___________"><span>na sala de aula.</span></li>
+        <li><span class="item-num">7.</span><span>Os hotéis mais baratos</span><input class="blank-input" data-answer="ficam" placeholder="___________"><span>longe da praia.</span></li>
+        <li><span class="item-num">8.</span><span>As bicicletas</span><input class="blank-input" data-answer="estão" placeholder="___________"><span>na garagem do prédio.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Write a welcome note for a friend</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>A friend is staying at your place for a week</h3>
+          <p>70–90 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">While you are away, write a welcome note (70–90 words) with information about your neighbourhood.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <p>Oi, Lucas!</p>
+        <p>Bem-vindo à minha casa. As chaves do portão estão em cima do micro-ondas.</p>
+        <p>A padaria fica na esquina, à esquerda de quem sai daqui. O pãozinho de lá é o melhor da região.</p>
+        <p>O ponto de ônibus fica em frente à farmácia, perto da praça. Os ônibus para o centro passam a cada dez minutos.</p>
+        <p>O supermercado fica um pouco longe, mas tem um mercadinho atrás do prédio azul.</p>
+        <p>Aos domingos, o show de forró é na praça.</p>
+        <p>Abraço,<br>Beatriz</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Onde comprar pão e café de manhã.</li>
+        <li>Onde pegar o ônibus, o metrô ou o táxi.</li>
+        <li>Um lugar bom que fica perto.</li>
+        <li>Um lugar que fica longe.</li>
+        <li>Onde estão as chaves.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Oi..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
