@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Se Dependesse de Mim… | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--cobalto);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: #967E63;
+      padding: 60px 48px 52px;
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      color: white; margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 15px; color: rgba(255,255,255,0.88);
+      max-width: 560px; line-height: 1.75;
+    }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 500; color: white;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note {
+      background: var(--cobalto-light);
+      border: 1.5px solid rgba(38,91,139,0.18);
+      border-radius: 14px; padding: 28px 32px; margin-bottom: 24px;
+    }
+    .lang-note-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--cobalto); margin-bottom: 10px;
+    }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* formation grid */
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0; }
+    .form-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .form-card-header { background: var(--cobalto); padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+    .form-table-wrap { overflow-x: auto; }
+    .form-table { width: 100%; min-width: 480px; border-collapse: collapse; }
+    .form-table tr { border-bottom: 1px solid var(--light-gray); }
+    .form-table tr:last-child { border-bottom: none; }
+    .form-table td { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+    .form-table td:first-child { color: #999; }
+    .form-table td:last-child { font-weight: 700; color: var(--cobalto); }
+    .form-table th {
+      padding: 8px 14px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #999; text-align: left; white-space: nowrap;
+      border-bottom: 1.5px solid var(--light-gray);
+    }
+
+    /* comparison table */
+    .compare-table { width: 100%; border-collapse: collapse; margin: 16px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--light-gray); }
+    .compare-table th { padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; }
+    .compare-table th:first-child { background: #FBE8E5; color: #C04030; }
+    .compare-table th:last-child  { background: var(--floresta); color: white; }
+    .compare-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .compare-table td:first-child { color: #C04030; border-right: 1px solid var(--light-gray); text-decoration: line-through; }
+    .compare-table td:last-child  { color: var(--floresta); font-weight: 600; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--cobalto); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--cobalto); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--cobalto); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+
+    /* vox-pop entries */
+    .voxpop-item { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--light-gray); }
+    .voxpop-item:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+    .voxpop-name { font-weight: 700; font-size: 15px; color: var(--cobalto); margin-bottom: 2px; }
+    .voxpop-meta { font-size: 12px; color: #aaa; margin-bottom: 10px; }
+    .voxpop-quote { font-size: 15px; color: var(--texto); line-height: 1.9; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--cobalto); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--cobalto); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea {
+      width: 100%; background: var(--off-white);
+      border: 1.5px solid var(--light-gray); border-radius: 10px;
+      padding: 14px 16px; font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px;
+      outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px;
+    }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* transform list */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--cobalto); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--cobalto); font-weight: 700; }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #967E63; margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--cobalto); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--cobalto); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid #967E63; color: #967E63;
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Se Dependesse<br><em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">de Mim…</em></h1>
+    <p>Talking about hypothetical situations that aren't true — dreams, imaginary changes, and advice — with <strong style="color:white;">se + imperfeito do subjuntivo + futuro do pretérito</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Condicional hipotético</span>
+      <span class="meta-pill"><span class="dot"></span>Se + imperfeito do subjuntivo</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>The hypothetical conditional — talking about what is not (yet) true</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. The hypothetical conditional</div>
+      <p>
+        <strong>Se</strong> + imperfeito do subjuntivo <strong>,</strong> futuro do pretérito
+      </p>
+      <p style="margin-top:-4px;">
+        <em>Se eu tivesse tempo, eu estudaria alemão.</em> — <span style="color:#888;font-style:italic;">If I had time, I would study German.</span>
+      </p>
+      <p>
+        The two halves can swap places — the comma disappears when the <em>se</em> clause comes second: <em>Eu estudaria alemão se tivesse tempo.</em>
+      </p>
+      <p>
+        We use this structure to talk about things that are not true now: dreams, imaginary situations, and advice.
+      </p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Imperfeito do subjuntivo — how to build it</div>
+      <p>Take the <em>eles</em> form of the pretérito perfeito, remove <strong>-ram</strong>, and add the endings below. This rule has no exceptions — if you know the pretérito perfeito, you know this tense.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-card-header">Imperfeito do subjuntivo — formation</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Infinitivo</th><th>eles (perfeito)</th><th>eu / ele</th><th>nós</th><th>eles</th></tr></thead>
+          <tr><td>falar</td><td>falaram</td><td>falasse</td><td>falássemos</td><td>falassem</td></tr>
+          <tr><td>comer</td><td>comeram</td><td>comesse</td><td>comêssemos</td><td>comessem</td></tr>
+          <tr><td>partir</td><td>partiram</td><td>partisse</td><td>partíssemos</td><td>partissem</td></tr>
+          <tr><td>ser / ir</td><td>foram</td><td>fosse</td><td>fôssemos</td><td>fossem</td></tr>
+          <tr><td>ter</td><td>tiveram</td><td>tivesse</td><td>tivéssemos</td><td>tivessem</td></tr>
+          <tr><td>poder</td><td>puderam</td><td>pudesse</td><td>pudéssemos</td><td>pudessem</td></tr>
+          <tr><td>fazer</td><td>fizeram</td><td>fizesse</td><td>fizéssemos</td><td>fizessem</td></tr>
+          <tr><td>dizer</td><td>disseram</td><td>dissesse</td><td>disséssemos</td><td>dissessem</td></tr>
+          <tr><td>estar</td><td>estiveram</td><td>estivesse</td><td>estivéssemos</td><td>estivessem</td></tr>
+          <tr><td>vir</td><td>vieram</td><td>viesse</td><td>viéssemos</td><td>viessem</td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Futuro do pretérito — how to build it</div>
+      <p>Infinitive + <strong>-ia</strong>: <em>falar → falaria · comer → comeria · partir → partiria</em></p>
+      <p style="margin-bottom:0;">Only three verbs are irregular:</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">dizer → diria</span></div>
+      <div class="ex-pair"><span class="ex-pt">fazer → faria</span></div>
+      <div class="ex-pair"><span class="ex-pt">trazer → traria</span></div>
+    </div>
+
+    <div class="sec-header" style="margin-top:44px;">
+      <div class="sec-icon icon-gram">⚠️</div>
+      <div>
+        <h2>Two Things to Watch</h2>
+        <p>Common mistakes and how Brazilians actually speak</p>
+      </div>
+    </div>
+
+    <p style="font-size:14px; color:#666; margin-bottom:14px;">Careful: English says <em>"If I would have time…"</em> — but Portuguese never puts the futuro do pretérito after <em>se</em>.</p>
+
+    <table class="compare-table">
+      <thead><tr><th>❌ Common mistake</th><th>✅ Correct form</th></tr></thead>
+      <tbody>
+        <tr><td>Se eu teria tempo…</td><td>Se eu tivesse tempo…</td></tr>
+      </tbody>
+    </table>
+
+    <div class="time-note">
+      <strong>In speech:</strong> Brazilians very often replace the futuro do pretérito with the <em>imperfeito do indicativo</em> — <em>Se eu ganhasse na loteria, eu viajava o mundo.</em> Both are heard every day; the <em>-ia</em> form is the one you write.
+    </div>
+
+    <div class="cult-note">
+      <strong>Giving advice:</strong> <em>Se eu fosse você, eu conversaria com ele.</em> — this is the most common way to give advice in Portuguese.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the street poll carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Minha Cidade, se Dependesse de Mim</div>
+      <div class="text-byline">Enquete: se você pudesse mudar uma coisa na sua cidade, o que mudaria?</div>
+
+      <div class="voxpop-item">
+        <div class="voxpop-name">Rogério</div>
+        <div class="voxpop-meta">52 anos, motorista — Belo Horizonte (MG)</div>
+        <p class="voxpop-quote">Se dependesse de mim, o ônibus passaria a cada dez minutos. Hoje eu perco duas horas por dia no trânsito. Se eu morasse mais perto do trabalho, teria mais tempo com as minhas filhas — mas o aluguel lá é impossível.</p>
+      </div>
+
+      <div class="voxpop-item">
+        <div class="voxpop-name">Ana Cláudia</div>
+        <div class="voxpop-meta">31 anos, enfermeira — Recife (PE)</div>
+        <p class="voxpop-quote">Eu faria mais ciclovias. Muita gente iria de bicicleta para o trabalho se as ruas fossem mais seguras. Meu irmão diria que é loucura pedalar aqui, e ele tem razão.</p>
+      </div>
+
+      <div class="voxpop-item">
+        <div class="voxpop-name">Seu Antônio</div>
+        <div class="voxpop-meta">68 anos, aposentado — Porto Alegre (RS)</div>
+        <p class="voxpop-quote">Se eu fosse prefeito, cuidaria das praças. A praça do meu bairro seria um lugar bonito se tivesse árvores e bancos. As crianças brincariam ali todo dia.</p>
+      </div>
+
+      <div class="voxpop-item">
+        <div class="voxpop-name">Juliana</div>
+        <div class="voxpop-meta">24 anos, estudante — Manaus (AM)</div>
+        <p class="voxpop-quote">Se a prefeitura ouvisse os jovens, a cidade seria diferente. A gente pediria mais espaços culturais e traria oficinas para a periferia. Se eu tivesse dinheiro, eu mesma abriria um centro cultural no meu bairro.</p>
+      </div>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <table class="vocab-table" style="margin-top:24px;">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">a enquete</td><td>street poll, survey</td></tr>
+        <tr><td class="vocab-pt">se dependesse de mim</td><td>if it were up to me</td></tr>
+        <tr><td class="vocab-pt">o trânsito</td><td>traffic</td></tr>
+        <tr><td class="vocab-pt">o aluguel</td><td>rent</td></tr>
+        <tr><td class="vocab-pt">a ciclovia</td><td>bike lane</td></tr>
+        <tr><td class="vocab-pt">o prefeito / a prefeitura</td><td>mayor / city hall</td></tr>
+        <tr><td class="vocab-pt">o banco (na praça)</td><td>bench</td></tr>
+        <tr><td class="vocab-pt">aposentado</td><td>retired</td></tr>
+        <tr><td class="vocab-pt">a oficina</td><td>workshop (class)</td></tr>
+        <tr><td class="vocab-pt">a periferia</td><td>outer neighbourhoods</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cult-note" style="margin-top:20px;">
+      <strong>Cultural note:</strong> <em>Seu Antônio, Dona Maria</em> — Brazilians put <em>Seu</em> or <em>Dona</em> before the first name of an older person as a sign of respect. It is warmer than <em>Senhor / Senhora</em>.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions in Portuguese, based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. O que o Rogério mudaria no transporte da cidade dele?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What would Rogério change about transport in his city?</span>
+        <textarea class="open-textarea" placeholder="Ele mudaria..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Por que o Rogério não mora perto do trabalho?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Why doesn't Rogério live near his workplace?</span>
+        <textarea class="open-textarea" placeholder="Porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Segundo a Ana Cláudia, o que aconteceria se as ruas fossem mais seguras?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">According to Ana Cláudia, what would happen if the streets were safer?</span>
+        <textarea class="open-textarea" placeholder="Muita gente..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O que faltaria na praça do bairro do Seu Antônio?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What is missing in the square in Seu Antônio's neighbourhood?</span>
+        <textarea class="open-textarea" placeholder="Falta(m)..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. O que a Juliana faria se tivesse dinheiro?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What would Juliana do if she had money?</span>
+        <textarea class="open-textarea" placeholder="Ela..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">6. Duas pessoas falam de mudanças que dependem da prefeitura. Quais são?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Two people talk about changes that depend on the city government. Which ones?</span>
+        <textarea class="open-textarea" placeholder="São..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Ele mudaria a frequência dos ônibus — passariam a cada dez minutos.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Porque o aluguel perto do trabalho é caro demais.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Muita gente iria de bicicleta para o trabalho.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Faltam árvores e bancos.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Ela abriria um centro cultural no bairro dela.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 6</div><p>As ciclovias (Ana Cláudia) e os espaços culturais / as oficinas (Juliana). Aceita-se também o cuidado com as praças (Seu Antônio).</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Controlled practice -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Controlled practice</h3>
+          <p>Complete with the correct form of the verbs in brackets</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct form: imperfeito do subjuntivo in the <em>se</em> clause, futuro do pretérito in the main clause.</p>
+
+      <ul class="blanks-list" id="blanks-list">
+        <li><span class="item-num">1.</span><span>Se eu</span><input class="blank-input" data-answer="tivesse" placeholder="___________"><span class="blank-hint">(ter)</span><span>mais tempo,</span><input class="blank-input" data-answer="aprenderia" placeholder="___________"><span class="blank-hint">(aprender)</span><span>a tocar violão.</span></li>
+        <li><span class="item-num">2.</span><span>Nós</span><input class="blank-input" data-answer="viajaríamos" placeholder="___________"><span class="blank-hint">(viajar)</span><span>mais se as passagens</span><input class="blank-input" data-answer="fossem" placeholder="___________"><span class="blank-hint">(ser)</span><span>mais baratas.</span></li>
+        <li><span class="item-num">3.</span><span>Se você</span><input class="blank-input" data-answer="morasse" placeholder="___________"><span class="blank-hint">(morar)</span><span>no interior,</span><input class="blank-input" data-answer="pagaria" placeholder="___________"><span class="blank-hint">(pagar)</span><span>menos aluguel.</span></li>
+        <li><span class="item-num">4.</span><span>A Marina</span><input class="blank-input" data-answer="aceitaria" placeholder="___________"><span class="blank-hint">(aceitar)</span><span>o emprego se o salário</span><input class="blank-input" data-answer="fosse" placeholder="___________"><span class="blank-hint">(ser)</span><span>melhor.</span></li>
+        <li><span class="item-num">5.</span><span>Se os meus pais</span><input class="blank-input" data-answer="pudessem" placeholder="___________"><span class="blank-hint">(poder)</span><span>, eles</span><input class="blank-input" data-answer="viriam" placeholder="___________"><span class="blank-hint">(vir)</span><span>me visitar todo mês.</span></li>
+        <li><span class="item-num">6.</span><span>Se a gente</span><input class="blank-input" data-answer="saísse" placeholder="___________"><span class="blank-hint">(sair)</span><span>mais cedo, não</span><input class="blank-input" data-answer="pegaria" placeholder="___________"><span class="blank-hint">(pegar)</span><span>trânsito.</span></li>
+        <li><span class="item-num">7.</span><span>Eu</span><input class="blank-input" data-answer="diria" placeholder="___________"><span class="blank-hint">(dizer)</span><span>a verdade a ele se ele me</span><input class="blank-input" data-answer="perguntasse" placeholder="___________"><span class="blank-hint">(perguntar)</span><span>.</span></li>
+        <li><span class="item-num">8.</span><span>Se vocês</span><input class="blank-input" data-answer="fizessem" placeholder="___________"><span class="blank-hint">(fazer)</span><span>exercício,</span><input class="blank-input" data-answer="dormiriam" placeholder="___________"><span class="blank-hint">(dormir)</span><span>melhor.</span></li>
+        <li><span class="item-num">9.</span><span>Se eu</span><input class="blank-input" data-answer="estivesse" placeholder="___________"><span class="blank-hint">(estar)</span><span>no seu lugar,</span><input class="blank-input" data-answer="falaria" placeholder="___________"><span class="blank-hint">(falar)</span><span>com o chefe hoje mesmo.</span></li>
+        <li><span class="item-num">10.</span><span>O que você</span><input class="blank-input" data-answer="faria" placeholder="___________"><span class="blank-hint">(fazer)</span><span>se</span><input class="blank-input" data-answer="ganhasse" placeholder="___________"><span class="blank-hint">(ganhar)</span><span>na Mega-Sena?</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks()">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks()" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Transformation -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>From real to hypothetical</h3>
+          <p>Read the real situation and write the hypothetical version</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Rewrite each real situation as a hypothetical one, using se + imperfeito do subjuntivo + futuro do pretérito.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> Não tenho carro, por isso vou de ônibus. → <strong>Se eu tivesse carro, não iria de ônibus.</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. O Pedro não fala inglês, por isso não aceita o convite para trabalhar em Londres.</p><input class="transform-input" type="text" placeholder="Se o Pedro..."></li>
+        <li class="transform-item"><p class="transform-original">2. A gente não mora perto da praia, por isso não vai nadar de manhã.</p><input class="transform-input" type="text" placeholder="Se a gente..."></li>
+        <li class="transform-item"><p class="transform-original">3. Não conheço a cidade, por isso não sei indicar o caminho.</p><input class="transform-input" type="text" placeholder="Se eu..."></li>
+        <li class="transform-item"><p class="transform-original">4. Vocês não têm tempo, por isso não fazem um curso de português.</p><input class="transform-input" type="text" placeholder="Se vocês..."></li>
+        <li class="transform-item"><p class="transform-original">5. A minha irmã não ganha bem, por isso não viaja nas férias.</p><input class="transform-input" type="text" placeholder="Se a minha irmã..."></li>
+        <li class="transform-item"><p class="transform-original">6. Chove muito aqui, por isso eu não ando de bicicleta.</p><input class="transform-input" type="text" placeholder="Se não..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex3-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex3-answers">
+        <div class="model-answer-item"><p>1. Se o Pedro falasse inglês, aceitaria o convite para trabalhar em Londres.</p></div>
+        <div class="model-answer-item"><p>2. Se a gente morasse perto da praia, iria nadar de manhã.</p></div>
+        <div class="model-answer-item"><p>3. Se eu conhecesse a cidade, saberia indicar o caminho.</p></div>
+        <div class="model-answer-item"><p>4. Se vocês tivessem tempo, fariam um curso de português.</p></div>
+        <div class="model-answer-item"><p>5. Se a minha irmã ganhasse bem, viajaria nas férias.</p></div>
+        <div class="model-answer-item"><p>6. Se não chovesse tanto aqui, eu andaria de bicicleta.</p></div>
+        <p class="model-note">Other phrasings are possible.</p>
+      </div>
+    </div>
+
+    <!-- Exercise 4 — Advice -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Giving advice</h3>
+          <p>A friend tells you about a problem</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Give advice to each friend, starting with "Se eu fosse você…".</p>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. <em>"Recebi duas ofertas de emprego e não sei qual escolher."</em></p><input class="transform-input" type="text" placeholder="Se eu fosse você..."></li>
+        <li class="transform-item"><p class="transform-original">2. <em>"Meu vizinho ouve música alta até as três da manhã."</em></p><input class="transform-input" type="text" placeholder="Se eu fosse você..."></li>
+        <li class="transform-item"><p class="transform-original">3. <em>"Vou morar no Brasil por um ano, mas ainda não falo bem português."</em></p><input class="transform-input" type="text" placeholder="Se eu fosse você..."></li>
+        <li class="transform-item"><p class="transform-original">4. <em>"Comprei uma passagem cara e agora não posso mais viajar."</em></p><input class="transform-input" type="text" placeholder="Se eu fosse você..."></li>
+        <li class="transform-item"><p class="transform-original">5. <em>"Meu chefe nunca responde os meus e-mails."</em></p><input class="transform-input" type="text" placeholder="Se eu fosse você..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex4-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex4-answers">
+        <div class="model-answer-item"><p>1. Se eu fosse você, eu conversaria com as duas empresas antes de decidir.</p></div>
+        <div class="model-answer-item"><p>2. Se eu fosse você, eu falaria com ele antes de chamar o síndico.</p></div>
+        <div class="model-answer-item"><p>3. Se eu fosse você, eu procuraria um professor particular agora.</p></div>
+        <div class="model-answer-item"><p>4. Se eu fosse você, eu pediria o reembolso à companhia aérea.</p></div>
+        <div class="model-answer-item"><p>5. Se eu fosse você, eu marcaria uma conversa presencial com ele.</p></div>
+        <p class="model-note">Other phrasings are possible.</p>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Answer the same street poll</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>You've been invited to answer the poll</h3>
+          <p>80–120 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write your own answer to the street poll: "se você pudesse mudar uma coisa na sua cidade, o que mudaria?"</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Marcos, 39 anos, professor — Salvador (BA)</div>
+        <p>Se dependesse de mim, o centro histórico teria mais ônibus à noite. Muita gente deixaria o carro em casa se pudesse voltar do trabalho com segurança. Eu também cuidaria das feiras livres: se a prefeitura desse apoio aos feirantes, os preços seriam melhores e o bairro ganharia vida. E se eu tivesse um minuto com o prefeito, diria uma coisa só: as melhores ideias não estão no gabinete, estão na esquina.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>O que você mudaria na cidade onde mora?</li>
+        <li>O que aconteceria se essa mudança existisse?</li>
+        <li>Algo que você faria se tivesse dinheiro ou poder para isso.</li>
+        <li>O que você diria ao prefeito da sua cidade?</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:220px;" placeholder="Se dependesse de mim..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
