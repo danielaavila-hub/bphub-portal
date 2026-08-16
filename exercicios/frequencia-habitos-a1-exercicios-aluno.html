@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hábitos Saudáveis | A1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #4E551D;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: rgba(78,85,29,0.06); border: 1.5px solid rgba(78,85,29,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--level); font-style: italic; }
+    .lang-note strong { color: var(--level); }
+
+    /* info table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--level); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--level); white-space: nowrap; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
+    .cult-note strong { color: var(--level); }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--level); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+
+    .profile-item { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--light-gray); }
+    .profile-item:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+    .profile-name { font-weight: 700; font-size: 15px; color: var(--level); margin-bottom: 8px; }
+    .profile-text { font-size: 15px; color: var(--texto); line-height: 1.9; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+    .vocab-group-label { font-size: 12px; font-weight: 700; color: var(--nanquim); margin: 20px 0 6px; }
+    .vocab-group-label:first-child { margin-top: 0; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 90px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+
+    /* transform list */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--level); }
+
+    /* example box */
+    .example-box { background: rgba(78,85,29,0.06); border: 1px solid rgba(78,85,29,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--level); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(78,85,29,.06); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid var(--level); color: var(--level);
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+    <span class="topbar-name">Iniciante</span>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Hábitos<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> Saudáveis</em></h1>
+    <p>Saying how often you do things — sempre, geralmente, às vezes, nunca — through the daily routines of a walking group in Recife.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Advérbios de frequência</span>
+      <span class="meta-pill"><span class="dot"></span>Rotina e hábitos</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>How often? — frequency words and where they go in the sentence</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. How often? — the scale</div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>%</th><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>100%</td><td>sempre</td><td>always</td></tr>
+          <tr><td>90%</td><td>quase sempre</td><td>almost always</td></tr>
+          <tr><td>70%</td><td>geralmente</td><td>usually</td></tr>
+          <tr><td>40%</td><td>às vezes</td><td>sometimes</td></tr>
+          <tr><td>10%</td><td>raramente</td><td>rarely</td></tr>
+          <tr><td>0%</td><td>nunca</td><td>never</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Where the adverb goes</div>
+      <p><strong>One-word adverbs</strong> go between the subject and the verb.</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Eu sempre caminho de manhã.</span><span class="ex-en">I always walk in the morning.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Nós geralmente cozinhamos em casa.</span><span class="ex-en">We usually cook at home.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Ele raramente come fast food.</span><span class="ex-en">He rarely eats fast food.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Eles nunca fumam.</span><span class="ex-en">They never smoke.</span></div>
+    </div>
+
+    <div class="time-note">
+      <strong>Note:</strong> <em>Geralmente</em> and <em>às vezes</em> may also open the sentence — <em>Às vezes eu corro na praia.</em>
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 3. Time words</div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>o dia</td><td>day</td></tr>
+          <tr><td>a manhã</td><td>morning</td></tr>
+          <tr><td>a tarde</td><td>afternoon</td></tr>
+          <tr><td>a noite</td><td>night, evening</td></tr>
+          <tr><td>a semana</td><td>week</td></tr>
+          <tr><td>o mês</td><td>month</td></tr>
+          <tr><td>o ano</td><td>year</td></tr>
+          <tr><td>a hora</td><td>hour</td></tr>
+          <tr><td>o fim de semana</td><td>weekend</td></tr>
+          <tr><td>a vez / duas vezes</td><td>time / twice</td></tr>
+          <tr><td>todos os dias</td><td>every day</td></tr>
+          <tr><td>aos sábados / aos domingos</td><td>on Saturdays / on Sundays</td></tr>
+          <tr><td>antes de</td><td>before</td></tr>
+          <tr><td>depois</td><td>after, afterwards</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 4. Longer expressions of frequency</div>
+      <p style="margin-bottom:0;">Built from the words above. They go at the <strong>beginning or the end</strong> of the sentence — never between the subject and the verb.</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Eu corro duas vezes por semana.</span><span class="ex-en">I run twice a week.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Todos os dias eu bebo muita água.</span><span class="ex-en">Every day I drink a lot of water.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Ela medita de manhã.</span><span class="ex-en">She meditates in the morning.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Nos fins de semana, nós relaxamos.</span><span class="ex-en">On weekends, we relax.</span></div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Cultural note — walking groups in Brazil.</strong> Along the seafront of almost every coastal Brazilian city — Boa Viagem in Recife, Copacabana in Rio, Beira-Mar in Florianópolis — you will find <em>grupos de caminhada</em> out before sunrise. They are as much social as physical: people greet one another with <em>bom dia</em> even without knowing each other, and the walk usually ends with conversation and a coffee. In many cities these groups are organized free of charge by the <em>posto de saúde</em> of the neighborhood, as part of the public health system (SUS).
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the profiles carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Grupo de Caminhada Bom Dia</div>
+      <div class="text-byline">Orla de Boa Viagem, Recife · Todos os dias, às 5h45, em frente ao quiosque 12</div>
+
+      <div class="profile-item">
+        <div class="profile-name">Dona Marlene, 68 anos</div>
+        <p class="profile-text">Eu caminho na orla seis dias por semana. Aos domingos, eu relaxo em casa. Eu sempre bebo água antes da caminhada. Eu geralmente cozinho as refeições com as minhas amigas do grupo. Eu nunca fumo.</p>
+      </div>
+
+      <div class="profile-item">
+        <div class="profile-name">Bruno, 34 anos</div>
+        <p class="profile-text">Eu caminho com o grupo três vezes por semana. Às vezes eu corro um pouco também. Eu quase sempre bebo muita água. Eu preparo as refeições em casa e raramente como fast food. À noite, eu medito para relaxar.</p>
+      </div>
+
+      <div class="profile-item">
+        <div class="profile-name">Camila, 22 anos</div>
+        <p class="profile-text">Eu caminho à tarde, com as amigas. Duas vezes por semana eu corro na orla. Eu sempre como frutas de manhã. Nos fins de semana, eu viajo para a praia com a família. Eu geralmente durmo oito horas por noite.</p>
+      </div>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins didáticos — modelo de perfis de participantes.</p>
+    </div>
+
+    <div class="vocab-group-label" style="margin-top:24px;">Verbos</div>
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">beber</td><td>to drink</td></tr>
+        <tr><td class="vocab-pt">caminhar</td><td>to walk</td></tr>
+        <tr><td class="vocab-pt">comer</td><td>to eat</td></tr>
+        <tr><td class="vocab-pt">correr</td><td>to run</td></tr>
+        <tr><td class="vocab-pt">cozinhar</td><td>to cook</td></tr>
+        <tr><td class="vocab-pt">dormir</td><td>to sleep</td></tr>
+        <tr><td class="vocab-pt">fumar</td><td>to smoke</td></tr>
+        <tr><td class="vocab-pt">meditar</td><td>to meditate</td></tr>
+        <tr><td class="vocab-pt">preparar</td><td>to prepare</td></tr>
+        <tr><td class="vocab-pt">relaxar</td><td>to relax</td></tr>
+        <tr><td class="vocab-pt">ter</td><td>to have</td></tr>
+        <tr><td class="vocab-pt">viajar</td><td>to travel</td></tr>
+      </tbody>
+    </table>
+
+    <div class="vocab-group-label">Lugares e pessoas</div>
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">a orla</td><td>seafront</td></tr>
+        <tr><td class="vocab-pt">a praia</td><td>beach</td></tr>
+        <tr><td class="vocab-pt">o quiosque</td><td>kiosk</td></tr>
+        <tr><td class="vocab-pt">em casa</td><td>at home</td></tr>
+        <tr><td class="vocab-pt">a família</td><td>family</td></tr>
+        <tr><td class="vocab-pt">o grupo</td><td>group</td></tr>
+        <tr><td class="vocab-pt">a caminhada</td><td>walk (noun)</td></tr>
+        <tr><td class="vocab-pt">o amigo / a amiga</td><td>friend</td></tr>
+        <tr><td class="vocab-pt">em frente a</td><td>in front of</td></tr>
+        <tr><td class="vocab-pt">o irmão</td><td>brother</td></tr>
+      </tbody>
+    </table>
+
+    <div class="vocab-group-label">Outras palavras</div>
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">a água</td><td>water</td></tr>
+        <tr><td class="vocab-pt">a fruta</td><td>fruit</td></tr>
+        <tr><td class="vocab-pt">a refeição / as refeições</td><td>meal / meals</td></tr>
+        <tr><td class="vocab-pt">muito / muita</td><td>a lot (of)</td></tr>
+        <tr><td class="vocab-pt">bem</td><td>well</td></tr>
+        <tr><td class="vocab-pt">também</td><td>also, too</td></tr>
+        <tr><td class="vocab-pt">juntos</td><td>together</td></tr>
+        <tr><td class="vocab-pt">até</td><td>as far as, up to</td></tr>
+        <tr><td class="vocab-pt">para</td><td>to, in order to</td></tr>
+        <tr><td class="vocab-pt">um pouco</td><td>a little</td></tr>
+        <tr><td class="vocab-pt">durante</td><td>during</td></tr>
+        <tr><td class="vocab-pt">então</td><td>so</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer in Portuguese, using complete sentences</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, based on the three profiles.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Com que frequência Dona Marlene caminha na orla?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How often does Dona Marlene walk on the seafront?</span>
+        <textarea class="open-textarea" placeholder="Ela caminha..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. O que Dona Marlene bebe antes da caminhada?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What does Dona Marlene drink before the walk?</span>
+        <textarea class="open-textarea" placeholder="Ela bebe..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Com que frequência Bruno corre?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How often does Bruno run?</span>
+        <textarea class="open-textarea" placeholder="Ele corre..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O que Camila come de manhã?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What does Camila eat in the morning?</span>
+        <textarea class="open-textarea" placeholder="Ela come..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. E você? Com que frequência você caminha?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">And you? How often do you walk?</span>
+        <textarea class="open-textarea" placeholder="Eu..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Seis dias por semana.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ela bebe água.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Às vezes.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Ela come frutas.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Resposta pessoal.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Reposition the word -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Add the frequency word</h3>
+          <p>Rewrite each sentence, placing the word or expression correctly</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Rewrite each sentence, adding the word or expression in parentheses in the correct position.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> Eu como frutas de manhã. (geralmente) → <strong>Eu geralmente como frutas de manhã.</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. Eu bebo água durante o dia. <em>(sempre)</em></p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">2. Meu irmão corre na praia. <em>(três vezes por semana)</em></p><input class="transform-input" type="text" placeholder="Meu irmão..."></li>
+        <li class="transform-item"><p class="transform-original">3. Nós cozinhamos as refeições em casa. <em>(geralmente)</em></p><input class="transform-input" type="text" placeholder="Nós..."></li>
+        <li class="transform-item"><p class="transform-original">4. Eles fumam. <em>(nunca)</em></p><input class="transform-input" type="text" placeholder="Eles..."></li>
+        <li class="transform-item"><p class="transform-original">5. Ela medita à noite. <em>(todos os dias)</em></p><input class="transform-input" type="text" placeholder="Ela..."></li>
+        <li class="transform-item"><p class="transform-original">6. Eu viajo com a minha família. <em>(uma vez por ano)</em></p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">7. Você relaxa no fim de semana? <em>(sempre)</em></p><input class="transform-input" type="text" placeholder="Você..."></li>
+        <li class="transform-item"><p class="transform-original">8. Marcos come fast food. <em>(raramente)</em></p><input class="transform-input" type="text" placeholder="Marcos..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex2-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex2-answers">
+        <div class="model-answer-item"><p>1. Eu sempre bebo água durante o dia.</p></div>
+        <div class="model-answer-item"><p>2. Meu irmão corre na praia três vezes por semana.</p></div>
+        <div class="model-answer-item"><p>3. Nós geralmente cozinhamos as refeições em casa.</p></div>
+        <div class="model-answer-item"><p>4. Eles nunca fumam.</p></div>
+        <div class="model-answer-item"><p>5. Ela medita à noite todos os dias.</p></div>
+        <div class="model-answer-item"><p>6. Eu viajo com a minha família uma vez por ano.</p></div>
+        <div class="model-answer-item"><p>7. Você sempre relaxa no fim de semana?</p></div>
+        <div class="model-answer-item"><p>8. Marcos raramente come fast food.</p></div>
+        <p class="model-note">Note: in items 2, 5 and 6, starting the sentence with the long expression is equally correct — e.g. "Três vezes por semana, meu irmão corre na praia." The mistake to correct is placing it between the subject and the verb.</p>
+      </div>
+    </div>
+
+    <!-- Exercise 3 — About yourself -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>About yourself</h3>
+          <p>Write true sentences, choosing a frequency word for each one</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write true sentences about yourself. Choose a frequency word or expression for each one, and be careful with its position.</p>
+
+      <div class="example-box">
+        <strong>Word bank:</strong> sempre · quase sempre · geralmente · às vezes · raramente · nunca · todos os dias · uma vez por semana · duas/três vezes por semana · seis dias por semana · uma vez por mês · uma vez por ano · aos domingos · nos fins de semana · de manhã · à tarde · à noite
+      </div>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> (comer frutas) → <strong>Eu geralmente como frutas de manhã.</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. (caminhar na praia)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">2. (cozinhar em casa)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">3. (beber água durante o dia)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">4. (correr)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">5. (viajar com a família)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">6. (preparar as refeições)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">7. (meditar à noite)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+        <li class="transform-item"><p class="transform-original">8. (relaxar no fim de semana)</p><input class="transform-input" type="text" placeholder="Eu..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex3-answers')">👁 See example answers</button>
+      <div class="model-answers-block" id="ex3-answers">
+        <div class="model-answer-item"><p>1. Eu raramente caminho na praia.</p></div>
+        <div class="model-answer-item"><p>2. Eu cozinho em casa todos os dias.</p></div>
+        <div class="model-answer-item"><p>3. Eu sempre bebo água durante o dia.</p></div>
+        <div class="model-answer-item"><p>4. Eu corro três vezes por semana.</p></div>
+        <div class="model-answer-item"><p>5. Nos fins de semana, eu viajo com a família.</p></div>
+        <div class="model-answer-item"><p>6. Eu quase sempre preparo as refeições.</p></div>
+        <div class="model-answer-item"><p>7. Eu nunca medito à noite.</p></div>
+        <div class="model-answer-item"><p>8. Eu geralmente relaxo no fim de semana.</p></div>
+        <p class="model-note">These are personal answers — yours will be different. Just double-check the position: one-word adverb between subject and verb, longer expression at the start or end. And remember: sentences with "nunca" don't take another negation — "Eu nunca medito" ✓, not "Eu nunca não medito" ✗.</p>
+      </div>
+    </div>
+
+    <!-- Exercise 4 — Fourth profile -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>A fourth profile</h3>
+          <p>Complete with the verbs in parentheses in the present tense</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete Seu Jorge's profile with the correct present-tense form of each verb.</p>
+
+      <ul class="blanks-list" id="blanks-list-4">
+        <li><span class="item-num">Seu Jorge, 71 anos.</span></li>
+        <li><span>Eu</span><input class="blank-input" data-answer="caminho" placeholder="___________"><span>(caminhar) na orla todos os dias.</span></li>
+        <li><span>Eu sempre</span><input class="blank-input" data-answer="preparo" placeholder="___________"><span>(preparar) as refeições em casa: eu</span><input class="blank-input" data-answer="cozinho" placeholder="___________"><span>(cozinhar) muito bem!</span></li>
+        <li><span>Aos sábados, os meus amigos e eu</span><input class="blank-input" data-answer="caminhamos" placeholder="___________"><span>(caminhar) juntos até o quiosque 12.</span></li>
+        <li><span>Nós</span><input class="blank-input" data-answer="viajamos" placeholder="___________"><span>(viajar) uma vez por ano.</span></li>
+        <li><span>À noite, eu</span><input class="blank-input" data-answer="medito" placeholder="___________"><span>(meditar) e depois</span><input class="blank-input" data-answer="relaxo" placeholder="___________"><span>(relaxar).</span></li>
+        <li><span>Eu nunca</span><input class="blank-input" data-answer="fumo" placeholder="___________"><span>(fumar).</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-4','blanks-result-4')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-4','blanks-result-4')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-4" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>The Bom Dia group is collecting new profiles</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Write your own profile</h3>
+          <p>60–80 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write your profile (60–80 words), using the profiles above as your model.</p>
+
+      <ul class="writing-questions">
+        <li>Com que frequência você caminha ou corre.</li>
+        <li>O que você bebe e come.</li>
+        <li>O que você prepara ou cozinha em casa.</li>
+        <li>Como você relaxa.</li>
+        <li>O que você nunca ou raramente inclui na sua rotina.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Eu caminho..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
