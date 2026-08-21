@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obras na Cozinha | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
+    /* ── HERO ── */
+    .page-hero { background: #967E63; padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: var(--cobalto-light); border: 1.5px solid rgba(38,91,139,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* formation table */
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0; }
+    .form-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .form-card-header { background: var(--cobalto); padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+    .form-table-wrap { overflow-x: auto; }
+    .form-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .form-table tr { border-bottom: 1px solid var(--light-gray); }
+    .form-table tr:last-child { border-bottom: none; }
+    .form-table td { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+    .form-table td:first-child { color: #999; }
+    .form-table td:last-child { font-weight: 700; color: var(--cobalto); }
+    .form-table th { padding: 8px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #999; text-align: left; white-space: nowrap; border-bottom: 1.5px solid var(--light-gray); }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 220px; color: var(--cobalto); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* time / practical note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--cobalto); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--cobalto); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--cobalto); white-space: nowrap; }
+    .vocab-group-label { font-size: 12px; font-weight: 700; color: var(--nanquim); margin: 20px 0 6px; }
+    .vocab-group-label:first-child { margin-top: 0; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--cobalto); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 70px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* choice exercise */
+    .choice-list { list-style: none; }
+    .choice-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .choice-item:last-child { border-bottom: none; }
+    .choice-sentence { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .choice-options { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .choice-btn { border: 1.5px solid var(--light-gray); background: var(--off-white); border-radius: 8px; padding: 7px 18px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: var(--texto); cursor: pointer; transition: all 0.15s; }
+    .choice-btn:hover { border-color: var(--cobalto); background: var(--cobalto-light); color: var(--cobalto); }
+    .choice-btn.selected { border-color: var(--cobalto); background: var(--cobalto-light); color: var(--cobalto); }
+    .choice-btn.correct  { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .choice-btn.wrong    { border-color: var(--pitomba);  background: rgba(211,109,41,0.08); color: var(--pitomba); }
+
+    /* transform list */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--cobalto); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--cobalto); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--cobalto); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid #967E63; color: #967E63;
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+      .choice-options { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Obras<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> na Cozinha</em></h1>
+    <p>Describing a home renovation step by step, with the <strong style="color:white;">voz passiva</strong> — the natural way to say what was done without always saying who did it.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Voz passiva analítica</span>
+      <span class="meta-pill"><span class="dot"></span>Vocabulário de reforma</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Voz passiva — describing what was (or will be) done</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. How the passive voice is formed</div>
+      <p><strong>ser</strong> (in the appropriate tense) <strong>+ particípio passado</strong> — and the participle agrees in gender and number with the subject.</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Ativa: Os pedreiros derrubaram a parede.</span><span class="ex-en">The workers knocked down the wall.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Passiva: A parede foi derrubada (pelos pedreiros).</span><span class="ex-en">The wall was knocked down (by the workers).</span></div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Why use the passive?</div>
+      <p style="margin-bottom:0;">We use the passive voice when the <strong>action</strong> matters more than <strong>who did it</strong> — very common when talking about a renovation, since we're usually more interested in what changed than in naming every worker. The agent (<em>pelos pedreiros, pela arquiteta...</em>) is optional and often left out.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Which tense of "ser"?</div>
+      <p style="margin-bottom:0;">Use <strong>foi / foram</strong> for finished work, and <strong>será / serão</strong> for work that is still planned.</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">O piso foi trocado semana passada.</span><span class="ex-en">The floor was replaced last week. (done)</span></div>
+      <div class="ex-pair"><span class="ex-pt">A coifa será instalada semana que vem.</span><span class="ex-en">The extractor hood will be installed next week. (planned)</span></div>
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 4. Irregular particípios you'll need</div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-card-header">Common irregular participles for talking about renovations</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Infinitivo</th><th>Particípio</th></tr></thead>
+          <tr><td>fazer</td><td>feito</td></tr>
+          <tr><td>refazer</td><td>refeito</td></tr>
+          <tr><td>abrir</td><td>aberto</td></tr>
+          <tr><td>cobrir</td><td>coberto</td></tr>
+          <tr><td>pôr</td><td>posto</td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="time-note">
+      <strong>Agreement tip:</strong> the participle changes like an adjective — <em>o piso foi instalad<u>o</u></em>, <em>a bancada foi feit<u>a</u></em>, <em>os armários foram encomendad<u>os</u></em>, <em>as paredes foram pintad<u>as</u></em>.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the renovation blog post carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Reforma da Cozinha: o Antes e Depois</div>
+      <div class="text-byline">por Juliana Prado — blog "Casa em Reforma"</div>
+
+      <p>Depois de sete anos morando no apartamento, eu decidi finalmente reformar a cozinha. Ela era pequena, escura e completamente separada do resto da casa. O projeto <mark>foi feito</mark> por uma arquiteta amiga minha, e a obra começou em março.</p>
+
+      <p>Na primeira semana, a parede entre a cozinha e a sala de jantar <mark>foi derrubada</mark> e um vão <mark>foi aberto</mark> no lugar. O piso antigo <mark>foi retirado</mark> e a instalação elétrica <mark>foi refeita</mark> — os fios eram muito velhos e perigosos.</p>
+
+      <p>Depois da parte estrutural, um piso novo de porcelanato <mark>foi instalado</mark>. Os armários planejados <mark>foram encomendados</mark> numa marcenaria do bairro, e a bancada <mark>foi feita</mark> em granito preto. A pia e a torneira também <mark>foram trocadas</mark>.</p>
+
+      <p>Nas últimas semanas, as paredes <mark>foram pintadas</mark> de branco e uma iluminação nova <mark>foi instalada</mark> em cima da bancada. O resultado já está lindo, mas a obra ainda não terminou.</p>
+
+      <p>A coifa ainda <mark>será instalada</mark> na próxima semana, e os azulejos da parede <mark>serão escolhidos</mark> no fim de semana. Segundo a arquiteta, o projeto <mark>será finalizado</mark> até o final do mês.</p>
+
+      <p>No total, a obra vai durar quase dois meses e o orçamento ficou em R$ 22.000. Foi caro e cheio de imprevistos, mas o resultado vale cada centavo.</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <div class="vocab-group-label" style="margin-top:24px;">Pessoas e etapas da obra</div>
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">a obra</td><td>the renovation, the construction work</td></tr>
+        <tr><td class="vocab-pt">a reforma</td><td>renovation</td></tr>
+        <tr><td class="vocab-pt">o orçamento</td><td>budget, quote</td></tr>
+        <tr><td class="vocab-pt">o pedreiro</td><td>bricklayer, construction worker</td></tr>
+        <tr><td class="vocab-pt">o eletricista</td><td>electrician</td></tr>
+        <tr><td class="vocab-pt">o marceneiro / a marcenaria</td><td>carpenter / carpentry shop</td></tr>
+        <tr><td class="vocab-pt">o entulho</td><td>construction debris</td></tr>
+        <tr><td class="vocab-pt">o imprevisto</td><td>unexpected problem</td></tr>
+      </tbody>
+    </table>
+
+    <div class="vocab-group-label">Materiais e elementos da cozinha</div>
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">o armário planejado</td><td>built-in / custom cabinet</td></tr>
+        <tr><td class="vocab-pt">a bancada</td><td>countertop</td></tr>
+        <tr><td class="vocab-pt">o piso / o porcelanato</td><td>flooring / porcelain tile</td></tr>
+        <tr><td class="vocab-pt">o azulejo</td><td>wall tile</td></tr>
+        <tr><td class="vocab-pt">a pia</td><td>sink</td></tr>
+        <tr><td class="vocab-pt">a torneira</td><td>faucet</td></tr>
+        <tr><td class="vocab-pt">a coifa</td><td>extractor hood</td></tr>
+        <tr><td class="vocab-pt">o vão</td><td>opening, pass-through (in a wall)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="time-note">
+      <strong>Practical note:</strong> for a renovation like this, Brazilians usually hire either an <em>empreiteira</em> (a company that manages the whole project and workers) or individual <em>pedreiros/eletricistas autônomos</em> hired separately and coordinated by the homeowner or the architect — the second option is often cheaper but takes more of the owner's time to manage.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions in Portuguese, based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Por que Juliana decidiu reformar a cozinha?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Why did Juliana decide to renovate the kitchen?</span>
+        <textarea class="open-textarea" placeholder="Porque a cozinha..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. O que foi aberto no lugar da parede derrubada?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What was opened where the wall was knocked down?</span>
+        <textarea class="open-textarea" placeholder="Um..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Por que a instalação elétrica foi refeita?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Why was the electrical wiring redone?</span>
+        <textarea class="open-textarea" placeholder="Porque os fios..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. De que material é a bancada?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What material is the countertop made of?</span>
+        <textarea class="open-textarea" placeholder="É de..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. O que ainda será feito na cozinha?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What still needs to be done in the kitchen?</span>
+        <textarea class="open-textarea" placeholder="Ainda será(ão)..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">6. Quanto tempo a obra vai durar, no total?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How long will the renovation take, in total?</span>
+        <textarea class="open-textarea" placeholder="A obra vai durar..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Porque a cozinha era pequena, escura e separada do resto da casa.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Um vão foi aberto entre a cozinha e a sala de jantar.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Porque os fios eram muito velhos e perigosos.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Ela é de granito preto.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>A coifa ainda será instalada e os azulejos serão escolhidos; o projeto será finalizado até o fim do mês.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 6</div><p>A obra vai durar quase dois meses.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Active to passive -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Ativa → passiva</h3>
+          <p>Rewrite each sentence in the passive voice</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Rewrite each active sentence in the passive voice, keeping the same tense. The agent (com "pelo/pela...") is optional.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> Os pedreiros derrubaram a parede. → <strong>A parede foi derrubada (pelos pedreiros).</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. Os operários instalaram o piso novo.</p><input class="transform-input" type="text" placeholder="O piso novo..."></li>
+        <li class="transform-item"><p class="transform-original">2. A arquiteta fez o projeto.</p><input class="transform-input" type="text" placeholder="O projeto..."></li>
+        <li class="transform-item"><p class="transform-original">3. O marceneiro entregou os armários ontem.</p><input class="transform-input" type="text" placeholder="Os armários..."></li>
+        <li class="transform-item"><p class="transform-original">4. Os pintores vão pintar as paredes na sexta-feira.</p><input class="transform-input" type="text" placeholder="As paredes..."></li>
+        <li class="transform-item"><p class="transform-original">5. O eletricista refez a instalação elétrica.</p><input class="transform-input" type="text" placeholder="A instalação elétrica..."></li>
+        <li class="transform-item"><p class="transform-original">6. Vamos trocar a pia e a torneira semana que vem.</p><input class="transform-input" type="text" placeholder="A pia e a torneira..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex2-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex2-answers">
+        <div class="model-answer-item"><p>1. O piso novo foi instalado (pelos operários).</p></div>
+        <div class="model-answer-item"><p>2. O projeto foi feito pela arquiteta.</p></div>
+        <div class="model-answer-item"><p>3. Os armários foram entregues (pelo marceneiro) ontem.</p></div>
+        <div class="model-answer-item"><p>4. As paredes serão pintadas (pelos pintores) na sexta-feira.</p></div>
+        <div class="model-answer-item"><p>5. A instalação elétrica foi refeita (pelo eletricista).</p></div>
+        <div class="model-answer-item"><p>6. A pia e a torneira serão trocadas semana que vem.</p></div>
+        <p class="model-note">Other phrasings are possible — the important part is the "ser + particípio" structure and correct agreement.</p>
+      </div>
+    </div>
+
+    <!-- Exercise 3 — Fill in the participle -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Complete com o particípio</h3>
+          <p>Pay attention to gender and number agreement</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct participle of the verb in parentheses, agreeing with the subject.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><span>A parede foi</span><input class="blank-input" data-answer="derrubada" placeholder="___________"><span class="blank-hint">(derrubar)</span><span>na primeira semana.</span></li>
+        <li><span class="item-num">2.</span><span>O projeto foi</span><input class="blank-input" data-answer="feito" placeholder="___________"><span class="blank-hint">(fazer)</span><span>por uma arquiteta.</span></li>
+        <li><span class="item-num">3.</span><span>Os armários foram</span><input class="blank-input" data-answer="encomendados" placeholder="___________"><span class="blank-hint">(encomendar)</span><span>numa marcenaria.</span></li>
+        <li><span class="item-num">4.</span><span>A instalação elétrica foi</span><input class="blank-input" data-answer="refeita" placeholder="___________"><span class="blank-hint">(refazer)</span><span>.</span></li>
+        <li><span class="item-num">5.</span><span>Um vão foi</span><input class="blank-input" data-answer="aberto" placeholder="___________"><span class="blank-hint">(abrir)</span><span>entre a cozinha e a sala.</span></li>
+        <li><span class="item-num">6.</span><span>As paredes serão</span><input class="blank-input" data-answer="pintadas" placeholder="___________"><span class="blank-hint">(pintar)</span><span>de branco.</span></li>
+        <li><span class="item-num">7.</span><span>A bancada foi</span><input class="blank-input" data-answer="feita" placeholder="___________"><span class="blank-hint">(fazer)</span><span>em granito.</span></li>
+        <li><span class="item-num">8.</span><span>A coifa ainda será</span><input class="blank-input" data-answer="instalada" placeholder="___________"><span class="blank-hint">(instalar)</span><span>.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks()">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks()" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 — Choice (agreement) -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Concordância correta</h3>
+          <p>Choose the participle that correctly agrees with the subject</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Choose the participle that correctly agrees in gender and number with the subject of each sentence.</p>
+
+      <ul class="choice-list" id="choice-list">
+        <li class="choice-item">
+          <p class="choice-sentence">1. A cozinha foi _______.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="1" data-val="reformada" data-correct="true" onclick="selectChoice(this)">reformada</button>
+            <button class="choice-btn" data-item="1" data-val="reformado" data-correct="false" onclick="selectChoice(this)">reformado</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. Os azulejos foram _______.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="2" data-val="escolhida" data-correct="false" onclick="selectChoice(this)">escolhida</button>
+            <button class="choice-btn" data-item="2" data-val="escolhidos" data-correct="true" onclick="selectChoice(this)">escolhidos</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. A bancada foi _______ em granito.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="3" data-val="feita" data-correct="true" onclick="selectChoice(this)">feita</button>
+            <button class="choice-btn" data-item="3" data-val="feito" data-correct="false" onclick="selectChoice(this)">feito</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. O piso foi _______ na segunda semana.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="4" data-val="instalada" data-correct="false" onclick="selectChoice(this)">instalada</button>
+            <button class="choice-btn" data-item="4" data-val="instalado" data-correct="true" onclick="selectChoice(this)">instalado</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. As paredes foram _______ de branco.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="5" data-val="pintado" data-correct="false" onclick="selectChoice(this)">pintado</button>
+            <button class="choice-btn" data-item="5" data-val="pintadas" data-correct="true" onclick="selectChoice(this)">pintadas</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">6. Um vão foi _______ entre a cozinha e a sala.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="6" data-val="aberto" data-correct="true" onclick="selectChoice(this)">aberto</button>
+            <button class="choice-btn" data-item="6" data-val="abertos" data-correct="false" onclick="selectChoice(this)">abertos</button>
+          </div>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkChoices()">✓ Check answers</button>
+      <div id="choices-result" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>A renovation you know about — real or imagined</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Describe a home renovation</h3>
+          <p>80–120 words · use at least 6 passive-voice sentences</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write about a renovation — real or imagined — in your home. Use at least <strong>6 sentences in the passive voice</strong> (ser + particípio), paying attention to agreement.</p>
+
+      <ul class="writing-questions">
+        <li>O que foi planejado antes de a obra começar.</li>
+        <li>O que foi derrubado, trocado ou instalado.</li>
+        <li>Quem fez o trabalho (arquiteto, pedreiro, você mesmo...).</li>
+        <li>O que ainda será feito.</li>
+        <li>Quanto tempo a obra durou (ou vai durar).</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:220px;" placeholder="A obra começou..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  /* Exercise 3: fill in participle */
+  function checkBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list-3 .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list-3 .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+
+  /* Exercise 4: choice */
+  const selections = {};
+
+  function selectChoice(btn) {
+    const item = btn.dataset.item;
+    const siblings = document.querySelectorAll(`[data-item="${item}"]`);
+    siblings.forEach(b => b.classList.remove('selected','correct','wrong'));
+    btn.classList.add('selected');
+    selections[item] = btn;
+  }
+
+  function checkChoices() {
+    let correct = 0, answered = 0;
+    for (let i = 1; i <= 6; i++) {
+      const btn = selections[i];
+      if (!btn) continue;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    }
+    const el = document.getElementById('choices-result');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please select an answer for each sentence first.';
+      return;
+    }
+    if (correct === 6) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All 6 choices correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 6 correct. Review the highlighted choices.';
+    }
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
