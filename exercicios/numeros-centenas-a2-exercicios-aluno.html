@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Números: Centenas e Ordinais | A2 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #265B8B;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: var(--cobalto-light); border: 1.5px solid rgba(38,91,139,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* info / form table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--cobalto); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--cobalto); white-space: nowrap; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 220px; color: var(--cobalto); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* time / warning note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--level); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .num-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; padding: 2px 8px; background: var(--off-white); border: 1px solid var(--light-gray); border-radius: 20px; font-weight: 700; font-size: 13px; color: var(--nanquim); }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 140px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+
+    /* paragraph fill (ex 4) */
+    .paragraph-fill { font-size: 15.5px; line-height: 2.1; color: var(--texto); }
+    .paragraph-fill .blank-input { min-width: 150px; }
+
+    /* choice exercise */
+    .choice-list { list-style: none; }
+    .choice-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .choice-item:last-child { border-bottom: none; }
+    .choice-sentence { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .choice-options { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .choice-btn { border: 1.5px solid var(--light-gray); background: var(--off-white); border-radius: 8px; padding: 7px 18px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: var(--texto); cursor: pointer; transition: all 0.15s; }
+    .choice-btn:hover { border-color: var(--level); background: var(--cobalto-light); color: var(--level); }
+    .choice-btn.selected { border-color: var(--level); background: var(--cobalto-light); color: var(--level); }
+    .choice-btn.correct  { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .choice-btn.wrong    { border-color: var(--pitomba);  background: rgba(211,109,41,0.08); color: var(--pitomba); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--level); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(38,91,139,.06); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid var(--level); color: var(--level);
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+      .choice-options { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A2</div>
+    <span class="topbar-name">Básico II</span>
+  </div>
+  <a href="../a2/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Números<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">: Centenas e Ordinais</em></h1>
+    <p>Duzentos ou duzentas? Primeiro ou primeira? The hundreds and the ordinal numbers are the trickiest in Portuguese — here's exactly when they change for gender, and when they never do.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Números — as centenas</span>
+      <span class="meta-pill"><span class="dot"></span>Números ordinais</span>
+      <span class="meta-pill"><span class="dot"></span>Concordância de gênero</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Cem, cento, and the hundreds that change for gender</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Cem vs. cento — these never change</div>
+      <p><strong>Cem</strong> = exactly 100. <strong>Cento</strong> = 100 when something else follows it (tens or units). Neither one ever has a feminine form.</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Custou cem reais.</span><span class="ex-en">It cost 100 reais. (exact)</span></div>
+      <div class="ex-pair"><span class="ex-pt">Custou cento e vinte reais.</span><span class="ex-en">It cost 120 reais. (100 + more)</span></div>
+      <div class="ex-pair"><span class="ex-pt">Havia cem pessoas.</span><span class="ex-en">There were 100 people. (still "cem" — never "cema")</span></div>
+      <div class="ex-pair"><span class="ex-pt">Havia cento e cinquenta pessoas.</span><span class="ex-en">There were 150 people. (still "cento" — never "centa")</span></div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. 200 to 900 — these DO change for gender</div>
+      <p style="margin-bottom:0;">Unlike cem/cento, the hundreds from 200 to 900 agree in gender with the noun they count.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Number</th><th>Masculino</th><th>Feminino</th></tr></thead>
+        <tbody>
+          <tr><td>200</td><td>duzentos</td><td>duzentas</td></tr>
+          <tr><td>300</td><td>trezentos</td><td>trezentas</td></tr>
+          <tr><td>400</td><td>quatrocentos</td><td>quatrocentas</td></tr>
+          <tr><td>500</td><td>quinhentos</td><td>quinhentas</td></tr>
+          <tr><td>600</td><td>seiscentos</td><td>seiscentas</td></tr>
+          <tr><td>700</td><td>setecentos</td><td>setecentas</td></tr>
+          <tr><td>800</td><td>oitocentos</td><td>oitocentas</td></tr>
+          <tr><td>900</td><td>novecentos</td><td>novecentas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">duzentos reais</span><span class="ex-en">200 reais (reais = masculine)</span></div>
+      <div class="ex-pair"><span class="ex-pt">duzentas pessoas</span><span class="ex-en">200 people (pessoas = feminine)</span></div>
+      <div class="ex-pair"><span class="ex-pt">quinhentos quilômetros</span><span class="ex-en">500 km (quilômetros = masculine)</span></div>
+      <div class="ex-pair"><span class="ex-pt">quinhentas garrafas</span><span class="ex-en">500 bottles (garrafas = feminine)</span></div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Mil — invariable, but watch the hundred before it</div>
+      <p><strong>Mil</strong> (1,000) never changes by itself. But if a hundred (200–900) comes right before it, that hundred still agrees with the gender of the final noun being counted — not with "mil".</p>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">trezentas mil pessoas</span><span class="ex-en">300,000 people (pessoas = feminine → trezentas)</span></div>
+      <div class="ex-pair"><span class="ex-pt">setecentos mil reais</span><span class="ex-en">700,000 reais (reais = masculine → setecentos)</span></div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 4. Números ordinais — 1º, 2º, 3º...</div>
+      <p><strong>Ordinal numbers</strong> behave differently from cardinals: they agree in <strong>gender AND number</strong> with the noun, just like a regular adjective.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>#</th><th>Masculino</th><th>Feminino</th></tr></thead>
+        <tbody>
+          <tr><td>1º / 1ª</td><td>primeiro</td><td>primeira</td></tr>
+          <tr><td>2º / 2ª</td><td>segundo</td><td>segunda</td></tr>
+          <tr><td>3º / 3ª</td><td>terceiro</td><td>terceira</td></tr>
+          <tr><td>4º / 4ª</td><td>quarto</td><td>quarta</td></tr>
+          <tr><td>5º / 5ª</td><td>quinto</td><td>quinta</td></tr>
+          <tr><td>6º / 6ª</td><td>sexto</td><td>sexta</td></tr>
+          <tr><td>7º / 7ª</td><td>sétimo</td><td>sétima</td></tr>
+          <tr><td>8º / 8ª</td><td>oitavo</td><td>oitava</td></tr>
+          <tr><td>9º / 9ª</td><td>nono</td><td>nona</td></tr>
+          <tr><td>10º / 10ª</td><td>décimo</td><td>décima</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">o primeiro dia</span><span class="ex-en">the first day (dia = masculine)</span></div>
+      <div class="ex-pair"><span class="ex-pt">a primeira vez</span><span class="ex-en">the first time (vez = feminine)</span></div>
+      <div class="ex-pair"><span class="ex-pt">os primeiros colocados</span><span class="ex-en">the top finishers (masculine plural)</span></div>
+      <div class="ex-pair"><span class="ex-pt">as primeiras inscrições</span><span class="ex-en">the first sign-ups (feminine plural)</span></div>
+    </div>
+
+    <div class="time-note">
+      <strong>Note the abbreviation:</strong> in writing, ordinals are shortened to the number + <em>º</em> (masculine) or <em>ª</em> (feminine) — the text you're about to read uses exactly this: <em>a 26ª edição</em> (a vigésima sexta edição). Also, in everyday speech, Brazilians rarely use ordinals above <em>décimo</em> — they usually just say the cardinal number instead: <em>o aluno número 15</em>, not <em>o décimo quinto aluno</em>.
+    </div>
+
+    <div class="time-note">
+      <strong>Quick summary:</strong> <em>cem</em> and <em>cento</em> — never change. <em>duzentos → novecentos</em> — always agree with the noun's gender, even with "mil" attached to them. <em>Ordinais</em> — agree in gender <strong>and</strong> number, like any adjective.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the news article carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Maratona do Rio bate recorde de público</div>
+      <div class="text-byline">Redação Esporte Total — segunda-feira</div>
+
+      <p>A 26ª edição da Maratona do Rio de Janeiro bateu recorde de público neste domingo. Mais de <mark>trezentas mil</mark> pessoas acompanharam a prova pelas ruas da cidade, entre corredores e espectadores.</p>
+
+      <p>Ao todo, <mark>cento e oitenta</mark> quilômetros de ruas foram fechados para o evento, que reuniu corredores de mais de <mark>cem</mark> países. <mark>Duzentos e cinquenta</mark> atletas profissionais competiram na categoria elite, enquanto milhares de outros corredores participaram por diversão ou por uma causa social.</p>
+
+      <p>Para garantir a hidratação de todos, foram distribuídas mais de <mark>oitocentas mil</mark> garrafas de água ao longo do percurso. <mark>Seiscentos</mark> voluntários trabalharam nos postos de apoio, da madrugada até o fim da tarde.</p>
+
+      <p>A organização também comemorou o lado social do evento: <mark>setecentos mil</mark> reais foram arrecadados em doações para instituições de caridade da cidade, e <mark>quatrocentas</mark> toneladas de lixo foram recolhidas e recicladas depois da prova.</p>
+
+      <p><mark>Duzentas</mark> mulheres e <mark>trezentos</mark> homens se inscreveram pela primeira vez na modalidade, um recorde de estreantes. Para o próximo ano, a organização promete uma edição ainda maior — com mais postos de hidratação e um novo percurso de quarenta e dois quilômetros pela orla.</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <table class="vocab-table" style="margin-top:24px;">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">a maratona</td><td>marathon</td></tr>
+        <tr><td class="vocab-pt">o corredor / a corredora</td><td>runner</td></tr>
+        <tr><td class="vocab-pt">o espectador</td><td>spectator</td></tr>
+        <tr><td class="vocab-pt">o percurso</td><td>route, course</td></tr>
+        <tr><td class="vocab-pt">o posto de apoio</td><td>aid/support station</td></tr>
+        <tr><td class="vocab-pt">o voluntário</td><td>volunteer</td></tr>
+        <tr><td class="vocab-pt">arrecadar</td><td>to raise (money)</td></tr>
+        <tr><td class="vocab-pt">a doação</td><td>donation</td></tr>
+        <tr><td class="vocab-pt">a instituição de caridade</td><td>charity</td></tr>
+        <tr><td class="vocab-pt">reciclar</td><td>to recycle</td></tr>
+        <tr><td class="vocab-pt">a tonelada</td><td>ton</td></tr>
+        <tr><td class="vocab-pt">o/a estreante</td><td>first-timer</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions in Portuguese, based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the article.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quantas pessoas acompanharam a prova?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many people watched the race?</span>
+        <textarea class="open-textarea" placeholder="Mais de..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Quantos quilômetros de ruas foram fechados?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many kilometers of streets were closed?</span>
+        <textarea class="open-textarea" placeholder="Foram fechados..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Quantos voluntários trabalharam no evento?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many volunteers worked at the event?</span>
+        <textarea class="open-textarea" placeholder="Trabalharam..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Quanto dinheiro foi arrecadado em doações?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How much money was raised in donations?</span>
+        <textarea class="open-textarea" placeholder="Foram arrecadados..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Quantas mulheres e quantos homens se inscreveram pela primeira vez?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many women and how many men signed up for the first time?</span>
+        <textarea class="open-textarea" placeholder="Se inscreveram..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Mais de trezentas mil pessoas acompanharam a prova.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Foram fechados cento e oitenta quilômetros de ruas.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Seiscentos voluntários trabalharam no evento.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Foram arrecadados setecentos mil reais.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Duzentas mulheres e trezentos homens se inscreveram pela primeira vez.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Spell the number with correct gender -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Write the number, with the correct gender</h3>
+          <p>Spell out each number in Portuguese, agreeing with the noun</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write the number in words, making it agree in gender with the noun given.</p>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><span class="num-chip">200</span><span>+ pessoas →</span><input class="blank-input" data-answer="duzentas" placeholder="___________"></li>
+        <li><span class="item-num">2.</span><span class="num-chip">300</span><span>+ reais →</span><input class="blank-input" data-answer="trezentos" placeholder="___________"></li>
+        <li><span class="item-num">3.</span><span class="num-chip">400</span><span>+ metros →</span><input class="blank-input" data-answer="quatrocentos" placeholder="___________"></li>
+        <li><span class="item-num">4.</span><span class="num-chip">500</span><span>+ páginas →</span><input class="blank-input" data-answer="quinhentas" placeholder="___________"></li>
+        <li><span class="item-num">5.</span><span class="num-chip">600</span><span>+ dólares →</span><input class="blank-input" data-answer="seiscentos" placeholder="___________"></li>
+        <li><span class="item-num">6.</span><span class="num-chip">700</span><span>+ garrafas →</span><input class="blank-input" data-answer="setecentas" placeholder="___________"></li>
+        <li><span class="item-num">7.</span><span class="num-chip">800</span><span>+ quilômetros →</span><input class="blank-input" data-answer="oitocentos" placeholder="___________"></li>
+        <li><span class="item-num">8.</span><span class="num-chip">900</span><span>+ toneladas →</span><input class="blank-input" data-answer="novecentas" placeholder="___________"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-2','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-2','blanks-result-2')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Cem/cento or gender choice -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Cem, cento, or the correct gender?</h3>
+          <p>Choose the correct form for each sentence</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Choose the correct form to complete each sentence.</p>
+
+      <ul class="choice-list" id="choice-list">
+        <li class="choice-item">
+          <p class="choice-sentence">1. Custou exatamente _______ reais.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="1" data-val="cem" data-correct="true" onclick="selectChoice(this)">cem</button>
+            <button class="choice-btn" data-item="1" data-val="cento" data-correct="false" onclick="selectChoice(this)">cento</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. Custou _______ e vinte reais.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="2" data-val="cem" data-correct="false" onclick="selectChoice(this)">cem</button>
+            <button class="choice-btn" data-item="2" data-val="cento" data-correct="true" onclick="selectChoice(this)">cento</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. Havia _______ pessoas na festa.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="3" data-val="duzentos" data-correct="false" onclick="selectChoice(this)">duzentos</button>
+            <button class="choice-btn" data-item="3" data-val="duzentas" data-correct="true" onclick="selectChoice(this)">duzentas</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. Ele pagou _______ reais pelo ingresso.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="4" data-val="trezentos" data-correct="true" onclick="selectChoice(this)">trezentos</button>
+            <button class="choice-btn" data-item="4" data-val="trezentas" data-correct="false" onclick="selectChoice(this)">trezentas</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. Foram distribuídas _______ mil garrafas de água.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="5" data-val="oitocentos" data-correct="false" onclick="selectChoice(this)">oitocentos</button>
+            <button class="choice-btn" data-item="5" data-val="oitocentas" data-correct="true" onclick="selectChoice(this)">oitocentas</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">6. A empresa arrecadou _______ mil reais.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="6" data-val="setecentos" data-correct="true" onclick="selectChoice(this)">setecentos</button>
+            <button class="choice-btn" data-item="6" data-val="setecentas" data-correct="false" onclick="selectChoice(this)">setecentas</button>
+          </div>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkChoices()">✓ Check answers</button>
+      <div id="choices-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 — Ordinals -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Números ordinais — o gênero certo</h3>
+          <p>Choose the ordinal that correctly agrees with the noun</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Choose the ordinal number that correctly agrees in gender (and number) with the noun in each sentence.</p>
+
+      <ul class="choice-list" id="choice-list-ord">
+        <li class="choice-item">
+          <p class="choice-sentence">1. Ela ficou em _______ lugar na corrida.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o1" data-val="primeiro" data-correct="true" onclick="selectChoice(this)">primeiro</button>
+            <button class="choice-btn" data-item="o1" data-val="primeira" data-correct="false" onclick="selectChoice(this)">primeira</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. Essa é a _______ vez que eu participo.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o2" data-val="primeiro" data-correct="false" onclick="selectChoice(this)">primeiro</button>
+            <button class="choice-btn" data-item="o2" data-val="primeira" data-correct="true" onclick="selectChoice(this)">primeira</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. Eu moro no _______ andar.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o3" data-val="terceiro" data-correct="true" onclick="selectChoice(this)">terceiro</button>
+            <button class="choice-btn" data-item="o3" data-val="terceira" data-correct="false" onclick="selectChoice(this)">terceira</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. Ela é a _______ candidata da lista.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o4" data-val="segundo" data-correct="false" onclick="selectChoice(this)">segundo</button>
+            <button class="choice-btn" data-item="o4" data-val="segunda" data-correct="true" onclick="selectChoice(this)">segunda</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. Este é o _______ ano do projeto.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o5" data-val="quinto" data-correct="true" onclick="selectChoice(this)">quinto</button>
+            <button class="choice-btn" data-item="o5" data-val="quinta" data-correct="false" onclick="selectChoice(this)">quinta</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">6. Conquistamos a _______ posição do campeonato.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o6" data-val="quarto" data-correct="false" onclick="selectChoice(this)">quarto</button>
+            <button class="choice-btn" data-item="o6" data-val="quarta" data-correct="true" onclick="selectChoice(this)">quarta</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">7. Eles foram os _______ a chegar.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="o7" data-val="primeiro" data-correct="false" onclick="selectChoice(this)">primeiro</button>
+            <button class="choice-btn" data-item="o7" data-val="primeiros" data-correct="true" onclick="selectChoice(this)">primeiros</button>
+          </div>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkChoicesOrd()">✓ Check answers</button>
+      <div id="choices-result-ord" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 5 — Paragraph fill -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Complete a notícia</h3>
+          <p>Spell out the numbers in parentheses, with the correct gender</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete the short news paragraph, spelling out each number in parentheses and making it agree with the noun.</p>
+
+      <p class="paragraph-fill" id="ex5-paragraph">
+        A prova teve <input class="blank-input" data-answer="cento e cinquenta" placeholder="___________"> <span class="blank-hint">(150)</span> corredores profissionais e <input class="blank-input" data-answer="trezentos e cinquenta" placeholder="___________"> <span class="blank-hint">(350)</span> amadores. Ao todo, <input class="blank-input" data-answer="quinhentas" placeholder="___________"> <span class="blank-hint">(500)</span> mil pessoas acompanharam o evento. A prefeitura investiu <input class="blank-input" data-answer="novecentos" placeholder="___________"> <span class="blank-hint">(900)</span> mil reais na segurança, e <input class="blank-input" data-answer="duzentos" placeholder="___________"> <span class="blank-hint">(200)</span> voluntários ajudaram na organização. Esta foi a <input class="blank-input" data-answer="vigesima sexta|26|26a|26ª" placeholder="___________"> <span class="blank-hint">(26ª)</span> edição da prova.
+      </p>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('ex5-paragraph','blanks-result-5')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('ex5-paragraph','blanks-result-5')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-5" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Write your own short news blurb</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">6</div>
+        <div>
+          <h3>An event in numbers</h3>
+          <p>60–90 words · use at least 6 numbers of 100 or more</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short news blurb about an event — real or invented. Use at least <strong>6 numbers of 100 or more</strong>, paying attention to gender agreement.</p>
+
+      <ul class="writing-questions">
+        <li>Quantas pessoas participaram ou assistiram.</li>
+        <li>Quantos quilômetros, quanto tempo ou quantas horas durou.</li>
+        <li>Quanto dinheiro foi arrecadado ou gasto.</li>
+        <li>Quantos voluntários ou profissionais trabalharam.</li>
+        <li>Um recorde ou fato interessante sobre o evento.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="O evento reuniu..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+
+  /* Exercise 3: choice */
+  const selections = {};
+
+  function selectChoice(btn) {
+    const item = btn.dataset.item;
+    const siblings = document.querySelectorAll(`[data-item="${item}"]`);
+    siblings.forEach(b => b.classList.remove('selected','correct','wrong'));
+    btn.classList.add('selected');
+    selections[item] = btn;
+  }
+
+  function checkChoices() {
+    let correct = 0, answered = 0;
+    for (let i = 1; i <= 6; i++) {
+      const btn = selections[i];
+      if (!btn) continue;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    }
+    const el = document.getElementById('choices-result');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please select an answer for each sentence first.';
+      return;
+    }
+    if (correct === 6) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All 6 choices correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 6 correct. Review the highlighted choices.';
+    }
+  }
+
+  /* Exercise 4: ordinals choice */
+  function checkChoicesOrd() {
+    const items = ['o1','o2','o3','o4','o5','o6','o7'];
+    let correct = 0, answered = 0;
+    items.forEach(function(key) {
+      const btn = selections[key];
+      if (!btn) return;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    });
+    const el = document.getElementById('choices-result-ord');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please select an answer for each sentence first.';
+      return;
+    }
+    if (correct === items.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All ' + items.length + ' choices correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + items.length + ' correct. Review the highlighted choices.';
+    }
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
