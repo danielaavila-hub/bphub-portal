@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feito de Manteiga — Jackson do Pandeiro | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--forro:#D36D29;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--forro);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .phon-box{background:#fdeee6;border-left:4px solid var(--telha);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .phon-box strong{color:var(--telha)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--terracota);color:var(--terracota)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:12px 14px;background:var(--baunilha);border-radius:8px}
+  .word-chip{background:#fff;border:1.5px solid var(--terracota);color:var(--telha);font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:20px}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--terracota);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:130px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .mc-item{padding:12px 0;border-bottom:1px solid var(--light-gray)}
+  .mc-item:last-child{border-bottom:none}
+  .mc-q{font-size:.93rem;font-weight:700;color:var(--musgo);margin-bottom:8px}
+  .mc-opts{display:flex;flex-direction:column;gap:6px}
+  .mc-btn{text-align:left;border:1.5px solid var(--light-gray);background:#fff;border-radius:6px;padding:7px 12px;font-size:.85rem;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .15s}
+  .mc-btn:hover{border-color:var(--terracota)}
+  .mc-btn.sel{background:var(--baunilha);border-color:var(--terracota)}
+  .mc-btn.right{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32;font-weight:700}
+  .mc-btn.wrong{background:#ffebee;border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--terracota);color:var(--terracota);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--terracota);color:#fff}
+  .model-answers-block{display:none;margin-top:14px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:8px;background:var(--baunilha);border-left:3px solid var(--terracota);border-radius:0 6px 6px 0;padding:8px 12px}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--telha);margin-bottom:2px}
+  .model-answer-item p{font-size:.85rem;color:var(--nanquim);line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">A2</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Coco · Xote</span>
+  <span class="badge">Jackson do Pandeiro</span>
+  <span class="badge">1972</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Feito de Manteiga</h1>
+    <p class="fonte">Jackson do Pandeiro · from the album <em>Sina de Cigarra</em>, 1972 · composed by Ivo Marins and Jackson do Pandeiro</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">A comic love declaration built on one giant exaggeration: the singer says he's so soft and crazy about someone that he might as well be made of butter — he could melt right there. The song moves between two moods — a dramatic, over-the-top declaration, and a pair of affectionate requests, which is exactly what we'll use to study the Imperativo Negativo.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Listen to the song</p>
+    <p class="card-title">Feito de Manteiga</p>
+    <p class="instr">Listen to the whole song at least once. Pay attention to the two very different parts: the refrão (chorus), where he describes himself, and the estrofe (verse), where he makes his requests.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1BxrNjwyTB8"
+        title="Feito de Manteiga — Jackson do Pandeiro" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulary — before you listen</p>
+    <p class="card-title">Words from the song</p>
+    <table class="vocab-table">
+      <thead><tr><th>Portuguese</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">mole</td><td>soft; weak at the knees</td></tr>
+        <tr><td class="vocab-pt">a manteiga</td><td>butter</td></tr>
+        <tr><td class="vocab-pt">derreter-se</td><td>to melt oneself</td></tr>
+        <tr><td class="vocab-pt">louquinho (por)</td><td>crazy about — affectionate form of louco</td></tr>
+        <tr><td class="vocab-pt">demorar</td><td>to take a long time</td></tr>
+        <tr><td class="vocab-pt">o beijo / beijar</td><td>kiss / to kiss</td></tr>
+        <tr><td class="vocab-pt">cair no chão</td><td>to fall to the floor</td></tr>
+        <tr><td class="vocab-pt">até</td><td>even</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GRAMMAR 1: declaração vs pedido -->
+  <div class="card">
+    <p class="section-label">Grammar</p>
+    <p class="card-title">A declaration and two requests</p>
+    <p style="font-size:.9rem;line-height:1.65;margin-bottom:10px;">The song has two very different parts. In the chorus he describes how he feels, using the <strong style="color:var(--telha)">Present Indicative</strong> and a huge exaggeration. In the verse, he asks for something, and the <strong style="color:var(--telha)">Negative Imperative</strong> appears, with the same verb repeated in both requests: <em>eu demoro → não demore</em>.</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Form</th><th>Function</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Presente do Indicativo</td><td>How he feels now</td><td>Eu sou louquinho por você</td></tr>
+          <tr><td>Imperativo Negativo</td><td>Asking someone not to do something</td><td>Não chegue atrasado</td></tr>
+          <tr><td>Reforço não… não</td><td>Softening and warming the request</td><td>Não chegue atrasado não</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- GRAMMAR 2: formação do imperativo negativo -->
+  <div class="card">
+    <p class="card-title">How to form the Imperativo Negativo</p>
+    <p style="font-size:.9rem;line-height:1.65;margin-bottom:10px;">These are not present-tense forms. The present is only the starting point: take the <em>eu</em> form, drop the <strong>-o</strong>, and add the ending.</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Group</th><th>Ending</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Verbos em -AR</td><td>-e</td><td>demorar (eu demoro) → não demore · falar → não fale</td></tr>
+          <tr><td>Verbos em -ER / -IR</td><td>-a</td><td>comer (eu como) → não coma · abrir → não abra</td></tr>
+        </tbody>
+      </table>
+      <br>
+      <strong>Same rule, spelling adjusted:</strong> chegar → não chegue · ficar → não fique · esquecer → não esqueça
+      <br><br>
+      <strong>Irregular eu form, rule still works:</strong> sair (eu saio) → não saia · dizer (eu digo) → não diga
+      <br><br>
+      <strong>True irregulars:</strong> ir → não vá · ser → não seja · estar → não esteja · dar → não dê
+    </div>
+  </div>
+
+  <!-- NÃO...NÃO -->
+  <div class="card">
+    <p class="card-title">The não… não of spoken Portuguese</p>
+    <div class="cult-box">
+      <strong>💬 One "não" too many — on purpose</strong><br>
+      In spoken Brazilian Portuguese, speakers often add a second <em>não</em> at the end of the sentence. It doesn't cancel the first one — it softens the request and makes it warmer and more personal.<br><br>
+      <em>Não demore.</em> → <em>Não demore não.</em><br>
+      <em>Não saia agora.</em> → <em>Não saia agora não.</em><br><br>
+      <strong>Tip:</strong> this belongs to speech and informal writing — messages, songs, conversation. It does not belong in formal writing.
+    </div>
+  </div>
+
+  <!-- PRONÚNCIA -->
+  <div class="card">
+    <p class="card-title">Pronúncia — the ei that becomes e</p>
+    <div class="phon-box">
+      <strong>🔊 manteiga [mã.ˈte.gɐ]</strong> — written ei, sounds like [e]: "mantega"<br>
+      <strong>🔊 beijo [ˈbe.ʒu]</strong> — same pattern: "bejo"<br><br>
+      <strong>Tip:</strong> in Brazilian Portuguese, <em>ei</em> reduces to [e] before certain consonants. You'll hear this constantly — and almost never see it written that way: manteiga → mantega, beijo → bejo, queijo → quejo, primeira → primera.
+    </div>
+  </div>
+
+  <!-- CULTURA -->
+  <div class="card">
+    <p class="section-label">Cultural context</p>
+    <div class="cult-box">
+      <strong>🥁 Jackson do Pandeiro, o Rei do Ritmo</strong><br>
+      Jackson do Pandeiro (1919–1982) was born in Alagoa Grande, in the state of Paraíba, and is one of the great names of Northeastern Brazilian music, alongside Luiz Gonzaga. His mother was a singer and percussionist; he wanted an accordion, but the family couldn't afford one and bought him a pandeiro (tambourine) instead — hence the nickname. He moved with equal ease between coco, forró, baião, xote, and samba, and became famous for his razor-sharp diction and rhythmic mastery. "Feito de Manteiga" is a comic love declaration: the singer melts completely and begs for a kiss that never comes.
+    </div>
+  </div>
+
+  <!-- EX 1: V/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercise 1</p>
+    <p class="ex-title">Verdadeiro (V) ou Falso (F)?</p>
+    <p class="ex-instr">Watch the video and decide whether each sentence is true or false.</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>O cantor está apaixonado por alguém.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>No começo do refrão, ele repete a palavra "mole" três vezes.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Ele diz que é duro e forte como uma pedra.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>No primeiro pedido, ele diz "não" duas vezes.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>Ele pede que a pessoa demore mais para beijá-lo.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Check answers</button>
+      <button class="btn btn-reset" onclick="resetTF()">Try again</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: Imperativo Negativo -->
+  <div class="ex-card">
+    <p class="ex-num">Exercise 2</p>
+    <p class="ex-title">Complete with the Imperativo Negativo</p>
+    <p class="ex-instr">Someone is sending affectionate messages. Fill in the blanks using the correct form of the verbs below.</p>
+    <div class="word-bank">
+      <span class="word-chip">chegar</span><span class="word-chip">demorar</span><span class="word-chip">esquecer</span><span class="word-chip">ir</span><span class="word-chip">sair</span>
+    </div>
+    <div id="gap-area-2">
+      <div class="gap-row"><span class="gap-num">1.</span><span>Meu amor, não</span><input class="gap-input" id="g1" data-answer="demore" type="text" placeholder="___________"><span>muito não!</span></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Não</span><input class="gap-input" id="g2" data-answer="chegue" type="text" placeholder="___________"><span>atrasado hoje, por favor.</span></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>Não</span><input class="gap-input" id="g3" data-answer="esqueca|esqueça" type="text" placeholder="___________"><span>do nosso encontro no sábado.</span></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span>Não</span><input class="gap-input" id="g4" data-answer="saia" type="text" placeholder="___________"><span>sem me avisar.</span></div>
+      <div class="gap-row"><span class="gap-num">5.</span><span>Não</span><input class="gap-input" id="g5" data-answer="va|vá" type="text" placeholder="___________"><span>embora agora, a festa está começando.</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps2()">Check answers</button>
+      <button class="btn btn-reset" onclick="resetGaps2()">Try again</button>
+    </div>
+    <div id="gap-msg-2" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Multiple choice -->
+  <div class="ex-card">
+    <p class="ex-num">Exercise 3</p>
+    <p class="ex-title">Choose the correct option</p>
+    <p class="ex-instr">Select the best answer based on the song and the language focus.</p>
+    <div id="mc-area">
+      <div class="mc-item" data-id="1">
+        <p class="mc-q">1. A comparação com manteiga é:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,1,'a')">a) uma reclamação (a complaint)</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,1,'b')">b) um exagero afetivo (an affectionate exaggeration)</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,1,'c')">c) uma receita (a recipe)</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="2">
+        <p class="mc-q">2. O segundo "não" no fim do pedido:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,2,'a')">a) cancela o pedido (cancels the request)</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,2,'b')">b) reforça e suaviza o pedido (reinforces and softens the request)</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,2,'c')">c) é um erro (is a mistake)</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="3">
+        <p class="mc-q">3. Para dizer "don't leave":</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,3,'a')">a) não sai</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,3,'b')">b) não saia</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,3,'c')">c) não sair</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="4">
+        <p class="mc-q">4. "louquinho" é:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,4,'a')">a) "louco" com valor afetivo (louco with affectionate value)</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,4,'b')">b) o plural de "louco" (the plural of louco)</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,4,'c')">c) alguém perigoso (someone dangerous)</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="5">
+        <p class="mc-q">5. Em "manteiga" e "beijo", o "ei" soa como:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,5,'a')">a) [ei]</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,5,'b')">b) [e]</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,5,'c')">c) [i]</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMC()">Check answers</button>
+      <button class="btn btn-reset" onclick="resetMC()">Try again</button>
+    </div>
+    <div id="mc-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: Your turn -->
+  <div class="ex-card">
+    <p class="ex-num">Exercise 4</p>
+    <p class="ex-title">Your turn</p>
+    <p class="ex-instr">Read each situation and write one sentence in Portuguese.</p>
+
+    <div class="gram-box" style="margin-bottom:16px;">
+      <strong>Exemplo:</strong> Ele nunca responde suas mensagens rápido. <em>(He never answers your messages quickly.)</em><br>
+      Você escreve: <strong>Não demore para responder não!</strong>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">1. Ele sempre chega atrasado nos seus encontros. <span style="font-weight:400;color:var(--pitomba);">(He is always late for your dates.)</span></label>
+      <textarea class="prod" rows="2" id="q1"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">2. Ela vai sair com os amigos hoje à noite, mas você quer ver ela. <span style="font-weight:400;color:var(--pitomba);">(She is going out with friends tonight, but you want to see her.)</span></label>
+      <textarea class="prod" rows="2" id="q2"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">3. Ele esquece o seu aniversário todo ano. <span style="font-weight:400;color:var(--pitomba);">(He forgets your birthday every year.)</span></label>
+      <textarea class="prod" rows="2" id="q3"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">4. Você quer dizer que gosta muito dela. <span style="font-weight:400;color:var(--pitomba);">(You want to say that you like her a lot.)</span></label>
+      <textarea class="prod" rows="2" id="q4"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">5. Você quer dizer, com exagero, o que acontece com você quando ele chega. <span style="font-weight:400;color:var(--pitomba);">(You want to say, with exaggeration, what happens to you when he arrives.)</span></label>
+      <textarea class="prod" rows="2" id="q5"></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('ex4-answers', this)">👁 See model answers</button>
+    <div class="model-answers-block" id="ex4-answers">
+      <div class="model-answer-item"><div class="model-label">Question 1</div><p>Não chegue atrasado não!</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 2</div><p>Não saia hoje à noite não!</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 3</div><p>Não esqueça o meu aniversário!</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 4</div><p>Eu estou louquinho por você.</p></div>
+      <div class="model-answer-item"><div class="model-label">Question 5</div><p>Eu derreto na hora. / Eu sou feito de manteiga.</p></div>
+      <p style="font-size:.78rem;color:#999;font-style:italic;margin-top:6px;">Other phrasings are possible — items 1–3 are graded on the verb form (chegue, saia, esqueça), items 4–5 on the affectionate exaggeration.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
+
+// EX 1 — V/F
+const tfKey={1:'T',2:'T',3:'F',4:'T',5:'F'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// EX 2 — Imperativo Negativo blanks
+function checkGaps2(){
+  const inputs=document.querySelectorAll('#gap-area-2 .gap-input');
+  let ok=0;
+  inputs.forEach(inp=>{
+    const accepted=inp.dataset.answer.split('|').map(norm);
+    const correct=accepted.includes(norm(inp.value));
+    inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');
+    if(correct)ok++;
+  });
+  const msg=document.getElementById('gap-msg-2');
+  msg.className='result-msg show '+(ok===inputs.length?'result-ok':'result-err');
+  msg.textContent=ok+' / '+inputs.length+' correto(s).';
+}
+function resetGaps2(){
+  document.querySelectorAll('#gap-area-2 .gap-input').forEach(inp=>{inp.value='';inp.classList.remove('ok','err');});
+  const msg=document.getElementById('gap-msg-2');msg.className='result-msg';msg.textContent='';
+}
+
+// EX 3 — Multiple choice
+const mcKey={1:'b',2:'b',3:'b',4:'a',5:'b'};
+const mcSel={};
+function selectMC(btn,id,val){
+  const item=document.querySelector('.mc-item[data-id="'+id+'"]');
+  item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));
+  btn.classList.add('sel');mcSel[id]=val;
+}
+function checkMC(){
+  let ok=0,tot=Object.keys(mcKey).length,answered=0;
+  for(const id in mcKey){
+    const item=document.querySelector('.mc-item[data-id="'+id+'"]');
+    item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('right','wrong'));
+    if(mcSel[id]){answered++;const correct=mcSel[id]===mcKey[id];if(correct)ok++;
+      item.querySelectorAll('.mc-btn').forEach(b=>{if(b.dataset.val===mcKey[id])b.classList.add('right');else if(b.dataset.val===mcSel[id]&&!correct)b.classList.add('wrong');});
+    }
+  }
+  const msg=document.getElementById('mc-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetMC(){
+  for(const id in mcKey){document.querySelector('.mc-item[data-id="'+id+'"]').querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));delete mcSel[id];}
+  const msg=document.getElementById('mc-msg');msg.className='result-msg';msg.textContent='';
+}
+
+function toggleAnswers(id,btn){
+  const block=document.getElementById(id);
+  const visible=block.classList.toggle('visible');
+  btn.textContent=visible?'🙈 Hide model answers':'👁 See model answers';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
