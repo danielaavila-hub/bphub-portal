@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De Quem É? | A1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #4E551D;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: rgba(78,85,29,0.06); border: 1.5px solid rgba(78,85,29,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--level); font-style: italic; }
+    .lang-note strong { color: var(--level); }
+
+    /* info table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--level); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--level); white-space: nowrap; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
+    .cult-note strong { color: var(--level); }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p.body-p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p.body-p:last-of-type { margin-bottom: 0; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 70px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+
+    /* transform list */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--level); }
+
+    /* example box */
+    .example-box { background: rgba(78,85,29,0.06); border: 1px solid rgba(78,85,29,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--level); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(78,85,29,.06); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid var(--level); color: var(--level);
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+    <span class="topbar-name">Iniciante</span>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>De Quem<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> É?</em></h1>
+    <p>Saying who something belongs to — de + artigo, dele / dela, and adjective agreement — through a shared student house in Ouro Preto.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Posse com de + artigo</span>
+      <span class="meta-pill"><span class="dot"></span>Dele, dela, deles, delas</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Saying who something belongs to</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. De + artigo — saying who something belongs to</div>
+      <p>The object comes first, then <strong>de</strong> + the owner. Brazilians normally put an article before a person's name (<em>o Téo, a Camila</em>), so <em>de</em> joins with that article:</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Contração</th><th></th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>de + o</td><td>= do</td><td>o violão do Téo — Téo's guitar</td></tr>
+          <tr><td>de + a</td><td>= da</td><td>a bicicleta da Camila — Camila's bicycle</td></tr>
+          <tr><td>de + os</td><td>= dos</td><td>os livros dos meninos — the boys' books</td></tr>
+          <tr><td>de + as</td><td>= das</td><td>as bicicletas das meninas — the girls' bicycles</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 2. Asking: De quem é...? / De quem são...?</div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Pergunta</th><th>Resposta</th></tr></thead>
+        <tbody>
+          <tr><td>De quem é o violão?</td><td>É do Téo.</td></tr>
+          <tr><td>De quem é a bicicleta?</td><td>É da Camila.</td></tr>
+          <tr><td>De quem são os livros?</td><td>São dos meninos.</td></tr>
+          <tr><td>De quem são as bicicletas?</td><td>São das meninas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="time-note">
+      <strong>Note:</strong> Use <em>é</em> for one object and <em>são</em> for more than one. The verb agrees with the object, never with the owner: <em>De quem são as bicicletas? São da Camila.</em>
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 3. Dele, dela, deles, delas — not repeating the name</div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Forma</th><th></th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>dele</td><td>de + ele</td><td>O violão dele é velho. — His guitar is old.</td></tr>
+          <tr><td>dela</td><td>de + ela</td><td>A bicicleta dela é azul. — Her bicycle is blue.</td></tr>
+          <tr><td>deles</td><td>de + eles</td><td>Os livros deles são pesados. — Their books are heavy.</td></tr>
+          <tr><td>delas</td><td>de + elas</td><td>As camisetas delas são novas. — Their T-shirts are new.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:14px; color:#666; margin:10px 0;">These forms agree with the <strong>owner</strong>, not with the object.</p>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Téo tem um violão. → O violão dele é velho.</span></div>
+      <div class="ex-pair"><span class="ex-pt">Bruna tem um violão. → O violão dela é novo.</span></div>
+    </div>
+
+    <div class="time-note">
+      <em>Violão</em> is masculine in both sentences. The form changes because the <strong>owner</strong> changes.
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 4. Adjetivos: masculino e feminino</div>
+      <p>Most adjectives end in <strong>-o</strong> for masculine and <strong>-a</strong> for feminine. Add <strong>-s</strong> for plural:</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th></th><th>masculino</th><th>feminino</th></tr></thead>
+        <tbody>
+          <tr><td>singular</td><td>o violão novo</td><td>a bicicleta nova</td></tr>
+          <tr><td>plural</td><td>os violões novos</td><td>as bicicletas novas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrap" style="margin-top:16px;">
+      <table class="info-table">
+        <thead><tr><th>English</th><th>masculino</th><th>feminino</th></tr></thead>
+        <tbody>
+          <tr><td>new</td><td>novo</td><td>nova</td></tr>
+          <tr><td>old (worn, used)</td><td>velho</td><td>velha</td></tr>
+          <tr><td>old (from long ago)</td><td>antigo</td><td>antiga</td></tr>
+          <tr><td>pretty</td><td>bonito</td><td>bonita</td></tr>
+          <tr><td>beautiful</td><td>lindo</td><td>linda</td></tr>
+          <tr><td>ugly</td><td>feio</td><td>feia</td></tr>
+          <tr><td>expensive</td><td>caro</td><td>cara</td></tr>
+          <tr><td>cheap</td><td>barato</td><td>barata</td></tr>
+          <tr><td>small</td><td>pequeno</td><td>pequena</td></tr>
+          <tr><td>colorful</td><td>colorido</td><td>colorida</td></tr>
+          <tr><td>heavy</td><td>pesado</td><td>pesada</td></tr>
+          <tr><td>noisy</td><td>barulhento</td><td>barulhenta</td></tr>
+          <tr><td>red</td><td>vermelho</td><td>vermelha</td></tr>
+          <tr><td>white</td><td>branco</td><td>branca</td></tr>
+          <tr><td>friendly</td><td>simpático</td><td>simpática</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:14px; color:#666; margin:16px 0 6px;">Adjectives ending in <strong>-e</strong> or <strong>-l</strong> have one form for masculine and feminine:</p>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>English</th><th>masculino e feminino</th><th>plural</th></tr></thead>
+        <tbody>
+          <tr><td>big</td><td>grande</td><td>grandes</td></tr>
+          <tr><td>green</td><td>verde</td><td>verdes</td></tr>
+          <tr><td>blue</td><td>azul</td><td>azuis</td></tr>
+          <tr><td>cool, nice</td><td>legal</td><td>legais</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cult-note" style="margin-top:20px;">
+      <strong>Two different agreements in the same sentence:</strong><br>
+      Téo tem uma bicicleta. → <em>A bicicleta dele é velha.</em><br>
+      <strong>dele</strong> → agrees with Téo (the owner — masculine)<br>
+      <strong>velha</strong> → agrees with bicicleta (the object — feminine)
+    </div>
+
+    <div class="time-note">
+      <strong>5. Tem = there is / there are.</strong> In spoken Brazilian Portuguese, <em>tem</em> also means "there is / there are": <em>Tem um quadro na parede.</em> — There is a painting on the wall.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the text carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">A sala da república</div>
+      <div class="text-byline">Texto construído para este material</div>
+
+      <p class="body-p">Moro em uma república em Ouro Preto, uma cidade antiga de Minas Gerais. Na república, moram cinco estudantes: Camila, Téo, Bruna, Rafael e eu.</p>
+      <p class="body-p">A sala é pequena, mas é muito colorida. É o lugar favorito da casa.</p>
+      <p class="body-p">Tem um quadro grande na parede. O quadro é da Bruna. Ela estuda artes e adora pintar.</p>
+      <p class="body-p">Tem também um violão velho. O violão é do Téo. Ele toca todos os dias e canta muito alto. O violão dele é barulhento, mas a música dele é linda.</p>
+      <p class="body-p">Tem duas bicicletas na sala. As bicicletas são das meninas. A bicicleta da Camila é azul e a bicicleta da Bruna é vermelha.</p>
+      <p class="body-p">Tem uma estante com muitos livros. Os livros são dos meninos. Rafael estuda história e Téo estuda geografia. Os livros deles são grandes e pesados.</p>
+      <p class="body-p">E o tapete verde? O tapete é do Rafael. Ele adora o tapete, mas o cachorro da Camila também adora! O cachorro dela é pequeno e branco. Ele dorme lá todos os dias.</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <div class="cult-note" style="margin-top:20px;">
+      <strong>Nota cultural — As repúblicas de Ouro Preto.</strong> Em Ouro Preto, em Minas Gerais, muitos estudantes moram em repúblicas. As repúblicas são casas antigas, dos séculos XVIII e XIX. Cada república tem um nome e uma história. Os estudantes moram juntos, cozinham juntos e organizam festas famosas. A tradição das repúblicas de Ouro Preto é muito antiga.
+    </div>
+
+    <table class="vocab-table" style="margin-top:24px;">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">a república (estudantil)</td><td>student shared house</td></tr>
+        <tr><td class="vocab-pt">a sala</td><td>living room</td></tr>
+        <tr><td class="vocab-pt">o quadro</td><td>painting, picture</td></tr>
+        <tr><td class="vocab-pt">a parede</td><td>wall</td></tr>
+        <tr><td class="vocab-pt">o violão</td><td>acoustic guitar</td></tr>
+        <tr><td class="vocab-pt">a estante</td><td>bookcase</td></tr>
+        <tr><td class="vocab-pt">o tapete</td><td>rug</td></tr>
+        <tr><td class="vocab-pt">a planta</td><td>plant</td></tr>
+        <tr><td class="vocab-pt">a mochila</td><td>backpack</td></tr>
+        <tr><td class="vocab-pt">a camiseta</td><td>T-shirt</td></tr>
+        <tr><td class="vocab-pt">o celular</td><td>cell phone</td></tr>
+        <tr><td class="vocab-pt">o morador / a moradora</td><td>resident</td></tr>
+        <tr><td class="vocab-pt">o vizinho / a vizinha</td><td>neighbor</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Read the text and answer in Portuguese</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Read the text and answer in Portuguese, using complete sentences.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quantos estudantes moram na república?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many students live in the shared house?</span>
+        <textarea class="open-textarea" placeholder="Moram..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. De quem é o quadro?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Whose is the painting?</span>
+        <textarea class="open-textarea" placeholder="É..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Como é a bicicleta da Camila?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What is Camila's bicycle like?</span>
+        <textarea class="open-textarea" placeholder="É..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. De quem são os livros?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Whose are the books?</span>
+        <textarea class="open-textarea" placeholder="São..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Como é o cachorro da Camila?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What is Camila's dog like?</span>
+        <textarea class="open-textarea" placeholder="É..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Cinco estudantes.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>É da Bruna.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>É azul.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>São dos meninos (do Rafael e do Téo).</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>É pequeno e branco.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — De quem é/são -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>De quem é / são?</h3>
+          <p>Write the question and the answer</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write the question and the answer, following the example.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> (o violão / Téo) → <strong>De quem é o violão? É do Téo.</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. (as bicicletas / meninas)</p><input class="transform-input" type="text" placeholder="De quem..."></li>
+        <li class="transform-item"><p class="transform-original">2. (o quadro / Bruna)</p><input class="transform-input" type="text" placeholder="De quem..."></li>
+        <li class="transform-item"><p class="transform-original">3. (os livros / meninos)</p><input class="transform-input" type="text" placeholder="De quem..."></li>
+        <li class="transform-item"><p class="transform-original">4. (a mochila / professora)</p><input class="transform-input" type="text" placeholder="De quem..."></li>
+        <li class="transform-item"><p class="transform-original">5. (o cachorro / Camila)</p><input class="transform-input" type="text" placeholder="De quem..."></li>
+        <li class="transform-item"><p class="transform-original">6. (as plantas / vizinhos)</p><input class="transform-input" type="text" placeholder="De quem..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex2-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex2-answers">
+        <div class="model-answer-item"><p>1. De quem são as bicicletas? São das meninas.</p></div>
+        <div class="model-answer-item"><p>2. De quem é o quadro? É da Bruna.</p></div>
+        <div class="model-answer-item"><p>3. De quem são os livros? São dos meninos.</p></div>
+        <div class="model-answer-item"><p>4. De quem é a mochila? É da professora.</p></div>
+        <div class="model-answer-item"><p>5. De quem é o cachorro? É da Camila.</p></div>
+        <div class="model-answer-item"><p>6. De quem são as plantas? São dos vizinhos.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 3 — do/da/dos/das + adjective -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Complete with do, da, dos or das</h3>
+          <p>Then write the adjective in the correct form</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete with do, da, dos or das. Then write the adjective in parentheses in the correct form.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><span>O celular</span><input class="blank-input" data-answer="da" placeholder="___"><span>Bruna é</span><input class="blank-input" data-answer="novo" placeholder="___________"><span>(novo).</span></li>
+        <li><span class="item-num">2.</span><span>As plantas</span><input class="blank-input" data-answer="dos" placeholder="___"><span>vizinhos são</span><input class="blank-input" data-answer="bonitas" placeholder="___________"><span>(bonito).</span></li>
+        <li><span class="item-num">3.</span><span>Os livros</span><input class="blank-input" data-answer="dos" placeholder="___"><span>meninos são</span><input class="blank-input" data-answer="pesados" placeholder="___________"><span>(pesado).</span></li>
+        <li><span class="item-num">4.</span><span>A mochila</span><input class="blank-input" data-answer="do" placeholder="___"><span>professor é</span><input class="blank-input" data-answer="vermelha" placeholder="___________"><span>(vermelho).</span></li>
+        <li><span class="item-num">5.</span><span>O tapete</span><input class="blank-input" data-answer="do" placeholder="___"><span>Rafael é</span><input class="blank-input" data-answer="verde" placeholder="___________"><span>(verde).</span></li>
+        <li><span class="item-num">6.</span><span>As camisetas</span><input class="blank-input" data-answer="do" placeholder="___"><span>Téo são</span><input class="blank-input" data-answer="coloridas" placeholder="___________"><span>(colorido).</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 — dele/dela/deles/delas + adjective -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Complete with dele, dela, deles or delas</h3>
+          <p>Then write the adjective in the correct form</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete with dele, dela, deles or delas. Then write the adjective in parentheses in the correct form.</p>
+
+      <ul class="blanks-list" id="blanks-list-4">
+        <li><span class="item-num">1.</span><span>Camila tem um cachorro. O cachorro</span><input class="blank-input" data-answer="dela" placeholder="___________"><span>é</span><input class="blank-input" data-answer="pequeno" placeholder="___________"><span>(pequeno).</span></li>
+        <li><span class="item-num">2.</span><span>Téo tem uma bicicleta. A bicicleta</span><input class="blank-input" data-answer="dele" placeholder="___________"><span>é</span><input class="blank-input" data-answer="velha" placeholder="___________"><span>(velho).</span></li>
+        <li><span class="item-num">3.</span><span>Bruna tem um violão. O violão</span><input class="blank-input" data-answer="dela" placeholder="___________"><span>é</span><input class="blank-input" data-answer="novo" placeholder="___________"><span>(novo).</span></li>
+        <li><span class="item-num">4.</span><span>Rafael e Téo estudam história. Os livros</span><input class="blank-input" data-answer="deles" placeholder="___________"><span>são</span><input class="blank-input" data-answer="pesados" placeholder="___________"><span>(pesado).</span></li>
+        <li><span class="item-num">5.</span><span>Camila e Bruna moram em Ouro Preto. A república</span><input class="blank-input" data-answer="delas" placeholder="___________"><span>é</span><input class="blank-input" data-answer="antiga" placeholder="___________"><span>(antigo).</span></li>
+        <li><span class="item-num">6.</span><span>Sofia é uma vizinha simpática. As plantas</span><input class="blank-input" data-answer="dela" placeholder="___________"><span>são</span><input class="blank-input" data-answer="grandes" placeholder="___________"><span>(grande).</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-4','blanks-result-4')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-4','blanks-result-4')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-4" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Objects that belong to people you know</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Write six sentences</h3>
+          <p>About objects that belong to people you know</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write six sentences about objects that belong to people you know. Use dele, dela, deles or delas at least three times. Use one adjective in every sentence, in the correct masculine or feminine form.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <p>Sofia é uma amiga da escola. A bicicleta dela é verde e muito antiga. Lucas é um primo. O cachorro dele é pequeno e branco. Ana e Paulo são vizinhos. A casa deles é grande e moderna. Carla e Júlia são estudantes de música. Os violões delas são novos.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>uma pessoa da sua família</li>
+        <li>um amigo ou uma amiga</li>
+        <li>duas pessoas juntas (use deles ou delas)</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Escreva sobre..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.transform-input').forEach(function(inp, idx) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Transformação '+(idx+1)+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
