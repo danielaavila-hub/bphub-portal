@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Epitáfio — Titãs | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--rock:#A1441D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--rock);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.25);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--telha);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--telha);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+  .gram-box th{background:var(--telha);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .compare-box{background:#fff;border:1.5px solid var(--light-gray);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.9rem}
+  .phon-box{background:#fdeee6;border-left:4px solid var(--telha);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .phon-box strong{color:var(--telha)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .model-text-box{background:var(--baunilha);border:1.5px dashed var(--light-gray);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+  .model-text-label{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+  .model-text-box p{font-size:.88rem;color:var(--nanquim);line-height:1.75}
+  .writing-checklist{list-style:none;margin:12px 0 16px}
+  .writing-checklist li{font-size:.85rem;color:var(--nanquim);padding:4px 0;padding-left:18px;position:relative}
+  .writing-checklist li::before{content:'→';position:absolute;left:0;color:var(--telha);font-weight:700}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--telha);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--telha);color:var(--telha)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:12px 14px;background:var(--baunilha);border-radius:8px}
+  .word-chip{background:#fff;border:1.5px solid var(--telha);color:var(--telha);font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:20px}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--telha);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:150px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--telha)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .mc-item{padding:12px 0;border-bottom:1px solid var(--light-gray)}
+  .mc-item:last-child{border-bottom:none}
+  .mc-q{font-size:.93rem;font-weight:700;color:var(--musgo);margin-bottom:8px}
+  .mc-opts{display:flex;flex-direction:column;gap:6px}
+  .mc-btn{text-align:left;border:1.5px solid var(--light-gray);background:#fff;border-radius:6px;padding:7px 12px;font-size:.85rem;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .15s}
+  .mc-btn:hover{border-color:var(--telha)}
+  .mc-btn.sel{background:var(--baunilha);border-color:var(--telha)}
+  .mc-btn.right{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32;font-weight:700}
+  .mc-btn.wrong{background:#ffebee;border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--telha)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--telha);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B2</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Rock Brasileiro</span>
+  <span class="badge">Titãs</span>
+  <span class="badge">2001</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Epitáfio</h1>
+    <p class="fonte">Titãs · do álbum <em>A Melhor Banda de Todos os Tempos da Última Semana</em>, 2001 · 2min56 · composição de Sérgio Britto</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">Um homem olha para trás e enumera o que lamenta — não os grandes fracassos, mas as coisas pequenas que nunca chegou a viver. É a canção mais silenciosa de uma das bandas mais barulhentas do rock brasileiro, e a letra inteira se apoia numa só construção, repetida verso após verso. Ouvindo, você vai descobrir qual.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Epitáfio</p>
+    <p class="instr">Ouça a canção inteira pelo menos uma vez. Não se preocupe em entender cada palavra — repare no tom, no sentido da música e em como quase todos os versos começam da mesma maneira.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/cvznde5nc_s"
+        title="Epitáfio — Titãs" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">o epitáfio</td><td>epitaph — the inscription on a gravestone</td></tr>
+        <tr><td class="vocab-pt">ver o sol nascer</td><td>to watch the sun rise</td></tr>
+        <tr><td class="vocab-pt">arriscar-se</td><td>to take a risk, to put yourself on the line</td></tr>
+        <tr><td class="vocab-pt">errar</td><td>to get it wrong, to make a mistake</td></tr>
+        <tr><td class="vocab-pt">o arrependimento</td><td>regret</td></tr>
+        <tr><td class="vocab-pt">adiar</td><td>to postpone, to put off</td></tr>
+        <tr><td class="vocab-pt">o balanço</td><td>a reckoning, taking stock of something</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GRAMMAR: devia ter + particípio -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">Devia ter + particípio</p>
+    <p style="font-size:.9rem;line-height:1.65;margin-bottom:10px;">É a estrutura que você acabou de ouvir do começo ao fim da canção: devia (imperfeito de dever) + ter + particípio. Ela olha para algo já concluído e julga. Em inglês, é o "should have".</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Estrutura</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td>devia ter + particípio</td><td>a ação <em>não</em> aconteceu — <em>Eu devia ter ligado para ela.</em></td></tr>
+          <tr><td>não devia ter + particípio</td><td>a ação <em>aconteceu</em> — <em>Eu não devia ter ligado para ela.</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--pitomba);margin:14px 0 4px;">Só o primeiro verbo muda:</p>
+    <div class="gram-box">
+      <table>
+        <tbody>
+          <tr><td>eu</td><td>devia ter amado</td></tr>
+          <tr><td>você / ele / ela / a gente</td><td>devia ter amado</td></tr>
+          <tr><td>nós</td><td>devíamos ter amado</td></tr>
+          <tr><td>vocês / eles / elas</td><td>deviam ter amado</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:.85rem;color:var(--pitomba);margin:14px 0 4px;">Compare com o presente:</p>
+    <div class="compare-box">
+      <em>devia + infinitivo</em> é conselho sobre agora — <strong>Você devia descansar.</strong><br>
+      <em>devia ter + particípio</em> é arrependimento sobre antes — <strong>Você devia ter descansado.</strong>
+    </div>
+  </div>
+
+  <!-- FALA -->
+  <div class="card">
+    <p class="card-title">O português falado da música</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Na música</th><th>Na escrita</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>devia</td><td>deveria</td><td>should</td></tr>
+          <tr><td>tê</td><td>ter</td><td>to have</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.85rem;color:var(--pitomba);margin-top:10px;">"Devia" não é uma redução de "deveria" — as duas formas existem na gramática. Mas no português brasileiro falado, "devia" é muito mais comum, e é a forma que a canção usa do começo ao fim.</p>
+  </div>
+
+  <!-- PRONÚNCIA -->
+  <div class="card">
+    <p class="card-title">Pronúncia — o -r final</p>
+    <div class="phon-box">
+      <strong>🔊 ter amado</strong> — o -r no fim do verbo desaparece na fala conectada; "ter" emenda direto na palavra seguinte<br>
+      <strong>🔊 devia ter amado</strong> — diga como um bloco só: <em>deviatêamado</em><br><br>
+      A canção repete "ter" dezenas de vezes, sempre antes de vogal. É um lugar excepcionalmente limpo para ouvir esse apagamento.
+    </div>
+  </div>
+
+  <!-- CULTURA -->
+  <div class="card">
+    <p class="section-label">Nota cultural</p>
+    <div class="cult-box">
+      <strong>🎶 Uma canção de fim de ano</strong><br>
+      Os Titãs se formaram em São Paulo no começo dos anos 1980 e foram uma das bandas mais barulhentas do rock brasileiro. "Epitáfio" não tem nada disso — é uma canção de piano, calma, que a própria banda hesitou em lançar. O produtor, Jack Endino, insistiu contra a opinião do grupo e acabou tendo razão: o clipe, montado com imagens caseiras dos integrantes, levou o prêmio de Videoclipe do Ano no VMA da MTV em 2002.
+      <br><br>
+      Desde então, virou a trilha não oficial dos balanços brasileiros — toca em retrospectivas de fim de ano, em formaturas, em despedidas. Em dezembro de 2014, o Fantástico pediu que a banda regravasse a canção com versos enviados pelo público: cada pessoa mandava algo que sentia que devia ter vivido menos naquele ano, ou que pretendia viver mais no ano seguinte.
+    </div>
+  </div>
+
+  <!-- EX 1: V/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro (V) ou Falso (F)?</p>
+    <p class="ex-instr">Ouça a canção e decida se cada frase é verdadeira ou falsa.</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>O eu-lírico fala de coisas que já aconteceram.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>Ele diz que viveu tudo o que queria.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Ele menciona ter chorado.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>A canção fala de planos para o futuro.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Tentar de novo</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: O que se repete -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">O que se repete?</p>
+    <p class="ex-instr">Ouça de novo e marque a melhor resposta.</p>
+    <div id="mc-area">
+      <div class="mc-item" data-id="1">
+        <p class="mc-q">1. Qual estrutura abre quase todos os versos da canção?</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,1,'a')">a) devia ter + particípio</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,1,'b')">b) devia + infinitivo</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,1,'c')">c) se eu tivesse + particípio</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="2">
+        <p class="mc-q">2. Um epitáfio é:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,2,'a')">a) uma carta de despedida</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,2,'b')">b) uma frase gravada num túmulo</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,2,'c')">c) o último verso de uma canção</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="3">
+        <p class="mc-q">3. As coisas que o eu-lírico lamenta são:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC(this,3,'a')">a) grandes conquistas que ele não teve</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC(this,3,'b')">b) experiências comuns que estavam ao alcance dele</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC(this,3,'c')">c) erros graves que ele cometeu contra outras pessoas</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMC()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetMC()">Tentar de novo</button>
+    </div>
+    <div id="mc-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: complete com devia ter + particípio -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">Complete com devia ter + particípio</p>
+    <p class="ex-instr">Complete as lacunas com o particípio correto. Use cada palavra uma vez.</p>
+    <div class="word-bank">
+      <span class="word-chip">aceitar</span><span class="word-chip">amar</span><span class="word-chip">arriscar</span><span class="word-chip">dizer</span><span class="word-chip">dormir</span>
+    </div>
+    <div id="ex3-inputs">
+      <div class="gap-row"><span class="gap-num">1.</span><span>Eu devia ter</span><input class="gap-input" id="e3_1" data-answer="amado" type="text" placeholder="___________"><span>mais e me preocupado menos.</span></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Ela não devia ter</span><input class="gap-input" id="e3_2" data-answer="dito" type="text" placeholder="___________"><span>aquilo na frente de todo mundo.</span></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>Nós devíamos ter</span><input class="gap-input" id="e3_3" data-answer="arriscado" type="text" placeholder="___________"><span>mais — ficamos sempre no seguro.</span></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span>Você não devia ter</span><input class="gap-input" id="e3_4" data-answer="dormido" type="text" placeholder="___________"><span>tão pouco antes da viagem.</span></div>
+      <div class="gap-row"><span class="gap-num">5.</span><span>Eles deviam ter</span><input class="gap-input" id="e3_5" data-answer="aceitado" type="text" placeholder="___________"><span>o convite quando ainda dava tempo.</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGapsGroup('ex3-inputs','ex3-msg')">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGapsGroup('ex3-inputs','ex3-msg')">Tentar de novo</button>
+    </div>
+    <div id="ex3-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: escolha a forma correta -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Escolha a forma correta</p>
+    <p class="ex-instr">Marque a melhor resposta.</p>
+    <div id="mc2-area">
+      <div class="mc-item" data-id="1">
+        <p class="mc-q">1. "Devia ter amado mais" quer dizer que ele:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC2(this,1,'a')">a) amou muito</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC2(this,1,'b')">b) não amou o suficiente</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC2(this,1,'c')">c) ainda vai amar</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="2">
+        <p class="mc-q">2. "Não devia ter dito" quer dizer que a pessoa:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC2(this,2,'a')">a) disse e se arrepende</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC2(this,2,'b')">b) não disse e se arrepende</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC2(this,2,'c')">c) ainda vai dizer</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="3">
+        <p class="mc-q">3. "Você devia descansar" fala de:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC2(this,3,'a')">a) agora</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC2(this,3,'b')">b) ontem</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC2(this,3,'c')">c) uma coisa que não aconteceu</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="4">
+        <p class="mc-q">4. Em "Nós devíamos ter saído mais cedo", o particípio "saído":</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC2(this,4,'a')">a) muda conforme o sujeito</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC2(this,4,'b')">b) nunca muda</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC2(this,4,'c')">c) concorda em gênero com o sujeito</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="5">
+        <p class="mc-q">5. No português brasileiro falado, "devia" é mais comum que:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC2(this,5,'a')">a) deveria</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC2(this,5,'b')">b) devera</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC2(this,5,'c')">c) deve</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMC2()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetMC2()">Tentar de novo</button>
+    </div>
+    <div id="mc2-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 5: produção -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 5</p>
+    <p class="ex-title">Sua vez</p>
+    <p class="ex-instr">O eu-lírico olha para uma vida inteira. Faça o mesmo com os últimos 12 meses. Escreva de quatro a cinco frases — um parágrafo, não uma lista.</p>
+
+    <div class="model-text-box">
+      <div class="model-text-label">Modelo</div>
+      <p>Olho para os últimos doze meses e vejo um ano estreito. Devia ter dormido mais e me cobrado menos. Devia ter aceitado aquele almoço de domingo em vez de responder e-mails, e devia ter dito à minha irmã, em voz alta, o que eu só pensava. Não devia ter guardado tanta coisa para depois — descobri tarde que "depois" também tem prazo.</p>
+    </div>
+
+    <p style="font-size:.85rem;font-weight:700;color:var(--musgo);margin-bottom:4px;">Você pode incluir no seu texto:</p>
+    <ul class="writing-checklist">
+      <li>uma pessoa de quem você se afastou</li>
+      <li>algo que você adiou</li>
+      <li>uma preocupação que não valeu a pena</li>
+      <li>um risco que você não correu</li>
+      <li>algo pequeno que trouxe prazer</li>
+    </ul>
+
+    <textarea class="prod" style="min-height:160px;" id="q5" placeholder="Olho para os últimos doze meses..."></textarea>
+  </div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
+
+// EX 1 — V/F
+const tfKey={1:'T',2:'F',3:'T',4:'F'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// Generic gap-input checker (Ex3)
+function checkGapsGroup(containerId,msgId){
+  const inputs=document.querySelectorAll('#'+containerId+' .gap-input');
+  let ok=0;
+  inputs.forEach(inp=>{
+    const accepted=inp.dataset.answer.split('|').map(norm);
+    const correct=accepted.includes(norm(inp.value));
+    inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');
+    if(correct)ok++;
+  });
+  const msg=document.getElementById(msgId);
+  msg.className='result-msg show '+(ok===inputs.length?'result-ok':'result-err');
+  msg.textContent=ok+' / '+inputs.length+' correto(s).';
+}
+function resetGapsGroup(containerId,msgId){
+  document.querySelectorAll('#'+containerId+' .gap-input').forEach(inp=>{inp.value='';inp.classList.remove('ok','err');});
+  const msg=document.getElementById(msgId);msg.className='result-msg';msg.textContent='';
+}
+
+// EX 2 — Multiple choice
+const mcKey={1:'a',2:'b',3:'b'};
+const mcSel={};
+function selectMC(btn,id,val){
+  const item=btn.closest('#mc-area').querySelector('.mc-item[data-id="'+id+'"]');
+  item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));
+  btn.classList.add('sel');mcSel[id]=val;
+}
+function checkMC(){
+  let ok=0,tot=Object.keys(mcKey).length,answered=0;
+  for(const id in mcKey){
+    const item=document.querySelector('#mc-area .mc-item[data-id="'+id+'"]');
+    item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('right','wrong'));
+    if(mcSel[id]){answered++;const correct=mcSel[id]===mcKey[id];if(correct)ok++;
+      item.querySelectorAll('.mc-btn').forEach(b=>{if(b.dataset.val===mcKey[id])b.classList.add('right');else if(b.dataset.val===mcSel[id]&&!correct)b.classList.add('wrong');});
+    }
+  }
+  const msg=document.getElementById('mc-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetMC(){
+  for(const id in mcKey){document.querySelector('#mc-area .mc-item[data-id="'+id+'"]').querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));delete mcSel[id];}
+  const msg=document.getElementById('mc-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// EX 4 — Multiple choice (segundo grupo)
+const mc2Key={1:'b',2:'a',3:'a',4:'b',5:'a'};
+const mc2Sel={};
+function selectMC2(btn,id,val){
+  const item=btn.closest('#mc2-area').querySelector('.mc-item[data-id="'+id+'"]');
+  item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));
+  btn.classList.add('sel');mc2Sel[id]=val;
+}
+function checkMC2(){
+  let ok=0,tot=Object.keys(mc2Key).length,answered=0;
+  for(const id in mc2Key){
+    const item=document.querySelector('#mc2-area .mc-item[data-id="'+id+'"]');
+    item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('right','wrong'));
+    if(mc2Sel[id]){answered++;const correct=mc2Sel[id]===mc2Key[id];if(correct)ok++;
+      item.querySelectorAll('.mc-btn').forEach(b=>{if(b.dataset.val===mc2Key[id])b.classList.add('right');else if(b.dataset.val===mc2Sel[id]&&!correct)b.classList.add('wrong');});
+    }
+  }
+  const msg=document.getElementById('mc2-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetMC2(){
+  for(const id in mc2Key){document.querySelector('#mc2-area .mc-item[data-id="'+id+'"]').querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));delete mc2Sel[id];}
+  const msg=document.getElementById('mc2-msg');msg.className='result-msg';msg.textContent='';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
