@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Minha Família | A1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #4E551D;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: rgba(78,85,29,0.06); border: 1.5px solid rgba(78,85,29,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--level); font-style: italic; }
+    .lang-note strong { color: var(--level); }
+
+    /* info table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--level); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--level); white-space: nowrap; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* compare table */
+    .compare-table { width: 100%; border-collapse: collapse; background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; overflow: hidden; margin: 16px 0; font-size: 14px; }
+    .compare-table th { background: var(--level); color: white; padding: 10px 16px; text-align: left; font-weight: 700; font-size: 13px; }
+    .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--light-gray); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { color: var(--level); font-weight: 600; }
+    .compare-table td:last-child { color: #888; font-style: italic; font-size: 13px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
+    .cult-note strong { color: var(--level); }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p.body-p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p.body-p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 100px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+
+    /* choice / V-F / multiple choice */
+    .choice-list { list-style: none; }
+    .choice-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .choice-item:last-child { border-bottom: none; }
+    .choice-sentence { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .choice-options { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .choice-btn { border: 1.5px solid var(--light-gray); background: var(--off-white); border-radius: 8px; padding: 7px 18px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: var(--texto); cursor: pointer; transition: all 0.15s; }
+    .choice-btn:hover { border-color: var(--level); background: rgba(78,85,29,0.06); color: var(--level); }
+    .choice-btn.selected { border-color: var(--level); background: rgba(78,85,29,0.06); color: var(--level); }
+    .choice-btn.correct  { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .choice-btn.wrong    { border-color: var(--pitomba);  background: rgba(211,109,41,0.08); color: var(--pitomba); }
+
+    /* example box */
+    .example-box { background: rgba(78,85,29,0.06); border: 1px solid rgba(78,85,29,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--level); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid var(--level); color: var(--level);
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+      .choice-options { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+    <span class="topbar-name">Iniciante</span>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>A Minha<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> Família</em></h1>
+    <p>Introducing your family in Portuguese — and the two different possessive systems Brazilian Portuguese uses side by side: <strong style="color:white;">meu/minha/nosso/nossa</strong> and <strong style="color:white;">dele/dela/deles/delas</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Pronomes possessivos</span>
+      <span class="meta-pill"><span class="dot"></span>Post de rede social</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Portuguese has two different possessive systems</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <p style="margin-bottom:0;">Portuguese has <strong>two different systems</strong> for saying "my," "your," "his," "her," "our" and "their." This is the most important thing on this page.</p>
+    </div>
+
+    <div class="lang-note-label">📌 Group 1 — the ending agrees with the THING owned</div>
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th></th><th>masc. sing.</th><th>fem. sing.</th><th>masc. plural</th><th>fem. plural</th></tr></thead>
+        <tbody>
+          <tr><td>eu (my)</td><td>meu</td><td>minha</td><td>meus</td><td>minhas</td></tr>
+          <tr><td>você / ele / ela (your, his, her)</td><td>seu</td><td>sua</td><td>seus</td><td>suas</td></tr>
+          <tr><td>nós (our)</td><td>nosso</td><td>nossa</td><td>nossos</td><td>nossas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">meu irmão · minha irmã · meus irmãos · minhas irmãs</span></div>
+    </div>
+
+    <div class="time-note">
+      <strong>Careful, English speakers:</strong> in English, <em>my</em> never changes. In Portuguese, it changes four ways — and it changes with the <strong>noun that follows</strong>, never with the person speaking. A man says <em>minha mãe</em>. A woman says <em>meu pai</em>. Who is speaking makes no difference at all.
+    </div>
+
+    <div class="examples-block" style="margin-top:16px;">
+      <div class="ex-pair"><span class="ex-pt">The article is optional. Both are correct and common in speech:</span></div>
+      <div class="ex-pair"><span class="ex-pt">(A) minha família é grande.  ·  Eu moro com (os) meus avós.</span></div>
+    </div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 Group 2 — the word agrees with the PERSON who owns</div>
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>Forma</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>ele (his)</td><td>dele = de + ele</td></tr>
+          <tr><td>ela (her)</td><td>dela = de + ela</td></tr>
+          <tr><td>eles (their)</td><td>deles = de + eles</td></tr>
+          <tr><td>elas (their)</td><td>delas = de + elas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:14px; color:#666; margin:10px 0;">These words come <strong>after the noun</strong>, and they <strong>never change</strong> with the noun:</p>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">o pai dele · a casa dele · os primos dele · as filhas dele</span></div>
+    </div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 Compare the two systems side by side</div>
+    <table class="compare-table">
+      <thead><tr><th></th><th>agrees with…</th><th>position</th></tr></thead>
+      <tr><td>minha casa</td><td>the noun (casa)</td><td>before the noun</td></tr>
+      <tr><td>a casa dela</td><td>the owner (ela)</td><td>after the noun</td></tr>
+    </table>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 In Brazil, in practice</div>
+      <p>Look at the second row of Group 1 again: <strong>seu</strong> and <strong>sua</strong> can mean <em>your</em>, <em>his</em> or <em>her</em>. So this sentence has three possible meanings:</p>
+      <p><em>O seu irmão mora no Rio.</em> → Your / his / her brother lives in Rio.</p>
+      <p style="margin-bottom:0;">Because of this, Brazilians usually keep <strong>seu</strong> and <strong>sua</strong> for <em>your</em>, and use <strong>dele</strong> and <strong>dela</strong> for <em>his</em> and <em>her</em>. It is much clearer, and it is what you will hear every day: <em>your brother</em> → seu irmão · <em>his brother</em> → o irmão dele · <em>her brother</em> → o irmão dela. You will still see seu/sua meaning his/her, especially in writing — context tells you which one it is.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the text carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">A minha família</div>
+      <div class="text-byline">Texto construído para este material</div>
+
+      <p class="body-p">Oi! Eu sou o Téo. Eu moro em Salvador, com <mark>a minha</mark> mãe e <mark>o meu</mark> irmão.</p>
+      <p class="body-p"><mark>A minha</mark> mãe se chama Vera. Ela é muito legal. <mark>O meu</mark> irmão se chama Caio. Ele adora música.</p>
+      <p class="body-p"><mark>O meu</mark> pai mora no Rio. A casa <mark>dele</mark> é pequena, mas é muito bonita.</p>
+      <p class="body-p"><mark>Os meus</mark> avós moram em Salvador também. <mark>A minha</mark> avó se chama Zilda e <mark>o meu</mark> avô se chama Sebastião. Eu amo <mark>os meus</mark> avós!</p>
+      <p class="body-p">Eu tenho duas primas. Elas se chamam Duda e Nina. Elas moram no Rio. O pai <mark>delas</mark> é o meu tio Rui.</p>
+      <p class="body-p">E nós temos um cachorro. O nome <mark>dele</mark> é Bili. O Bili é <mark>o nosso</mark> cachorro, mas ele adora <mark>a minha</mark> avó!</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para este material — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <table class="vocab-table" style="margin-top:24px;">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">a família</td><td>family</td></tr>
+        <tr><td class="vocab-pt">o pai / a mãe</td><td>father / mother</td></tr>
+        <tr><td class="vocab-pt">o filho / a filha</td><td>son / daughter</td></tr>
+        <tr><td class="vocab-pt">o irmão / a irmã</td><td>brother / sister</td></tr>
+        <tr><td class="vocab-pt">o avô / a avó</td><td>grandfather / grandmother</td></tr>
+        <tr><td class="vocab-pt">os avós</td><td>grandparents</td></tr>
+        <tr><td class="vocab-pt">o tio / a tia</td><td>uncle / aunt</td></tr>
+        <tr><td class="vocab-pt">o primo / a prima</td><td>cousin (male / female)</td></tr>
+        <tr><td class="vocab-pt">o cachorro / o gato</td><td>dog / cat</td></tr>
+        <tr><td class="vocab-pt">legal</td><td>nice, cool</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cult-note" style="margin-top:20px;">
+      <strong>Nota cultural.</strong> No Brasil, a família é muito importante. Os avós, os tios e os primos são da família — não só o pai, a mãe e os filhos. Muitas famílias moram na mesma cidade. Nas festas, a família toda está na casa dos avós. Os primos são quase irmãos.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions in Portuguese, based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Responda às perguntas em português, com frases completas.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Onde o Téo mora?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where does Téo live?</span>
+        <textarea class="open-textarea" placeholder="Ele mora..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Quem mora com o Téo?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Who lives with Téo?</span>
+        <textarea class="open-textarea" placeholder="A..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Onde o pai do Téo mora?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where does Téo's father live?</span>
+        <textarea class="open-textarea" placeholder="Ele mora..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Quantas primas o Téo tem?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many cousins does Téo have?</span>
+        <textarea class="open-textarea" placeholder="Ele tem..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. De quem é o cachorro Bili?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Whose dog is Bili?</span>
+        <textarea class="open-textarea" placeholder="É..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'comp-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="comp-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Ele mora em Salvador.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>A mãe dele, a Vera, e o irmão dele, o Caio.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Ele mora no Rio.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Ele tem duas primas.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>É o cachorro do Téo, da mãe dele e do irmão dele.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — V ou F -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Verdadeiro ou falso?</h3>
+          <p>Read the text again and mark V (verdadeiro) or F (falso)</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Leia o texto de novo e marque V ou F.</p>
+
+      <ul class="choice-list" id="vf-list">
+        <li class="choice-item">
+          <p class="choice-sentence">1. O Téo mora no Rio.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="1" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="1" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. A Vera é a mãe do Téo.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="2" data-val="V" data-correct="true" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="2" data-val="F" data-correct="false" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. O Caio é o irmão do Téo.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="3" data-val="V" data-correct="true" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="3" data-val="F" data-correct="false" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. Os avós do Téo moram no Rio.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="4" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="4" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. A Duda e a Nina são irmãs do Téo.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="5" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="5" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">6. O Bili é o cachorro do Téo, da mãe e do irmão.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="6" data-val="V" data-correct="true" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="6" data-val="F" data-correct="false" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+      </ul>
+
+      <p class="ex-instruction" style="margin-top:18px;margin-bottom:8px;">Depois, corrija as afirmações falsas por escrito:</p>
+      <textarea class="open-textarea" style="min-height:100px;" placeholder="1. ... 4. ... 5. ..."></textarea>
+
+      <button class="check-btn" onclick="checkVF()">✓ Check answers</button>
+      <div id="vf-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — meu, minha, meus, minhas, nosso, nossa, nossos, nossas -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Complete com meu, minha, meus, minhas, nosso, nossa, nossos ou nossas</h3>
+          <p>The pronoun in parentheses tells you who is speaking</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete as frases. A palavra entre parênteses indica quem fala — mas lembre-se: a forma concorda com o substantivo, não com a pessoa.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><input class="blank-input" data-answer="minha" placeholder="___________"><span>irmã mora no Rio.</span><span class="blank-hint">(eu)</span></li>
+        <li><span class="item-num">2.</span><input class="blank-input" data-answer="meu" placeholder="___________"><span>avô se chama Sebastião.</span><span class="blank-hint">(eu)</span></li>
+        <li><span class="item-num">3.</span><input class="blank-input" data-answer="minhas" placeholder="___________"><span>primas moram em Salvador.</span><span class="blank-hint">(eu)</span></li>
+        <li><span class="item-num">4.</span><input class="blank-input" data-answer="nossa" placeholder="___________"><span>casa é pequena.</span><span class="blank-hint">(nós)</span></li>
+        <li><span class="item-num">5.</span><input class="blank-input" data-answer="nossos" placeholder="___________"><span>filhos são pequenos.</span><span class="blank-hint">(nós)</span></li>
+        <li><span class="item-num">6.</span><input class="blank-input" data-answer="meus" placeholder="___________"><span>tios moram no Rio.</span><span class="blank-hint">(eu)</span></li>
+        <li><span class="item-num">7.</span><input class="blank-input" data-answer="nossa" placeholder="___________"><span>família é grande.</span><span class="blank-hint">(nós)</span></li>
+        <li><span class="item-num">8.</span><input class="blank-input" data-answer="nosso" placeholder="___________"><span>cachorro se chama Bili.</span><span class="blank-hint">(nós)</span></li>
+        <li><span class="item-num">9.</span><input class="blank-input" data-answer="minha" placeholder="___________"><span>mãe adora música.</span><span class="blank-hint">(eu)</span></li>
+        <li><span class="item-num">10.</span><input class="blank-input" data-answer="nossos" placeholder="___________"><span>primos são muito legais.</span><span class="blank-hint">(nós)</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 — dele, dela, deles, delas -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Complete com dele, dela, deles ou delas</h3>
+          <p>These agree with the owner, not the noun</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete as frases com dele, dela, deles ou delas.</p>
+
+      <ul class="blanks-list" id="blanks-list-4">
+        <li><span class="item-num">1.</span><span>A Vera tem uma casa em Salvador. A casa</span><input class="blank-input" data-answer="dela" placeholder="___________"><span>é bonita.</span></li>
+        <li><span class="item-num">2.</span><span>O Sebastião tem uma família grande. Os filhos</span><input class="blank-input" data-answer="dele" placeholder="___________"><span>moram em Salvador.</span></li>
+        <li><span class="item-num">3.</span><span>A Duda e a Nina moram no Rio. A mãe</span><input class="blank-input" data-answer="delas" placeholder="___________"><span>se chama Ana.</span></li>
+        <li><span class="item-num">4.</span><span>O Téo e o Caio são irmãos. A avó</span><input class="blank-input" data-answer="deles" placeholder="___________"><span>se chama Zilda.</span></li>
+        <li><span class="item-num">5.</span><span>O meu tio tem dois gatos. Os gatos</span><input class="blank-input" data-answer="dele" placeholder="___________"><span>são pequenos.</span></li>
+        <li><span class="item-num">6.</span><span>A minha prima tem uma filha. A filha</span><input class="blank-input" data-answer="dela" placeholder="___________"><span>é muito legal.</span></li>
+        <li><span class="item-num">7.</span><span>Os meus avós têm uma casa grande. A casa</span><input class="blank-input" data-answer="deles" placeholder="___________"><span>é em Salvador.</span></li>
+        <li><span class="item-num">8.</span><span>As minhas tias moram no Rio. Os filhos</span><input class="blank-input" data-answer="delas" placeholder="___________"><span>são os meus primos.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-4','blanks-result-4')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-4','blanks-result-4')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-4" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 5 — Multiple choice -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Escolha a opção correta</h3>
+          <p>Both groups mixed together</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escolha a opção correta em cada frase.</p>
+
+      <ul class="choice-list" id="mc-list">
+        <li class="choice-item">
+          <p class="choice-sentence">1. Eu sou o Téo. _______ avó se chama Zilda.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="1" data-val="Meu" data-correct="true" onclick="selectChoice(this)">Meu</button>
+            <button class="choice-btn" data-item="1" data-val="Minha" data-correct="false" onclick="selectChoice(this)">Minha</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. Eu sou a Nina. _______ avô mora em Salvador.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="2" data-val="Meu" data-correct="true" onclick="selectChoice(this)">Meu</button>
+            <button class="choice-btn" data-item="2" data-val="Minha" data-correct="false" onclick="selectChoice(this)">Minha</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. A Vera tem uma casa. A casa _______ é bonita.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="3" data-val="dele" data-correct="false" onclick="selectChoice(this)">dele</button>
+            <button class="choice-btn" data-item="3" data-val="dela" data-correct="true" onclick="selectChoice(this)">dela</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. O Téo e a Nina são primos. A avó _______ se chama Zilda.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="4" data-val="deles" data-correct="true" onclick="selectChoice(this)">deles</button>
+            <button class="choice-btn" data-item="4" data-val="delas" data-correct="false" onclick="selectChoice(this)">delas</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. Nós somos uma família grande. _______ família é de Salvador.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="5" data-val="Nosso" data-correct="false" onclick="selectChoice(this)">Nosso</button>
+            <button class="choice-btn" data-item="5" data-val="Nossa" data-correct="true" onclick="selectChoice(this)">Nossa</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">6. A Duda e a Nina são irmãs. O pai _______ é o meu tio.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="6" data-val="deles" data-correct="false" onclick="selectChoice(this)">deles</button>
+            <button class="choice-btn" data-item="6" data-val="delas" data-correct="true" onclick="selectChoice(this)">delas</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">7. Téo, _______ família é muito legal!</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="7" data-val="seu" data-correct="false" onclick="selectChoice(this)">seu</button>
+            <button class="choice-btn" data-item="7" data-val="sua" data-correct="true" onclick="selectChoice(this)">sua</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">8. A Vera é a mãe do Téo. O Caio é o filho _______.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="8" data-val="dele" data-correct="false" onclick="selectChoice(this)">dele</button>
+            <button class="choice-btn" data-item="8" data-val="dela" data-correct="true" onclick="selectChoice(this)">dela</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">9. Eu tenho dois primos. _______ primos moram no Rio.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="9" data-val="Meu" data-correct="false" onclick="selectChoice(this)">Meu</button>
+            <button class="choice-btn" data-item="9" data-val="Meus" data-correct="true" onclick="selectChoice(this)">Meus</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">10. Nós temos um cachorro. _______ cachorro se chama Bili.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="10" data-val="Nosso" data-correct="true" onclick="selectChoice(this)">Nosso</button>
+            <button class="choice-btn" data-item="10" data-val="Nossos" data-correct="false" onclick="selectChoice(this)">Nossos</button>
+          </div>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkMC()">✓ Check answers</button>
+      <div id="mc-result" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Introduce your own family</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">6</div>
+        <div>
+          <h3>Escreva sobre a sua família</h3>
+          <p>50–70 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escreva sobre a sua família (50–70 palavras).</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <p>Oi! Eu sou a Sarah. Eu moro em Boston com a minha mãe e o meu pai. A minha mãe se chama Karen e o meu pai se chama David. Eu tenho um irmão. Ele se chama Kevin e ele adora música. Os meus avós moram em Chicago. A casa deles é muito bonita. Nós temos um gato. O nome dele é Leo!</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>onde você mora</li>
+        <li>quem mora com você</li>
+        <li>os nomes das pessoas da sua família</li>
+        <li>onde os seus avós ou os seus primos moram</li>
+        <li>um cachorro ou um gato da família</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:150px;" placeholder="Oi! Eu sou..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+
+  /* V/F and multiple choice share the same selection pattern */
+  const vfSelections = {};
+  const mcSelections = {};
+
+  function selectChoice(btn) {
+    const item = btn.dataset.item;
+    const list = btn.closest('ul').id;
+    const siblings = document.querySelectorAll(`#${list} [data-item="${item}"]`);
+    siblings.forEach(b => b.classList.remove('selected','correct','wrong'));
+    btn.classList.add('selected');
+    if (list === 'vf-list') vfSelections[item] = btn;
+    if (list === 'mc-list') mcSelections[item] = btn;
+  }
+
+  function checkVF() {
+    let correct = 0, answered = 0;
+    for (let i = 1; i <= 6; i++) {
+      const btn = vfSelections[i];
+      if (!btn) continue;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    }
+    const el = document.getElementById('vf-result');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please select V or F for each sentence first.';
+      return;
+    }
+    if (correct === 6) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All 6 correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 6 correct. Review the highlighted answers.';
+    }
+  }
+
+  function checkMC() {
+    let correct = 0, answered = 0;
+    for (let i = 1; i <= 10; i++) {
+      const btn = mcSelections[i];
+      if (!btn) continue;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    }
+    const el = document.getElementById('mc-result');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please select an option for each sentence first.';
+      return;
+    }
+    if (correct === 10) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All 10 correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 10 correct. Review the highlighted answers.';
+    }
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
