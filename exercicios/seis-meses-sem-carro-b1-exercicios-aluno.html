@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretérito Perfeito Composto — Seis Meses sem Carro | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
+    /* ── HERO ── */
+    .page-hero { background: #967E63; padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: var(--cobalto-light); border: 1.5px solid rgba(38,91,139,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* formation table */
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0; }
+    .form-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .form-card-header { background: var(--cobalto); padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+    .form-table-wrap { overflow-x: auto; }
+    .form-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .form-table tr { border-bottom: 1px solid var(--light-gray); }
+    .form-table tr:last-child { border-bottom: none; }
+    .form-table td { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+    .form-table td:first-child { color: #999; }
+    .form-table td:last-child { font-weight: 700; color: var(--cobalto); }
+    .form-table th { padding: 8px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #999; text-align: left; white-space: nowrap; border-bottom: 1.5px solid var(--light-gray); }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 220px; color: var(--cobalto); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* compare table (simples x composto) */
+    .compare-table { width: 100%; border-collapse: collapse; background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; overflow: hidden; margin: 16px 0; font-size: 14px; }
+    .compare-table th { background: var(--cobalto); color: white; padding: 10px 16px; text-align: left; font-weight: 700; font-size: 13px; }
+    .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--light-gray); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { color: var(--cobalto); font-weight: 600; }
+    .compare-table td:last-child { color: #888; font-style: italic; font-size: 13px; }
+
+    /* time / practical note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* markers row */
+    .markers-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    .marker-chip { background: white; border: 1.5px solid var(--cobalto); color: var(--cobalto); font-weight: 600; font-size: 13px; padding: 6px 14px; border-radius: 20px; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--cobalto); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--cobalto); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--cobalto); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--cobalto); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 70px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 130px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* choice / V-F exercise */
+    .choice-list { list-style: none; }
+    .choice-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .choice-item:last-child { border-bottom: none; }
+    .choice-sentence { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .choice-options { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .choice-btn { border: 1.5px solid var(--light-gray); background: var(--off-white); border-radius: 8px; padding: 7px 18px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: var(--texto); cursor: pointer; transition: all 0.15s; }
+    .choice-btn:hover { border-color: var(--cobalto); background: var(--cobalto-light); color: var(--cobalto); }
+    .choice-btn.selected { border-color: var(--cobalto); background: var(--cobalto-light); color: var(--cobalto); }
+    .choice-btn.correct  { border-color: var(--floresta); background: rgba(78,85,29,0.08); color: var(--floresta); }
+    .choice-btn.wrong    { border-color: var(--pitomba);  background: rgba(211,109,41,0.08); color: var(--pitomba); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    /* model text box */
+    .model-text-box { background: var(--baunilha2); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #967E63; margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--cobalto); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--cobalto); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid #967E63; color: #967E63;
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+      .choice-options { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Pretérito Perfeito<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> Composto</em></h1>
+    <p>A blog post about giving up a car for six months — and the verb form Brazilians use to talk about habits that started recently and are still going: <strong style="color:white;">ter (presente) + particípio</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Pretérito perfeito composto</span>
+      <span class="meta-pill"><span class="dot"></span>Post de blog</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>O pretérito perfeito composto — a recent, ongoing habit</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. How it's formed</div>
+      <p><strong>ter</strong> (in the present tense) <strong>+ particípio</strong>.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-card-header">TER no presente</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Sujeito</th><th>TER</th></tr></thead>
+          <tr><td>eu</td><td>tenho</td></tr>
+          <tr><td>você / ele / ela</td><td>tem</td></tr>
+          <tr><td>nós</td><td>temos</td></tr>
+          <tr><td>vocês / eles / elas</td><td>têm</td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">+ particípio: acordado, perdido, dormido</span><span class="ex-en"></span></div>
+    </div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 2. The participle</div>
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-card-header">Particípio regular</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Terminação</th><th>Exemplo</th></tr></thead>
+          <tr><td>-ar → -ado</td><td>acordar → acordado</td></tr>
+          <tr><td>-er → -ido</td><td>perder → perdido</td></tr>
+          <tr><td>-ir → -ido</td><td>dormir → dormido</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-header">Alguns particípios irregulares</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Infinitivo</th><th>Particípio</th></tr></thead>
+          <tr><td>ver</td><td>visto</td></tr>
+          <tr><td>vir</td><td>vindo</td></tr>
+          <tr><td>dizer</td><td>dito</td></tr>
+          <tr><td>escrever</td><td>escrito</td></tr>
+          <tr><td>abrir</td><td>aberto</td></tr>
+          <tr><td>pôr</td><td>posto</td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">📌 3. When to use it</div>
+      <p>The pretérito perfeito composto describes a <strong>repeated action that started in the past and is still happening now</strong>. It often marks a new habit or a temporary situation.</p>
+      <p style="margin-bottom:0;"><em>Tenho acordado mais cedo.</em> → Before, I didn't wake up early. In the last few weeks, that's changed — and it's still like this.</p>
+    </div>
+
+    <table class="compare-table">
+      <thead><tr><th>Pretérito perfeito simples</th><th>Pretérito perfeito composto</th></tr></thead>
+      <tr><td>Ontem eu peguei o ônibus.</td><td>Ultimamente eu tenho pegado o ônibus.</td></tr>
+      <tr><td>uma vez, terminado</td><td>várias vezes, continua</td></tr>
+    </table>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 4. Time markers you'll see with it</div>
+    <div class="markers-row">
+      <span class="marker-chip">ultimamente</span>
+      <span class="marker-chip">nos últimos dias / meses / anos</span>
+      <span class="marker-chip">nestas últimas semanas</span>
+      <span class="marker-chip">recentemente</span>
+      <span class="marker-chip">frequentemente</span>
+    </div>
+
+    <div class="time-note">
+      <strong>Atenção, falantes de inglês:</strong> the pretérito perfeito composto does <em>not</em> correspond to the present perfect. In Brazilian Portuguese it almost always signals repetition. For a single, already-finished experience, use the pretérito perfeito simples with <em>já</em>: <strong>"I have already seen this film"</strong> → <em>Já vi esse filme</em> (not <em>tenho visto</em>).
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">🔊 Pronúncia — tem e têm</div>
+      <p>The circumflex accent in <strong>têm</strong> exists only in writing. In speech, <em>tem</em> and <em>têm</em> sound exactly the same — there's no audible difference between singular and plural. A listener figures out the number from the subject of the sentence, not from the verb: <em>o bairro tem mudado</em> · <em>os ônibus têm demorado</em>.</p>
+      <p style="margin-bottom:0;">In other words: when you write, pay attention to the accent. When you speak, you don't need to change anything.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the blog post carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Seis meses sem carro</div>
+      <div class="text-byline">por Renata — blog pessoal</div>
+
+      <p>Meu nome é Renata, tenho 38 anos e moro em Belo Horizonte. Em março, meu carro quebrou e eu decidi não consertar. Foi uma decisão difícil, mas hoje não me arrependo.</p>
+
+      <p>Nos últimos meses, <mark>tenho ido</mark> para o trabalho de ônibus e de bicicleta. No começo, foi horrível: eu chegava atrasada, cansada e suada. Agora já me acostumei. <mark>Tenho acordado</mark> quarenta minutos mais cedo, <mark>tenho lido</mark> dois livros por mês dentro do ônibus e <mark>tenho dormido</mark> muito melhor.</p>
+
+      <p>A cidade também tem mudado. A prefeitura <mark>tem investido</mark> em ciclofaixas e o meu bairro ganhou uma no ano passado. Ainda assim, nem tudo é perfeito: muitos motoristas não <mark>têm respeitado</mark> o espaço dos ciclistas, e nos horários de pico os ônibus <mark>têm demorado</mark> bastante.</p>
+
+      <p>Meus colegas <mark>têm me perguntado</mark> se eu vou comprar outro carro. Ultimamente, <mark>tenho respondido</mark> sempre a mesma coisa: por enquanto, não. <mark>Tenho economizado</mark> quase mil reais por mês e <mark>tenho me sentido</mark> mais parte da cidade. <mark>Tem sido</mark> cansativo em alguns dias, mas <mark>tem valido</mark> a pena.</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para este material — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <div class="lang-note-label" style="margin-top:24px;">Vocabulário</div>
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">consertar</td><td>to repair, to fix</td></tr>
+        <tr><td class="vocab-pt">arrepender-se (de)</td><td>to regret</td></tr>
+        <tr><td class="vocab-pt">suado(a)</td><td>sweaty</td></tr>
+        <tr><td class="vocab-pt">acostumar-se (a)</td><td>to get used to</td></tr>
+        <tr><td class="vocab-pt">a ciclofaixa</td><td>painted bike lane (on the street itself)</td></tr>
+        <tr><td class="vocab-pt">a prefeitura</td><td>city hall, municipal government</td></tr>
+        <tr><td class="vocab-pt">o horário de pico</td><td>rush hour</td></tr>
+        <tr><td class="vocab-pt">demorar</td><td>to take a long time, to be delayed</td></tr>
+        <tr><td class="vocab-pt">por enquanto</td><td>for now, for the time being</td></tr>
+        <tr><td class="vocab-pt">valer a pena</td><td>to be worth it</td></tr>
+      </tbody>
+    </table>
+
+    <div class="time-note">
+      <strong>Nota cultural:</strong> in Brazil, <em>ciclofaixa</em> and <em>ciclovia</em> are different things. The <em>ciclofaixa</em> is just a lane painted on the street — the bicycle shares the space with cars. The <em>ciclovia</em> is separated from cars by a physical barrier and is therefore safer. Cities like São Paulo, Fortaleza, Rio de Janeiro, and Belo Horizonte have built many of both in recent years, but they're almost always concentrated downtown and in wealthier neighborhoods — in poorer neighborhoods, where a lot of people rely on bikes to get to work, there's still very little. There's also a broader cultural note here: in Brazil, owning a car is a symbol of success. So when someone decides not to have one — and not because they can't afford it — friends and colleagues almost always ask why. That's exactly what happens to Renata.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — V ou F -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Verdadeiro ou falso?</h3>
+          <p>Read the text again and mark V (verdadeiro) or F (falso)</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Leia o texto de novo e marque V ou F.</p>
+
+      <ul class="choice-list" id="vf-list">
+        <li class="choice-item">
+          <p class="choice-sentence">1. Renata vendeu o carro para economizar dinheiro.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="1" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="1" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. A mudança de rotina foi fácil desde o primeiro dia.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="2" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="2" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. O bairro de Renata ganhou uma ciclofaixa recentemente.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="3" data-val="V" data-correct="true" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="3" data-val="F" data-correct="false" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. Na opinião de Renata, os motoristas respeitam os ciclistas.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="4" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="4" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. Ela pretende comprar outro carro em breve.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="5" data-val="V" data-correct="false" onclick="selectChoice(this)">V</button>
+            <button class="choice-btn" data-item="5" data-val="F" data-correct="true" onclick="selectChoice(this)">F</button>
+          </div>
+        </li>
+      </ul>
+
+      <p class="ex-instruction" style="margin-top:18px;margin-bottom:8px;">Depois, corrija as afirmações falsas por escrito:</p>
+      <textarea class="open-textarea" style="min-height:110px;" placeholder="1. ... 2. ..."></textarea>
+
+      <button class="check-btn" onclick="checkVF()">✓ Check answers</button>
+      <div id="vf-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 2 — Complete com o pretérito perfeito composto -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Complete com o pretérito perfeito composto</h3>
+          <p>A reader's comment on Renata's blog post</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete o comentário abaixo com o pretérito perfeito composto dos verbos entre parênteses.</p>
+
+      <div class="example-box">
+        <strong>Comentário de leitor:</strong> Renata, adorei seu texto! Moro em Recife e (1) tenho pensado muito nisso ultimamente...
+      </div>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><span>Renata, adorei seu texto! Moro em Recife e</span><input class="blank-input" data-answer="tenho pensado" placeholder="___________"><span class="blank-hint">(pensar)</span><span>muito nisso ultimamente.</span></li>
+        <li><span class="item-num">2.</span><span>Minha rua</span><input class="blank-input" data-answer="tem ficado" placeholder="___________"><span class="blank-hint">(ficar)</span><span>impossível nos últimos meses:</span></li>
+        <li><span class="item-num">3.</span><span>os carros</span><input class="blank-input" data-answer="têm aumentado" placeholder="___________"><span class="blank-hint">(aumentar)</span><span>e não sobra espaço para ninguém.</span></li>
+        <li><span class="item-num">4.</span><span>Meus filhos</span><input class="blank-input" data-answer="têm ido" placeholder="___________"><span class="blank-hint">(ir)</span><span>para a escola a pé desde março</span></li>
+        <li><span class="item-num">5.</span><span>e</span><input class="blank-input" data-answer="têm chegado" placeholder="___________"><span class="blank-hint">(chegar)</span><span>muito mais animados.</span></li>
+        <li><span class="item-num">6.</span><span>Eu</span><input class="blank-input" data-answer="tenho economizado" placeholder="___________"><span class="blank-hint">(economizar)</span><span>bastante com gasolina,</span></li>
+        <li><span class="item-num">7.</span><span>e minha mulher</span><input class="blank-input" data-answer="tem dormido" placeholder="___________"><span class="blank-hint">(dormir)</span><span>melhor, porque não precisa mais sair de casa às seis da manhã.</span></li>
+        <li><span class="item-num">8.</span><span>Nós dois</span><input class="blank-input" data-answer="temos conversado" placeholder="___________"><span class="blank-hint">(conversar)</span><span>muito sobre isso</span></li>
+        <li><span class="item-num">9.</span><span>e</span><input class="blank-input" data-answer="temos percebido" placeholder="___________"><span class="blank-hint">(perceber)</span><span>que a mudança valeu a pena.</span></li>
+        <li><span class="item-num">10.</span><span>Só a chuva atrapalha: nestas últimas semanas</span><input class="blank-input" data-answer="tem chovido" placeholder="___________"><span class="blank-hint">(chover)</span><span>quase todos os dias por aqui.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-2','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-2','blanks-result-2')" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Simples ou composto -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Simples ou composto?</h3>
+          <p>Choose the correct form based on the context</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete as frases com o pretérito perfeito simples ou com o pretérito perfeito composto, conforme o contexto.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><span>No sábado passado, eu</span><input class="blank-input" data-answer="fui" placeholder="___________"><span class="blank-hint">(ir)</span><span>ao Mineirão ver um jogo.</span></li>
+        <li><span class="item-num">2.</span><span>Nos últimos meses, o número de ciclistas</span><input class="blank-input" data-answer="tem crescido" placeholder="___________"><span class="blank-hint">(crescer)</span><span>muito em Belo Horizonte.</span></li>
+        <li><span class="item-num">3.</span><span>Meu irmão</span><input class="blank-input" data-answer="mudou" placeholder="___________"><span class="blank-hint">(mudar)</span><span>de casa em janeiro.</span></li>
+        <li><span class="item-num">4.</span><span>Ultimamente, os ônibus da minha linha</span><input class="blank-input" data-answer="têm atrasado" placeholder="___________"><span class="blank-hint">(atrasar)</span><span>todos os dias.</span></li>
+        <li><span class="item-num">5.</span><span>Ontem eu</span><input class="blank-input" data-answer="perdi" placeholder="___________"><span class="blank-hint">(perder)</span><span>a hora e</span><input class="blank-input" data-answer="cheguei" placeholder="___________"><span class="blank-hint">(chegar)</span><span>atrasada no trabalho.</span></li>
+        <li><span class="item-num">6.</span><span>— Você está diferente! — Pois é,</span><input class="blank-input" data-answer="tenho praticado" placeholder="___________"><span class="blank-hint">(praticar)</span><span>natação três vezes por semana.</span></li>
+        <li><span class="item-num">7.</span><span>A prefeitura</span><input class="blank-input" data-answer="inaugurou" placeholder="___________"><span class="blank-hint">(inaugurar)</span><span>uma nova ciclofaixa no mês passado.</span></li>
+        <li><span class="item-num">8.</span><span>Nestes últimos dias, nós</span><input class="blank-input" data-answer="temos saído" placeholder="___________"><span class="blank-hint">(sair)</span><span>de casa mais cedo por causa do trânsito.</span></li>
+        <li><span class="item-num">9.</span><span>Entre 2018 e 2020, eu</span><input class="blank-input" data-answer="morei" placeholder="___________"><span class="blank-hint">(morar)</span><span>em Salvador.</span></li>
+        <li><span class="item-num">10.</span><span>Recentemente, muita gente</span><input class="blank-input" data-answer="tem deixado" placeholder="___________"><span class="blank-hint">(deixar)</span><span>o carro em casa e</span><input class="blank-input" data-answer="tem usado" placeholder="___________"><span class="blank-hint">(usar)</span><span>o transporte público.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 — Uso correto ou incorreto -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Uso correto ou incorreto?</h3>
+          <p>All sentences below use the pretérito perfeito composto</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Em algumas frases, o uso está correto: a ação se repete e continua acontecendo. Em outras, o uso está incorreto: a ação aconteceu uma única vez e já terminou, e por isso o verbo deveria estar no pretérito perfeito simples. Marque C (correto) ou I (incorreto).</p>
+
+      <ul class="choice-list" id="ci-list">
+        <li class="choice-item">
+          <p class="choice-sentence">1. Já tenho visitado o Cristo Redentor duas vezes.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="1" data-val="C" data-correct="false" onclick="selectChoice(this)">C</button>
+            <button class="choice-btn" data-item="1" data-val="I" data-correct="true" onclick="selectChoice(this)">I</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">2. Ultimamente tenho estudado português todos os dias.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="2" data-val="C" data-correct="true" onclick="selectChoice(this)">C</button>
+            <button class="choice-btn" data-item="2" data-val="I" data-correct="false" onclick="selectChoice(this)">I</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">3. Tenho perdido meu passaporte ontem.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="3" data-val="C" data-correct="false" onclick="selectChoice(this)">C</button>
+            <button class="choice-btn" data-item="3" data-val="I" data-correct="true" onclick="selectChoice(this)">I</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">4. Nos últimos meses, o preço da passagem tem subido bastante.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="4" data-val="C" data-correct="true" onclick="selectChoice(this)">C</button>
+            <button class="choice-btn" data-item="4" data-val="I" data-correct="false" onclick="selectChoice(this)">I</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">5. Ela tem chegado atrasada nesta semana.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="5" data-val="C" data-correct="true" onclick="selectChoice(this)">C</button>
+            <button class="choice-btn" data-item="5" data-val="I" data-correct="false" onclick="selectChoice(this)">I</button>
+          </div>
+        </li>
+        <li class="choice-item">
+          <p class="choice-sentence">6. Tenho nascido em Recife.</p>
+          <div class="choice-options">
+            <button class="choice-btn" data-item="6" data-val="C" data-correct="false" onclick="selectChoice(this)">C</button>
+            <button class="choice-btn" data-item="6" data-val="I" data-correct="true" onclick="selectChoice(this)">I</button>
+          </div>
+        </li>
+      </ul>
+
+      <button class="check-btn" onclick="checkCI()">✓ Check answers</button>
+      <div id="ci-result" class="result-msg"></div>
+
+      <p class="ex-instruction" style="margin-top:22px;margin-bottom:8px;">Agora reescreva as frases incorretas no pretérito perfeito simples:</p>
+      <textarea class="open-textarea" style="min-height:100px;" placeholder="1. ... 3. ... 6. ..."></textarea>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex4-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex4-answers">
+        <div class="model-answer-item"><div class="model-label">1 — incorreto</div><p>Já visitei o Cristo Redentor duas vezes. (experiência concluída, com número definido de vezes)</p></div>
+        <div class="model-answer-item"><div class="model-label">3 — incorreto</div><p>Perdi meu passaporte ontem. (ontem marca um momento único e terminado)</p></div>
+        <div class="model-answer-item"><div class="model-label">6 — incorreto</div><p>Nasci em Recife. (nascer acontece uma única vez; não pode se repetir)</p></div>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Write a comment for Renata's blog</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Alguma coisa mudou na sua rotina?</h3>
+          <p>80–120 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Alguma coisa mudou na sua rotina nos últimos meses? Escreva um comentário (80–120 palavras) para o blog da Renata contando o que mudou e como você tem se sentido.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <p>Oi, Renata! Aqui em Curitiba a situação é diferente. Mudei de emprego em fevereiro e agora trabalho de casa três dias por semana. Tenho economizado umas seis horas de deslocamento por semana e tenho cozinhado quase todos os dias. Por outro lado, tenho saído muito pouco de casa e tenho sentido falta dos meus colegas. Nos fins de semana, tenho caminhado no Parque Barigui para compensar. Tem sido uma adaptação difícil, mas acho que tem valido a pena.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>o seu trajeto até o trabalho ou a escola</li>
+        <li>o seu sono e a sua alimentação</li>
+        <li>alguma coisa que melhorou</li>
+        <li>alguma coisa que piorou</li>
+        <li>a sua opinião sobre a mudança</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Oi, Renata!..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  /* Generic fill-in-the-blank checker (used by Ex2 and Ex3) */
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+
+  /* Exercise 1: V/F and Exercise 4: C/I share this selection state + choice pattern */
+  const vfSelections = {};
+  const ciSelections = {};
+
+  function selectChoice(btn) {
+    const item = btn.dataset.item;
+    const list = btn.closest('ul').id;
+    const siblings = document.querySelectorAll(`#${list} [data-item="${item}"]`);
+    siblings.forEach(b => b.classList.remove('selected','correct','wrong'));
+    btn.classList.add('selected');
+    if (list === 'vf-list') vfSelections[item] = btn;
+    if (list === 'ci-list') ciSelections[item] = btn;
+  }
+
+  function checkVF() {
+    let correct = 0, answered = 0;
+    for (let i = 1; i <= 5; i++) {
+      const btn = vfSelections[i];
+      if (!btn) continue;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    }
+    const el = document.getElementById('vf-result');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please select V or F for each sentence first.';
+      return;
+    }
+    if (correct === 5) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All 5 correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 5 correct. Review the highlighted answers.';
+    }
+  }
+
+  function checkCI() {
+    let correct = 0, answered = 0;
+    for (let i = 1; i <= 6; i++) {
+      const btn = ciSelections[i];
+      if (!btn) continue;
+      answered++;
+      const isCorrect = btn.dataset.correct === 'true';
+      btn.classList.remove('selected');
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (isCorrect) correct++;
+    }
+    const el = document.getElementById('ci-result');
+    el.style.display = 'block';
+    if (answered === 0) {
+      el.className = 'result-msg try-again';
+      el.textContent = 'Please classify each sentence as C or I first.';
+      return;
+    }
+    if (correct === 6) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Excellent! All 6 correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of 6 correct. Review the highlighted answers.';
+    }
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
