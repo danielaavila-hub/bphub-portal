@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tempo Perdido (B2) — Legião Urbana | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--rock:#A1441D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--rock);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.25);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--telha);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--telha);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+  .gram-box th{background:var(--telha);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .compare-box{background:#fff;border:1.5px solid var(--light-gray);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.9rem}
+  .phon-box{background:#fdeee6;border-left:4px solid var(--telha);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .phon-box strong{color:var(--telha)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .model-text-box{background:var(--baunilha);border:1.5px dashed var(--light-gray);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+  .model-text-label{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+  .model-text-box p{font-size:.88rem;color:var(--nanquim);line-height:1.75}
+  .writing-checklist{list-style:none;margin:12px 0 16px}
+  .writing-checklist li{font-size:.85rem;color:var(--nanquim);padding:4px 0;padding-left:18px;position:relative}
+  .writing-checklist li::before{content:'→';position:absolute;left:0;color:var(--telha);font-weight:700}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--telha);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--telha);color:var(--telha)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:12px 14px;background:var(--baunilha);border-radius:8px}
+  .word-chip{background:#fff;border:1.5px solid var(--telha);color:var(--telha);font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:20px}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--telha);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:150px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--telha)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .qa-item{padding:14px 0;border-bottom:1px solid var(--light-gray)}
+  .qa-item:last-child{border-bottom:none}
+  .qa-q{font-size:.93rem;font-weight:700;color:var(--musgo);margin-bottom:8px}
+  .show-model-btn{border:1.5px solid var(--telha);background:#fff;color:var(--telha);border-radius:6px;padding:5px 12px;font-size:.78rem;font-weight:700;cursor:pointer;margin-top:8px}
+  .show-model-btn:hover{background:var(--telha);color:#fff}
+  .model-ans{display:none;background:var(--baunilha);border-radius:6px;padding:10px 14px;margin-top:8px;font-size:.85rem;line-height:1.6;color:var(--nanquim)}
+  .model-ans.show{display:block}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--telha)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--telha);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B2</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Rock Brasileiro</span>
+  <span class="badge">Legião Urbana</span>
+  <span class="badge">1986</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Tempo Perdido</h1>
+    <p class="fonte">Legião Urbana · do álbum <em>Dois</em>, 1986</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">Nenhuma música da Legião Urbana parece ter tocado mais no Brasil do que esta. "Tempo Perdido" virou hino de formatura, de show e de geração — a frase final da letra deu nome ao filme sobre a juventude de Renato Russo, lançado em 2013. Nesta versão B2, a canção é a porta de entrada para uma estrutura que o português usa o tempo todo para contar o que aconteceu sem apontar o dedo: a voz passiva.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Tempo Perdido</p>
+    <p class="instr">Ouça a música inteira pelo menos uma vez antes de continuar.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/zpzoG5KGaHg"
+        title="Tempo Perdido — Legião Urbana" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da música</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">o suor</td><td>sweat — in the song, physical effort and work, treated as something sacred</td></tr>
+        <tr><td class="vocab-pt">sagrado</td><td>sacred — worthy of respect, not to be touched</td></tr>
+        <tr><td class="vocab-pt">amargo</td><td>bitter — used of taste, but also of resentment and hard feelings</td></tr>
+        <tr><td class="vocab-pt">selvagem</td><td>wild, untamed — here it is praise, not criticism</td></tr>
+        <tr><td class="vocab-pt">a tempestade</td><td>the storm</td></tr>
+        <tr><td class="vocab-pt">o escuro</td><td>the dark, darkness</td></tr>
+        <tr><td class="vocab-pt">esconder / esconder-se</td><td>to hide (something) / to hide oneself</td></tr>
+        <tr><td class="vocab-pt">prometer</td><td>to promise</td></tr>
+        <tr><td class="vocab-pt">perder / perdido</td><td>to lose / lost — <em>tempo perdido</em> is time that was wasted</td></tr>
+        <tr><td class="vocab-pt">distante</td><td>distant, far away — in space or in feeling</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURA -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>🎼 Uma canção montada aos pedaços</strong><br>
+      "Tempo Perdido" não nasceu pronta. Renato Russo vinha reaproveitando versos de composições antigas, algumas do tempo do Aborto Elétrico, a banda punk que ele integrou em Brasília antes da Legião Urbana. Por volta de 1984 a letra já estava quase completa, mas ele não gostava do resultado e chegou a procurar ajuda para reescrever os versos. A versão definitiva só apareceu em 1986, no álbum <em>Dois</em>, lançada pela EMI-Odeon.
+    </div>
+    <div class="cult-box">
+      <strong>🏛️ O som de Brasília nos anos 80</strong><br>
+      A Legião Urbana surgiu no começo dos anos 1980, na mesma cena de garagem de Brasília que gerou outras bandas da época. Era um país cansado de vinte anos de ditadura, e uma geração inteira de adolescentes de classe média se reconhecia nas letras sobre pressa, desilusão e recomeço. Quarenta anos depois, "Tempo Perdido" continua sendo cantada em coro por plateias que não eram nem nascidas quando o disco saiu.
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">Voz passiva — contar o que aconteceu sem dizer quem foi</p>
+    <p style="font-size:.9rem;line-height:1.65;margin-bottom:10px;">Na última estrofe da letra, a pessoa que canta usa esse recurso: algo que <strong>foi escondido</strong> — logo, alguém escondeu — e algo que <strong>se escondeu</strong> por conta própria. Em seguida, ela afirma que algo <strong>foi prometido</strong>, mas acrescenta que ninguém prometeu. A construção garante que existe um responsável; o verso seguinte nega isso. A contradição é deliberada, e só existe porque o português marca essa diferença.</p>
+    <p style="font-size:.9rem;line-height:1.65;margin-bottom:10px;">Na voz passiva, o objeto da frase ativa torna-se o sujeito, e o particípio concorda em gênero e número com esse novo sujeito.</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Voz ativa</th><th>Voz passiva</th></tr></thead>
+        <tbody>
+          <tr><td>Alguém escondeu a verdade.</td><td>A verdade foi <strong>escondida</strong>.</td></tr>
+          <tr><td>A banda gravou o disco em três semanas.</td><td>O disco foi <strong>gravado</strong> em três semanas.</td></tr>
+          <tr><td>A rádio tocava as canções todo dia.</td><td>As canções eram <strong>tocadas</strong> todo dia.</td></tr>
+          <tr><td>A gravadora vai relançar o álbum.</td><td>O álbum vai ser <strong>relançado</strong>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.85rem;color:var(--pitomba);margin:14px 0 4px;">O agente é opcional — e é justamente por isso que a passiva existe. Quando não interessa, ou não se sabe quem é o responsável, ele desaparece: <em>"A decisão foi tomada em janeiro."</em> Quando interessa, usa-se "por": <em>A canção foi escrita por Renato Russo.</em></p>
+
+    <p style="font-size:.85rem;font-weight:700;color:var(--musgo);margin:16px 0 4px;">Duas maneiras de relatar o mesmo acontecimento</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Construção</th><th>Registro</th></tr></thead>
+        <tbody>
+          <tr><td>A porta foi aberta às sete.</td><td>passiva — comum no jornalismo, em documentos e na escrita mais geral</td></tr>
+          <tr><td>Abriram a porta às sete.</td><td>verbo na 3ª pessoa do plural, sem sujeito — muito mais comum na fala</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.85rem;color:var(--pitomba);margin:10px 0 4px;">Nos dois casos, alguém abre a porta; nos dois casos, a frase não diz quem. A escolha é de registro, não de sentido.</p>
+
+    <p style="font-size:.85rem;font-weight:700;color:var(--musgo);margin:16px 0 4px;">Cuidado com ser e estar</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Frase</th><th>Sentido</th></tr></thead>
+        <tbody>
+          <tr><td>A loja foi fechada às oito.</td><td>ação: alguém fechou naquele momento</td></tr>
+          <tr><td>A loja estava fechada quando cheguei.</td><td>estado: o resultado, e não interessa quem fechou</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.85rem;color:var(--pitomba);margin:10px 0 4px;">O inglês usa "was" nos dois casos — o português obriga você a escolher.</p>
+
+    <p style="font-size:.85rem;font-weight:700;color:var(--musgo);margin:16px 0 4px;">Regra prática</p>
+    <div class="compare-box">
+      O particípio nunca muda de tempo — quem carrega o tempo é o verbo <em>ser</em> (<em>é gravado, foi gravado, era gravado, será gravado</em>), e o particípio concorda com o sujeito. Na conversa do dia a dia, o brasileiro costuma preferir a terceira pessoa do plural: em vez de <em>meu celular foi roubado</em>, ele diz <em>roubaram meu celular</em>.
+    </div>
+  </div>
+
+  <!-- PRONÚNCIA -->
+  <div class="card">
+    <p class="card-title">Pronúncia</p>
+    <div class="phon-box">
+      Os particípios em <strong>-ido</strong> concentram dois traços do português brasileiro ao mesmo tempo: <em>di</em> e <em>ti</em> antes de <em>i</em> soam como <em>dj</em> e <em>tch</em> em vários estados brasileiros, e o <strong>-o</strong> final átono soa como <em>u</em>.<br><br>
+      Repita em voz alta acompanhando a canção: <em>perdido, escondido, prometido, partido, todos os dias, distante</em>.
+    </div>
+  </div>
+
+  <!-- EX 1: V/F -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Verdadeiro ou Falso?</p>
+    <p class="ex-instr">Com base no que você ouviu e leu acima, marque V ou F.</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>Renato Russo compôs "Tempo Perdido" em poucos dias, pouco antes da gravação do álbum.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>A canção aproveita versos de composições anteriores, do tempo do Aborto Elétrico.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Nenhuma outra música da Legião Urbana parece ter tocado tanto no Brasil quanto esta.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>O último verso da canção deu nome a um filme sobre Renato Russo.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>Na última estrofe, a pessoa que canta conclui que o tempo vivido foi tempo desperdiçado.</span>
+      </div>
+      <div class="tf-item" data-id="6">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,6,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,6,'F')">F</button>
+        </div>
+        <span>A pessoa que canta se dirige a alguém, com pedidos diretos.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Tentar de novo</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 2: voz passiva no passado -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Voz passiva no passado</p>
+    <p class="ex-instr">Complete as frases com a voz passiva do verbo indicado. Atenção à concordância do particípio.</p>
+    <div id="ex2-inputs">
+      <div class="gap-row"><span class="gap-num">1.</span><span>O álbum <em>Dois</em></span><input class="gap-input" id="e2_1" data-answer="foi lançado" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(lançar) em junho de 1986.</span></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>A canção</span><input class="gap-input" id="e2_2" data-answer="foi escrita" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(escrever) por Renato Russo.</span></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>As primeiras composições da banda</span><input class="gap-input" id="e2_3" data-answer="foram compostas" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(compor) ainda no tempo do Aborto Elétrico.</span></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span>"Tempo Perdido"</span><input class="gap-input" id="e2_4" data-answer="foi escolhida" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(escolher) como single do disco.</span></div>
+      <div class="gap-row"><span class="gap-num">5.</span><span>Os versos antigos</span><input class="gap-input" id="e2_5" data-answer="foram reaproveitados" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(aproveitar) na versão definitiva.</span></div>
+      <div class="gap-row"><span class="gap-num">6.</span><span>A Legião Urbana</span><input class="gap-input" id="e2_6" data-answer="foi formada" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(formar) em Brasília, no início dos anos 80.</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGapsGroup('ex2-inputs','ex2-msg')">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGapsGroup('ex2-inputs','ex2-msg')">Tentar de novo</button>
+    </div>
+    <div id="ex2-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: ser ou estar -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">Ação ou estado?</p>
+    <p class="ex-instr">Complete com <em>ser</em> ou <em>estar</em> no tempo adequado, mais o particípio do verbo indicado.</p>
+    <div class="gap-row" style="border-bottom:1.5px dashed var(--light-gray);">
+      <span class="gap-num" style="color:var(--pitomba)">Ex.</span>
+      <span>A carta</span><span style="font-weight:700;color:var(--pitomba)">foi escrita</span><span>(escrever) pelo gerente às oito em ponto.</span>
+    </div>
+    <div id="ex3-inputs">
+      <div class="gap-row"><span class="gap-num">1.</span><span>A loja</span><input class="gap-input" id="e3_1" data-answer="foi fechada" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(fechar) pelo gerente às oito em ponto, como todo dia.</span></div>
+      <div class="gap-row"><span class="gap-num">2.</span><span>Quando cheguei, a loja já</span><input class="gap-input" id="e3_2" data-answer="estava fechada" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(fechar) e não pude voltar no dia seguinte.</span></div>
+      <div class="gap-row"><span class="gap-num">3.</span><span>O álbum</span><input class="gap-input" id="e3_3" data-answer="foi gravado" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(gravar) em três semanas, num estúdio no Rio de Janeiro.</span></div>
+      <div class="gap-row"><span class="gap-num">4.</span><span>O museu ficou anos sem visitantes; as salas</span><input class="gap-input" id="e3_4" data-answer="estavam fechadas" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(fechar) desde 2019.</span></div>
+      <div class="gap-row"><span class="gap-num">5.</span><span>Três faixas inéditas</span><input class="gap-input" id="e3_5" data-answer="foram incluídas" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(incluir) na edição comemorativa do disco.</span></div>
+      <div class="gap-row"><span class="gap-num">6.</span><span>Quando o público entrou, o palco já</span><input class="gap-input" id="e3_6" data-answer="estava montado" type="text" autocomplete="off" spellcheck="false" placeholder="___________"><span>(montar).</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGapsGroup('ex3-inputs','ex3-msg')">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGapsGroup('ex3-inputs','ex3-msg')">Tentar de novo</button>
+    </div>
+    <div id="ex3-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 4: compreensão auditiva -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Compreensão auditiva</p>
+    <p class="ex-instr">Ouça a música de novo e responda com suas próprias palavras — não copie nenhuma linha da letra, descreva o que você entende.</p>
+    <div class="qa-item">
+      <p class="qa-q">1. Na última estrofe, a pessoa canta que "o que foi escondido é o que se escondeu". Por que você acha que essa diferença importa para ela?</p>
+      <textarea class="prod" id="q4_1" placeholder="Escreva sua resposta..."></textarea>
+      <button class="show-model-btn" onclick="showModel('m4_1',this)">Ver resposta modelo</button>
+      <div class="model-ans" id="m4_1">A diferença marca se existe ou não um responsável pelo que aconteceu: algo que <em>foi escondido</em> supõe que alguém escondeu; algo que <em>se escondeu</em> aconteceu por conta própria. A pessoa parece querer separar o que aconteceu sozinho do que teve, de fato, um culpado.</div>
+    </div>
+    <div class="qa-item">
+      <p class="qa-q">2. Logo depois, ela afirma que algo foi prometido, mas que ninguém prometeu. Como você entende essa contradição?</p>
+      <textarea class="prod" id="q4_2" placeholder="Escreva sua resposta..."></textarea>
+      <button class="show-model-btn" onclick="showModel('m4_2',this)">Ver resposta modelo</button>
+      <div class="model-ans" id="m4_2">A voz passiva ("foi prometido") garante que existe um responsável; o verso seguinte nega isso ("ninguém prometeu"). A contradição é deliberada — sugere expectativas que ninguém chegou a assumir de fato, mas que ainda pesam como se tivessem sido assumidas.</div>
+    </div>
+    <div class="qa-item">
+      <p class="qa-q">3. A canção termina dizendo que nada daquilo foi tempo perdido. Depois de ouvir a música inteira, esse final soa triste ou esperançoso para você?</p>
+      <textarea class="prod" id="q4_3" placeholder="Escreva sua resposta..."></textarea>
+      <button class="show-model-btn" onclick="showModel('m4_3',this)">Ver resposta modelo</button>
+      <div class="model-ans" id="m4_3">Resposta pessoal — as duas leituras são possíveis, desde que justificadas. Algumas pessoas ouvem uma aceitação serena do passado; outras, uma tentativa de se convencer de que nada foi em vão.</div>
+    </div>
+  </div>
+
+  <!-- EX 5: produção -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 5</p>
+    <p class="ex-title">Sua vez</p>
+    <p class="ex-instr">Escreva de cinco a sete frases contando algo que mudou na sua cidade nos últimos anos — um prédio, uma praça, um festival, uma lei. Use a voz passiva em pelo menos quatro frases e, em cada uma delas, não nomeie o responsável.</p>
+
+    <div class="model-text-box">
+      <div class="model-text-label">Modelo</div>
+      <p>Nos últimos anos, o centro da minha cidade mudou bastante. Uma praça antiga foi reformada e ganhou bancos novos e mais árvores. Uma ciclovia foi construída na avenida principal, e agora muita gente vai de bicicleta para o trabalho. O antigo cinema foi fechado há dois anos, mas o prédio ainda não foi ocupado por nada. Um festival de música ao ar livre foi criado no verão passado e já virou tradição. Algumas coisas foram perdidas nesse processo — mas, no geral, acho que o bairro ficou melhor.</p>
+    </div>
+
+    <p style="font-size:.85rem;font-weight:700;color:var(--musgo);margin-bottom:4px;">Você pode incluir no seu texto:</p>
+    <ul class="writing-checklist">
+      <li>um prédio ou espaço público que foi construído, reformado ou fechado</li>
+      <li>uma lei ou regra que foi criada ou mudada</li>
+      <li>um evento ou festival que foi criado, cancelado ou retomado</li>
+      <li>algo que foi perdido nesse processo</li>
+      <li>sua opinião pessoal sobre a mudança</li>
+    </ul>
+
+    <textarea class="prod" style="min-height:160px;" id="q5" placeholder="Nos últimos anos, minha cidade..."></textarea>
+  </div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
+
+// EX 1 — V/F
+const tfKey={1:'F',2:'T',3:'T',4:'T',5:'F',6:'T'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// Generic gap-input checker (Ex2, Ex3)
+function checkGapsGroup(containerId,msgId){
+  const inputs=document.querySelectorAll('#'+containerId+' .gap-input');
+  let ok=0;
+  inputs.forEach(inp=>{
+    const accepted=inp.dataset.answer.split('|').map(norm);
+    const correct=accepted.includes(norm(inp.value));
+    inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');
+    if(correct)ok++;
+  });
+  const msg=document.getElementById(msgId);
+  msg.className='result-msg show '+(ok===inputs.length?'result-ok':'result-err');
+  msg.textContent=ok+' / '+inputs.length+' correto(s).';
+}
+function resetGapsGroup(containerId,msgId){
+  document.querySelectorAll('#'+containerId+' .gap-input').forEach(inp=>{inp.value='';inp.classList.remove('ok','err');});
+  const msg=document.getElementById(msgId);msg.className='result-msg';msg.textContent='';
+}
+
+// EX 4 — reveal model answer
+function showModel(id,btn){
+  const el=document.getElementById(id);
+  el.classList.toggle('show');
+  btn.textContent=el.classList.contains('show')?'Ocultar resposta modelo':'Ver resposta modelo';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
