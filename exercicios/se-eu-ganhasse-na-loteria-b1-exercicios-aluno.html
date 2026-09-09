@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Se Eu Ganhasse na Loteria… | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--cobalto);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: #967E63;
+      padding: 60px 48px 52px;
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      color: white; margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 15px; color: rgba(255,255,255,0.88);
+      max-width: 560px; line-height: 1.75;
+    }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 500; color: white;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note {
+      background: var(--cobalto-light);
+      border: 1.5px solid rgba(38,91,139,0.18);
+      border-radius: 14px; padding: 28px 32px; margin-bottom: 24px;
+    }
+    .lang-note-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--cobalto); margin-bottom: 10px;
+    }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* register comparison table (neutral colours — no right/wrong implied) */
+    .register-table { width: 100%; border-collapse: collapse; margin: 16px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--light-gray); }
+    .register-table th { padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; color: white; }
+    .register-table th:first-child { background: var(--cobalto); }
+    .register-table th:last-child  { background: var(--pitomba); }
+    .register-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .register-table td:first-child { color: var(--cobalto); font-weight: 600; border-right: 1px solid var(--light-gray); }
+    .register-table td:last-child  { color: var(--pitomba); font-weight: 600; }
+
+    /* form table (verb reference) */
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0; }
+    .form-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .form-card-header { background: var(--cobalto); padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+    .form-table-wrap { overflow-x: auto; }
+    .form-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .form-table tr { border-bottom: 1px solid var(--light-gray); }
+    .form-table tr:last-child { border-bottom: none; }
+    .form-table td { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+    .form-table td:first-child { color: #999; }
+    .form-table th {
+      padding: 8px 14px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #999; text-align: left; white-space: nowrap;
+      border-bottom: 1.5px solid var(--light-gray);
+    }
+
+    /* time / cultural / phon notes */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+    .phon-note { background: #F3ECF8; border-left: 3px solid #8E5FA8; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .phon-note strong { color: #8E5FA8; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--cobalto); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--cobalto); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p.body-p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 18px; }
+    .text-reader p.body-p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: #FDE7C4; color: var(--pitomba); font-weight: 700; padding: 0 2px; border-radius: 3px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--cobalto); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--cobalto); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea {
+      width: 100%; background: var(--off-white);
+      border: 1.5px solid var(--light-gray); border-radius: 10px;
+      padding: 14px 16px; font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px;
+      outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px;
+    }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* transform list */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--cobalto); }
+
+    /* example box */
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--cobalto); font-weight: 700; }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #967E63; margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; margin-bottom: 8px; }
+    .model-text-box p:last-child { margin-bottom: 0; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--cobalto); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid #967E63; color: #967E63;
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Se Eu Ganhasse<br><em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">na Loteria…</em></h1>
+    <p>You already know the hypothetical conditional. Now let's look at something no textbook tells you: what Brazilians actually say instead of the "correct" written form.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Condicional hipotético — registro falado</span>
+      <span class="meta-pill"><span class="dot"></span>Imperfeito do indicativo x futuro do pretérito</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>The same idea, two registers</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Quick review</div>
+      <p>You already know this structure: <strong>se</strong> + imperfeito do subjuntivo <strong>,</strong> futuro do pretérito.</p>
+      <p style="margin-top:-4px;"><em>Se eu tivesse tempo, eu estudaria alemão.</em> — <span style="color:#888;font-style:italic;">If I had time, I would study German.</span></p>
+      <p>This is the form you'll see in writing — in a crônica, a news article, a book. But it is not always the form you'll hear.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. What changes in speech</div>
+      <p>In everyday spoken Brazilian Portuguese, the futuro do pretérito of the main clause is very often replaced by the <strong>imperfeito do indicativo</strong> — the same past tense you already use for habits and descriptions.</p>
+    </div>
+
+    <table class="register-table">
+      <thead><tr><th>Escrito (futuro do pretérito)</th><th>Falado (imperfeito do indicativo)</th></tr></thead>
+      <tbody>
+        <tr><td>Se eu ganhasse na loteria, eu viajaria o mundo.</td><td>Se eu ganhasse na loteria, eu viajava o mundo.</td></tr>
+        <tr><td>Se ela tivesse tempo, ela estudaria mais.</td><td>Se ela tivesse tempo, ela estudava mais.</td></tr>
+        <tr><td>Se eles pudessem, eles ajudariam a família.</td><td>Se eles pudessem, eles ajudavam a família.</td></tr>
+        <tr><td>Se eu fosse você, eu conversaria com ele.</td><td>Se eu fosse você, eu conversava com ele.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lang-note">
+      <p style="margin-bottom:0;">Notice: only the main clause changes. The <em>se</em> clause — the imperfeito do subjuntivo (<em>ganhasse, tivesse, pudesse, fosse</em>) — stays exactly the same in both registers. Neither version is "incorrect": it's the same relationship English has between <em>going to</em> and <em>gonna</em> — one belongs to writing and careful speech, the other to everyday conversation. You need to recognize both, even if you choose to produce only one.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-card">
+        <div class="form-card-header">A few more verbs, side by side</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Infinitivo</th><th>Escrito</th><th>Falado</th></tr></thead>
+          <tr><td>ser</td><td>seria</td><td>era</td></tr>
+          <tr><td>fazer</td><td>faria</td><td>fazia</td></tr>
+          <tr><td>viver</td><td>viveria</td><td>vivia</td></tr>
+          <tr><td>mudar</td><td>mudaria</td><td>mudava</td></tr>
+          <tr><td>estar</td><td>estaria</td><td>estava</td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="phon-note">
+      <strong>🔊 Pronunciation:</strong> the stress falls on the syllable right before the ending in both forms — <em>vi<u>vi</u>a, mu<u>da</u>va, fa<u>zi</u>a</em> — the same stress pattern you already use for habitual imperfeito (<em>eu chegava, eu comia</em>). The <em>nós</em> form always carries a written accent: <em>vivíamos, mudávamos, fazíamos</em>.
+    </div>
+
+    <div class="cult-note">
+      <strong>Cultural note — a national daydream:</strong> "O que você faria se ganhasse na loteria?" is one of the most common icebreaker questions in Brazil. Alongside the official lotteries (Mega-Sena, Lotofácil), many Brazilians grew up around the <em>jogo do bicho</em> — an old, technically illegal but widely tolerated numbers game based on animal symbols, still part of popular culture in many cities today.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the crônica before your lesson — the highlighted verbs are all in futuro do pretérito</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Se Eu Ganhasse na Loteria (trecho)</div>
+      <div class="text-byline">Fonte: Diego Guerra, "Se Eu Ganhasse na Loteria", Crônicas de Segunda, 2021 — <em>texto adaptado</em></div>
+
+      <p class="body-p">Fico pensando em como <mark>seria</mark> complicado me acostumar com uma vida de luxos e acabar voltando a bater o cartão, engolindo sapo para pagar o aluguel. Deus me livre! Se um dia eu ganhar um prêmio qualquer, tem que ser o suficiente para mudar de vida de uma vez, sem chance de volta.</p>
+
+      <p class="body-p">Parte da graça de se jogar com a sorte é imaginar o que você <mark>faria</mark> com o dinheiro. Uma amiga certa vez me contava seus planos de comprar um apartamento, casa na praia, viajar o mundo, investir em gado… e eu só conseguia balançar a cabeça de um lado para o outro, sem concordar com nada. O que eu <mark>faria</mark> com meu prêmio <mark>seria</mark> enfiá-lo no investimento mais sem graça que eu pudesse encontrar e <mark>viveria</mark> do seu rendimento pelo resto da minha vida. Nada de imóveis, gado, carros. Um ano sabático, de mochila nas costas, a certeza de uma aposentadoria tranquila. Minha amiga não se conformava. Dizia que se tivesse o dinheiro <mark>mudaria</mark> de ideia. Quem sabe? Duvido.</p>
+
+      <p class="body-p">A verdade é que não preciso de muito. Não sonho em ter carro, casa chique ou ir em restaurantes caros. Meus gostos são simples e eu já tenho muito do conforto que eu desejaria. <mark>Seria</mark> bom conseguir tirar férias uma ou duas vezes por ano, pedir comida sem procurar na aba de promoções. Meus planos para a riqueza é viver da mesma forma que já vivo, porém mais leve, fazendo só o que eu gosto.</p>
+
+      <p class="body-p">Com o dinheiro que sobrasse, eu <mark>alimentaria</mark> apenas duas extravagâncias, dessas que são reservadas somente aos que têm realmente muito dinheiro: uma ONG de resgate de animais que <mark>estaria</mark> sempre de portas abertas e um assassino profissional na minha folha de pagamento, sempre disponível. Um homem também precisa ter seus passatempos.</p>
+    </div>
+
+    <table class="vocab-table" style="margin-top:24px;">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">bater o cartão</td><td>to clock in/out at work</td></tr>
+        <tr><td class="vocab-pt">engolir sapo</td><td>to put up with something unpleasant (lit. "swallow a frog")</td></tr>
+        <tr><td class="vocab-pt">a sorte grande</td><td>the jackpot, hitting it big</td></tr>
+        <tr><td class="vocab-pt">enfiar (dinheiro) em algo</td><td>to stick / put (money) into something</td></tr>
+        <tr><td class="vocab-pt">um ano sabático</td><td>a sabbatical year</td></tr>
+        <tr><td class="vocab-pt">a aposentadoria</td><td>retirement</td></tr>
+        <tr><td class="vocab-pt">não se conformar</td><td>to not accept/come to terms with something</td></tr>
+        <tr><td class="vocab-pt">a extravagância</td><td>extravagance, indulgence</td></tr>
+        <tr><td class="vocab-pt">a folha de pagamento</td><td>payroll</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cult-note" style="margin-top:20px;">
+      <strong>About the humor:</strong> the "professional assassin on payroll" line is a deliberate joke — Brazilian crônicas often end on an absurd exaggeration for comic effect. It is not meant literally.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions in Portuguese, based on the text</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Segundo o autor, o que ele faria com o dinheiro do prêmio?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">According to the author, what would he do with the prize money?</span>
+        <textarea class="open-textarea" placeholder="Ele..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. O que a amiga dele diria se tivesse o dinheiro?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What did his friend say she would do if she had the money?</span>
+        <textarea class="open-textarea" placeholder="Ela..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Por que o autor tem medo de "se tornar um ex-rico"?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Why is the author afraid of "becoming an ex-rich person"?</span>
+        <textarea class="open-textarea" placeholder="Porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Quais duas "extravagâncias" o autor alimentaria com o dinheiro que sobrasse?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Which two "extravagances" would the author indulge in with the money left over?</span>
+        <textarea class="open-textarea" placeholder="Ele..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Na sua opinião, o autor parece uma pessoa mais gastadora ou mais econômica? Por quê?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">In your opinion, does the author seem like a big spender or a frugal person? Why?</span>
+        <textarea class="open-textarea" placeholder="Acho que..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Ele investiria o dinheiro no investimento mais sem graça possível e viveria do rendimento pelo resto da vida, sem comprar imóveis, gado ou carros.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ela disse que mudaria de ideia se tivesse o dinheiro — ou seja, achava que ele também compraria coisas como apartamento, casa na praia e viagens.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Porque ele já conheceu pessoas que tiveram a sorte grande e depois perderam tudo, voltando à vida de antes — o que ele considera pior do que nunca ter ganhado.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Uma ONG de resgate de animais e um "assassino profissional" na folha de pagamento — a segunda é uma piada exagerada, não literal.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Resposta pessoal — a maioria dos leitores nota que ele parece mais econômico/cauteloso: prefere segurança financeira a luxo.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Controlled practice -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Escrito ou falado?</h3>
+          <p>Complete with the form indicated in brackets</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct form of the verb in brackets, according to the register indicated: (escrito) = futuro do pretérito, (falado) = imperfeito do indicativo.</p>
+
+      <ul class="blanks-list" id="blanks-list">
+        <li><span class="item-num">1.</span><span>Se eu tivesse mais tempo, eu</span><input class="blank-input" data-answer="aprendia" placeholder="___________"><span class="blank-hint">(aprender — falado)</span><span>a tocar piano.</span></li>
+        <li><span class="item-num">2.</span><span>Se ela ganhasse na loteria, ela</span><input class="blank-input" data-answer="compraria" placeholder="___________"><span class="blank-hint">(comprar — escrito)</span><span>uma casa nova.</span></li>
+        <li><span class="item-num">3.</span><span>Se nós morássemos no Brasil, nós</span><input class="blank-input" data-answer="falávamos" placeholder="___________"><span class="blank-hint">(falar — falado)</span><span>português todos os dias.</span></li>
+        <li><span class="item-num">4.</span><span>Se você tivesse um cachorro, você</span><input class="blank-input" data-answer="seria" placeholder="___________"><span class="blank-hint">(ser — escrito)</span><span>mais feliz.</span></li>
+        <li><span class="item-num">5.</span><span>Se eles pudessem, eles</span><input class="blank-input" data-answer="viajavam" placeholder="___________"><span class="blank-hint">(viajar — falado)</span><span>o ano inteiro.</span></li>
+        <li><span class="item-num">6.</span><span>Se eu fosse rico, eu</span><input class="blank-input" data-answer="ajudaria" placeholder="___________"><span class="blank-hint">(ajudar — escrito)</span><span>minha família.</span></li>
+        <li><span class="item-num">7.</span><span>Se a gente tivesse coragem, a gente</span><input class="blank-input" data-answer="mudava" placeholder="___________"><span class="blank-hint">(mudar — falado)</span><span>de profissão.</span></li>
+        <li><span class="item-num">8.</span><span>Se meu chefe soubesse, ele</span><input class="blank-input" data-answer="ficaria" placeholder="___________"><span class="blank-hint">(ficar — escrito)</span><span>furioso.</span></li>
+        <li><span class="item-num">9.</span><span>Se eu pudesse escolher, eu</span><input class="blank-input" data-answer="vivia" placeholder="___________"><span class="blank-hint">(viver — falado)</span><span>numa cidade pequena.</span></li>
+        <li><span class="item-num">10.</span><span>Se vocês tivessem dinheiro, vocês</span><input class="blank-input" data-answer="fariam" placeholder="___________"><span class="blank-hint">(fazer — escrito)</span><span>o quê?</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks()">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks()" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Transformation from the text -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Do escrito ao falado</h3>
+          <p>Rewrite these sentences from the crônica the way you'd say them out loud</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Each sentence below comes from the text and uses futuro do pretérito. Rewrite it using imperfeito do indicativo instead — the way a Brazilian would actually say it to a friend.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> Se eu ganhasse na loteria, eu viajaria o mundo. → <strong>Se eu ganhasse na loteria, eu viajava o mundo.</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. <em>Seria</em> bom conseguir tirar férias uma ou duas vezes por ano.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">2. Eu <em>alimentaria</em> apenas duas extravagâncias com o dinheiro que sobrasse.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">3. Uma ONG de resgate de animais que <em>estaria</em> sempre de portas abertas.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">4. Dizia que se tivesse o dinheiro <em>mudaria</em> de ideia.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">5. O que eu <em>faria</em> com meu prêmio <em>seria</em> enfiá-lo no investimento mais sem graça que eu pudesse encontrar e <em>viveria</em> do seu rendimento pelo resto da minha vida.</p><input class="transform-input" type="text" placeholder="___________"></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex3-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex3-answers">
+        <div class="model-answer-item"><p>1. Era bom conseguir tirar férias uma ou duas vezes por ano.</p></div>
+        <div class="model-answer-item"><p>2. Eu alimentava apenas duas extravagâncias com o dinheiro que sobrasse.</p></div>
+        <div class="model-answer-item"><p>3. Uma ONG de resgate de animais que estava sempre de portas abertas.</p></div>
+        <div class="model-answer-item"><p>4. Dizia que se tivesse o dinheiro mudava de ideia.</p></div>
+        <div class="model-answer-item"><p>5. O que eu fazia com meu prêmio era enfiá-lo no investimento mais sem graça que eu pudesse encontrar e vivia do seu rendimento pelo resto da minha vida.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 4 — Register recognition -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Escrito ou falado?</h3>
+          <p>Decide which register each sentence belongs to</p>
+        </div>
+      </div>
+      <p class="ex-instruction">For each sentence, write "escrito" if it sounds like something you'd read, or "falado" if it sounds like something you'd hear a Brazilian say in conversation.</p>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><span>"Se eu ganhasse na loteria, eu compraria uma casa nova."</span><input class="blank-input" data-answer="escrito" placeholder="___________"></li>
+        <li><span class="item-num">2.</span><span>"Se ela tivesse tempo, ela ajudava mais a comunidade."</span><input class="blank-input" data-answer="falado" placeholder="___________"></li>
+        <li><span class="item-num">3.</span><span>"Se nós pudéssemos, nós mudaríamos de cidade."</span><input class="blank-input" data-answer="escrito" placeholder="___________"></li>
+        <li><span class="item-num">4.</span><span>"Se ele soubesse a verdade, ele ficava chocado."</span><input class="blank-input" data-answer="falado" placeholder="___________"></li>
+        <li><span class="item-num">5.</span><span>"Se eu fosse rico, eu viajava o ano inteiro."</span><input class="blank-input" data-answer="falado" placeholder="___________"></li>
+        <li><span class="item-num">6.</span><span>"Se vocês estudassem mais, vocês passariam na prova."</span><input class="blank-input" data-answer="escrito" placeholder="___________"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks2()">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks2()" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>The same daydream, in two registers</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>O que você faria se ganhasse na loteria?</h3>
+          <p>3–4 sentences, written twice</p>
+        </div>
+      </div>
+      <p class="ex-instruction">First, write 3–4 sentences about what you would do if you won the lottery — using futuro do pretérito, the way you'd write it. Then rewrite the exact same sentences the way you'd actually say them to a friend, using imperfeito do indicativo.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo — Escrito</div>
+        <p>Se eu ganhasse na loteria, eu pagaria minhas dívidas, compraria um apartamento pequeno e viajaria para o Japão. Eu não mudaria muito da minha rotina — só teria menos preocupação.</p>
+        <div class="model-text-label" style="margin-top:14px;">Modelo — Falado</div>
+        <p>Se eu ganhasse na loteria, eu pagava minhas dívidas, comprava um apartamento pequeno e viajava para o Japão. Eu não mudava muito da minha rotina — só tinha menos preocupação.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>O que você pagaria / compraria primeiro?</li>
+        <li>Você mudaria de emprego ou de rotina?</li>
+        <li>O que você faria pela sua família?</li>
+        <li>Alguma "extravagância", séria ou engraçada, como a do autor?</li>
+      </ul>
+
+      <p style="font-size:12px; font-weight:700; color:var(--cobalto); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Versão escrita (futuro do pretérito)</p>
+      <textarea class="open-textarea" style="min-height:110px;" placeholder="Se eu ganhasse na loteria, eu..."></textarea>
+
+      <p style="font-size:12px; font-weight:700; color:var(--pitomba); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Versão falada (imperfeito do indicativo)</p>
+      <textarea class="open-textarea" style="min-height:110px;" placeholder="Se eu ganhasse na loteria, eu..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks() {
+    const inputs = document.querySelectorAll('#blanks-list .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById('blanks-result');
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+
+  function checkBlanks2() {
+    const inputs = document.querySelectorAll('#blanks-list-2 .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById('blanks-result-2');
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks2() {
+    const inputs = document.querySelectorAll('#blanks-list-2 .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById('blanks-result-2');
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
