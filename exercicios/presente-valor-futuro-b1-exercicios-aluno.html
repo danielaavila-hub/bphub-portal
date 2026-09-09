@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eu Faço Depois | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--cobalto);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: #967E63;
+      padding: 60px 48px 52px;
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      color: white; margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 15px; color: rgba(255,255,255,0.88);
+      max-width: 560px; line-height: 1.75;
+    }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 500; color: white;
+    }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note {
+      background: var(--cobalto-light);
+      border: 1.5px solid rgba(38,91,139,0.18);
+      border-radius: 14px; padding: 28px 32px; margin-bottom: 24px;
+    }
+    .lang-note-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--cobalto); margin-bottom: 10px;
+    }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--cobalto); font-style: italic; }
+    .lang-note strong { color: var(--cobalto); }
+
+    /* comparison table */
+    .register-table { width: 100%; border-collapse: collapse; margin: 16px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--light-gray); }
+    .register-table th { padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; color: white; background: var(--cobalto); }
+    .register-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .register-table td:first-child { color: var(--cobalto); font-weight: 600; border-right: 1px solid var(--light-gray); }
+
+    /* three-way future table */
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0; }
+    .form-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .form-card-header { background: var(--cobalto); padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+    .form-table-wrap { overflow-x: auto; }
+    .form-table { width: 100%; min-width: 460px; border-collapse: collapse; }
+    .form-table tr { border-bottom: 1px solid var(--light-gray); }
+    .form-table tr:last-child { border-bottom: none; }
+    .form-table td { padding: 10px 14px; font-size: 13px; }
+    .form-table td:first-child { color: #999; white-space: nowrap; }
+    .form-table th {
+      padding: 8px 14px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #999; text-align: left;
+      border-bottom: 1.5px solid var(--light-gray);
+    }
+
+    /* time / cultural notes */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* adverb chips */
+    .adverb-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+    .adverb-chip { background: white; border: 1.5px solid rgba(38,91,139,0.25); color: var(--cobalto); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; }
+
+    /* ── WHATSAPP REPLICA ── */
+    .wa-wrap { background: #E5DDD5; border-radius: 16px; padding: 24px; max-width: 460px; margin: 0 auto; box-shadow: 0 4px 18px rgba(0,0,0,0.08); }
+    .wa-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(0,0,0,0.08); }
+    .wa-avatar { width:36px; height:36px; border-radius:50%; background:var(--cobalto); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; flex-shrink:0; }
+    .wa-name { font-size:14px; font-weight:700; color:#222; }
+    .wa-status { font-size:11px; color:#4CAF50; }
+    .wa-msg { border-radius: 0 8px 8px 8px; padding: 8px 12px; margin-bottom: 10px; max-width: 82%; box-shadow: 0 1px 2px rgba(0,0,0,.12); font-size: 14px; line-height: 1.5; background: #fff; color: #222; }
+    .wa-msg.me { background: #DCF8C6; border-radius: 8px 0 8px 8px; margin-left: auto; }
+    .wa-time { font-size: 10.5px; color: #999; display:block; text-align:right; margin-top:3px; }
+    .wa-msg mark { background: #FDE7C4; color: var(--pitomba); font-weight: 700; padding: 0 3px; border-radius: 3px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--cobalto); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--cobalto); white-space: nowrap; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--cobalto); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    .open-textarea {
+      width: 100%; background: var(--off-white);
+      border: 1.5px solid var(--light-gray); border-radius: 10px;
+      padding: 14px 16px; font-family: 'Manrope', sans-serif;
+      font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px;
+      outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px;
+    }
+    .open-textarea:focus { border-color: var(--cobalto); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--cobalto); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--cobalto); }
+
+    .example-box { background: var(--cobalto-light); border: 1px solid rgba(38,91,139,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--cobalto); }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--cobalto); font-weight: 700; }
+
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #967E63; margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; margin-bottom: 8px; }
+    .model-text-box p:last-child { margin-bottom: 0; }
+
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--cobalto); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid #967E63; color: #967E63;
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .wa-wrap { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <a href="../b1/index.html" style="font-size:12px;color:#aaa;">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Eu Faço<br><em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Depois…</em></h1>
+    <p>"I eat later." In English that sentence is a bit odd. In Portuguese, it's exactly how people talk about the future all day long — no "will," no "ir a." Let's find out why.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Presente do indicativo com valor de futuro</span>
+      <span class="meta-pill"><span class="dot"></span>Registro falado, informal</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Present tense, future meaning</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. The pattern</div>
+      <p>In everyday spoken Brazilian Portuguese, the <strong>presente do indicativo</strong> is very often used to talk about the future — not the present. What makes this possible is a <strong>time expression</strong> that tells you the action isn't happening right now.</p>
+      <p style="margin-top:-4px;"><em>Eu como depois.</em> — <span style="color:#888;font-style:italic;">I'll eat later.</span> (not "I eat later" as a habit)</p>
+      <p style="margin-bottom:0;">Structure: <strong>presente do indicativo + expressão de tempo futuro</strong> (depois, mais tarde, amanhã, semana que vem…)</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Why this makes sense to an English speaker</div>
+      <p>English already does something similar — just in a narrower way. You use the simple present or present continuous for <strong>scheduled, fixed, or certain</strong> future events: <em>"The train leaves at 9." "I'm meeting her tomorrow."</em></p>
+      <p style="margin-bottom:0;">Portuguese takes this same logic and stretches it much further. It's not limited to schedules — it covers spontaneous decisions, promises, and casual plans too. <em>"Eu como depois"</em> isn't a schedule, it's just a decision made a minute ago — and the present tense works fine for it.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. The adverb is what shifts the meaning</div>
+      <p style="margin-bottom:0;">Without a future-time expression, the same sentence would default to a habitual or immediate reading. Compare:</p>
+    </div>
+
+    <table class="register-table">
+      <thead><tr><th>Sentence</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Eu como às 8h. <span style="color:#999;font-weight:400;">(no future adverb)</span></td><td>I eat at 8. — habit</td></tr>
+        <tr><td>Eu como depois. <span style="color:#999;font-weight:400;">(future adverb)</span></td><td>I'll eat later. — future</td></tr>
+        <tr><td>Eu falo com ela. <span style="color:#999;font-weight:400;">(no future adverb)</span></td><td>I talk to her. — habit, or right now</td></tr>
+        <tr><td>Eu falo com ela depois da aula.</td><td>I'll talk to her after class. — future</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lang-note-label" style="margin-top:28px;">📌 4. Common future-time expressions</div>
+    <div class="adverb-chips">
+      <span class="adverb-chip">depois</span>
+      <span class="adverb-chip">mais tarde</span>
+      <span class="adverb-chip">daqui a pouco</span>
+      <span class="adverb-chip">amanhã</span>
+      <span class="adverb-chip">semana que vem</span>
+      <span class="adverb-chip">mês que vem</span>
+      <span class="adverb-chip">ano que vem</span>
+      <span class="adverb-chip">na sexta / na segunda</span>
+      <span class="adverb-chip">daqui a uma hora</span>
+    </div>
+
+    <div class="form-grid" style="margin-top:24px;">
+      <div class="form-card">
+        <div class="form-card-header">Three ways to talk about the future in Portuguese</div>
+        <div class="form-table-wrap">
+        <table class="form-table">
+          <thead><tr><th>Strategy</th><th>Example</th><th>Register</th></tr></thead>
+          <tr><td>Futuro do presente</td><td>Eu falarei com ela depois.</td><td>Formal, written — rare in speech</td></tr>
+          <tr><td>Ir + infinitivo</td><td>Eu vou falar com ela depois.</td><td>Neutral — the "textbook future"</td></tr>
+          <tr><td>Presente + advérbio</td><td>Eu falo com ela depois.</td><td>Very informal — extremely common in speech</td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Cultural note — a national pattern:</strong> this construction is at the heart of Brazil's famous "procrastination culture" — <em>"Amanhã eu começo a dieta," "Segunda eu paro de fumar," "Ano que vem eu vou pra academia."</em> These promises-for-later almost always use the present tense, not <em>vou começar</em> or <em>começarei</em>. Recognizing the pattern will help you understand a huge amount of casual Brazilian speech — and maybe laugh at the joke when a Brazilian friend makes one of these promises with a wink.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: WHATSAPP -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">💬</div>
+      <div>
+        <h2>Conversa</h2>
+        <p>A WhatsApp exchange between two coworkers — every highlighted verb is presente com valor de futuro</p>
+      </div>
+    </div>
+
+    <div class="wa-wrap">
+      <div class="wa-header">
+        <div class="wa-avatar">CA</div>
+        <div>
+          <div class="wa-name">Camila</div>
+          <div class="wa-status">online</div>
+        </div>
+      </div>
+
+      <div class="wa-msg">Oi! Tudo bem? Você já <mark>manda</mark> aquele relatório pro cliente hoje?</div>
+      <span class="wa-time" style="text-align:left;display:block;margin-bottom:10px;">09:14</span>
+
+      <div class="wa-msg me">Oi Camila! Ainda não, <mark>mando depois</mark> do almoço, tá bom?<span class="wa-time">09:16 ✓✓</span></div>
+
+      <div class="wa-msg">Tranquilo. E a reunião de amanhã, você já <mark>confirma</mark> o horário com eles?</div>
+      <span class="wa-time" style="text-align:left;display:block;margin-bottom:10px;">09:17</span>
+
+      <div class="wa-msg me">Isso eu <mark>confirmo mais tarde</mark>, tô numa call agora 🙏<span class="wa-time">09:18 ✓✓</span></div>
+
+      <div class="wa-msg">Combinado. Ah, e o contrato que te pedi semana passada?</div>
+      <span class="wa-time" style="text-align:left;display:block;margin-bottom:10px;">09:20</span>
+
+      <div class="wa-msg me">Esse eu <mark>resolvo amanhã</mark> de manhã, prometo! Hoje tá impossível.<span class="wa-time">09:21 ✓✓</span></div>
+
+      <div class="wa-msg">kkkkk tá bom, confio 😄</div>
+      <span class="wa-time" style="text-align:left;display:block;margin-bottom:10px;">09:21</span>
+
+      <div class="wa-msg me">Semana que vem a gente <mark>marca</mark> aquele café, também ando te devendo isso!<span class="wa-time">09:22 ✓✓</span></div>
+
+      <div class="wa-msg">Combinado! Daqui a pouco eu te <mark>mando</mark> os dados que faltam pro relatório.</div>
+      <span class="wa-time" style="text-align:left;display:block;">09:23</span>
+    </div>
+
+    <table class="vocab-table" style="margin-top:24px;max-width:460px;margin-left:auto;margin-right:auto;">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">tô numa call</td><td>informal contraction of "estou" + "call" (loanword, common in tech/corporate speech)</td></tr>
+        <tr><td class="vocab-pt">combinado</td><td>agreed, deal / it's settled</td></tr>
+        <tr><td class="vocab-pt">ando te devendo isso</td><td>I owe you that (lit. "I've been owing you this")</td></tr>
+        <tr><td class="vocab-pt">daqui a pouco</td><td>in a bit, shortly</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer based on the WhatsApp conversation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the conversation.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quando Camila vai receber o relatório?</label>
+        <textarea class="open-textarea" placeholder="Ela vai receber..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Quando a colega vai confirmar o horário da reunião?</label>
+        <textarea class="open-textarea" placeholder="Ela vai confirmar..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. O que a colega promete resolver amanhã de manhã?</label>
+        <textarea class="open-textarea" placeholder="Ela promete..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O que as duas combinam fazer semana que vem?</label>
+        <textarea class="open-textarea" placeholder="Elas combinam..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Ela vai receber o relatório depois do almoço.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ela vai confirmar o horário mais tarde, porque está numa call agora.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Ela promete resolver o contrato amanhã de manhã.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Elas combinam marcar um café semana que vem.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 — Identify the pattern -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Verbo + advérbio</h3>
+          <p>Find the pattern in the conversation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Go back to the conversation above. For each highlighted verb, write the future-time adverb that goes with it, and what the sentence actually means in English.</p>
+
+      <ul class="blanks-list" id="blanks-list-1">
+        <li><span class="item-num">1.</span><span>manda</span><input class="blank-input" data-answer="depois" placeholder="advérbio"><span class="blank-hint">(pista: depois de quê?)</span></li>
+        <li><span class="item-num">2.</span><span>confirmo</span><input class="blank-input" data-answer="mais tarde" placeholder="advérbio"></li>
+        <li><span class="item-num">3.</span><span>resolvo</span><input class="blank-input" data-answer="amanhã" placeholder="advérbio"></li>
+        <li><span class="item-num">4.</span><span>marca</span><input class="blank-input" data-answer="semana que vem" placeholder="advérbio"></li>
+        <li><span class="item-num">5.</span><span>mando</span><input class="blank-input" data-answer="daqui a pouco" placeholder="advérbio"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-1','blanks-result-1')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-1','blanks-result-1')" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-1" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Transformation -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Do "vou + infinitivo" ao presente</h3>
+          <p>Rewrite each sentence the way a Brazilian would say it casually</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Each sentence below uses "ir + infinitivo." Rewrite it using presente do indicativo instead — the more casual, spoken version.</p>
+
+      <div class="example-box">
+        <strong>Exemplo:</strong> Eu vou ligar pra ela depois. → <strong>Eu ligo pra ela depois.</strong>
+      </div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. Eu <em>vou mandar</em> o arquivo mais tarde.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">2. Nós <em>vamos resolver</em> isso amanhã.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">3. Ela <em>vai confirmar</em> a presença na sexta.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">4. Eles <em>vão terminar</em> o projeto semana que vem.</p><input class="transform-input" type="text" placeholder="___________"></li>
+        <li class="transform-item"><p class="transform-original">5. Eu <em>vou falar</em> com o chefe daqui a pouco.</p><input class="transform-input" type="text" placeholder="___________"></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex3-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex3-answers">
+        <div class="model-answer-item"><p>1. Eu mando o arquivo mais tarde.</p></div>
+        <div class="model-answer-item"><p>2. Nós resolvemos isso amanhã.</p></div>
+        <div class="model-answer-item"><p>3. Ela confirma a presença na sexta.</p></div>
+        <div class="model-answer-item"><p>4. Eles terminam o projeto semana que vem.</p></div>
+        <div class="model-answer-item"><p>5. Eu falo com o chefe daqui a pouco.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 4 — Gap fill, own production -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Complete a conversa</h3>
+          <p>Fill in each blank using presente do indicativo + the adverb in brackets</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Conjugate the verb in brackets in the presente do indicativo. Remember: the adverb is already doing the work of pointing to the future.</p>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><span>— Você paga a conta agora?<br>— Não, eu</span><input class="blank-input" data-answer="pago" placeholder="___________"><span class="blank-hint">(pagar)</span><span>depois.</span></li>
+        <li><span class="item-num">2.</span><span>— Vamos ao médico hoje?<br>— A gente</span><input class="blank-input" data-answer="vai" placeholder="___________"><span class="blank-hint">(ir)</span><span>semana que vem.</span></li>
+        <li><span class="item-num">3.</span><span>— Me manda a resposta agora?<br>— Eu te</span><input class="blank-input" data-answer="mando" placeholder="___________"><span class="blank-hint">(mandar)</span><span>daqui a pouco.</span></li>
+        <li><span class="item-num">4.</span><span>— Ela já sabe da novidade?<br>— Ainda não, eu</span><input class="blank-input" data-answer="conto" placeholder="___________"><span class="blank-hint">(contar)</span><span>pra ela amanhã.</span></li>
+        <li><span class="item-num">5.</span><span>— Vocês entregam o projeto hoje?<br>— Não, nós</span><input class="blank-input" data-answer="entregamos" placeholder="___________"><span class="blank-hint">(entregar)</span><span>na sexta.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-2','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-2','blanks-result-2')" style="background:transparent; color:var(--cobalto); border:1.5px solid var(--cobalto);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Your turn to postpone things, the Brazilian way</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Sua conversa de WhatsApp</h3>
+          <p>Write a short exchange postponing 3 things</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short WhatsApp-style exchange (6-8 lines) with a colleague or friend, in which you postpone at least three different things. Use presente do indicativo + a future-time adverb for each one — not "vou + infinitivo."</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <p>— Você já revisa o contrato hoje?<br>
+        — Reviso amanhã de manhã, prometo!<br>
+        — E o pagamento do fornecedor?<br>
+        — Esse eu resolvo depois do almoço.<br>
+        — Combinado. Ah, e nosso café?<br>
+        — Semana que vem a gente marca, com certeza!</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>What three things are you postponing?</li>
+        <li>What future-time adverb fits each one (depois, amanhã, semana que vem, na sexta…)?</li>
+        <li>Does your conversation sound natural — like a real exchange between colleagues or friends?</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:140px;" placeholder="— Você já...&#10;— ..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
