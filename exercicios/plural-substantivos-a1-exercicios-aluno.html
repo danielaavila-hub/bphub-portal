@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plural dos Substantivos | A1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #4E551D;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; font-weight: 600; }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: rgba(78,85,29,0.06); border: 1.5px solid rgba(78,85,29,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--level); font-style: italic; }
+    .lang-note strong { color: var(--level); }
+
+    /* info table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--level); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--level); white-space: nowrap; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
+    .cult-note strong { color: var(--level); }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* ── TEXT READER ── */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--level); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p.body-p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .text-reader p.body-p:last-of-type { margin-bottom: 0; }
+    .text-reader mark { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+    .bilhete-list { list-style: none; margin: 6px 0 14px 12px; }
+    .bilhete-list li { font-size: 15px; color: var(--texto); line-height: 1.9; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+    @media (max-width: 700px) { .vocab-grid { grid-template-columns: 1fr; } }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 100px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .see-answers-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: transparent; border: 1.5px solid var(--level); color: var(--level);
+      border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s;
+    }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+    .model-answers-block { display: none; margin-top: 16px; border-top: 1px dashed var(--light-gray); padding-top: 16px; }
+    .model-answers-block.visible { display: block; }
+    .model-answer-item { margin-bottom: 10px; }
+    .model-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 3px; }
+    .model-answer-item p { font-size: 14px; color: var(--texto); }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+    <span class="topbar-name">Iniciante</span>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Plural dos<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> Substantivos</em></h1>
+    <p>A shopping-list note teaches you the simplest plural rule in Portuguese — <strong style="color:white;">just add -s</strong> — plus the handful of everyday words that never change, and a review of numbers 11–20.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Plural: +s</span>
+      <span class="meta-pill"><span class="dot"></span>Bilhete (nota)</span>
+      <span class="meta-pill"><span class="dot"></span>Números 11–20</span>
+    </div>
+    <div class="hero-note">📝 Complete after your lesson</div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Before You Read</h2>
+        <p>Learn these words before you read the note</p>
+      </div>
+    </div>
+
+    <div class="vocab-grid">
+      <table class="vocab-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="vocab-pt">a lista de supermercado</td><td>shopping list</td></tr>
+          <tr><td class="vocab-pt">o bilhete</td><td>note</td></tr>
+          <tr><td class="vocab-pt">a geladeira</td><td>fridge</td></tr>
+          <tr><td class="vocab-pt">o ovo</td><td>egg</td></tr>
+          <tr><td class="vocab-pt">o tomate</td><td>tomato</td></tr>
+          <tr><td class="vocab-pt">a cebola</td><td>onion</td></tr>
+          <tr><td class="vocab-pt">o abacate</td><td>avocado</td></tr>
+          <tr><td class="vocab-pt">a melancia</td><td>watermelon</td></tr>
+          <tr><td class="vocab-pt">a banana</td><td>banana</td></tr>
+          <tr><td class="vocab-pt">o iogurte</td><td>yogurt</td></tr>
+          <tr><td class="vocab-pt">o arroz</td><td>rice</td></tr>
+          <tr><td class="vocab-pt">o feijão</td><td>beans</td></tr>
+          <tr><td class="vocab-pt">o leite</td><td>milk</td></tr>
+        </tbody>
+      </table>
+      <table class="vocab-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="vocab-pt">o biscoito</td><td>cookie</td></tr>
+          <tr><td class="vocab-pt">a batata</td><td>potato</td></tr>
+          <tr><td class="vocab-pt">a cenoura</td><td>carrot</td></tr>
+          <tr><td class="vocab-pt">a laranja</td><td>orange</td></tr>
+          <tr><td class="vocab-pt">a pera</td><td>pear</td></tr>
+          <tr><td class="vocab-pt">a uva</td><td>grape</td></tr>
+          <tr><td class="vocab-pt">o abacaxi</td><td>pineapple</td></tr>
+          <tr><td class="vocab-pt">o pepino</td><td>cucumber</td></tr>
+          <tr><td class="vocab-pt">o açúcar</td><td>sugar</td></tr>
+          <tr><td class="vocab-pt">o café</td><td>coffee</td></tr>
+          <tr><td class="vocab-pt">o quilo</td><td>kilo</td></tr>
+          <tr><td class="vocab-pt">o litro</td><td>liter</td></tr>
+          <tr><td class="vocab-pt">o almoço</td><td>lunch</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Bilhete na Geladeira</h2>
+        <p>Read the note carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Bilhete na geladeira</div>
+      <div class="text-byline">Texto construído para fins pedagógicos — Brazilian Portuguese Hub</div>
+
+      <p class="body-p">Oi, Rafael!</p>
+      <p class="body-p">Hoje eu trabalho o dia todo. A lista do supermercado está na mesa. Nós precisamos de:</p>
+      <ul class="bilhete-list">
+        <li><mark>treze bananas</mark></li>
+        <li><mark>quatro iogurtes</mark></li>
+        <li>um quilo de <mark>arroz</mark></li>
+        <li>um quilo de <mark>feijão</mark></li>
+        <li>dois litros de <mark>leite</mark></li>
+      </ul>
+      <p class="body-p">O arroz e o feijão são para o almoço de domingo com a minha mãe.</p>
+      <p class="body-p">Obrigada!<br>Camila</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins pedagógicos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise A — Comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">A</div>
+        <div>
+          <h3>Compreensão</h3>
+          <p>Answer the questions in Portuguese, based on the note</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Responda às perguntas em português, com frases completas.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quem escreve o bilhete?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Who writes the note?</span>
+        <textarea class="open-textarea" placeholder="A..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Onde está a lista de supermercado?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where is the shopping list?</span>
+        <textarea class="open-textarea" placeholder="A lista está..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Quantas bananas tem na lista?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">How many bananas are on the list?</span>
+        <textarea class="open-textarea" placeholder="Tem..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Para que dia são o arroz e o feijão?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What day are the rice and beans for?</span>
+        <textarea class="open-textarea" placeholder="São para..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'comp-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="comp-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>A Camila escreve o bilhete.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>A lista está na mesa.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Tem treze bananas na lista.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>São para o almoço de domingo com a mãe da Camila.</p></div>
+      </div>
+    </div>
+
+    <!-- Reference: Números 11-20 -->
+    <div class="lang-note-label" style="margin-top:8px;">📌 Números 11–20</div>
+    <div class="table-wrap">
+      <table class="info-table">
+        <tbody>
+          <tr><td>11 – onze</td><td>13 – treze</td><td>15 – quinze</td><td>17 – dezessete</td></tr>
+          <tr><td>12 – doze</td><td>14 – quatorze</td><td>16 – dezesseis</td><td>18 – dezoito</td></tr>
+          <tr><td></td><td></td><td>19 – dezenove</td><td>20 – vinte</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Exercise B — Numbers -->
+    <div class="exercise-block" style="margin-top:24px;">
+      <div class="ex-header">
+        <div class="ex-num">B</div>
+        <div>
+          <h3>Números</h3>
+          <p>Write the number in words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escreva o número por extenso.</p>
+
+      <ul class="blanks-list" id="blanks-list-b">
+        <li><span class="item-num">1.</span><span>11 uvas →</span><input class="blank-input" data-answer="onze|onze uvas" placeholder="___________"></li>
+        <li><span class="item-num">2.</span><span>16 laranjas →</span><input class="blank-input" data-answer="dezesseis|dezesseis laranjas" placeholder="___________"></li>
+        <li><span class="item-num">3.</span><span>19 tomates →</span><input class="blank-input" data-answer="dezenove|dezenove tomates" placeholder="___________"></li>
+        <li><span class="item-num">4.</span><span>14 abacaxis →</span><input class="blank-input" data-answer="quatorze|catorze|quatorze abacaxis" placeholder="___________"></li>
+        <li><span class="item-num">5.</span><span>18 biscoitos →</span><input class="blank-input" data-answer="dezoito|dezoito biscoitos" placeholder="___________"></li>
+        <li><span class="item-num">6.</span><span>20 pepinos →</span><input class="blank-input" data-answer="vinte|vinte pepinos" placeholder="___________"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-b','blanks-result-b')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-b','blanks-result-b')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-b" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Grammar note: Plural +S -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Plural: + S</h2>
+        <p>The simplest plural rule in Portuguese</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 Look at the note again</div>
+      <div class="examples-block" style="margin:12px 0;">
+        <div class="ex-pair"><span class="ex-pt">ovo → ovos</span></div>
+        <div class="ex-pair"><span class="ex-pt">tomate → tomates</span></div>
+        <div class="ex-pair"><span class="ex-pt">cebola → cebolas</span></div>
+        <div class="ex-pair"><span class="ex-pt">banana → bananas</span></div>
+        <div class="ex-pair"><span class="ex-pt">iogurte → iogurtes</span></div>
+      </div>
+      <p style="margin-bottom:0;">When a word ends in a vowel (<strong>a, e, i, o, u</strong>), add <strong>-s</strong>.</p>
+    </div>
+
+    <!-- Exercise C — Singular to Plural -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">C</div>
+        <div>
+          <h3>Singular → Plural</h3>
+          <p>Write the plural form</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escreva a forma plural.</p>
+
+      <ul class="blanks-list" id="blanks-list-c">
+        <li><span class="item-num">1.</span><span>cenoura →</span><input class="blank-input" data-answer="cenouras" placeholder="___________"></li>
+        <li><span class="item-num">2.</span><span>uva →</span><input class="blank-input" data-answer="uvas" placeholder="___________"></li>
+        <li><span class="item-num">3.</span><span>laranja →</span><input class="blank-input" data-answer="laranjas" placeholder="___________"></li>
+        <li><span class="item-num">4.</span><span>pera →</span><input class="blank-input" data-answer="peras" placeholder="___________"></li>
+        <li><span class="item-num">5.</span><span>batata →</span><input class="blank-input" data-answer="batatas" placeholder="___________"></li>
+        <li><span class="item-num">6.</span><span>biscoito →</span><input class="blank-input" data-answer="biscoitos" placeholder="___________"></li>
+        <li><span class="item-num">7.</span><span>pepino →</span><input class="blank-input" data-answer="pepinos" placeholder="___________"></li>
+        <li><span class="item-num">8.</span><span>abacaxi →</span><input class="blank-input" data-answer="abacaxis" placeholder="___________"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-c','blanks-result-c')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-c','blanks-result-c')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-c" class="result-msg"></div>
+    </div>
+
+    <!-- Careful note -->
+    <div class="time-note">
+      <strong>Careful: some words stay in the singular.</strong> On a shopping list, these words do not take a plural form: <em>arroz · feijão · leite · açúcar · café · sal</em>. We count the container or the weight instead: <em>um quilo de arroz</em>, <em>dois litros de leite</em>.
+    </div>
+
+    <!-- Exercise D — Complete -->
+    <div class="exercise-block" style="margin-top:24px;">
+      <div class="ex-header">
+        <div class="ex-num">D</div>
+        <div>
+          <h3>Complete</h3>
+          <p>Complete with the correct form of the word in parentheses</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete com a forma correta da palavra entre parênteses. Cuidado — algumas palavras não mudam.</p>
+
+      <ul class="blanks-list" id="blanks-list-d">
+        <li><span class="item-num">1.</span><span>Camila compra dois quilos de</span><input class="blank-input" data-answer="feijão|feijao" placeholder="___________"><span class="blank-hint">(feijão)</span><span>para o almoço de domingo.</span></li>
+        <li><span class="item-num">2.</span><span>Na lista tem quatorze</span><input class="blank-input" data-answer="batatas" placeholder="___________"><span class="blank-hint">(batata)</span></li>
+        <li><span class="item-num">3.</span><span>Nós precisamos de um litro de</span><input class="blank-input" data-answer="leite" placeholder="___________"><span class="blank-hint">(leite)</span></li>
+        <li><span class="item-num">4.</span><span>Rafael compra dezessete</span><input class="blank-input" data-answer="ovos" placeholder="___________"><span class="blank-hint">(ovo)</span></li>
+        <li><span class="item-num">5.</span><span>Eu compro um quilo de</span><input class="blank-input" data-answer="açúcar|acucar" placeholder="___________"><span class="blank-hint">(açúcar)</span></li>
+        <li><span class="item-num">6.</span><span>Ela precisa de cinco</span><input class="blank-input" data-answer="peras" placeholder="___________"><span class="blank-hint">(pera)</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-d','blanks-result-d')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-d','blanks-result-d')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-d" class="result-msg"></div>
+    </div>
+
+    <!-- Pronunciation note -->
+    <div class="time-note">
+      <strong>Pronunciation.</strong> Some words with <em>-o</em> change the vowel sound in the plural: <em>ovo</em> (closed o) → <em>ovos</em> (open o). Read the pair aloud. The same happens with <em>porco → porcos</em>.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>A Sua Lista</h2>
+        <p>Write your own shopping list</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">E</div>
+        <div>
+          <h3>Write your own shopping list</h3>
+          <p>Use plural forms and numbers 11–20</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escreva a sua própria lista de supermercado.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <p>Lista da Júlia<br>quatorze ovos<br>dezesseis bananas<br>um quilo de arroz<br>doze tomates</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Write a list with 6 items. Use numbers between 11 and 20 for at least four of them.</li>
+      </ul>
+      <textarea class="open-textarea" style="min-height:120px;" placeholder="Lista de..."></textarea>
+
+      <ul class="writing-questions">
+        <li>Write three sentences about your list: one item you buy every week, one item for a special lunch, and one item that stays in the singular.</li>
+      </ul>
+      <textarea class="open-textarea" style="min-height:120px;" placeholder="Eu compro..."></textarea>
+    </div>
+
+    <div class="cult-note" style="margin-top:20px;">
+      <strong>Nota cultural.</strong> No Brasil, muita gente compra frutas, verduras e legumes na feira livre, não só no supermercado. A feira acontece um dia fixo por semana, sempre no mesmo lugar. Lá é comum comprar por peso — <em>um quilo de tomate</em> — ou por dúzia — <em>uma dúzia de ovos</em>, ou seja, doze unidades — em vez de comprar cada item separadamente.
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box" style="margin-top:32px;">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
