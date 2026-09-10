@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ai, Que Saudade D'Ocê — Vital Farias | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--forro:#967E63;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--forro);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.35);color:#3C1810}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--telha);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 10px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 10px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--telha);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.86rem}
+  .gram-box th{background:var(--telha);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .model-text-box{background:var(--baunilha);border:1.5px dashed var(--light-gray);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+  .model-text-label{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+  .model-text-box p{font-size:.88rem;color:var(--nanquim);line-height:1.75}
+  .writing-checklist{list-style:none;margin:12px 0 16px}
+  .writing-checklist li{font-size:.85rem;color:var(--nanquim);padding:4px 0;padding-left:18px;position:relative}
+  .writing-checklist li::before{content:'→';position:absolute;left:0;color:var(--telha);font-weight:700}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--telha);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .mc-item{padding:12px 0;border-bottom:1px solid var(--light-gray)}
+  .mc-item:last-child{border-bottom:none}
+  .mc-q{font-size:.93rem;font-weight:700;color:var(--musgo);margin-bottom:8px}
+  .mc-opts{display:flex;flex-direction:column;gap:6px}
+  .mc-btn{text-align:left;border:1.5px solid var(--light-gray);background:#fff;border-radius:6px;padding:7px 12px;font-size:.85rem;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .15s}
+  .mc-btn:hover{border-color:var(--telha)}
+  .mc-btn.sel{background:var(--baunilha);border-color:var(--telha)}
+  .mc-btn.right{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32;font-weight:700}
+  .mc-btn.wrong{background:#ffebee;border-color:#c62828;color:#c62828}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+  .chip-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:20px;padding:6px 16px;font-size:.85rem;font-family:'Manrope',sans-serif;font-weight:700;cursor:pointer;transition:all .15s;color:var(--nanquim)}
+  .chip-btn:hover{border-color:var(--telha)}
+  .chip-btn.sel{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .chip-btn.right{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32}
+  .chip-btn.wrong{background:#ffebee;border-color:#c62828;color:#c62828}
+  .chip-btn.missed{background:#fff3cd;border-color:#e0a800;color:#7a5c00}
+  .sub-q{font-size:.9rem;font-weight:700;color:var(--musgo);margin:14px 0 4px}
+  input.gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:4px 4px;width:100%;outline:none;transition:border-color .2s}
+  input.gap-input:focus{border-color:var(--telha)}
+  input.gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  input.gap-input.err{border-color:#c62828;color:#c62828}
+  .rw-item{margin-bottom:14px}
+  .rw-orig{font-size:.87rem;color:var(--pitomba);font-style:italic;margin-bottom:4px}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--telha)}
+  .reveal-box{display:none;margin-top:6px;padding:8px 14px;background:var(--baunilha);border-left:3px solid var(--erva-doce);border-radius:0 6px 6px 0;font-size:.87rem;color:var(--floresta);font-style:italic;line-height:1.6}
+  .reveal-box.visible{display:block}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--telha);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .btn-show{background:var(--floresta);color:#fff}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Baião</span>
+  <span class="badge">Vital Farias / Elba Ramalho</span>
+  <span class="badge">1982</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Ai, Que Saudade D'Ocê</h1>
+    <p class="fonte">Vital Farias (1982), do disco <em>Sagas Brasileiras</em> · gravação de Elba Ramalho (1983) · Nível B1 · Foco: você / cê / ocê, te e lhe</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">Uma canção sobre distância e trabalho: quem canta está longe de quem ama e manda notícias como dá — um beijo, uma carta. É o ponto de partida perfeito para estudar como o brasileiro realmente fala com a pessoa amada: você, cê, ocê, te, lhe — todos convivendo na mesma frase.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a canção</p>
+    <p class="card-title">Ai, Que Saudade D'Ocê</p>
+    <p class="instr">Ouça a canção inteira pelo menos uma vez, sem se preocupar em entender cada palavra.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Kh21uLSZQZQ"
+        title="Ai, Que Saudade D'Ocê — Elba Ramalho, Zé Ramalho, Geraldo Azevedo" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras da canção</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">a saudade</td><td>longing, missing someone</td><td class="vocab-pt">a estrada</td><td>road</td></tr>
+        <tr><td class="vocab-pt">o beija-flor</td><td>hummingbird</td><td class="vocab-pt">a sina</td><td>fate, destiny</td></tr>
+        <tr><td class="vocab-pt">o correio</td><td>post office, mail</td><td class="vocab-pt">o desejo</td><td>desire, longing</td></tr>
+        <tr><td class="vocab-pt">a carta</td><td>letter</td><td class="vocab-pt">o choro</td><td>crying</td></tr>
+        <tr><td class="vocab-pt">o namoro</td><td>(romantic) relationship</td><td class="vocab-pt">recordar</td><td>to recall</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CULTURA -->
+  <div class="card">
+    <p class="section-label">Nota cultural</p>
+    <div class="cult-box">
+      <strong>🎶 Vital Farias e o "ocê"</strong><br>
+      Vital Farias (1943–2025) nasceu em Taperoá, no Cariri paraibano, e lançou "Ai, Que Saudade D'Ocê" em 1982, no disco <em>Sagas Brasileiras</em>. No ano seguinte, a gravação de Elba Ramalho, também paraibana, levou a canção ao Brasil inteiro. É a composição mais regravada do autor, e já apareceu em novela na voz de outros intérpretes. A forma "ocê" é típica de várias regiões do país — e é justamente ela que dá nome à canção.
+    </div>
+  </div>
+
+  <!-- ANTES DE OUVIR -->
+  <div class="ex-card">
+    <p class="ex-num">Antes de ouvir</p>
+    <p class="ex-title">Converse ou escreva sobre estas perguntas</p>
+    <div class="rw-item">
+      <p class="mc-q">1. Você já ficou muito tempo longe de alguém importante? Como vocês mantinham contato?</p>
+      <textarea class="prod" id="pre1" placeholder="Escreva aqui…"></textarea>
+    </div>
+    <div class="rw-item">
+      <p class="mc-q">2. No seu país, as pessoas costumam escrever cartas? Em que situações?</p>
+      <textarea class="prod" id="pre2" placeholder="Escreva aqui…"></textarea>
+    </div>
+    <div class="rw-item">
+      <p class="mc-q">3. A palavra <em>saudade</em> tem tradução na sua língua? Como você explicaria essa palavra para um amigo?</p>
+      <textarea class="prod" id="pre3" placeholder="Escreva aqui…"></textarea>
+    </div>
+  </div>
+
+  <!-- PRIMEIRA ESCUTA -->
+  <div class="ex-card">
+    <p class="ex-num">1. Primeira escuta</p>
+    <p class="ex-title">Ouça a canção inteira e marque a alternativa que resume a situação</p>
+    <div id="mc1-area">
+      <div class="mc-item" data-id="1">
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMC1(this,1,'a')">a) Uma pessoa termina o namoro e pede à outra que não a procure mais.</button>
+          <button class="mc-btn" data-val="b" onclick="selectMC1(this,1,'b')">b) Uma pessoa está longe de quem ama por causa do trabalho e pede uma carta.</button>
+          <button class="mc-btn" data-val="c" onclick="selectMC1(this,1,'c')">c) Duas pessoas se reencontram depois de muitos anos e relembram o passado.</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMC1()">Verificar</button>
+      <button class="btn btn-reset" onclick="resetMC1()">Tentar de novo</button>
+    </div>
+    <div id="mc1-msg" class="result-msg"></div>
+  </div>
+
+  <!-- SEGUNDA ESCUTA -->
+  <div class="ex-card">
+    <p class="ex-num">2. Segunda escuta — como a pessoa amada é chamada</p>
+    <p class="ex-title">Ouça de novo, prestando atenção às formas de tratamento</p>
+
+    <p class="sub-q">a) Marque as formas que aparecem na canção:</p>
+    <div class="chip-row" id="chips-2a">
+      <button class="chip-btn" data-val="você" onclick="toggleChip(this,'s2a')">você</button>
+      <button class="chip-btn" data-val="ocê" onclick="toggleChip(this,'s2a')">ocê</button>
+      <button class="chip-btn" data-val="cê" onclick="toggleChip(this,'s2a')">cê</button>
+      <button class="chip-btn" data-val="tu" onclick="toggleChip(this,'s2a')">tu</button>
+      <button class="chip-btn" data-val="o senhor" onclick="toggleChip(this,'s2a')">o senhor</button>
+    </div>
+
+    <p class="sub-q">b) Qual pronome aparece antes do verbo, referindo-se à pessoa amada?</p>
+    <div class="chip-row" id="chips-2b">
+      <button class="chip-btn" data-val="te" onclick="toggleChip(this,'s2b',true)">te</button>
+      <button class="chip-btn" data-val="lhe" onclick="toggleChip(this,'s2b',true)">lhe</button>
+      <button class="chip-btn" data-val="o" onclick="toggleChip(this,'s2b',true)">o</button>
+    </div>
+
+    <p class="sub-q">c) Para falar da casa da pessoa amada, a canção usa:</p>
+    <div class="chip-row" id="chips-2c">
+      <button class="chip-btn" data-val="tua" onclick="toggleChip(this,'s2c',true)">tua</button>
+      <button class="chip-btn" data-val="sua" onclick="toggleChip(this,'s2c',true)">sua</button>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkSegunda()">Verificar</button>
+      <button class="btn btn-reset" onclick="resetSegunda()">Tentar de novo</button>
+    </div>
+    <div id="segunda-msg" class="result-msg"></div>
+  </div>
+
+  <!-- COMPREENSÃO -->
+  <div class="ex-card">
+    <p class="ex-num">3. Compreensão</p>
+    <p class="ex-title">Responda em português</p>
+    <div class="rw-item">
+      <p class="mc-q">1. Por que as duas pessoas estão separadas?</p>
+      <textarea class="prod" id="c1" placeholder="Escreva aqui…"></textarea>
+      <div class="reveal-box" id="c1-rev">O trabalho mantém uma delas na estrada — ela precisa viajar para trabalhar.</div>
+    </div>
+    <div class="rw-item">
+      <p class="mc-q">2. O que a pessoa que canta manda para quem ama? Quem leva esse presente?</p>
+      <textarea class="prod" id="c2" placeholder="Escreva aqui…"></textarea>
+      <div class="reveal-box" id="c2-rev">Um beijo, levado por um beija-flor.</div>
+    </div>
+    <div class="rw-item">
+      <p class="mc-q">3. O que ela pede em troca? Por qual caminho essa resposta deve chegar?</p>
+      <textarea class="prod" id="c3" placeholder="Escreva aqui…"></textarea>
+      <div class="reveal-box" id="c3-rev">Uma carta, que deve chegar pelo correio.</div>
+    </div>
+    <div class="rw-item">
+      <p class="mc-q">4. Como a outra pessoa reagia nas despedidas, no tempo do namoro?</p>
+      <textarea class="prod" id="c4" placeholder="Escreva aqui…"></textarea>
+      <div class="reveal-box" id="c4-rev">Ela chorava. Hoje, quem sente saudade e chora, sozinho na estrada, é ele.</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-show" onclick="toggleAnswersC()">Ver respostas-modelo</button>
+      <button class="btn btn-reset" onclick="hideAnswersC()">Esconder</button>
+    </div>
+  </div>
+
+  <!-- FOCO NA LÍNGUA 1 -->
+  <div class="card">
+    <p class="section-label">Foco na língua</p>
+    <p class="card-title">Você, cê e ocê</p>
+    <div class="gram-box">
+      <strong>Você</strong> é a forma geral do português brasileiro, tanto na fala quanto na escrita.<br><br>
+      <strong>Cê</strong> é a redução de <em>você</em> na fala rápida. Ela se apoia no verbo: vem antes dele (<em>cê vai, cê viu</em>) ou depois de "pra", com o verbo em seguida (<em>pra cê ver</em>). Não aparece sozinha: — Quem chegou? — <em>Você!</em><br><br>
+      <strong>Ocê</strong> é a forma de falar em várias regiões do país. Funciona como <em>você</em>, sem restrição de posição: pode vir depois de preposição (<em>pra ocê</em>, <em>de ocê</em>) e aparece sozinha na resposta.
+      <table>
+        <thead><tr><th></th><th>antes do verbo</th><th>depois de preposição</th><th>sozinha na resposta</th></tr></thead>
+        <tbody>
+          <tr><td>você</td><td>sim</td><td>sim</td><td>sim</td></tr>
+          <tr><td>cê</td><td>sim</td><td>só em <em>pra</em> + verbo</td><td>não</td></tr>
+          <tr><td>ocê</td><td>sim</td><td>sim</td><td>sim</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.83rem;color:var(--telha);font-weight:700;margin-top:10px;">Atenção: cê e ocê pertencem à fala. Em textos escritos, use sempre "você".</p>
+  </div>
+
+  <!-- EXERCÍCIO A -->
+  <div class="ex-card">
+    <p class="ex-num">A. Formas possíveis</p>
+    <p class="ex-title">Marque as formas possíveis em cada frase</p>
+    <p class="ex-instr">Pode haver mais de uma forma correta em cada item.</p>
+    <div id="exA-area">
+      <div class="rw-item" data-id="1">
+        <p class="mc-q">1. ______ vai me escrever esta semana?</p>
+        <div class="chip-row"><button class="chip-btn" data-val="você" onclick="toggleA(this,1)">você</button><button class="chip-btn" data-val="cê" onclick="toggleA(this,1)">cê</button></div>
+      </div>
+      <div class="rw-item" data-id="2">
+        <p class="mc-q">2. Eu penso muito em ______.</p>
+        <div class="chip-row"><button class="chip-btn" data-val="você" onclick="toggleA(this,2)">você</button><button class="chip-btn" data-val="cê" onclick="toggleA(this,2)">cê</button></div>
+      </div>
+      <div class="rw-item" data-id="3">
+        <p class="mc-q">3. — Quem mandou o beija-flor? — ______!</p>
+        <div class="chip-row"><button class="chip-btn" data-val="você" onclick="toggleA(this,3)">você</button><button class="chip-btn" data-val="cê" onclick="toggleA(this,3)">cê</button></div>
+      </div>
+      <div class="rw-item" data-id="4">
+        <p class="mc-q">4. Guardei esta carta pra ______ ler na estrada.</p>
+        <div class="chip-row"><button class="chip-btn" data-val="você" onclick="toggleA(this,4)">você</button><button class="chip-btn" data-val="cê" onclick="toggleA(this,4)">cê</button></div>
+      </div>
+      <div class="rw-item" data-id="5">
+        <p class="mc-q">5. Eu chorei ao lado de ______ na despedida.</p>
+        <div class="chip-row"><button class="chip-btn" data-val="você" onclick="toggleA(this,5)">você</button><button class="chip-btn" data-val="cê" onclick="toggleA(this,5)">cê</button></div>
+      </div>
+      <div class="rw-item" data-id="6">
+        <p class="mc-q">6. Todo mundo sabe que ______ chora quando eu viajo.</p>
+        <div class="chip-row"><button class="chip-btn" data-val="você" onclick="toggleA(this,6)">você</button><button class="chip-btn" data-val="cê" onclick="toggleA(this,6)">cê</button></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkA()">Verificar</button>
+      <button class="btn btn-reset" onclick="resetA()">Tentar de novo</button>
+    </div>
+    <div id="exA-msg" class="result-msg"></div>
+  </div>
+
+  <!-- FOCO NA LÍNGUA 2 -->
+  <div class="card">
+    <p class="section-label">Foco na língua</p>
+    <p class="card-title">Te, lhe e você</p>
+    <div class="gram-box">
+      Com <em>você</em>, o brasileiro usa <strong>"te"</strong> antes do verbo: <em>eu te ligo, eu te espero, eu te mando uma foto.</em><br><br>
+      No Nordeste, <strong>lhe</strong> aparece na mesma posição e com o mesmo sentido: <em>eu lhe ligo, eu lhe espero.</em><br><br>
+      Na fala, <strong>teu/tua</strong> convive com <em>seu/sua</em> ao lado de <em>você</em> — e a canção usa <em>tua</em>.
+    </div>
+  </div>
+
+  <!-- EXERCÍCIO B -->
+  <div class="ex-card">
+    <p class="ex-num">B. Na fala do dia a dia</p>
+    <p class="ex-title">Reescreva as frases usando "te"</p>
+    <p class="ex-instr">Todas são coisas que as duas pessoas da canção poderiam dizer uma para a outra.</p>
+    <div id="exB-area">
+      <div class="rw-item">
+        <p class="rw-orig">1. Eu vou escrever para você da próxima cidade.</p>
+        <input class="gap-input" id="b1" data-answer="eu vou te escrever da proxima cidade|eu te vou escrever da proxima cidade" type="text" placeholder="Reescreva aqui…">
+      </div>
+      <div class="rw-item">
+        <p class="rw-orig">2. Eu mando um beijo para você pelo beija-flor.</p>
+        <input class="gap-input" id="b2" data-answer="eu te mando um beijo pelo beija-flor" type="text" placeholder="Reescreva aqui…">
+      </div>
+      <div class="rw-item">
+        <p class="rw-orig">3. Eu espero você na rodoviária no domingo.</p>
+        <input class="gap-input" id="b3" data-answer="eu te espero na rodoviaria no domingo" type="text" placeholder="Reescreva aqui…">
+      </div>
+      <div class="rw-item">
+        <p class="rw-orig">4. Eu quero ver você antes de viajar.</p>
+        <input class="gap-input" id="b4" data-answer="eu quero te ver antes de viajar|eu te quero ver antes de viajar" type="text" placeholder="Reescreva aqui…">
+      </div>
+      <div class="rw-item">
+        <p class="rw-orig">5. Eu levei você até a estação de manhã.</p>
+        <input class="gap-input" id="b5" data-answer="eu te levei ate a estacao de manha" type="text" placeholder="Reescreva aqui…">
+      </div>
+      <div class="rw-item">
+        <p class="rw-orig">6. Eu convido você para dançar forró no São João.</p>
+        <input class="gap-input" id="b6" data-answer="eu te convido para dancar forro no sao joao" type="text" placeholder="Reescreva aqui…">
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--pitomba);margin-top:8px;font-style:italic;">No Nordeste: lhe escrevo, lhe mando, lhe espero…</p>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkB()">Verificar</button>
+      <button class="btn btn-reset" onclick="resetB()">Tentar de novo</button>
+    </div>
+    <div id="exB-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO C -->
+  <div class="ex-card">
+    <p class="ex-num">C. Cada forma no seu lugar</p>
+    <p class="ex-title">Marque a frase mais adequada para cada situação</p>
+    <div id="mcC-area">
+      <div class="mc-item" data-id="1">
+        <p class="mc-q">1. Mensagem para um amigo:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMCC(this,1,'a')">Cê vai pro forró hoje?</button>
+          <button class="mc-btn" data-val="b" onclick="selectMCC(this,1,'b')">Você comparecerá à festa hoje?</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="2">
+        <p class="mc-q">2. E-mail para o seu chefe:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMCC(this,2,'a')">Te mando o relatório antes de viajar.</button>
+          <button class="mc-btn" data-val="b" onclick="selectMCC(this,2,'b')">Envio o relatório antes de viajar.</button>
+        </div>
+      </div>
+      <div class="mc-item" data-id="3">
+        <p class="mc-q">3. Carta formal para uma escola:</p>
+        <div class="mc-opts">
+          <button class="mc-btn" data-val="a" onclick="selectMCC(this,3,'a')">Ocê pode confirmar a matrícula?</button>
+          <button class="mc-btn" data-val="b" onclick="selectMCC(this,3,'b')">Você pode confirmar a matrícula?</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkMCC()">Verificar</button>
+      <button class="btn btn-reset" onclick="resetMCC()">Tentar de novo</button>
+    </div>
+    <div id="mcC-msg" class="result-msg"></div>
+  </div>
+
+  <!-- CARTA -->
+  <div class="ex-card">
+    <p class="ex-num">D. A carta que a canção pede</p>
+    <p class="ex-title">Escreva a carta</p>
+    <p class="ex-instr">Na canção, quem está longe pede uma carta e até dita o que quer ler. Escreva essa carta: você é a pessoa que ficou. Escreva de 60 a 80 palavras.</p>
+    <p style="font-size:.85rem;font-weight:700;color:var(--musgo);margin-bottom:4px;">Inclua na sua carta:</p>
+    <ul class="writing-checklist">
+      <li>há quanto tempo vocês não se veem</li>
+      <li>uma resposta ao pedido feito na canção</li>
+      <li>uma lembrança do tempo em que vocês estavam juntos</li>
+      <li>pelo menos duas vezes o pronome <em>te</em> e uma vez <em>você</em> depois de preposição</li>
+    </ul>
+    <textarea class="prod" style="min-height:160px;" id="carta" placeholder="Escreva aqui…"></textarea>
+  </div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
+
+// ── Primeira escuta (single MC) ──
+const mc1Key={1:'b'};
+const mc1Sel={};
+function selectMC1(btn,id,val){
+  const item=document.querySelector('#mc1-area .mc-item[data-id="'+id+'"]');
+  item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));
+  btn.classList.add('sel');mc1Sel[id]=val;
+}
+function checkMC1(){
+  let ok=0,tot=Object.keys(mc1Key).length,answered=0;
+  for(const id in mc1Key){
+    const item=document.querySelector('#mc1-area .mc-item[data-id="'+id+'"]');
+    item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('right','wrong'));
+    if(mc1Sel[id]){answered++;const correct=mc1Sel[id]===mc1Key[id];if(correct)ok++;
+      item.querySelectorAll('.mc-btn').forEach(b=>{if(b.dataset.val===mc1Key[id])b.classList.add('right');else if(b.dataset.val===mc1Sel[id]&&!correct)b.classList.add('wrong');});
+    }
+  }
+  const msg=document.getElementById('mc1-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda o item primeiro':'');
+}
+function resetMC1(){
+  for(const id in mc1Key){document.querySelector('#mc1-area .mc-item[data-id="'+id+'"]').querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));delete mc1Sel[id];}
+  const msg=document.getElementById('mc1-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// ── Segunda escuta (multi-select + 2 single-select groups) ──
+const chipSel={s2a:[],s2b:[],s2c:[]};
+function toggleChip(btn,group,single){
+  const val=btn.dataset.val;
+  if(single){
+    document.querySelectorAll('#chips-'+group+' .chip-btn').forEach(b=>b.classList.remove('sel'));
+    chipSel[group]=[val];
+    btn.classList.add('sel');
+  } else {
+    const idx=chipSel[group].indexOf(val);
+    if(idx>-1){chipSel[group].splice(idx,1);btn.classList.remove('sel');}
+    else{chipSel[group].push(val);btn.classList.add('sel');}
+  }
+}
+const segundaKey={s2a:['você','ocê'],s2b:['te','lhe'],s2c:['tua']};
+function checkSegunda(){
+  let ok=0,tot=3;
+  ['s2a','s2b','s2c'].forEach(function(group){
+    const correctSet=segundaKey[group];
+    const selSet=chipSel[group];
+    document.querySelectorAll('#chips-'+group+' .chip-btn').forEach(b=>b.classList.remove('right','wrong','missed'));
+    let groupOk = selSet.length>0 && selSet.every(v=>correctSet.includes(v));
+    if(group==='s2a'){ groupOk = groupOk && correctSet.every(v=>selSet.includes(v)); }
+    if(groupOk) ok++;
+    document.querySelectorAll('#chips-'+group+' .chip-btn').forEach(function(b){
+      const v=b.dataset.val;
+      if(correctSet.includes(v) && selSet.includes(v)) b.classList.add('right');
+      else if(!correctSet.includes(v) && selSet.includes(v)) b.classList.add('wrong');
+      else if(correctSet.includes(v) && !selSet.includes(v) && group==='s2a') b.classList.add('missed');
+    });
+  });
+  const msg=document.getElementById('segunda-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' partes corretas';
+}
+function resetSegunda(){
+  ['s2a','s2b','s2c'].forEach(function(group){
+    chipSel[group]=[];
+    document.querySelectorAll('#chips-'+group+' .chip-btn').forEach(b=>b.classList.remove('sel','right','wrong','missed'));
+  });
+  const msg=document.getElementById('segunda-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// ── Compreensão reveal ──
+function toggleAnswersC(){
+  ['c1-rev','c2-rev','c3-rev','c4-rev'].forEach(id=>document.getElementById(id).classList.add('visible'));
+}
+function hideAnswersC(){
+  ['c1-rev','c2-rev','c3-rev','c4-rev'].forEach(id=>document.getElementById(id).classList.remove('visible'));
+}
+
+// ── Exercício A (multi-select chips per item) ──
+const aSel={1:[],2:[],3:[],4:[],5:[],6:[]};
+const aKey={1:['você','cê'],2:['você'],3:['você'],4:['você','cê'],5:['você'],6:['você','cê']};
+function toggleA(btn,id){
+  const val=btn.dataset.val;
+  const arr=aSel[id];
+  const idx=arr.indexOf(val);
+  if(idx>-1){arr.splice(idx,1);btn.classList.remove('sel');}
+  else{arr.push(val);btn.classList.add('sel');}
+}
+function checkA(){
+  let ok=0,tot=Object.keys(aKey).length;
+  for(const id in aKey){
+    const item=document.querySelector('#exA-area .rw-item[data-id="'+id+'"]');
+    const correctSet=aKey[id];
+    const selSet=aSel[id];
+    item.querySelectorAll('.chip-btn').forEach(b=>b.classList.remove('right','wrong','missed'));
+    const isOk = selSet.length>0 && selSet.every(v=>correctSet.includes(v)) && correctSet.every(v=>selSet.includes(v));
+    if(isOk) ok++;
+    item.querySelectorAll('.chip-btn').forEach(function(b){
+      const v=b.dataset.val;
+      if(correctSet.includes(v) && selSet.includes(v)) b.classList.add('right');
+      else if(!correctSet.includes(v) && selSet.includes(v)) b.classList.add('wrong');
+      else if(correctSet.includes(v) && !selSet.includes(v)) b.classList.add('missed');
+    });
+  }
+  const msg=document.getElementById('exA-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' corretos';
+}
+function resetA(){
+  for(const id in aKey){
+    aSel[id]=[];
+    document.querySelector('#exA-area .rw-item[data-id="'+id+'"]').querySelectorAll('.chip-btn').forEach(b=>b.classList.remove('sel','right','wrong','missed'));
+  }
+  const msg=document.getElementById('exA-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// ── Exercício B (gap-input full sentence) ──
+function checkB(){
+  const inputs=document.querySelectorAll('#exB-area .gap-input');
+  let ok=0;
+  inputs.forEach(function(inp){
+    const accepted=inp.dataset.answer.split('|').map(norm);
+    const correct=accepted.includes(norm(inp.value));
+    inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');
+    if(correct)ok++;
+  });
+  const msg=document.getElementById('exB-msg');
+  msg.className='result-msg show '+(ok===inputs.length?'result-ok':'result-err');
+  msg.textContent=ok+' / '+inputs.length+' correto(s).';
+}
+function resetB(){
+  document.querySelectorAll('#exB-area .gap-input').forEach(function(inp){inp.value='';inp.classList.remove('ok','err');});
+  const msg=document.getElementById('exB-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// ── Exercício C (single MC per item) ──
+const mcCKey={1:'a',2:'b',3:'b'};
+const mcCSel={};
+function selectMCC(btn,id,val){
+  const item=document.querySelector('#mcC-area .mc-item[data-id="'+id+'"]');
+  item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));
+  btn.classList.add('sel');mcCSel[id]=val;
+}
+function checkMCC(){
+  let ok=0,tot=Object.keys(mcCKey).length,answered=0;
+  for(const id in mcCKey){
+    const item=document.querySelector('#mcC-area .mc-item[data-id="'+id+'"]');
+    item.querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('right','wrong'));
+    if(mcCSel[id]){answered++;const correct=mcCSel[id]===mcCKey[id];if(correct)ok++;
+      item.querySelectorAll('.mc-btn').forEach(b=>{if(b.dataset.val===mcCKey[id])b.classList.add('right');else if(b.dataset.val===mcCSel[id]&&!correct)b.classList.add('wrong');});
+    }
+  }
+  const msg=document.getElementById('mcC-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetMCC(){
+  for(const id in mcCKey){document.querySelector('#mcC-area .mc-item[data-id="'+id+'"]').querySelectorAll('.mc-btn').forEach(b=>b.classList.remove('sel','right','wrong'));delete mcCSel[id];}
+  const msg=document.getElementById('mcC-msg');msg.className='result-msg';msg.textContent='';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
