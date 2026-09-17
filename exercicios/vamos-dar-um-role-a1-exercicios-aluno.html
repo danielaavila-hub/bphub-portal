@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vamos Dar um Rolê? | A1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #4E551D;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* ── HERO ── */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; font-weight: 600; }
+
+    /* ── MAIN ── */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* ── GRAMMAR NOTE ── */
+    .lang-note { background: rgba(78,85,29,0.06); border: 1.5px solid rgba(78,85,29,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--level); font-style: italic; }
+    .lang-note strong { color: var(--level); }
+
+    /* info table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--level); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--level); white-space: nowrap; }
+
+    /* examples block */
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--level); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
+    .cult-note strong { color: var(--level); }
+
+    /* time marker note */
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+    @media (max-width: 700px) { .vocab-grid { grid-template-columns: 1fr; } }
+
+    /* ── AGENDA POSTER REPLICA ── */
+    .poster-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; }
+    .poster-head { background: var(--level); color: white; padding: 18px 28px; }
+    .poster-head .poster-title { font-family: 'Trirong', serif; font-size: 20px; letter-spacing: .04em; }
+    .poster-head .poster-sub { font-size: 12.5px; color: rgba(255,255,255,.8); margin-top: 4px; }
+    .poster-body { padding: 6px 28px 20px; }
+    .poster-item { padding: 16px 0; border-bottom: 1px dashed var(--light-gray); }
+    .poster-item:last-child { border-bottom: none; }
+    .poster-event { font-weight: 700; color: var(--texto); font-size: 15px; }
+    .poster-when { color: var(--pitomba); font-weight: 700; font-size: 13.5px; float: right; }
+    .poster-meta { font-size: 13px; color: #888; margin-top: 4px; clear: both; }
+    .poster-meta strong { color: var(--level); }
+
+    /* ── WHATSAPP REPLICA ── */
+    .wa-box { background: #e5ddd5; border-radius: 14px; padding: 18px; max-width: 460px; }
+    .wa-date { text-align: center; font-size: 11px; color: #777; background: #d9e4e8; display: inline-block; padding: 3px 12px; border-radius: 8px; margin: 4px auto 12px; }
+    .wa-date-wrap { text-align: center; }
+    .wa-msg { border-radius: 0 8px 8px 8px; padding: 8px 12px; margin-bottom: 8px; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,.15); background: #fff; }
+    .wa-msg.me { border-radius: 8px 0 8px 8px; margin-left: auto; background: #dcf8c6; }
+    .wa-msg p { margin: 0 0 4px; font-size: 14px; color: #222; line-height: 1.5; }
+    .wa-time { font-size: 10.5px; color: #999; float: right; }
+    .wa-sender { font-size: 11px; font-weight: 700; color: var(--cobalto); margin-bottom: 2px; }
+
+    /* ── EXERCISE BLOCK ── */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* short text field (personal info) */
+    .short-input { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 8px; padding: 10px 14px; font-family: 'Manrope', sans-serif; font-size: 14.5px; color: var(--texto); outline: none; transition: border-color 0.2s; margin-bottom: 12px; }
+    .short-input:focus { border-color: var(--level); }
+    .short-input::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 100px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* dates table exercise */
+    .dates-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .dates-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; }
+    .dates-table td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: middle; }
+    .dates-table tr:nth-child(even) td { background: var(--off-white); }
+    .dates-table td:first-child { font-weight: 700; color: var(--level); white-space: nowrap; }
+    .dates-table .model-row td { color: #999; font-style: italic; }
+    .dates-table input.blank-input { min-width: 90%; width: 90%; }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .dates-table { font-size: 12.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+    <span class="topbar-name">Iniciante</span>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Vamos Dar um<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> Rolê?</em></h1>
+    <p>An events calendar and a WhatsApp conversation teach you how to say dates and times in Portuguese — the months, numbers 21–59, and the difference between clock time (<strong style="color:white;">são sete e quinze</strong>) and event time (<strong style="color:white;">é às sete</strong>).</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Datas e horários</span>
+      <span class="meta-pill"><span class="dot"></span>Agenda cultural</span>
+      <span class="meta-pill"><span class="dot"></span>São / É / às / à / ao</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Before You Read</h2>
+        <p>Learn these words before you read the texts</p>
+      </div>
+    </div>
+
+    <div class="vocab-grid">
+      <table class="vocab-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="vocab-pt">agenda cultural</td><td>events calendar</td></tr>
+          <tr><td class="vocab-pt">evento</td><td>event</td></tr>
+          <tr><td class="vocab-pt">roda de samba</td><td>samba circle (informal live samba)</td></tr>
+          <tr><td class="vocab-pt">sessão de cinema</td><td>movie screening</td></tr>
+          <tr><td class="vocab-pt">comédia</td><td>comedy</td></tr>
+          <tr><td class="vocab-pt">feira de comidas juninas</td><td>June festival food fair</td></tr>
+          <tr><td class="vocab-pt">arraial</td><td>festa junina party</td></tr>
+          <tr><td class="vocab-pt">quadrilha</td><td>festa junina square dance</td></tr>
+        </tbody>
+      </table>
+      <table class="vocab-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="vocab-pt">show de forró</td><td>forró concert</td></tr>
+          <tr><td class="vocab-pt">praça</td><td>square</td></tr>
+          <tr><td class="vocab-pt">salão / terraço / sala</td><td>hall / terrace / room</td></tr>
+          <tr><td class="vocab-pt">local</td><td>place, venue</td></tr>
+          <tr><td class="vocab-pt">ingresso</td><td>ticket</td></tr>
+          <tr><td class="vocab-pt">entrada gratuita</td><td>free admission</td></tr>
+          <tr><td class="vocab-pt">rolê / dar um rolê</td><td>outing / to go out, hang out</td></tr>
+          <tr><td class="vocab-pt">Você está onde?</td><td>Where are you?</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: LANGUAGE REFERENCE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗓️</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Read these references before you start. You will use them throughout the activity.</p>
+      </div>
+    </div>
+
+    <div class="lang-note-label">📌 Os meses / The months</div>
+    <p style="font-size:13px;color:#888;margin-bottom:10px;">Months are lowercase in Portuguese.</p>
+    <div class="table-wrap">
+      <table class="info-table">
+        <tbody>
+          <tr><td>1 – janeiro</td><td>4 – abril</td><td>7 – julho</td><td>10 – outubro</td></tr>
+          <tr><td>2 – fevereiro</td><td>5 – maio</td><td>8 – agosto</td><td>11 – novembro</td></tr>
+          <tr><td>3 – março</td><td>6 – junho</td><td>9 – setembro</td><td>12 – dezembro</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 Números 21–59</div>
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">The pattern is <strong>tens + e + unit</strong>:</span></div>
+      <div class="ex-pair"><span class="ex-pt">21 vinte e um · 25 vinte e cinco</span><span class="ex-en">30 trinta · 31 trinta e um</span></div>
+      <div class="ex-pair"><span class="ex-pt">40 quarenta · 45 quarenta e cinco</span><span class="ex-en">50 cinquenta · 55 cinquenta e cinco</span></div>
+    </div>
+    <div class="time-note">For hours, use the feminine forms: <em>uma, duas, vinte e uma, vinte e duas</em> (hora is feminine).</div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 Datas / Dates</div>
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">Quando é a festa?</span><span class="ex-en">When is the party?</span></div>
+      <div class="ex-pair"><span class="ex-pt">É no dia 24 de junho.</span><span class="ex-en">dia vinte e quatro de junho</span></div>
+      <div class="ex-pair"><span class="ex-pt">informal: dia vinte e quatro do seis</span><span class="ex-en">(day + month number)</span></div>
+      <div class="ex-pair"><span class="ex-pt">Day 1: 01/05 → dia primeiro de maio</span><span class="ex-en">informal: dia um do cinco</span></div>
+    </div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 Que horas são? / What time is it?</div>
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt">1h, 12h, 0h</span><span class="ex-en">É uma hora. / É meio-dia. / É meia-noite.</span></div>
+      <div class="ex-pair"><span class="ex-pt">All other hours</span><span class="ex-en">São duas horas. / São sete e quinze. / São oito e meia.</span></div>
+      <div class="ex-pair"><span class="ex-pt">:30</span><span class="ex-en">e meia or e trinta</span></div>
+      <div class="ex-pair"><span class="ex-pt">19h</span><span class="ex-en">sete da noite or dezenove horas</span></div>
+      <div class="ex-pair"><span class="ex-pt">da manhã / da tarde / da noite</span><span class="ex-en">morning / afternoon / evening-night</span></div>
+    </div>
+    <div class="time-note">You may also hear: 9h45 → <em>quinze para as dez</em>.</div>
+
+    <div class="lang-note-label" style="margin-top:24px;">📌 A que horas é...? / What time is...?</div>
+    <div class="examples-block">
+      <div class="ex-pair"><span class="ex-pt"><strong>Clock time:</strong> Que horas são? — São sete e quinze.</span><span class="ex-en">(It's 7:15.)</span></div>
+      <div class="ex-pair"><span class="ex-pt"><strong>Event time:</strong> A que horas é a festa? — É às sete.</span><span class="ex-en">(It's at 7.)</span></div>
+      <div class="ex-pair"><span class="ex-pt">às + hours: às duas, às oito e meia, às 22h</span></div>
+      <div class="ex-pair"><span class="ex-pt">à uma (1h) · ao meio-dia (12h) · à meia-noite (0h)</span></div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural.</strong> Rolê é uma palavra informal, muito comum no Brasil: "Qual é o rolê hoje?", "Vamos dar um rolê?" No Brasil, a data é assim: dia/mês — 05/07 é o dia 5 de julho, não é 7 de maio! Nos cartazes e nas agendas, a hora é de 0h a 23h: 19h, 22h. Na conversa, é comum: sete da noite, dez da noite. Junho é o mês das festas juninas — um arraial tem quadrilha, música e comidas típicas.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 3: TEXTO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">🎉</div>
+      <div>
+        <h2>Textos</h2>
+        <p>Read the events calendar and the messages carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="poster-box">
+      <div class="poster-head">
+        <div class="poster-title">Agenda Cultural — Junho</div>
+        <div class="poster-sub">Centro Cultural Boa Vista · Recife (PE)</div>
+      </div>
+      <div class="poster-body">
+        <div class="poster-item">
+          <span class="poster-event">Roda de samba</span><span class="poster-when">07/06 · 16h</span>
+          <div class="poster-meta">Local: <strong>Terraço do Centro Cultural</strong> · Ingresso: <strong>R$ 20</strong></div>
+        </div>
+        <div class="poster-item">
+          <span class="poster-event">Sessão de cinema: comédia brasileira</span><span class="poster-when">10/06 · 20h</span>
+          <div class="poster-meta">Local: <strong>Sala 2</strong> · Ingresso: <strong>R$ 15</strong></div>
+        </div>
+        <div class="poster-item">
+          <span class="poster-event">Feira de comidas juninas</span><span class="poster-when">14/06 · 12h</span>
+          <div class="poster-meta">Local: <strong>Praça da Boa Vista</strong> · <strong>Entrada gratuita</strong></div>
+        </div>
+        <div class="poster-item">
+          <span class="poster-event">Arraial da Boa Vista, com quadrilha!</span><span class="poster-when">24/06 · 19h</span>
+          <div class="poster-meta">Local: <strong>Praça da Boa Vista</strong> · <strong>Entrada gratuita</strong></div>
+        </div>
+        <div class="poster-item">
+          <span class="poster-event">Show de forró</span><span class="poster-when">28/06 · 22h</span>
+          <div class="poster-meta">Local: <strong>Salão Asa Branca</strong> · Ingresso: <strong>R$ 30</strong></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#bbb;font-style:italic;margin-top:8px;">Texto construído para fins didáticos.</p>
+
+    <div class="wa-box" style="margin-top:24px;">
+      <div class="wa-date-wrap"><span class="wa-date">20/06</span></div>
+      <div class="wa-msg">
+        <div class="wa-sender">Marina</div>
+        <p>Oi, Léo! Tudo bem? Vamos dar um rolê no Arraial da Boa Vista? A festa é no dia 24 de junho, às sete da noite. O local é a Praça da Boa Vista e a entrada é gratuita.</p>
+        <span class="wa-time">14:02 ✓✓</span>
+      </div>
+      <div class="wa-msg me">
+        <p>Oi, Marina! Vamos, sim! A quadrilha é a que horas?</p>
+        <span class="wa-time">14:05 ✓✓</span>
+      </div>
+      <div class="wa-msg">
+        <div class="wa-sender">Marina</div>
+        <p>É às oito e meia.</p>
+        <span class="wa-time">14:06 ✓✓</span>
+      </div>
+      <div class="wa-date-wrap" style="margin-top:12px;"><span class="wa-date">24/06</span></div>
+      <div class="wa-msg">
+        <div class="wa-sender">Marina</div>
+        <p>Léo, são sete e quinze! Você está onde?</p>
+        <span class="wa-time">19:15 ✓✓</span>
+      </div>
+      <div class="wa-msg me">
+        <p>Desculpa! Estou no ônibus.</p>
+        <span class="wa-time">19:17 ✓✓</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#bbb;font-style:italic;margin-top:8px;">Texto construído para fins didáticos.</p>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 — Reading comprehension -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Leitura</h3>
+          <p>Read the agenda and the messages. Answer the questions. Write dates, times, and prices in words.</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Responda em português. Escreva datas, horas e valores por extenso.</p>
+
+      <ul class="blanks-list" id="blanks-list-1">
+        <li><span class="item-num">1.</span><span>A roda de samba é no dia</span><input class="blank-input" data-answer="sete de junho|sete do seis" placeholder="___________"><span>.</span></li>
+        <li><span class="item-num">2.</span><span>O show de forró é</span><input class="blank-input" data-answer="às dez da noite|às vinte e duas horas|as dez da noite|as vinte e duas horas" placeholder="___________"><span>.</span></li>
+        <li><span class="item-num">3.</span><span>O ingresso da sessão de cinema custa</span><input class="blank-input" data-answer="quinze reais" placeholder="___________"><span>.</span></li>
+        <li><span class="item-num">4.</span><span>A feira de comidas juninas é</span><input class="blank-input" data-answer="ao meio-dia|ao meio dia" placeholder="___________"><span>.</span></li>
+        <li><span class="item-num">5.</span><span>O arraial é no dia</span><input class="blank-input" data-answer="vinte e quatro de junho|vinte e quatro do seis" placeholder="___________"><span>.</span></li>
+        <li><span class="item-num">6.</span><span>A quadrilha é</span><input class="blank-input" data-answer="às oito e meia|às oito e meia da noite|às vinte e trinta|as oito e meia|as vinte e trinta" placeholder="___________"><span>.</span></li>
+        <li><span class="item-num">7.</span><span>No dia 24, Léo está no ônibus. Que horas são?</span><input class="blank-input" data-answer="são sete e quinze" placeholder="___________"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-1','blanks-result-1')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-1','blanks-result-1')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-1" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 2 — Datas especiais -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Datas Especiais no Brasil</h3>
+          <p>Write each date in words, in two ways</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escreva cada data por extenso, de duas formas. Siga o modelo.</p>
+
+      <div class="table-wrap" id="exercise-2-wrap">
+        <table class="dates-table">
+          <thead><tr><th>Data</th><th>Com o nome do mês</th><th>Com o número do mês</th></tr></thead>
+          <tbody>
+            <tr class="model-row"><td>Modelo: Natal · 25/12</td><td>vinte e cinco de dezembro</td><td>vinte e cinco do doze</td></tr>
+            <tr><td>Ano-Novo · 01/01</td><td><input class="blank-input" data-answer="primeiro de janeiro|um de janeiro" placeholder="___________"></td><td><input class="blank-input" data-answer="primeiro do um|um do um" placeholder="___________"></td></tr>
+            <tr><td>Tiradentes · 21/04</td><td><input class="blank-input" data-answer="vinte e um de abril" placeholder="___________"></td><td><input class="blank-input" data-answer="vinte e um do quatro" placeholder="___________"></td></tr>
+            <tr><td>Independência · 07/09</td><td><input class="blank-input" data-answer="sete de setembro" placeholder="___________"></td><td><input class="blank-input" data-answer="sete do nove" placeholder="___________"></td></tr>
+            <tr><td>Dia das Crianças · 12/10</td><td><input class="blank-input" data-answer="doze de outubro" placeholder="___________"></td><td><input class="blank-input" data-answer="doze do dez" placeholder="___________"></td></tr>
+            <tr><td>Consciência Negra · 20/11</td><td><input class="blank-input" data-answer="vinte de novembro" placeholder="___________"></td><td><input class="blank-input" data-answer="vinte do onze" placeholder="___________"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('exercise-2-wrap','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('exercise-2-wrap','blanks-result-2')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 — Que horas são -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Que Horas São?</h3>
+          <p>Write the time in words. Start with É or São.</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Modelo: 6h20 → São seis e vinte.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">a.</span><span>3h10 =</span><input class="blank-input" data-answer="são três e dez|sao tres e dez" placeholder="___________"></li>
+        <li><span class="item-num">b.</span><span>1h40 =</span><input class="blank-input" data-answer="é uma e quarenta|e uma e quarenta" placeholder="___________"></li>
+        <li><span class="item-num">c.</span><span>14h05 =</span><input class="blank-input" data-answer="são duas e cinco|são catorze e cinco|são quatorze e cinco" placeholder="___________"></li>
+        <li><span class="item-num">d.</span><span>10h30 =</span><input class="blank-input" data-answer="são dez e meia|são dez e trinta" placeholder="___________"></li>
+        <li><span class="item-num">e.</span><span>17h25 =</span><input class="blank-input" data-answer="são cinco e vinte e cinco|são dezessete e vinte e cinco" placeholder="___________"></li>
+        <li><span class="item-num">f.</span><span>21h35 =</span><input class="blank-input" data-answer="são nove e trinta e cinco|são vinte e uma e trinta e cinco" placeholder="___________"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 — clock time or event time -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Hora do Relógio ou Hora do Evento?</h3>
+          <p>Complete the dialogues with São, É, às, à or ao</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete com <strong>São, É, às, à</strong> ou <strong>ao</strong>. Use cada palavra pelo menos uma vez.</p>
+
+      <ul class="blanks-list" id="blanks-list-4">
+        <li><span class="item-num">1.</span><span>— Que horas são? —</span><input class="blank-input" data-answer="são" placeholder="___________"><span>onze e meia.</span></li>
+        <li><span class="item-num">2.</span><span>— A que horas é a aula de português? — É</span><input class="blank-input" data-answer="às" placeholder="___________"><span>oito horas.</span></li>
+        <li><span class="item-num">3.</span><span>— Que horas são? —</span><input class="blank-input" data-answer="é" placeholder="___________"><span>uma e dez.</span></li>
+        <li><span class="item-num">4.</span><span>— A que horas é o churrasco? — É</span><input class="blank-input" data-answer="ao" placeholder="___________"><span>meio-dia.</span></li>
+        <li><span class="item-num">5.</span><span>— A que horas é o ônibus para o centro? — É</span><input class="blank-input" data-answer="à" placeholder="___________"><span>meia-noite.</span></li>
+        <li><span class="item-num">6.</span><span>— Que horas são? —</span><input class="blank-input" data-answer="são" placeholder="___________"><span>quatro e quinze.</span></li>
+        <li><span class="item-num">7.</span><span>— A que horas é a aula de violão? — É</span><input class="blank-input" data-answer="à" placeholder="___________"><span>uma e meia.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-4','blanks-result-4')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-4','blanks-result-4')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-4" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Seu Convite</h2>
+        <p>Write your own invitation message</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Seu Convite</h3>
+          <p>Choose one event from the agenda and invite a friend, using Marina's first message as a model</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Escolha um evento da agenda: a roda de samba, a sessão de cinema ou o show de forró. Complete a mensagem para um(a) amigo(a). Escreva a data com o nome do mês e a hora com <em>às</em>.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Sua Mensagem</div>
+        <label style="font-size:13px;color:#888;display:block;margin-bottom:4px;">Oi, ___________! Tudo bem?</label>
+        <input class="short-input" type="text" placeholder="Nome do seu amigo/amiga...">
+        <label style="font-size:13px;color:#888;display:block;margin-bottom:4px;">Vamos dar um rolê? O evento é:</label>
+        <input class="short-input" type="text" placeholder="roda de samba / sessão de cinema / show de forró...">
+        <label style="font-size:13px;color:#888;display:block;margin-bottom:4px;">É no dia ___________, às ___________.</label>
+        <input class="short-input" type="text" placeholder="dia + mês, hora por extenso...">
+        <label style="font-size:13px;color:#888;display:block;margin-bottom:4px;">O local é:</label>
+        <input class="short-input" type="text" placeholder="Terraço do Centro Cultural / Sala 2 / Salão Asa Branca...">
+        <label style="font-size:13px;color:#888;display:block;margin-bottom:0;">O ingresso custa:</label>
+        <input class="short-input" type="text" placeholder="valor por extenso..." style="margin-bottom:0;">
+      </div>
+
+      <div style="margin-top:20px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">Agora leia a sua mensagem em voz alta. Diga todos os números por extenso.</label>
+        <textarea class="open-textarea" placeholder="Escreva a sua mensagem completa aqui..."></textarea>
+      </div>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box" style="margin-top:32px;">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').replace(/[.,;:!?]/g,'');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('input.blank-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    var liNum = inp.closest('li') ? inp.closest('li').querySelector('.item-num') : null;
+    answersHtml += '<p><strong>Campo '+ (liNum ? liNum.textContent : '') +'</strong> '+val+'</p>';
+  });
+  document.querySelectorAll('input.short-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
