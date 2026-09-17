@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colocação dos Adjetivos — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+    p { margin-bottom: 14px; }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #265B8B; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #265B8B; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; margin-top: 44px; }
+    .sec-label:first-child { margin-top: 0; }
+
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 26px 28px; margin-bottom: 18px; }
+    .example { color: var(--cobalto); font-style: italic; }
+    .example-en { color: #888; font-size: 14px; }
+    .ex-row { padding: 10px 0; border-bottom: 1px solid var(--light-gray); }
+    .ex-row:last-child { border-bottom: none; }
+
+    .highlight-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 15px; }
+    .warn-box { background: #FDE7C4; border-left: 4px solid var(--pitomba); border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 15px; }
+
+    .q-block { margin-bottom: 22px; }
+    .q-num { font-weight: 700; color: var(--nanquim); margin-bottom: 6px; }
+    input[type="text"], textarea {
+      width: 100%; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px;
+      font-family: 'Manrope', sans-serif; font-size: 14px; outline: none; margin-top: 6px;
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    input[type="text"]:focus, textarea:focus { border-color: var(--cobalto); }
+    .mc-option { display: block; padding: 8px 12px; border: 1.5px solid var(--light-gray); border-radius: 8px; margin-top: 6px; cursor: pointer; font-size: 14px; }
+    .mc-option:hover { border-color: var(--cobalto); }
+    .mc-option input { margin-right: 8px; }
+
+    .check-btn { background: var(--cobalto); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 8px; }
+    .result-msg { display: none; margin-top: 16px; border-radius: 10px; padding: 16px 20px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; }
+    .result-msg.try-again { background: #FDE7C4; }
+    input.correct { border-color: var(--floresta) !important; background: #EAF5EE; }
+    input.wrong { border-color: var(--pitomba) !important; background: #FDE7C4; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 32px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Exercícios</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Colocação dos <em>Adjetivos</em></h1>
+  <div class="hero-sub">Learn where adjectives go in Portuguese — and how their position can change what they mean.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">gramática</span>
+    <span class="hero-tag">adjetivos</span>
+    <span class="hero-tag">A2</span>
+  </div>
+  <div class="hero-note">📖📝 Read the explanation, then complete the exercises</div>
+</div>
+
+<div class="main">
+
+  <div class="sec-label">Texto</div>
+  <div class="card">
+    <div style="font-family:'Trirong',serif;font-weight:700;font-size:18px;color:var(--cobalto);margin-bottom:2px;">Um Dia Comum</div>
+    <div style="font-size:12px;font-style:italic;color:#999;margin-bottom:14px;">Texto elaborado para esta atividade.</div>
+    <p>Camila é advogada e trabalha em um escritório no centro da cidade. Hoje ela chegou cedo, ligou o <span class="example">computador rápido</span> que comprou mês passado e revisou um <span class="example">contrato longo</span> antes da reunião das nove.</p>
+    <p>A reunião foi com os sócios do escritório. Discutiram um caso complicado, mas, no fim, foi uma <span class="example">reunião produtiva</span> — na real, uma <span class="example">produtiva reunião</span>, porque resolveram tudo em menos de uma hora.</p>
+    <p>À tarde, Camila visitou uma cliente nova: dona Marta, dona de uma pequena confeitaria perto do escritório. Dona Marta é uma <span class="example">mulher velha</span>, já com setenta e cinco anos, mas ainda cheia de energia. Camila também ligou para o Rogério, um <span class="example">velho amigo</span> — eles se conhecem desde os cinco anos de idade.</p>
+    <p>À noite, o Dr. Aurélio, chefe de Camila, é considerado por todos um <span class="example">grande advogado</span> — não pelo tamanho, mas pela competência. Ele disse: "Camila, você ainda é uma <span class="example">nova advogada</span> aqui, mas já trabalha como uma profissional experiente."</p>
+    <p>No caminho para casa, Camila passou perto da estação e viu uma <span class="example">pobre família</span> pedindo ajuda. Pensou em como o dia tinha sido bom para ela — e como nem todo mundo tem a mesma sorte.</p>
+    <div class="q-block" style="margin-top:22px;">
+      <div class="q-num">Perguntas sobre o texto — responda em português</div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">1. O que Camila fez antes da reunião das nove?</div>
+      <textarea placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-num">2. Quem é dona Marta, e como ela é descrita no texto?</div>
+      <textarea placeholder="Escreva aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-num">3. Por que o Dr. Aurélio é chamado de "grande advogado"?</div>
+      <textarea placeholder="Escreva aqui..."></textarea>
+    </div>
+  </div>
+
+  <div class="sec-label">Regra geral</div>
+  <div class="card">
+    <p>In Portuguese, adjectives usually come <strong>after</strong> the noun — the opposite of English.</p>
+    <div class="highlight-box">
+      <p><span class="example">Ela tem um computador rápido.</span> <span class="example-en">(She has a fast computer.)</span></p>
+      <p><span class="example">Ele trabalha em uma clínica moderna.</span> <span class="example-en">(He works in a modern clinic.)</span></p>
+      <p><span class="example">Assinamos um contrato longo.</span> <span class="example-en">(We signed a long contract.)</span></p>
+    </div>
+    <p>The adjective (<em>rápido</em>, <em>moderna</em>, <em>longo</em>) always agrees in gender and number with the noun it describes, and it goes right after that noun.</p>
+    <p style="font-size:13.5px;color:#888;font-style:italic;">No texto que você leu: "ligou o <strong>computador rápido</strong>" e "revisou um <strong>contrato longo</strong>" — repare que o adjetivo vem sempre depois do substantivo.</p>
+  </div>
+
+  <div class="sec-label">Adjetivos que mudam de sentido</div>
+  <div class="card">
+    <p>A few common adjectives — <strong>grande</strong>, <strong>velho</strong>, <strong>novo</strong>, <strong>pobre</strong> — actually change meaning depending on where you put them:</p>
+    <div class="highlight-box">
+      <p><span class="example">Sérgio é um amigo velho.</span> <span class="example-en">(Sérgio is a friend who is old — elderly.)</span></p>
+      <p><span class="example">Sérgio é um velho amigo.</span> <span class="example-en">(Sérgio is a friend I've had for a long time.)</span></p>
+    </div>
+    <p><strong>After the noun</strong> → the literal, physical meaning. <strong>Before the noun</strong> → a more subjective, emotional meaning.</p>
+    <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;">
+      <tr style="border-bottom:1.5px solid var(--light-gray);"><td style="padding:8px 4px;"><strong>grande</strong> after</td><td style="padding:8px 4px;">physically big — <em>um homem grande</em> (a big man)</td></tr>
+      <tr style="border-bottom:1.5px solid var(--light-gray);"><td style="padding:8px 4px;"><strong>grande</strong> before</td><td style="padding:8px 4px;">remarkable, admirable — <em>um grande homem</em> (a great man)</td></tr>
+      <tr style="border-bottom:1.5px solid var(--light-gray);"><td style="padding:8px 4px;"><strong>novo</strong> after</td><td style="padding:8px 4px;">young in age — <em>uma mulher nova</em> (a young woman)</td></tr>
+      <tr style="border-bottom:1.5px solid var(--light-gray);"><td style="padding:8px 4px;"><strong>novo</strong> before</td><td style="padding:8px 4px;">renewed, transformed — <em>uma nova mulher</em> (a new/renewed woman)</td></tr>
+      <tr><td style="padding:8px 4px;"><strong>pobre</strong> after</td><td style="padding:8px 4px;">financially poor — <em>uma família pobre</em></td></tr>
+      <tr><td style="padding:8px 4px;"><strong>pobre</strong> before</td><td style="padding:8px 4px;">unfortunate, to be pitied — <em>uma pobre família</em></td></tr>
+    </table>
+    <p style="font-size:13.5px;color:#888;font-style:italic;margin-top:10px;">No texto: "um <strong>velho amigo</strong>" (before = long-time friend) x "uma mulher <strong>velha</strong>" (after = elderly); "um <strong>grande advogado</strong>" (before = remarkable); "uma <strong>nova advogada</strong>" (before = newly arrived); "uma <strong>pobre família</strong>" (before = unfortunate).</p>
+  </div>
+
+  <div class="sec-label">Ênfase</div>
+  <div class="card">
+    <p>Sometimes moving the adjective before the noun doesn't change the meaning at all — it just adds <strong>emphasis</strong>.</p>
+    <div class="highlight-box">
+      <p><span class="example">Tivemos uma reunião produtiva.</span> <span class="example-en">(We had a productive meeting.)</span></p>
+      <p><span class="example">Tivemos uma produtiva reunião.</span> <span class="example-en">(We had a — very — productive meeting.)</span></p>
+    </div>
+    <p style="font-size:13.5px;color:#888;font-style:italic;">Essas duas frases estão no texto que você leu, uma logo depois da outra — ambas corretas, e com o mesmo significado.</p>
+  </div>
+
+  <div class="sec-label">Nem todo adjetivo pode mudar de posição</div>
+  <div class="card">
+    <p>Some adjectives simply cannot go before the noun — even though English speakers often want to put them there.</p>
+    <div class="warn-box">
+      <p>❌ <em>Meu favorito restaurante é...</em></p>
+      <p>✅ <span class="example">Meu restaurante favorito é...</span> <span class="example-en">(My favorite restaurant is...)</span></p>
+    </div>
+    <p>If you're not sure whether an adjective can move, the safest choice is to keep it <strong>after</strong> the noun — that's the standard position for almost every adjective in Portuguese.</p>
+  </div>
+
+  <!-- EXERCISES -->
+  <div class="sec-label">Exercício 1 — Ordene as palavras</div>
+  <div class="card">
+    <p style="margin-bottom:16px;">Put the words in the correct order to form a sentence.</p>
+    <div id="ex1"></div>
+    <button class="check-btn" onclick="checkEx1()">✓ Check answers</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </div>
+
+  <div class="sec-label">Exercício 2 — Escolha a frase certa</div>
+  <div class="card">
+    <p style="margin-bottom:16px;">Read the meaning given, then choose the sentence that expresses it.</p>
+    <div id="ex2"></div>
+    <button class="check-btn" onclick="checkEx2()">✓ Check answers</button>
+    <div id="ex2-result" class="result-msg"></div>
+  </div>
+
+  <div class="sec-label">Exercício 3 — Sua vez</div>
+  <div class="card">
+    <div class="q-block">
+      <div class="q-num">1. Write two sentences about your work or daily routine, using an adjective after the noun in each.</div>
+      <textarea placeholder="Escreva suas frases aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-num">2. Now write one sentence using "grande", "velho" or "novo" — before OR after the noun. In English, explain what your sentence means.</div>
+      <textarea placeholder="Escreva sua frase e a explicação aqui..."></textarea>
+    </div>
+  </div>
+
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:24px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+</div><!-- /main -->
+
+<script>
+// ── EXERCÍCIO 1 — reorder words ──
+var ex1Items = [
+  { words: "rápido / tem / computador / Ela / um", answer: "Ela tem um computador rápido.", gloss: "(She has a fast computer.)" },
+  { words: "clínica / trabalha / moderna / Ele / uma / em", answer: "Ele trabalha em uma clínica moderna.", gloss: "(He works in a modern clinic.)" },
+  { words: "contrato / assinamos / longo / um", answer: "Assinamos um contrato longo.", gloss: "(We signed a long contract.)" },
+  { words: "paciente / atendeu / um / A médica / calmo", answer: "A médica atendeu um paciente calmo.", gloss: "(The doctor treated a calm patient.)" },
+  { words: "reunião / tivemos / uma / produtiva", answer: "Tivemos uma reunião produtiva.", gloss: "(We had a productive meeting.)" },
+  { words: "escritório / alugou / Marcos / pequeno / um", answer: "Marcos alugou um escritório pequeno.", gloss: "(Marcos rented a small office.)" }
+];
+
+(function renderEx1() {
+  var html = '';
+  ex1Items.forEach(function(item, i) {
+    html += '<div class="q-block"><div class="q-num">' + (i + 1) + '. ' + item.words + '</div>'
+      + '<input type="text" id="ex1-input-' + i + '" placeholder="Escreva a frase completa...">'
+      + '</div>';
+  });
+  document.getElementById('ex1').innerHTML = html;
+})();
+
+function norm(s) {
+  return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ');
+}
+
+function checkEx1() {
+  var html = '';
+  var correct = 0;
+  ex1Items.forEach(function(item, i) {
+    var el = document.getElementById('ex1-input-' + i);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === norm(item.answer);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+      + '<strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + item.answer + ' <span style="color:#888;">' + item.gloss + '</span></div>';
+  });
+  var res = document.getElementById('ex1-result');
+  var allOk = correct === ex1Items.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex1Items.length + ' correct!' : correct + ' of ' + ex1Items.length + ' correct — model answers:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCÍCIO 2 — multiple choice ──
+var ex2Items = [
+  { prompt: '"Rafael is a physically big man."', a: 'Rafael é um homem grande.', b: 'Rafael é um grande homem.', correct: 'a' },
+  { prompt: '"Camila is a truly remarkable lawyer."', a: 'Camila é uma advogada grande.', b: 'Camila é uma grande advogada.', correct: 'b' },
+  { prompt: '"Sérgio and I have known each other for twenty years."', a: 'Sérgio é um amigo velho.', b: 'Sérgio é um velho amigo.', correct: 'b' },
+  { prompt: "\"Beatriz's grandfather is an elderly man.\"", a: 'O avô de Beatriz é um homem velho.', b: 'O avô de Beatriz é um velho homem.', correct: 'a' },
+  { prompt: '"After the surgery, my uncle feels like a renewed man."', a: 'Meu tio é um homem novo.', b: 'Meu tio é um novo homem.', correct: 'b' },
+  { prompt: "\"Helena is only twenty-five — she's young.\"", a: 'Helena é uma mulher nova.', b: 'Helena é uma nova mulher.', correct: 'a' },
+  { prompt: "\"The clinic doesn't have much funding — it's financially poor.\"", a: 'É uma clínica pobre.', b: 'É uma pobre clínica.', correct: 'a' },
+  { prompt: '"My colleague lost his passport during the trip — poor guy!"', a: 'Meu colega é um pobre homem.', b: 'Meu colega é um homem pobre.', correct: 'a' }
+];
+
+(function renderEx2() {
+  var html = '';
+  ex2Items.forEach(function(item, i) {
+    html += '<div class="q-block"><div class="q-num">' + (i + 1) + '. ' + item.prompt + '</div>'
+      + '<label class="mc-option"><input type="radio" name="ex2-' + i + '" value="a"> A. ' + item.a + '</label>'
+      + '<label class="mc-option"><input type="radio" name="ex2-' + i + '" value="b"> B. ' + item.b + '</label>'
+      + '</div>';
+  });
+  document.getElementById('ex2').innerHTML = html;
+})();
+
+function checkEx2() {
+  var html = '';
+  var correct = 0;
+  ex2Items.forEach(function(item, i) {
+    var chosen = document.querySelector('input[name="ex2-' + i + '"]:checked');
+    var ok = chosen && chosen.value === item.correct;
+    if (ok) correct++;
+    var correctText = item.correct === 'a' ? item.a : item.b;
+    html += '<div style="margin-bottom:8px;">'
+      + '<strong>' + (i + 1) + '.</strong> '
+      + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>')
+      + ' ' + item.correct.toUpperCase() + '. ' + correctText + '</div>';
+  });
+  var res = document.getElementById('ex2-result');
+  var allOk = correct === ex2Items.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ All ' + ex2Items.length + ' correct!' : correct + ' of ' + ex2Items.length + ' correct — respostas corretas:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('input[type="text"]').forEach(function(inp) {
+    if (inp.id === 'bphub-student-name') return;
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p>'+val+'</p>';
+  });
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(rb) {
+    var label = rb.closest('.mc-option') ? rb.closest('.mc-option').textContent.replace(/\s+/g,' ').trim() : rb.value;
+    answersHtml += '<p><strong>Escolhida:</strong> '+label+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
