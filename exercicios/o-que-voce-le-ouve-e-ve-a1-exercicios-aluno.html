@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Que Você Lê, Ouve e Vê? | A1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --level:      #4E551D;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Trirong', serif; font-weight: 300; color: var(--cobalto); line-height: 1.25; }
+    a { color: inherit; text-decoration: none; }
+
+    /* -- TOPBAR -- */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--level); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--level); }
+
+    /* -- HERO -- */
+    .page-hero { background: var(--level); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* -- MAIN -- */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* -- SECTION HEADER -- */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--cobalto-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* -- GRAMMAR NOTE -- */
+    .lang-note { background: rgba(78,85,29,0.06); border: 1.5px solid rgba(78,85,29,0.18); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--level); font-style: italic; }
+    .lang-note strong { color: var(--level); }
+
+    /* verb conjugation table */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1.5px solid var(--light-gray); margin: 16px 0; }
+    .info-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+    .info-table th { background: var(--level); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; text-align: left; white-space: nowrap; }
+    .info-table td { padding: 10px 16px; font-size: 14px; border-top: 1px solid var(--light-gray); }
+    .info-table tr:first-child td { border-top: none; }
+    .info-table tr:nth-child(even) td { background: var(--off-white); }
+    .info-table td:first-child { font-weight: 600; color: var(--level); white-space: nowrap; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
+    .cult-note strong { color: var(--level); }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--level); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--level); white-space: nowrap; }
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+    @media (max-width: 700px) { .vocab-grid { grid-template-columns: 1fr; } }
+
+    /* email replica */
+    .email-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; overflow: hidden; }
+    .email-head { background: var(--off-white); padding: 16px 24px; border-bottom: 1px solid var(--light-gray); }
+    .email-row { font-size: 13px; color: #888; padding: 2px 0; }
+    .email-row strong { color: var(--texto); font-weight: 600; }
+    .email-body { padding: 24px 28px; }
+    .email-body p { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 14px; }
+    .email-body p:last-of-type { margin-bottom: 0; }
+
+    /* -- EXERCISE BLOCK -- */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--level); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 60px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--level); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 100px; outline: none; transition: border-color 0.2s; text-align: center; }
+    .blank-input:focus { border-bottom-color: var(--level); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* transform list (reorder words / free rewrite) */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--level); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    /* writing prompt */
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--level); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    /* model answers reveal */
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(78,85,29,.07); border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--level); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; background: transparent; border: 1.5px solid var(--level); color: var(--level); border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s; }
+    .see-answers-btn:hover { background: var(--level); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .email-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">A1</div>
+    <span class="topbar-name">Iniciante</span>
+  </div>
+  <a href="../a1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>O Que Você<em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;"> Lê, Ouve e Vê?</em></h1>
+    <p>An e-mail from Vera in Belo Horizonte teaches you three irregular verbs in the present tense: <strong style="color:white;">ler, ouvir</strong> and <strong style="color:white;">ver</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>LER, OUVIR, VER</span>
+      <span class="meta-pill"><span class="dot"></span>Presente do indicativo</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Before You Read</h2>
+        <p>Learn these words before you read the e-mail</p>
+      </div>
+    </div>
+
+    <div class="vocab-grid">
+      <table class="vocab-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="vocab-pt">as notícias</td><td>the news</td></tr>
+          <tr><td class="vocab-pt">o celular</td><td>the cell phone</td></tr>
+          <tr><td class="vocab-pt">o marido</td><td>the husband</td></tr>
+          <tr><td class="vocab-pt">o rádio</td><td>the radio</td></tr>
+          <tr><td class="vocab-pt">a cozinha</td><td>the kitchen</td></tr>
+          <tr><td class="vocab-pt">a varanda</td><td>the balcony</td></tr>
+          <tr><td class="vocab-pt">a sala</td><td>the living room</td></tr>
+          <tr><td class="vocab-pt">o quarto</td><td>the bedroom</td></tr>
+          <tr><td class="vocab-pt">a novela</td><td>the soap opera</td></tr>
+        </tbody>
+      </table>
+      <table class="vocab-table">
+        <thead><tr><th>Português</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="vocab-pt">o vídeo</td><td>the video</td></tr>
+          <tr><td class="vocab-pt">a revista</td><td>the magazine</td></tr>
+          <tr><td class="vocab-pt">a mensagem</td><td>the message</td></tr>
+          <tr><td class="vocab-pt">o poema</td><td>the poem</td></tr>
+          <tr><td class="vocab-pt">o cardápio</td><td>the menu</td></tr>
+          <tr><td class="vocab-pt">o vizinho / a vizinha</td><td>the neighbor</td></tr>
+          <tr><td class="vocab-pt">a avó</td><td>the grandmother</td></tr>
+          <tr><td class="vocab-pt">os avós</td><td>the grandparents</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: LANGUAGE REFERENCE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📖</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>LER, OUVIR and VER — present indicative</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <p>These three verbs are irregular. The <strong>eu</strong> form is the one to memorize — the other forms follow a regular pattern.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th></th><th>LER (to read)</th><th>OUVIR (to listen to)</th><th>VER (to see, to watch)</th></tr></thead>
+        <tbody>
+          <tr><td>eu</td><td>leio</td><td>ouço</td><td>vejo</td></tr>
+          <tr><td>você, ele, ela, a gente</td><td>lê</td><td>ouve</td><td>vê</td></tr>
+          <tr><td>nós</td><td>lemos</td><td>ouvimos</td><td>vemos</td></tr>
+          <tr><td>vocês, eles, elas</td><td>leem</td><td>ouvem</td><td>veem</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lang-note" style="margin-top:20px;">
+      <p><strong>a gente</strong> = we, but it takes the same form as <em>ele/ela</em>: <em>a gente ouve</em> (not <em>a gente ouvimos</em>).</p>
+      <p style="margin-bottom:0;"><strong>VER</strong> covers both <em>see</em> and <em>watch</em>: <em>Eu vejo uma série.</em> = <em>Eu assisto uma série.</em></p>
+    </div>
+
+    <div class="cult-note">
+      <strong>A novela:</strong> No Brasil, a novela é muito popular. A novela da noite começa às nove horas, na televisão. Muitas famílias veem a novela juntas na sala e falam da novela no dia seguinte, no trabalho ou na escola.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 3: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read Vera's e-mail before your lesson</p>
+      </div>
+    </div>
+
+    <div class="email-box">
+      <div class="email-head">
+        <div class="email-row"><strong>De:</strong> vera.almeida@email.com.br</div>
+        <div class="email-row"><strong>Para:</strong> Emily</div>
+        <div class="email-row"><strong>Assunto:</strong> A nossa casa</div>
+      </div>
+      <div class="email-body">
+        <p>Oi, Emily!</p>
+        <p>Tudo bem? Eu sou a Vera. Você chega em Belo Horizonte no dia 10 e eu quero falar um pouco da nossa casa.</p>
+        <p>De manhã, eu leio as notícias no celular e tomo café. Meu marido, o Jorge, não lê as notícias: ele ouve o rádio na cozinha.</p>
+        <p>À tarde, eu ouço música na varanda. O Jorge vê vídeos de futebol no computador.</p>
+        <p>À noite, nós vemos a novela na sala. Meus filhos não veem a novela: eles leem no quarto ou ouvem podcast.</p>
+        <p>E você? O que você lê, ouve e vê em casa?</p>
+        <p>Um beijo,<br>Vera</p>
+      </div>
+    </div>
+
+    <p style="font-size:11px; color:#bbb; margin-top:16px; font-style:italic;">Texto construído para fins didáticos — Brazilian Portuguese Hub.</p>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions about the text in Portuguese</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer the questions about the text in Portuguese.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quem lê as notícias de manhã?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Who reads the news in the morning?</span>
+        <textarea class="open-textarea" placeholder="..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. O que o Jorge ouve na cozinha?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What does Jorge listen to in the kitchen?</span>
+        <textarea class="open-textarea" placeholder="..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Onde a Vera ouve música?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Where does Vera listen to music?</span>
+        <textarea class="open-textarea" placeholder="..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O que a Vera e o Jorge veem à noite?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What do Vera and Jorge watch at night?</span>
+        <textarea class="open-textarea" placeholder="..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Os filhos da Vera veem a novela?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Do Vera's children watch the soap opera?</span>
+        <textarea class="open-textarea" placeholder="..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>A Vera lê as notícias.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Ele ouve o rádio.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Na varanda.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Eles veem a novela.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Não, eles não veem a novela. Eles leem no quarto ou ouvem podcast.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Which verb goes with each one?</h3>
+          <p>Write LER, OUVIR or VER</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Which verb goes with each one? Write LER, OUVIR or VER.</p>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><input class="blank-input" data-answer="ver" placeholder="___________"><span>a novela</span></li>
+        <li><span class="item-num">2.</span><input class="blank-input" data-answer="ler" placeholder="___________"><span>uma mensagem</span></li>
+        <li><span class="item-num">3.</span><input class="blank-input" data-answer="ouvir" placeholder="___________"><span>o rádio</span></li>
+        <li><span class="item-num">4.</span><input class="blank-input" data-answer="ler" placeholder="___________"><span>um poema</span></li>
+        <li><span class="item-num">5.</span><input class="blank-input" data-answer="ver" placeholder="___________"><span>um vídeo</span></li>
+        <li><span class="item-num">6.</span><input class="blank-input" data-answer="ouvir" placeholder="___________"><span>uma música</span></li>
+        <li><span class="item-num">7.</span><input class="blank-input" data-answer="ver" placeholder="___________"><span>televisão</span></li>
+        <li><span class="item-num">8.</span><input class="blank-input" data-answer="ler" placeholder="___________"><span>o cardápio</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-2','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-2','blanks-result-2')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Complete with the correct form</h3>
+          <p>LER, OUVIR or VER</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete the sentences with LER, OUVIR or VER in the correct form.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><span>Eu</span><input class="blank-input" data-answer="ouço" placeholder="___________"><span>música no celular.</span></li>
+        <li><span class="item-num">2.</span><span>A minha avó</span><input class="blank-input" data-answer="lê" placeholder="___________"><span>um livro no sofá.</span></li>
+        <li><span class="item-num">3.</span><span>Nós</span><input class="blank-input" data-answer="vemos" placeholder="___________"><span>um filme na sala à noite.</span></li>
+        <li><span class="item-num">4.</span><span>Você</span><input class="blank-input" data-answer="ouve" placeholder="___________"><span>podcast em português?</span></li>
+        <li><span class="item-num">5.</span><span>Os meus vizinhos</span><input class="blank-input" data-answer="veem" placeholder="___________"><span>televisão na varanda.</span></li>
+        <li><span class="item-num">6.</span><span>A gente</span><input class="blank-input" data-answer="ouve" placeholder="___________"><span>o rádio no carro.</span></li>
+        <li><span class="item-num">7.</span><span>Eu não</span><input class="blank-input" data-answer="vejo" placeholder="___________"><span>novela.</span></li>
+        <li><span class="item-num">8.</span><span>Vocês</span><input class="blank-input" data-answer="leem" placeholder="___________"><span>revistas em inglês?</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Put the words in order</h3>
+          <p>Write the sentence using the correct form of the verb</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Put the words in order and write the sentence. Use the correct form of the verb.</p>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. de manhã / o jornal / ler / a minha mãe</p><input class="transform-input" type="text" placeholder="Escreva a frase..."></li>
+        <li class="transform-item"><p class="transform-original">2. no computador / nós / um podcast / ouvir</p><input class="transform-input" type="text" placeholder="Escreva a frase..."></li>
+        <li class="transform-item"><p class="transform-original">3. na sala / televisão / os meus avós / ver</p><input class="transform-input" type="text" placeholder="Escreva a frase..."></li>
+        <li class="transform-item"><p class="transform-original">4. em português / eu / uma revista / ler</p><input class="transform-input" type="text" placeholder="Escreva a frase..."></li>
+        <li class="transform-item"><p class="transform-original">5. no quarto / música / você / ouvir</p><input class="transform-input" type="text" placeholder="Escreva a frase..."></li>
+        <li class="transform-item"><p class="transform-original">6. no domingo / um filme / a gente / ver</p><input class="transform-input" type="text" placeholder="Escreva a frase..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex4-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex4-answers">
+        <div class="model-answer-item"><p>1. A minha mãe lê o jornal de manhã.</p></div>
+        <div class="model-answer-item"><p>2. Nós ouvimos um podcast no computador.</p></div>
+        <div class="model-answer-item"><p>3. Os meus avós veem televisão na sala.</p></div>
+        <div class="model-answer-item"><p>4. Eu leio uma revista em português.</p></div>
+        <div class="model-answer-item"><p>5. Você ouve música no quarto.</p></div>
+        <div class="model-answer-item"><p>6. A gente vê um filme no domingo.</p></div>
+        <p class="model-note">A expressão de tempo ou lugar também pode vir no início: "De manhã, a minha mãe lê o jornal." As duas ordens são aceitas.</p>
+      </div>
+    </div>
+
+    <!-- Exercise 5 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Rewrite with the new subject</h3>
+          <p>Change the verb to match the new subject</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Rewrite the sentences with the new subject.</p>
+
+      <ul class="blanks-list" id="blanks-list-5">
+        <li><span class="item-num">1.</span><span>Eu vejo um vídeo no computador. → A Vera</span><input class="blank-input" data-answer="vê" placeholder="___________"><span>um vídeo no computador.</span></li>
+        <li><span class="item-num">2.</span><span>Nós lemos o jornal no domingo. → Eu</span><input class="blank-input" data-answer="leio" placeholder="___________"><span>o jornal no domingo.</span></li>
+        <li><span class="item-num">3.</span><span>Ela ouve o rádio na cozinha. → Nós</span><input class="blank-input" data-answer="ouvimos" placeholder="___________"><span>o rádio na cozinha.</span></li>
+        <li><span class="item-num">4.</span><span>Eles veem a novela na sala. → Eu</span><input class="blank-input" data-answer="vejo" placeholder="___________"><span>a novela na sala.</span></li>
+        <li><span class="item-num">5.</span><span>Eu ouço música no quarto. → Os meus filhos</span><input class="blank-input" data-answer="ouvem" placeholder="___________"><span>música no quarto.</span></li>
+        <li><span class="item-num">6.</span><span>Você lê revistas? → Vocês</span><input class="blank-input" data-answer="leem" placeholder="___________"><span>revistas?</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-5','blanks-result-5')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-5','blanks-result-5')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-5" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 6 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">6</div>
+        <div>
+          <h3>Emily answers Vera's e-mail</h3>
+          <p>Complete with LER, OUVIR or VER in the correct form</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete with LER, OUVIR or VER in the correct form.</p>
+
+      <div class="email-box">
+        <div class="email-head">
+          <div class="email-row"><strong>De:</strong> emily.parker@email.com</div>
+          <div class="email-row"><strong>Para:</strong> Vera</div>
+          <div class="email-row"><strong>Assunto:</strong> RE: A nossa casa</div>
+        </div>
+        <div class="email-body">
+          <p>Oi, Vera!</p>
+          <ul class="blanks-list" id="blanks-list-6" style="margin-bottom:0;">
+            <li><span class="item-num">1.</span><span>Aqui em casa, de manhã eu</span><input class="blank-input" data-answer="leio" placeholder="___________"><span>uma revista e o meu irmão</span><input class="blank-input" data-answer="ouve" placeholder="___________"><span>música no quarto.</span></li>
+            <li><span class="item-num">2.</span><span>À tarde, nós</span><input class="blank-input" data-answer="ouvimos" placeholder="___________"><span>um podcast de português no carro.</span></li>
+            <li><span class="item-num">3.</span><span>À noite, eu</span><input class="blank-input" data-answer="vejo" placeholder="___________"><span>um filme na sala ou</span><input class="blank-input" data-answer="leio" placeholder="___________"><span>um livro no quarto.</span></li>
+            <li><span class="item-num">4.</span><span>Os meus pais não</span><input class="blank-input" data-answer="veem" placeholder="___________"><span>filme: eles</span><input class="blank-input" data-answer="ouvem" placeholder="___________"><span>o rádio.</span></li>
+          </ul>
+          <p style="margin-top:14px;">Até o dia 10!<br>Emily</p>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-6','blanks-result-6')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-6','blanks-result-6')" style="background:transparent; color:var(--level); border:1.5px solid var(--level);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-6" class="result-msg"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Agora Escreva Sobre Você</h2>
+        <p>Now write about you</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">7</div>
+        <div>
+          <h3>Complete the sentences</h3>
+          <p>Write about your own routine</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Now write about you. Complete the sentences.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">1. O que você lê de manhã?</label>
+        <textarea class="open-textarea" placeholder="De manhã, eu..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">2. O que você ouve em casa?</label>
+        <textarea class="open-textarea" placeholder="Em casa, eu..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">3. O que você e a sua família veem à noite?</label>
+        <textarea class="open-textarea" placeholder="À noite, nós..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:8px;">4. O que os seus amigos leem?</label>
+        <textarea class="open-textarea" placeholder="Os meus amigos..."></textarea>
+      </div>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box" style="margin-top:32px;">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// -- BREVO SUBMIT --
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
