@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onde Vale Mais a Pena Comprar? | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --cobalto:    #265B8B;
+      --cobalto-light: #EEF4FB;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+      --marrom:     #967E63;
+      --marrom-light: #F1ECE6;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* -- TOPBAR -- */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:#967E63; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:#967E63; }
+
+    /* -- HERO -- */
+    .page-hero { background: #967E63; padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 560px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+
+    /* -- MAIN -- */
+    .main { padding: 52px 48px 100px; max-width: 900px; margin: 0 auto; }
+
+    /* -- SECTION HEADER -- */
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .sec-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-text  { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* -- GRAMMAR NOTE -- */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0; }
+    .form-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .form-card-header { background: var(--marrom); padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+    .form-table-wrap { overflow-x: auto; }
+    .form-table { width: 100%; min-width: 480px; border-collapse: collapse; }
+    .form-table tr { border-bottom: 1px solid var(--light-gray); }
+    .form-table tr:last-child { border-bottom: none; }
+    .form-table td { padding: 10px 16px; font-size: 13.5px; }
+    .form-table th { padding: 10px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #999; text-align: left; border-bottom: 1.5px solid var(--light-gray); }
+
+    .examples-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+    .ex-pair { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--light-gray); font-size: 14px; flex-wrap: wrap; }
+    .ex-pair:last-child { border-bottom: none; }
+    .ex-pt { flex: 1; min-width: 200px; color: var(--marrom); font-weight: 600; }
+    .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
+
+    .time-note { background: var(--baunilha2); border-left: 3px solid var(--pitomba); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .time-note strong { color: var(--pitomba); }
+    .time-note em { font-style: italic; font-weight: 600; }
+
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* -- TEXT READER -- */
+    .text-reader { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 36px 40px; }
+    .text-fonte { font-size: 11px; color: #aaa; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .text-fonte::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--marrom); flex-shrink: 0; }
+    .text-title { font-family: 'Trirong', serif; font-size: 20px; font-weight: 400; color: var(--marrom); margin-bottom: 4px; }
+    .text-byline { font-size: 12px; color: #aaa; margin-bottom: 28px; }
+    .text-reader p.text-para { font-size: 15px; color: var(--texto); line-height: 1.9; margin-bottom: 16px; }
+    .text-reader p.text-para:last-of-type { margin-bottom: 0; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+
+    .price-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--light-gray); }
+    .price-table th { background: var(--marrom); color: white; padding: 10px 14px; text-align: left; font-weight: 700; }
+    .price-table td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr:nth-child(even) td { background: var(--off-white); }
+
+    /* -- EXERCISE BLOCK -- */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 90px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--marrom); }
+
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #967E63; margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid #967E63; border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #967E63; margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; background: transparent; border: 1.5px solid #967E63; color: #967E63; border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s; }
+    .see-answers-btn:hover { background: #967E63; color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+      .text-reader { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Onde Vale Mais<br><em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">a Pena Comprar?</em></h1>
+    <p>Comparing prices and places to shop — practicing the three degrees of comparison in Brazilian Portuguese: <strong style="color:white;">superioridade, igualdade e inferioridade</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Comparativos</span>
+      <span class="meta-pill"><span class="dot"></span>Superioridade · Igualdade · Inferioridade</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION 1: GRAMMAR NOTE -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Comparatives — three degrees of comparison</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. The three degrees of comparison</div>
+      <div class="form-grid" style="margin-top:4px;">
+        <div class="form-card">
+          <div class="form-table-wrap">
+          <table class="form-table">
+            <thead><tr><th>Comparação</th><th>Estrutura</th><th>Exemplo</th></tr></thead>
+            <tr><td><strong>Superioridade</strong></td><td>mais + adjetivo/advérbio + (do) que</td><td><em>Os preços são mais altos do que na feira.</em></td></tr>
+            <tr><td><strong>Igualdade</strong></td><td>tão + adjetivo/advérbio + quanto</td><td><em>As frutas são tão frescas quanto as do supermercado.</em></td></tr>
+            <tr><td><strong>Inferioridade</strong></td><td>menos + adjetivo/advérbio + (do) que</td><td><em>O mercadinho tem menos variedade do que o atacarejo.</em></td></tr>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Tão or tanto?</div>
+      <p><strong>Tão</strong> goes with adjectives and adverbs: <em>a feira é tão barata quanto o atacarejo.</em></p>
+      <p>With a <strong>noun</strong>, use <strong>tanto / tanta / tantos / tantas + quanto</strong> — it agrees with the noun: <em>A feira não tem tantos produtos de limpeza quanto um supermercado.</em></p>
+      <p style="margin-bottom:0;">With a <strong>verb</strong>, use <strong>tanto quanto</strong>, which never changes: <em>Eu gasto tanto quanto você.</em></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Do is optional</div>
+      <p style="margin-bottom:0;"><em>mais barato que</em> = <em>mais barato do que</em>. Both are correct in spoken and written Brazilian Portuguese — use whichever sounds more natural to you.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 4. Que or de?</div>
+      <p style="margin-bottom:0;">Before a <strong>number</strong>, always use <strong>de</strong>: <em>mais de dez reais, menos de cinco produtos.</em></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 5. Irregular forms</div>
+      <p><strong>bom → melhor</strong> · <strong>ruim → pior</strong> · <strong>grande → maior</strong> · <strong>pequeno → menor</strong>. Never say <em>mais bom</em> or <em>mais grande</em>.</p>
+      <p><strong>Melhor</strong> and <strong>pior</strong> also work as adverbs: <em>Ela cozinha melhor do que eu.</em></p>
+      <p style="margin-bottom:0;">For a person's age, the standard forms are <strong>mais velho / mais novo (do) que</strong> — not <em>maior/menor</em>.</p>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural — a feira livre e a pesquisa de preços:</strong> Em quase todas as cidades brasileiras, a feira livre acontece uma vez por semana, sempre no mesmo dia e na mesma rua. Os feirantes montam as barracas de manhã cedo e, no fim da manhã, costumam baixar os preços para vender o que sobrou — é a hora da pechincha. Comparar preços antes de comprar é um hábito comum no Brasil, e com razão: em setembro de 2026, uma pesquisa do Procon de Lages (SC) encontrou diferenças de até 749,2% no preço de um mesmo produto entre nove estabelecimentos da cidade. <span style="font-size:11.5px;color:#888;font-style:italic;">Fonte: pesquisa mensal de preços do Procon de Lages (SC), setembro de 2026.</span>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 2: VOCABULARY -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📝</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Places to shop and everyday shopping words</p>
+      </div>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">o atacarejo</td><td>wholesale-retail store (bulk prices, open to the public)</td></tr>
+        <tr><td class="vocab-pt">o mercadinho (da esquina)</td><td>the corner store, small neighborhood market</td></tr>
+        <tr><td class="vocab-pt">a feira livre</td><td>the weekly open-air street market</td></tr>
+        <tr><td class="vocab-pt">o sacolão</td><td>produce market (fruit and vegetables)</td></tr>
+        <tr><td class="vocab-pt">a barraca</td><td>the market stall</td></tr>
+        <tr><td class="vocab-pt">o feirante</td><td>the market vendor</td></tr>
+        <tr><td class="vocab-pt">pechinchar</td><td>to haggle, to bargain</td></tr>
+        <tr><td class="vocab-pt">a embalagem</td><td>the package, packaging</td></tr>
+        <tr><td class="vocab-pt">a marca</td><td>the brand</td></tr>
+        <tr><td class="vocab-pt">a variedade</td><td>the range, variety</td></tr>
+        <tr><td class="vocab-pt">o atendimento</td><td>the service (how customers are treated)</td></tr>
+        <tr><td class="vocab-pt">a prateleira</td><td>the shelf</td></tr>
+        <tr><td class="vocab-pt">o carrinho</td><td>the shopping cart</td></tr>
+        <tr><td class="vocab-pt">o caixa</td><td>the checkout</td></tr>
+        <tr><td class="vocab-pt">a conta</td><td>the bill, the total</td></tr>
+        <tr><td class="vocab-pt">valer a pena</td><td>to be worth it</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION 3: READING TEXT -->
+    <div class="sec-header">
+      <div class="sec-icon icon-text">📖</div>
+      <div>
+        <h2>Leitura</h2>
+        <p>Read the column carefully before your lesson</p>
+      </div>
+    </div>
+
+    <div class="text-reader">
+      <div class="text-title">Onde vale mais a pena comprar?</div>
+      <div class="text-byline">Coluna Dinheiro Curto — por Renata Prado</div>
+
+      <p class="text-para">Toda semana recebo a mesma pergunta: onde a gente economiza mais nas compras do mês? A resposta depende do que você procura.</p>
+      <p class="text-para">No atacarejo, os preços costumam ser menores do que nos supermercados de bairro, principalmente quando você leva embalagens grandes. Em compensação, a loja fica longe, o carrinho enche rápido e a conta no fim é maior do que você imaginava.</p>
+      <p class="text-para">O mercadinho da esquina é o contrário: tem menos variedade do que o atacarejo e os preços são um pouco mais altos, mas você gasta menos tempo e compra só o necessário. Para quem mora sozinho, ele costuma ser melhor.</p>
+      <p class="text-para">E a feira? Na feira, as frutas e os legumes são tão frescos quanto os da melhor loja da cidade — muitas vezes até mais — e você ainda pode pechinchar no fim da manhã. Por outro lado, a feira não tem tantos produtos de limpeza quanto um supermercado.</p>
+      <p class="text-para">Minha sugestão é simples: compare antes de comprar. A diferença entre o menor e o maior preço de um mesmo produto pode ser bem maior do que você pensa.</p>
+
+      <p style="font-size:11px; color:#bbb; margin-top:24px; font-style:italic;">Texto construído para fins didáticos — Brazilian Portuguese Hub.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Comprehension</h3>
+          <p>Answer the questions about the text in Portuguese</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer in Portuguese, using complete sentences based on the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Segundo a colunista, qual é a principal vantagem do atacarejo?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">According to the columnist, what is the main advantage of the atacarejo?</span>
+        <textarea class="open-textarea" placeholder="A principal vantagem é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Por que ela diz que a conta do atacarejo pode ser maior do que o esperado?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Why does she say the atacarejo bill can be higher than expected?</span>
+        <textarea class="open-textarea" placeholder="Porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Para quem o mercadinho da esquina costuma ser a melhor opção? Por quê?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Who is the corner store usually the best option for? Why?</span>
+        <textarea class="open-textarea" placeholder="Para quem..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O que a feira oferece que o supermercado nem sempre oferece?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What does the street market offer that the supermarket doesn't always offer?</span>
+        <textarea class="open-textarea" placeholder="A feira oferece..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Qual é a sugestão final da colunista?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What is the columnist's final suggestion?</span>
+        <textarea class="open-textarea" placeholder="A sugestão final é..."></textarea>
+      </div>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex1-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex1-answers">
+        <div class="model-answer-item"><div class="model-label">Question 1</div><p>Os preços costumam ser menores do que nos supermercados de bairro, principalmente em embalagens grandes.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 2</div><p>Porque a loja fica longe, o carrinho enche rápido e no fim a conta sai maior do que o esperado.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 3</div><p>Para quem mora sozinho, porque gasta menos tempo e compra só o necessário.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 4</div><p>Frutas e legumes tão frescos quanto os da melhor loja da cidade e a possibilidade de pechinchar no fim da manhã.</p></div>
+        <div class="model-answer-item"><div class="model-label">Question 5</div><p>Comparar preços antes de comprar.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Superiority, equality, or inferiority?</h3>
+          <p>Classify each sentence from the column</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Read each sentence from the column and write S (superioridade), I (igualdade) or F (inferioridade).</p>
+
+      <ul class="blanks-list" id="blanks-list-2">
+        <li><span class="item-num">1.</span><span>Os preços do mercadinho são mais altos do que os do atacarejo.</span><input class="blank-input" data-answer="S" style="min-width:50px;" placeholder="___"></li>
+        <li><span class="item-num">2.</span><span>O mercadinho tem menos variedade do que o atacarejo.</span><input class="blank-input" data-answer="F" style="min-width:50px;" placeholder="___"></li>
+        <li><span class="item-num">3.</span><span>As frutas da feira são tão frescas quanto as do supermercado.</span><input class="blank-input" data-answer="I" style="min-width:50px;" placeholder="___"></li>
+        <li><span class="item-num">4.</span><span>Você gasta menos tempo no mercadinho do que no atacarejo.</span><input class="blank-input" data-answer="F" style="min-width:50px;" placeholder="___"></li>
+        <li><span class="item-num">5.</span><span>Na feira, você encontra tanta variedade de frutas quanto em um supermercado.</span><input class="blank-input" data-answer="I" style="min-width:50px;" placeholder="___"></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-2','blanks-result-2')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-2','blanks-result-2')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-2" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Complete the sentences</h3>
+          <p>The symbol shows the type of comparison</p>
+        </div>
+      </div>
+      <p class="ex-instruction">(+) superioridade · (=) igualdade · (−) inferioridade. Complete each sentence with the correct comparative words.</p>
+
+      <ul class="blanks-list" id="blanks-list-3">
+        <li><span class="item-num">1.</span><span>(=) A feira é</span><input class="blank-input" data-answer="tão" placeholder="___________"><span>barata</span><input class="blank-input" data-answer="quanto" placeholder="___________"><span>o atacarejo.</span></li>
+        <li><span class="item-num">2.</span><span>(−) O mercadinho tem</span><input class="blank-input" data-answer="menos" placeholder="___________"><span>marcas</span><input class="blank-input" data-answer="do que|que" placeholder="___________"><span>o supermercado.</span></li>
+        <li><span class="item-num">3.</span><span>(+) Este sabão em pó é</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>caro</span><input class="blank-input" data-answer="do que|que" placeholder="___________"><span>aquele.</span></li>
+        <li><span class="item-num">4.</span><span>(=) Eu gasto</span><input class="blank-input" data-answer="tanto" placeholder="___________"><span>na feira</span><input class="blank-input" data-answer="quanto" placeholder="___________"><span>no supermercado.</span></li>
+        <li><span class="item-num">5.</span><span>(−) A loja do bairro tem</span><input class="blank-input" data-answer="menos" placeholder="___________"><span>produtos de limpeza</span><input class="blank-input" data-answer="do que|que" placeholder="___________"><span>o atacarejo.</span></li>
+        <li><span class="item-num">6.</span><span>(=) As frutas do sacolão são</span><input class="blank-input" data-answer="tão" placeholder="___________"><span>frescas</span><input class="blank-input" data-answer="quanto" placeholder="___________"><span>as da feira.</span></li>
+        <li><span class="item-num">7.</span><span>(=) Este mês eu comprei</span><input class="blank-input" data-answer="tanto" placeholder="___________"><span>arroz</span><input class="blank-input" data-answer="quanto" placeholder="___________"><span>no mês passado.</span></li>
+        <li><span class="item-num">8.</span><span>(+) O atendimento do mercadinho é</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>atencioso</span><input class="blank-input" data-answer="do que|que" placeholder="___________"><span>o do atacarejo.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-3','blanks-result-3')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-3','blanks-result-3')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-3" class="result-msg"></div>
+      <p class="model-note" style="margin-top:12px;">Em 2, 3, 5 e 8, "que" sem "do" também está correto.</p>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Price survey</h3>
+          <p>Compare the lowest and the highest price of each product</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Look at the price survey below. Write one sentence about each product, comparing the lowest and the highest price. Do not repeat the same structure more than twice.</p>
+
+      <table class="price-table">
+        <thead><tr><th>Produto</th><th>Menor preço</th><th>Maior preço</th></tr></thead>
+        <tbody>
+          <tr><td>Laranja pera (kg)</td><td>R$ 1,99</td><td>R$ 16,90</td></tr>
+          <tr><td>Carne moída de 2ª (kg)</td><td>R$ 8,49</td><td>R$ 49,90</td></tr>
+          <tr><td>Sabão em pó (1 kg)</td><td>R$ 4,09</td><td>R$ 16,99</td></tr>
+          <tr><td>Leite em pó (350–380 g)</td><td>R$ 7,49</td><td>R$ 29,99</td></tr>
+          <tr><td>Extrato de tomate (300 g)</td><td>R$ 2,39</td><td>R$ 7,99</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px; color:#bbb; margin-bottom:20px; font-style:italic;">Dados: pesquisa mensal de preços do Procon de Lages (SC), setembro de 2026, em nove estabelecimentos.</p>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. Laranja pera</p><input class="transform-input" type="text" placeholder="Escreva sua frase..."></li>
+        <li class="transform-item"><p class="transform-original">2. Carne moída de 2ª</p><input class="transform-input" type="text" placeholder="Escreva sua frase..."></li>
+        <li class="transform-item"><p class="transform-original">3. Sabão em pó</p><input class="transform-input" type="text" placeholder="Escreva sua frase..."></li>
+        <li class="transform-item"><p class="transform-original">4. Leite em pó</p><input class="transform-input" type="text" placeholder="Escreva sua frase..."></li>
+        <li class="transform-item"><p class="transform-original">5. Extrato de tomate</p><input class="transform-input" type="text" placeholder="Escreva sua frase..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex4-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex4-answers">
+        <div class="model-answer-item"><p>1. A laranja pera mais cara custa mais de oito vezes o preço da mais barata.</p></div>
+        <div class="model-answer-item"><p>2. A carne moída mais barata é bem mais em conta do que a mais cara.</p></div>
+        <div class="model-answer-item"><p>3. O sabão em pó mais caro custa quatro vezes mais do que o mais barato.</p></div>
+        <div class="model-answer-item"><p>4. A diferença em reais é maior na carne moída do que em todos os outros produtos da lista.</p></div>
+        <div class="model-answer-item"><p>5. O extrato de tomate tem a menor diferença de preço da lista.</p></div>
+        <p class="model-note">Respostas possíveis — outras frases também podem estar corretas.</p>
+      </div>
+    </div>
+
+    <!-- Exercise 5 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Comparative form</h3>
+          <p>Complete with the comparative form of the adjective in parentheses</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Watch out for the irregular forms and for agreement with the subject.</p>
+
+      <ul class="blanks-list" id="blanks-list-5">
+        <li><span class="item-num">1.</span><span>O pão da padaria é</span><input class="blank-input" data-answer="melhor" placeholder="___________"><span>do que o do supermercado. (bom)</span></li>
+        <li><span class="item-num">2.</span><span>A fila do atacarejo é</span><input class="blank-input" data-answer="maior" placeholder="___________"><span>do que a do mercadinho. (grande)</span></li>
+        <li><span class="item-num">3.</span><span>Este carrinho é</span><input class="blank-input" data-answer="menor" placeholder="___________"><span>do que aquele. (pequeno)</span></li>
+        <li><span class="item-num">4.</span><span>O atendimento por telefone foi</span><input class="blank-input" data-answer="pior" placeholder="___________"><span>do que eu esperava. (ruim)</span></li>
+        <li><span class="item-num">5.</span><span>Na feira, as bananas estão</span><input class="blank-input" data-answer="melhores" placeholder="___________"><span>do que na semana passada. (bom)</span></li>
+        <li><span class="item-num">6.</span><span>As diferenças de preço são</span><input class="blank-input" data-answer="maiores" placeholder="___________"><span>do que eu imaginava. (grande)</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <button class="check-btn" onclick="checkBlanks('blanks-list-5','blanks-result-5')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('blanks-list-5','blanks-result-5')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="blanks-result-5" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 6 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">6</div>
+        <div>
+          <h3>Same meaning, different subject</h3>
+          <p>Rewrite each sentence so it keeps the same meaning</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Rewrite each sentence so that it keeps the same meaning, beginning as shown.</p>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. O atacarejo é mais barato do que o mercadinho.<br><em>O mercadinho...</em></p><input class="transform-input" type="text" placeholder="O mercadinho..."></li>
+        <li class="transform-item"><p class="transform-original">2. A feira tem tanta variedade de frutas quanto o supermercado.<br><em>O supermercado...</em></p><input class="transform-input" type="text" placeholder="O supermercado..."></li>
+        <li class="transform-item"><p class="transform-original">3. O mercadinho tem menos marcas do que o atacarejo.<br><em>O atacarejo...</em></p><input class="transform-input" type="text" placeholder="O atacarejo..."></li>
+        <li class="transform-item"><p class="transform-original">4. Este sabão em pó é pior do que o outro.<br><em>O outro sabão em pó...</em></p><input class="transform-input" type="text" placeholder="O outro sabão em pó..."></li>
+        <li class="transform-item"><p class="transform-original">5. A fila do caixa rápido é menor do que a do caixa comum.<br><em>A fila do caixa comum...</em></p><input class="transform-input" type="text" placeholder="A fila do caixa comum..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex6-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex6-answers">
+        <div class="model-answer-item"><p>1. O mercadinho é mais caro do que o atacarejo.</p></div>
+        <div class="model-answer-item"><p>2. O supermercado tem tanta variedade de frutas quanto a feira.</p></div>
+        <div class="model-answer-item"><p>3. O atacarejo tem mais marcas do que o mercadinho.</p></div>
+        <div class="model-answer-item"><p>4. O outro sabão em pó é melhor do que este.</p></div>
+        <div class="model-answer-item"><p>5. A fila do caixa comum é maior do que a do caixa rápido.</p></div>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção escrita</h2>
+        <p>Answer the columnist</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">7</div>
+        <div>
+          <h3>Write a reader's comment</h3>
+          <p>80–100 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a reader's comment answering Renata Prado. Use her column as your model. Say where you usually buy your groceries and compare two of those places. Include at least one comparison of superiority, one of equality and one of inferiority, and at least one irregular form (melhor, pior, maior, menor). Finish with a recommendation to other readers.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Resposta de leitor</div>
+        <p>Concordo com a Renata. Eu compro no mercadinho da esquina e no atacarejo. O atacarejo é mais barato do que o mercadinho, mas fica longe e eu perco a manhã inteira lá. O mercadinho tem menos opções do que o atacarejo, e mesmo assim o atendimento é melhor: o dono conhece todo mundo. Para frutas, nenhum dos dois é tão bom quanto a feira de domingo. Minha recomendação: compre o básico no atacarejo uma vez por mês e o resto perto de casa.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Onde você costuma fazer as compras do mês?</li>
+        <li>Compare dois desses lugares — preços, variedade, atendimento.</li>
+        <li>Use pelo menos uma comparação de superioridade, uma de igualdade e uma de inferioridade.</li>
+        <li>Termine com uma recomendação para os outros leitores.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:200px;" placeholder="Concordo com a Renata..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide model answers' : '👁 See model answers';
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const inputs = document.querySelectorAll('#' + listId + ' .blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// -- BREVO SUBMIT --
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
