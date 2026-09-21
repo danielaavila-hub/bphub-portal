@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheia de Manias — Raça Negra | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--pitomba:#967E63;--pitomba-bg:#F1ECE6;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--telha:#A1441D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--pitomba);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--pitomba);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.8rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray);vertical-align:top}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--pitomba);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--pitomba);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pitomba);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--pitomba);color:var(--pitomba)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--pitomba);color:#fff;border-color:var(--pitomba)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--pitomba);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:110px;outline:none;transition:border-color .2s;text-align:center}
+  .gap-input:focus{border-color:var(--telha)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .quirk-table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:10px}
+  .quirk-table th{background:var(--musgo);color:#fff;padding:8px 12px;text-align:left;font-weight:700}
+  .quirk-table th.narrow{text-align:center;width:70px}
+  .quirk-table td{padding:9px 12px;border-bottom:1px solid var(--light-gray)}
+  .quirk-table td.narrow{text-align:center}
+  .quirk-table tr:last-child td{border-bottom:none}
+  .quirk-table tr:nth-child(even) td{background:var(--baunilha)}
+  .quirk-check{width:20px;height:20px;cursor:pointer}
+  .word-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:10px 0}
+  .word-check-item{display:flex;align-items:center;gap:8px;font-size:.93rem}
+  .word-check-item input{width:18px;height:18px;cursor:pointer}
+  @media(max-width:480px){.word-check-grid{grid-template-columns:1fr}}
+  .prod-item{margin-bottom:18px;font-size:.93rem}
+  .prod-item p{margin-bottom:4px;line-height:1.5}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--pitomba)}
+  .transform-item{padding:12px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .transform-item:last-child{border-bottom:none}
+  .transform-original{margin-bottom:8px;line-height:1.5}
+  .transform-input{width:100%;border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.9rem;color:var(--nanquim);padding:4px 6px;outline:none}
+  .transform-input:focus{border-color:var(--telha)}
+  .model-answers-block{display:none;margin-top:16px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:10px;background:var(--pitomba-bg);border-left:3px solid var(--pitomba);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.88rem}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-note{font-size:.8rem;color:#999;font-style:italic;margin-top:8px}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--pitomba);color:var(--pitomba);border-radius:8px;padding:8px 16px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--pitomba);color:#fff}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--pitomba);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none;max-height:260px;overflow-y:auto}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">A2</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Pagode</span>
+  <span class="badge">Raça Negra</span>
+  <span class="badge">1992</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Cheia de Manias</h1>
+    <p class="fonte">Raça Negra · álbum <em>Raça Negra Vol. 3</em>, 1992 · composição de Luiz Carlos</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">O Raça Negra é um grupo paulista de pagode, formado em 1983. O cantor e compositor do grupo é Luiz Carlos. Nos anos 1990, o pagode romântico — samba com letras de amor — tocava em todas as rádios do Brasil, e o Raça Negra era um dos grupos mais famosos do país. "Cheia de Manias" é de 1992, e muita gente chama a canção de "a música do didididiê". Hoje, ela ainda toca em festas, churrascos e rodas de pagode, e artistas mais novos, como Thiaguinho e o grupo Sorriso Maroto, gravaram a canção junto com o Raça Negra.</p>
+  </div>
+
+  <!-- CULTURAL NOTE -->
+  <div class="card">
+    <p class="section-label">Nota cultural</p>
+    <div class="cult-box">
+      <strong>🏨 Sobre a palavra "motel"</strong><br>
+      Na canção, aparece a palavra <strong>motel</strong>. No Brasil, motel é um hotel só para casais, com quarto por hora — não é o mesmo tipo de hotel de estrada usado em viagens. Em viagens, os brasileiros ficam em hotéis ou pousadas.
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da canção</p>
+    <table class="vocab-table">
+      <thead><tr><th>Palavra</th><th>English</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">mania</td><td>quirk, habit</td><td>Falso cognato: em inglês, <em>mania</em> é uma obsessão. Em português, é um hábito pequeno — às vezes fofo, às vezes irritante.</td></tr>
+        <tr><td class="vocab-pt">dengosa (dengoso)</td><td>sweet and a little spoiled</td><td>Vem de <em>dengo</em> (carinho, mimo).</td></tr>
+        <tr><td class="vocab-pt">jeito</td><td>way (of being)</td><td><em>o jeito dela</em> = her way of being</td></tr>
+        <tr><td class="vocab-pt">deixar alguém</td><td>to leave someone</td><td></td></tr>
+        <tr><td class="vocab-pt">segurar a barra</td><td>to hang in there (informal)</td><td><em>a barra</em> = uma situação difícil. <em>A barra está pesada.</em> = Things are tough.</td></tr>
+        <tr><td class="vocab-pt">pro</td><td>to the (informal)</td><td><em>pro</em> = <em>para o</em></td></tr>
+        <tr><td class="vocab-pt">gostosa</td><td>delicious (food); sexy (person)</td><td>Sobre comida, é neutro. Sobre uma pessoa, é sexual — evite usar dessa forma.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Cheia de Manias (Raça Negra)</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Db3Zzd5D-E8"
+        title="Cheia de Manias — Raça Negra" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- EX 1: Antes de ouvir -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 1</p>
+    <p class="ex-title">Antes de ouvir</p>
+    <p class="ex-instr">Leia as quatro manias. Para cada uma, marque ✓ em fofa ou irritante. Não há resposta certa. Depois, ouça a canção — nela, um homem fala de uma mulher cheia de manias.<br><span style="color:#999;">Read the four quirks. For each one, check fofa (cute) or irritante (annoying). There's no right answer.</span></p>
+    <table class="quirk-table">
+      <thead><tr><th>Mania</th><th class="narrow">Fofa</th><th class="narrow">Irritante</th></tr></thead>
+      <tbody>
+        <tr><td>Ele só toma café na mesma xícara.</td><td class="narrow"><input type="checkbox" class="quirk-check" name="q1"></td><td class="narrow"><input type="checkbox" class="quirk-check" name="q1"></td></tr>
+        <tr><td>Ela dá nome às plantas da casa.</td><td class="narrow"><input type="checkbox" class="quirk-check" name="q2"></td><td class="narrow"><input type="checkbox" class="quirk-check" name="q2"></td></tr>
+        <tr><td>Ele responde às mensagens só com emojis.</td><td class="narrow"><input type="checkbox" class="quirk-check" name="q3"></td><td class="narrow"><input type="checkbox" class="quirk-check" name="q3"></td></tr>
+        <tr><td>Ela lê o final do livro primeiro.</td><td class="narrow"><input type="checkbox" class="quirk-check" name="q4"></td><td class="narrow"><input type="checkbox" class="quirk-check" name="q4"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EX 2: Primeira escuta -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 2</p>
+    <p class="ex-title">Primeira escuta</p>
+    <p class="ex-instr">Ouça a canção uma vez, do começo ao fim, sem pausar. Marque ✓ nas 5 palavras que você ouvir.<br><span style="color:#999;">Listen to the whole song once, without pausing. Check the 5 words you hear.</span></p>
+    <div class="word-check-grid" id="word-area">
+      <label class="word-check-item"><input type="checkbox" data-word="cinema"> cinema</label>
+      <label class="word-check-item"><input type="checkbox" data-word="praia"> praia</label>
+      <label class="word-check-item"><input type="checkbox" data-word="coracao"> coração</label>
+      <label class="word-check-item"><input type="checkbox" data-word="telefone"> telefone</label>
+      <label class="word-check-item"><input type="checkbox" data-word="porta"> porta</label>
+      <label class="word-check-item"><input type="checkbox" data-word="festa"> festa</label>
+      <label class="word-check-item"><input type="checkbox" data-word="casa"> casa</label>
+      <label class="word-check-item"><input type="checkbox" data-word="janela"> janela</label>
+      <label class="word-check-item"><input type="checkbox" data-word="jeito"> jeito</label>
+      <label class="word-check-item"><input type="checkbox" data-word="carro"> carro</label>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkWords()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetWords()">Refazer</button>
+    </div>
+    <div id="word-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 3: Segunda escuta -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 3</p>
+    <p class="ex-title">Segunda escuta</p>
+    <p class="ex-instr">Leia as frases. Depois, ouça a canção mais uma vez e marque <strong>V</strong> (verdadeiro) ou <strong>F</strong> (falso).<br><span style="color:#999;">Read the sentences. Then listen to the song again and mark V (true) or F (false).</span></p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>O cantor está na casa da mulher. <span style="color:#999;font-style:italic;">(The singer is at the woman's house.)</span></span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>A mulher quer ir ao cinema. <span style="color:#999;font-style:italic;">(The woman wants to go to the movies.)</span></span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Ele quer terminar o relacionamento, mas ela não quer. <span style="color:#999;font-style:italic;">(He wants to end the relationship, but she doesn't.)</span></span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>A mulher não sabe que é bonita. <span style="color:#999;font-style:italic;">(The woman doesn't know she's pretty.)</span></span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>No refrão, ele pede ajuda a ela. <span style="color:#999;font-style:italic;">(In the chorus, he asks her for help.)</span></span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+
+    <div class="prod-item" style="margin-top:18px;">
+      <p><strong>f)</strong> Para o cantor, as manias dela são fofas, irritantes ou as duas coisas? Responda com uma frase. <span style="color:#999;font-style:italic;">(For the singer, are her quirks cute, annoying, or both? Answer in one sentence.)</span></p>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">Para descrever o jeito de alguém</p>
+    <div class="gram-box">
+      <strong>cheio de + substantivo</strong> — full of, with lots of<br>
+      Na canção: a mulher é descrita como <em>cheia de manias</em>. <strong>Cheio</strong> concorda em gênero e número com a pessoa.
+      <table>
+        <thead><tr><th></th><th>ele</th><th>ela</th><th>eles</th><th>elas</th></tr></thead>
+        <tbody>
+          <tr><td></td><td>cheio</td><td>cheia</td><td>cheios</td><td>cheias</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:.85rem;">Exemplos: <em>O meu avô é cheio de histórias.</em> / <em>As minhas primas são cheias de planos.</em></p>
+    </div>
+    <div class="gram-box">
+      <strong>ter mania de + verbo no infinitivo</strong> — to have a (funny or annoying) habit of<br>
+      <em>Ela tem mania de dormir de meia.</em> — She has a habit of sleeping in socks.<br>
+      <em>Ele tem mania de não atender o celular.</em> — He has a habit of not picking up his phone.
+      <p style="margin-top:10px;font-size:.85rem;"><strong>ter:</strong> eu tenho · você/ele/ela tem · nós temos · vocês/eles/elas têm</p>
+    </div>
+  </div>
+
+  <!-- EX 4: Cheio ou cheia -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 4</p>
+    <p class="ex-title">Cheio ou cheia?</p>
+    <p class="ex-instr">O cantor fala sobre as pessoas da vida dele. Complete com cheio, cheia, cheios ou cheias.</p>
+    <div id="gap-area">
+      <div class="gap-row">
+        <span class="gap-num">a)</span>
+        <span>A namorada dele é bonita e</span>
+        <input class="gap-input" id="g1" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>de charme.</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">b)</span>
+        <span>O coração dele está</span>
+        <input class="gap-input" id="g2" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>de saudade.</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">c)</span>
+        <span>Os amigos do cantor são</span>
+        <input class="gap-input" id="g3" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>de conselhos.</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">d)</span>
+        <span>As irmãs dela são</span>
+        <input class="gap-input" id="g4" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>de ciúme.</span>
+      </div>
+      <div class="gap-row">
+        <span class="gap-num">e)</span>
+        <span>O cantor é</span>
+        <input class="gap-input" id="g5" type="text" autocomplete="off" spellcheck="false" placeholder="___________">
+        <span>de paciência com ela.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGaps()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGaps()">Refazer</button>
+    </div>
+    <div id="gap-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EX 5: As manias de todo mundo -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 5</p>
+    <p class="ex-title">As manias de todo mundo</p>
+    <p class="ex-instr">Os amigos do cantor conversam sobre manias. Reescreva cada frase com <strong>ter mania de</strong> e tire a palavra <strong>sempre</strong>.</p>
+    <div class="gram-box" style="margin-bottom:16px;">
+      <strong>Exemplo:</strong> Ele sempre fala com o cachorro. → Ele tem mania de falar com o cachorro.
+    </div>
+    <div class="transform-item"><p class="transform-original">a) Ela sempre muda de ideia no último minuto.</p><input class="transform-input" type="text" placeholder="Ela tem mania de..."></div>
+    <div class="transform-item"><p class="transform-original">b) Eu sempre canto no chuveiro.</p><input class="transform-input" type="text" placeholder="Eu tenho mania de..."></div>
+    <div class="transform-item"><p class="transform-original">c) Vocês sempre chegam atrasados na roda de pagode.</p><input class="transform-input" type="text" placeholder="Vocês têm mania de..."></div>
+    <div class="transform-item"><p class="transform-original">d) Nós sempre dizemos sim para ela.</p><input class="transform-input" type="text" placeholder="Nós temos mania de..."></div>
+    <div class="transform-item"><p class="transform-original">e) O cantor sempre liga para ela à meia-noite.</p><input class="transform-input" type="text" placeholder="O cantor tem mania de..."></div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers(this,'ex5-answers')">👁 Ver respostas-modelo</button>
+    <div class="model-answers-block" id="ex5-answers">
+      <div class="model-answer-item">a) Ela tem mania de mudar de ideia no último minuto.</div>
+      <div class="model-answer-item">b) Eu tenho mania de cantar no chuveiro.</div>
+      <div class="model-answer-item">c) Vocês têm mania de chegar atrasados na roda de pagode.</div>
+      <div class="model-answer-item">d) Nós temos mania de dizer sim para ela.</div>
+      <div class="model-answer-item">e) O cantor tem mania de ligar para ela à meia-noite.</div>
+    </div>
+  </div>
+
+  <!-- EX 6: De volta à canção -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 6</p>
+    <p class="ex-title">De volta à canção</p>
+    <p class="ex-instr">Ouça a canção mais uma vez. Quais são as manias da mulher? Escreva 2 manias dela com a expressão "ter mania de".<br><span style="color:#999;">Listen to the song again. What are the woman's quirks? Write 2 of them with ter mania de.</span></p>
+    <div class="prod-item">
+      <p><strong>1.</strong></p>
+      <textarea class="prod" placeholder="Ela tem mania de..."></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>2.</strong></p>
+      <textarea class="prod" placeholder="Ela tem mania de..."></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers(this,'ex6-answers')">👁 Ver exemplos possíveis</button>
+    <div class="model-answers-block" id="ex6-answers">
+      <div class="model-answer-item">Ela tem mania de dizer não.</div>
+      <div class="model-answer-item">Ela tem mania de não querer ir ao cinema.</div>
+      <div class="model-answer-item">Ela tem mania de não deixar o namorado ir embora.</div>
+      <div class="model-answer-item">Ela tem mania de mandar no coração dele.</div>
+      <p class="model-note">Outras respostas também podem estar corretas — o importante é usar "ter mania de" corretamente.</p>
+    </div>
+  </div>
+
+  <!-- EX 7: Sua vez -->
+  <div class="ex-card">
+    <p class="ex-num">Exercício 7</p>
+    <p class="ex-title">Sua vez</p>
+    <p class="ex-instr">Escreva uma frase para cada situação. Nas frases a, b e c, use <strong>ter mania de</strong>. Na frase d, use <strong>cheio</strong> ou <strong>cheia de</strong>.</p>
+    <div class="prod-item">
+      <p><strong>a)</strong> Você tem uma mania. Qual? <span style="color:#999;font-style:italic;">(You have a quirk. What is it?)</span></p>
+      <textarea class="prod" placeholder="Eu tenho mania de..."></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>b)</strong> Uma pessoa da sua família tem uma mania fofa. Qual? <span style="color:#999;font-style:italic;">(Someone in your family has a cute quirk. What is it?)</span></p>
+      <textarea class="prod" placeholder="..."></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>c)</strong> Na canção, gostar da mulher é uma barra. Para você, qual mania de outra pessoa é uma barra? <span style="color:#999;font-style:italic;">(In the song, loving her is tough. What quirk of someone else's is tough for you?)</span></p>
+      <textarea class="prod" placeholder="..."></textarea>
+    </div>
+    <div class="prod-item">
+      <p><strong>d)</strong> Como é uma pessoa importante para você? <span style="color:#999;font-style:italic;">(What is someone important to you like?)</span></p>
+      <textarea class="prod" placeholder="Ele/Ela é cheio(a) de..."></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Esconder' : (id === 'ex6-answers' ? '👁 Ver exemplos possíveis' : '👁 Ver respostas-modelo');
+  }
+
+  // EX 2: word check
+  const wordKey = ['cinema','coracao','porta','casa','jeito'];
+  function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'')}
+  function checkWords(){
+    const boxes = document.querySelectorAll('#word-area input[type="checkbox"]');
+    let ok=0, wrong=0;
+    boxes.forEach(b=>{
+      const isKey = wordKey.includes(b.dataset.word);
+      b.parentElement.style.color = '';
+      if (b.checked && isKey) { ok++; b.parentElement.style.color='#2e7d32'; }
+      else if (b.checked && !isKey) { wrong++; b.parentElement.style.color='#c62828'; }
+      else if (!b.checked && isKey) { b.parentElement.style.color='#c62828'; }
+    });
+    const msg = document.getElementById('word-msg');
+    msg.style.display='block';
+    msg.className='result-msg show '+(ok===wordKey.length && wrong===0 ? 'result-ok':'result-err');
+    msg.textContent = ok+' / '+wordKey.length+' palavras corretas'+(wrong>0?' — '+wrong+' marcada(s) a mais':'');
+  }
+  function resetWords(){
+    document.querySelectorAll('#word-area input[type="checkbox"]').forEach(b=>{b.checked=false;b.parentElement.style.color='';});
+    const msg = document.getElementById('word-msg'); msg.style.display='none'; msg.textContent='';
+  }
+
+  // EX 3: T/F
+  const tfKey={1:'T',2:'F',3:'T',4:'F',5:'T'};
+  const tfSel={};
+  function selectTF(btn,id,val){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+    btn.classList.add('sel-'+val);tfSel[id]=val;
+  }
+  function checkTF(){
+    let ok=0,tot=Object.keys(tfKey).length,answered=0;
+    for(const id in tfKey){
+      const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+      item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong','sel-T','sel-F'));
+      if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});}
+    }
+    const msg=document.getElementById('tf-msg');
+    msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+    msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+  }
+  function resetTF(){
+    for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+    const msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+  }
+
+  // EX 4: gap fill (cheio/cheia agreement)
+  const gapKey={g1:['cheia'],g2:['cheio'],g3:['cheios'],g4:['cheias'],g5:['cheio']};
+  function checkGaps(){
+    let ok=0,tot=Object.keys(gapKey).length;
+    for(const id in gapKey){const inp=document.getElementById(id);const correct=gapKey[id].some(a=>norm(inp.value)===norm(a));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+    const msg=document.getElementById('gap-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+  }
+  function resetGaps(){for(const id in gapKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap-msg');msg.className='result-msg';msg.textContent='';}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
