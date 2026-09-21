@@ -11,400 +11,334 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --baunilha:   #FCF5EB;
-      --giz: #FCF5EB; --musgo: #3C3C21;
-      --baunilha2:  #FDE7C4;
-      --off-white:  #F2F0E3;
-      --light-gray: #EDEDE2;
-      --nanquim:    #1E1D1C;
-      --floresta:   #4E551D;
-      --erva-doce:  #A6B28A;
-      --cobalto:    #265B8B;
-      --pitomba:    #D36D29;
-      --ouro:       #FFB94A;
-      --marrom:     #967E63;
-      --texto:      #3C3C21;
+      --giz: #FCF5EB; --baunilha: #FCF5EB; --baunilha2: #FDE7C4;
+      --off-white: #F2F0E3; --light-gray: #EDEDE2;
+      --musgo: #3C3C21; --texto: #3C3C21;
+      --nanquim: #1E1D1C; --floresta: #4E551D; --erva-doce: #A6B28A;
+      --cobalto: #265B8B; --pitomba: #D36D29; --ouro: #FFB94A;
+      --marrom: #967E63; --telha: #A1441D;
     }
 
     html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', sans-serif; background: var(--giz); color: var(--texto); font-size: 16px; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
 
-    body {
-      background: var(--baunilha);
-      color: var(--texto);
-      font-family: 'Manrope', sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
-      min-height: 100vh;
-    }
+    /* ── HEADER (mantido como era: navbar branca + azul) ── */
+    .header { background: #fff; border-bottom: 1px solid var(--light-gray); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .header img { height: 32px; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .header-tag { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--pitomba); background: #FFF0E6; border: 1px solid #F5C6A0; border-radius: 20px; padding: 4px 12px; }
 
-    h1, h2, h3 {
-      font-family: 'Trirong', serif;
-      font-weight: 300;
-      color: var(--cobalto);
-    }
-
-    /* ── NAVBAR ── */
-    .navbar {
-      background: white;
-      border-bottom: 1px solid var(--light-gray);
-      padding: 0 40px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .navbar img { height: 32px; }
-    .navbar-tag {
-      font-family: 'Manrope', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--pitomba);
-      background: #FFF0E6;
-      border: 1px solid #F5C6A0;
-      border-radius: 20px;
-      padding: 4px 12px;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(135deg, var(--cobalto) 0%, #1a3f63 100%);
-      color: white;
-      padding: 52px 40px 48px;
-      text-align: center;
-    }
-    .hero h1 {
-      color: white;
-      font-size: clamp(24px, 3vw, 32px);
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 14px;
-      opacity: .75;
-      max-width: 480px;
-      margin: 0 auto;
-    }
+    /* ── HERO (mantido azul) ── */
+    .hero { background: linear-gradient(135deg, var(--cobalto) 0%, #1a3f63 100%); color: #fff; padding: 52px 40px 48px; text-align: center; }
+    .hero h1 { color: #fff; font-size: clamp(24px, 3vw, 32px); font-weight: 300; margin-bottom: 10px; }
+    .hero p { font-size: 14px; opacity: .75; max-width: 480px; margin: 0 auto; }
 
     /* ── MAIN ── */
-    .main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
+    .main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; flex: 1; }
 
-    .section-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: #aaa;
-      margin-bottom: 20px;
-    }
+    .group-title { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .group-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .group-name { font-size: .8rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .levels-group { margin-bottom: 40px; }
 
-    /* ── LEVEL GRID ── */
-    .level-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 52px;
-    }
+    /* ── CARD GRID (mesmo padrão da página do aluno) ── */
+    .level-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+    .levels-row-pairs { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 560px) { .levels-row-pairs { grid-template-columns: 1fr; } }
 
-    .level-card {
-      background: white;
-      border: 1.5px solid var(--light-gray);
-      border-radius: 14px;
-      padding: 24px 20px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
-      text-decoration: none;
-      color: inherit;
-    }
-    .level-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(38,91,139,0.10);
-      border-color: var(--cobalto);
-    }
+    .level-card { display: block; background: #fff; border-radius: 14px; padding: 22px 24px; text-decoration: none; color: inherit; border: 1.5px solid transparent; transition: all .2s; cursor: pointer; }
+    .level-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.12); border-color: var(--lc, var(--floresta)); }
 
-    .level-badge {
-      display: inline-block;
-      font-family: 'Manrope', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      border-radius: 20px;
-      padding: 3px 10px;
-      border: 1.5px solid;
-      width: fit-content;
-    }
-    .badge-a1 { color: #4E551D; background: #e8eedc; border-color: #b5c490; }
-    .badge-a2 { color: #265B8B; background: #dde8f4; border-color: #8ab4d8; }
-    .badge-b1 { color: #967E63; background: #f0ebe5; border-color: #c4ad98; }
-    .badge-b2 { color: #D36D29; background: #fbe9dc; border-color: #e8a87c; }
-    .badge-c1 { color: #A1441D; background: #f5e6e3; border-color: #d4917e; }
-    .badge-c2 { color: #1E1D1C; background: #e5e5e3; border-color: #9a9a90; }
+    .card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+    .level-badge { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 500; width: 46px; height: 46px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--lc-bg, #e8eedc); color: var(--lc, var(--floresta)); }
+    .level-badge.emoji { font-size: 1.2rem; }
 
-    .level-card h3 {
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--nanquim);
-    }
-    .level-card p {
-      font-size: 12px;
-      color: #999;
-      flex: 1;
-    }
-    .level-link {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--cobalto);
-    }
+    .card-info h3 { font-family: 'Trirong', serif; font-size: 1.05rem; font-weight: 400; color: var(--nanquim); margin-bottom: 2px; }
+    .card-info .sub { font-size: .78rem; color: #999; font-weight: 600; }
 
-    /* ── STUDENT LIST ── */
-    .student-section { margin-bottom: 40px; }
-    .student-section h3 {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--texto);
-      font-family: 'Manrope', sans-serif;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--light-gray);
-    }
-    .student-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    .student-table th {
-      text-align: left;
-      font-weight: 600;
-      color: #aaa;
-      font-size: 11px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: 0 12px 8px 0;
-    }
-    .student-table td {
-      padding: 8px 12px 8px 0;
-      border-top: 1px solid var(--light-gray);
-      color: var(--texto);
-    }
-    .student-table code {
-      background: var(--off-white);
-      border-radius: 4px;
-      padding: 2px 7px;
-      font-size: 12px;
-      font-family: 'Courier New', monospace;
-      color: var(--cobalto);
-    }
+    .card-meta { font-size: .78rem; color: #bbb; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+    .card-arrow { font-size: .85rem; color: var(--lc, var(--erva-doce)); }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 32px;
-      font-size: 12px;
-      color: #bbb;
-      border-top: 1px solid var(--light-gray);
+    /* ── FERRAMENTAS DA PROFESSORA ── */
+    .tool-card { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 18px 22px; text-decoration: none; color: inherit; transition: all .2s; max-width: 420px; width: 100%; }
+    .tool-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.12); border-color: var(--cobalto); }
+    .tool-bar { width: 4px; height: 44px; border-radius: 2px; background: var(--floresta); flex-shrink: 0; }
+    .tool-title { font-family: 'Trirong', serif; font-size: 15px; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .tool-sub { font-size: 12px; color: #999; }
+    .tool-arrow { font-size: 13px; font-weight: 600; color: var(--cobalto); margin-left: auto; white-space: nowrap; }
+
+    /* ── LOGINS DOS ALUNOS ── */
+    .student-section { margin-bottom: 32px; }
+    .student-section h3 { font-size: 14px; font-weight: 600; color: var(--texto); font-family: 'Manrope', sans-serif; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--light-gray); }
+    .student-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .student-table th { text-align: left; font-weight: 600; color: #aaa; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 0 12px 8px 0; }
+    .student-table td { padding: 8px 12px 8px 0; border-top: 1px solid var(--light-gray); color: var(--texto); }
+    .student-table code { background: var(--off-white); border-radius: 4px; padding: 2px 7px; font-size: 12px; font-family: 'Courier New', monospace; color: var(--cobalto); }
+
+    /* ── FOOTER (mesmo padrão da página do aluno) ── */
+    .footer { text-align: center; padding: 32px; font-size: 12px; color: #bbb; border-top: 1px solid var(--light-gray); }
+    .footer-copy { font-size: 12px; color: #bbb; }
+
+    @media (max-width: 600px) {
+      .header { padding: 12px 16px; }
+      .hero { padding: 28px 16px 36px; }
+      .main { padding: 28px 16px 60px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <a href="../index.html">
-    <img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub">
-  </a>
-  <span class="navbar-tag">Área da Professora</span>
-</nav>
+<header class="header">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="Brazilian Portuguese Hub"></a>
+  <div class="header-right">
+    <span class="header-tag">Área da Professora</span>
+  </div>
+</header>
 
-<!-- HERO -->
 <div class="hero">
   <h1>Área da Professora</h1>
   <p>Acesso direto aos materiais de todos os níveis e ao cadastro de alunos.</p>
 </div>
 
-<!-- MAIN -->
-<div class="main">
+<main class="main">
 
-  <!-- TEACHER TOOLS -->
-  <div class="section-title">Ferramentas da professora</div>
-  <div style="margin-bottom:44px;">
-    <a href="guia-de-tags.html" style="display:inline-flex;align-items:center;gap:12px;background:white;border:1.5px solid var(--light-gray);border-radius:14px;padding:18px 22px;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s,border-color .2s;max-width:420px;width:100%;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 28px rgba(38,91,139,0.10)';this.style.borderColor='var(--cobalto)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--light-gray)'">
-      <div style="width:4px;height:44px;border-radius:2px;background:var(--floresta);flex-shrink:0;"></div>
+  <!-- FERRAMENTAS -->
+  <div class="levels-group">
+    <div class="group-title">
+      <div class="group-dot" style="background:var(--cobalto)"></div>
+      <span class="group-name" style="color:var(--cobalto)">Ferramentas da professora</span>
+    </div>
+    <a class="tool-card" href="guia-de-tags.html">
+      <div class="tool-bar"></div>
       <div>
-        <div style="font-family:'Trirong',serif;font-size:15px;font-weight:400;color:var(--nanquim);margin-bottom:4px;">Guia de Tags</div>
-        <div style="font-size:12px;color:#999;">Inventário completo das 6 dimensões pedagógicas com todos os códigos, cores e exemplos para tagear materiais.</div>
+        <div class="tool-title">Guia de Tags</div>
+        <div class="tool-sub">Inventário completo das 6 dimensões pedagógicas com todos os códigos, cores e exemplos para tagear materiais.</div>
       </div>
-      <span style="font-size:13px;font-weight:600;color:var(--cobalto);margin-left:auto;white-space:nowrap;">Abrir →</span>
+      <span class="tool-arrow">Abrir →</span>
     </a>
   </div>
 
-  <!-- LEVELS -->
-  <div class="section-title">Materiais por nível</div>
-  <div class="level-grid">
+  <!-- MATERIAIS POR NÍVEL -->
+  <div class="levels-group">
+    <div class="group-title">
+      <div class="group-dot" style="background:var(--floresta)"></div>
+      <span class="group-name" style="color:var(--floresta)">Materiais por nível</span>
+    </div>
+    <div class="level-grid levels-row-pairs">
 
-    <a class="level-card" href="../a1/index.html#teacher">
-      <span class="level-badge badge-a1">A1</span>
-      <h3>Iniciante I</h3>
-      <p>Primeiros passos na língua.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+      <a class="level-card" style="--lc:#4E551D;--lc-bg:#e8eedc" href="../a1/index.html#teacher">
+        <div class="card-top">
+          <div class="level-badge">A1</div>
+          <div class="card-info">
+            <h3>Iniciante I</h3>
+            <div class="sub">Primeiros passos na língua</div>
+          </div>
+        </div>
+        <div class="card-meta"><span>&nbsp;</span><span class="card-arrow">→</span></div>
+      </a>
 
-    <a class="level-card" href="../a2/index.html#teacher">
-      <span class="level-badge badge-a2">A2</span>
-      <h3>Iniciante II</h3>
-      <p>Situações cotidianas básicas.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+      <a class="level-card" style="--lc:#265B8B;--lc-bg:#dde8f4" href="../a2/index.html#teacher">
+        <div class="card-top">
+          <div class="level-badge">A2</div>
+          <div class="card-info">
+            <h3>Iniciante II</h3>
+            <div class="sub">Situações cotidianas básicas</div>
+          </div>
+        </div>
+        <div class="card-meta"><span>&nbsp;</span><span class="card-arrow">→</span></div>
+      </a>
 
-    <a class="level-card" href="../b1/index.html#teacher">
-      <span class="level-badge badge-b1">B1</span>
-      <h3>Intermediário I</h3>
-      <p>Narrativa, rotina e opinião.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+      <a class="level-card" style="--lc:#967E63;--lc-bg:#f0ebe5" href="../b1/index.html#teacher">
+        <div class="card-top">
+          <div class="level-badge">B1</div>
+          <div class="card-info">
+            <h3>Intermediário I</h3>
+            <div class="sub">Narrativa, rotina e opinião</div>
+          </div>
+        </div>
+        <div class="card-meta"><span>&nbsp;</span><span class="card-arrow">→</span></div>
+      </a>
 
-    <a class="level-card" href="../b2/index.html#teacher">
-      <span class="level-badge badge-b2">B2</span>
-      <h3>Intermediário II</h3>
-      <p>Nuance, subjuntivo e compostos.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+      <a class="level-card" style="--lc:#D36D29;--lc-bg:#fbe9dc" href="../b2/index.html#teacher">
+        <div class="card-top">
+          <div class="level-badge">B2</div>
+          <div class="card-info">
+            <h3>Intermediário II</h3>
+            <div class="sub">Nuance, subjuntivo e compostos</div>
+          </div>
+        </div>
+        <div class="card-meta"><span>&nbsp;</span><span class="card-arrow">→</span></div>
+      </a>
 
-    <a class="level-card" href="../c1/index.html#teacher">
-      <span class="level-badge badge-c1">C1</span>
-      <h3>Avançado I</h3>
-      <p>Registro formal e acadêmico.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+      <a class="level-card" style="--lc:#A1441D;--lc-bg:#f5e6e3" href="../c1/index.html#teacher">
+        <div class="card-top">
+          <div class="level-badge">C1</div>
+          <div class="card-info">
+            <h3>Avançado I</h3>
+            <div class="sub">Registro formal e acadêmico</div>
+          </div>
+        </div>
+        <div class="card-meta"><span>&nbsp;</span><span class="card-arrow">→</span></div>
+      </a>
 
-    <a class="level-card" href="../c2/index.html#teacher">
-      <span class="level-badge badge-c2">C2</span>
-      <h3>Avançado II</h3>
-      <p>Domínio pleno e estilo.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+      <a class="level-card" style="--lc:#1E1D1C;--lc-bg:#e5e5e3" href="../c2/index.html#teacher">
+        <div class="card-top">
+          <div class="level-badge">C2</div>
+          <div class="card-info">
+            <h3>Avançado II</h3>
+            <div class="sub">Domínio pleno e estilo</div>
+          </div>
+        </div>
+        <div class="card-meta"><span>&nbsp;</span><span class="card-arrow">→</span></div>
+      </a>
 
+    </div>
   </div>
 
   <!-- CONTOS -->
-  <div class="section-title">BPHub Conta um Conto</div>
-  <div class="level-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:36px">
-    <a class="level-card" href="../contos/index.html">
-      <span class="level-badge" style="background:#A1441D;color:#fff;">🎙️ Contos e Crônicas</span>
-      <h3>Contos e Crônicas</h3>
-      <p>Contos e crônicas narrados pela professora — até 15 min, por nível.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+  <div class="levels-group">
+    <div class="group-title">
+      <div class="group-dot" style="background:#A1441D"></div>
+      <span class="group-name" style="color:#A1441D">BPHub Conta um Conto</span>
+    </div>
+    <div class="level-grid">
+      <a class="level-card" style="--lc:#A1441D;--lc-bg:#f5e6e3" href="../contos/index.html">
+        <div class="card-top">
+          <div class="level-badge emoji">🎙️</div>
+          <div class="card-info">
+            <h3>Contos e Crônicas</h3>
+            <div class="sub">Narrados pela professora · até 15 min</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span>Machado de Assis · e muito mais</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+    </div>
   </div>
 
   <!-- MÚSICAS -->
-  <div class="section-title">Sons do Brasil</div>
-  <div class="level-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:36px">
-    <a class="level-card" href="../musicas/index.html">
-      <span class="level-badge" style="background:#FCA290;color:#2B2B1E;">🎵 Músicas</span>
-      <h3>Sons do Brasil</h3>
-      <p>MPB · Samba · Forró · Axé · Rock — materiais por gênero.</p>
-      <span class="level-link">Ver materiais →</span>
-    </a>
+  <div class="levels-group">
+    <div class="group-title">
+      <div class="group-dot" style="background:#FCA290"></div>
+      <span class="group-name" style="color:#FCA290">Sons do Brasil</span>
+    </div>
+    <div class="level-grid">
+      <a class="level-card" style="--lc:#D36D29;--lc-bg:#fbe9dc" href="../musicas/index.html">
+        <div class="card-top">
+          <div class="level-badge emoji">🎵</div>
+          <div class="card-info">
+            <h3>Músicas</h3>
+            <div class="sub">MPB · Forró · Samba · Axé · Rock</div>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span>Gilberto Gil · e muito mais</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+    </div>
   </div>
 
-  <!-- STUDENT CREDENTIALS -->
-  <div class="section-title">Logins dos alunos</div>
+  <!-- LOGINS DOS ALUNOS -->
+  <div class="levels-group">
+    <div class="group-title">
+      <div class="group-dot" style="background:var(--marrom)"></div>
+      <span class="group-name" style="color:var(--marrom)">Logins dos alunos</span>
+    </div>
 
-  <div class="student-section">
-    <h3>A1 — Iniciante I</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>rajiv</td><td><code>rajiv2026</code></td></tr>
-      <tr><td>daniel</td><td><code>daniel2026</code></td></tr>
-      <tr><td>aditya</td><td><code>aditya2026</code></td></tr>
-    </table>
+    <div class="student-section">
+      <h3>A1 — Iniciante I</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>rajiv</td><td><code>rajiv2026</code></td></tr>
+        <tr><td>daniel</td><td><code>daniel2026</code></td></tr>
+        <tr><td>aditya</td><td><code>aditya2026</code></td></tr>
+      </table>
+    </div>
+
+    <div class="student-section">
+      <h3>A2 — Iniciante II</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>douglas</td><td><code>douglas2026</code></td></tr>
+        <tr><td>fiamma</td><td><code>fiamma2026</code></td></tr>
+      </table>
+    </div>
+
+    <div class="student-section">
+      <h3>B1 — Intermediário I</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>arvesh</td><td><code>arvesh2026</code></td></tr>
+        <tr><td>kristenm</td><td><code>kristenm2026</code></td></tr>
+        <tr><td>chad</td><td><code>chad2026</code></td></tr>
+        <tr><td>arthur</td><td><code>arthur2026</code></td></tr>
+        <tr><td>robyn</td><td><code>robyn2026</code></td></tr>
+        <tr><td>todd</td><td><code>todd2026</code></td></tr>
+        <tr><td>margaret</td><td><code>margaret2026</code></td></tr>
+        <tr><td>james</td><td><code>james2026</code></td></tr>
+      </table>
+    </div>
+
+    <div class="student-section">
+      <h3>B2 — Intermediário II</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>cynthia</td><td><code>cynthia2026</code></td></tr>
+        <tr><td>natalie</td><td><code>natalie2026</code></td></tr>
+        <tr><td>jonathan</td><td><code>jonathan2026</code></td></tr>
+        <tr><td>tod</td><td><code>tod2026</code></td></tr>
+        <tr><td>justin</td><td><code>justin2026</code></td></tr>
+        <tr><td>yasmin</td><td><code>yasmin2026</code></td></tr>
+        <tr><td>jaime</td><td><code>jaime2026</code></td></tr>
+        <tr><td>marinne</td><td><code>marinne2026</code></td></tr>
+        <tr><td>alexandre</td><td><code>alexandre2026</code></td></tr>
+        <tr><td>jennifer</td><td><code>jennifer2026</code></td></tr>
+        <tr><td>thomas</td><td><code>thomas2026</code></td></tr>
+        <tr><td>ken</td><td><code>ken2026</code></td></tr>
+      </table>
+    </div>
+
+    <div class="student-section">
+      <h3>C1 — Avançado I</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>john</td><td><code>john2026</code></td></tr>
+        <tr><td>alexis</td><td><code>alexis2026</code></td></tr>
+        <tr><td>barbara</td><td><code>barbara2026</code></td></tr>
+      </table>
+    </div>
+
+    <div class="student-section">
+      <h3>C2 — Avançado II</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>kristenc</td><td><code>kristenc2026</code></td></tr>
+        <tr><td>erin</td><td><code>erin2026</code></td></tr>
+      </table>
+    </div>
+
+    <div class="student-section">
+      <h3>Professoras</h3>
+      <table class="student-table">
+        <tr><th>Nome</th><th>Senha</th></tr>
+        <tr><td>daniela</td><td><code>daniela2026</code></td></tr>
+        <tr><td>uiara</td><td><code>uiara2026</code></td></tr>
+        <tr><td>adriana</td><td><code>adriana2026</code></td></tr>
+        <tr><td>elen</td><td><code>elen2026</code></td></tr>
+        <tr><td>marta</td><td><code>marta2026</code></td></tr>
+      </table>
+    </div>
+
   </div>
 
-  <div class="student-section">
-    <h3>A2 — Iniciante II</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>douglas</td><td><code>douglas2026</code></td></tr>
-      <tr><td>fiamma</td><td><code>fiamma2026</code></td></tr>
-    </table>
-  </div>
+</main>
 
-  <div class="student-section">
-    <h3>B1 — Intermediário I</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>arvesh</td><td><code>arvesh2026</code></td></tr>
-      <tr><td>kristenm</td><td><code>kristenm2026</code></td></tr>
-      <tr><td>chad</td><td><code>chad2026</code></td></tr>
-      <tr><td>arthur</td><td><code>arthur2026</code></td></tr>
-      <tr><td>robyn</td><td><code>robyn2026</code></td></tr>
-      <tr><td>todd</td><td><code>todd2026</code></td></tr>
-      <tr><td>margaret</td><td><code>margaret2026</code></td></tr>
-      <tr><td>james</td><td><code>james2026</code></td></tr>
-    </table>
-  </div>
-
-  <div class="student-section">
-    <h3>B2 — Intermediário II</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>cynthia</td><td><code>cynthia2026</code></td></tr>
-      <tr><td>natalie</td><td><code>natalie2026</code></td></tr>
-      <tr><td>jonathan</td><td><code>jonathan2026</code></td></tr>
-      <tr><td>tod</td><td><code>tod2026</code></td></tr>
-      <tr><td>justin</td><td><code>justin2026</code></td></tr>
-      <tr><td>yasmin</td><td><code>yasmin2026</code></td></tr>
-      <tr><td>jaime</td><td><code>jaime2026</code></td></tr>
-      <tr><td>marinne</td><td><code>marinne2026</code></td></tr>
-      <tr><td>alexandre</td><td><code>alexandre2026</code></td></tr>
-      <tr><td>jennifer</td><td><code>jennifer2026</code></td></tr>
-      <tr><td>thomas</td><td><code>thomas2026</code></td></tr>
-      <tr><td>ken</td><td><code>ken2026</code></td></tr>
-    </table>
-  </div>
-
-  <div class="student-section">
-    <h3>C1 — Avançado I</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>john</td><td><code>john2026</code></td></tr>
-      <tr><td>alexis</td><td><code>alexis2026</code></td></tr>
-      <tr><td>barbara</td><td><code>barbara2026</code></td></tr>
-    </table>
-  </div>
-
-  <div class="student-section">
-    <h3>C2 — Avançado II</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>kristenc</td><td><code>kristenc2026</code></td></tr>
-      <tr><td>erin</td><td><code>erin2026</code></td></tr>
-    </table>
-  </div>
-
-  <div class="student-section">
-    <h3>Professoras</h3>
-    <table class="student-table">
-      <tr><th>Nome</th><th>Senha</th></tr>
-      <tr><td>daniela</td><td><code>daniela2026</code></td></tr>
-      <tr><td>uiara</td><td><code>uiara2026</code></td></tr>
-      <tr><td>adriana</td><td><code>adriana2026</code></td></tr>
-      <tr><td>elen</td><td><code>elen2026</code></td></tr>
-      <tr><td>marta</td><td><code>marta2026</code></td></tr>
-    </table>
-  </div>
-
-</div>
-
-<footer>
-  Brazilian Portuguese Hub &nbsp;·&nbsp; Área restrita — professoras
+<footer class="footer">
+  <div class="footer-copy">Brazilian Portuguese Hub &nbsp;·&nbsp; Área restrita — professoras</div>
 </footer>
 
 </body>
