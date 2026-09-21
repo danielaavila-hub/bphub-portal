@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Um Apólogo — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--telha); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--telha); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--telha); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--telha); font-weight: 700; margin-right: 4px; }
+
+    .vf-row { display: flex; align-items: flex-start; gap: 14px; }
+    .vf-row .vf-text { flex: 1; }
+    .vf-choice { display: flex; gap: 10px; flex-shrink: 0; padding-top: 2px; }
+    .vf-choice label { font-size: 13px; display: flex; align-items: center; gap: 4px; cursor: pointer; }
+    .vf-correction { margin-top: 10px; }
+    .vf-correction label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
+    .vf-model { display: none; margin-top: 8px; font-size: 13px; background: var(--cobalto-light); border-radius: 8px; padding: 10px 12px; color: var(--nanquim); }
+    .vf-model.show { display: block; }
+
+    .check-btn { background: var(--telha); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--telha); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .vf-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../contos/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Conto com Áudio</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Um Apólogo <em>Machado de Assis</em></h1>
+  <div class="hero-sub">BPHub Conta um Conto — contos brasileiros de verdade, no seu nível, em até 15 minutos. Ouça o conto e pratique a clivagem ("eu é que coso").</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Conto · Machado de Assis</span>
+    <span class="hero-tag">Foco gramatical: clivagem</span>
+  </div>
+  <div class="hero-note">🎧 Ouça o episódio e complete as atividades abaixo</div>
+</div>
+
+<div class="main">
+
+  <p style="font-size:15px;">Nesta ficha, você vai ouvir um conto de Machado de Assis, o mais celebrado escritor brasileiro, e praticar uma estrutura que as personagens usam o tempo todo para disputar quem merece o crédito. No final da ficha, há um link para o texto completo do conto, para consultar depois de todas as atividades, se você sentir necessidade.</p>
+
+  <section>
+    <div class="sec-label">Nota cultural</div>
+    <div class="info-box">
+      Joaquim Maria Machado de Assis (1839–1908) é considerado o maior escritor brasileiro. Nasceu no Morro do Livramento, no Rio de Janeiro, numa família pobre: era neto de escravizados libertos e filho de um pintor de paredes. Estudou pouco na escola e aprendeu quase tudo sozinho. Começou como aprendiz de tipógrafo e revisor e tornou-se jornalista e funcionário público. Foi um dos fundadores da Academia Brasileira de Letras, em 1897, e seu primeiro presidente. Escreveu romances como <i>Memórias Póstumas de Brás Cubas</i> (1881) e <i>Dom Casmurro</i> (1899), além de mais de duzentos contos. Sua marca é a ironia: com humor discreto, ele expõe a vaidade, o interesse e as hierarquias da sociedade do seu tempo.
+      <br><br>
+      Machado era um homem negro, mas, por décadas, livros e retratos o apresentaram como branco. Essa imagem "embranquecida" vem sendo revista hoje.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota de contexto — o Brasil do Império</div>
+    <div class="info-box">
+      "Um Apólogo" foi reunido no livro <i>Várias Histórias</i> (1896). A história se passa no período do Império, quando o Brasil era governado pelo imperador D. Pedro II, até 1889.
+      <br><br>
+      Por isso aparecem no conto os <b>batedores</b>, soldados a cavalo que iam à frente do imperador para abrir caminho. Por isso também aparece uma <b>baronesa</b>: o imperador concedia títulos de nobreza, como barão e visconde, a pessoas ricas e influentes.
+      <br><br>
+      O Brasil ainda era um país escravista, e a escravidão só terminou em 1888, com a Lei Áurea. As <b>mucamas</b> eram mulheres escravizadas que trabalhavam dentro da casa, servindo à família dos senhores.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Antes de ouvir</div>
+    <div class="q">
+      <div class="q-text">Numa costura, a agulha e a linha trabalham juntas. Na sua opinião, qual das duas é mais importante? Por quê? <i>(Responda em uma ou duas frases.)</i></div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">Este quadro é longo, então leia antes de ouvir o conto. Não é preciso decorar as palavras: volte a ele sempre que precisar.</p>
+
+    <table class="vocab">
+      <tr><th>O mundo da costura</th><th>In English</th></tr>
+      <tr><td>a agulha</td><td>needle</td></tr>
+      <tr><td>o novelo de linha</td><td>ball of thread</td></tr>
+      <tr><td>o alfinete</td><td>pin (it has a head: <i>a cabeça</i>)</td></tr>
+      <tr><td>coser (hoje: costurar)</td><td>to sew</td></tr>
+      <tr><td>furar</td><td>to pierce, to poke holes in</td></tr>
+      <tr><td>o pano</td><td>cloth, fabric</td></tr>
+      <tr><td>a seda</td><td>silk</td></tr>
+      <tr><td>os babados</td><td>ruffles, frills</td></tr>
+      <tr><td>a costureira / a modista</td><td>seamstress / dressmaker</td></tr>
+      <tr><td>o corpinho</td><td>bodice (the upper part of a dress)</td></tr>
+      <tr><td>arregaçar</td><td>to gather up, to tuck up (fabric)</td></tr>
+      <tr><td>acolchetar (os colchetes)</td><td>to fasten with hooks and eyes</td></tr>
+      <tr><td>espetar</td><td>to stick (a pin or needle) into something</td></tr>
+      <tr><td>o balaio</td><td>large straw basket</td></tr>
+    </table>
+
+    <table class="vocab">
+      <tr><th>Outras palavras e expressões</th><th>In English</th></tr>
+      <tr><td>um apólogo</td><td>a short tale in which objects talk and act like people</td></tr>
+      <tr><td>cheia de si</td><td>full of herself</td></tr>
+      <tr><td>enrolada</td><td>wound up (like a ball of thread)</td></tr>
+      <tr><td>decerto</td><td>certainly</td></tr>
+      <tr><td>É boa! / Esta agora é melhor!</td><td>ironic: "That's a good one!" / "Now that's even better!"</td></tr>
+      <tr><td>dar feição a</td><td>to give shape to</td></tr>
+      <tr><td>ínfimo</td><td>lowest, most insignificant</td></tr>
+      <tr><td>ao pé de si</td><td>close by, at hand</td></tr>
+      <tr><td>os galgos de Diana</td><td>the greyhounds of Diana, Roman goddess of the hunt</td></tr>
+      <tr><td>teimar em</td><td>to stubbornly insist on</td></tr>
+      <tr><td>mofar de</td><td>to mock (old-fashioned)</td></tr>
+      <tr><td>gozar da vida</td><td>to enjoy life (formal; everyday: <i>aproveitar a vida</i>)</td></tr>
+      <tr><td>abanar a cabeça</td><td>to shake one's head</td></tr>
+      <tr><td>ordinário, ordinária</td><td>cheap, of poor quality; for people: mean, worthless</td></tr>
+    </table>
+
+    <table class="vocab">
+      <tr><th>Linguagem do século XIX</th><th>Hoje</th></tr>
+      <tr><td>pegou do pano</td><td>pegou o pano</td></tr>
+      <tr><td>entrou a coser</td><td>começou a costurar</td></tr>
+      <tr><td>cansas-te, aprende, ficas (tratamento por "tu")</td><td>você se cansa, aprenda, você fica</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Ouça o conto</div>
+    <p style="font-size:13.5px;color:#888;">Ouça o conto uma vez, só para acompanhar a história.</p>
+    <div class="audio-box">
+      <audio controls>
+        <source src="conto-um-apologo-c1.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 1 — Verdadeiro ou falso?</div>
+    <p style="font-size:13.5px;color:#888;">Leia as frases abaixo. Depois, ouça o conto novamente e marque V ou F. Reescreva as frases falsas na linha abaixo delas, para que fiquem verdadeiras.</p>
+
+    <div id="vf-list">
+      <div class="q vf-item" data-correct="V">
+        <div class="vf-row">
+          <div class="vf-text">1. A agulha começa a discussão porque acha a linha orgulhosa demais.</div>
+          <div class="vf-choice">
+            <label><input type="radio" name="vf1" value="V"> V</label>
+            <label><input type="radio" name="vf1" value="F"> F</label>
+          </div>
+        </div>
+        <div class="vf-correction"><label>Se for falsa, reescreva:</label><textarea style="min-height:40px;"></textarea>
+          <div class="vf-model"></div>
+        </div>
+      </div>
+
+      <div class="q vf-item" data-correct="F" data-model="Para a linha, quem vai na frente tem um papel subalterno, como os batedores do imperador.">
+        <div class="vf-row">
+          <div class="vf-text">2. Para a linha, ir na frente mostra que a agulha manda no trabalho.</div>
+          <div class="vf-choice">
+            <label><input type="radio" name="vf2" value="V"> V</label>
+            <label><input type="radio" name="vf2" value="F"> F</label>
+          </div>
+        </div>
+        <div class="vf-correction"><label>Se for falsa, reescreva:</label><textarea style="min-height:40px;"></textarea>
+          <div class="vf-model"></div>
+        </div>
+      </div>
+
+      <div class="q vf-item" data-correct="F" data-model="Enquanto a costureira trabalha, a linha fica em silêncio.">
+        <div class="vf-row">
+          <div class="vf-text">3. Enquanto a costureira trabalha, a linha continua respondendo às provocações da agulha.</div>
+          <div class="vf-choice">
+            <label><input type="radio" name="vf3" value="V"> V</label>
+            <label><input type="radio" name="vf3" value="F"> F</label>
+          </div>
+        </div>
+        <div class="vf-correction"><label>Se for falsa, reescreva:</label><textarea style="min-height:40px;"></textarea>
+          <div class="vf-model"></div>
+        </div>
+      </div>
+
+      <div class="q vf-item" data-correct="V">
+        <div class="vf-row">
+          <div class="vf-text">4. A costureira leva quatro dias para terminar o vestido.</div>
+          <div class="vf-choice">
+            <label><input type="radio" name="vf4" value="V"> V</label>
+            <label><input type="radio" name="vf4" value="F"> F</label>
+          </div>
+        </div>
+        <div class="vf-correction"><label>Se for falsa, reescreva:</label><textarea style="min-height:40px;"></textarea>
+          <div class="vf-model"></div>
+        </div>
+      </div>
+
+      <div class="q vf-item" data-correct="V">
+        <div class="vf-row">
+          <div class="vf-text">5. No baile, a linha vai no vestido da baronesa, enquanto a agulha volta para a caixinha da costureira.</div>
+          <div class="vf-choice">
+            <label><input type="radio" name="vf5" value="V"> V</label>
+            <label><input type="radio" name="vf5" value="F"> F</label>
+          </div>
+        </div>
+        <div class="vf-correction"><label>Se for falsa, reescreva:</label><textarea style="min-height:40px;"></textarea>
+          <div class="vf-model"></div>
+        </div>
+      </div>
+
+      <div class="q vf-item" data-correct="F" data-model="O alfinete aconselha o contrário: não abrir caminho para ninguém.">
+        <div class="vf-row">
+          <div class="vf-text">6. O alfinete aconselha a agulha a continuar abrindo caminho para os outros.</div>
+          <div class="vf-choice">
+            <label><input type="radio" name="vf6" value="V"> V</label>
+            <label><input type="radio" name="vf6" value="F"> F</label>
+          </div>
+        </div>
+        <div class="vf-correction"><label>Se for falsa, reescreva:</label><textarea style="min-height:40px;"></textarea>
+          <div class="vf-model"></div>
+        </div>
+      </div>
+    </div>
+    <button class="check-btn" onclick="checkVF()">✓ Conferir respostas</button>
+    <div id="vf-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 2 — Compreensão e interpretação</div>
+    <p style="font-size:13.5px;color:#888;">Responda às perguntas abaixo em duas ou três frases cada. Se precisar, ouça o conto de novo.</p>
+
+    <div class="q">
+      <div class="q-text"><span class="q-num">1.</span>No começo, a agulha diz que vai falar "sempre que me der na cabeça" (= sempre que quiser). Como a linha usa essa expressão para provocar a agulha? E quem tem "cabeça" no fim do conto?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q">
+      <div class="q-text"><span class="q-num">2.</span>Por que a linha compara a agulha aos batedores do imperador? O que ela quer dizer com essa comparação?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q">
+      <div class="q-text"><span class="q-num">3.</span>Quando a costureira começa a trabalhar, a linha para de responder à agulha. Por que você acha que ela fica em silêncio?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q">
+      <div class="q-text"><span class="q-num">4.</span>No baile, a linha parece vencer a discussão. Mas quem realmente aparece e recebe os olhares? E que outras personagens trabalham sem aparecer, como a agulha?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q">
+      <div class="q-text"><span class="q-num">5.</span>Um apólogo costuma terminar com uma lição clara. Qual é a lição que o alfinete dá à agulha? E como a frase final do professor de melancolia muda o tom dessa lição?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Foco gramatical — a clivagem: "eu é que coso"</div>
+    <div class="grammar-box">
+      Em português, podemos destacar uma parte da frase por meio de uma estrutura chamada <b>clivagem</b>. Em vez de dizer simplesmente <b>"eu costuro os vestidos"</b>, podemos dizer <b>"eu é que costuro os vestidos"</b> ou <b>"quem costura os vestidos sou eu"</b>.
+      <br><br>
+      Na clivagem, a frase é reorganizada para colocar um elemento em <b>foco</b>. Nessas duas construções, o elemento destacado é <b>eu</b>: o importante não é a ação de costurar, mas <b>quem</b> a realiza.
+      <br><br>
+      Por isso, no conto, a agulha e a linha usam essas construções para disputar a autoria da ação: <b>"eu é que coso"</b> equivale, naquele contexto, a <b>"sou eu, e não você, quem cose"</b>.
+      <br><br>
+      <b>Compare:</b><br>
+      — Qual é o seu trabalho? — <b>Eu costuro vestidos.</b> (A ação é informação nova: a frase é simples.)<br>
+      — A agulha costura os vestidos da baronesa? — Não, <b>eu é que costuro</b> os vestidos. (A ação já é dada como certa, e a disputa é sobre quem: a frase é clivada.)
+    </div>
+    <table class="grammar">
+      <tr><th>Estrutura</th><th>No conto</th><th>Como funciona</th></tr>
+      <tr><td>pessoa + <b>é que</b> + verbo</td><td>Eu é que coso. / Ela é que vai gozar da vida.</td><td>O verbo concorda com a pessoa; <i>é que</i> não muda: nós é que costuramos, elas é que costuram.</td></tr>
+      <tr><td><b>Quem</b> + verbo + <b>ser</b> + pessoa</td><td>Quem os cose sou eu.</td><td>O verbo depois de <i>quem</i> fica na 3ª pessoa do singular. <i>Ser</i> concorda com a pessoa do final: quem costura <b>sou eu</b> · quem costurou <b>fui eu</b> · quem costurou <b>foram elas</b>.</td></tr>
+      <tr><td><b>Quem é que</b> + verbo?</td><td>Quem é que vai ao baile? / Quem é que os cose, senão eu?</td><td>Pergunta com ênfase, comum na fala. No passado: Quem foi que costurou? Com <i>senão eu</i>, vira pergunta retórica.</td></tr>
+    </table>
+    <p style="font-size:13px;color:#888;margin-top:10px;"><i>Atenção: na fala, é comum ouvir "quem costurou foi eu"; na escrita, use "fui eu".</i></p>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 3 — Todo mundo quer o crédito</div>
+    <p style="font-size:13.5px;color:#888;">Outros objetos da caixinha de costura entram na discussão. Complete a fala de cada um, colocando <i>é que</i> depois da pessoa e conjugando o verbo no presente.</p>
+
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>A tesoura, para a agulha: "Você se acha a primeira a trabalhar? <i>(eu / cortar o pano antes de todo mundo)</i>"</div><input type="text" id="ex3-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A agulha, para o alfinete: "Não me venha com conselhos. <i>(você / ficar parado na caixinha)</i>; eu trabalho."</div><input type="text" id="ex3-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Os botões, para a linha: "Você diz que prende tudo? <i>(nós / fechar o vestido no corpo da baronesa)</i>"</div><input type="text" id="ex3-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>A fita métrica, para a tesoura: "Sem mim, você corta errado. <i>(eu / medir o corpo da baronesa)</i>"</div><input type="text" id="ex3-4" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>A costureira, para a agulha e a linha: "Vocês discutem à toa. <i>(as minhas mãos / conduzir vocês duas pelo pano)</i>"</div><input type="text" id="ex3-5" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Conferir respostas</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 4 — Na noite do baile</div>
+    <p style="font-size:13.5px;color:#888;">Responda a cada pergunta com <i>Não</i>, seguido de uma frase que comece com <i>Quem</i>.</p>
+
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Um ministro: — A baronesa desenhou este vestido? <i>(a costureira)</i></div><input type="text" id="ex4-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Um diplomata: — A agulha prendeu estes babados? <i>(a linha responde: eu)</i></div><input type="text" id="ex4-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Uma senhora: — O alfinete passou quatro dias neste vestido? <i>(a agulha e a linha respondem: nós)</i></div><input type="text" id="ex4-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Uma senhora: — A agulha vai dançar no baile hoje? <i>(a linha responde: eu)</i></div><input type="text" id="ex4-4" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Um diplomata: — A agulha e a linha seguram o vestido no lugar? <i>(os colchetes)</i></div><input type="text" id="ex4-5" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Conferir respostas</button>
+    <div id="ex4-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 5 — Sua leitura do conto</div>
+    <p style="font-size:13.5px;color:#888;">Escreva um parágrafo de 80 a 120 palavras com a sua opinião sobre o conto. Use pelo menos uma frase clivada.</p>
+    <ul style="font-size:13.5px;color:#888;margin:0 0 12px 18px;">
+      <li>Para você, qual é o sentido do conto? O que ele diz sobre trabalho e reconhecimento?</li>
+      <li>Você concorda com o conselho do alfinete? Por quê?</li>
+      <li>Volte à sua resposta de "Antes de ouvir": depois de ouvir o conto, você mudaria de opinião?</li>
+    </ul>
+    <div class="q">
+      <textarea style="min-height:140px;" placeholder="Escreva seu parágrafo aqui..."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">O conto: texto integral</div>
+    <p style="font-size:14.5px;">Se sentir necessidade, depois de terminar todas as atividades, leia o <a href="conto-um-apologo-c1-texto.pdf" target="_blank">texto completo do conto (PDF)</a> que você ouviu.</p>
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Fonte: ASSIS, Machado de. "Um apólogo". In: <i>Obra Completa</i>. Rio de Janeiro: Nova Aguilar, 1994. v. II. (Domínio público.) Texto-base: Biblioteca Virtual do Estudante Brasileiro / Escola do Futuro — USP.</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+// ── EXERCÍCIO 1 (V/F) ──
+function checkVF() {
+  var items = document.querySelectorAll('.vf-item');
+  var correct = 0;
+  var html = '';
+  items.forEach(function(item, i) {
+    var name = 'vf' + (i + 1);
+    var expected = item.getAttribute('data-correct');
+    var model = item.getAttribute('data-model');
+    var selected = item.querySelector('input[name="' + name + '"]:checked');
+    var ok = selected && selected.value === expected;
+    if (ok) correct++;
+    if (model) {
+      var modelDiv = item.querySelector('.vf-model');
+      modelDiv.textContent = 'Correção-modelo: ' + model;
+      modelDiv.classList.add('show');
+    }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' resposta certa: <b>' + expected + '</b>' + (model ? ' — ' + model : '') + '</div>';
+  });
+  var res = document.getElementById('vf-result');
+  var allOk = correct === items.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Todas corretas!' : correct + ' de ' + items.length + ' corretas — gabarito:') + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── EXERCÍCIO 3 ──
+var ex3Answers = [
+  { id: 'ex3-1', key: 'Eu é que corto o pano antes de todo mundo.' },
+  { id: 'ex3-2', key: 'Você é que fica parado na caixinha.' },
+  { id: 'ex3-3', key: 'Nós é que fechamos o vestido no corpo da baronesa.' },
+  { id: 'ex3-4', key: 'Eu é que meço o corpo da baronesa.' },
+  { id: 'ex3-5', key: 'As minhas mãos é que conduzem vocês duas pelo pano.' }
+];
+function checkEx3() { return checkFill(ex3Answers, 'ex3-result'); }
+
+// ── EXERCÍCIO 4 ──
+var ex4Answers = [
+  { id: 'ex4-1', key: 'Não, quem desenhou este vestido foi a costureira.' },
+  { id: 'ex4-2', key: 'Não, quem prendeu estes babados fui eu.' },
+  { id: 'ex4-3', key: 'Não, quem passou quatro dias neste vestido fomos nós.' },
+  { id: 'ex4-4', key: 'Não, quem vai dançar no baile sou eu.' },
+  { id: 'ex4-5', key: 'Não, quem segura o vestido no lugar são os colchetes.' }
+];
+function checkEx4() { return checkFill(ex4Answers, 'ex4-result'); }
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var ok = filled && norm(el.value) === norm(a.key);
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + a.key + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  // Exercício 1 — V/F (+ reescrita quando falsa)
+  document.querySelectorAll('.vf-item').forEach(function(item, i) {
+    var radioName = 'vf' + (i + 1);
+    var sel = item.querySelector('input[name="' + radioName + '"]:checked');
+    var val = sel ? sel.value : '(sem resposta)';
+    var corrTa = item.querySelector('.vf-correction textarea');
+    var corr = corrTa ? corrTa.value.trim() : '';
+    var line = val + (corr ? ' — reescrita: ' + corr.replace(/</g,'&lt;') : '');
+    summaryLines.push('<strong>Ex1-' + (i+1) + ':</strong> ' + line);
+    answersHtml += '<p><strong>Ex1-' + (i+1) + ':</strong> ' + line + '</p>';
+  });
+
+  // "Antes de ouvir", Exercício 2 e Exercício 5 (textareas abertas, fora do V/F)
+  var taIdx = 0;
+  document.querySelectorAll('textarea').forEach(function(ta) {
+    if (ta.closest('.vf-correction')) return;
+    taIdx++;
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + taIdx;
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  // Exercícios 3 e 4 — frases clivadas (inputs de texto)
+  ['ex3-1','ex3-2','ex3-3','ex3-4','ex3-5','ex4-1','ex4-2','ex4-3','ex4-4','ex4-5'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
