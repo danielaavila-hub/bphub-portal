@@ -317,6 +317,16 @@
       <div class="q-text"><span class="q-num">5.</span>Um apólogo costuma terminar com uma lição clara. Qual é a lição que o alfinete dá à agulha? E como a frase final do professor de melancolia muda o tom dessa lição?</div>
       <textarea placeholder="Escreva sua resposta aqui..."></textarea>
     </div>
+
+    <button class="check-btn" onclick="toggleEx2()">💡 Ver sugestões de resposta</button>
+    <div id="ex2-result" class="result-msg good" style="display:none;">
+      <div style="font-weight:700;margin-bottom:10px;">Sugestões de resposta (são respostas abertas — a sua pode ser diferente e igualmente válida):</div>
+      <div style="margin-bottom:10px;"><strong>1.</strong> A linha ironiza a agulha dizendo "que cabeça, senhora? A senhora não é alfinete, é agulha. Agulha não tem cabeça" — ou seja, a agulha nem deveria ter vontade própria. No fim do conto, é justamente um <b>alfinete</b> — "de cabeça grande" — quem aparece para aconselhar a agulha: o alfinete é o único que realmente "tem cabeça".</div>
+      <div style="margin-bottom:10px;"><strong>2.</strong> A linha diz que a agulha só fura o pano e "vai adiante", sem fazer o trabalho de valor (prender, ligar, ajuntar). A agulha responde com a comparação aos batedores do imperador para defender que abrir caminho também é importante — mesmo que quem receba a glória seja outro.</div>
+      <div style="margin-bottom:10px;"><strong>3.</strong> Quando a costura começa de verdade, a linha para de discutir e se concentra no trabalho — o texto diz que ela ficava "silenciosa e ativa como quem sabe o que faz, e não está para ouvir palavras loucas". É uma forma de sugerir que trabalhar importa mais do que discutir sobre quem é mais importante.</div>
+      <div style="margin-bottom:10px;"><strong>4.</strong> Quem realmente aparece e recebe os olhares no baile é a <b>baronesa</b>, vestida com o resultado do trabalho de ambas. Nem a agulha nem a linha desfrutam da festa. Outra personagem que trabalha sem aparecer é o <b>alfinete</b>, que também fica onde o espetam, sem nunca ser notado.</div>
+      <div><strong>5.</strong> O alfinete ensina que não vale a pena se cansar abrindo caminho para que outro "goze da vida" — melhor aceitar o lugar em que se está. Mas a frase final do professor de melancolia ("Também eu tenho servido de agulha a muita linha ordinária!") muda o tom: em vez de uma moral resignada, ela revela uma leitura mais amarga — a de quem trabalhou duro para o benefício de gente medíocre, sem reconhecimento.</div>
+    </div>
   </section>
 
   <section>
@@ -358,6 +368,12 @@
   <section>
     <div class="sec-label">Exercício 4 — Na noite do baile</div>
     <p style="font-size:13.5px;color:#888;">Responda a cada pergunta com <i>Não</i>, seguido de uma frase que comece com <i>Quem</i>.</p>
+
+    <div class="grammar-box" style="font-size:13.5px;padding:16px 20px;">
+      <b>Exemplo:</b><br>
+      Um aluno: — O diretor organizou a festa? <i>(os professores)</i><br>
+      — Não. Quem organizou a festa foram os professores.
+    </div>
 
     <div class="q"><div class="q-text"><span class="q-num">1.</span>Um ministro: — A baronesa desenhou este vestido? <i>(a costureira)</i></div><input type="text" id="ex4-1" placeholder="Escreva a frase completa..."></div>
     <div class="q"><div class="q-text"><span class="q-num">2.</span>Um diplomata: — A agulha prendeu estes babados? <i>(a linha responde: eu)</i></div><input type="text" id="ex4-2" placeholder="Escreva a frase completa..."></div>
@@ -461,6 +477,15 @@ var ex4Answers = [
   { id: 'ex4-5', key: 'Não, quem segura o vestido no lugar são os colchetes.' }
 ];
 function checkEx4() { return checkFill(ex4Answers, 'ex4-result'); }
+
+function toggleEx2() {
+  var el = document.getElementById('ex2-result');
+  var btn = event.target;
+  var showing = el.style.display === 'block';
+  el.style.display = showing ? 'none' : 'block';
+  btn.textContent = showing ? '💡 Ver sugestões de resposta' : '🙈 Esconder sugestões';
+  if (!showing) el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
 
 function checkFill(answers, resultId) {
   var html = '';
