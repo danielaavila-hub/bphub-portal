@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quebrar a Rotina — C2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB;
+      --giz: #FCF5EB; --musgo: #3C3C21; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --verde: #2E7D52; --verde-bg: #EAF5EE;
+      --vermelho: #C0392B; --vermelho-bg: #FAEAEA;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--nanquim); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--nanquim); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.55); max-width: 620px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .gram-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 32px; }
+    .gram-box h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .gram-intro { font-size: 14px; color: #666; line-height: 1.65; margin-bottom: 20px; max-width: 700px; }
+    .gram-sub { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nanquim); margin: 24px 0 12px; }
+
+    .register-box { background: var(--off-white); border-radius: 12px; padding: 20px 24px; margin-top: 16px; }
+    .register-box .rb-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pitomba); margin-bottom: 12px; }
+    .rb-note { font-size: 13.5px; color: #444; line-height: 1.75; }
+    .rb-note strong { color: var(--nanquim); }
+    .rb-note + .rb-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--light-gray); }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 12px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 7px 12px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 36px 40px; margin-bottom: 32px; }
+    .text-source { font-size: 12px; color: #aaa; font-style: italic; margin-bottom: 20px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 26px; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .text-subtitle { font-size: 13px; color: #888; margin-bottom: 28px; }
+    .text-body { font-size: 15px; line-height: 1.9; color: var(--nanquim); }
+    .text-body p { margin-bottom: 18px; }
+    .text-body p:last-child { margin-bottom: 0; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+    .ex-num { width: 36px; height: 36px; background: var(--nanquim); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; font-family: 'Trirong', serif; }
+    .ex-title { font-family: 'Trirong', serif; font-weight: 300; font-size: 20px; color: var(--nanquim); margin-bottom: 4px; }
+    .ex-instruction { font-size: 13px; color: #666; line-height: 1.55; }
+
+    .q-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; color: var(--nanquim); line-height: 1.65; }
+    .q-item:last-of-type { border-bottom: none; }
+    .q-num { color: var(--nanquim); font-weight: 700; font-size: 13px; margin-right: 8px; }
+    .q-textarea { width: 100%; margin-top: 10px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.15); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); resize: vertical; min-height: 72px; line-height: 1.6; outline: none; transition: border-color 0.2s; }
+    .q-textarea:focus { border-color: var(--nanquim); }
+    .q-textarea::placeholder { color: #bbb; font-style: italic; }
+    .show-model-btn { display:inline-flex; align-items:center; gap:6px; margin:8px 0 4px; padding:5px 13px; border-radius:6px; background:transparent; border:1.5px solid var(--nanquim); color:var(--nanquim); font-family:'Manrope',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+    .show-model-btn:hover { background:rgba(30,29,28,0.07); }
+    .model-ans { display:none; background:rgba(30,29,28,0.05); border-left:3px solid var(--nanquim); border-radius:0 6px 6px 0; padding:10px 14px; font-size:13px; color:var(--nanquim); line-height:1.65; margin:4px 0 2px; }
+
+    .gap-row { padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 14.5px; line-height: 1.7; }
+    .gap-row:last-of-type { border-bottom: none; }
+    .gap-num { font-weight: 700; color: var(--nanquim); margin-right: 6px; }
+    .gap-input { border: none; border-bottom: 2px solid var(--pitomba); background: transparent; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); padding: 1px 4px; width: 220px; outline: none; transition: border-color 0.2s; }
+    .gap-input:focus { border-color: var(--nanquim); }
+    .gap-input.ok { border-color: var(--verde); color: var(--verde); }
+    .gap-input.err { border-color: var(--vermelho); color: var(--vermelho); }
+    .wb-box { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 13.5px; color: var(--nanquim); }
+    .wb-box strong { color: var(--pitomba); }
+
+    .wc-row { padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 14.5px; line-height: 1.7; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .wc-row:last-of-type { border-bottom: none; }
+    .wc-num { font-weight: 700; color: var(--nanquim); }
+    .wc-btn { border: 1.5px solid var(--light-gray); background: #fff; border-radius: 6px; padding: 5px 12px; font-size: 13.5px; font-family: 'Manrope', sans-serif; cursor: pointer; transition: all .15s; }
+    .wc-btn:hover { border-color: var(--nanquim); }
+    .wc-btn.sel { background: var(--nanquim); color: #fff; border-color: var(--nanquim); }
+    .wc-btn.right { background: var(--verde); color: #fff; border-color: var(--verde); }
+    .wc-btn.wrong { background: var(--vermelho); color: #fff; border-color: var(--vermelho); }
+
+    .rw-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .rw-item:last-child { border-bottom: none; }
+    .rw-num { font-size: 12px; font-weight: 700; color: var(--nanquim); margin-bottom: 8px; }
+    .rw-sent { font-size: 14px; font-style: italic; color: #444; line-height: 1.65; margin-bottom: 10px; background: var(--off-white); border-radius: 6px; padding: 10px 14px; }
+    .rw-textarea { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; padding: 9px 13px; border: 1.5px solid var(--light-gray); border-radius: 8px; background: white; outline: none; resize: vertical; min-height: 60px; line-height: 1.6; transition: border-color 0.2s; color: var(--nanquim); }
+    .rw-textarea:focus { border-color: var(--nanquim); }
+    .rw-textarea::placeholder { color: #bbb; font-style: italic; }
+
+    .btn-row { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+    .btn { border:none; border-radius:6px; padding:9px 20px; font-family:'Manrope',sans-serif; font-size:.85rem; font-weight:700; cursor:pointer; transition:opacity .15s; }
+    .btn:hover { opacity:.85; }
+    .btn-check { background: var(--nanquim); color:#fff; }
+    .btn-reset { background: var(--light-gray); color: var(--nanquim); }
+    .result-msg { font-size:.85rem; font-weight:700; margin-top:10px; padding:6px 12px; border-radius:5px; display:none; }
+    .result-msg.show { display:block; }
+    .result-ok { background: var(--verde-bg); color: var(--verde); }
+    .result-err { background: var(--vermelho-bg); color: var(--vermelho); }
+
+    .prod-area { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14.5px; padding: 14px 16px; border: 1.5px solid var(--light-gray); border-radius: 10px; background: white; outline: none; resize: vertical; min-height: 200px; line-height: 1.8; transition: border-color 0.2s; color: var(--nanquim); }
+    .prod-area:focus { border-color: var(--nanquim); }
+    .prod-opt { background: var(--off-white); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; border-left: 4px solid var(--pitomba); }
+    .prod-opt-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pitomba); margin-bottom: 10px; }
+    .prod-opt .msg-bubble { background: white; border-radius: 8px; padding: 12px 16px; font-size: 14px; font-style: italic; color: #444; line-height: 1.6; margin-bottom: 10px; }
+    .prod-opt ul { margin: 8px 0 0 18px; }
+    .prod-opt li { font-size: 13.5px; color: #555; line-height: 1.6; margin-bottom: 4px; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .gram-box, .text-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C2</span>
+    <span class="badge badge-type">Vocabulário + Texto</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Quebrar a <em>Rotina</em></h1>
+  <div class="hero-sub">Vocabulário de mudança, expressões idiomáticas do cotidiano de trabalho e a estrutura sem + infinitivo — a partir de uma crônica sobre burnout, licença e a vontade de largar tudo.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">dar conta</span>
+    <span class="hero-tag">dar-se conta</span>
+    <span class="hero-tag">quebrar a rotina</span>
+    <span class="hero-tag">viver o agora</span>
+    <span class="hero-tag">sem + infinitivo</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- NOTA CULTURAL / LINGUÍSTICA -->
+  <div class="sec-label">Notas</div>
+  <div class="gram-box">
+    <h2>Antes de ler</h2>
+    <p class="gram-intro">"Qualquer dia eu largo tudo e vou vender coco na praia" é uma das frases mais repetidas no mundo do trabalho brasileiro. Virou meme, figurinha de WhatsApp e piada de escritório: é a fantasia de trocar o crachá pela areia. Por trás da piada há um dado sério — segundo a Associação Nacional de Medicina do Trabalho (Anamt), com base em dados do INSS, as licenças por burnout superiores a 15 dias saltaram de 1.760 para 6.985 entre 2023 e 2025.</p>
+
+    <div class="register-box">
+      <div class="rb-title">Nota linguística</div>
+      <div class="rb-note"><strong>Dar conta × dar-se conta.</strong> <em>Dar conta (de algo)</em> significa conseguir lidar com algo: "Não vou dar conta de tudo sozinha". <em>Dar-se conta (de algo)</em> significa perceber: "Só depois me dei conta do erro". O pronome muda o sentido.</div>
+      <div class="rb-note"><strong>A maioria das pessoas + verbo.</strong> Com expressões partitivas (<em>a maioria de, a maior parte de, grande parte de</em>) seguidas de plural, o verbo pode ficar no singular, concordando com <em>maioria</em>, ou ir para o plural, concordando com <em>pessoas</em>. As duas formas são aceitas pela norma: "A maioria das pessoas vive/vivem assim."</div>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="sec-label">Vocabulário</div>
+  <div class="gram-box">
+    <p class="gram-intro" style="margin-bottom:6px;">Leia o quadro antes de ler o texto. Você vai encontrar estas palavras e expressões na crônica.</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">estagnado/a</td><td>stuck, stagnant</td></tr>
+        <tr><td class="vocab-pt">amedrontador/a</td><td>frightening</td></tr>
+        <tr><td class="vocab-pt">licença não remunerada</td><td>unpaid leave</td></tr>
+        <tr><td class="vocab-pt">largar o emprego</td><td>to quit one's job</td></tr>
+        <tr><td class="vocab-pt">guardar dinheiro</td><td>to save money</td></tr>
+        <tr><td class="vocab-pt">desperdiçar</td><td>to waste</td></tr>
+        <tr><td class="vocab-pt">adiar</td><td>to put off</td></tr>
+        <tr><td class="vocab-pt">brega</td><td>cheesy, corny</td></tr>
+        <tr><td class="vocab-pt">dar um tempo (de algo)</td><td>to take a break (from something)</td></tr>
+        <tr><td class="vocab-pt">ir atrás de um sonho</td><td>to chase a dream</td></tr>
+        <tr><td class="vocab-pt">passar perrengue</td><td>to go through a rough patch</td></tr>
+        <tr><td class="vocab-pt">viver o agora</td><td>to live in the moment</td></tr>
+        <tr><td class="vocab-pt">dar conta (de algo)</td><td>to manage, to cope with</td></tr>
+        <tr><td class="vocab-pt">quebrar a rotina</td><td>to break the routine</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LEITURA -->
+  <div class="sec-label">Leitura</div>
+  <div class="text-card">
+    <div class="text-source">Texto construído para esta atividade</div>
+    <div class="text-title">O dia em que eu não fui vender coco na praia</div>
+    <div class="text-subtitle">crônica</div>
+    <div class="text-body">
+      <p>Todo brasileiro que trabalha em escritório já ouviu, ou já disse, a frase: "Qualquer dia eu largo tudo e vou vender coco na praia". A gente diz isso na segunda-feira de manhã, na fila do elevador, no fim de uma reunião que podia ter sido um e-mail. Diz rindo, claro. Mas ninguém ri por inteiro.</p>
+      <p>Eu disse essa frase por onze anos. Onze anos no mesmo andar, na mesma mesa, com a mesma caneca de café. A rotina era uma sala sem janelas. Eu não estava infeliz. Estava pior: estava estagnada. A infelicidade pelo menos incomoda; a estagnação acomoda.</p>
+      <p>A maioria das pessoas que eu conhecia vivia do mesmo jeito. Guardávamos dinheiro para as férias e desperdiçávamos as férias pensando no trabalho. Passávamos a semana esperando o sábado, e o sábado temendo a segunda-feira.</p>
+      <p>Um dia, sem pensar muito, ou talvez depois de pensar demais, pedi para dar um tempo: três meses de licença não remunerada. Quando contei para minha mãe, ela quase morreu do coração. Confesso que a ideia era amedrontadora. Sair da rotina assusta mais do que a própria rotina cansa.</p>
+      <p>Não fui vender coco na praia. Fui, primeiro, dormir. Depois, fui aprender a dançar forró, coisa que eu adiava desde os vinte anos. Depois, fui atrás de um sonho antigo e pequeno: escrever. Não um livro, só um parágrafo por dia. Passei perrengue, sim: o dinheiro encurtou, a culpa apareceu, o medo chegou. Mais de uma vez achei que não ia dar conta de ficar parada.</p>
+      <p>Mas foi nesses três meses que eu me dei conta de uma coisa óbvia: eu não precisava largar o emprego para quebrar a rotina. Precisava parar de viver o futuro sem desfrutar o presente. Precisava, como dizem os adesivos de carro e os livros de autoajuda, viver o agora. É uma frase brega, eu sei, mas verdadeira.</p>
+      <p>Voltei para o mesmo andar e para a mesma mesa. A caneca, joguei fora. Hoje mudo o caminho para o trabalho, mudo o lugar do almoço, mudo de ideia sem medo. Recuperei a confiança? Em parte. O resto estou aprendendo. E, se um dia eu largar tudo para vender coco na praia, não vai ser por fuga. Vai ser por escolha.</p>
+    </div>
+  </div>
+
+  <!-- EXERCÍCIO 1 -->
+  <div class="sec-label">Exercícios</div>
+  <div class="ex-card" id="ex1">
+    <div class="ex-header">
+      <div class="ex-num">1</div>
+      <div>
+        <div class="ex-title">Compreensão</div>
+        <div class="ex-instruction">Leia a crônica e responda com suas palavras, em duas ou três frases por pergunta.</div>
+      </div>
+    </div>
+
+    <div class="q-item">
+      <span class="q-num">1.</span> Por que a narradora diz que estar estagnada é "pior" do que estar infeliz?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="show-model-btn" onclick="showModel(1)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-1">A infelicidade incomoda e por isso provoca reação. A estagnação acomoda: a pessoa se acostuma e deixa de buscar mudança.</div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">2.</span> A narradora largou o emprego? O que ela descobriu durante a licença?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="show-model-btn" onclick="showModel(2)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-2">Não. Ela tirou uma licença não remunerada e voltou ao mesmo emprego. Descobriu que podia quebrar a rotina sem largar o emprego, mudando a forma de viver o presente.</div>
+    </div>
+    <div class="q-item">
+      <span class="q-num">3.</span> A frase "vender coco na praia" aparece no início e no fim do texto. O que muda no sentido dela entre um momento e outro?
+      <textarea class="q-textarea" placeholder="Escreva sua resposta…"></textarea>
+      <button class="show-model-btn" onclick="showModel(3)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-3">No início a frase é uma piada, uma fantasia de fuga. No fim ela pode virar uma escolha consciente, não uma fuga.</div>
+    </div>
+  </div>
+
+  <!-- EXERCÍCIO 2 -->
+  <div class="ex-card" id="ex2">
+    <div class="ex-header">
+      <div class="ex-num">2</div>
+      <div>
+        <div class="ex-title">Expressões em contexto</div>
+        <div class="ex-instruction">Complete as frases com as expressões do quadro. Conjugue o verbo quando for necessário. Use cada expressão uma vez só.</div>
+      </div>
+    </div>
+    <div class="wb-box"><strong>Expressões:</strong> dar conta · dar um tempo · quebrar a rotina · passar perrengue · viver o agora · ir atrás de um sonho</div>
+
+    <div class="gap-row"><span class="gap-num">1.</span>Estou tão sobrecarregada que não vou <input class="gap-input" id="g1" type="text"> de entregar esse relatório até sexta.</div>
+    <div class="gap-row"><span class="gap-num">2.</span>Vou <input class="gap-input" id="g2" type="text"> das redes sociais: um mês inteiro sem abrir o Instagram.</div>
+    <div class="gap-row"><span class="gap-num">3.</span>Semana passada fui trabalhar de bicicleta só para <input class="gap-input" id="g3" type="text">.</div>
+    <div class="gap-row"><span class="gap-num">4.</span>Na minha primeira viagem sozinho, eu <input class="gap-input" id="g4" type="text">: perdi a mala e dormi no aeroporto.</div>
+    <div class="gap-row"><span class="gap-num">5.</span>Meu avô sempre diz que a gente se preocupa demais com o amanhã e esquece de <input class="gap-input" id="g5" type="text">.</div>
+    <div class="gap-row"><span class="gap-num">6.</span>Aos 50 anos, minha tia <input class="gap-input" id="g6" type="text">: abriu uma escola de dança em Recife.</div>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkGap2()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetGap2()">Refazer</button>
+    </div>
+    <div id="gap2-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 3 -->
+  <div class="ex-card" id="ex3">
+    <div class="ex-header">
+      <div class="ex-num">3</div>
+      <div>
+        <div class="ex-title">A palavra certa</div>
+        <div class="ex-instruction">Escolha a opção adequada em cada frase.</div>
+      </div>
+    </div>
+    <div id="wc-area">
+      <div class="wc-row" data-id="1"><span class="wc-num">1.</span><span>Depois de dez anos na mesma empresa, Marcos resolveu</span>
+        <button class="wc-btn" onclick="selectWC(this,1,'terminar')">terminar</button>
+        <button class="wc-btn" onclick="selectWC(this,1,'largar')">largar</button>
+        <span>o emprego.</span>
+      </div>
+      <div class="wc-row" data-id="2"><span class="wc-num">2.</span><span>Estou</span>
+        <button class="wc-btn" onclick="selectWC(this,2,'salvando')">salvando</button>
+        <button class="wc-btn" onclick="selectWC(this,2,'guardando')">guardando</button>
+        <span>dinheiro para viajar em dezembro.</span>
+      </div>
+      <div class="wc-row" data-id="3"><span class="wc-num">3.</span><span>Ela finalmente ganhou</span>
+        <button class="wc-btn" onclick="selectWC(this,3,'confidencia')">confidência</button>
+        <button class="wc-btn" onclick="selectWC(this,3,'confianca')">confiança</button>
+        <span>para apresentar o próprio projeto.</span>
+      </div>
+      <div class="wc-row" data-id="4"><span class="wc-num">4.</span><span>Sinto que estou</span>
+        <button class="wc-btn" onclick="selectWC(this,4,'desperdicando')">desperdiçando</button>
+        <button class="wc-btn" onclick="selectWC(this,4,'gastando')">gastando</button>
+        <span>meu talento nesse cargo.</span>
+      </div>
+      <div class="wc-row" data-id="5"><span class="wc-num">5.</span><span>Recomeçar do zero aos 40 anos parece uma ideia</span>
+        <button class="wc-btn" onclick="selectWC(this,5,'amedrontada')">amedrontada</button>
+        <button class="wc-btn" onclick="selectWC(this,5,'amedrontadora')">amedrontadora</button>
+        <span>.</span>
+      </div>
+      <div class="wc-row" data-id="6"><span class="wc-num">6.</span><span>Há anos ele cumpre as mesmas tarefas e não aprende nada novo. Está</span>
+        <button class="wc-btn" onclick="selectWC(this,6,'estancado')">estancado</button>
+        <button class="wc-btn" onclick="selectWC(this,6,'estagnado')">estagnado</button>
+        <span>.</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkWC()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetWC()">Refazer</button>
+    </div>
+    <div id="wc-msg" class="result-msg"></div>
+  </div>
+
+  <!-- EXERCÍCIO 4 -->
+  <div class="ex-card" id="ex4">
+    <div class="ex-header">
+      <div class="ex-num">4</div>
+      <div>
+        <div class="ex-title">Reescrita com expressões</div>
+        <div class="ex-instruction">Reescreva cada frase, substituindo o trecho em negrito por uma das expressões do quadro. Conjugue o verbo e ajuste a frase quando necessário. Use cada expressão uma vez só.</div>
+      </div>
+    </div>
+    <div class="wb-box"><strong>Expressões:</strong> quebrar a rotina · dar-se conta de · viver o agora · dar um tempo · ir atrás de um sonho · passar perrengue · dar conta de</div>
+
+    <div class="rw-item">
+      <div class="rw-num">1.</div>
+      <div class="rw-sent">Depois de dois anos sem férias, Carla decidiu <strong>se afastar do trabalho por um período</strong>.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(4)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-4">Depois de dois anos sem férias, Carla decidiu dar um tempo do trabalho.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">2.</div>
+      <div class="rw-sent">Só percebi que estava infeliz quando tirei uma semana de folga.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(5)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-5">Só me dei conta de que estava infeliz quando tirei uma semana de folga.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">3.</div>
+      <div class="rw-sent">No primeiro ano em São Paulo, a gente <strong>enfrentou muitas dificuldades</strong>: pouco dinheiro, apartamento minúsculo, nenhum amigo.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(6)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-6">No primeiro ano em São Paulo, a gente passou (muito) perrengue: pouco dinheiro, apartamento minúsculo, nenhum amigo.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">4.</div>
+      <div class="rw-sent">Com dois empregos e um bebê em casa, ela <strong>não consegue lidar com tantas responsabilidades</strong>.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(7)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-7">Com dois empregos e um bebê em casa, ela não dá conta de tantas responsabilidades.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">5.</div>
+      <div class="rw-sent">Minha terapeuta diz que eu penso demais no futuro e preciso <strong>aproveitar o momento presente</strong>.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(8)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-8">Minha terapeuta diz que eu penso demais no futuro e preciso viver o agora.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">6.</div>
+      <div class="rw-sent">Aos 60 anos, meu pai finalmente resolveu <strong>realizar o desejo antigo</strong> de ser músico.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(9)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-9">Aos 60 anos, meu pai finalmente foi atrás do sonho de ser músico.</div>
+    </div>
+    <div class="rw-item" style="border-bottom:none;padding-bottom:0;">
+      <div class="rw-num">7.</div>
+      <div class="rw-sent">Às sextas-feiras, a equipe almoça no parque para <strong>sair um pouco do de sempre</strong>.</div>
+      <textarea class="rw-textarea" placeholder="Reescreva aqui…"></textarea>
+      <button class="show-model-btn" onclick="showModel(10)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-10">Às sextas-feiras, a equipe almoça no parque para quebrar a rotina.</div>
+    </div>
+  </div>
+
+  <!-- EXERCÍCIO 5 -->
+  <div class="ex-card" id="ex5">
+    <div class="ex-header">
+      <div class="ex-num">5</div>
+      <div>
+        <div class="ex-title">Sem + infinitivo</div>
+        <div class="ex-instruction">Una as duas frases em uma só, usando <em>sem</em> + infinitivo. A segunda frase vira a parte com <em>sem</em>.</div>
+      </div>
+    </div>
+
+    <div class="gram-box" style="padding:20px 24px;margin-bottom:20px;">
+      <p class="gram-intro" style="margin-bottom:12px;">Depois de <strong>sem</strong>, o verbo fica no infinitivo. A forma do infinitivo depende de quem pratica a ação.</p>
+      <table class="vocab-table">
+        <thead><tr><th>Quem pratica a ação depois de <em>sem</em>?</th><th>Exemplo</th><th>Forma do verbo</th></tr></thead>
+        <tbody>
+          <tr><td>A mesma pessoa da oração principal</td><td><em>Ela mudou de cidade sem pensar duas vezes.</em></td><td>infinitivo sem sujeito próprio</td></tr>
+          <tr><td>Outra pessoa (singular)</td><td><em>Ele pediu demissão sem o chefe esperar.</em></td><td>infinitivo pessoal, igual ao infinitivo comum</td></tr>
+          <tr><td>Outra pessoa (plural)</td><td><em>Saí da reunião sem os colegas notarem.</em></td><td>infinitivo pessoal + -em</td></tr>
+          <tr><td>Nós</td><td><em>A semana acabou sem conversarmos.</em></td><td>infinitivo pessoal + -mos</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;color:#666;margin-top:12px;">Quando a ação é de outra pessoa, o sujeito vem antes do infinitivo e o verbo concorda com ele.</p>
+    </div>
+
+    <div class="rw-item">
+      <div class="rw-num">1.</div>
+      <div class="rw-sent">Ele aceitou a proposta. Ele não leu o contrato.</div>
+      <textarea class="rw-textarea" placeholder="Una as frases com sem + infinitivo..."></textarea>
+      <button class="show-model-btn" onclick="showModel(11)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-11">Ele aceitou a proposta sem ler o contrato.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">2.</div>
+      <div class="rw-sent">Passei cinco anos nesse cargo. Não desfrutei nenhum fim de semana.</div>
+      <textarea class="rw-textarea" placeholder="Una as frases com sem + infinitivo..."></textarea>
+      <button class="show-model-btn" onclick="showModel(12)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-12">Passei cinco anos nesse cargo sem desfrutar (de) nenhum fim de semana.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">3.</div>
+      <div class="rw-sent">Muita gente vive no piloto automático. Essas pessoas não questionam a rotina.</div>
+      <textarea class="rw-textarea" placeholder="Una as frases com sem + infinitivo..."></textarea>
+      <button class="show-model-btn" onclick="showModel(13)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-13">Muita gente vive no piloto automático sem questionar a rotina.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">4.</div>
+      <div class="rw-sent">Ela vendeu o carro. A família não sabia.</div>
+      <textarea class="rw-textarea" placeholder="Una as frases com sem + infinitivo..."></textarea>
+      <button class="show-model-btn" onclick="showModel(14)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-14">Ela vendeu o carro sem a família saber.</div>
+    </div>
+    <div class="rw-item">
+      <div class="rw-num">5.</div>
+      <div class="rw-sent">Os filhos saíram de casa. Os pais não perceberam.</div>
+      <textarea class="rw-textarea" placeholder="Una as frases com sem + infinitivo..."></textarea>
+      <button class="show-model-btn" onclick="showModel(15)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-15">Os filhos saíram de casa sem os pais perceberem.</div>
+    </div>
+    <div class="rw-item" style="border-bottom:none;padding-bottom:0;">
+      <div class="rw-num">6.</div>
+      <div class="rw-sent">O ano inteiro passou. Nós não tiramos férias.</div>
+      <textarea class="rw-textarea" placeholder="Una as frases com sem + infinitivo..."></textarea>
+      <button class="show-model-btn" onclick="showModel(16)">Ver resposta modelo</button>
+      <div class="model-ans" id="model-16">O ano inteiro passou sem tirarmos férias.</div>
+    </div>
+  </div>
+
+  <!-- PRODUÇÃO ESCRITA -->
+  <div class="ex-card" id="ex6">
+    <div class="ex-header">
+      <div class="ex-num">6</div>
+      <div>
+        <div class="ex-title">Produção escrita</div>
+        <div class="ex-instruction">Escolha uma das duas propostas abaixo. Você pode escrever a Opção A ou a Opção B.</div>
+      </div>
+    </div>
+
+    <div class="prod-opt">
+      <div class="prod-opt-title">Opção A · Resposta a um amigo</div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:8px;">Você recebeu esta mensagem do seu amigo Diego:</p>
+      <div class="msg-bubble">"Oi! Não aguento mais. Hoje o chefe mudou o prazo do projeto pela terceira vez e eu decidi: vou largar tudo e vender coco na praia. Tô falando sério desta vez. O que você acha?"</div>
+      <p style="font-size:13.5px;color:#555;">Escreva uma resposta para o Diego, em tom informal, com 15 a 20 linhas. Sua resposta deve:</p>
+      <ul>
+        <li>reagir à decisão dele;</li>
+        <li>contar, com suas palavras, a experiência da narradora da crônica como exemplo;</li>
+        <li>dizer se, na sua opinião, largar o emprego é a melhor saída para ele, e por quê;</li>
+        <li>sugerir pelo menos uma alternativa;</li>
+        <li>usar pelo menos três expressões deste material.</li>
+      </ul>
+    </div>
+
+    <div class="prod-opt">
+      <div class="prod-opt-title">Opção B · Crônica</div>
+      <p style="font-size:13.5px;color:#555;">Releia a crônica "O dia em que eu não fui vender coco na praia" como modelo. Depois escreva uma crônica de 20 a 30 linhas sobre uma frase que todo mundo repete e quase ninguém cumpre, como "segunda-feira eu começo" ou "um dia eu mudo de vida". Sua crônica deve:</p>
+      <ul>
+        <li>partir de uma cena concreta do dia a dia;</li>
+        <li>mostrar o que essa frase revela ou esconde sobre quem a diz;</li>
+        <li>usar pelo menos três expressões deste material;</li>
+        <li>retomar a frase no final com um sentido diferente do início.</li>
+      </ul>
+    </div>
+
+    <textarea class="prod-area" id="producao-final" placeholder="Escreva o seu texto aqui (Opção A ou Opção B)…"></textarea>
+  </div>
+
+  <!-- ENVIO PARA A PROFESSORA -->
+  <div style="max-width:700px;margin:0 auto;padding:0 16px 48px;">
+    <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+      <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+        <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+        <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+      </div>
+    </div>
+    <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+      <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+      <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+      <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+    </div>
+    <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,'').trim()}
+
+function showModel(n){var p=document.getElementById('model-'+n);var b=p.previousElementSibling;p.style.display='block';b.style.display='none';}
+
+// ── EXERCÍCIO 2 (gap-fill) ──
+const gap2Key={
+  g1:['dar conta'],
+  g2:['dar um tempo'],
+  g3:['quebrar a rotina'],
+  g4:['passei perrengue','passei um perrengue'],
+  g5:['viver o agora'],
+  g6:['foi atras de um sonho','foi atras do sonho']
+};
+function checkGap2(){
+  let ok=0,tot=Object.keys(gap2Key).length;
+  for(const id in gap2Key){const inp=document.getElementById(id);const val=norm(inp.value);const correct=gap2Key[id].some(a=>val===norm(a));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('gap2-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetGap2(){for(const id in gap2Key){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('gap2-msg');msg.className='result-msg';msg.textContent='';}
+
+// ── EXERCÍCIO 3 (word choice) ──
+const wcKey={1:'largar',2:'guardando',3:'confianca',4:'desperdicando',5:'amedrontadora',6:'estagnado'};
+const wcSel={};
+function selectWC(btn,id,val){
+  const row=document.querySelector('.wc-row[data-id="'+id+'"]');
+  row.querySelectorAll('.wc-btn').forEach(b=>{b.className='wc-btn'});
+  btn.classList.add('sel');wcSel[id]=val;
+}
+function checkWC(){
+  let ok=0,tot=Object.keys(wcKey).length,answered=0;
+  for(const id in wcKey){
+    const row=document.querySelector('.wc-row[data-id="'+id+'"]');
+    const btns=row.querySelectorAll('.wc-btn');
+    btns.forEach(b=>b.classList.remove('right','wrong','sel'));
+    if(wcSel[id]){
+      answered++;
+      const correct=wcSel[id]===wcKey[id];
+      if(correct)ok++;
+      btns.forEach(b=>{
+        const bval=b.textContent.trim();
+        if(norm(bval)===norm(wcKey[id]))b.classList.add('right');
+        else if(norm(bval)===norm(wcSel[id])&&!correct)b.classList.add('wrong');
+      });
+    }
+  }
+  const msg=document.getElementById('wc-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetWC(){
+  for(const id in wcKey){document.querySelector('.wc-row[data-id="'+id+'"]').querySelectorAll('.wc-btn').forEach(b=>b.className='wc-btn');delete wcSel[id];}
+  const msg=document.getElementById('wc-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  document.querySelectorAll('.wc-row').forEach(function(row) {
+    var id = row.getAttribute('data-id');
+    var sel = wcSel[id] || '(sem resposta)';
+    answersHtml += '<p><strong>Palavra certa '+id+':</strong> '+sel+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
