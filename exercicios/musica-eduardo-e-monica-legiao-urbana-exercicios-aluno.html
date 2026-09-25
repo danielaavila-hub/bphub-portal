@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eduardo e Mônica — Legião Urbana | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;--rock:#A1441D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--rock);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box em{color:var(--musgo)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 8px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 8px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .order-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--light-gray);font-size:.9rem}
+  .order-row:last-of-type{border-bottom:none}
+  .order-select{border:1.5px solid var(--light-gray);border-radius:6px;padding:5px 6px;font-family:'Manrope',sans-serif;font-size:.85rem;background:#fff;width:56px;text-align:center}
+  .order-select.ok{border-color:#2e7d32;color:#2e7d32}
+  .order-select.err{border-color:#c62828;color:#c62828}
+  .em-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--light-gray);font-size:.9rem;flex-wrap:wrap}
+  .em-row:last-of-type{border-bottom:none}
+  .em-num{font-weight:700;color:var(--terracota);min-width:18px}
+  .em-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:6px;padding:5px 12px;font-size:.83rem;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .15s}
+  .em-btn:hover{border-color:var(--rock)}
+  .em-btn.sel{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .em-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .em-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .cloze-text{font-size:.95rem;line-height:2.3}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:110px;text-align:center;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:80px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--terracota);color:var(--terracota);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--terracota);color:#fff}
+  .model-answers-block{display:none;margin-top:14px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:8px;background:var(--baunilha);border-left:3px solid var(--terracota);border-radius:0 6px 6px 0;padding:8px 12px}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--telha);margin-bottom:2px}
+  .model-answer-item p{font-size:.85rem;color:var(--nanquim);line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Rock Brasileiro</span>
+  <span class="badge">Legião Urbana</span>
+  <span class="badge">1986</span>
+</div>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="card intro-card">
+    <h1>Eduardo e Mônica</h1>
+    <p class="fonte">Legião Urbana · do álbum <em>Dois</em>, 1986</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">"Eduardo e Mônica" é uma canção de Renato Russo, gravada pela Legião Urbana. É uma das canções mais amadas do rock brasileiro: conta, em forma de história, o namoro de um casal de opostos — ele fã de futebol de botão, ela de filosofia e astrologia — e como o amor deles resistiu às diferenças e ao tempo.</p>
+  </div>
+
+  <!-- LISTEN -->
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Eduardo e Mônica</p>
+    <p class="instr">Ouça a música do começo ao fim. Depois você vai responder algumas perguntas sobre o que entendeu.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/bsutUab2fkI"
+        title="Eduardo e Mônica — Legião Urbana" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <!-- NOTA LINGUÍSTICA -->
+  <div class="card">
+    <p class="section-label">Nota linguística</p>
+    <div class="cult-box">
+      A canção tem registro informal: <strong>tô</strong> (estou), <strong>tava</strong> (estava), <strong>pra</strong> (para), <strong>a gente</strong> (nós). Também aparecem gírias da época, como <strong>camelo</strong> (bicicleta) e <strong>birita</strong> (bebida alcoólica). <em>Birita</em> ainda é usado hoje em dia.
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Leia o quadro antes de ouvir a canção. Você vai encontrar estas palavras na música.</p>
+    <table class="vocab-table">
+      <thead><tr><th>Palavra ou expressão</th><th>Significado</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">cursinho</td><td>curso que prepara para o vestibular</td></tr>
+        <tr><td class="vocab-pt">carinha</td><td>rapaz (informal)</td></tr>
+        <tr><td class="vocab-pt">birita</td><td>bebida alcoólica (gíria)</td></tr>
+        <tr><td class="vocab-pt">tonto</td><td>meio bêbado, com a cabeça girando</td></tr>
+        <tr><td class="vocab-pt">me ferrar</td><td>me dar mal, ter problemas (informal)</td></tr>
+        <tr><td class="vocab-pt">boyzinho</td><td>rapaz que quer parecer moderno (gíria dos anos 80)</td></tr>
+        <tr><td class="vocab-pt">camelo</td><td>bicicleta (gíria dos anos 80)</td></tr>
+        <tr><td class="vocab-pt">tinta</td><td>produto para pintar ou colorir, inclusive o cabelo</td></tr>
+        <tr><td class="vocab-pt">ser de Leão</td><td>ter nascido sob o signo de Leão</td></tr>
+        <tr><td class="vocab-pt">futebol de botão</td><td>jogo de futebol de mesa, com peças parecidas com botões</td></tr>
+        <tr><td class="vocab-pt">se formar</td><td>terminar a faculdade</td></tr>
+        <tr><td class="vocab-pt">passar no vestibular</td><td>ser aprovado na prova para entrar na universidade</td></tr>
+        <tr><td class="vocab-pt">batalhar grana</td><td>trabalhar muito para ganhar dinheiro (informal)</td></tr>
+        <tr><td class="vocab-pt">segurar a barra</td><td>aguentar um momento difícil (informal)</td></tr>
+        <tr><td class="vocab-pt">gêmeos</td><td>dois irmãos que nasceram no mesmo parto</td></tr>
+        <tr><td class="vocab-pt">ficar de recuperação</td><td>ter que repetir uma prova na escola por causa de nota baixa</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CONTEXTO CULTURAL -->
+  <div class="card">
+    <p class="section-label">Contexto cultural</p>
+    <div class="cult-box">
+      <strong>🏛️ Uma história brasiliense</strong><br>
+      A banda Legião Urbana nasceu em Brasília, no começo dos anos 80, numa cena de rock formada por jovens da capital. A história do casal também se passa em Brasília: o <em>Parque da Cidade</em> é um grande parque da capital, e o <em>Planalto Central</em> é a região onde a cidade fica. Na canção aparecem duas palavras importantes da vida escolar brasileira — o <em>vestibular</em>, prova para entrar na universidade, e o <em>cursinho</em>, curso que prepara para essa prova.
+    </div>
+    <div class="cult-box">
+      <strong>🎬 Do disco à telona</strong><br>
+      Em 2022, a história de "Eduardo e Mônica" virou filme, com Alice Braga e Gabriel Leone nos papéis principais — quase 40 anos depois de a canção ter sido lançada no álbum <em>Dois</em> (1986).
+    </div>
+  </div>
+
+  <!-- ATIVIDADE 1 -->
+  <div class="ex-card">
+    <p class="ex-num">Atividade 1</p>
+    <p class="ex-title">Primeira escuta</p>
+    <p class="ex-instr">Ouça a canção do começo ao fim. Numere os acontecimentos de 1 a 8, na ordem em que aparecem na canção. Se precisar, ouça de novo.</p>
+    <div id="order-area">
+      <div class="order-row" data-id="1"><select class="order-select" id="o1"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Os dois viajaram juntos.</span></div>
+      <div class="order-row" data-id="2"><select class="order-select" id="o2"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Eduardo acordou e não quis sair da cama.</span></div>
+      <div class="order-row" data-id="3"><select class="order-select" id="o3"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Os dois voltaram para Brasília.</span></div>
+      <div class="order-row" data-id="4"><select class="order-select" id="o4"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Os dois marcaram o primeiro encontro.</span></div>
+      <div class="order-row" data-id="5"><select class="order-select" id="o5"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Um amigo do cursinho chamou Eduardo para uma festa.</span></div>
+      <div class="order-row" data-id="6"><select class="order-select" id="o6"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Mônica terminou a faculdade.</span></div>
+      <div class="order-row" data-id="7"><select class="order-select" id="o7"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Os dois se conheceram numa festa.</span></div>
+      <div class="order-row" data-id="8"><select class="order-select" id="o8"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Os dois construíram uma casa.</span></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkOrder()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetOrder()">Refazer</button>
+    </div>
+    <div id="order-msg" class="result-msg"></div>
+  </div>
+
+  <!-- ATIVIDADE 2 -->
+  <div class="ex-card">
+    <p class="ex-num">Atividade 2</p>
+    <p class="ex-title">Eduardo ou Mônica?</p>
+    <p class="ex-instr">Ouça a canção de novo. Marque E (Eduardo) ou M (Mônica) para cada frase.</p>
+    <div id="em-area">
+      <div class="em-row" data-id="1"><span class="em-num">1.</span><span style="flex:1;">Tinha dezesseis anos.</span><button class="em-btn" onclick="selectEM(this,1,'E')">E</button><button class="em-btn" onclick="selectEM(this,1,'M')">M</button></div>
+      <div class="em-row" data-id="2"><span class="em-num">2.</span><span style="flex:1;">Estudava Medicina.</span><button class="em-btn" onclick="selectEM(this,2,'E')">E</button><button class="em-btn" onclick="selectEM(this,2,'M')">M</button></div>
+      <div class="em-row" data-id="3"><span class="em-num">3.</span><span style="flex:1;">Falava alemão.</span><button class="em-btn" onclick="selectEM(this,3,'E')">E</button><button class="em-btn" onclick="selectEM(this,3,'M')">M</button></div>
+      <div class="em-row" data-id="4"><span class="em-num">4.</span><span style="flex:1;">Ainda tinha aulas de inglês.</span><button class="em-btn" onclick="selectEM(this,4,'E')">E</button><button class="em-btn" onclick="selectEM(this,4,'M')">M</button></div>
+      <div class="em-row" data-id="5"><span class="em-num">5.</span><span style="flex:1;">Gostava de novela.</span><button class="em-btn" onclick="selectEM(this,5,'E')">E</button><button class="em-btn" onclick="selectEM(this,5,'M')">M</button></div>
+      <div class="em-row" data-id="6"><span class="em-num">6.</span><span style="flex:1;">Gostava de Van Gogh e dos Mutantes.</span><button class="em-btn" onclick="selectEM(this,6,'E')">E</button><button class="em-btn" onclick="selectEM(this,6,'M')">M</button></div>
+      <div class="em-row" data-id="7"><span class="em-num">7.</span><span style="flex:1;">Jogava futebol de botão com o avô.</span><button class="em-btn" onclick="selectEM(this,7,'E')">E</button><button class="em-btn" onclick="selectEM(this,7,'M')">M</button></div>
+      <div class="em-row" data-id="8"><span class="em-num">8.</span><span style="flex:1;">Falava de magia e meditação.</span><button class="em-btn" onclick="selectEM(this,8,'E')">E</button><button class="em-btn" onclick="selectEM(this,8,'M')">M</button></div>
+      <div class="em-row" data-id="9"><span class="em-num">9.</span><span style="flex:1;">Sugeriu uma lanchonete.</span><button class="em-btn" onclick="selectEM(this,9,'E')">E</button><button class="em-btn" onclick="selectEM(this,9,'M')">M</button></div>
+      <div class="em-row" data-id="10"><span class="em-num">10.</span><span style="flex:1;">Queria ver um filme de Godard.</span><button class="em-btn" onclick="selectEM(this,10,'E')">E</button><button class="em-btn" onclick="selectEM(this,10,'M')">M</button></div>
+      <div class="em-row" data-id="11"><span class="em-num">11.</span><span style="flex:1;">Chegou ao parque de moto.</span><button class="em-btn" onclick="selectEM(this,11,'E')">E</button><button class="em-btn" onclick="selectEM(this,11,'M')">M</button></div>
+      <div class="em-row" data-id="12"><span class="em-num">12.</span><span style="flex:1;">Chegou ao parque de bicicleta.</span><button class="em-btn" onclick="selectEM(this,12,'E')">E</button><button class="em-btn" onclick="selectEM(this,12,'M')">M</button></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkEM()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetEM()">Refazer</button>
+    </div>
+    <div id="em-msg" class="result-msg"></div>
+  </div>
+
+  <!-- GRAMÁTICA -->
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">Contar uma história no passado</p>
+    <div class="gram-box">
+      <strong>Pretérito perfeito:</strong> o que aconteceu. São as ações que avançam a história. <em>→ trocaram, telefonaram, decidiram, sugeriu</em><br><br>
+      <strong>Pretérito imperfeito:</strong><br>
+      Descrição de pessoas e situações. <em>→ era, tinha, gostava</em><br>
+      Hábitos, coisas que se repetiam. <em>→ jogava</em><br>
+      Ação em andamento enquanto outra acontece. <em>→ abriu (ação) × tomava (em andamento)</em><br><br>
+      Na canção, o mesmo verbo aparece nos dois tempos: <em>um dia, se encontraram</em> → aconteceu uma vez; <em>se encontravam todo dia</em> → hábito.
+      <table>
+        <thead><tr><th></th><th>-AR (gostar)</th><th>-ER / -IR (querer)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>eu / ele / ela / você</strong></td><td>gostava</td><td>queria</td></tr>
+          <tr><td><strong>nós</strong></td><td>gostávamos</td><td>queríamos</td></tr>
+          <tr><td><strong>eles / elas / vocês</strong></td><td>gostavam</td><td>queriam</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;color:#666;margin-top:10px;"><strong>Irregulares:</strong> ser → era &nbsp;·&nbsp; ter → tinha</p>
+    </div>
+  </div>
+
+  <!-- ATIVIDADE 3 -->
+  <div class="ex-card">
+    <p class="ex-num">Atividade 3</p>
+    <p class="ex-title">A noite da festa</p>
+    <p class="ex-instr">Complete o texto com os verbos entre parênteses no pretérito perfeito ou no pretérito imperfeito.</p>
+    <p class="cloze-text">Naquela noite, Eduardo <input class="gap-input" id="c1" type="text"> (ir) a uma festa com um amigo do cursinho. A festa <input class="gap-input" id="c2" type="text"> (ser) estranha e as pessoas <input class="gap-input" id="c3" type="text"> (parecer) esquisitas. Eduardo <input class="gap-input" id="c4" type="text"> (estar) meio tonto e o tempo todo <input class="gap-input" id="c5" type="text"> (pensar) em voltar para casa. Foi aí que ele <input class="gap-input" id="c6" type="text"> (conhecer) a Mônica. De repente, ela <input class="gap-input" id="c7" type="text"> (começar) a rir das histórias dele. No fim da noite, os dois <input class="gap-input" id="c8" type="text"> (trocar) telefone.</p>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkCloze()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetCloze()">Refazer</button>
+    </div>
+    <div id="cloze-msg" class="result-msg"></div>
+  </div>
+
+  <!-- ATIVIDADE 4 -->
+  <div class="ex-card">
+    <p class="ex-num">Atividade 4</p>
+    <p class="ex-title">De volta à canção</p>
+    <p class="ex-instr">Ouça a canção mais uma vez. Responda com frases completas.</p>
+
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">a) O primeiro encontro dos dois foi planejado? Como você sabe?</label>
+      <textarea class="prod" rows="2" id="e4a"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">b) Depois que começaram a namorar, com que frequência os dois se viam?</label>
+      <textarea class="prod" rows="2" id="e4b"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">c) Mônica explicava coisas para Eduardo. Sobre o quê?</label>
+      <textarea class="prod" rows="2" id="e4c"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">d) Eduardo mudou com o tempo. Cite duas mudanças.</label>
+      <textarea class="prod" rows="2" id="e4d"></textarea>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">e) Por que o casal não vai viajar nas férias?</label>
+      <textarea class="prod" rows="2" id="e4e"></textarea>
+    </div>
+    <div>
+      <label style="font-size:.85rem;font-weight:700;color:var(--musgo);display:block;margin-bottom:4px;">f) O refrão pergunta se existe razão nas coisas do coração. Pela história que você ouviu, qual é a sua resposta? Use dois acontecimentos da canção.</label>
+      <textarea class="prod" rows="3" id="e4f"></textarea>
+    </div>
+
+    <button class="see-answers-btn" onclick="toggleAnswers('e4-answers', this)">👁 Ver respostas modelo</button>
+    <div class="model-answers-block" id="e4-answers">
+      <div class="model-answer-item"><div class="model-label">a)</div><p>Não. Eles se encontraram sem querer.</p></div>
+      <div class="model-answer-item"><div class="model-label">b)</div><p>Eles se encontravam todo dia.</p></div>
+      <div class="model-answer-item"><div class="model-label">c)</div><p>Sobre o céu, a terra, a água e o ar.</p></div>
+      <div class="model-answer-item"><div class="model-label">d)</div><p>Ele aprendeu a beber, deixou o cabelo crescer, decidiu trabalhar e passou no vestibular.</p></div>
+      <div class="model-answer-item"><div class="model-label">e)</div><p>Porque o filho de Eduardo está de recuperação.</p></div>
+      <div class="model-answer-item"><div class="model-label">f)</div><p>Resposta pessoal.</p></div>
+    </div>
+  </div>
+
+  <!-- ATIVIDADE 5 -->
+  <div class="ex-card">
+    <p class="ex-num">Atividade 5</p>
+    <p class="ex-title">Produção escrita</p>
+    <p class="ex-instr">Eduardo e Mônica eram muito diferentes, mas o namoro deu certo. Escreva um texto de 80 a 120 palavras sobre duas pessoas muito diferentes que você conhece. Podem ser um casal, dois amigos ou dois colegas. Leia o modelo antes de escrever.</p>
+    <div class="gram-box" style="margin-bottom:14px;font-size:.87rem;">
+      <strong>Modelo (texto construído):</strong><br>
+      <em>Meus avós, Lúcia e Antônio, eram muito diferentes. Ela era professora, lia muito e adorava viajar. Ele trabalhava numa oficina, não gostava de livros e preferia ficar em casa. Eles se conheceram num baile em Curitiba, em 1965. Ele a convidou para dançar e, no fim da noite, ela deu o telefone para ele. Casaram dois anos depois. Nos fins de semana, ela lia no jardim e ele cuidava das plantas. Brigavam às vezes, mas sempre ficavam juntos no fim do dia.</em>
+    </div>
+    <p style="font-size:.85rem;color:var(--pitomba);margin-bottom:10px;">No seu texto, conte: quem são essas pessoas; como era cada uma; como e onde elas se conheceram; que hábitos cada uma tinha; o que aconteceu depois.</p>
+    <textarea class="prod" rows="6" id="producao-final"></textarea>
+  </div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,'').trim()}
+
+// ── ATIVIDADE 1 (ordering) ──
+const orderKey={1:'5',2:'1',3:'8',4:'4',5:'2',6:'6',7:'3',8:'7'};
+function checkOrder(){
+  let ok=0,tot=Object.keys(orderKey).length;
+  for(const id in orderKey){const sel=document.getElementById('o'+id);const correct=sel.value===orderKey[id];sel.classList.remove('ok','err');if(sel.value)sel.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('order-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetOrder(){for(const id in orderKey){const sel=document.getElementById('o'+id);sel.value='';sel.classList.remove('ok','err');}const msg=document.getElementById('order-msg');msg.className='result-msg';msg.textContent='';}
+
+// ── ATIVIDADE 2 (Eduardo ou Mônica) ──
+const emKey={1:'E',2:'M',3:'M',4:'E',5:'E',6:'M',7:'E',8:'M',9:'E',10:'M',11:'M',12:'E'};
+const emSel={};
+function selectEM(btn,id,val){
+  const row=document.querySelector('.em-row[data-id="'+id+'"]');
+  row.querySelectorAll('.em-btn').forEach(b=>{b.className='em-btn'});
+  btn.classList.add('sel');emSel[id]=val;
+}
+function checkEM(){
+  let ok=0,tot=Object.keys(emKey).length,answered=0;
+  for(const id in emKey){
+    const row=document.querySelector('.em-row[data-id="'+id+'"]');
+    const btns=row.querySelectorAll('.em-btn');
+    btns.forEach(b=>b.classList.remove('right','wrong','sel'));
+    if(emSel[id]){
+      answered++;
+      const correct=emSel[id]===emKey[id];
+      if(correct)ok++;
+      btns.forEach(b=>{
+        const bval=b.textContent.trim();
+        if(bval===emKey[id])b.classList.add('right');
+        else if(bval===emSel[id]&&!correct)b.classList.add('wrong');
+      });
+    }
+  }
+  const msg=document.getElementById('em-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetEM(){
+  for(const id in emKey){document.querySelector('.em-row[data-id="'+id+'"]').querySelectorAll('.em-btn').forEach(b=>b.className='em-btn');delete emSel[id];}
+  const msg=document.getElementById('em-msg');msg.className='result-msg';msg.textContent='';
+}
+
+// ── ATIVIDADE 3 (cloze) ──
+const clozeKey={
+  c1:['foi'],c2:['era'],c3:['pareciam'],c4:['estava'],c5:['pensava'],
+  c6:['conheceu'],c7:['comecou'],c8:['trocaram']
+};
+function checkCloze(){
+  let ok=0,tot=Object.keys(clozeKey).length;
+  for(const id in clozeKey){const inp=document.getElementById(id);const val=norm(inp.value);const correct=clozeKey[id].some(a=>val===norm(a));inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;}
+  const msg=document.getElementById('cloze-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+function resetCloze(){for(const id in clozeKey){const inp=document.getElementById(id);inp.value='';inp.classList.remove('ok','err');}const msg=document.getElementById('cloze-msg');msg.className='result-msg';msg.textContent='';}
+
+function toggleAnswers(id,btn){
+  const block=document.getElementById(id);
+  const visible=block.classList.toggle('visible');
+  btn.textContent=visible?'🙈 Esconder respostas modelo':'👁 Ver respostas modelo';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  document.querySelectorAll('.order-select').forEach(function(sel) {
+    var val = sel.value || '(sem resposta)';
+    answersHtml += '<p><strong>Ordem '+sel.id+':</strong> '+val+'</p>';
+  });
+  document.querySelectorAll('.em-row').forEach(function(row) {
+    var id = row.getAttribute('data-id');
+    var sel = emSel[id] || '(sem resposta)';
+    answersHtml += '<p><strong>Eduardo/Mônica '+id+':</strong> '+sel+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
