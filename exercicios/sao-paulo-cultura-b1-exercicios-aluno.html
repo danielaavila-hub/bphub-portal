@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>São Paulo | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --marrom:     #967E63;
+      --marrom-light: #F3EFE9;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--marrom); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--marrom); }
+
+    /* HERO */
+    .page-hero { background: var(--marrom); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 580px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 52px 48px 20px; }
+
+    .sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-photo { background: #EFF3EA; }
+    .icon-video { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* INTRO TEXT */
+    .intro-text { font-size: 15px; line-height: 1.85; color: var(--texto); margin-bottom: 10px; }
+    .intro-text strong { color: var(--marrom); }
+
+    /* GRAMMAR NOTE */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    /* ATTRACTION CARDS */
+    .attraction-card { background: white; border-radius: 14px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--light-gray); box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    .attraction-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--light-gray); }
+    .attraction-credit { font-size: 11px; color: #aaa; padding: 8px 22px 0; font-style: italic; }
+    .attraction-body { padding: 16px 22px 22px; }
+    .attraction-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .attraction-text { font-size: 14.5px; line-height: 1.8; color: var(--texto); }
+    .attraction-text strong { color: var(--marrom); }
+
+    /* VIDEO */
+    .video-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+    .video-title { font-family: 'Trirong', serif; font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .video-meta { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+    .vocab-note { font-size: 13px; color: #888; font-style: italic; margin-bottom: 14px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* transform list */
+    .transform-list { list-style: none; }
+    .transform-item { padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+    .transform-item:last-child { border-bottom: none; }
+    .transform-original { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.65; }
+    .transform-original em { color: var(--pitomba); font-style: normal; font-weight: 600; }
+    .transform-input { width: 100%; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 4px 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--texto); outline: none; transition: border-color 0.2s; }
+    .transform-input:focus { border-bottom-color: var(--marrom); }
+
+    /* example box */
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .model-answers-block { display:none; margin-top:20px; }
+    .model-answers-block.visible { display:block; }
+    .model-answer-item { margin-bottom:14px; background: rgba(150,126,99,.07); border-left: 3px solid var(--marrom); border-radius: 0 8px 8px 0; padding: 10px 14px; }
+    .model-answer-item:last-child { margin-bottom:0; }
+    .model-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--marrom); margin-bottom: 4px; }
+    .model-answer-item p { font-size:14px; color:var(--texto); line-height:1.7; margin:0; }
+    .model-note { font-size: 12px; color: #999; font-style: italic; margin-top: 10px; }
+    .personal-note { background: rgba(150,126,99,.1); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--marrom); font-style: italic; margin-top: 4px; }
+    .see-answers-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; background: transparent; border: 1.5px solid var(--marrom); color: var(--marrom); border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Manrope', sans-serif; transition: background .2s, color .2s; }
+    .see-answers-btn:hover { background: var(--marrom); color: white; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal · Aspectos Culturais</div>
+    <h1>São <em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Paulo</em></h1>
+    <p>The largest city in the Southern Hemisphere, told through four of its most iconic spots — with real photos, a real video, and the expressions Brazilians actually use to talk about places: <strong style="color:white;">vale a pena</strong> and <strong style="color:white;">ficar</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Vale a pena + infinitivo</span>
+      <span class="meta-pill"><span class="dot"></span>Ficar — localização</span>
+      <span class="meta-pill"><span class="dot"></span>Material cultural</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION: INTRO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗺️</div>
+      <div>
+        <h2>Sobre a Cidade</h2>
+        <p>Read the short introduction below before exploring the four spots</p>
+      </div>
+    </div>
+
+    <p class="intro-text">São Paulo é a maior cidade do Brasil e do Hemisfério Sul, com mais de 12 milhões de habitantes só na capital. É uma cidade de imigrantes: italianos, japoneses, libaneses, nordestinos e pessoas de quase todos os cantos do Brasil e do mundo ajudaram a construir o jeito paulistano de ser. Por isso, São Paulo tem uma das cenas gastronômicas mais diversas da América Latina, um calendário cultural cheio de museus e exposições, e um ritmo de vida rápido — o paulistano é famoso por andar depressa e reclamar do trânsito.</p>
+    <p class="intro-text">Vamos conhecer quatro lugares que <strong>valem a pena</strong> visitar na cidade.</p>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: GRAMMAR -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Two expressions you will need to talk about places</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Vale a pena + infinitivo</div>
+      <p><strong>Valer a pena</strong> means "to be worth it." Use <strong>vale a pena</strong> + infinitive to recommend something.</p>
+      <p style="margin-top:-4px;"><em>Vale a pena visitar o MASP.</em> — <span style="color:#888;font-style:italic;">It's worth visiting MASP.</span></p>
+      <p>The negative is <strong>não vale a pena</strong>: <em>Não vale a pena ir lá de carro — não tem onde estacionar.</em></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Ficar — talking about location</div>
+      <p>Brazilians use <strong>ficar</strong>, not <strong>estar</strong>, to say where a fixed place is located — a building, a park, a city.</p>
+      <p style="margin-top:-4px;"><em>O Mercadão fica no centro histórico.</em> — <span style="color:#888;font-style:italic;">The Mercadão is (located) downtown.</span></p>
+      <p><strong>Ficar</strong> also describes a temporary state or how something turns out: <em>A avenida fica fechada para carros aos domingos.</em> — <span style="color:#888;font-style:italic;">The avenue is (turns) closed to cars on Sundays.</span></p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: ATTRACTIONS -->
+    <div class="sec-header">
+      <div class="sec-icon icon-photo">📍</div>
+      <div>
+        <h2>Quatro Lugares para Conhecer</h2>
+        <p>Read about each spot — notice every use of <em>fica</em> and <em>vale a pena</em></p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://images.unsplash.com/photo-1636394375509-3258f4c7e078?fm=jpg&q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Avenida Paulista, São Paulo">
+      <div class="attraction-credit">Foto: Raphael Brasileiro, Unsplash License</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Avenida Paulista</div>
+        <p class="attraction-text">A Avenida Paulista <strong>fica</strong> no coração de São Paulo e é um dos símbolos mais conhecidos da cidade. <strong>Vale a pena</strong> caminhar pela avenida em um domingo, quando ela <strong>fica</strong> fechada para carros e cheia de gente andando de bicicleta, patins e skate. De um lado e do outro, prédios altos dividem espaço com museus e pracinhas.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://images.unsplash.com/photo-1680573346177-16adaf21f56f?fm=jpg&q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0" alt="MASP - Museu de Arte de São Paulo">
+      <div class="attraction-credit">Foto: Odinei Ribeiro, Unsplash License</div>
+      <div class="attraction-body">
+        <div class="attraction-title">MASP</div>
+        <p class="attraction-text">Bem na Paulista <strong>fica</strong> o MASP, o Museu de Arte de São Paulo. O prédio, projetado pela arquiteta ítalo-brasileira Lina Bo Bardi, é sustentado por quatro pilares vermelhos e parece flutuar sobre a avenida. <strong>Vale a pena</strong> visitar o museu para ver obras de Cândido Portinari e Tarsila do Amaral — e para tirar uma foto por baixo do prédio, claro.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://images.unsplash.com/photo-1685937652431-4f855a1994ca?fm=jpg&q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Parque Ibirapuera, São Paulo">
+      <div class="attraction-credit">Foto: Felipe Barradas, Unsplash License</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Parque Ibirapuera</div>
+        <p class="attraction-text">O Parque Ibirapuera <strong>fica</strong> na Zona Sul da cidade e é o parque urbano mais visitado do Brasil. Projetado por Oscar Niemeyer, tem lagos, museus e um obelisco em homenagem à Revolução de 1932. <strong>Vale a pena</strong> ir de manhã cedo, quando o parque <strong>fica</strong> mais tranquilo — ideal para caminhar, andar de bicicleta ou simplesmente sentar na grama.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://images.unsplash.com/photo-1654508590628-21c717998f6b?fm=jpg&q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Mercado Municipal de São Paulo">
+      <div class="attraction-credit">Foto: Nadine Marfurt, Unsplash License</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Mercado Municipal (Mercadão)</div>
+        <p class="attraction-text">O Mercadão, como os paulistanos chamam o Mercado Municipal, <strong>fica</strong> no centro histórico da cidade. <strong>Vale a pena</strong> provar o famoso sanduíche de mortadela, quase do tamanho de um prato, ou um pastel de bacalhau, tudo isso cercado por bancas de frutas, temperos e produtos típicos. É um passeio para os olhos e para o estômago.</p>
+      </div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural:</strong> Diferente do Rio de Janeiro, São Paulo não tem praia nem paisagem natural famosa — a cidade é, antes de tudo, um centro de negócios, cultura e gastronomia. Por isso, um roteiro paulistano combina prédios, museus, parques urbanos e, principalmente, muita comida.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🔤</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Review before the exercises</p>
+      </div>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">o paulistano / a paulistana</td><td>person from the city of São Paulo</td></tr>
+        <tr><td class="vocab-pt">o prédio</td><td>building</td></tr>
+        <tr><td class="vocab-pt">o pilar</td><td>pillar</td></tr>
+        <tr><td class="vocab-pt">flutuar</td><td>to float</td></tr>
+        <tr><td class="vocab-pt">a obra (de arte)</td><td>work (of art)</td></tr>
+        <tr><td class="vocab-pt">o parque urbano</td><td>urban park</td></tr>
+        <tr><td class="vocab-pt">o lago</td><td>lake</td></tr>
+        <tr><td class="vocab-pt">tranquilo</td><td>calm, peaceful</td></tr>
+        <tr><td class="vocab-pt">a grama</td><td>grass</td></tr>
+        <tr><td class="vocab-pt">a banca</td><td>market stall</td></tr>
+        <tr><td class="vocab-pt">os temperos</td><td>seasonings, spices</td></tr>
+        <tr><td class="vocab-pt">cercado(a) por</td><td>surrounded by</td></tr>
+        <tr><td class="vocab-pt">o passeio</td><td>outing, stroll</td></tr>
+        <tr><td class="vocab-pt">dar uma volta</td><td>to go for a walk / stroll</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- VIDEO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-video">🎥</div>
+      <div>
+        <h2>Assista ao Vídeo</h2>
+        <p>Watch the video before doing Exercise 4</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-title">São Paulo: Roteiro Completo</div>
+      <div class="video-meta">Gaby Coutinho, YouTube · dicas, passeios e os quatro lugares deste material</div>
+      <div class="video-wrap">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/JVwxoNcswdk" title="São Paulo: Roteiro completo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Complete with fica or vale a pena</h3>
+          <p>Based on the four texts above</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct form: <em>fica / ficam</em> or <em>vale a pena / não vale a pena</em>.</p>
+
+      <ul class="blanks-list" id="ex1-blanks">
+        <li><span class="item-num">1.</span><span>A Avenida Paulista</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>no coração da cidade.</span></li>
+        <li><span class="item-num">2.</span><span>O MASP</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>bem na Avenida Paulista.</span></li>
+        <li><span class="item-num">3.</span><span>Aos domingos, a Paulista</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>fechada para carros.</span></li>
+        <li><span class="item-num">4.</span><span></span><input class="blank-input" data-answer="vale a pena" placeholder="___________"><span>visitar o MASP para ver obras de Portinari e Tarsila.</span></li>
+        <li><span class="item-num">5.</span><span>O Parque Ibirapuera</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>na Zona Sul de São Paulo.</span></li>
+        <li><span class="item-num">6.</span><span>De manhã cedo, o parque</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>mais tranquilo.</span></li>
+        <li><span class="item-num">7.</span><span>O Mercadão</span><input class="blank-input" data-answer="fica" placeholder="___________"><span>no centro histórico.</span></li>
+        <li><span class="item-num">8.</span><span></span><input class="blank-input" data-answer="vale a pena" placeholder="___________"><span>provar o sanduíche de mortadela no Mercadão.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkBlanks('ex1-blanks','ex1-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('ex1-blanks','ex1-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex1-result" class="result-msg"></div>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Recommend it with vale a pena</h3>
+          <p>Transform each cue into a full recommendation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Use <strong>vale a pena</strong> + infinitive to turn each cue into a recommendation. Follow the model.</p>
+
+      <div class="example-box"><strong>Modelo:</strong> caminhar pela Paulista aos domingos → <strong>Vale a pena caminhar pela Paulista aos domingos.</strong></div>
+
+      <ul class="transform-list">
+        <li class="transform-item"><p class="transform-original">1. visitar o MASP de manhã, quando tem menos gente</p><input class="transform-input" type="text" placeholder="Vale a pena..."></li>
+        <li class="transform-item"><p class="transform-original">2. ir ao Ibirapuera de bicicleta</p><input class="transform-input" type="text" placeholder="Vale a pena..."></li>
+        <li class="transform-item"><p class="transform-original">3. provar o pastel de bacalhau do Mercadão</p><input class="transform-input" type="text" placeholder="Vale a pena..."></li>
+        <li class="transform-item"><p class="transform-original">4. não / levar carro para a Paulista aos domingos</p><input class="transform-input" type="text" placeholder="Não vale a pena..."></li>
+        <li class="transform-item"><p class="transform-original">5. conhecer o obelisco do Ibirapuera</p><input class="transform-input" type="text" placeholder="Vale a pena..."></li>
+        <li class="transform-item"><p class="transform-original">6. tirar uma foto por baixo do prédio do MASP</p><input class="transform-input" type="text" placeholder="Vale a pena..."></li>
+      </ul>
+
+      <button class="see-answers-btn" onclick="toggleAnswers(this,'ex2-answers')">👁 See model answers</button>
+      <div class="model-answers-block" id="ex2-answers">
+        <div class="model-answer-item"><p>1. Vale a pena visitar o MASP de manhã, quando tem menos gente.</p></div>
+        <div class="model-answer-item"><p>2. Vale a pena ir ao Ibirapuera de bicicleta.</p></div>
+        <div class="model-answer-item"><p>3. Vale a pena provar o pastel de bacalhau do Mercadão.</p></div>
+        <div class="model-answer-item"><p>4. Não vale a pena levar carro para a Paulista aos domingos.</p></div>
+        <div class="model-answer-item"><p>5. Vale a pena conhecer o obelisco do Ibirapuera.</p></div>
+        <div class="model-answer-item"><p>6. Vale a pena tirar uma foto por baixo do prédio do MASP.</p></div>
+      </div>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Where does it stay... err, where is it?</h3>
+          <p>Describe location with fica</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Answer each question in a complete sentence, using <strong>fica</strong>.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Onde fica o MASP?</label>
+        <textarea class="open-textarea" placeholder="O MASP fica..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Onde fica o Parque Ibirapuera?</label>
+        <textarea class="open-textarea" placeholder="O Parque Ibirapuera fica..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Onde fica o Mercadão?</label>
+        <textarea class="open-textarea" placeholder="O Mercadão fica..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. E na sua cidade — onde fica o lugar mais famoso?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Na minha cidade, o lugar mais famoso fica..."></textarea>
+      </div>
+      <p class="personal-note">Question 4 is a personal answer — there is no single correct response. Focus on using <em>fica</em> correctly.</p>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Video comprehension</h3>
+          <p>Watch the video and answer</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Watch the video above (at least the first few minutes) and answer the questions below in Portuguese.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quais dos quatro lugares deste material aparecem no vídeo?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Which of the four places in this material appear in the video?</span>
+        <textarea class="open-textarea" placeholder="No vídeo aparecem..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Que outro lugar, que não está neste material, a vlogueira recomenda?</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">What other place, not in this material, does she recommend?</span>
+        <textarea class="open-textarea" placeholder="Ela também recomenda..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Alguma dica do vídeo combina com "vale a pena"? Escreva uma frase usando essa dica.</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Pick one tip from the video and turn it into a "vale a pena" sentence.</span>
+        <textarea class="open-textarea" placeholder="Vale a pena..."></textarea>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção Escrita</h2>
+        <p>Write about your own city</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Um roteiro pela sua cidade</h3>
+          <p>60–90 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short text (60–90 words) recommending two places in your own city or region to a Brazilian visitor. Use <strong>fica</strong> to say where each place is, and <strong>vale a pena</strong> to recommend what to do there.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Um roteiro por Lisboa</div>
+        <p>Se você vier a Lisboa, o Castelo de São Jorge fica no alto da cidade, com uma vista incrível sobre o rio Tejo. Vale a pena subir até lá no fim da tarde, quando o sol está baixo. Outro lugar interessante é o bairro de Alfama, que fica pertinho do castelo. Vale a pena se perder pelas ruas estreitas e parar para ouvir um fado ao vivo.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Escolha dois lugares da sua cidade ou região.</li>
+        <li>Diga onde cada lugar fica.</li>
+        <li>Recomende pelo menos uma atividade em cada lugar com "vale a pena".</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Se você vier..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function toggleAnswers(btn, id) {
+    const block = document.getElementById(id);
+    const visible = block.classList.toggle('visible');
+    btn.textContent = visible ? '🙈 Hide answers' : (btn.textContent.indexOf('correct') > -1 ? '👁 See correct answers' : '👁 See model answers');
+  }
+
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// BREVO SUBMIT
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
