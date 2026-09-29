@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Homem Nu — Fernando Sabino | BPHUB B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #D36D29;
+      --verde-ok: #2E6B3E; --vermelho: #A83030;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--cobalto)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 640px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .gram-ref table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    .gram-ref th { background: var(--level); color: #fff; padding: 7px 12px; text-align: left; font-weight: 700; }
+    .gram-ref td { padding: 7px 12px; border-bottom: 1px solid var(--light-gray); }
+    .gram-ref tr:last-child td { border-bottom: none; }
+    .gram-ref tr:nth-child(even) td { background: var(--off-white); }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16px; line-height: 1.85; font-family: 'Trirong', serif; }
+    .text-body p:last-child { margin-bottom: 0; }
+    .text-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; margin-bottom: 14px; }
+    mark.lv { background: rgba(211,109,41,.16); color: var(--level); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    .placeholder-box { border: 2px dashed var(--erva-doce); border-radius: 10px; padding: 22px 24px; background: #fff; color: #8a8672; font-style: italic; font-size: 14.5px; line-height: 1.7; text-align: center; }
+    .audio-wrap { border: 2px dashed var(--cobalto); border-radius: 10px; padding: 22px 24px; background: #fff; color: var(--cobalto); font-size: 14.5px; text-align: center; margin-top: 16px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 22px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--level); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; color: var(--nanquim); }
+    table.vocab:last-child { margin-bottom: 0; }
+
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+    audio { width: 100%; margin-top: 4px; }
+
+    .cult-box { background: #f0f4e8; border-left: 4px solid var(--erva-doce); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; line-height: 1.7; }
+    .cult-box strong { color: var(--musgo); }
+    .cult-box:last-child { margin-bottom: 0; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--level); }
+    textarea.prod { min-height: 140px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .base-verb { font-family: 'Trirong', serif; font-style: italic; color: #999; font-size: 13px; }
+    .gap-input { display: inline-block; min-width: 130px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--level); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--level); }
+    .correct { border-color: var(--verde-ok) !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--vermelho) !important; background: #FBEFE6 !important; }
+
+    .tf-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-item span { flex: 1; line-height: 1.55; }
+    .tf-btn { border: 1.5px solid var(--light-gray); background: #fff; border-radius: 5px; padding: 4px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: all .15s; white-space: nowrap; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.sel-V { background: var(--musgo); color: #fff; border-color: var(--musgo); }
+    .tf-btn.sel-F { background: var(--level); color: #fff; border-color: var(--level); }
+    .tf-btn.right { background: var(--verde-ok); color: #fff; border-color: var(--verde-ok); }
+    .tf-btn.wrong-btn { background: var(--vermelho); color: #fff; border-color: var(--vermelho); }
+
+    .match-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--light-gray); font-size: 14.5px; }
+    .match-row:last-child { border-bottom: none; }
+    .match-word { font-weight: 700; color: var(--nanquim); min-width: 150px; }
+    .match-select { flex: 1; padding: 7px 10px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 13.5px; background: #fff; }
+
+    .transf-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .transf-item:last-child { border-bottom: none; }
+    .transf-given { color: #8a8672; font-style: italic; margin-bottom: 8px; line-height: 1.6; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--level); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: var(--verde-ok); }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Literatura + Exercícios</span>
+    <a href="../b2/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para os materiais B2</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>O Homem Nu <em>Fernando Sabino</em></h1>
+  <div class="hero-sub">Uma crônica cômica sobre o pânico cotidiano: um pequeno problema (a conta da televisão) se transforma, passo a passo, numa situação cada vez mais ridícula e sem volta — até o final irônico.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Mais-que-perfeito literário</span>
+    <span class="hero-tag">Crônica humorística · Fernando Sabino</span>
+    <span class="hero-tag">B2 · Literatura + Exercícios</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Contexto cultural</p>
+  <div class="card">
+    <div class="cult-box">
+      <strong>✍️ Quem foi Fernando Sabino</strong><br>
+      Fernando Sabino (Belo Horizonte, 1923 — Rio de Janeiro, 2004) foi um dos grandes cronistas brasileiros do século XX. Junto com amigos como Otto Lara Resende e Paulo Mendes Campos, fez parte de um grupo de escritores mineiros que se tornou conhecido como a "Geração de 45". Jornalista, editor e romancista, Sabino é autor do romance <em>O Encontro Marcado</em> (1954) e de dezenas de livros de crônicas, publicadas ao longo de décadas em jornais do Rio de Janeiro.
+    </div>
+    <div class="cult-box">
+      <strong>😄 O estilo do autor</strong><br>
+      As crônicas de Fernando Sabino são conhecidas pelo humor leve e observacional: ele pega uma situação banal do dia a dia — uma conta atrasada, um mal-entendido, um pequeno acidente doméstico — e a leva, com precisão cômica, a um desfecho cada vez mais absurdo. "O Homem Nu" é um exemplo clássico desse estilo: um problema pequeno (não ter dinheiro para pagar uma conta) desencadeia uma sequência de eventos cada vez mais constrangedores, num ritmo quase cinematográfico, até a ironia final.
+    </div>
+  </div>
+
+  <p class="sec-label">O Texto</p>
+  <div class="card text-card">
+    <div class="text-kicker">O Homem Nu · Fernando Sabino</div>
+    <div class="placeholder-box">
+      [ Espaço reservado — cole aqui o texto completo do conto "O Homem Nu", de Fernando Sabino ]
+    </div>
+    <p class="fonte" style="margin-top:16px;">Fonte: Fernando Sabino, "O Homem Nu", em <em>Os Cem Melhores Contos Brasileiros do Século</em>.</p>
+  </div>
+
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:16px;">Este quadro é dividido por tema. Leia antes de ler o conto e volte a ele sempre que precisar — não é preciso decorar as palavras.</p>
+
+    <table class="vocab">
+      <tr><th>O apuro e o pânico</th><th>Significado</th></tr>
+      <tr><td>a vigarice</td><td>ato de enganar alguém; malandragem, fraude</td></tr>
+      <tr><td>aterrorizado</td><td>tomado de terror, apavorado</td></tr>
+      <tr><td>precipitar-se</td><td>lançar-se ou correr às pressas, sem cautela</td></tr>
+      <tr><td>desvairado</td><td>fora de si, descontrolado, quase alucinado</td></tr>
+      <tr><td>ofegante</td><td>respirando com dificuldade, sem fôlego</td></tr>
+      <tr><td>o tarado</td><td>pessoa com desvio sexual; forma como os vizinhos julgam o homem, por engano</td></tr>
+    </table>
+
+    <table class="vocab">
+      <tr><th>Objetos e sons da cena</th><th>Significado</th></tr>
+      <tr><td>o embrulho</td><td>pacote, algo embrulhado (ex.: o embrulho de pão deixado pelo padeiro)</td></tr>
+      <tr><td>o parapeito</td><td>muro baixo ou proteção na beira de uma janela, varanda ou terraço</td></tr>
+      <tr><td>o estrondo</td><td>barulho forte, repentino e seco</td></tr>
+      <tr><td>esmurrar</td><td>bater com os punhos fechados (dar socos)</td></tr>
+      <tr><td>a campainha</td><td>dispositivo que toca para avisar que alguém está à porta</td></tr>
+      <tr><td>a radiopatrulha</td><td>viatura da polícia equipada com rádio; carro de patrulha</td></tr>
+    </table>
+  </div>
+
+  <p class="sec-label">Ouça o conto</p>
+  <div class="card">
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:14px;">Ouça a narração do conto uma vez, só para acompanhar a história.</p>
+    <div class="audio-box">
+      <audio controls>
+        <source src="o-homem-nu-b2.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+      <p style="font-size:12px;color:#aaa;margin-top:8px;">[ Substituir "o-homem-nu-b2.mp3" pelo nome/link do arquivo de áudio final ]</p>
+    </div>
+  </div>
+
+  <p class="sec-label">Part 1 — Compreensão</p>
+  <div class="ex-card">
+    <h2>Verdadeiro ou Falso?</h2>
+    <p class="ex-instr">Com base na leitura do texto, escolha V (Verdadeiro) ou F (Falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,1,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>O homem não tinha dinheiro para pagar a prestação da televisão porque não tinha trazido dinheiro da cidade no dia anterior.</span>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,2,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>Ele pediu para a esposa explicar a situação ao cobrador, porque achava mais fácil do que fazer isso ele mesmo.</span>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,3,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>O homem ficou trancado do lado de fora do apartamento, completamente nu, porque o vento fechou a porta de serviço.</span>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,4,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>Assim que ele tocou a campainha, a esposa abriu a porta imediatamente e tudo se resolveu sem problemas.</span>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,5,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>No final do conto, quando batem novamente à porta, é realmente o cobrador da televisão — exatamente o que ele estava tentando evitar o dia inteiro.</span>
+      </div>
+    </div>
+    <button class="check-btn" onclick="checkTF()">✓ Corrigir</button>
+    <button class="reset-btn" onclick="resetTF()">Refazer</button>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 1 — Vocabulário: combine as colunas</h2>
+    <p class="ex-instr">Para cada palavra, escolha a definição correta.</p>
+    <div id="match-area">
+      <div class="match-row" data-id="1">
+        <span class="match-word">vigarice</span>
+        <select class="match-select">
+          <option value="">Escolha…</option>
+          <option value="a">ato de enganar alguém; fraude</option>
+          <option value="b">barulho forte e repentino</option>
+          <option value="c">respirando com dificuldade</option>
+        </select>
+      </div>
+      <div class="match-row" data-id="2">
+        <span class="match-word">parapeito</span>
+        <select class="match-select">
+          <option value="">Escolha…</option>
+          <option value="a">viatura da polícia</option>
+          <option value="b">muro baixo na beira de uma janela ou varanda</option>
+          <option value="c">pacote, algo embrulhado</option>
+        </select>
+      </div>
+      <div class="match-row" data-id="3">
+        <span class="match-word">precipitar-se</span>
+        <select class="match-select">
+          <option value="">Escolha…</option>
+          <option value="a">bater com os punhos fechados</option>
+          <option value="b">ficar fora de si, descontrolado</option>
+          <option value="c">correr ou se lançar às pressas, sem cautela</option>
+        </select>
+      </div>
+      <div class="match-row" data-id="4">
+        <span class="match-word">esmurrar</span>
+        <select class="match-select">
+          <option value="">Escolha…</option>
+          <option value="a">bater com os punhos fechados (dar socos)</option>
+          <option value="b">tomado de terror</option>
+          <option value="c">viatura da polícia equipada com rádio</option>
+        </select>
+      </div>
+      <div class="match-row" data-id="5">
+        <span class="match-word">desvairado</span>
+        <select class="match-select">
+          <option value="">Escolha…</option>
+          <option value="a">respirando com dificuldade</option>
+          <option value="b">fora de si, descontrolado, quase alucinado</option>
+          <option value="c">malandragem, fraude</option>
+        </select>
+      </div>
+    </div>
+    <button class="check-btn" onclick="checkMatch()">✓ Corrigir</button>
+    <button class="reset-btn" onclick="resetMatch()">Refazer</button>
+    <div id="match-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 2 — Gramática</p>
+  <div class="gram-ref">
+    <h3>Pretérito Mais-que-perfeito: forma simples x forma composta</h3>
+    <p>Em português, uma ação passada que aconteceu <strong>antes de outra ação passada</strong> pode ser expressa de duas formas. A <strong>forma composta</strong> ("tinha/havia + particípio") é a mais comum na fala e na escrita do dia a dia. A <strong>forma simples</strong> (radical do pretérito perfeito + terminação -ra, -ras, -ra, -ramos, -reis, -ram) é mais rara na fala, mas aparece com frequência na escrita literária e jornalística, dando um tom mais formal e elegante à narrativa.</p>
+    <table>
+      <thead><tr><th>Forma composta (fala comum)</th><th>Forma simples (registro literário)</th></tr></thead>
+      <tbody>
+        <tr><td>ela tinha trancado</td><td>ela trancara</td></tr>
+        <tr><td>ele tinha chegado</td><td>ele chegara</td></tr>
+        <tr><td>eles tinham saído</td><td>eles sairam &#8594; <em>saíram</em> (idêntica ao perfeito na 3ª pl. de alguns verbos — cuidado)</td></tr>
+        <tr><td>nós tínhamos visto</td><td>nós víramos</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>No texto:</strong> "a mulher já se trancara lá dentro" — Fernando Sabino usa a forma simples exatamente para marcar que a esposa já estava trancada no banheiro <em>antes</em> de o marido ir até a porta de serviço. É a mesma ideia de "já tinha se trancado", só que num registro mais literário.</div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 2 — Da forma composta para a forma simples</h2>
+    <p class="ex-instr">Reescreva cada frase substituindo a forma composta destacada pela forma simples equivalente.</p>
+    <div class="transf-item">
+      <p class="transf-given">1. Quando o cobrador chegou, o casal já <strong>tinha decidido</strong> não abrir a porta.</p>
+      <textarea placeholder="Quando o cobrador chegou, o casal já..."></textarea>
+    </div>
+    <div class="transf-item">
+      <p class="transf-given">2. Ele percebeu que a porta <strong>tinha fechado</strong> sozinha, empurrada pelo vento.</p>
+      <textarea placeholder="Ele percebeu que a porta..."></textarea>
+    </div>
+    <div class="transf-item">
+      <p class="transf-given">3. A vizinha ficou horrorizada porque nunca <strong>tinha visto</strong> uma cena daquelas.</p>
+      <textarea placeholder="A vizinha ficou horrorizada porque nunca..."></textarea>
+    </div>
+    <div class="transf-item">
+      <p class="transf-given">4. Antes de a polícia chegar, os vizinhos já <strong>tinham formado</strong> um verdadeiro tumulto na porta do apartamento.</p>
+      <textarea placeholder="Antes de a polícia chegar, os vizinhos já..."></textarea>
+    </div>
+    <p class="ref-note" style="margin-top:4px;">Gabarito sugerido: 1. decidira · 2. fechara · 3. vira · 4. formaram (3ª pl., idêntica ao perfeito — por isso muitos autores evitam essa forma na 3ª pessoa do plural e preferem a composta).</p>
+  </div>
+
+  <p class="sec-label">Part 3 — Interpretação e Discussão</p>
+  <div class="ex-card">
+    <h2>Para pensar e conversar</h2>
+    <p class="ex-instr">Responda com 3–5 frases em português. Não existe resposta certa ou errada — o objetivo é praticar a expressão de opinião e narrar experiências pessoais.</p>
+    <div class="q-block">
+      <p class="q"><span class="q-num">1.</span> O humor do conto vem do fato de um problema pequeno ir piorando pouco a pouco. Cite pelo menos duas etapas dessa "escalada" que você achou mais engraçadas.</p>
+      <textarea placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">2.</span> O final do conto é irônico: depois de toda aquela confusão, quem está mesmo à porta? Por que esse final funciona tão bem como piada?</p>
+      <textarea placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">3.</span> Você já viveu (ou quase viveu) uma situação de pânico cotidiano parecida — ficar trancado(a) para fora de casa, do carro, do escritório? Conte o que aconteceu.</p>
+      <textarea placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">4.</span> Fernando Sabino transforma situações banais do cotidiano em boas crônicas cômicas. Que outra situação do dia a dia você acha que poderia virar uma crônica engraçada?</p>
+      <textarea placeholder="Escreva sua resposta aqui…"></textarea>
+    </div>
+  </div>
+
+  <p class="sec-label">Part 4 — Produção Escrita</p>
+  <div class="ex-card">
+    <h2>Sua própria crônica de pânico cotidiano</h2>
+    <p class="ex-instr">Escreva um parágrafo curto (80–120 palavras) narrando uma situação cômica de pânico ou constrangimento — real ou inventada. Use pelo menos <strong>duas</strong> ocorrências do pretérito mais-que-perfeito (forma simples ou composta) e pelo menos <strong>três</strong> palavras do vocabulário estudado.</p>
+    <textarea class="prod" placeholder="Escreva seu texto aqui…"></textarea>
+  </div>
+
+  <div class="send-box">
+    📩 Quando terminar, envie suas respostas para a professora. Ela vai ler com atenção e comentar na próxima aula.
+  </div>
+
+</div>
+
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,''); }
+
+// ── TF ──
+const tfKey={1:'V',2:'F',3:'V',4:'F',5:'V'};
+const tfSel={};
+function selectTF(btn,id,val){
+  const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(b=>{b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  let ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(const id in tfKey){
+    const item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('right','wrong-btn','sel-V','sel-F'));
+    if(tfSel[id]){answered++;const correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(b=>{if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong-btn');});}
+  }
+  const msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'good':'try-again');
+  msg.innerHTML='<strong>'+ok+' / '+tot+' corretas.</strong>'+(answered<tot?' — responda todos os itens primeiro.':'');
+}
+function resetTF(){
+  for(const id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(b=>b.className='tf-btn');delete tfSel[id];}
+  document.getElementById('tf-msg').className='result-msg';
+}
+
+// ── Match ──
+const matchKey={1:'a',2:'b',3:'c',4:'a',5:'b'};
+function checkMatch(){
+  let correct=0,total=Object.keys(matchKey).length,answered=0;
+  document.querySelectorAll('.match-row').forEach(function(row){
+    var id=row.dataset.id;
+    var sel=row.querySelector('select');
+    sel.style.borderColor='';
+    if(sel.value){
+      answered++;
+      if(sel.value===matchKey[id]){correct++;sel.style.borderColor='var(--verde-ok)';sel.style.background='#EAF5EE';}
+      else{sel.style.borderColor='var(--vermelho)';sel.style.background='#FBEFE6';}
+    } else { sel.style.background=''; }
+  });
+  var res=document.getElementById('match-msg');
+  res.className='result-msg show '+(correct===total?'good':'try-again');
+  res.innerHTML='<strong>'+correct+' / '+total+' corretas.</strong>'+(answered<total?' — responda todos os itens primeiro.':'');
+}
+function resetMatch(){
+  document.querySelectorAll('.match-row select').forEach(function(sel){sel.value='';sel.style.borderColor='';sel.style.background='';});
+  document.getElementById('match-msg').className='result-msg';
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
