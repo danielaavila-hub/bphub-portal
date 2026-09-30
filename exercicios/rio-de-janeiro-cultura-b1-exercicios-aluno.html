@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rio de Janeiro, a Cidade Maravilhosa | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --marrom:     #967E63;
+      --marrom-light: #F3EFE9;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--marrom); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--marrom); }
+
+    /* HERO */
+    .page-hero { background: var(--marrom); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 580px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 52px 48px 20px; }
+
+    .sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-photo { background: #EFF3EA; }
+    .icon-video { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* INTRO TEXT */
+    .intro-text { font-size: 15px; line-height: 1.85; color: var(--texto); margin-bottom: 10px; }
+    .intro-text strong { color: var(--marrom); }
+
+    /* GRAMMAR NOTE */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    /* ATTRACTION CARDS */
+    .attraction-card { background: white; border-radius: 14px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--light-gray); box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    .attraction-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--light-gray); }
+    .attraction-credit { font-size: 11px; color: #aaa; padding: 8px 22px 0; font-style: italic; }
+    .attraction-body { padding: 16px 22px 22px; }
+    .attraction-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .attraction-text { font-size: 14.5px; line-height: 1.8; color: var(--texto); }
+    .attraction-text strong { color: var(--marrom); }
+
+    /* VIDEO */
+    .video-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+    .video-title { font-family: 'Trirong', serif; font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .video-meta { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+    .vocab-note { font-size: 13px; color: #888; font-style: italic; margin-bottom: 14px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* example box */
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .personal-note { background: rgba(150,126,99,.1); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--marrom); font-style: italic; margin-top: 4px; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal · Aspectos Culturais</div>
+    <h1>Rio de Janeiro, <em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">a Cidade Maravilhosa</em></h1>
+    <p>One of the most photographed cities on the planet, told through its mountains, beaches and streets — with a real video and the way Brazilians describe what's biggest, best and most beautiful: <strong style="color:white;">superlativos</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Superlativos</span>
+      <span class="meta-pill"><span class="dot"></span>Descrever lugares</span>
+      <span class="meta-pill"><span class="dot"></span>Morros, praias e história</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION: INTRO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗺️</div>
+      <div>
+        <h2>Sobre a Cidade</h2>
+        <p>Read the short introduction below before exploring the spots</p>
+      </div>
+    </div>
+
+    <p class="intro-text">O Rio de Janeiro é conhecido como a <strong>Cidade Maravilhosa</strong>, um apelido que já diz muito: poucas cidades do mundo têm montanhas, floresta tropical e praias urbanas tão perto do centro. Quem nasce no Rio é <strong>carioca</strong>. A cidade foi capital do Brasil por quase 200 anos, e boa parte do seu cartão-postal — o Cristo Redentor, o Pão de Açúcar, Copacabana — está entre os símbolos mais reconhecidos do país no mundo todo.</p>
+    <p class="intro-text">Vamos conhecer alguns dos lugares mais famosos da cidade e aprender a falar sobre eles em português — usando os superlativos que os próprios cariocas usam o tempo todo.</p>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: GRAMMAR -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Three ways to say something is "the most"</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Superlativo relativo — o/a mais + adjetivo</div>
+      <p>To say something is "the most" or "the least" within a group, use <strong>o/a (mais/menos) + adjective + de/do/da</strong>.</p>
+      <p style="margin-top:-4px;"><em>Copacabana é uma das praias mais famosas do mundo.</em> — <span style="color:#888;font-style:italic;">one of the most famous beaches in the world</span></p>
+      <p>You don't always need "de/do/da" — sometimes the comparison is understood: <em>Para os cariocas, essa é a vista mais bonita.</em></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Superlativos irregulares</div>
+      <p>Four common adjectives don't use <strong>mais</strong> — they have their own superlative form.</p>
+      <p style="margin-top:-4px;"><strong>bom → o melhor</strong> · <strong>mau → o pior</strong> · <strong>grande → o maior</strong> · <strong>pequeno → o menor</strong></p>
+      <p><em>O Maracanã é um dos maiores estádios do mundo.</em> — <span style="color:#888;font-style:italic;">not "o mais grande"</span></p>
+      <p>⚠️ Don't combine the two systems: <span style="color:var(--pitomba);">✗ o mais melhor</span>. Choose one or the other.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Superlativo absoluto — o sufixo -íssimo</div>
+      <p>To intensify an adjective <strong>without comparing it to anything</strong>, Brazilians often add <strong>-íssimo/-íssima</strong> instead of using "muito".</p>
+      <p style="margin-top:-4px;"><em>A vista lá de cima é lindíssima.</em> — <span style="color:#888;font-style:italic;">= muito linda, not "the most beautiful of all"</span></p>
+      <p>Some adjectives change spelling: <strong>fácil → facílimo</strong>, <strong>simpático → simpatiquíssimo</strong>. When in doubt, "muito + adjective" is always a safe alternative.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: ATTRACTIONS -->
+    <div class="sec-header">
+      <div class="sec-icon icon-photo">📍</div>
+      <div>
+        <h2>Lugares para Conhecer</h2>
+        <p>Read about each spot and watch the video below — notice every superlative</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg" alt="Cristo Redentor, Rio de Janeiro">
+      <div class="attraction-credit">Foto: Arne Müseler, CC BY-SA 3.0 de (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Cristo Redentor</div>
+        <p class="attraction-text">No alto do morro do Corcovado, o Cristo Redentor é <strong>o cartão-postal mais famoso</strong> do Brasil e uma das Novas Sete Maravilhas do Mundo Moderno. A estátua tem 38 metros de altura (incluindo o pedestal) e pode ser vista de quase toda a cidade. Para subir até lá, os visitantes pegam o trenzinho histórico pelo Corcovado ou uma van oficial — e a vista do topo é uma das <strong>mais impressionantes</strong> do Rio.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Sugarloaf_Mountain%2C_Rio_de_Janeiro%2C_Brazil.jpg" alt="Pão de Açúcar, Rio de Janeiro">
+      <div class="attraction-credit">Foto: Wikimedia Commons contributor, CC0 (domínio público)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Pão de Açúcar</div>
+        <p class="attraction-text">O Pão de Açúcar é outro símbolo do Rio, na entrada da Baía de Guanabara. Dois bondinhos levam os visitantes até o topo em poucos minutos, oferecendo uma das <strong>vistas mais bonitas</strong> da cidade — de um lado o mar, do outro os morros e a floresta. O horário <strong>mais</strong> procurado é o final da tarde, quando o pôr do sol deixa tudo alaranjado.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Aerial_view_of_Copacabana_beach.jpg" alt="Praia de Copacabana, Rio de Janeiro">
+      <div class="attraction-credit">Foto: Gustavo Facci, CC BY-SA 2.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Praia de Copacabana</div>
+        <p class="attraction-text">Copacabana é uma das praias <strong>mais conhecidas</strong> do planeta, com quase 4 km de areia entre o Leme e o Posto Seis. É também considerada, por muitos guias de viagem, <strong>a melhor</strong> região para se hospedar no Rio, porque fica perto de tudo — praia, metrô, restaurantes e vida noturna. Na virada do ano, a praia recebe uma das festas de Réveillon <strong>mais concorridas</strong> do mundo.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/1/15/Ipanema_Beach_Rio.jpg" alt="Praia de Ipanema, Rio de Janeiro">
+      <div class="attraction-credit">Foto: Cesvieira, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Praia de Ipanema</div>
+        <p class="attraction-text">Vizinha de Copacabana, Ipanema é considerada por muitos cariocas <strong>a praia mais charmosa</strong> da cidade — mais tranquila, mais segura e cercada de bons restaurantes e lojas. A canção "Garota de Ipanema", uma das músicas brasileiras <strong>mais gravadas</strong> no mundo todo, nasceu observando o movimento dessa praia. No fim da tarde, o Arpoador (na ponta da praia) enche de gente para ver um dos pores do sol <strong>mais bonitos</strong> da cidade.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Escadaria_Selaron_em_2022.jpg" alt="Escadaria Selarón, Rio de Janeiro">
+      <div class="attraction-credit">Foto: Boaventuravinicius, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Escadaria Selarón</div>
+        <p class="attraction-text">Entre os bairros de Santa Teresa e Lapa, a Escadaria Selarón é um dos pontos <strong>mais coloridos e fotografados</strong> do Rio. O artista chileno Jorge Selarón começou a decorar os degraus com azulejos nos anos 1990 e continuou o projeto até sua morte, em 2013 — hoje são mais de 2.000 azulejos vindos de mais de 60 países. O acesso é gratuito e fica a poucos minutos a pé dos bondes de Santa Teresa.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Tram_Bonde_de_Santa_Teresa.jpg" alt="Bonde de Santa Teresa, Rio de Janeiro">
+      <div class="attraction-credit">Foto: slasher-fun, CC BY-SA 2.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Santa Teresa</div>
+        <p class="attraction-text">Subindo pelas ladeiras de paralelepípedo, Santa Teresa é, para muitos, o bairro <strong>mais boêmio e charmoso</strong> do Rio, cheio de casarões antigos, ateliês de artistas, bares e restaurantes. O bondinho amarelo que cruza o bairro desde o século XIX é uma das atrações <strong>mais tradicionais</strong> da cidade — e uma das formas mais gostosas de conhecer as ruas estreitas e cheias de arte de Santa Teresa.</p>
+        <div class="video-wrap" style="margin-top:16px;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_APBRp80yEs" title="10 passeios no Rio de Janeiro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+        </div>
+        <div class="attraction-credit" style="padding:8px 0 0;">Vídeo: "10 Passeios no Rio de Janeiro! Lugares e atrações imperdíveis na viagem!", Grupo Dicas de Viagem, YouTube (4min23)</div>
+      </div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural:</strong> O Rio de Janeiro reúne, num espaço pequeno, tudo o que o Brasil tem de mais icônico: montanha, floresta, praia urbana e centro histórico. Por isso, um roteiro carioca típico combina um passeio de natureza (Corcovado ou Pão de Açúcar), um dia de praia (Copacabana ou Ipanema) e um mergulho na cultura boêmia da cidade (Santa Teresa e a Escadaria Selarón).
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🔤</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Review before the exercises</p>
+      </div>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">carioca</td><td>person from the city of Rio de Janeiro</td></tr>
+        <tr><td class="vocab-pt">o morro</td><td>hill</td></tr>
+        <tr><td class="vocab-pt">o cartão-postal</td><td>postcard; iconic view</td></tr>
+        <tr><td class="vocab-pt">o pedestal</td><td>pedestal, base</td></tr>
+        <tr><td class="vocab-pt">o bondinho</td><td>cable car</td></tr>
+        <tr><td class="vocab-pt">a baía</td><td>bay</td></tr>
+        <tr><td class="vocab-pt">alaranjado(a)</td><td>orange-colored</td></tr>
+        <tr><td class="vocab-pt">a orla</td><td>waterfront, beachfront</td></tr>
+        <tr><td class="vocab-pt">hospedar-se</td><td>to stay (at a hotel/place)</td></tr>
+        <tr><td class="vocab-pt">o réveillon</td><td>New Year's Eve celebration</td></tr>
+        <tr><td class="vocab-pt">concorrido(a)</td><td>crowded, well-attended</td></tr>
+        <tr><td class="vocab-pt">cercado(a) de</td><td>surrounded by</td></tr>
+        <tr><td class="vocab-pt">o pôr do sol</td><td>sunset</td></tr>
+        <tr><td class="vocab-pt">o azulejo</td><td>ceramic tile</td></tr>
+        <tr><td class="vocab-pt">a ladeira</td><td>steep street, slope</td></tr>
+        <tr><td class="vocab-pt">o paralelepípedo</td><td>cobblestone</td></tr>
+        <tr><td class="vocab-pt">boêmio(a)</td><td>bohemian</td></tr>
+        <tr><td class="vocab-pt">o casarão</td><td>large old house, mansion</td></tr>
+        <tr><td class="vocab-pt">o ateliê</td><td>artist's studio</td></tr>
+        <tr><td class="vocab-pt">a floresta tropical</td><td>tropical/rain forest</td></tr>
+        <tr><td class="vocab-pt">o estádio</td><td>stadium</td></tr>
+        <tr><td class="vocab-pt">gratuito(a)</td><td>free (no cost)</td></tr>
+        <tr><td class="vocab-pt">o roteiro</td><td>itinerary</td></tr>
+        <tr><td class="vocab-pt">a vista</td><td>view</td></tr>
+        <tr><td class="vocab-pt">o mirante</td><td>lookout point</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Complete with the correct superlative</h3>
+          <p>More facts about Rio de Janeiro</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct superlative form. Some blanks need <em>mais/menos</em>, others need an irregular form (<em>melhor, maior</em>), and one needs the <em>-íssimo</em> ending.</p>
+
+      <ul class="blanks-list" id="ex1-blanks">
+        <li><span class="item-num">1.</span><span>O Cristo Redentor é o cartão-postal</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>famoso do Brasil.</span></li>
+        <li><span class="item-num">2.</span><span>A vista do Pão de Açúcar é uma das</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>bonitas da cidade.</span></li>
+        <li><span class="item-num">3.</span><span>Copacabana é uma das praias</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>conhecidas do planeta.</span></li>
+        <li><span class="item-num">4.</span><span>O Maracanã é um dos</span><input class="blank-input" data-answer="maiores" placeholder="___________"><span>estádios do mundo.</span></li>
+        <li><span class="item-num">5.</span><span>Para muitos cariocas, Ipanema é a praia</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>charmosa do Rio.</span></li>
+        <li><span class="item-num">6.</span><span>A Escadaria Selarón é um dos pontos</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>coloridos e fotografados do Rio.</span></li>
+        <li><span class="item-num">7.</span><span>Copacabana é considerada a</span><input class="blank-input" data-answer="melhor" placeholder="___________"><span>região para se hospedar, porque fica perto de tudo.</span></li>
+        <li><span class="item-num">8.</span><span>O bondinho de Santa Teresa é uma das atrações</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>tradicionais da cidade.</span></li>
+        <li><span class="item-num">9.</span><span>Se comparado ao Cristo Redentor, o passeio de barco pela Baía de Guanabara é</span><input class="blank-input" data-answer="menos" placeholder="___________"><span>conhecido, mas igualmente bonito.</span></li>
+        <li><span class="item-num">10.</span><span>Quem chega ao topo do Corcovado costuma dizer que a vista é</span><input class="blank-input" data-answer="lindíssima|lindissima" placeholder="___________"><span>(muito linda).</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkBlanks('ex1-blanks','ex1-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('ex1-blanks','ex1-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex1-result" class="result-msg"></div>
+      <p class="personal-note">Item 4 and 7 use irregular superlatives (grande → maior, bom → melhor). Item 10 uses the absolute superlative (-íssimo), not a comparison.</p>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Um roteiro realista</h3>
+          <p>Think it through — not every recommendation fits every situation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Read Thomas's situation below and answer the questions in Portuguese. Use at least one superlative in each answer.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Situação</div>
+        <p>Thomas é canadense e está no Rio de Janeiro a trabalho. Ele está hospedado num hotel em Copacabana e tem só uma tarde livre, de 13h às 18h, antes de voltar para o Canadá. Ele adora natureza e fotografia, mas tem medo de altura e não gosta de multidão. Um colega falou: "Vai ao Cristo Redentor, é imperdível!"</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. A dica do colega é uma boa ideia para Thomas, considerando o medo de altura e o gosto dele por fotografia? Explique.</label>
+        <textarea class="open-textarea" placeholder="Talvez não, porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Ele vai conseguir ir a Copacabana E ao Pão de Açúcar nessa tarde? Considere o horário disponível.</label>
+        <textarea class="open-textarea" placeholder="Sim/Não, porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Escolha UM outro lugar deste material para Thomas visitar nessa tarde. Justifique, considerando os gostos dele e o tempo disponível.</label>
+        <textarea class="open-textarea" placeholder="Eu recomendaria..., porque..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Escreva uma recomendação final para Thomas (60–80 palavras), como se você fosse falar diretamente com ele. Use pelo menos duas vezes um superlativo (mais/menos, melhor/maior ou -íssimo).</label>
+        <textarea class="open-textarea" style="min-height:140px;" placeholder="Thomas, na sua tarde eu recomendaria..."></textarea>
+      </div>
+
+      <p class="personal-note">Questions 1 and 2 have a factual basis in the texts above. Questions 3 and 4 are open — the important thing is a realistic, well-justified choice, not a "correct" answer.</p>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Um guia de bolso</h3>
+          <p>Write short definitions for a pocket travel guide</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write one sentence to define each place for a pocket travel guide, using a superlative. Use information from the texts above, but write your own sentence — don't copy the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. O Cristo Redentor</label>
+        <textarea class="open-textarea" placeholder="O Cristo Redentor é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. A praia de Copacabana</label>
+        <textarea class="open-textarea" placeholder="Copacabana é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. A Escadaria Selarón</label>
+        <textarea class="open-textarea" placeholder="A Escadaria Selarón é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O bairro de Santa Teresa</label>
+        <textarea class="open-textarea" placeholder="Santa Teresa é..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Um lugar famoso da sua cidade (use um superlativo)</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Na minha cidade, o lugar mais..."></textarea>
+      </div>
+      <p class="personal-note">Question 5 is a personal answer — there is no single correct response.</p>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Video comprehension</h3>
+          <p>Watch the video in the Santa Teresa section above</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Watch only the parts of the video indicated in each question, and answer in Portuguese. Use a superlative in each answer when possible.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. (0:36 – 0:49) Como o vídeo descreve o Cristo Redentor? Como é possível chegar até lá?</label>
+        <textarea class="open-textarea" placeholder="O vídeo descreve o Cristo Redentor como..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. (2:13 – 2:31) Quais são o quarto e o quinto passeios sugeridos no vídeo? Descreva brevemente cada um.</label>
+        <textarea class="open-textarea" placeholder="O quarto passeio é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. (2:57 – 3:20) O que o vídeo diz sobre o Museu do Amanhã e o bairro de Santa Teresa?</label>
+        <textarea class="open-textarea" placeholder="Sobre o Museu do Amanhã..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. (3:42 – 3:57) Segundo o vídeo, qual é a melhor região para se hospedar no Rio, e por quê?</label>
+        <textarea class="open-textarea" placeholder="Segundo o vídeo, a melhor região é..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. (vídeo inteiro) Dos dez passeios do vídeo, qual você quer fazer primeiro? Explique em duas frases, usando um superlativo.</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Eu quero fazer..."></textarea>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção Escrita</h2>
+        <p>Write about your own city</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Um roteiro pela sua cidade</h3>
+          <p>60–90 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short text (60–90 words) presenting two places in your own city or region to a Brazilian visitor, using superlatives to describe them.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Um roteiro por São Francisco</div>
+        <p>O lugar mais famoso de São Francisco é, sem dúvida, a Golden Gate Bridge, uma das pontes mais fotografadas do mundo — a vista de lá é lindíssima, principalmente ao pôr do sol. Outro passeio imperdível é o bairro de Fisherman's Wharf, onde fica um dos mercados de frutos do mar mais tradicionais da cidade. Para quem gosta de arte, o melhor programa é visitar um dos museus do centro, geralmente menos cheios do que os pontos turísticos mais conhecidos.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Escolha dois lugares da sua cidade ou região.</li>
+        <li>Use pelo menos um superlativo regular (mais/menos) e um irregular ou absoluto (melhor, maior, -íssimo) para descrevê-los.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="O lugar mais famoso da minha cidade é..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// BREVO SUBMIT
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
