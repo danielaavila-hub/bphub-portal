@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rio Grande do Norte, Terra do Sol | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --marrom:     #967E63;
+      --marrom-light: #F3EFE9;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--marrom); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--marrom); }
+
+    /* HERO */
+    .page-hero { background: var(--marrom); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 580px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 52px 48px 20px; }
+
+    .sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-photo { background: #EFF3EA; }
+    .icon-video { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* INTRO TEXT */
+    .intro-text { font-size: 15px; line-height: 1.85; color: var(--texto); margin-bottom: 10px; }
+    .intro-text strong { color: var(--marrom); }
+
+    /* GRAMMAR NOTE */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    /* ATTRACTION CARDS */
+    .attraction-card { background: white; border-radius: 14px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--light-gray); box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    .attraction-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--light-gray); }
+    .attraction-credit { font-size: 11px; color: #aaa; padding: 8px 22px 0; font-style: italic; }
+    .attraction-body { padding: 16px 22px 22px; }
+    .attraction-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .attraction-text { font-size: 14.5px; line-height: 1.8; color: var(--texto); }
+    .attraction-text strong { color: var(--marrom); }
+
+    /* VIDEO */
+    .video-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+    .video-title { font-family: 'Trirong', serif; font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .video-meta { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+    .vocab-note { font-size: 13px; color: #888; font-style: italic; margin-bottom: 14px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* example box */
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .personal-note { background: rgba(150,126,99,.1); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--marrom); font-style: italic; margin-top: 4px; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal · Aspectos Culturais</div>
+    <h1>Rio Grande do Norte, <em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Terra do Sol</em></h1>
+    <p>The state on Brazil's "corner," told through its beaches, dunes and landmarks — with a real video and the words Brazilians use to describe places: <strong style="color:white;">que</strong>, <strong style="color:white;">onde</strong> and <strong style="color:white;">em que</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Pronomes relativos</span>
+      <span class="meta-pill"><span class="dot"></span>Descrever lugares</span>
+      <span class="meta-pill"><span class="dot"></span>Praias, dunas e história</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION: INTRO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗺️</div>
+      <div>
+        <h2>Sobre o Estado</h2>
+        <p>Read the short introduction below before exploring the spots</p>
+      </div>
+    </div>
+
+    <p class="intro-text">O Rio Grande do Norte está na "esquina" do Brasil: é o ponto do continente mais próximo da África e da Europa. A capital, Natal, é uma cidade que tem cerca de 300 dias de sol por ano — por isso ganhou o apelido de Cidade do Sol. Quem nasce no estado é <strong>potiguar</strong>, uma palavra que vem do nome do povo indígena potiguara; quem nasce na capital é natalense. O estado é famoso pelas praias, pelas dunas de areia branca e pelo caju — o maior cajueiro do mundo também está aqui.</p>
+    <p class="intro-text">Vamos conhecer alguns lugares que os turistas adoram e onde os potiguares também passam os fins de semana.</p>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: GRAMMAR -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Three words you will need to describe places</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Que — for people and things</div>
+      <p><strong>Que</strong> connects a description to a noun. It works for people and for things, and it can be the subject or the object of the verb that follows.</p>
+      <p style="margin-top:-4px;"><em>O Morro do Careca é uma duna que tem mais de 100 metros.</em> — <span style="color:#888;font-style:italic;">que is the subject of tem</span></p>
+      <p style="margin-top:-4px;"><em>O cajueiro é uma árvore que um pescador plantou em 1888.</em> — <span style="color:#888;font-style:italic;">que is the object of plantou</span></p>
+      <p>⚠️ In English, you can drop "that": <em>the tree (that) a fisherman planted</em>. In Portuguese, <strong>que</strong> can never be dropped: <span style="color:var(--pitomba);">✗ a árvore um pescador plantou.</span></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Onde — for places</div>
+      <p>Use <strong>onde</strong> (where) when the description tells what happens in that place. Tip: if you can say <em>lá</em> or <em>nesse lugar</em> in the second part, use <strong>onde</strong>.</p>
+      <p style="margin-top:-4px;"><em>A Baía dos Golfinhos é uma praia onde é comum ver golfinhos.</em> — <span style="color:#888;font-style:italic;">é comum ver golfinhos lá</span></p>
+      <p>⚠️ A place does not automatically take <strong>onde</strong>. Look at the verb:</p>
+      <p style="margin-top:-4px;"><em>Pipa é uma vila que os turistas adoram.</em> — <span style="color:#888;font-style:italic;">os turistas adoram Pipa: Pipa is the object → que</span></p>
+      <p style="margin-top:-4px;"><em>Pipa é uma vila onde os turistas passam as férias.</em> — <span style="color:#888;font-style:italic;">passam as férias lá → onde</span></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Em que — for time</div>
+      <p>With words like <strong>dia, ano, mês, hora</strong> and <strong>época</strong>, use <strong>em que</strong>.</p>
+      <p style="margin-top:-4px;"><em>25 de dezembro é o dia em que Natal nasceu.</em></p>
+      <p>In everyday speech, Brazilians often simplify it to <strong>que</strong>: <em>o dia que Natal nasceu.</em></p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: ATTRACTIONS -->
+    <div class="sec-header">
+      <div class="sec-icon icon-photo">📍</div>
+      <div>
+        <h2>Lugares para Conhecer</h2>
+        <p>Read about each spot and watch the video in the Praia da Pipa section — notice every use of <em>que</em>, <em>onde</em> and <em>em que</em></p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Forte_dos_Reis_Magos_%28Natal%29.JPG" alt="Forte dos Reis Magos, Natal">
+      <div class="attraction-credit">Foto: Alexanderps, Public domain (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Forte dos Reis Magos</div>
+        <p class="attraction-text">O Forte dos Reis Magos está na foz do Rio Potengi, no lugar <strong>onde</strong> o rio encontra o mar. A construção começou em 6 de janeiro de 1598, o Dia de Reis — a data <strong>que</strong> deu nome ao forte. O forte tem a forma de uma estrela de cinco pontas e marca o início da história da cidade: Natal nasceu perto dele, e o dia <strong>em que</strong> a cidade nasceu, 25 de dezembro de 1599, explica o nome Natal. Hoje, o forte é um monumento histórico <strong>onde</strong> os visitantes podem ver canhões antigos e uma linda vista do encontro do rio com o mar.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Morro_do_Careca%2C_Natal_%28RN%29.jpg" alt="Morro do Careca, Natal">
+      <div class="attraction-credit">Foto: Romilda Queiroz Facc…, CC BY-SA 3.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Ponta Negra e o Morro do Careca</div>
+        <p class="attraction-text">Ponta Negra é o bairro mais turístico de Natal, com uma praia <strong>que</strong> tem hotéis, restaurantes e barracas na areia. No fim da praia está o Morro do Careca, uma duna de mais de 100 metros <strong>que</strong> é o principal cartão-postal da cidade. O nome vem da forma do morro: uma faixa de areia no meio da vegetação, que lembra a cabeça de um careca. Antigamente, o morro era um lugar <strong>onde</strong> os natalenses subiam para descer a duna sentados na areia. Mas desde 1997 é proibido subir no morro, para proteger a duna e a vegetação. Hoje, os turistas admiram o morro da praia, principalmente à noite, quando ele fica iluminado.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/2/26/Alex_Regis_Cajueiro_de_Pirangi_Natal_RN_%2840928752712%29.jpg" alt="Cajueiro de Pirangi">
+      <div class="attraction-credit">Foto: MTur Destinos, Public domain (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Cajueiro de Pirangi</div>
+        <p class="attraction-text">O Cajueiro de Pirangi fica na Praia de Pirangi do Norte, em Parnamirim, pertinho de Natal. É uma árvore <strong>que</strong> parece uma pequena floresta: ela ocupa cerca de 8.500 metros quadrados, mais ou menos o tamanho de um campo de futebol, e está no Guinness como o maior cajueiro do mundo. Segundo a história, é uma árvore <strong>que</strong> um pescador plantou em 1888. No meio dos galhos, há passarelas <strong>onde</strong> os visitantes caminham e um mirante que permite ver a árvore de cima.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/2/25/Praia_da_Redinha%2C_Natal_%28RN%29.jpg" alt="Praia da Redinha, Natal">
+      <div class="attraction-credit">Foto: Frankie Marcone/MTur Destinos, Attribution (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Redinha e o Mercado da Redinha</div>
+        <p class="attraction-text">Do outro lado do Rio Potengi, na Zona Norte de Natal, fica a praia da Redinha. Para chegar lá, é só atravessar a Ponte Newton Navarro. O Mercado da Redinha é o lugar <strong>onde</strong> os natalenses vão comer ginga com tapioca: peixinhos fritos no espeto, <strong>que</strong> chegam à mesa dentro de uma tapioca. É um prato <strong>que</strong> todo potiguar conhece.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Dunas_de_Genipabu_2.jpg" alt="Dunas de Genipabu">
+      <div class="attraction-credit">Foto: Jjunoo, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Dunas de Genipabu</div>
+        <p class="attraction-text">As dunas de Genipabu estão em Extremoz, no litoral norte, a cerca de 25 km de Natal. São dunas de areia branca <strong>que</strong> mudam de forma com o vento. O passeio mais famoso é de buggy, e a pergunta <strong>que</strong> todo bugueiro repete antes de sair é: "Com emoção ou sem emoção?". Nas dunas também há dromedários, e a paisagem é tão parecida com um deserto que a novela O Clone, da Globo, gravou aqui cenas do Marrocos. O passeio termina em uma lagoa <strong>onde</strong> é possível tomar banho de água doce.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Praia_da_Pipa%2C_Tibau_do_Sul_%28RN%29.jpg" alt="Praia da Pipa, Tibau do Sul">
+      <div class="attraction-credit">Foto: Deltafrut, CC BY 2.0 (Wikimedia Commons / Flickr)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Praia da Pipa</div>
+        <p class="attraction-text">A Praia da Pipa fica em Tibau do Sul, no litoral sul, a cerca de 85 km de Natal — aproximadamente 1h30 de carro. Pipa é uma pequena vila <strong>que</strong> atrai turistas do Brasil e do mundo, com falésias coloridas, restaurantes e muita vida noturna. A praia mais famosa é a Baía dos Golfinhos, <strong>onde</strong> é comum ver golfinhos perto das pessoas. Mas atenção: o caminho <strong>que</strong> leva à Baía dos Golfinhos passa pela areia e só existe na maré baixa. Antes de ir, consulte a tábua de marés, <strong>que</strong> mostra os horários <strong>em que</strong> a maré está baixa.</p>
+        <div class="video-wrap" style="margin-top:16px;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vW4RygRDswE" title="As 10 melhores praias do Rio Grande do Norte" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+        </div>
+        <div class="attraction-credit" style="padding:8px 0 0;">Vídeo: "As 10 melhores praias do Rio Grande do Norte", YouTube (8min47)</div>
+      </div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural:</strong> Diferente de São Paulo, o Rio Grande do Norte não é um destino que atrai turistas por museus ou prédios: o turismo no estado é, antes de tudo, natureza — praia, duna, lagoa e sol. Por isso, um roteiro potiguar combina praias urbanas, passeios de buggy pelas dunas, um pouco de história colonial e, principalmente, muito sol.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🔤</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Review before the exercises</p>
+      </div>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">potiguar</td><td>person from Rio Grande do Norte</td></tr>
+        <tr><td class="vocab-pt">a foz (do rio)</td><td>river mouth</td></tr>
+        <tr><td class="vocab-pt">o canhão</td><td>cannon</td></tr>
+        <tr><td class="vocab-pt">a estrela de cinco pontas</td><td>five-pointed star</td></tr>
+        <tr><td class="vocab-pt">o cartão-postal</td><td>postcard; iconic view</td></tr>
+        <tr><td class="vocab-pt">a duna</td><td>sand dune</td></tr>
+        <tr><td class="vocab-pt">o morro</td><td>hill</td></tr>
+        <tr><td class="vocab-pt">careca</td><td>bald</td></tr>
+        <tr><td class="vocab-pt">a vegetação</td><td>vegetation, plants</td></tr>
+        <tr><td class="vocab-pt">proibido</td><td>forbidden</td></tr>
+        <tr><td class="vocab-pt">o cajueiro</td><td>cashew tree</td></tr>
+        <tr><td class="vocab-pt">o galho</td><td>branch</td></tr>
+        <tr><td class="vocab-pt">a passarela</td><td>walkway</td></tr>
+        <tr><td class="vocab-pt">o pescador</td><td>fisherman</td></tr>
+        <tr><td class="vocab-pt">o mirante</td><td>lookout point</td></tr>
+        <tr><td class="vocab-pt">atravessar</td><td>to cross</td></tr>
+        <tr><td class="vocab-pt">a ponte</td><td>bridge</td></tr>
+        <tr><td class="vocab-pt">o espeto</td><td>skewer</td></tr>
+        <tr><td class="vocab-pt">o bugueiro</td><td>buggy driver</td></tr>
+        <tr><td class="vocab-pt">a lagoa</td><td>lagoon, lake</td></tr>
+        <tr><td class="vocab-pt">a água doce</td><td>fresh water</td></tr>
+        <tr><td class="vocab-pt">a falésia</td><td>cliff (by the sea)</td></tr>
+        <tr><td class="vocab-pt">atrair</td><td>to attract</td></tr>
+        <tr><td class="vocab-pt">a maré baixa / a maré alta</td><td>low tide / high tide</td></tr>
+        <tr><td class="vocab-pt">a tábua de marés</td><td>tide table</td></tr>
+        <tr><td class="vocab-pt">mergulhar</td><td>to dive, to snorkel</td></tr>
+        <tr><td class="vocab-pt">os parrachos</td><td>coral reefs (regional word in RN)</td></tr>
+        <tr><td class="vocab-pt">a península</td><td>peninsula</td></tr>
+        <tr><td class="vocab-pt">o vento</td><td>wind</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Complete with que, onde or em que</h3>
+          <p>More facts about Rio Grande do Norte</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with <em>que</em>, <em>onde</em> or <em>em que</em>. Look at the verb in the second part of the sentence before you choose.</p>
+
+      <ul class="blanks-list" id="ex1-blanks">
+        <li><span class="item-num">1.</span><span>Câmara Cascudo foi um escritor potiguar</span><input class="blank-input" data-answer="que" placeholder="___________"><span>estudou o folclore brasileiro.</span></li>
+        <li><span class="item-num">2.</span><span>A Ponte Newton Navarro é uma ponte</span><input class="blank-input" data-answer="que" placeholder="___________"><span>muitos turistas fotografam ao pôr do sol.</span></li>
+        <li><span class="item-num">3.</span><span>Ponta Negra é o bairro</span><input class="blank-input" data-answer="onde" placeholder="___________"><span>muitos turistas estrangeiros ficam hospedados.</span></li>
+        <li><span class="item-num">4.</span><span>O Carnatal é uma festa</span><input class="blank-input" data-answer="que" placeholder="___________"><span>acontece em dezembro.</span></li>
+        <li><span class="item-num">5.</span><span>Janeiro é o mês</span><input class="blank-input" data-answer="em que" placeholder="___________"><span>muitos brasileiros tiram férias.</span></li>
+        <li><span class="item-num">6.</span><span>A carne de sol é um prato típico</span><input class="blank-input" data-answer="que" placeholder="___________"><span>os potiguares comem com macaxeira e manteiga de garrafa.</span></li>
+        <li><span class="item-num">7.</span><span>Tibau do Sul é o município</span><input class="blank-input" data-answer="onde" placeholder="___________"><span>está a Praia da Pipa.</span></li>
+        <li><span class="item-num">8.</span><span>O buggy é um carro</span><input class="blank-input" data-answer="que" placeholder="___________"><span>anda bem na areia.</span></li>
+        <li><span class="item-num">9.</span><span>1997 foi o ano</span><input class="blank-input" data-answer="em que" placeholder="___________"><span>a prefeitura proibiu a subida no Morro do Careca.</span></li>
+        <li><span class="item-num">10.</span><span>Genipabu é uma praia</span><input class="blank-input" data-answer="que" placeholder="___________"><span>muitos natalenses visitam no fim de semana.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkBlanks('ex1-blanks','ex1-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('ex1-blanks','ex1-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex1-result" class="result-msg"></div>
+      <p class="personal-note">Items 2, 6 and 10 are the traps: the noun is the object of the verb, so it takes <em>que</em>. In 10, the answer is <em>que</em> even with a place (Genipabu), because the verb is <em>visitar Genipabu</em>.</p>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Um roteiro realista</h3>
+          <p>Think it through — not every recommendation fits every situation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Read Júlia's situation below and answer the questions in Portuguese. Use <strong>que</strong>, <strong>onde</strong> or <strong>em que</strong> at least once in each answer.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Situação</div>
+        <p>Júlia é americana e mora em Chicago. Ela está em Natal a trabalho e está hospedada em um hotel em Ponta Negra. No sábado, ela tem só uma manhã livre: sai do hotel às 8h e precisa estar no aeroporto às 13h. O aeroporto fica em São Gonçalo do Amarante, ao norte de Natal. Júlia adora natureza e comida típica, e o sonho dela é tirar uma foto lá do alto do Morro do Careca. Uma amiga falou: "Vai para Pipa ver os golfinhos!"</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Júlia vai conseguir tirar a foto que ela quer no alto do Morro do Careca? Por quê?</label>
+        <textarea class="open-textarea" placeholder="Não, porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. A dica da amiga é boa para essa manhã? Explique, considerando a distância e o horário.</label>
+        <textarea class="open-textarea" placeholder="Não, porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Escolha UM outro lugar deste material para Júlia visitar antes de ir ao aeroporto. Descreva o lugar e justifique a escolha, considerando o tempo disponível, os gostos dela e a distância até o aeroporto.</label>
+        <textarea class="open-textarea" placeholder="Eu recomendaria..., porque..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Escreva uma recomendação final para Júlia (60–80 palavras), como se você fosse falar diretamente com ela. Use pelo menos três orações com que, onde ou em que.</label>
+        <textarea class="open-textarea" style="min-height:140px;" placeholder="Júlia, na sua manhã eu recomendaria..."></textarea>
+      </div>
+
+      <p class="personal-note">Questions 1 and 2 have a factual basis in the texts above. Questions 3 and 4 are open — the important thing is a realistic, well-justified choice, not a "correct" answer.</p>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Um guia de bolso</h3>
+          <p>Write short definitions for a pocket travel guide</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write one sentence to define each place for a pocket travel guide. Use the word in parentheses. Use information from the texts above, but write your own sentence — don't copy the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. O Forte dos Reis Magos (que)</label>
+        <textarea class="open-textarea" placeholder="O Forte dos Reis Magos é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. A praia da Redinha (onde)</label>
+        <textarea class="open-textarea" placeholder="A Redinha é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. As dunas de Genipabu (que)</label>
+        <textarea class="open-textarea" placeholder="As dunas de Genipabu são..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O Cajueiro de Pirangi (onde)</label>
+        <textarea class="open-textarea" placeholder="O Cajueiro de Pirangi é..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Um lugar famoso da sua cidade (que + onde, in the same sentence or in two sentences)</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Na minha cidade, tem..."></textarea>
+      </div>
+      <p class="personal-note">Question 5 is a personal answer — there is no single correct response.</p>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Video comprehension</h3>
+          <p>Watch the video in the Praia da Pipa section above</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Watch only the parts of the video indicated in each question, and answer in Portuguese. Use <strong>que</strong>, <strong>onde</strong> or <strong>em que</strong> in each answer.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. (2:10 – 2:58) Qual é o apelido de Maracajaú? Descreva a praia em uma frase com "onde".</label>
+        <textarea class="open-textarea" placeholder="Maracajaú é conhecida como..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. (3:49 – 4:30) Que forma as falésias da Praia do Amor desenham? Qual esporte é popular nessa praia?</label>
+        <textarea class="open-textarea" placeholder="As falésias desenham..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. (5:32 – 6:13) Que esportes as pessoas praticam na Ponta do Santo Cristo? Por quê?</label>
+        <textarea class="open-textarea" placeholder="As pessoas praticam..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. (6:14 – 7:06) Como é Galinhos? Descreva o local e o acesso.</label>
+        <textarea class="open-textarea" placeholder="Galinhos é uma vila..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. (vídeo inteiro) Das dez praias do vídeo, qual você quer conhecer primeiro? Explique em duas frases.</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Eu quero conhecer..."></textarea>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção Escrita</h2>
+        <p>Write about your own city</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Um roteiro pela sua cidade</h3>
+          <p>60–90 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short text (60–90 words) presenting two places in your own city or region to a Brazilian visitor.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Um roteiro por Chicago</div>
+        <p>Um lugar que todo visitante precisa conhecer em Chicago é o Millennium Park, onde fica o "Bean", uma escultura de metal que reflete os prédios e o céu como um espelho. Perto do parque, fica o Navy Pier, um píer onde as famílias passeiam e tomam sorvete na beira do lago. O melhor horário para ir é o fim da tarde, a hora em que o sol ilumina os arranha-céus e a roda-gigante acende as luzes.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Escolha dois lugares da sua cidade ou região.</li>
+        <li>Descreva cada lugar com pelo menos uma oração com <strong>que</strong> e uma com <strong>onde</strong>.</li>
+        <li>Use <strong>em que</strong> pelo menos uma vez para falar de um horário, um dia ou uma época do ano.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Um lugar que todo visitante precisa conhecer..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// BREVO SUBMIT
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
