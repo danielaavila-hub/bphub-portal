@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rio Grande do Sul, Terra Gaúcha | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --marrom:     #967E63;
+      --marrom-light: #F3EFE9;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--marrom); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--marrom); }
+
+    /* HERO */
+    .page-hero { background: var(--marrom); padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 580px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 52px 48px 20px; }
+
+    .sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-photo { background: #EFF3EA; }
+    .icon-video { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* INTRO TEXT */
+    .intro-text { font-size: 15px; line-height: 1.85; color: var(--texto); margin-bottom: 10px; }
+    .intro-text strong { color: var(--marrom); }
+
+    /* GRAMMAR NOTE */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    /* ATTRACTION CARDS */
+    .attraction-card { background: white; border-radius: 14px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--light-gray); box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    .attraction-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--light-gray); }
+    .attraction-credit { font-size: 11px; color: #aaa; padding: 8px 22px 0; font-style: italic; }
+    .attraction-body { padding: 16px 22px 22px; }
+    .attraction-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .attraction-text { font-size: 14.5px; line-height: 1.8; color: var(--texto); }
+    .attraction-text strong { color: var(--marrom); }
+
+    /* VIDEO */
+    .video-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+    .video-title { font-family: 'Trirong', serif; font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .video-meta { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+    .vocab-note { font-size: 13px; color: #888; font-style: italic; margin-bottom: 14px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* example box */
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .personal-note { background: rgba(150,126,99,.1); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--marrom); font-style: italic; margin-top: 4px; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal · Aspectos Culturais</div>
+    <h1>Rio Grande do Sul, <em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Terra Gaúcha</em></h1>
+    <p>Brazil's southernmost state, told through its capital and its mountain towns — with a real video and the way Brazilians compare two places: <strong style="color:white;">comparativos</strong>.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Comparativos</span>
+      <span class="meta-pill"><span class="dot"></span>Descrever lugares</span>
+      <span class="meta-pill"><span class="dot"></span>Capital, serra e cultura gaúcha</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION: INTRO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗺️</div>
+      <div>
+        <h2>Sobre o Estado</h2>
+        <p>Read the short introduction below before exploring the spots</p>
+      </div>
+    </div>
+
+    <p class="intro-text">O Rio Grande do Sul é o estado mais ao sul do Brasil, na fronteira com o Uruguai e a Argentina. Quem nasce lá é <strong>gaúcho</strong> — uma palavra que também descreve o tradicional cavaleiro da região, com seu chimarrão, seu churrasco e seus costumes campeiros. O estado tem dois lados bem diferentes: a capital, <strong>Porto Alegre</strong>, uma cidade grande às margens do Lago Guaíba, e a <strong>Serra Gaúcha</strong>, uma região de montanhas com cidades como Gramado e Canela, colonizadas por imigrantes alemães e italianos e famosas pelo clima frio e pela arquitetura europeia.</p>
+    <p class="intro-text">Vamos comparar alguns lugares desses dois lados do Rio Grande do Sul — e aprender a fazer comparações em português no processo.</p>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: GRAMMAR -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Three ways to compare two places</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Comparativo de superioridade/inferioridade — mais/menos + adjetivo + do que</div>
+      <p>To say one thing is "more" or "less" than another, use <strong>mais/menos + adjective + do que</strong>.</p>
+      <p style="margin-top:-4px;"><em>Gramado é mais fria do que Porto Alegre.</em> — <span style="color:#888;font-style:italic;">Gramado is colder than Porto Alegre</span></p>
+      <p><strong>Do que</strong> is required — you can't drop it like English sometimes drops "than": <span style="color:var(--pitomba);">✗ Gramado é mais fria Porto Alegre.</span></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Comparativo de igualdade — tão + adjetivo + quanto</div>
+      <p>To say two things are equal, use <strong>tão + adjective + quanto</strong> (also written <em>quanto</em> or, less formally, <em>como</em>).</p>
+      <p style="margin-top:-4px;"><em>O Mini Mundo é tão divertido para adultos quanto para crianças.</em></p>
+      <p>For quantities (nouns) instead of qualities, use <strong>tanto/tanta/tantos/tantas + noun + quanto</strong>: <em>Porto Alegre tem tantos parques quanto Curitiba.</em></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Comparativos irregulares</div>
+      <p>The same four adjectives from superlatives have irregular comparative forms too — they don't use <strong>mais</strong>.</p>
+      <p style="margin-top:-4px;"><strong>bom → melhor (do que)</strong> · <strong>mau → pior (do que)</strong> · <strong>grande → maior (do que)</strong> · <strong>pequeno → menor (do que)</strong></p>
+      <p><em>Porto Alegre é maior do que Gramado.</em> — <span style="color:#888;font-style:italic;">not "mais grande"</span></p>
+      <p>⚠️ Same rule as with superlatives: don't say <span style="color:var(--pitomba);">✗ mais melhor</span>.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: ATTRACTIONS -->
+    <div class="sec-header">
+      <div class="sec-icon icon-photo">📍</div>
+      <div>
+        <h2>Lugares para Conhecer</h2>
+        <p>Read about each spot and watch the video below — notice every comparative</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Mercado_P%C3%BAblico_de_Porto_Alegre_2021_1.jpg" alt="Mercado Público, Porto Alegre">
+      <div class="attraction-credit">Foto: Hedestad, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Mercado Público (Porto Alegre)</div>
+        <p class="attraction-text">No Centro Histórico de Porto Alegre, o Mercado Público foi inaugurado em 1869 e é <strong>mais antigo do que</strong> a maior parte dos prédios ao redor. Suas bancas vendem de tudo — frutas, queijos, temperos, doces — e é um ótimo lugar para comprar lembrancinhas. A arquitetura preservada faz do mercado um dos símbolos <strong>mais tradicionais</strong> da capital gaúcha.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/9/95/A_sunset_and_a_tree_at_Parque_da_Orla_do_Gua%C3%ADba.jpg" alt="Orla do Guaíba, Porto Alegre">
+      <div class="attraction-credit">Foto: Heylenny, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Orla do Guaíba (Porto Alegre)</div>
+        <p class="attraction-text">A Orla do Guaíba é uma extensa faixa às margens do Lago Guaíba, com quadras de esporte, restaurantes e ciclovias. Nos fins de semana, a avenida à beira do lago fecha para carros — um programa <strong>tão popular quanto</strong> qualquer passeio de praia. Mas o grande motivo para visitar é o pôr do sol: muitos moradores dizem que ele é <strong>tão bonito quanto</strong> os pores do sol mais famosos do Brasil.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/3/39/Parque_da_Reden%C3%A7%C3%A3o_%28Porto_Alegre%2C_Brasil%29_2030-10-12_0.jpg" alt="Parque Farroupilha (Redenção), Porto Alegre">
+      <div class="attraction-credit">Foto: Eugenio Hansen, OFS, CC BY-SA 2.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Parque Farroupilha, a Redenção (Porto Alegre)</div>
+        <p class="attraction-text">Mais conhecido como <strong>Redenção</strong>, o Parque Farroupilha é uma área verde enorme perto do bairro Bonfim. Aos sábados e domingos acontece o <strong>Brique da Redenção</strong>, uma feira de artesanato que atrai <strong>tanta gente quanto</strong> qualquer evento cultural da cidade. É o lugar preferido dos porto-alegrenses para pegar sol, andar de bicicleta e tomar chimarrão sentado na grama.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Rua_Coberta_%284654764634%29.jpg" alt="Rua Coberta, Gramado">
+      <div class="attraction-credit">Foto: Leandro Neumann Ciuffo, CC BY 2.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Rua Coberta (Gramado)</div>
+        <p class="attraction-text">No centro de Gramado, a Rua Coberta é uma pequena rua de pedestres com um teto que protege os visitantes da chuva — muito útil, já que Gramado é <strong>mais fria e mais chuvosa do que</strong> a maioria das cidades brasileiras. Cercada de lojas de chocolate, cafés e restaurantes, a rua fica especialmente bonita em junho e julho, quando as luzes de Natal Luz (sim, em pleno inverno!) e a decoração de festival deixam tudo ainda mais aconchegante.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Mini_Mundo_em_setembro_de_2019_%2824%29.jpg" alt="Mini Mundo, Gramado">
+      <div class="attraction-credit">Foto: Érico, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Mini Mundo (Gramado)</div>
+        <p class="attraction-text">O Mini Mundo é um parque com réplicas em miniatura de castelos, trens, moinhos, igrejas e casas — tudo <strong>24 vezes menor</strong> do que o tamanho real. Apesar do nome, o passeio costuma ser <strong>tão divertido para adultos quanto</strong> para crianças, principalmente por causa do capricho nos detalhes de cada maquete.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/0/00/Cascata_Caracol_-_Canela_RS.jpg" alt="Cascata do Caracol, Canela">
+      <div class="attraction-credit">Foto: J0s3l1t0, CC BY-SA 4.0 (Wikimedia Commons)</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Cascata do Caracol (Canela)</div>
+        <p class="attraction-text">Bem perto de Gramado, na cidade vizinha de Canela, fica a Cascata do Caracol, uma queda d'água de mais de 130 metros de altura. Um mirante e um elevador panorâmico permitem ver a cascata de perto, sem precisar descer a trilha inteira. Canela costuma ser <strong>menos movimentada do que</strong> Gramado, o que faz do passeio um programa <strong>mais tranquilo</strong> para quem busca contato com a natureza.</p>
+        <div class="video-wrap" style="margin-top:16px;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/v8lf5N1SmIc" title="13 Passeios Maravilhosos Em Porto Alegre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+        </div>
+        <div class="attraction-credit" style="padding:8px 0 0;">Vídeo: "13 Passeios Maravilhosos Em Porto Alegre", To De Férias, YouTube (7min20)</div>
+      </div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural:</strong> Poucos estados brasileiros têm um contraste tão grande quanto o Rio Grande do Sul: de um lado, a vida urbana de Porto Alegre, com seu lago, sua vida noturna e seu churrasco; do outro, o clima europeu de Gramado e Canela, com arquitetura germânica, festivais de cinema e fondue no inverno. Um roteiro gaúcho completo costuma combinar os dois lados — a capital e a serra.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🔤</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Review before the exercises</p>
+      </div>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">gaúcho(a)</td><td>person from Rio Grande do Sul; traditional herdsman</td></tr>
+        <tr><td class="vocab-pt">o chimarrão</td><td>traditional mate drink of southern Brazil</td></tr>
+        <tr><td class="vocab-pt">a banca</td><td>market stall</td></tr>
+        <tr><td class="vocab-pt">a margem (do lago/rio)</td><td>bank, shore</td></tr>
+        <tr><td class="vocab-pt">a ciclovia</td><td>bike lane</td></tr>
+        <tr><td class="vocab-pt">o pôr do sol</td><td>sunset</td></tr>
+        <tr><td class="vocab-pt">o brique</td><td>weekend crafts/flea market (regional word)</td></tr>
+        <tr><td class="vocab-pt">o artesanato</td><td>handicrafts</td></tr>
+        <tr><td class="vocab-pt">a grama</td><td>grass</td></tr>
+        <tr><td class="vocab-pt">a rua de pedestres</td><td>pedestrian street</td></tr>
+        <tr><td class="vocab-pt">o teto</td><td>roof</td></tr>
+        <tr><td class="vocab-pt">aconchegante</td><td>cozy</td></tr>
+        <tr><td class="vocab-pt">a réplica</td><td>replica</td></tr>
+        <tr><td class="vocab-pt">a maquete</td><td>scale model</td></tr>
+        <tr><td class="vocab-pt">o capricho</td><td>care, attention to detail</td></tr>
+        <tr><td class="vocab-pt">a queda d'água</td><td>waterfall</td></tr>
+        <tr><td class="vocab-pt">o mirante</td><td>lookout point</td></tr>
+        <tr><td class="vocab-pt">a trilha</td><td>trail</td></tr>
+        <tr><td class="vocab-pt">movimentado(a)</td><td>busy, bustling</td></tr>
+        <tr><td class="vocab-pt">germânico(a)</td><td>Germanic</td></tr>
+        <tr><td class="vocab-pt">o roteiro</td><td>itinerary</td></tr>
+        <tr><td class="vocab-pt">o campeiro</td><td>rural/ranch-related (gaúcho tradition)</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Complete with the correct comparative</h3>
+          <p>More facts about Rio Grande do Sul</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with the correct comparative word: <em>mais, menos, tão</em>, or an irregular form (<em>melhor, maior</em>).</p>
+
+      <ul class="blanks-list" id="ex1-blanks">
+        <li><span class="item-num">1.</span><span>Porto Alegre é</span><input class="blank-input" data-answer="maior" placeholder="___________"><span>do que Gramado.</span></li>
+        <li><span class="item-num">2.</span><span>Segundo os moradores, o pôr do sol na Orla do Guaíba é</span><input class="blank-input" data-answer="tão" placeholder="___________"><span>bonito quanto qualquer pôr do sol litorâneo.</span></li>
+        <li><span class="item-num">3.</span><span>O clima de Gramado costuma ser</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>frio do que o de Porto Alegre.</span></li>
+        <li><span class="item-num">4.</span><span>Para muita gente, o passeio pelo Mini Mundo é</span><input class="blank-input" data-answer="tão" placeholder="___________"><span>divertido para crianças quanto para adultos.</span></li>
+        <li><span class="item-num">5.</span><span>O Mercado Público é</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>antigo do que a maioria dos prédios do Centro Histórico.</span></li>
+        <li><span class="item-num">6.</span><span>Para muitos, visitar a Rua Coberta durante o Natal Luz é</span><input class="blank-input" data-answer="melhor" placeholder="___________"><span>do que em qualquer outra época do ano.</span></li>
+        <li><span class="item-num">7.</span><span>A Cascata do Caracol é</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>alta do que a maioria das cachoeiras da região.</span></li>
+        <li><span class="item-num">8.</span><span>Para quem não gosta de agito, Canela é</span><input class="blank-input" data-answer="menos" placeholder="___________"><span>movimentada do que Gramado.</span></li>
+        <li><span class="item-num">9.</span><span>O Brique da Redenção só acontece nos fins de semana, então é</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>fácil visitá-lo num sábado do que num dia de semana.</span></li>
+        <li><span class="item-num">10.</span><span>Para muitos turistas, Gramado no inverno é uma</span><input class="blank-input" data-answer="melhor" placeholder="___________"><span>opção do que Porto Alegre para uma viagem romântica.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkBlanks('ex1-blanks','ex1-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('ex1-blanks','ex1-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex1-result" class="result-msg"></div>
+      <p class="personal-note">Items 1 and 10 use the irregular comparatives (grande → maior, bom → melhor). The rest use the regular pattern mais/menos/tão + adjective + do que/quanto.</p>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Um roteiro realista</h3>
+          <p>Think it through — not every recommendation fits every situation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Read Laura's situation below and answer the questions in Portuguese. Use at least one comparative in each answer.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Situação</div>
+        <p>Laura é australiana e vai visitar o Rio Grande do Sul em julho — inverno no Brasil. Ela tem só 4 dias de viagem e pousa em Porto Alegre. Ela adora frio, chocolate e paisagens europeias, mas também quer conhecer um pouco da cultura gaúcha típica antes de ir embora. Gramado fica a cerca de 115 km de Porto Alegre — mais ou menos 2h de carro.</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Considerando os gostos de Laura, Gramado ou Porto Alegre é o destino mais indicado para ela? Compare os dois lugares na sua resposta.</label>
+        <textarea class="open-textarea" placeholder="Gramado é mais... do que..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Com só 4 dias, ela consegue conhecer bem os dois lugares (capital e serra)? Considere a distância entre eles.</label>
+        <textarea class="open-textarea" placeholder="Sim/Não, porque..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Escolha UM lugar deste material para Laura conhecer a cultura gaúcha típica antes de ir embora. Justifique a escolha.</label>
+        <textarea class="open-textarea" placeholder="Eu recomendaria..., porque..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Escreva uma recomendação final para Laura (60–80 palavras), como se você fosse falar diretamente com ela. Use pelo menos duas comparações (mais/menos...do que, tão...quanto, ou melhor/maior).</label>
+        <textarea class="open-textarea" style="min-height:140px;" placeholder="Laura, na sua viagem eu recomendaria..."></textarea>
+      </div>
+
+      <p class="personal-note">Questions 1 and 2 have a factual basis in the texts above. Questions 3 and 4 are open — the important thing is a realistic, well-justified choice, not a "correct" answer.</p>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Um guia de bolso</h3>
+          <p>Write short definitions for a pocket travel guide</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write one sentence to define each place for a pocket travel guide, using a comparative. Use information from the texts above, but write your own sentence — don't copy the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. O Mercado Público (mais...do que)</label>
+        <textarea class="open-textarea" placeholder="O Mercado Público é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. A Rua Coberta (tão...quanto)</label>
+        <textarea class="open-textarea" placeholder="A Rua Coberta é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. O Mini Mundo (menor do que)</label>
+        <textarea class="open-textarea" placeholder="O Mini Mundo é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. A Cascata do Caracol (mais...do que)</label>
+        <textarea class="open-textarea" placeholder="A Cascata do Caracol é..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Compare dois lugares da sua cidade ou região (use um comparativo)</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Na minha cidade, X é mais... do que Y..."></textarea>
+      </div>
+      <p class="personal-note">Question 5 is a personal answer — there is no single correct response.</p>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Video comprehension</h3>
+          <p>Watch the video in the Cascata do Caracol section above</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Watch only the parts of the video indicated in each question, and answer in Portuguese. Use a comparative in each answer when possible.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. (0:46 – 1:26) O que a Orla do Guaíba oferece? Qual é o melhor horário para visitá-la, segundo o vídeo?</label>
+        <textarea class="open-textarea" placeholder="A Orla do Guaíba oferece..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. (2:13 – 2:44) O que é o Brique da Redenção e quando ele acontece?</label>
+        <textarea class="open-textarea" placeholder="O Brique da Redenção é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. (3:09 – 3:37) Quando o Mercado Público foi inaugurado? O que é possível comprar lá?</label>
+        <textarea class="open-textarea" placeholder="O Mercado Público foi inaugurado em..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. (5:22 – 5:45) O que é o passeio de Cisne Branco? Quanto custa, em média?</label>
+        <textarea class="open-textarea" placeholder="O passeio de Cisne Branco é..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. (vídeo inteiro) Dos treze passeios do vídeo, qual você quer fazer primeiro? Explique em duas frases, usando um comparativo.</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Eu quero fazer..."></textarea>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção Escrita</h2>
+        <p>Compare two places in your own region</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Duas cidades, duas experiências</h3>
+          <p>60–90 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short text (60–90 words) comparing two cities or neighborhoods in your own region to a Brazilian visitor, the way this material compares Porto Alegre and Gramado.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Boston e Nova York: duas experiências diferentes</div>
+        <p>Boston é bem menor do que Nova York, mas isso não significa que seja menos interessante. Enquanto Nova York é mais agitada e tem uma vida noturna mais intensa, Boston é mais tranquila e tem um clima universitário forte, com faculdades famosas como Harvard e o MIT. Para quem gosta de história americana, Boston é tão interessante quanto Nova York — só que num ritmo mais calmo. As duas cidades são ótimas, mas oferecem experiências bem diferentes.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Escolha duas cidades ou bairros da sua região.</li>
+        <li>Use pelo menos um comparativo de superioridade/inferioridade (mais/menos...do que) e um de igualdade (tão...quanto) ou irregular (melhor/maior/menor).</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Na minha região, X é mais... do que Y..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// BREVO SUBMIT
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
