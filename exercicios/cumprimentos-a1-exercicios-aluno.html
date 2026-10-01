@@ -74,23 +74,20 @@
     .ex-en { flex: 1; min-width: 150px; color: #888; font-style: italic; }
     .ex-speaker { font-size: 11px; font-weight: 700; color: var(--pitomba); min-width: 18px; text-transform: uppercase; }
 
-    /* ── VIDEO CALL MOCKUP ── */
-    .vc-shell { background: #232220; border-radius: 16px; padding: 16px; margin: 16px 0; }
-    .vc-bar { display: flex; align-items: center; gap: 8px; color: #ccc; font-size: 12px; margin-bottom: 12px; padding: 0 4px; }
-    .vc-dot { width: 8px; height: 8px; border-radius: 50%; background: #e74c3c; }
-    .vc-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .vc-tile { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
-    .vc-tile-prof { background: linear-gradient(135deg, var(--cobalto), var(--floresta)); }
-    .vc-tile-student { background: linear-gradient(135deg, var(--pitomba), #A1441D); }
-    .vc-avatar-circle { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-family: 'Trirong', serif; font-size: 26px; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
-    .vc-label { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.45); color: #fff; font-size: 11px; padding: 3px 9px; border-radius: 6px; font-weight: 600; }
-    .vc-mic { position: absolute; bottom: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; font-size: 11px; }
-    .vc-transcript { margin-top: 14px; }
-    .vc-line { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; font-size: 14px; }
-    .vc-chip { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; font-family: 'Trirong', serif; }
-    .vc-chip-prof { background: var(--cobalto); }
-    .vc-chip-student { background: var(--pitomba); }
-    .vc-line span.vc-text { color: var(--texto); padding-top: 2px; }
+    /* ── GREETING PHOTOS + SPEECH BUBBLES ── */
+    .greet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 28px 0 16px; }
+    .greet-col { display: flex; flex-direction: column; align-items: stretch; }
+    .greet-bubble { position: relative; background: #fff; border: 2px solid var(--nanquim); border-radius: 18px; padding: 16px 18px; font-size: 14px; line-height: 1.55; color: var(--texto); z-index: 2; margin-bottom: 18px; }
+    .greet-bubble.bubble-a { box-shadow: 6px 6px 0 var(--rosa-cha); }
+    .greet-bubble.bubble-b { box-shadow: 6px 6px 0 var(--ouro); }
+    .greet-bubble strong { color: var(--level); }
+    .greet-bubble::before, .greet-bubble::after { content: ''; position: absolute; left: 28px; width: 0; height: 0; border-left: 13px solid transparent; border-right: 13px solid transparent; }
+    .greet-bubble::before { bottom: -16px; border-top: 16px solid var(--nanquim); }
+    .greet-bubble::after { bottom: -13px; border-top: 13px solid #fff; left: 30.5px; }
+    .greet-photo { width: 100%; border-radius: 14px; overflow: hidden; border: 2px solid var(--nanquim); }
+    .greet-photo img { width: 100%; height: 230px; object-fit: cover; display: block; }
+    .greet-credit { font-size: 10px; color: #bbb; margin-top: 6px; text-align: right; }
+    @media (max-width: 700px) { .greet-grid { grid-template-columns: 1fr; } }
 
     /* cultural note */
     .cult-note { background: #EFF3EA; border-left: 3px solid var(--level); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 8px; font-size: 14px; color: var(--texto); line-height: 1.8; }
@@ -186,30 +183,19 @@
       </div>
     </div>
 
-    <div class="vc-shell">
-      <div class="vc-bar"><span class="vc-dot"></span>Chamada de vídeo — Primeira aula</div>
-      <div class="vc-tiles">
-        <div class="vc-tile vc-tile-prof">
-          <div class="vc-avatar-circle">P</div>
-          <div class="vc-label">Professora</div>
-          <div class="vc-mic">🎤</div>
-        </div>
-        <div class="vc-tile vc-tile-student">
-          <div class="vc-avatar-circle">V</div>
-          <div class="vc-label">Você</div>
-          <div class="vc-mic">🎤</div>
-        </div>
+    <div class="greet-grid">
+      <div class="greet-col">
+        <div class="greet-bubble bubble-a"><strong>Oi, tudo bem?</strong> Eu sou a Daniela. Sou brasileira e você? <strong>Sou</strong> professora de português.</div>
+        <div class="greet-photo"><img src="https://images.unsplash.com/photo-1752650733337-cb0189176fb9?w=800&amp;q=80&amp;fm=jpg&amp;fit=crop&amp;auto=format" alt="Professora acenando durante uma videochamada"></div>
+        <div class="greet-credit">Foto: Vitaly Gariev / Unsplash</div>
       </div>
-      <div class="vc-transcript">
-        <div class="vc-line"><span class="vc-chip vc-chip-prof">P</span><span class="vc-text">Oi, tudo bem?</span></div>
-        <div class="vc-line"><span class="vc-chip vc-chip-student">V</span><span class="vc-text">Tudo bem! E você?</span></div>
-        <div class="vc-line"><span class="vc-chip vc-chip-prof">P</span><span class="vc-text">Tudo bom também. Qual é o seu nome?</span></div>
-        <div class="vc-line"><span class="vc-chip vc-chip-student">V</span><span class="vc-text">Meu nome é Mariana. E o seu?</span></div>
-        <div class="vc-line"><span class="vc-chip vc-chip-prof">P</span><span class="vc-text">Sou a Daniela. Muito prazer.</span></div>
-        <div class="vc-line"><span class="vc-chip vc-chip-student">V</span><span class="vc-text">Prazer, Daniela!</span></div>
+      <div class="greet-col">
+        <div class="greet-bubble bubble-b"><strong>Tudo bom!</strong> Eu sou a Mariana. <strong>Sou</strong> americana. <strong>Sou</strong> designer.</div>
+        <div class="greet-photo"><img src="https://images.unsplash.com/photo-1758876203819-4cb3eec8e1aa?w=800&amp;q=80&amp;fm=jpg&amp;fit=crop&amp;auto=format" alt="Aluna sorrindo durante uma videochamada"></div>
+        <div class="greet-credit">Foto: Vitaly Gariev / Unsplash</div>
       </div>
     </div>
-    <p style="font-size:11px;color:#bbb;font-style:italic;margin-top:4px;">Agora pratique ao vivo: troquem de papéis e repitam com o seu nome e a sua profissão.</p>
+    <p style="font-size:11px;color:#bbb;font-style:italic;margin-top:4px;">Agora pratique ao vivo com a sua professora: troquem de papéis e repitam com o seu nome e a sua profissão.</p>
 
     <hr class="sec-divider">
 
