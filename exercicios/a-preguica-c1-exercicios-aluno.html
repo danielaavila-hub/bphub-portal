@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Preguiça — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--telha); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--telha); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--telha); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--telha); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--telha); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--telha); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../contos/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Conto com Áudio</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>A Preguiça <em>Luis Fernando Veríssimo</em></h1>
+  <div class="hero-sub">BPHub Conta um Conto — contos brasileiros de verdade, no seu nível, em até 15 minutos. Ouça a crônica e pratique o uso de lhe no lugar de dele/dela.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Crônica · Luis Fernando Veríssimo</span>
+    <span class="hero-tag">Foco linguístico: lhe no lugar de dele/dela</span>
+  </div>
+  <div class="hero-note">🎧 Ouça o episódio e complete as atividades abaixo</div>
+</div>
+
+<div class="main">
+
+  <p style="font-size:15px;">Nesta ficha, você vai ouvir uma crônica de Luis Fernando Veríssimo, um dos cronistas mais lidos do Brasil, em que ele compara a preguiça — o bicho e o sentimento — a outros animais. No final da ficha, você encontra uma observação sobre como ler o texto completo da crônica.</p>
+
+  <section>
+    <div class="sec-label">Nota cultural — o autor</div>
+    <div class="info-box">
+      Luis Fernando Veríssimo (Porto Alegre, 1936–2025) foi um dos cronistas mais lidos do Brasil. Filho do romancista Erico Veríssimo, escreveu durante décadas para jornais de todo o país e criou personagens que entraram para o imaginário brasileiro, como o Analista de Bagé e o detetive Ed Mort. Suas crônicas também viraram série de TV (<i>Comédias da Vida Privada</i>). Além de escritor, era cartunista, saxofonista e torcedor fanático do Internacional. O humor dele é quase sempre irônico: diz uma coisa absurda com a maior seriedade do mundo.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota de contexto</div>
+    <div class="info-box">
+      <b>Clovis Bornay</b> (1916–2005) foi um museólogo carioca que ficou famoso pelas fantasias luxuosas e extravagantes com que desfilava nos concursos de fantasia do carnaval do Rio. Na crônica, ele aparece como o "ponto final" da evolução humana — o que é uma piada.
+      <br><br>
+      <b>"Fase anal retentiva"</b> é um conceito de Freud. Na linguagem popular, descreve uma pessoa obcecada por ordem, controle e limpeza.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota linguística — lhe com partes do corpo</div>
+    <div class="grammar-box">
+      Na crônica, o autor diz que o sangue <b>lhe</b> sobe à cabeça, ou seja, sobe à cabeça da preguiça. Aqui, <b>lhe</b> pode ocupar o lugar de <b>dele/dela</b>. O mesmo vale para <b>me</b>, <b>te</b> e <b>nos</b>.
+    </div>
+    <table class="grammar">
+      <tr><th>Na fala do dia a dia</th><th>No texto escrito / literário</th></tr>
+      <tr><td>O sangue sobe à cabeça dela.</td><td>O sangue lhe sobe à cabeça.</td></tr>
+      <tr><td>O sangue subiu à minha cabeça.</td><td>O sangue me subiu à cabeça.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">Leia este quadro antes de ouvir a crônica. Não é preciso decorar as palavras: volte a ele sempre que precisar.</p>
+    <table class="vocab">
+      <tr><th>Português</th><th>English</th></tr>
+      <tr><td>visceral</td><td>deep-seated, gut-level</td></tr>
+      <tr><td>pendurado(a)</td><td>hanging</td></tr>
+      <tr><td>rabo / cauda</td><td>tail</td></tr>
+      <tr><td>empáfia</td><td>haughtiness, smugness</td></tr>
+      <tr><td>ponderação</td><td>deliberation</td></tr>
+      <tr><td>anfíbio</td><td>amphibious</td></tr>
+      <tr><td>inquietação</td><td>restlessness</td></tr>
+      <tr><td>pudor</td><td>modesty, sense of shame</td></tr>
+      <tr><td>provação</td><td>ordeal</td></tr>
+      <tr><td>equívoco</td><td>mistake, blunder</td></tr>
+      <tr><td>prosaico(a)</td><td>mundane, ordinary</td></tr>
+      <tr><td>espectador(a)</td><td>spectator</td></tr>
+      <tr><td>esquematizar</td><td>to map out</td></tr>
+      <tr><td>desistir</td><td>to give up</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Atividade 1 — Antes de ouvir</div>
+    <p style="font-size:13.5px;color:#888;">Em português, <i>preguiça</i> é ao mesmo tempo o nome de um bicho e de um sentimento. Responda em duas ou três frases.</p>
+    <div class="q">
+      <div class="q-text"><span class="q-num">1.</span>Você se considera uma pessoa preguiçosa? Em que situações?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q">
+      <div class="q-text"><span class="q-num">2.</span>Se você fosse um animal, qual seria? Por quê?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <p style="font-size:14px;">Agora você vai ouvir uma crônica em que Veríssimo compara a preguiça a outros animais.</p>
+  </section>
+
+  <section>
+    <div class="sec-label">Ouça o conto</div>
+    <div class="audio-box">
+      <audio controls>
+        <source src="a-preguica-c1.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Atividade 2 — Primeira escuta</div>
+    <p style="font-size:13.5px;color:#888;">Ouça a crônica uma vez. Ligue cada animal à descrição que o cronista dá a ele, escrevendo a letra correspondente. Uma descrição sobra.</p>
+
+    <div class="match-desc-list">
+      A. Parece acomodado, mas, no fundo, queria outra vida.<br>
+      B. Sabe que é um erro da natureza e tenta passar despercebido.<br>
+      C. Acha que é o rei dos animais.<br>
+      D. Tem opiniões sobre a vida, mas ninguém nunca perguntou.<br>
+      E. Exagera nos cuidados com a higiene e não morre na frente dos outros.
+    </div>
+
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">1.</span>o boi</div><input type="text" id="at2-1" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">2.</span>o hipopótamo</div><input type="text" id="at2-2" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">3.</span>o elefante</div><input type="text" id="at2-3" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">4.</span>a preguiça</div><input type="text" id="at2-4" maxlength="1" placeholder="?"></div></div>
+
+    <button class="check-btn" onclick="checkAt2()">✓ Conferir respostas</button>
+    <div id="at2-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Atividade 3 — Segunda escuta</div>
+    <p style="font-size:13.5px;color:#888;">Ouça a crônica de novo e responda com suas palavras.</p>
+
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Segundo o cronista, como Darwin reagiu quando lhe perguntaram sobre a preguiça?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Por que a preguiça é uma espectadora incompetente?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Como o sol aparece para a preguiça?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Qual é a explicação da crônica para o cérebro da preguiça? E o que ela resolveu depois de pensar em tudo?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Por que nenhuma crise é novidade para a preguiça?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>O cronista diz que tem "uma simpatia visceral" pela preguiça. Pelo que você ouviu, o que ele admira nela?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+
+    <button class="check-btn" onclick="toggleAt3()">💡 Ver sugestões de resposta</button>
+    <div id="at3-result" class="result-msg good" style="display:none;">
+      <div style="font-weight:700;margin-bottom:10px;">Sugestões de resposta (são respostas abertas — a sua pode ser diferente e igualmente válida):</div>
+      <div style="margin-bottom:10px;"><strong>1.</strong> Fingiu que procurava um lápis embaixo da mesa.</div>
+      <div style="margin-bottom:10px;"><strong>2.</strong> Porque vê tudo de cabeça para baixo.</div>
+      <div style="margin-bottom:10px;"><strong>3.</strong> O sol não nasce: cai do horizonte como um ovo sai da galinha.</div>
+      <div style="margin-bottom:10px;"><strong>4.</strong> Com o sangue indo para a cabeça, o cérebro cresce duas vezes mais depressa; ela previu toda a evolução e desistiu antes de começar.</div>
+      <div style="margin-bottom:10px;"><strong>5.</strong> Porque, para ela, o mundo sempre esteve de pernas para o ar.</div>
+      <div><strong>6.</strong> Resposta pessoal: a indiferença, a falta de pretensão, a sabedoria de desistir — entre outras possibilidades.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Atividade 4 — O mundo do avesso</div>
+    <p style="font-size:13.5px;color:#888;">A crônica inteira é construída sobre a ideia de ver o mundo de cabeça para baixo. Complete as frases com uma das expressões abaixo. Use cada expressão uma vez.</p>
+    <div class="match-desc-list">de cabeça para baixo &nbsp;·&nbsp; de pernas para o ar &nbsp;·&nbsp; ao contrário &nbsp;·&nbsp; não quer nem saber &nbsp;·&nbsp; à mão</div>
+
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Depois da mudança, a casa ficou ______________________: caixas por todo lado e nenhum talher no lugar.</div><input type="text" id="at4-1" placeholder="Escreva a expressão..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>O quadro ficou pendurado ______________________ durante uma semana, e ninguém na galeria percebeu.</div><input type="text" id="at4-2" placeholder="Escreva a expressão..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Eu disse "esquerda", mas o motorista entendeu ______________________ e virou à direita.</div><input type="text" id="at4-3" placeholder="Escreva a expressão..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Pode chover, pode ventar: meu avô ______________________ e sai para caminhar todo dia às seis.</div><input type="text" id="at4-4" placeholder="Escreva a expressão..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Deixe o guarda-chuva ______________________: a previsão é de temporal à tarde.</div><input type="text" id="at4-5" placeholder="Escreva a expressão..."></div>
+
+    <button class="check-btn" onclick="checkAt4()">✓ Conferir respostas</button>
+    <div id="at4-result" class="result-msg"></div>
+
+    <p style="font-size:13px;color:#888;margin-top:16px;"><i>Na crônica, o sangue sobe à cabeça da preguiça. Volte à nota linguística do início antes de seguir.</i></p>
+  </section>
+
+  <section>
+    <div class="sec-label">Atividade 5 — lhe no lugar de dele/dela</div>
+    <p style="font-size:14.5px;font-weight:600;margin-bottom:10px;">A. Reescreva as frases no registro literário, usando lhe ou me.</p>
+
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Depois do primeiro prêmio, a fama subiu à cabeça dele.</div><input type="text" id="at5a-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>O vento gelado queimava o rosto dela.</div><input type="text" id="at5a-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>A notícia partiu o coração dele.</div><input type="text" id="at5a-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Quando ouvi aquilo, o sangue subiu à minha cabeça.</div><input type="text" id="at5a-4" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O cabeleireiro cortou o cabelo dela curto demais.</div><input type="text" id="at5a-5" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkAt5a()">✓ Conferir respostas</button>
+    <div id="at5a-result" class="result-msg"></div>
+
+    <p style="font-size:14.5px;font-weight:600;margin:28px 0 10px;">B. Agora o contrário: reescreva as frases como um brasileiro diria numa conversa.</p>
+
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>O garçom lhe encheu o copo sem perguntar.</div><input type="text" id="at5b-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Uma ideia estranha me passou pela cabeça.</div><input type="text" id="at5b-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>A mãe lhe ajeitou a gola da camisa antes da foto.</div><input type="text" id="at5b-3" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkAt5b()">✓ Conferir respostas</button>
+    <div id="at5b-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Atividade 6 — Produção escrita</div>
+    <p style="font-size:13.5px;color:#888;">Você já ouviu como Veríssimo transforma um bicho em uma personagem cheia de filosofia. Agora é a sua vez.</p>
+    <p style="font-size:14.5px;margin-bottom:10px;">Escreva uma crônica curta (150 a 200 palavras) sobre outro animal: a capivara, o pombo, o gato, o bicho que você preferir. Use a crônica de Veríssimo como modelo. No seu texto:</p>
+    <ul style="font-size:13.5px;color:#888;margin:0 0 12px 18px;">
+      <li>dê ao animal uma personalidade humana e uma "filosofia de vida";</li>
+      <li>compare-o com pelo menos dois outros bichos;</li>
+      <li>aponte um defeito ou uma contradição dele;</li>
+      <li>termine com uma frase de efeito, como Veríssimo no final da crônica.</li>
+    </ul>
+    <div class="q">
+      <textarea style="min-height:180px;" placeholder="Escreva sua crônica aqui..."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">A crônica: texto integral</div>
+    <p style="font-size:14.5px;">Como esta crônica ainda está protegida por direitos autorais, não é possível disponibilizar o texto completo aqui no portal. Se quiser lê-la na íntegra, pergunte à professora pela referência da coletânea onde ela foi publicada.</p>
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Fonte: VERISSIMO, Luis Fernando. "A preguiça". In: coletânea de crônicas do autor (referência completa a confirmar com a professora).</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+// ── ATIVIDADE 2 — primeira escuta (matching) ──
+var at2Answers = [
+  { id: 'at2-1', key: 'D' },
+  { id: 'at2-2', key: 'A' },
+  { id: 'at2-3', key: 'E' },
+  { id: 'at2-4', key: 'B' }
+];
+function checkAt2() { return checkFill(at2Answers, 'at2-result'); }
+
+function toggleAt3() {
+  var el = document.getElementById('at3-result');
+  var btn = event.target;
+  var showing = el.style.display === 'block';
+  el.style.display = showing ? 'none' : 'block';
+  btn.textContent = showing ? '💡 Ver sugestões de resposta' : '🙈 Esconder sugestões';
+  if (!showing) el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+// ── ATIVIDADE 4 — o mundo do avesso ──
+var at4Answers = [
+  { id: 'at4-1', key: 'de pernas para o ar' },
+  { id: 'at4-2', key: 'de cabeça para baixo' },
+  { id: 'at4-3', key: 'ao contrário' },
+  { id: 'at4-4', key: 'não quer nem saber' },
+  { id: 'at4-5', key: 'à mão' }
+];
+function checkAt4() { return checkFill(at4Answers, 'at4-result'); }
+
+// ── ATIVIDADE 5A — lhe/me (registro literário) ──
+var at5aAnswers = [
+  { id: 'at5a-1', key: 'A fama lhe subiu à cabeça.' },
+  { id: 'at5a-2', key: 'O vento gelado lhe queimava o rosto.' },
+  { id: 'at5a-3', key: 'A notícia lhe partiu o coração.' },
+  { id: 'at5a-4', key: 'O sangue me subiu à cabeça.' },
+  { id: 'at5a-5', key: 'O cabeleireiro lhe cortou o cabelo curto demais.' }
+];
+function checkAt5a() { return checkFill(at5aAnswers, 'at5a-result'); }
+
+// ── ATIVIDADE 5B — dele/dela (registro falado) ──
+var at5bAnswers = [
+  { id: 'at5b-1', key: ['O garçom encheu o copo dele sem perguntar.', 'O garçom encheu o copo dela sem perguntar.'] },
+  { id: 'at5b-2', key: 'Passou uma ideia estranha pela minha cabeça.' },
+  { id: 'at5b-3', key: ['A mãe ajeitou a gola da camisa dele antes da foto.', 'A mãe ajeitou a gola da camisa dela antes da foto.'] }
+];
+function checkAt5b() { return checkFill(at5bAnswers, 'at5b-result'); }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['at2-1','at2-2','at2-3','at2-4','at4-1','at4-2','at4-3','at4-4','at4-5','at5a-1','at5a-2','at5a-3','at5a-4','at5a-5','at5b-1','at5b-2','at5b-3'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
