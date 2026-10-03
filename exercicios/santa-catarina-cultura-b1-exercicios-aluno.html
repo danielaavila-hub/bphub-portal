@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santa Catarina, Florianópolis | B1 | Brazilian Portuguese Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --marrom:     #967E63;
+      --marrom-light: #F3EFE9;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--marrom); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--marrom); }
+
+    /* HERO */
+    .page-hero { background: #265B8B; padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 580px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 52px 48px 20px; }
+
+    .sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-photo { background: #EFF3EA; }
+    .icon-video { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* INTRO TEXT */
+    .intro-text { font-size: 15px; line-height: 1.85; color: var(--texto); margin-bottom: 10px; }
+    .intro-text strong { color: var(--marrom); }
+
+    /* GRAMMAR NOTE */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    /* ATTRACTION CARDS */
+    .attraction-card { background: white; border-radius: 14px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--light-gray); box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    .attraction-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--light-gray); }
+    .attraction-credit { font-size: 11px; color: #aaa; padding: 8px 22px 0; font-style: italic; }
+    .attraction-body { padding: 16px 22px 22px; }
+    .attraction-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .attraction-text { font-size: 14.5px; line-height: 1.8; color: var(--texto); }
+    .attraction-text strong { color: var(--marrom); }
+
+    /* VIDEO */
+    .video-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+    .video-title { font-family: 'Trirong', serif; font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .video-meta { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+    .vocab-note { font-size: 13px; color: #888; font-style: italic; margin-bottom: 14px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* example box */
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .personal-note { background: rgba(150,126,99,.1); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--marrom); font-style: italic; margin-top: 4px; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../b1/index.html" class="topbar-back">← My Materials</a>
+</div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal · Aspectos Culturais</div>
+    <h1>Santa Catarina <span style="color:rgba(255,255,255,0.5); font-weight:300;">&middot;</span> <em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Florianópolis</em></h1>
+    <p>A state built around an island, settled by families from the Azores — with beaches, a historic lagoon, and the women who have kept a centuries-old lace tradition alive. Along the way, you'll practice how Brazilians compare things: <strong style="color:white;">mais... (do) que</strong>, <strong style="color:white;">tão... quanto</strong> and <strong style="color:white;">o/a mais...</strong></p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Comparativos</span>
+      <span class="meta-pill"><span class="dot"></span>Colonização Açoriana</span>
+      <span class="meta-pill"><span class="dot"></span>Lagoa da Conceição e Rendeiras</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- SECTION: INTRO -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗺️</div>
+      <div>
+        <h2>Sobre o Estado</h2>
+        <p>Read the short introduction below before exploring the spots</p>
+      </div>
+    </div>
+
+    <p class="intro-text">Santa Catarina é um estado pequeno no Sul do Brasil, mas com uma costa riquíssima: mais de 500 quilômetros de praias, lagoas e baías. A capital, <strong>Florianópolis</strong>, é conhecida como "Ilha da Magia" porque boa parte da cidade fica em uma ilha, ligada ao continente por pontes — a mais famosa delas, a <strong>Ponte Hercílio Luz</strong>, é hoje um símbolo da cidade, mesmo sem carros passando por ela. Quem nasce no estado é <strong>catarinense</strong>; quem é da ilha, especificamente, costuma se chamar, com carinho, de <strong>manezinho</strong> ou <strong>manezinha</strong> da ilha.</p>
+    <p class="intro-text">A partir de 1748, milhares de famílias dos <strong>Açores</strong> (um arquipélago português no meio do Atlântico) chegaram à ilha a pedido da Coroa Portuguesa, que queria povoar e proteger o litoral sul. Esses imigrantes deixaram marcas profundas: na arquitetura, na culinária do mar, nas festas religiosas e em um artesanato que sobrevive até hoje nas mãos de poucas famílias — a renda de bilro.</p>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: GRAMMAR -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div>
+        <h2>Language Reference</h2>
+        <p>Three ways to compare people, places and things</p>
+      </div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. Mais / Menos ... (do) que — superiority and inferiority</div>
+      <p>Use <strong>mais + adjective + (do) que</strong> to say something has more of a quality, and <strong>menos + adjective + (do) que</strong> for less.</p>
+      <p style="margin-top:-4px;"><em>A Lagoa da Conceição é mais tranquila do que a Praia da Joaquina.</em> — <span style="color:#888;font-style:italic;">the lagoon has calmer water than the beach</span></p>
+      <p><strong>Do que</strong> can often be shortened to just <strong>que</strong> in everyday speech: <em>mais antiga que a maioria das pontes do país</em>.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Tão ... quanto — equality</div>
+      <p>Use <strong>tão + adjective + quanto</strong> to say two things are equal in some quality.</p>
+      <p style="margin-top:-4px;"><em>Para muitos moradores, a tainha assada é tão gostosa quanto qualquer prato chique.</em> — <span style="color:#888;font-style:italic;">just as tasty as</span></p>
+      <p>With nouns instead of adjectives, use <strong>tanto(s)/tanta(s) ... quanto</strong>: <em>Floripa recebe tantos turistas no verão quanto uma capital bem maior.</em></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. O/A mais... de — the superlative</div>
+      <p>To say something is "the most" in a group, use <strong>o/a mais + adjective + de</strong>.</p>
+      <p style="margin-top:-4px;"><em>Santo Antônio de Lisboa é considerado o vilarejo mais bem preservado da ilha.</em></p>
+      <p>Some adjectives have an irregular comparative/superlative form: <strong>bom → melhor</strong>, <strong>ruim → pior</strong>, <strong>grande → maior</strong>, <strong>pequeno → menor</strong>. <em>O Ribeirão da Ilha produz as melhores ostras do estado, segundo muita gente.</em></p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- SECTION: ATTRACTIONS -->
+    <div class="sec-header">
+      <div class="sec-icon icon-photo">📍</div>
+      <div>
+        <h2>Lugares para Conhecer</h2>
+        <p>Read about each spot and watch the video below — notice every comparative</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/a/a3/PonteHercilioLuz-Julho2001.jpg" alt="Ponte Hercílio Luz, Florianópolis">
+      <div class="attraction-credit">Foto: Wikimedia Commons, CC BY-SA 3.0</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Ponte Hercílio Luz</div>
+        <p class="attraction-text">Inaugurada em 1926, a Ponte Hercílio Luz foi, por muitos anos, uma das pontes pênseis <strong>mais</strong> longas do mundo. Hoje ela não recebe mais carros — é só para pedestres, em datas especiais — mas continua sendo o cartão-postal <strong>mais</strong> fotografado de Florianópolis, especialmente quando se ilumina à noite. Para os catarinenses, ela é tão importante quanto qualquer monumento histórico do país.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Lagoa_da_Concei%C3%A7%C3%A3o_%283943842901%29.jpg" alt="Lagoa da Conceição, Florianópolis">
+      <div class="attraction-credit">Foto: Rodrigo Soldon / Wikimedia Commons, CC BY 2.0</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Lagoa da Conceição</div>
+        <p class="attraction-text">A Lagoa da Conceição foi um dos primeiros pontos onde os imigrantes açorianos se instalaram na ilha, no século XVIII. Hoje é um dos bairros <strong>mais</strong> procurados de Florianópolis, com águas <strong>mais</strong> calmas do que o mar aberto — ótimas para stand up paddle — cercada de dunas, bares e restaurantes. À beira da lagoa fica a Avenida das Rendeiras, onde mulheres ainda vendem, à mão, a renda de bilro que suas famílias fazem há gerações.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Avdasrendeiras.jpg" alt="Avenida das Rendeiras, Lagoa da Conceição">
+      <div class="attraction-credit">Foto: Ben Tavener / Wikimedia Commons, CC BY 2.0</div>
+      <div class="attraction-body">
+        <div class="attraction-title">As Rendeiras</div>
+        <p class="attraction-text">A renda de bilro chegou à ilha com as mulheres açorianas no século XVIII: enquanto os homens saíam para pescar, elas faziam renda para complementar a renda da casa (sim, a palavra "renda" serve para as duas coisas). A técnica passa de mãe para filha há mais de 250 anos, usando dezenas de bilros de madeira trançados com linha fina. Com o turismo, a renda deixou de ser só para uso doméstico e virou também um produto vendido a visitantes — mas, para as rendeiras mais antigas, ela continua sendo tão importante quanto sempre foi: uma herança de família.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Namoradeiras_na_Janela%2C_em_Santo_Ant%C3%B4nio_de_Lisboa%2C_Florian%C3%B3polis%2C_SC._01.jpg" alt="Casario açoriano em Santo Antônio de Lisboa, Florianópolis">
+      <div class="attraction-credit">Foto: Simplus Menegati / Wikimedia Commons, CC BY-SA 4.0</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Santo Antônio de Lisboa</div>
+        <p class="attraction-text">Fundado por volta de 1750 por imigrantes açorianos, Santo Antônio de Lisboa é considerado o distrito <strong>mais</strong> bem preservado da ilha: casas baixas, paredes brancas, janelas azuis e uma igreja do século XVIII à beira da baía. As "namoradeiras" — pequenas janelas de madeira nas casas antigas — eram usadas pelas moças para namorar escondidas, sem sair de casa. Ao entardecer, a vista da baía ali é tão bonita quanto em qualquer cartão-postal da ilha, e os restaurantes da região servem alguns dos pratos de peixe e frutos do mar mais tradicionais de Florianópolis.</p>
+      </div>
+    </div>
+
+    <div class="attraction-card">
+      <img class="attraction-photo" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Ribeir%C3%A3o_da_Ilha_%285418356405%29.jpg" alt="Ribeirão da Ilha, Florianópolis">
+      <div class="attraction-credit">Foto: Andreia Reis / Wikimedia Commons, CC BY 2.0</div>
+      <div class="attraction-body">
+        <div class="attraction-title">Ribeirão da Ilha e a Comida do Mar</div>
+        <p class="attraction-text">Em Florianópolis, o mar não é só paisagem — é também a mesa. O bairro do Ribeirão da Ilha, outro antigo núcleo açoriano, é hoje o maior produtor de ostras do Brasil, e famílias de maricultores vendem o marisco direto da água para o prato, em restaurantes simples com vista para a baía. A gastronomia do mar é, para muita gente, a <strong>maior</strong> atração da cidade: ostras, camarões, berbigão e, principalmente entre maio e julho, a tainha assada — um peixe tão esperado na época da pesca quanto qualquer festa de fim de ano.</p>
+        <div class="video-wrap" style="margin-top:16px;">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/NtJYwDDh7Sc" title="Florianópolis - Santa Catarina: 4 praias imperdíveis em Floripa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+        </div>
+        <div class="attraction-credit" style="padding:8px 0 0;">Vídeo: "Florianópolis - Santa Catarina: 4 praias imperdíveis em Floripa", 3em3, YouTube</div>
+      </div>
+    </div>
+
+    <div class="cult-note">
+      <strong>Nota cultural:</strong> Os moradores mais antigos da ilha falam um jeito de português bem próprio, cheio de expressões herdadas dos Açores — o "manezês". Palavras como <em>"bah"</em>, <em>"oxente, tu"</em> (usado de forma diferente do Nordeste) e o costume de tratar quase todo mundo por <em>"tu"</em>, em vez de "você", ainda marcam o jeito de falar de muita gente na ilha, especialmente fora do centro turístico.
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- VOCAB -->
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🔤</div>
+      <div>
+        <h2>Vocabulário</h2>
+        <p>Review before the exercises</p>
+      </div>
+    </div>
+
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>English</th></tr></thead>
+      <tbody>
+        <tr><td class="vocab-pt">catarinense</td><td>person from the state of Santa Catarina</td></tr>
+        <tr><td class="vocab-pt">manezinho(a) da ilha</td><td>colloquial term for someone from Florianópolis island</td></tr>
+        <tr><td class="vocab-pt">açoriano(a)</td><td>from the Azores (Portuguese archipelago)</td></tr>
+        <tr><td class="vocab-pt">povoar</td><td>to settle, to populate</td></tr>
+        <tr><td class="vocab-pt">a rendeira</td><td>lacemaker</td></tr>
+        <tr><td class="vocab-pt">o bilro</td><td>bobbin (lacemaking tool)</td></tr>
+        <tr><td class="vocab-pt">a herança</td><td>heritage, inheritance</td></tr>
+        <tr><td class="vocab-pt">a dupla</td><td>duna (sand dune)</td></tr>
+        <tr><td class="vocab-pt">o casario</td><td>a row/cluster of (old) houses</td></tr>
+        <tr><td class="vocab-pt">a namoradeira</td><td>small wooden window (Azorean architecture)</td></tr>
+        <tr><td class="vocab-pt">a ostra</td><td>oyster</td></tr>
+        <tr><td class="vocab-pt">o camarão</td><td>shrimp</td></tr>
+        <tr><td class="vocab-pt">o berbigão</td><td>clam (local variety)</td></tr>
+        <tr><td class="vocab-pt">a tainha</td><td>mullet (fish)</td></tr>
+        <tr><td class="vocab-pt">o(a) maricultor(a)</td><td>shellfish/oyster farmer</td></tr>
+        <tr><td class="vocab-pt">a baía</td><td>bay</td></tr>
+        <tr><td class="vocab-pt">pênsil (ponte pênsil)</td><td>suspension (bridge)</td></tr>
+        <tr><td class="vocab-pt">bem preservado(a)</td><td>well preserved</td></tr>
+        <tr><td class="vocab-pt">entardecer</td><td>dusk, to grow dark</td></tr>
+        <tr><td class="vocab-pt">trançar</td><td>to braid, to weave</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="sec-divider">
+
+    <!-- EXERCISES -->
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div>
+        <h2>Homework Exercises</h2>
+        <p>Complete after your lesson and send your answers to your teacher</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">1</div>
+        <div>
+          <h3>Complete com mais... (do) que, tão... quanto ou o/a mais...</h3>
+          <p>More facts about Santa Catarina</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Complete each sentence with <em>mais... que</em>, <em>menos... que</em>, <em>tão... quanto</em> or <em>o/a mais...</em>, based on the texts above.</p>
+
+      <ul class="blanks-list" id="ex1-blanks">
+        <li><span class="item-num">1.</span><span>A Ponte Hercílio Luz foi, por anos, uma das pontes pênseis</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>longas do mundo.</span></li>
+        <li><span class="item-num">2.</span><span>A Lagoa da Conceição é</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>tranquila do que o mar aberto.</span></li>
+        <li><span class="item-num">3.</span><span>Santo Antônio de Lisboa é considerado o distrito</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>bem preservado da ilha.</span></li>
+        <li><span class="item-num">4.</span><span>Para as rendeiras mais antigas, a renda continua sendo</span><input class="blank-input" data-answer="tão" placeholder="___________"><span>importante quanto sempre foi.</span></li>
+        <li><span class="item-num">5.</span><span>A vista da baía ao entardecer é</span><input class="blank-input" data-answer="tão" placeholder="___________"><span>bonita quanto em qualquer cartão-postal.</span></li>
+        <li><span class="item-num">6.</span><span>Para muita gente, a gastronomia do mar é a</span><input class="blank-input" data-answer="maior" placeholder="___________"><span>atração da cidade.</span></li>
+        <li><span class="item-num">7.</span><span>A tainha assada é tão esperada na época da pesca</span><input class="blank-input" data-answer="quanto" placeholder="___________"><span>qualquer festa de fim de ano.</span></li>
+        <li><span class="item-num">8.</span><span>O Ribeirão da Ilha produz as</span><input class="blank-input" data-answer="melhores" placeholder="___________"><span>ostras do estado, segundo muita gente.</span></li>
+        <li><span class="item-num">9.</span><span>A ponte não recebe</span><input class="blank-input" data-answer="mais" placeholder="___________"><span>carros desde que virou monumento.</span></li>
+        <li><span class="item-num">10.</span><span>"Do que" pode ser encurtado para apenas "que" em</span><input class="blank-input" data-answer="mais|menos" placeholder="___________"><span>antiga que / recente que a maioria das pontes do país.</span></li>
+      </ul>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkBlanks('ex1-blanks','ex1-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetBlanks('ex1-blanks','ex1-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex1-result" class="result-msg"></div>
+      <p class="personal-note">Tip: mais/menos...que compares difference, tão...quanto compares equality, and o/a mais... marks the superlative inside a group.</p>
+    </div>
+
+    <!-- Exercise 2 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">2</div>
+        <div>
+          <h3>Um roteiro realista</h3>
+          <p>Think it through — not every recommendation fits every situation</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Read Claire's situation below and answer the questions in Portuguese. Use a comparative (mais...que, tão...quanto or o/a mais...) at least once in each answer.</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Situação</div>
+        <p>Claire é canadense e está em Florianópolis há três dias. Ela adora história, arquitetura antiga e um bom prato de frutos do mar, mas enjoa fácil em lugares muito agitados. Ela tem só a tarde de hoje livre, das 13h às 18h, e quer fazer um programa tranquilo antes de pegar o avião amanhã de manhã. Um amigo falou: "Vai pra Praia Mole, é imperdível!"</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. A dica do amigo combina com o perfil de Claire? Explique, comparando a Praia Mole com outro lugar deste material.</label>
+        <textarea class="open-textarea" placeholder="Talvez não, porque a Praia Mole é mais..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Considerando o gosto de Claire por história e arquitetura, qual lugar deste material é perfeito para ela?</label>
+        <textarea class="open-textarea" placeholder="Santo Antônio de Lisboa..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. Escolha UM lugar deste material para Claire comer frutos do mar. Justifique.</label>
+        <textarea class="open-textarea" placeholder="Eu recomendaria..., porque..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Escreva uma recomendação final para Claire (60–80 palavras), como se você fosse falar diretamente com ela. Use pelo menos dois comparativos.</label>
+        <textarea class="open-textarea" style="min-height:140px;" placeholder="Claire, na sua última tarde eu recomendaria..."></textarea>
+      </div>
+
+      <p class="personal-note">Questions 1 and 2 have a factual basis in the texts above. Questions 3 and 4 are open — the important thing is a realistic, well-justified choice, not a "correct" answer.</p>
+    </div>
+
+    <!-- Exercise 3 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">3</div>
+        <div>
+          <h3>Um guia de bolso</h3>
+          <p>Write short definitions for a pocket travel guide</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write one sentence to define each place or tradition for a pocket travel guide, using a comparative. Use information from the texts above, but write your own sentence — don't copy the text.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. A Ponte Hercílio Luz (mais...que)</label>
+        <textarea class="open-textarea" placeholder="A Ponte Hercílio Luz é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. A Lagoa da Conceição (mais...que)</label>
+        <textarea class="open-textarea" placeholder="A Lagoa da Conceição é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. As rendeiras (tão...quanto)</label>
+        <textarea class="open-textarea" placeholder="Para as rendeiras, a tradição é..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. O Ribeirão da Ilha (o/a mais...)</label>
+        <textarea class="open-textarea" placeholder="O Ribeirão da Ilha é..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">5. Um lugar da sua cidade com uma tradição antiga (qualquer comparativo)</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Na minha cidade, existe um lugar que..."></textarea>
+      </div>
+      <p class="personal-note">Question 5 is a personal answer — there is no single correct response.</p>
+    </div>
+
+    <!-- Exercise 4 -->
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">4</div>
+        <div>
+          <h3>Video comprehension</h3>
+          <p>Watch the video in the Ribeirão da Ilha section above</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Watch the video about beaches in Florianópolis and answer in Portuguese. Use a comparative in each answer when possible.</p>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">1. Quais praias aparecem no vídeo? Escreva pelo menos duas.</label>
+        <textarea class="open-textarea" placeholder="As praias que aparecem são..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">2. Segundo o vídeo, qual praia parece ser mais agitada e qual parece ser mais tranquila?</label>
+        <textarea class="open-textarea" placeholder="A praia mais agitada parece ser..."></textarea>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">3. O que mais chamou a sua atenção na paisagem mostrada no vídeo?</label>
+        <textarea class="open-textarea" placeholder="O que mais chamou a minha atenção foi..."></textarea>
+      </div>
+      <div>
+        <label style="font-size:14px; font-weight:600; color:var(--texto); display:block; margin-bottom:2px;">4. Das praias do vídeo, qual você visitaria primeiro? Explique em duas frases, comparando com as outras.</label>
+        <span style="font-size:12px; color:#aaa; font-style:italic; display:block; margin-bottom:8px;">Personal answer</span>
+        <textarea class="open-textarea" placeholder="Eu visitaria..."></textarea>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- Writing production -->
+    <div class="sec-header">
+      <div class="sec-icon icon-write">✍️</div>
+      <div>
+        <h2>Produção Escrita</h2>
+        <p>Write about your own city</p>
+      </div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header">
+        <div class="ex-num">5</div>
+        <div>
+          <h3>Comparando dois lugares da sua cidade</h3>
+          <p>60–90 words</p>
+        </div>
+      </div>
+      <p class="ex-instruction">Write a short text (60–90 words) comparing two places, neighborhoods or traditions in your own city or region to a Brazilian visitor. Use at least two different comparative structures (mais...que, tão...quanto, o/a mais...).</p>
+
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo</div>
+        <div class="model-text-name">Dois bairros de Seattle</div>
+        <p>Pike Place Market é mais movimentado do que a maioria dos mercados da cidade, cheio de turistas o dia inteiro. Já o bairro de Ballard é tão charmoso quanto o centro, mas bem mais tranquilo, com uma forte herança escandinava por causa dos imigrantes que chegaram há mais de cem anos. Para quem gosta de história, Ballard é, para mim, o bairro mais interessante de Seattle.</p>
+      </div>
+
+      <ul class="writing-questions">
+        <li>Escolha dois lugares, bairros ou tradições da sua cidade ou região.</li>
+        <li>Compare-os usando mais...que, tão...quanto ou o/a mais....</li>
+        <li>Mencione pelo menos um detalhe histórico ou cultural de cada um.</li>
+      </ul>
+
+      <textarea class="open-textarea" style="min-height:180px;" placeholder="Na minha cidade, um lugar interessante é..."></textarea>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <p>
+        When you're done, <strong>send your answers to your teacher.</strong> They will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+      </p>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+</div>
+
+  </div><!-- /main -->
+
+<script>
+  function norm(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ');
+  }
+
+  function checkBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const accepted = inp.dataset.answer.split('|').map(norm);
+      const ok = accepted.includes(norm(inp.value));
+      inp.classList.toggle('correct-input', ok);
+      inp.classList.toggle('wrong-input', !ok && inp.value.trim() !== '');
+      if (ok) correct++;
+    });
+    const el = document.getElementById(resultId);
+    el.style.display = 'block';
+    if (correct === inputs.length) {
+      el.className = 'result-msg good';
+      el.textContent = '✓ Perfect! All ' + inputs.length + ' answers correct.';
+    } else {
+      el.className = 'result-msg try-again';
+      el.textContent = correct + ' of ' + inputs.length + ' correct. Review the highlighted answers.';
+    }
+  }
+
+  function resetBlanks(listId, resultId) {
+    const scope = document.getElementById(listId);
+    const inputs = scope.querySelectorAll('.blank-input');
+    inputs.forEach(inp => { inp.value = ''; inp.classList.remove('correct-input', 'wrong-input'); });
+    const el = document.getElementById(resultId);
+    el.style.display = 'none';
+    el.textContent = '';
+  }
+</script>
+
+<script>
+// BREVO SUBMIT
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
