@@ -92,6 +92,8 @@ body{background:#faf9f5;color:var(--texto);font-family:'Manrope',sans-serif;font
 .dim-table input{width:100%;border:1.5px solid var(--light-gray);border-radius:5px;padding:6px 10px;font-family:'Manrope',sans-serif;font-size:14px;background:#fff;}
 .dim-table input:focus{outline:none;border-color:var(--azul);}
 .dim-table input.prefilled{background:rgba(38,91,139,.07);font-weight:600;color:var(--azul);}
+.dim-table input.correct{border-color:var(--verde);background:rgba(78,124,58,.08);}
+.dim-table input.wrong{border-color:var(--terracota);background:rgba(193,68,14,.08);}
 
 /* WORD LIST (ex3, ex5) */
 .word-list{list-style:none;padding:0;}
@@ -200,7 +202,7 @@ body{background:#faf9f5;color:var(--texto);font-family:'Manrope',sans-serif;font
     <h2>📖 Leitura</h2>
     <p>Leia o texto a seguir.</p>
     <p>Uma manhã, Dona Conceição chegou um <span class="dim-hl">pouquinho</span> atrasada ao trabalho e explicou para a chefe:</p>
-    <p class="speaker">— Desculpa, cheguei um <span class="dim-hl">pouquinho</span> atrasada porque o meu <span class="dim-hl">gatinho</span> fugiu de casa bem cedo e eu fui atrás dele na rua. Fiquei um <span class="dim-hl">tempinho</span> procurando, mas logo encontrei o <span class="dim-hl">bichinho</span> escondido debaixo do carro do <span class="dim-hl">vizinho</span>.</p>
+    <p class="speaker">— Desculpa, cheguei um <span class="dim-hl">pouquinho</span> atrasada porque o meu <span class="dim-hl">gatinho</span> fugiu de casa bem cedo e eu fui atrás dele na rua. Fiquei um <span class="dim-hl">tempinho</span> procurando, mas logo encontrei o <span class="dim-hl">bichinho</span> escondido debaixo do carro do vizinho.</p>
     <p>A chefe olhou para ela e disse:</p>
     <p class="speaker">— Conceição, você tem um <span class="dim-hl">probleminha</span>: você chega atrasada toda semana com uma <span class="dim-hl">historinha</span> diferente!</p>
   </div>
@@ -249,31 +251,29 @@ body{background:#faf9f5;color:var(--texto);font-family:'Manrope',sans-serif;font
           <td><input class="prefilled" value="pouco" readonly></td>
         </tr>
         <tr>
-          <td><input placeholder="diminutivo…"></td>
-          <td><input placeholder="forma original…"></td>
+          <td><input class="ex2-input" data-answer="gatinho" placeholder="diminutivo…"></td>
+          <td><input class="ex2-input" data-answer="gato" placeholder="forma original…"></td>
         </tr>
         <tr>
-          <td><input placeholder="diminutivo…"></td>
-          <td><input placeholder="forma original…"></td>
+          <td><input class="ex2-input" data-answer="tempinho" placeholder="diminutivo…"></td>
+          <td><input class="ex2-input" data-answer="tempo" placeholder="forma original…"></td>
         </tr>
         <tr>
-          <td><input placeholder="diminutivo…"></td>
-          <td><input placeholder="forma original…"></td>
+          <td><input class="ex2-input" data-answer="bichinho" placeholder="diminutivo…"></td>
+          <td><input class="ex2-input" data-answer="bicho" placeholder="forma original…"></td>
         </tr>
         <tr>
-          <td><input placeholder="diminutivo…"></td>
-          <td><input placeholder="forma original…"></td>
+          <td><input class="ex2-input" data-answer="probleminha" placeholder="diminutivo…"></td>
+          <td><input class="ex2-input" data-answer="problema" placeholder="forma original…"></td>
         </tr>
         <tr>
-          <td><input placeholder="diminutivo…"></td>
-          <td><input placeholder="forma original…"></td>
-        </tr>
-        <tr>
-          <td><input placeholder="diminutivo…"></td>
-          <td><input placeholder="forma original…"></td>
+          <td><input class="ex2-input" data-answer="historinha" placeholder="diminutivo…"></td>
+          <td><input class="ex2-input" data-answer="história" placeholder="forma original…"></td>
         </tr>
       </tbody>
     </table>
+    <button class="check-btn" onclick="checkEx2()">Check answers</button>
+    <div class="score-line" id="score2"></div>
   </div>
 
   <!-- EX 3 -->
@@ -390,7 +390,7 @@ body{background:#faf9f5;color:var(--texto);font-family:'Manrope',sans-serif;font
     </div>
     <div class="fill-item">
       <div class="fill-original">Moro em uma <strong>cidade</strong> no interior.</div>
-      <div class="fill-sentence">Moro em uma <input class="fill-input" data-answer="cidadinha" placeholder="…"> no interior.</div>
+      <div class="fill-sentence">Moro em uma <input class="fill-input" data-answer="cidadezinha" placeholder="…"> no interior.</div>
     </div>
     <div class="fill-item">
       <div class="fill-original">Tomei um <strong>café</strong> antes de sair.</div>
@@ -477,6 +477,26 @@ function pickS(btn, ok) {
   const g = btn.closest('.sent-opts');
   g.querySelectorAll('.sent-btn').forEach(b => { b.classList.remove('ok','no'); b.onclick = null; });
   btn.classList.add(ok ? 'ok' : 'no');
+}
+
+function normAccents(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkEx2() {
+  let c = 0, t = 0;
+  document.querySelectorAll('.ex2-input').forEach(function(inp) {
+    t++;
+    const val = normAccents(inp.value);
+    const ans = normAccents(inp.dataset.answer);
+    if (val && val === ans) { inp.classList.add('correct'); inp.classList.remove('wrong'); c++; }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); if (!inp.value.trim()) inp.value = inp.dataset.answer; }
+  });
+  const s = document.getElementById('score2');
+  s.style.display = 'block';
+  s.textContent = 'Resultado: ' + c + ' de ' + t + ' corretas';
 }
 
 function checkEx3() {
