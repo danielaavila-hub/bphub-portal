@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Um mergulho no oceano — Martha Medeiros | BPHUB B2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #D36D29;
+      --verde-ok: #2E6B3E; --vermelho: #A83030;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--cobalto)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 640px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .gram-ref table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    .gram-ref th { background: var(--level); color: #fff; padding: 7px 12px; text-align: left; font-weight: 700; }
+    .gram-ref td { padding: 7px 12px; border-bottom: 1px solid var(--light-gray); }
+    .gram-ref tr:last-child td { border-bottom: none; }
+    .gram-ref tr:nth-child(even) td { background: var(--off-white); }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16px; line-height: 1.85; font-family: 'Trirong', serif; }
+    .text-body p:last-child { margin-bottom: 0; }
+    .text-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; margin-bottom: 14px; }
+    mark.lv { background: rgba(211,109,41,.16); color: var(--level); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    .placeholder-box { border: 2px dashed var(--erva-doce); border-radius: 10px; padding: 22px 24px; background: #fff; color: #8a8672; font-style: italic; font-size: 14.5px; line-height: 1.7; text-align: center; }
+    .audio-wrap { border: 2px dashed var(--cobalto); border-radius: 10px; padding: 22px 24px; background: #fff; color: var(--cobalto); font-size: 14.5px; text-align: center; margin-top: 16px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 22px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--level); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; color: var(--nanquim); }
+    table.vocab:last-child { margin-bottom: 0; }
+
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+    audio { width: 100%; margin-top: 4px; }
+
+    .cult-box { background: #f0f4e8; border-left: 4px solid var(--erva-doce); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; line-height: 1.7; }
+    .cult-box strong { color: var(--musgo); }
+    .cult-box:last-child { margin-bottom: 0; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--level); }
+    textarea.prod { min-height: 140px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .base-verb { font-family: 'Trirong', serif; font-style: italic; color: #999; font-size: 13px; }
+    .gap-input { display: inline-block; min-width: 130px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--level); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--level); }
+    .correct { border-color: var(--verde-ok) !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--vermelho) !important; background: #FBEFE6 !important; }
+
+    .tf-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-item span { flex: 1; line-height: 1.55; }
+    .tf-btn { border: 1.5px solid var(--light-gray); background: #fff; border-radius: 5px; padding: 4px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: all .15s; white-space: nowrap; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.sel-V { background: var(--musgo); color: #fff; border-color: var(--musgo); }
+    .tf-btn.sel-F { background: var(--level); color: #fff; border-color: var(--level); }
+    .tf-btn.right { background: var(--verde-ok); color: #fff; border-color: var(--verde-ok); }
+    .tf-btn.wrong-btn { background: var(--vermelho); color: #fff; border-color: var(--vermelho); }
+
+    .match-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--light-gray); font-size: 14.5px; }
+    .match-row:last-child { border-bottom: none; }
+    .match-word { font-weight: 700; color: var(--nanquim); min-width: 150px; }
+    .match-select { flex: 1; padding: 7px 10px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 13.5px; background: #fff; }
+
+    .transf-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .transf-item:last-child { border-bottom: none; }
+    .transf-given { color: #8a8672; font-style: italic; margin-bottom: 8px; line-height: 1.6; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--level); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: var(--verde-ok); }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+  
+    .hero h1 em { display:block; font-size:0.72em; margin-top:4px; }
+    .mc-group { margin-bottom: 22px; }
+    .mc-sentence { font-size: 15.5px; margin-bottom: 10px; line-height: 1.6; }
+    .mc-opts { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { padding: 10px 16px; border-radius: 12px; border: 1.5px solid var(--light-gray); background: white; font-size: 14.5px; font-weight: 500; cursor: pointer; font-family: 'Manrope', sans-serif; color: var(--texto); text-align: left; line-height: 1.5; transition: all .15s; }
+    .mc-btn:hover { border-color: var(--level); }
+    .mc-btn.selected { background: rgba(211,109,41,0.10); border-color: var(--level); color: var(--level); font-weight: 700; }
+    .mc-btn.right { background: #EAF5EE; border-color: var(--verde-ok); color: var(--verde-ok); font-weight: 700; }
+    .mc-btn.wrong-btn { background: #FBEFE6; border-color: var(--vermelho); color: var(--vermelho); }
+    .tf-block { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .tf-block:last-child { border-bottom: none; }
+    .tf-block .tf-item { border-bottom: none; padding: 0 0 8px; }
+    .tf-block textarea { min-height: 44px; }
+    .tf-fix-label { font-size: 12px; color: #999; font-style: italic; margin: 2px 0 6px; }
+    .gloss { color: #999; font-size: 13px; }
+    .quote-pt { font-family:'Trirong',serif; font-style:italic; }
+    .wc { font-size: 12.5px; color: #999; margin-top: 6px; text-align: right; }
+    .wc.ok { color: var(--verde-ok); font-weight: 700; }
+    .model-text { background: var(--off-white); border: 1.5px dashed var(--erva-doce); border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; font-size: 15px; line-height: 1.8; }
+    .model-text .lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--level); margin-bottom: 8px; }
+    .guide-list { list-style: none; margin: 0 0 18px; }
+    .guide-list li { position: relative; padding: 5px 0 5px 20px; font-size: 14.5px; }
+    .guide-list li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+    .gram-ref .ex-line { font-size: 14.5px; margin: 4px 0 4px 14px; }
+    .gram-ref .ex-line strong { color: var(--level); }
+    .gram-box { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Conta um Conto</span>
+    <a href="../contos/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para o Conta um Conto</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Um mergulho no oceano <em>— Martha Medeiros</em></h1>
+  <div class="hero-sub">Uma crônica sobre voltar à sala de aula depois de muitos anos: entre o caderno e o tablet, a piscina e o oceano, a autora descobre que aprender é o melhor jeito de se manter jovem.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Como se + imperfeito do subjuntivo</span>
+    <span class="hero-tag">Crônica · Martha Medeiros</span>
+    <span class="hero-tag">B2 · Conta um Conto</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Nota cultural</p>
+  <div class="card">
+    <div class="cult-box">
+      <strong>✍️ Quem é Martha Medeiros</strong><br>
+      Martha Medeiros nasceu em Porto Alegre, no Rio Grande do Sul, em 1961, e publica suas crônicas nos jornais <em>Zero Hora</em> e <em>O Globo</em>. É uma das cronistas mais lidas do país. Também escreve romances: <em>Divã</em>, de 2002, virou filme e série de TV.
+    </div>
+    <div class="cult-box">
+      <strong>📰 A crônica</strong><br>
+      A crônica é um gênero muito brasileiro. É um texto curto, publicado em jornal ou revista, que parte de uma cena do dia a dia para chegar a uma reflexão, muitas vezes com humor. Rubem Braga e Luis Fernando Veríssimo são alguns dos grandes cronistas brasileiros.
+    </div>
+  </div>
+
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:16px;">Antes de ouvir, leia o quadro de vocabulário. As palavras aparecem na ordem em que você vai ouvi-las.</p>
+    <table class="vocab">
+      <tr><th>Português</th><th>Tradução</th></tr>
+      <tr><td>lá se vão muitas luas</td><td><span class="gloss">(it’s been ages)</span></td></tr>
+      <tr><td>apreensivo/a</td><td><span class="gloss">(uneasy, apprehensive)</span></td></tr>
+      <tr><td>matricular-se</td><td><span class="gloss">(to enroll)</span></td></tr>
+      <tr><td>giz</td><td><span class="gloss">(chalk)</span></td></tr>
+      <tr><td>quadro-negro</td><td><span class="gloss">(blackboard)</span></td></tr>
+      <tr><td>analfabeto/a digital</td><td><span class="gloss">(someone who is not tech-savvy)</span></td></tr>
+      <tr><td>passar vergonha</td><td><span class="gloss">(to embarrass oneself)</span></td></tr>
+      <tr><td>saudosista</td><td><span class="gloss">(someone nostalgic for the old days)</span></td></tr>
+      <tr><td>rabiscado/a</td><td><span class="gloss">(scribbled)</span></td></tr>
+      <tr><td>decorar</td><td><span class="gloss">(to memorize (not “to decorate” here))</span></td></tr>
+      <tr><td>sublinhar</td><td><span class="gloss">(to underline)</span></td></tr>
+      <tr><td>flecha</td><td><span class="gloss">(arrow)</span></td></tr>
+      <tr><td>resgatar</td><td><span class="gloss">(to recover, to bring back)</span></td></tr>
+      <tr><td>disposição (em)</td><td><span class="gloss">(willingness (to))</span></td></tr>
+      <tr><td>aprendiz</td><td><span class="gloss">(learner, apprentice)</span></td></tr>
+      <tr><td>braçada</td><td><span class="gloss">(stroke (in swimming))</span></td></tr>
+      <tr><td>agarrar-se a</td><td><span class="gloss">(to cling to)</span></td></tr>
+      <tr><td>borda</td><td><span class="gloss">(edge (of a pool))</span></td></tr>
+      <tr><td>amplitude restrita</td><td><span class="gloss">(limited range)</span></td></tr>
+      <tr><td>terra firme</td><td><span class="gloss">(dry land)</span></td></tr>
+      <tr><td>apegado/a a</td><td><span class="gloss">(attached to)</span></td></tr>
+      <tr><td>receio</td><td><span class="gloss">(fear, wariness)</span></td></tr>
+      <tr><td>procedimentos estéticos</td><td><span class="gloss">(cosmetic procedures)</span></td></tr>
+      <tr><td>recreio</td><td><span class="gloss">(recess (school break))</span></td></tr>
+    </table>
+  </div>
+
+  <p class="sec-label">Ouça o episódio</p>
+  <div class="card">
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:14px;">Você vai ouvir a crônica duas vezes: primeiro sem pausar (Atividade 1) e depois com pausas (Atividade 2).</p>
+    <div class="audio-box">
+      <audio controls>
+        <source src="mergulho-no-oceano-b2.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+    <p class="fonte" style="margin-top:14px;margin-bottom:0;">Fonte: MEDEIROS, Martha. Um mergulho no oceano. In: MEDEIROS, Martha. <em>Simples assim</em>. Porto Alegre: L&amp;PM, 2025. (Coleção L&amp;PM Pocket).</p>
+  </div>
+
+  <p class="sec-label">Atividade 1 — Primeira escuta</p>
+  <div class="ex-card">
+    <h2>O sentido geral</h2>
+    <p class="ex-instr">Ouça o episódio inteiro uma vez, sem pausar. Depois, escolha a melhor resposta para cada pergunta.</p>
+    <div class="mc-group">
+      <p class="mc-sentence"><span class="q-num">1.</span> Qual frase resume melhor a crônica?</p>
+      <div class="mc-opts" id="a1_1-opts">
+          <button class="mc-btn" onclick="selectMC('a1_1','a',this)">a) A autora critica a escola de Londres porque ela usa pouca tecnologia.</button>
+          <button class="mc-btn" onclick="selectMC('a1_1','b',this)">b) Ao voltar a estudar depois de muitos anos, a autora redescobre o prazer de aprender e decide nunca mais parar.</button>
+          <button class="mc-btn" onclick="selectMC('a1_1','c',this)">c) A autora conta como aprendeu a usar tablet e laptop durante um curso em Londres.</button>
+      </div>
+    </div>
+    <div class="mc-group">
+      <p class="mc-sentence"><span class="q-num">2.</span> Como a autora se sentia antes de começar o curso?</p>
+      <div class="mc-opts" id="a1_2-opts">
+          <button class="mc-btn" onclick="selectMC('a1_2','a',this)">a) entusiasmada</button>
+          <button class="mc-btn" onclick="selectMC('a1_2','b',this)">b) apreensiva</button>
+          <button class="mc-btn" onclick="selectMC('a1_2','c',this)">c) indiferente</button>
+      </div>
+    </div>
+    <div class="mc-group">
+      <p class="mc-sentence"><span class="q-num">3.</span> Que tom predomina na crônica?</p>
+      <div class="mc-opts" id="a1_3-opts">
+          <button class="mc-btn" onclick="selectMC('a1_3','a',this)">a) bem-humorado e reflexivo</button>
+          <button class="mc-btn" onclick="selectMC('a1_3','b',this)">b) triste e nostálgico</button>
+          <button class="mc-btn" onclick="selectMC('a1_3','c',this)">c) irritado e crítico</button>
+      </div>
+    </div>
+    <button class="check-btn" onclick="checkA1()">✓ Corrigir</button>
+    <div id="a1-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Atividade 2 — Segunda escuta</p>
+  <div class="ex-card">
+    <h2>Verdadeiro ou Falso?</h2>
+    <p class="ex-instr">Ouça de novo. Você pode pausar a gravação. Marque V (verdadeiro) ou F (falso). Reescreva cada afirmação falsa na linha abaixo dela, para que fique verdadeira.</p>
+    <div class="tf-block">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,1,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>A autora não entrava numa sala de aula desde a época da faculdade.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,2,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>Havia cerca de quinze alunos em cada sala.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,3,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Na escola, os professores ainda usam giz e quadro-negro.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,4,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>A autora levava um tablet para as aulas.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,5,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>Alguns colegas fotografavam o quadro em vez de copiar.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_5" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="6">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,6,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,6,'F')">F</button>
+        </div>
+        <span>Para a autora, escrever à mão é a melhor maneira de decorar informações.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_6" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="7">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,7,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,7,'F')">F</button>
+        </div>
+        <span>A autora tinha vergonha de errar e por isso quase não falava nas aulas.</span>
+      </div>
+      <p class="tf-fix-label">Se for falsa, reescreva a frase para que ela fique verdadeira:</p>
+      <textarea id="a2_fix_7" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <button class="check-btn" onclick="checkA2()">✓ Corrigir</button>
+    <button class="reset-btn" onclick="resetA2()">Refazer</button>
+    <div id="a2-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Atividade 3 — O que a autora quer dizer?</p>
+  <div class="ex-card">
+    <h2>Interpretação</h2>
+    <p class="ex-instr">Responda a cada pergunta em português, com uma ou duas frases. Se precisar, ouça de novo a parte da piscina até o final.</p>
+    <div class="q-block">
+      <p class="q"><span class="q-num">1.</span> Por que a autora se chama de “analfabeta digital”? Ela se arrepende de levar caderno e caneta? Explique.</p>
+      <textarea id="a3_1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">2.</span> A autora compara dois tipos de pessoa a dois lugares para nadar. Quais são esses lugares? Que tipo de pessoa cada um representa?</p>
+      <textarea id="a3_2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">3.</span> A autora diz que tem certo receio de procedimentos estéticos. Qual é, então, a maneira de se manter jovem que ela descobriu?</p>
+      <textarea id="a3_3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">4.</span> O que a autora quer dizer com a frase final: “depois disso, aí sim, recreio”?</p>
+      <textarea id="a3_4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <button class="check-btn" onclick="checkA3()">✓ Corrigir</button>
+    <div id="a3-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Atividade 4 — Foco gramatical</p>
+  <div class="gram-ref">
+    <h3>Como se + imperfeito do subjuntivo</h3>
+    <p>Na crônica, a autora fala das pessoas que se satisfazem com o que já sabem: <span class="quote-pt">é como se seu conhecimento <strong>coubesse</strong> numa piscina</span>.</p>
+    <p>Usamos <strong>como se</strong> para comparar uma situação real com uma situação imaginada. O verbo depois de <em>como se</em> fica sempre no imperfeito do subjuntivo, tanto no presente quanto no passado:</p>
+    <p class="ex-line">— Ela fala como se <strong>soubesse</strong> tudo. <span class="gloss">(presente)</span></p>
+    <p class="ex-line">— Ela falava como se <strong>soubesse</strong> tudo. <span class="gloss">(passado)</span></p>
+    <div class="gram-box">
+      <p style="margin-bottom:6px;"><strong>Como formar o imperfeito do subjuntivo</strong></p>
+      <p class="ex-line">Passo 1: pegue a forma <em>eles</em> do pretérito perfeito e tire o <em>-ram</em>: caber → couberam → <strong>coube-</strong></p>
+      <p class="ex-line">Passo 2: acrescente as terminações: eu coube<strong>sse</strong> · você/ele/ela coube<strong>sse</strong> · nós coub<strong>éssemos</strong> · vocês/eles/elas coube<strong>ssem</strong></p>
+    </div>
+    <p>Outros exemplos: poder → puderam → <strong>pudesse</strong> · querer → quiseram → <strong>quisesse</strong></p>
+  </div>
+
+  <div class="ex-card">
+    <h2>Complete as frases</h2>
+    <p class="ex-instr">Complete cada frase com o verbo entre parênteses no imperfeito do subjuntivo.</p>
+    <p class="sent"><span class="q-num">1.</span> Meu colega fotografa tudo o que o professor escreve, como se não <input class="gap-input" id="a4_1" placeholder="..."> <span class="base-verb">(confiar)</span> na própria memória.</p>
+    <p class="sent"><span class="q-num">2.</span> A professora explicou a regra com toda a calma, como se nós <input class="gap-input" id="a4_2" placeholder="..."> <span class="base-verb">(ter)</span> o dia inteiro.</p>
+    <p class="sent"><span class="q-num">3.</span> Quando erro uma palavra, meus amigos me olham como se eu <input class="gap-input" id="a4_3" placeholder="..."> <span class="base-verb">(dizer)</span> um palavrão.</p>
+    <p class="sent"><span class="q-num">4.</span> Minha avó anota tudo à mão, como se ainda não <input class="gap-input" id="a4_4" placeholder="..."> <span class="base-verb">(existir)</span> computadores.</p>
+    <p class="sent"><span class="q-num">5.</span> Ele segura o celular novo como se <input class="gap-input" id="a4_5" placeholder="..."> <span class="base-verb">(estar)</span> com medo de quebrá-lo.</p>
+    <p class="sent"><span class="q-num">6.</span> Os dois falam português como se <input class="gap-input" id="a4_6" placeholder="..."> <span class="base-verb">(ser)</span> brasileiros.</p>
+    <button class="check-btn" onclick="checkA4()">✓ Corrigir</button>
+    <button class="reset-btn" onclick="resetA4()">Refazer</button>
+    <div id="a4-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Atividade 5 — Sua vez</p>
+  <div class="ex-card">
+    <h2>Minha experiência como aluno(a) de línguas</h2>
+    <p class="ex-instr">Leia o texto-modelo. Depois escreva um texto curto (80 a 120 palavras) sobre a sua experiência como aluno(a) de línguas. Responda às perguntas no seu texto e use <em>como se</em> + imperfeito do subjuntivo pelo menos duas vezes.</p>
+    <div class="model-text">
+      <div class="lbl">Texto-modelo <span style="text-transform:none;letter-spacing:0;font-weight:400;color:#999;">(texto construído)</span></div>
+      <em>Voltei a estudar português aos 45 anos. Na primeira aula, fiquei tão nervosa que segurava a caneta como se ela fosse fugir da minha mão. Hoje levo o laptop para a aula, mas anoto as palavras novas num caderno: escrever à mão me ajuda a lembrar. Ainda erro muito, e às vezes falo como se o português e o espanhol fossem a mesma língua. Mas já aprendi a rir dos meus erros.</em>
+    </div>
+    <ul class="guide-list">
+      <li>Quando você começou a estudar português? Como se sentiu nas primeiras aulas?</li>
+      <li>Você prefere caderno e caneta ou tecnologia? Por quê?</li>
+      <li>Como você reage aos seus próprios erros?</li>
+    </ul>
+    <textarea class="prod" id="a5" placeholder="Escreva seu texto aqui..." oninput="countWords()"></textarea>
+    <p class="wc" id="a5-wc">0 palavras (meta: 80 a 120)</p>
+  </div>
+
+</div>
+
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' '); }
+function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+var OK = '<span style="color:var(--verde-ok);font-weight:700;">✓</span>';
+var NO = '<span style="color:var(--vermelho);font-weight:700;">✗</span>';
+function show(id, ok, tot, html, extra) {
+  var m = document.getElementById(id);
+  m.className = 'result-msg show ' + (ok === tot ? 'good' : 'try-again');
+  m.innerHTML = '<strong>' + ok + ' / ' + tot + ' corretas.</strong>' + (extra || '') + '<div style="margin-top:10px;">' + html + '</div>';
+}
+
+// ── Atividade 1: escolha ──
+var mcSel = {};
+function selectMC(id, val, btn) {
+  mcSel[id] = val;
+  document.getElementById(id + '-opts').querySelectorAll('.mc-btn').forEach(function(b) { b.className = 'mc-btn'; });
+  btn.className = 'mc-btn selected';
+}
+var a1Key = { a1_1: 'b', a1_2: 'b', a1_3: 'a' };
+var a1Why = {
+  a1_1: 'A autora volta a estudar depois de muitos anos, redescobre o prazer de aprender e decide nunca mais parar.',
+  a1_2: 'Ela estava apreensiva antes de começar o curso.',
+  a1_3: 'O tom é bem-humorado e reflexivo.'
+};
+function checkA1() {
+  var ok = 0, html = '', n = 0, answered = 0;
+  Object.keys(a1Key).forEach(function(id, i) {
+    n++;
+    var sel = mcSel[id], ans = a1Key[id], good = sel === ans;
+    if (sel) answered++;
+    if (good) ok++;
+    document.getElementById(id + '-opts').querySelectorAll('.mc-btn').forEach(function(b, idx) {
+      var l = 'abc'[idx];
+      b.className = 'mc-btn' + (l === ans ? ' right' : (l === sel && !good ? ' wrong-btn' : ''));
+    });
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' <strong>' + ans + ')</strong> ' + a1Why[id] + '</div>';
+  });
+  show('a1-msg', ok, n, html, answered < n ? ' — responda todos os itens primeiro.' : '');
+}
+
+// ── Atividade 2: V ou F ──
+var tfKey = {1:'V',2:'F',3:'F',4:'F',5:'V',6:'V',7:'F'};
+var tfFix = {
+  2: 'No máximo oito alunos por sala.',
+  3: 'Usam quadro branco e marcadores coloridos.',
+  4: 'Levava caderno e caneta.',
+  7: 'Sentia vergonha de falar, mas se divertia com os próprios erros.'
+};
+var tfSel = {};
+function selectTF(btn, id, val) {
+  var item = document.querySelector('.tf-item[data-id="' + id + '"]');
+  item.querySelectorAll('.tf-btn').forEach(function(b) { b.className = 'tf-btn'; });
+  btn.classList.add('sel-' + val); tfSel[id] = val;
+}
+function checkA2() {
+  var ok = 0, tot = 7, answered = 0, html = '';
+  for (var id in tfKey) {
+    var item = document.querySelector('.tf-item[data-id="' + id + '"]');
+    item.querySelectorAll('.tf-btn').forEach(function(b) { b.classList.remove('right','wrong-btn','sel-V','sel-F'); });
+    var sel = tfSel[id], good = sel === tfKey[id];
+    if (sel) { answered++; if (good) ok++;
+      item.querySelectorAll('.tf-btn').forEach(function(b) {
+        if (b.dataset.val === tfKey[id]) b.classList.add('right');
+        else if (b.dataset.val === sel && !good) b.classList.add('wrong-btn');
+      });
+    }
+    html += '<div style="margin-bottom:6px;"><strong>' + id + '.</strong> ' + (good ? OK : NO) + ' <strong>' + tfKey[id] + '</strong>' + (tfFix[id] ? ' — ' + tfFix[id] : '') + '</div>';
+  }
+  show('a2-msg', ok, tot, html, answered < tot ? ' — responda todos os itens primeiro.' : '');
+}
+function resetA2() {
+  for (var id in tfKey) {
+    document.querySelector('.tf-item[data-id="' + id + '"]').querySelectorAll('.tf-btn').forEach(function(b) { b.className = 'tf-btn'; });
+    delete tfSel[id];
+    document.getElementById('a2_fix_' + id).value = '';
+  }
+  document.getElementById('a2-msg').className = 'result-msg';
+}
+
+// ── Atividade 3: interpretação (grupos de palavras-chave) ──
+var a3Data = [
+  { groups: [['caderno','caneta','mao','escrev'],['tablet','laptop','colega','nao se arrepende','defende','melhor']], model: 'Porque prefere caderno e caneta, enquanto os colegas usam tablets e laptops. Não se arrepende: defende a escrita à mão como o melhor jeito de aprender e brinca que o caderno dela ainda vai ser exposto numa mostra de design.' },
+  { groups: [['piscina'],['oceano']], model: 'A piscina representa as pessoas que se satisfazem com o que já sabem e se sentem seguras num espaço limitado. O oceano representa quem continua aprendendo, sem limites, sempre em movimento.' },
+  { groups: [['estudar','estudo','aprender','nunca parar','nao parar','continuar']], model: 'Nunca parar de estudar. Assim ela vai se sentir com 20 anos até os 100, em vez de recorrer a procedimentos estéticos.' },
+  { groups: [['100','cem','velhice','vida toda','sempre'],['descans','pausa','recreio','parar','depois']], model: 'Ela vai estudar até os 100 anos e só depois vai descansar. “Recreio” é a pausa entre as aulas na escola, e assim a autora continua a imagem da sala de aula.' }
+];
+function checkA3() {
+  var ok = 0, html = '';
+  a3Data.forEach(function(d, i) {
+    var el = document.getElementById('a3_' + (i+1));
+    var v = norm(el.value), filled = v.length > 0;
+    var good = filled && d.groups.every(function(g) { return g.some(function(k) { return v.indexOf(k) !== -1; }); });
+    el.style.borderColor = good ? 'var(--verde-ok)' : (filled ? 'var(--vermelho)' : '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' ' + d.model + '</div>';
+  });
+  show('a3-msg', ok, a3Data.length, html, ' — resposta modelo abaixo; compare com a sua.');
+}
+
+// ── Atividade 4: como se + imperfeito do subjuntivo ──
+var a4Key = ['confiasse','tivéssemos','dissesse','existissem','estivesse','fossem'];
+function checkA4() {
+  var ok = 0, html = '';
+  a4Key.forEach(function(k, i) {
+    var el = document.getElementById('a4_' + (i+1));
+    var good = norm(el.value) === norm(k);
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', !good && el.value.trim() !== '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' <strong>' + k + '</strong></div>';
+  });
+  show('a4-msg', ok, a4Key.length, html);
+}
+function resetA4() {
+  a4Key.forEach(function(k, i) { var el = document.getElementById('a4_' + (i+1)); el.value = ''; el.classList.remove('correct','wrong'); });
+  document.getElementById('a4-msg').className = 'result-msg';
+}
+
+// ── Atividade 5: contador de palavras ──
+function countWords() {
+  var t = document.getElementById('a5').value.trim();
+  var n = t ? t.split(/\s+/).length : 0;
+  var el = document.getElementById('a5-wc');
+  el.textContent = n + (n === 1 ? ' palavra' : ' palavras') + ' (meta: 80 a 120)';
+  el.className = 'wc' + (n >= 80 && n <= 120 ? ' ok' : '');
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor = '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  function add(tag, val) {
+    var has = val && val.trim() !== '';
+    var shown = has ? esc(val.trim()) : '(sem resposta)';
+    summaryLines.push('<strong>' + tag + ':</strong> ' + (has ? shown : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>' + tag + ':</strong> ' + shown + '</p>';
+  }
+  for (var a = 1; a <= 3; a++) add('At1-' + a, mcSel['a1_' + a] || '');
+  for (var b = 1; b <= 7; b++) { add('At2-' + b + ' (V/F)', tfSel[b] || ''); add('At2-' + b + ' (reescrita)', document.getElementById('a2_fix_' + b).value); }
+  for (var c = 1; c <= 4; c++) add('At3-' + c, document.getElementById('a3_' + c).value);
+  for (var d = 1; d <= 6; d++) add('At4-' + d, document.getElementById('a4_' + d).value);
+  add('At5', document.getElementById('a5').value);
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div class="send-box" style="margin-bottom:16px;">
+    📩 Quando terminar, envie suas respostas para a professora. Ela vai ler com atenção e comentar na próxima aula.
+  </div>
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
