@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O buffet — Luis Fernando Veríssimo | BPHUB B1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #967E63;
+      --verde-ok: #2E6B3E; --vermelho: #A83030;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--cobalto)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 640px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .gram-ref table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    .gram-ref th { background: var(--level); color: #fff; padding: 7px 12px; text-align: left; font-weight: 700; }
+    .gram-ref td { padding: 7px 12px; border-bottom: 1px solid var(--light-gray); }
+    .gram-ref tr:last-child td { border-bottom: none; }
+    .gram-ref tr:nth-child(even) td { background: var(--off-white); }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .text-card { background: var(--off-white); border: none; }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+    .text-body p { margin-bottom: 14px; font-size: 16px; line-height: 1.85; font-family: 'Trirong', serif; }
+    .text-body p:last-child { margin-bottom: 0; }
+    .text-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; margin-bottom: 14px; }
+    mark.lv { background: rgba(150,126,99,.16); color: var(--level); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    .placeholder-box { border: 2px dashed var(--erva-doce); border-radius: 10px; padding: 22px 24px; background: #fff; color: #8a8672; font-style: italic; font-size: 14.5px; line-height: 1.7; text-align: center; }
+    .audio-wrap { border: 2px dashed var(--cobalto); border-radius: 10px; padding: 22px 24px; background: #fff; color: var(--cobalto); font-size: 14.5px; text-align: center; margin-top: 16px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 22px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--level); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; color: var(--nanquim); }
+    table.vocab:last-child { margin-bottom: 0; }
+
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+    audio { width: 100%; margin-top: 4px; }
+
+    .cult-box { background: #f0f4e8; border-left: 4px solid var(--erva-doce); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; line-height: 1.7; }
+    .cult-box strong { color: var(--musgo); }
+    .cult-box:last-child { margin-bottom: 0; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--level); }
+    textarea.prod { min-height: 140px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .base-verb { font-family: 'Trirong', serif; font-style: italic; color: #999; font-size: 13px; }
+    .gap-input { display: inline-block; min-width: 130px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--level); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--level); }
+    .correct { border-color: var(--verde-ok) !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--vermelho) !important; background: #FBEFE6 !important; }
+
+    .tf-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .tf-item:last-child { border-bottom: none; }
+    .tf-item span { flex: 1; line-height: 1.55; }
+    .tf-btn { border: 1.5px solid var(--light-gray); background: #fff; border-radius: 5px; padding: 4px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: all .15s; white-space: nowrap; }
+    .tf-btn:hover { border-color: var(--level); color: var(--level); }
+    .tf-btn.sel-V { background: var(--musgo); color: #fff; border-color: var(--musgo); }
+    .tf-btn.sel-F { background: var(--level); color: #fff; border-color: var(--level); }
+    .tf-btn.right { background: var(--verde-ok); color: #fff; border-color: var(--verde-ok); }
+    .tf-btn.wrong-btn { background: var(--vermelho); color: #fff; border-color: var(--vermelho); }
+
+    .match-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--light-gray); font-size: 14.5px; }
+    .match-row:last-child { border-bottom: none; }
+    .match-word { font-weight: 700; color: var(--nanquim); min-width: 150px; }
+    .match-select { flex: 1; padding: 7px 10px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 13.5px; background: #fff; }
+
+    .transf-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .transf-item:last-child { border-bottom: none; }
+    .transf-given { color: #8a8672; font-style: italic; margin-bottom: 8px; line-height: 1.6; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--level); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: var(--verde-ok); }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+  
+    .hero h1 em { display:block; font-size:0.72em; margin-top:4px; }
+    .mc-group { margin-bottom: 22px; }
+    .mc-sentence { font-size: 15.5px; margin-bottom: 10px; line-height: 1.6; }
+    .mc-opts { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { padding: 10px 16px; border-radius: 12px; border: 1.5px solid var(--light-gray); background: white; font-size: 14.5px; font-weight: 500; cursor: pointer; font-family: 'Manrope', sans-serif; color: var(--texto); text-align: left; line-height: 1.5; transition: all .15s; }
+    .mc-btn:hover { border-color: var(--level); }
+    .mc-btn.selected { background: rgba(150,126,99,0.10); border-color: var(--level); color: var(--level); font-weight: 700; }
+    .mc-btn.right { background: #EAF5EE; border-color: var(--verde-ok); color: var(--verde-ok); font-weight: 700; }
+    .mc-btn.wrong-btn { background: #FBEFE6; border-color: var(--vermelho); color: var(--vermelho); }
+    .tf-block { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .tf-block:last-child { border-bottom: none; }
+    .tf-block .tf-item { border-bottom: none; padding: 0 0 8px; }
+    .tf-block textarea { min-height: 44px; }
+    .tf-fix-label { font-size: 12px; color: #999; font-style: italic; margin: 2px 0 6px; }
+    .gloss { color: #999; font-size: 13px; }
+    .quote-pt { font-family:'Trirong',serif; font-style:italic; }
+    .wc { font-size: 12.5px; color: #999; margin-top: 6px; text-align: right; }
+    .wc.ok { color: var(--verde-ok); font-weight: 700; }
+    .model-text { background: var(--off-white); border: 1.5px dashed var(--erva-doce); border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; font-size: 15px; line-height: 1.8; }
+    .model-text .lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--level); margin-bottom: 8px; }
+    .guide-list { list-style: none; margin: 0 0 18px; }
+    .guide-list li { position: relative; padding: 5px 0 5px 20px; font-size: 14.5px; }
+    .guide-list li::before { content: '→'; position: absolute; left: 0; color: var(--level); font-weight: 700; }
+    .gram-ref .ex-line { font-size: 14.5px; margin: 4px 0 4px 14px; }
+    .gram-ref .ex-line strong { color: var(--level); }
+    .gram-box { background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+
+    .full-input { width: 100%; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; padding: 6px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); outline: none; margin-top: 4px; }
+    .full-input:focus { border-bottom-color: var(--level); }
+    .full-input.correct { border-bottom-color: var(--verde-ok); }
+    .full-input.wrong { border-bottom-color: var(--vermelho); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1</span>
+    <span class="badge badge-type">Conta um Conto</span>
+    <a href="../contos/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para o Conta um Conto</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>O buffet <em>— Luis Fernando Veríssimo</em></h1>
+  <div class="hero-sub">A funny crônica that turns a party buffet into a battlefield, with a tongue-in-cheek “survival guide” written almost entirely in the imperative.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Imperativo afirmativo e negativo</span>
+    <span class="hero-tag">Crônica · Luis Fernando Veríssimo</span>
+    <span class="hero-tag">B1 · Conta um Conto</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Cultural note</p>
+  <div class="card">
+    <div class="cult-box">
+      <strong>✍️ Quem é Luis Fernando Veríssimo</strong><br>
+      Luis Fernando Veríssimo (1936–2025) nasceu em Porto Alegre e foi um dos cronistas mais lidos do Brasil. Filho do escritor Erico Verissimo, ficou famoso pelo humor fino e pela ironia. Escreveu crônicas, contos e romances, criou personagens como o Analista de Bagé e publicou durante décadas nos jornais brasileiros.
+    </div>
+    <div class="cult-box">
+      <strong>🍽️ O buffet e a crônica</strong><br>
+      Em casamentos, aniversários e formaturas no Brasil, o buffet é muito comum: os convidados formam uma fila e se servem da mesa central. Nesta crônica, do livro <em>A mesa voadora</em>, Veríssimo transforma essa fila numa batalha e escreve um “guia de sobrevivência” em tom de brincadeira. Os conselhos são um exagero engraçado, claro: na vida real, ninguém precisa dar garfadas nas costelas dos outros!
+    </div>
+  </div>
+
+  <p class="sec-label">Vocabulary</p>
+  <div class="card">
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:16px;">Before you listen, read the vocabulary box. The words appear in the order you will hear them.</p>
+    <table class="vocab">
+      <tr><th>Português</th><th>English</th></tr>
+      <tr><td>o martírio</td><td><span class="gloss">(torment, ordeal)</span></td></tr>
+      <tr><td>o buffet</td><td><span class="gloss">(buffet)</span></td></tr>
+      <tr><td>a fartura</td><td><span class="gloss">(abundance, plenty)</span></td></tr>
+      <tr><td>a cascata de camarões</td><td><span class="gloss">(a cascade of shrimp)</span></td></tr>
+      <tr><td>o leitão</td><td><span class="gloss">(suckling pig)</span></td></tr>
+      <tr><td>o faisão empalhado</td><td><span class="gloss">(stuffed pheasant)</span></td></tr>
+      <tr><td>a boca-livre</td><td><span class="gloss">(free food and drink at an event)</span></td></tr>
+      <tr><td>o garçom</td><td><span class="gloss">(waiter)</span></td></tr>
+      <tr><td>a horda</td><td><span class="gloss">(horde, mob)</span></td></tr>
+      <tr><td>o empurrão / os empurrões</td><td><span class="gloss">(shove / shoves)</span></td></tr>
+      <tr><td>chegar aos tapas</td><td><span class="gloss">(to come to blows)</span></td></tr>
+      <tr><td>o cotovelo</td><td><span class="gloss">(elbow)</span></td></tr>
+      <tr><td>o anfitrião</td><td><span class="gloss">(host)</span></td></tr>
+      <tr><td>ignorar</td><td><span class="gloss">(to ignore)</span></td></tr>
+      <tr><td>a lagosta</td><td><span class="gloss">(lobster)</span></td></tr>
+      <tr><td>a travessa</td><td><span class="gloss">(serving dish)</span></td></tr>
+      <tr><td>os embutidos</td><td><span class="gloss">(cold cuts, sausages)</span></td></tr>
+      <tr><td>desviar</td><td><span class="gloss">(to swerve, to turn aside)</span></td></tr>
+      <tr><td>o inimigo</td><td><span class="gloss">(enemy)</span></td></tr>
+      <tr><td>o macete</td><td><span class="gloss">(trick, tip)</span></td></tr>
+      <tr><td>o pretexto</td><td><span class="gloss">(pretext, excuse)</span></td></tr>
+      <tr><td>o caviar</td><td><span class="gloss">(caviar)</span></td></tr>
+      <tr><td>impiedoso/a</td><td><span class="gloss">(ruthless)</span></td></tr>
+      <tr><td>o mexilhão</td><td><span class="gloss">(mussel)</span></td></tr>
+      <tr><td>a costela</td><td><span class="gloss">(rib)</span></td></tr>
+      <tr><td>o boato</td><td><span class="gloss">(rumor)</span></td></tr>
+      <tr><td>apalpar</td><td><span class="gloss">(to feel, to touch all over)</span></td></tr>
+      <tr><td>a vitela tonê</td><td><span class="gloss">(cold sliced veal with tuna sauce)</span></td></tr>
+      <tr><td>o estrogonofe</td><td><span class="gloss">(stroganoff)</span></td></tr>
+      <tr><td>carregar no arroz</td><td><span class="gloss">(to pile on the rice)</span></td></tr>
+      <tr><td>poupar</td><td><span class="gloss">(to spare, to save)</span></td></tr>
+      <tr><td>o patife</td><td><span class="gloss">(scoundrel)</span></td></tr>
+      <tr><td>sonegar</td><td><span class="gloss">(to withhold, to keep from someone)</span></td></tr>
+      <tr><td>ai dele</td><td><span class="gloss">(woe to him)</span></td></tr>
+      <tr><td>o pontapé</td><td><span class="gloss">(kick)</span></td></tr>
+      <tr><td>saborear</td><td><span class="gloss">(to savour)</span></td></tr>
+    </table>
+  </div>
+
+  <p class="sec-label">Listen to the episode</p>
+  <div class="card">
+    <p style="font-size:13.5px;color:#8a8672;font-style:italic;margin-bottom:14px;">You will listen twice: first without pausing (Activity 1), then again with pauses (Activity 2).</p>
+    <div class="audio-box">
+      <audio controls>
+        <source src="o-buffet-b1.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+    <p class="fonte" style="margin-top:14px;margin-bottom:0;">Fonte: VERÍSSIMO, Luis Fernando. O buffet. In: <em>A mesa voadora</em>.</p>
+  </div>
+
+  <p class="sec-label">Activity 1 — First listening</p>
+  <div class="ex-card">
+    <h2>The big picture</h2>
+    <p class="ex-instr">Listen to the whole episode once, without pausing. Then choose the best answer for each question.</p>
+    <div class="mc-group">
+      <p class="mc-sentence"><span class="q-num">1.</span> Qual frase resume melhor o texto?</p>
+      <div class="mc-opts" id="a1_1-opts">
+          <button class="mc-btn" onclick="selectMC('a1_1','a',this)">a) O autor critica a comida servida nas festas.</button>
+          <button class="mc-btn" onclick="selectMC('a1_1','b',this)">b) O autor conta, com humor, como sobreviver a um buffet de festa, tratando a fila da comida como uma batalha.</button>
+          <button class="mc-btn" onclick="selectMC('a1_1','c',this)">c) O autor ensina as boas maneiras à mesa.</button>
+      </div>
+    </div>
+    <div class="mc-group">
+      <p class="mc-sentence"><span class="q-num">2.</span> Que tom predomina no texto?</p>
+      <div class="mc-opts" id="a1_2-opts">
+          <button class="mc-btn" onclick="selectMC('a1_2','a',this)">a) irônico e bem-humorado</button>
+          <button class="mc-btn" onclick="selectMC('a1_2','b',this)">b) triste e sério</button>
+          <button class="mc-btn" onclick="selectMC('a1_2','c',this)">c) técnico e informativo</button>
+      </div>
+    </div>
+    <div class="mc-group">
+      <p class="mc-sentence"><span class="q-num">3.</span> Como o autor dá os conselhos ao leitor?</p>
+      <div class="mc-opts" id="a1_3-opts">
+          <button class="mc-btn" onclick="selectMC('a1_3','a',this)">a) Com verbos no imperativo: “estude”, “decore”, “use”.</button>
+          <button class="mc-btn" onclick="selectMC('a1_3','b',this)">b) Com verbos no passado, contando uma história.</button>
+          <button class="mc-btn" onclick="selectMC('a1_3','c',this)">c) Com perguntas, uma depois da outra.</button>
+      </div>
+    </div>
+    <button class="check-btn" onclick="checkA1()">✓ Check answers</button>
+    <div id="a1-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Activity 2 — Second listening</p>
+  <div class="ex-card">
+    <h2>Verdadeiro ou Falso?</h2>
+    <p class="ex-instr">Listen again. You may pause the recording. Mark V (verdadeiro) or F (falso). Then rewrite each false sentence on the line below it so that it becomes true.</p>
+    <div class="tf-block">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,1,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>Segundo o autor, o buffet nasceu para alimentar muita gente de um jeito prático e elegante.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,2,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>O autor acha que o buffet é mais organizado do que uma linha de montagem.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,3,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Em volta da mesa do buffet, as pessoas se comportam como feras e cada um pensa só em si.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,4,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>Se o anfitrião disser quem deve se servir primeiro, o autor recomenda obedecer.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,5,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>O autor aconselha estudar o buffet antes de começar a se servir.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_5" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="6">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,6,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,6,'F')">F</button>
+        </div>
+        <span>Para servir o caviar, o autor diz que a colherzinha do pote é sempre a melhor.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_6" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="tf-block">
+      <div class="tf-item" data-id="7">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="V" onclick="selectTF(this,7,'V')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,7,'F')">F</button>
+        </div>
+        <span>No final, o autor lembra que ainda falta a batalha dos doces.</span>
+      </div>
+      <p class="tf-fix-label">If it is false, rewrite the sentence to make it true:</p>
+      <textarea id="a2_fix_7" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <button class="check-btn" onclick="checkA2()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetA2()">Refazer</button>
+    <div id="a2-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Activity 3 — What does the author mean?</p>
+  <div class="ex-card">
+    <h2>Compreensão</h2>
+    <p class="ex-instr">Answer each question in Portuguese, in one or two sentences. If you need to, listen again.</p>
+    <div class="q-block">
+      <p class="q"><span class="q-num">1.</span> Por que, segundo o autor, o buffet foi inventado?</p>
+      <textarea id="a3_1" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">2.</span> Como as pessoas se comportam ao redor da mesa do buffet? Cite pelo menos duas coisas.</p>
+      <textarea id="a3_2" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">3.</span> Cite dois “macetes” que o autor dá para chegar primeiro à comida.</p>
+      <textarea id="a3_3" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="q-block">
+      <p class="q"><span class="q-num">4.</span> Por que o texto é engraçado? Explique com suas palavras.</p>
+      <textarea id="a3_4" placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <button class="check-btn" onclick="checkA3()">✓ Check answers</button>
+    <div id="a3-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Activity 4 — Grammar focus</p>
+  <div class="gram-ref">
+    <h3>O imperativo (você): afirmativo e negativo</h3>
+    <p>The text is a “survival guide”, so almost every piece of advice is an <strong>imperative</strong>. With <em>você</em>, the imperative uses the present subjunctive form:</p>
+    <p class="ex-line"><strong>-ar verbs → -e:</strong> <em>estudar → estude</em> (“Estude o terreno”), <em>decorar → decore</em>, <em>espalhar → espalhe</em>.</p>
+    <p class="ex-line"><strong>-er / -ir verbs → -a:</strong> <em>fazer → faça</em>, <em>dizer → diga</em>, <em>decidir → decida</em>.</p>
+    <p class="ex-line"><strong>Spelling changes:</strong> <em>pegar → pegue</em> (g → gu), <em>ficar → fique</em> (c → qu).</p>
+    <p class="ex-line"><strong>Irregular:</strong> <em>ser → seja</em>, <em>ter → tenha</em>, <em>ir → vá</em>.</p>
+    <p class="ex-line"><strong>Negative:</strong> add <em>não</em> before the verb: <em>“Não obedeça a ordens.”</em></p>
+    <p class="ex-line"><strong>Pronouns:</strong> in the affirmative they come <u>after</u> the verb, with a hyphen (<em>Lembre-se, Ignore-o</em>); in the negative they come <u>before</u> it (<em>Não se desmobilize</em>).</p>
+    <div class="gram-box">
+      <table>
+        <thead><tr><th>Afirmativo</th><th>Negativo</th></tr></thead>
+        <tbody>
+          <tr><td>Lembre-se disso.</td><td>Não se esqueça disso.</td></tr>
+          <tr><td>Ignore-o.</td><td>Não o ignore.</td></tr>
+          <tr><td>Use a colher.</td><td>Não use a colher.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Dê o conselho</h2>
+    <p class="ex-instr">Write the complete sentence, putting the verb in brackets in the <em>você</em> imperative.</p>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">1.</span> ______ o buffet antes de se servir. <span style="color:var(--cobalto);font-weight:600;">[estudar]</span></p>
+      <input class="full-input" id="a4a_1" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">2.</span> ______ onde ficam as saladas. <span style="color:var(--cobalto);font-weight:600;">[decorar]</span></p>
+      <input class="full-input" id="a4a_2" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">3.</span> ______ um plano antes de entrar na fila. <span style="color:var(--cobalto);font-weight:600;">[fazer]</span></p>
+      <input class="full-input" id="a4a_3" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">4.</span> ______ ao garçom que você quer mais arroz. <span style="color:var(--cobalto);font-weight:600;">[dizer]</span></p>
+      <input class="full-input" id="a4a_4" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">5.</span> ______ o primeiro da fila. <span style="color:var(--cobalto);font-weight:600;">[ser]</span></p>
+      <input class="full-input" id="a4a_5" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">6.</span> ______ dois pratos. <span style="color:var(--cobalto);font-weight:600;">[pegar]</span></p>
+      <input class="full-input" id="a4a_6" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <button class="check-btn" onclick="checkA4a()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetA4a()">Refazer</button>
+    <div id="a4a-msg" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Agora, o contrário</h2>
+    <p class="ex-instr">Rewrite each sentence in the negative. Watch the position of the pronoun.</p>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">1.</span> Espere a sua vez.</p>
+      <input class="full-input" id="a4b_1" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">2.</span> Use o cabo do garfo.</p>
+      <input class="full-input" id="a4b_2" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">3.</span> Preocupe-se com os outros.</p>
+      <input class="full-input" id="a4b_3" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">4.</span> Desmobilize-se.</p>
+      <input class="full-input" id="a4b_4" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <div class="transf-item">
+      <p class="transf-given"><span class="q-num">5.</span> Fale com o garçom.</p>
+      <input class="full-input" id="a4b_5" type="text" placeholder="Escreva a frase completa...">
+    </div>
+    <button class="check-btn" onclick="checkA4b()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetA4b()">Refazer</button>
+    <div id="a4b-msg" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Activity 5 — Your turn</p>
+  <div class="ex-card">
+    <h2>Seu guia de sobrevivência</h2>
+    <p class="ex-instr">Read the model text. Then write your own “survival guide” (60 to 90 words) for a situation you know well: a party, a long meeting, the supermarket, the airport... Use at least four imperative verbs, two of them in the negative.</p>
+    <div class="model-text">
+      <div class="lbl">Texto-modelo <span style="text-transform:none;letter-spacing:0;font-weight:400;color:#999;">(texto construído)</span></div>
+      <em>Como sobreviver a uma reunião longa. Chegue cedo e escolha uma cadeira perto da porta. Leve uma garrafa de água e não beba café demais. Anote só o essencial e não olhe o celular o tempo todo. Se a reunião ficar chata, não boceje! Faça uma pergunta no final e saia com um sorriso. Lembre-se: ninguém quer ser o último a sair.</em>
+    </div>
+    <ul class="guide-list">
+      <li>Qual situação você escolheu?</li>
+      <li>Qual é o seu primeiro conselho?</li>
+      <li>O que a pessoa nunca deve fazer?</li>
+    </ul>
+    <textarea class="prod" id="a5" placeholder="Escreva seu texto aqui..." oninput="countWords()"></textarea>
+    <p class="wc" id="a5-wc">0 palavras (meta: 60 a 90)</p>
+  </div>
+
+</div>
+
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' '); }
+function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+var OK = '<span style="color:var(--verde-ok);font-weight:700;">✓</span>';
+var NO = '<span style="color:var(--vermelho);font-weight:700;">✗</span>';
+function show(id, ok, tot, html, extra) {
+  var m = document.getElementById(id);
+  m.className = 'result-msg show ' + (ok === tot ? 'good' : 'try-again');
+  m.innerHTML = '<strong>' + ok + ' / ' + tot + ' correct.</strong>' + (extra || '') + '<div style="margin-top:10px;">' + html + '</div>';
+}
+
+// ── Activity 1 ──
+var mcSel = {};
+function selectMC(id, val, btn) {
+  mcSel[id] = val;
+  document.getElementById(id + '-opts').querySelectorAll('.mc-btn').forEach(function(b) { b.className = 'mc-btn'; });
+  btn.className = 'mc-btn selected';
+}
+var a1Key = { a1_1: 'b', a1_2: 'a', a1_3: 'a' };
+var a1Why = {
+  a1_1: 'O autor conta, com humor, como sobreviver a um buffet de festa, tratando a fila da comida como uma batalha.',
+  a1_2: 'O tom é irônico e bem-humorado.',
+  a1_3: 'Os conselhos vêm no imperativo: “estude”, “decore”, “use”...'
+};
+function checkA1() {
+  var ok = 0, html = '', n = 0, answered = 0;
+  Object.keys(a1Key).forEach(function(id, i) {
+    n++;
+    var sel = mcSel[id], ans = a1Key[id], good = sel === ans;
+    if (sel) answered++;
+    if (good) ok++;
+    document.getElementById(id + '-opts').querySelectorAll('.mc-btn').forEach(function(b, idx) {
+      var l = 'abc'[idx];
+      b.className = 'mc-btn' + (l === ans ? ' right' : (l === sel && !good ? ' wrong-btn' : ''));
+    });
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' <strong>' + ans + ')</strong> ' + a1Why[id] + '</div>';
+  });
+  show('a1-msg', ok, n, html, answered < n ? ' — answer all the items first.' : '');
+}
+
+// ── Activity 2 ──
+var tfKey = {1:'V',2:'F',3:'V',4:'F',5:'V',6:'F',7:'V'};
+var tfFix = {
+  2: 'O autor acha que a linha de montagem é mais organizada do que o buffet.',
+  4: 'O autor recomenda ignorar o anfitrião e ser o primeiro a se servir.',
+  6: 'O autor diz para jamais usar a colherzinha do pote se houver uma colher de sopa à mão.'
+};
+var tfSel = {};
+function selectTF(btn, id, val) {
+  var item = document.querySelector('.tf-item[data-id="' + id + '"]');
+  item.querySelectorAll('.tf-btn').forEach(function(b) { b.className = 'tf-btn'; });
+  btn.classList.add('sel-' + val); tfSel[id] = val;
+}
+function checkA2() {
+  var ok = 0, tot = 7, answered = 0, html = '';
+  for (var id in tfKey) {
+    var item = document.querySelector('.tf-item[data-id="' + id + '"]');
+    item.querySelectorAll('.tf-btn').forEach(function(b) { b.classList.remove('right','wrong-btn','sel-V','sel-F'); });
+    var sel = tfSel[id], good = sel === tfKey[id];
+    if (sel) { answered++; if (good) ok++;
+      item.querySelectorAll('.tf-btn').forEach(function(b) {
+        if (b.dataset.val === tfKey[id]) b.classList.add('right');
+        else if (b.dataset.val === sel && !good) b.classList.add('wrong-btn');
+      });
+    }
+    html += '<div style="margin-bottom:6px;"><strong>' + id + '.</strong> ' + (good ? OK : NO) + ' <strong>' + tfKey[id] + '</strong>' + (tfFix[id] ? ' — ' + tfFix[id] : '') + '</div>';
+  }
+  show('a2-msg', ok, tot, html, answered < tot ? ' — answer all the items first.' : '');
+}
+function resetA2() {
+  for (var id in tfKey) {
+    document.querySelector('.tf-item[data-id="' + id + '"]').querySelectorAll('.tf-btn').forEach(function(b) { b.className = 'tf-btn'; });
+    delete tfSel[id];
+    document.getElementById('a2_fix_' + id).value = '';
+  }
+  document.getElementById('a2-msg').className = 'result-msg';
+}
+
+// ── Activity 3 ──
+var a3Data = [
+  { groups: [['pratic','elegan','muita','pessoas','gente','convidad','garcon','alimentar']], model: 'Para alimentar muita gente de um jeito prático e elegante, sem precisar de um garçom para cada convidado.' },
+  { groups: [['fera','selvag','primitiv','empurr','tapa','briga','disput','por si','cotovelo','horda','duel']], model: 'As pessoas voltam a ser feras: cada um pensa só em si, empurra os outros, usa os cotovelos e até chega aos tapas por causa do último camarão.' },
+  { groups: [['ignor','ordem','anfitriao','primeiro','dois pratos','terreno','estud','lagosta','garfo','boato','colher','sorri','anotac','decor','estrategia','plano']], model: 'Por exemplo: ignorar a ordem do anfitrião e ser o primeiro a se servir; estudar o buffet antes; servir-se com dois pratos; fazer uma anotação mental; planejar uma estratégia de ataque.' },
+  { groups: [['guerra','batalha','ataque','estrategia','exager','inimigo','absurd','iron','serio','briga']], model: 'Porque o autor trata uma festa como se fosse uma guerra: fala em ataque, estratégia e inimigo e dá conselhos exagerados, como usar o garfo nas costelas dos outros.' }
+];
+function checkA3() {
+  var ok = 0, html = '';
+  a3Data.forEach(function(d, i) {
+    var el = document.getElementById('a3_' + (i+1));
+    var v = norm(el.value), filled = v.length > 0;
+    var good = filled && d.groups.every(function(g) { return g.some(function(k) { return v.indexOf(k) !== -1; }); });
+    el.style.borderColor = good ? 'var(--verde-ok)' : (filled ? 'var(--vermelho)' : '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' ' + d.model + '</div>';
+  });
+  show('a3-msg', ok, a3Data.length, html, ' — model answers below; compare them with yours.');
+}
+
+// ── Activity 4a: imperativo afirmativo ──
+var a4aKey = ['Estude o buffet antes de se servir.','Decore onde ficam as saladas.','Faça um plano antes de entrar na fila.','Diga ao garçom que você quer mais arroz.','Seja o primeiro da fila.','Pegue dois pratos.'];
+function checkA4a() {
+  var ok = 0, html = '';
+  a4aKey.forEach(function(k, i) {
+    var el = document.getElementById('a4a_' + (i+1));
+    var good = norm(el.value) === norm(k);
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', !good && el.value.trim() !== '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' <strong>' + k + '</strong></div>';
+  });
+  show('a4a-msg', ok, a4aKey.length, html);
+}
+function resetA4a() {
+  a4aKey.forEach(function(k, i) { var el = document.getElementById('a4a_' + (i+1)); el.value = ''; el.classList.remove('correct','wrong'); });
+  document.getElementById('a4a-msg').className = 'result-msg';
+}
+
+// ── Activity 4b: imperativo negativo ──
+var a4bKey = ['Não espere a sua vez.','Não use o cabo do garfo.','Não se preocupe com os outros.','Não se desmobilize.','Não fale com o garçom.'];
+function checkA4b() {
+  var ok = 0, html = '';
+  a4bKey.forEach(function(k, i) {
+    var el = document.getElementById('a4b_' + (i+1));
+    var good = norm(el.value) === norm(k);
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', !good && el.value.trim() !== '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + (good ? OK : NO) + ' <strong>' + k + '</strong></div>';
+  });
+  show('a4b-msg', ok, a4bKey.length, html);
+}
+function resetA4b() {
+  a4bKey.forEach(function(k, i) { var el = document.getElementById('a4b_' + (i+1)); el.value = ''; el.classList.remove('correct','wrong'); });
+  document.getElementById('a4b-msg').className = 'result-msg';
+}
+
+// ── Activity 5 ──
+function countWords() {
+  var t = document.getElementById('a5').value.trim();
+  var n = t ? t.split(/\s+/).length : 0;
+  var el = document.getElementById('a5-wc');
+  el.textContent = n + (n === 1 ? ' palavra' : ' palavras') + ' (meta: 60 a 90)';
+  el.className = 'wc' + (n >= 60 && n <= 90 ? ' ok' : '');
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor = '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  function add(tag, val) {
+    var has = val && val.trim() !== '';
+    var shown = has ? esc(val.trim()) : '(sem resposta)';
+    summaryLines.push('<strong>' + tag + ':</strong> ' + (has ? shown : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>' + tag + ':</strong> ' + shown + '</p>';
+  }
+  for (var a = 1; a <= 3; a++) add('At1-' + a, mcSel['a1_' + a] || '');
+  for (var b = 1; b <= 7; b++) { add('At2-' + b + ' (V/F)', tfSel[b] || ''); add('At2-' + b + ' (reescrita)', document.getElementById('a2_fix_' + b).value); }
+  for (var c = 1; c <= 4; c++) add('At3-' + c, document.getElementById('a3_' + c).value);
+  for (var d = 1; d <= 6; d++) add('At4a-' + d, document.getElementById('a4a_' + d).value);
+  for (var e = 1; e <= 5; e++) add('At4b-' + e, document.getElementById('a4b_' + e).value);
+  add('At5', document.getElementById('a5').value);
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div class="send-box" style="margin-bottom:16px;">
+    📩 Quando terminar, envie suas respostas para a professora. Ela vai ler com atenção e comentar na próxima aula.
+  </div>
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
