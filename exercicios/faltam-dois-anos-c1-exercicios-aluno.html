@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faltam dois anos — Trabalho e vida pessoal — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB;
+      --giz: #FCF5EB; --musgo: #3C3C21; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --verde: #2E7D52; --verde-bg: #EAF5EE;
+      --violeta: #8B3A7E; --violeta-bg: #F5EAF3;
+      --vermelho: #C0392B; --vermelho-bg: #FAEAEA;
+      /* 4 formas */
+      --f1: #D36D29; --f1-bg: #FDF0E5;   /* porque — conjunção */
+      --f2: #265B8B; --f2-bg: #EBF1F8;   /* por que — interrogativo/relativo */
+      --f3: #2E7D52; --f3-bg: #EAF5EE;   /* porquê — substantivo */
+      --f4: #8B3A7E; --f4-bg: #F5EAF3;   /* por quê — final de frase */
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    /* TOPBAR */
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #A1441D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    /* HERO */
+    .hero { background: #A1441D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+
+    /* MAIN */
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    /* SECTION LABEL */
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    /* GRAM BOX */
+    .gram-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 32px 36px; margin-bottom: 32px; }
+    .gram-box h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .gram-intro { font-size: 14px; color: #666; line-height: 1.65; margin-bottom: 28px; max-width: 680px; }
+
+    /* FORM CARDS */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media(max-width:700px){ .form-grid { grid-template-columns: 1fr; } }
+    .form-card { border-radius: 12px; padding: 20px 22px; border-left: 5px solid; }
+    .form-card.f1 { background: var(--f1-bg); border-color: var(--f1); }
+    .form-card.f2 { background: var(--f2-bg); border-color: var(--f2); }
+    .form-card.f3 { background: var(--f3-bg); border-color: var(--f3); }
+    .form-card.f4 { background: var(--f4-bg); border-color: var(--f4); }
+    .form-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .form-card.f1 .form-label { color: var(--f1); }
+    .form-card.f2 .form-label { color: var(--f2); }
+    .form-card.f3 .form-label { color: var(--f3); }
+    .form-card.f4 .form-label { color: var(--f4); }
+    .form-word { font-family: 'Trirong', serif; font-size: 22px; font-weight: 400; margin-bottom: 4px; color: var(--nanquim); }
+    .form-function { font-size: 13px; color: #555; margin-bottom: 12px; }
+    .form-example { font-size: 13px; font-style: italic; color: #444; background: rgba(255,255,255,0.6); border-radius: 6px; padding: 7px 12px; line-height: 1.6; margin-bottom: 4px; }
+    .form-transl { font-size: 12px; color: #999; font-style: normal; }
+    .dica { font-size: 13px; color: #555; background: var(--off-white); border-radius: 8px; padding: 12px 16px; margin-top: 8px; line-height: 1.6; }
+    .dica strong { color: var(--nanquim); }
+
+    /* CONTRAST TABLE */
+    .contrast-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; }
+    .contrast-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); color: #888; }
+    .contrast-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; }
+    .contrast-table tr:last-child td { border-bottom: none; }
+    .tag-f1 { color: var(--f1); font-weight: 700; font-family: 'Trirong', serif; }
+    .tag-f2 { color: var(--f2); font-weight: 700; font-family: 'Trirong', serif; }
+    .tag-f3 { color: var(--f3); font-weight: 700; font-family: 'Trirong', serif; }
+    .tag-f4 { color: var(--f4); font-weight: 700; font-family: 'Trirong', serif; }
+
+    /* TEXT CARD */
+    .text-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 16px; padding: 36px 40px; margin-bottom: 32px; }
+    .text-source { font-size: 12px; color: #aaa; font-style: italic; margin-bottom: 20px; }
+    .text-title { font-family: 'Trirong', serif; font-size: 26px; font-weight: 400; color: var(--nanquim); margin-bottom: 4px; }
+    .text-subtitle { font-size: 13px; color: #888; margin-bottom: 28px; }
+    .text-body { font-size: 15px; line-height: 1.9; color: var(--nanquim); }
+    .text-body p { margin-bottom: 18px; }
+    .text-body p:last-child { margin-bottom: 0; }
+    /* highlighted forms in text */
+    .hl1 { color: var(--f1); font-weight: 600; background: var(--f1-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl2 { color: var(--f2); font-weight: 600; background: var(--f2-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl3 { color: var(--f3); font-weight: 600; background: var(--f3-bg); padding: 1px 3px; border-radius: 3px; }
+    .hl4 { color: var(--f4); font-weight: 600; background: var(--f4-bg); padding: 1px 3px; border-radius: 3px; }
+
+    /* LEGEND */
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--light-gray); }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; font-family: 'Manrope', sans-serif; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    /* EXERCISE CARD */
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 28px; }
+    .ex-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+    .ex-num { width: 36px; height: 36px; background: #A1441D; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; font-family: 'Trirong', serif; }
+    .ex-title { font-family: 'Trirong', serif; font-weight: 300; font-size: 20px; color: var(--nanquim); margin-bottom: 4px; }
+    .ex-instruction { font-size: 13px; color: #666; line-height: 1.55; }
+
+    /* COMPREHENSION */
+    .q-item { padding: 12px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; color: var(--nanquim); line-height: 1.65; }
+    .q-item:last-of-type { border-bottom: none; }
+    .q-num { color: #A1441D; font-weight: 700; font-size: 13px; margin-right: 8px; }
+    .q-textarea { width: 100%; margin-top: 10px; padding: 10px 14px; border: 1.5px solid rgba(161,68,29,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--nanquim); background: var(--baunilha); resize: vertical; min-height: 72px; line-height: 1.6; outline: none; transition: border-color 0.2s; }
+    .q-textarea:focus { border-color: #A1441D; }
+    .q-textarea::placeholder { color: #bbb; font-style: italic; }
+
+    /* TABLE EXERCISE */
+    .id-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .id-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--light-gray); color: #888; background: var(--off-white); }
+    .id-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: middle; }
+    .id-table tr:last-child td { border-bottom: none; }
+    .id-table tr.example-row td { background: var(--off-white); }
+    .id-table .trecho { font-style: italic; color: #444; font-size: 13px; line-height: 1.5; }
+    .id-select { border: 1.5px solid var(--light-gray); border-radius: 7px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: var(--nanquim); background: white; cursor: pointer; outline: none; min-width: 110px; transition: border-color 0.2s; }
+    .id-select:focus { border-color: #A1441D; }
+    .id-select.correct { border-color: var(--verde); color: var(--verde); background: var(--verde-bg); }
+    .id-select.wrong   { border-color: var(--vermelho); color: var(--vermelho); background: var(--vermelho-bg); }
+    .id-just { width: 100%; font-family: 'Manrope', sans-serif; font-size: 12px; padding: 6px 10px; border: 1.5px solid var(--light-gray); border-radius: 7px; background: white; outline: none; resize: none; min-height: 52px; line-height: 1.5; transition: border-color 0.2s; color: var(--nanquim); }
+    .id-just:focus { border-color: #A1441D; }
+    .id-just.correct { border-color: var(--verde); background: var(--verde-bg); }
+    .id-just.wrong   { border-color: var(--vermelho); background: var(--vermelho-bg); }
+
+    /* REWRITE */
+    .rw-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .rw-item:last-child { border-bottom: none; }
+    .rw-num { font-size: 12px; font-weight: 700; color: #A1441D; margin-bottom: 6px; }
+    .rw-pair { font-size: 14px; font-style: italic; color: #444; margin-bottom: 8px; line-height: 1.6; }
+    .rw-hint { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 4px; color: white; margin-bottom: 8px; }
+    .rw-input { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; padding: 8px 12px; border: 1.5px solid var(--light-gray); border-radius: 8px; background: white; outline: none; color: var(--nanquim); transition: border-color 0.2s; }
+    .rw-input:focus { border-color: #A1441D; }
+    .rw-input.correct { border-color: var(--verde); background: var(--verde-bg); }
+    .rw-input.wrong   { border-color: var(--vermelho); background: var(--vermelho-bg); }
+    .rw-fb { font-size: 12px; margin-top: 6px; display: none; line-height: 1.5; }
+    .rw-fb.show { display: block; }
+
+    /* GAP FILL */
+    .gap-item { padding: 14px 0; border-bottom: 1px solid var(--light-gray); font-size: 15px; }
+    .gap-item:last-child { border-bottom: none; }
+    .gap-num { color: #A1441D; font-weight: 700; font-size: 13px; margin-right: 8px; }
+    .gap-select { border: none; border-bottom: 2px solid #A1441D; background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; color: #A1441D; font-weight: 600; outline: none; padding: 0 4px; cursor: pointer; transition: border-color 0.2s; }
+    .gap-select.correct { border-color: var(--verde); color: var(--verde); }
+    .gap-select.wrong   { border-color: var(--vermelho); color: var(--vermelho); }
+    .gap-just { display: block; width: 100%; font-family: 'Manrope', sans-serif; font-size: 12px; padding: 6px 10px; border: 1.5px solid var(--light-gray); border-radius: 7px; background: white; outline: none; resize: none; min-height: 44px; line-height: 1.5; transition: border-color 0.2s; color: var(--nanquim); margin-top: 8px; }
+    .gap-just:focus { border-color: #A1441D; }
+
+    /* CHECK / RESET */
+    .check-btn { background: #A1441D; color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 24px; border-radius: 8px; cursor: pointer; margin-top: 18px; transition: opacity 0.18s; }
+    .check-btn:hover { opacity: 0.88; }
+    .reset-btn { background: transparent; color: #888; border: 1.5px solid #ccc; font-family: 'Manrope', sans-serif; font-size: 12px; padding: 9px 18px; border-radius: 8px; cursor: pointer; margin-top: 18px; margin-left: 10px; }
+    .ex-score { font-family: 'Manrope', sans-serif; font-size: 13px; margin-top: 14px; padding: 12px 16px; border-radius: 8px; display: none; }
+    .ex-score.show { display: block; }
+    .ex-score.pass    { background: var(--verde-bg); color: var(--verde); }
+    .ex-score.partial { background: var(--baunilha2); color: #A1441D; }
+
+    /* PRODUÇÃO */
+    .prod-area { width: 100%; font-family: 'Manrope', sans-serif; font-size: 14.5px; padding: 14px 16px; border: 1.5px solid var(--light-gray); border-radius: 10px; background: white; outline: none; resize: vertical; min-height: 200px; line-height: 1.75; transition: border-color 0.2s; color: var(--nanquim); }
+    .prod-area:focus { border-color: #A1441D; }
+    .prod-hints { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .hint-chip { font-size: 12px; font-style: italic; padding: 4px 12px; background: var(--off-white); border-radius: 14px; color: var(--nanquim); font-family: 'Trirong', serif; }
+
+    /* SEND BOX */
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .ex-card, .gram-box, .text-card { padding: 24px 20px; }
+    }
+  
+    /* ── Ex2 cards ── */
+    .ex2-card { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .ex2-card.example-row { background: rgba(211,109,41,0.04); padding: 14px 12px; border-radius: 8px; margin-bottom: 4px; border-bottom: none; }
+    .ex2-trecho { font-size: 15px; color: var(--texto); margin-bottom: 10px; line-height: 1.6; }
+    .ex2-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .blank-word { font-style: italic; color: var(--cobalto); font-weight: 700; letter-spacing: 0.04em; }
+    .ex2-fb { font-size: 13px; font-weight: 700; }
+    .modelo-btn { background: none; border: 1px solid var(--cobalto); color: var(--cobalto); border-radius: 8px; padding: 4px 14px; font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 8px; font-family: 'Manrope', sans-serif; transition: background 0.15s; }
+    .modelo-btn:hover { background: #EBF1F8; }
+    .modelo-box { display: none; margin-top: 10px; padding: 14px 18px; background: #EBF1F8; border-left: 3px solid var(--cobalto); border-radius: 0 8px 8px 0; font-size: 14px; color: var(--nanquim); line-height: 1.65; }
+    .modelo-box.show { display: block; }
+    .ex2-fb.ok { color: #2E7D52; }
+    .ex2-fb.err { color: #C0392B; }
+  
+    .note-box { background: white; border: 1.5px solid var(--light-gray); border-left: 4px solid #A1441D; border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; font-size: 15px; line-height: 1.75; }
+    .note-box h3 { font-family:'Trirong',serif; font-weight:400; font-size:19px; margin-bottom:10px; color:var(--nanquim); }
+    .note-box ul { margin:8px 0 0 20px; }
+    .note-box li { margin-bottom:10px; }
+    .note-box .ex { color:#666; font-style:italic; }
+    .vocab-table { width:100%; border-collapse:collapse; font-size:15px; }
+    .vocab-table th { text-align:left; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#A1441D; padding:8px 12px; border-bottom:2px solid var(--light-gray); }
+    .vocab-table td { padding:9px 12px; border-bottom:1px solid var(--light-gray); vertical-align:top; }
+    .vocab-table td:first-child { font-weight:600; width:42%; }
+    input.gap { font-family:'Manrope',sans-serif; font-size:15px; color:var(--texto); border:none; border-bottom:2px solid var(--erva-doce); background:rgba(166,178,138,0.14); padding:2px 6px; margin:0 3px; text-align:center; outline:none; border-radius:4px 4px 0 0; }
+    input.gap:focus { border-bottom-color:#A1441D; background:white; }
+    input.gap.correct { border-bottom-color:var(--verde); background:var(--verde-bg); color:var(--verde); font-weight:700; }
+    input.gap.wrong { border-bottom-color:#A83030; background:#FBEFE6; color:#A83030; }
+    .fix { color:var(--verde); font-size:13px; font-weight:700; margin-right:3px; }
+    .hint { color:#888; font-size:13.5px; }
+    .gap-par { font-size:16px; line-height:2.4; margin:10px 0 4px; }
+    .gap-line { font-size:16px; line-height:2.3; padding:8px 0; border-bottom:1px solid var(--light-gray); }
+    .gap-line:last-of-type { border-bottom:none; }
+    .rst-btn { background:transparent; color:#8a8a7a; border:1.5px solid var(--light-gray); border-radius:8px; padding:9px 16px; font-family:'Manrope',sans-serif; font-size:13px; font-weight:600; cursor:pointer; margin-left:8px; }
+    .match-row { display:flex; align-items:center; gap:14px; padding:10px 0; border-bottom:1px solid var(--light-gray); flex-wrap:wrap; font-size:15px; }
+    .match-row .m-a { flex:1 1 260px; font-weight:600; }
+    .match-row select { padding:8px 10px; border:1.5px solid rgba(161,68,29,0.25); border-radius:8px; font-family:'Manrope',sans-serif; font-size:14px; background:var(--baunilha); max-width:100%; }
+    .match-row select.correct { border-color:var(--verde); background:var(--verde-bg); color:var(--verde); }
+    .match-row select.wrong { border-color:#A83030; background:#FBEFE6; }
+    .meanings { background:var(--off-white); border-radius:12px; padding:14px 20px; margin-bottom:14px; font-size:14.5px; line-height:1.9; }
+    .wc { font-size:12.5px; color:#999; margin-top:6px; text-align:right; }
+    .wc.ok { color:var(--verde); font-weight:700; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Texto + Exercícios</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Faltam dois anos <em>— equilíbrio entre trabalho e vida pessoal</em></h1>
+  <div class="hero-sub">Um depoimento sobre trabalho, férias e família para praticar expressões da vida profissional e pessoal, <em>não consigo</em> × <em>não posso</em> e o futuro do pretérito composto.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Expressões da vida profissional e pessoal</span>
+    <span class="hero-tag">Não consigo × não posso</span>
+    <span class="hero-tag">Futuro do pretérito composto</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="sec-label">Nota cultural</div>
+  <div class="note-box">
+    <h3>Férias e verão no Brasil</h3>
+    <p>Quem trabalha com carteira assinada (pela CLT) tem direito a 30 dias de férias remuneradas por ano, com um adicional de um terço do salário: o famoso “terço de férias”. Desde 2017, as férias podem ser divididas em até três períodos, desde que um deles tenha pelo menos 14 dias. Também é possível “vender” até dez dias: a pessoa trabalha nesses dias e recebe por eles.</p>
+    <p style="margin-top:10px">E vale lembrar: no Brasil, o verão vai de dezembro a março. As férias escolares mais longas caem nesse período, junto com o Natal, o Réveillon e, muitas vezes, o Carnaval. Por isso, muitas famílias concentram as viagens nessa época.</p>
+  </div>
+
+  <div class="sec-label">Nota linguística</div>
+  <div class="note-box">
+    <h3>O pronome acompanha a pessoa</h3>
+    <p>Algumas expressões do texto mudam conforme quem pratica a ação:</p>
+    <ul>
+      <li><strong>aposentar-se:</strong> eu <strong>me</strong> aposento · você/ela <strong>se</strong> aposenta · nós <strong>nos</strong> aposentamos<br><span class="ex">→ Faltam dois anos para eu me aposentar.</span></li>
+      <li><strong>cuidar de si:</strong> eu cuido <strong>de mim</strong> · você/ele/ela cuida <strong>de si</strong> (ou <em>de você mesmo/a</em>) · nós cuidamos <strong>de nós</strong><br><span class="ex">→ Hoje cuido de mim sem culpa. / Cuidar de si não é luxo.</span></li>
+    </ul>
+    <p style="margin-top:10px">Na fala, também é muito comum a forma <strong>se cuidar</strong>: <em>Eu me cuido.</em> E, como despedida carinhosa: <em>Se cuida!</em></p>
+  </div>
+
+  <div class="sec-label">Antes de ler</div>
+  <div class="ex-card">
+    <div class="ex-instruction" style="font-size:15px;color:var(--nanquim);margin-bottom:8px;">Leia a primeira frase do texto e responda por escrito, em uma ou duas frases:</div>
+    <p style="font-style:italic;font-size:16px;margin:0 0 10px;padding-left:14px;border-left:3px solid #A1441D;">“Faltam dois anos para eu me aposentar, e confesso que essa conta me assusta mais do que me alegra.”</p>
+    <div class="ex-instruction" style="font-size:15px;color:var(--nanquim);">Por que você acha que a autora está assustada?</div>
+<textarea class="q-textarea" id="pre1" data-label="Antes de ler" placeholder="Escreva suas frases aqui…" rows="3"></textarea>
+  </div>
+
+  <div class="sec-label">Leitura</div>
+  <div class="text-card">
+    <div class="text-source">Texto elaborado para fins didáticos</div>
+    <div class="text-title">Faltam dois anos</div>
+    <div class="text-subtitle">Regina Bittencourt, 63 anos, Florianópolis (SC)</div>
+    <div class="text-body">
+      <p>Faltam dois anos para eu <strong>me aposentar</strong>, e confesso que essa conta me assusta mais do que me alegra. Trabalho há 33 anos na mesma cooperativa de crédito, os últimos doze como gerente regional. Durante quase todo esse tempo, acreditei que ser uma boa profissional era bater metas e apresentar bons <strong>resultados</strong> no fim de cada trimestre. Eu cobrava resultados da equipe e, principalmente, de mim mesma. E os números vinham. O problema é que os resultados que eu não medi (o cansaço, a distância da família, as viagens adiadas) apareceram depois, e com juros.</p>
+      <p>Por muitos anos, eu <strong>tive férias</strong> só no papel. Tinha direito a trinta dias, mas vendia dez e passava os outros vinte respondendo e-mails na casa de praia. Meu marido brincava que eu levava o escritório na mala. Quando alguém me convidava para uma viagem, eu respondia: “<strong>Não posso</strong>, estamos fechando o semestre”. Às vezes era verdade. Na maioria das vezes, era desculpa. Hoje sei que a resposta honesta seria outra: “<strong>Não consigo</strong> me desligar”.</p>
+      <p>A virada veio de onde eu menos esperava: da <strong>minha enteada</strong>. A Lívia tinha catorze anos quando veio morar com a gente, e nós duas mal conversávamos. Num <strong>verão</strong>, há uns seis anos, ela me chamou pela terceira vez para <strong>fazer trilha</strong> até a Lagoinha do Leste. Eu, que não subia um lance de escada sem reclamar, dessa vez aceitei, mais por educação do que por vontade. Na metade da subida, sem fôlego, falei: “Não consigo mais, pode ir na frente”. Ela sentou numa pedra e esperou. Ficamos ali quase uma hora, conversando como nunca tínhamos conversado. Desde então, fazemos trilha juntas todo verão. É o compromisso da minha agenda que eu menos desmarco.</p>
+      <p>Não acho que errei em tudo. <strong>Cometi erros</strong>, como todo mundo, e aprendi com boa parte deles. Mesmo assim, olhando para trás, sei que algumas escolhas teriam sido outras. Se eu não tivesse vendido tantas férias, teria conhecido o Nordeste com o meu marido, como a gente planejava desde o casamento. Se tivesse aceitado o convite da Lívia na primeira vez, e não na terceira, nós teríamos nos aproximado bem mais cedo.</p>
+      <p>Hoje cuido de mim sem culpa: almoço longe da mesa e, às quintas, tenho aula de cerâmica. Quando uma colega mais nova me diz que não pode tirar férias porque o setor vai parar sem ela, eu conto a minha história. Digo que ninguém é tão insubstituível assim e que <strong>cuidar de si</strong> não é luxo: é parte do trabalho. Ainda não sei direito como vai ser a vida depois da aposentadoria. Mas já tenho um plano para o primeiro verão: <strong>ter férias</strong> de verdade, sem notebook, e percorrer com a Lívia todas as trilhas que ficaram para depois.</p>
+    </div>
+  </div>
+
+  <div class="sec-label">Vocabulário</div>
+  <div class="ex-card">
+    <h3 style="font-family:'Trirong',serif;font-weight:400;font-size:19px;margin-bottom:8px;">Expressões em foco</h3>
+    <table class="vocab-table">
+      <tr><th>Expressão</th><th>Significado</th></tr>
+      <tr><td>cometer erros (cometer um erro)</td><td>errar; fazer algo errado</td></tr>
+      <tr><td>cuidar de si (eu cuido de mim)</td><td>dar atenção à própria saúde e ao próprio bem-estar</td></tr>
+      <tr><td>o resultado · dar resultado · cobrar resultados</td><td>o que se obtém de uma ação · funcionar, trazer o efeito esperado · exigir que os objetivos sejam cumpridos</td></tr>
+      <tr><td>me aposentar (aposentar-se) · a aposentadoria</td><td>deixar de trabalhar depois de anos de contribuição · o período e o benefício que vêm depois</td></tr>
+      <tr><td>o verão (no verão)</td><td>estação mais quente do ano; no Brasil, de dezembro a março</td></tr>
+      <tr><td>minha enteada (o enteado)</td><td>filha (filho) do marido ou da esposa, de outro relacionamento</td></tr>
+      <tr><td>fazer trilha</td><td>caminhar por um percurso na natureza</td></tr>
+      <tr><td>ter férias (<em>férias</em> é sempre plural)</td><td>ter um período de descanso do trabalho ou da escola</td></tr>
+      <tr><td>não consigo × não posso</td><td><em>não consigo:</em> não sou capaz, mesmo tentando · <em>não posso:</em> não tenho permissão ou disponibilidade</td></tr>
+    </table>
+    <h3 style="font-family:'Trirong',serif;font-weight:400;font-size:19px;margin:26px 0 8px;">Outras palavras do texto</h3>
+    <table class="vocab-table">
+      <tr><th>Expressão</th><th>Significado</th></tr>
+      <tr><td>bater metas</td><td>alcançar os objetivos estabelecidos</td></tr>
+      <tr><td>com juros (sentido figurado)</td><td>com consequências piores do que o esperado</td></tr>
+      <tr><td>vender (dias de) férias</td><td>trabalhar nos dias de descanso e receber por eles</td></tr>
+      <tr><td>tirar férias</td><td>descansar durante o período de férias</td></tr>
+      <tr><td>desligar-se</td><td>parar de pensar no trabalho; desconectar-se</td></tr>
+      <tr><td>um lance de escada</td><td>um trecho de degraus, de um andar a outro</td></tr>
+      <tr><td>sem fôlego</td><td>sem conseguir respirar direito, por causa do cansaço</td></tr>
+      <tr><td>desmarcar</td><td>cancelar um compromisso marcado</td></tr>
+    </table>
+  </div>
+
+  <div class="sec-label">Exercícios</div>
+<div class="ex-card"><div class="ex-header"><div><div class="ex-title">Compreensão leitora</div><div class="ex-instruction">Responda por escrito, com suas palavras, em duas ou três linhas cada. Volte ao texto quantas vezes precisar. Depois, confira a resposta possível.</div></div></div><div class="q-item"><span class="q-num">1.</span>O que a Regina chama de “os resultados que eu não medi”? E por que ela diz que eles apareceram “com juros”?<textarea class="q-textarea" id="c_1" data-label="Compreensão · 1" placeholder="Escreva sua resposta aqui…" rows="3"></textarea><button class="modelo-btn" onclick="toggleModelo('c_1')">Ver resposta possível</button><div class="modelo-box" id="modelo-c_1">São as perdas que não entravam nos relatórios: o cansaço, a distância da família e as viagens adiadas. “Com juros” quer dizer que essas perdas apareceram mais tarde e maiores, como uma dívida que cresce com o tempo.</div></div><div class="q-item"><span class="q-num">2.</span>Por que ela diz que teve férias “só no papel”?<textarea class="q-textarea" id="c_2" data-label="Compreensão · 2" placeholder="Escreva sua resposta aqui…" rows="3"></textarea><button class="modelo-btn" onclick="toggleModelo('c_2')">Ver resposta possível</button><div class="modelo-box" id="modelo-c_2">Porque tinha direito a 30 dias, mas vendia 10 e passava os outros 20 respondendo e-mails na casa de praia. Oficialmente estava de férias, mas não descansava.</div></div><div class="q-item"><span class="q-num">3.</span>Antes, a Regina respondia aos convites de um jeito, mas hoje acha que a resposta honesta seria outra. Qual é a diferença entre as duas respostas?<textarea class="q-textarea" id="c_3" data-label="Compreensão · 3" placeholder="Escreva sua resposta aqui…" rows="3"></textarea><button class="modelo-btn" onclick="toggleModelo('c_3')">Ver resposta possível</button><div class="modelo-box" id="modelo-c_3">“Não posso” põe a causa fora dela: uma obrigação de trabalho, o fechamento do semestre. “Não consigo me desligar” admite que o problema era dela: não era capaz de se afastar do trabalho, mesmo quando poderia.</div></div><div class="q-item"><span class="q-num">4.</span>Que papel a Lívia teve na mudança da Regina?<textarea class="q-textarea" id="c_4" data-label="Compreensão · 4" placeholder="Escreva sua resposta aqui…" rows="3"></textarea><button class="modelo-btn" onclick="toggleModelo('c_4')">Ver resposta possível</button><div class="modelo-box" id="modelo-c_4">O convite da enteada para fazer trilha aproximou as duas, que mal conversavam. A trilha virou um compromisso fixo de todo verão, aquele que a Regina menos desmarca.</div></div><div class="q-item"><span class="q-num">5.</span>Como é a rotina da Regina hoje, fora do trabalho? E o que ela planeja para o primeiro verão depois da aposentadoria?<textarea class="q-textarea" id="c_5" data-label="Compreensão · 5" placeholder="Escreva sua resposta aqui…" rows="3"></textarea><button class="modelo-btn" onclick="toggleModelo('c_5')">Ver resposta possível</button><div class="modelo-box" id="modelo-c_5">Hoje ela cuida de si sem culpa: almoça longe da mesa e tem aula de cerâmica às quintas. Para o primeiro verão depois da aposentadoria, planeja ter férias de verdade, sem notebook, e percorrer com a Lívia as trilhas que ficaram para depois.</div></div></div><p class="hint" style="margin:0 0 14px;font-style:italic">A Regina usa várias expressões do dia a dia para falar de trabalho, família e descanso. Vamos praticá-las em outras situações.</p><div class="ex-card" id="e1"><div class="ex-header"><div class="ex-num">1</div><div><div class="ex-title">Expressões em contexto</div><div class="ex-instruction">Complete as frases com as expressões do quadro. Use cada expressão uma vez e adapte a forma à frase: conjugue o verbo, troque o pronome ou acrescente o artigo, quando necessário.</div></div></div><div class="meanings" style="text-align:center;font-weight:700">cometer erros · cuidar de si · resultado · aposentar-se · verão · enteada · fazer trilha · ter férias</div><div class="gap-line"><span class="q-num">1.</span>Meu avô trabalhou quarenta anos como motorista de ônibus e finalmente <input class="gap" type="text" size="18" data-ans="se aposentou|aposentou-se" data-label="Exercício 1 · 1.1" autocomplete="off" autocapitalize="off" spellcheck="false"> em março.</div><div class="gap-line"><span class="q-num">2.</span>O Caio não tem filhos, mas é muito próximo da <input class="gap" type="text" size="18" data-ans="enteada" data-label="Exercício 1 · 2.1" autocomplete="off" autocapitalize="off" spellcheck="false"> dele, a Bia, filha do primeiro casamento da esposa.</div><div class="gap-line"><span class="q-num">3.</span>Em janeiro, auge do <input class="gap" type="text" size="18" data-ans="verão" data-label="Exercício 1 · 3.1" autocomplete="off" autocapitalize="off" spellcheck="false">, as praias de Florianópolis ficam lotadas de turistas argentinos.</div><div class="gap-line"><span class="q-num">4.</span>A campanha nas redes sociais deu <input class="gap" type="text" size="18" data-ans="resultado" data-label="Exercício 1 · 4.1" autocomplete="off" autocapitalize="off" spellcheck="false">: as vendas subiram 20% em dois meses.</div><div class="gap-line"><span class="q-num">5.</span>Quem nunca <input class="gap" type="text" size="18" data-ans="cometeu um erro|cometeu erros|cometeu erro" data-label="Exercício 1 · 5.1" autocomplete="off" autocapitalize="off" spellcheck="false"> no trabalho que atire a primeira pedra.</div><div class="gap-line"><span class="q-num">6.</span>Eu e meu marido passamos anos cuidando dos filhos e dos netos. Agora que os netos cresceram, resolvemos <input class="gap" type="text" size="18" data-ans="cuidar de nós|cuidar de nós mesmos|cuidar de nós mesmas|nos cuidar" data-label="Exercício 1 · 6.1" autocomplete="off" autocapitalize="off" spellcheck="false">: entramos na hidroginástica e voltamos a dançar.</div><div class="gap-line"><span class="q-num">7.</span>No feriado, nós vamos <input class="gap" type="text" size="18" data-ans="fazer trilha|fazer uma trilha" data-label="Exercício 1 · 7.1" autocomplete="off" autocapitalize="off" spellcheck="false"> na Chapada Diamantina: são doze quilômetros até a cachoeira.</div><div class="gap-line"><span class="q-num">8.</span>Meus filhos só <input class="gap" type="text" size="18" data-ans="têm férias" data-label="Exercício 1 · 8.1" autocomplete="off" autocapitalize="off" spellcheck="false"> em julho e no fim do ano, então a gente viaja nesses meses.</div><button class="check-btn" onclick="checkSec('e1')">✓ Check answers</button><button class="rst-btn" onclick="resetSec('e1')">Reiniciar</button><div class="ex-score" id="sc_e1"></div></div><p class="hint" style="margin:0 0 14px;font-style:italic">Na pergunta 3, você viu que a Regina troca “não posso” por “não consigo”. Veja por que essa troca muda o sentido da frase.</p><div class="ex-card" id="e2"><div class="ex-header"><div class="ex-num">2</div><div><div class="ex-title">Não consigo × não posso</div></div></div>
+<div class="note-box" style="margin-bottom:20px"><p><strong>Em inglês,</strong> <em>I can't</em> serve para as duas situações. Em português, a escolha depende da causa:</p>
+<ul><li><strong>NÃO CONSEGUIR:</strong> o foco está no esforço e no resultado. A pessoa tenta (ou tentaria) e não chega lá.<br><span class="ex">Não consigo me concentrar com barulho. · Tentei três vezes, mas não consegui falar com o banco.</span></li>
+<li><strong>NÃO PODER:</strong> o foco está na permissão ou na disponibilidade. Uma regra, um compromisso ou uma circunstância impede a ação, e a pessoa nem chega a tentar.<br><span class="ex">Não posso sair agora, estou de plantão. · Aqui não pode fumar.</span></li></ul>
+<p style="margin-top:10px"><strong>Teste rápido:</strong> se cabe “mesmo tentando”, use <em>conseguir</em>. Se cabe “não é permitido” ou “tenho outro compromisso”, use <em>poder</em>.</p></div>
+<p style="font-size:15px;margin-bottom:6px"><strong>Parte A.</strong> Complete cada frase com <em>conseguir</em> ou <em>poder</em> na forma negativa, no tempo adequado.</p><div class="gap-line"><span class="q-num">1.</span>Mesmo com óculos novos, minha avó <input class="gap" type="text" size="18" data-ans="não consegue|nao consegue" data-label="Exercício 2A · 1.1" autocomplete="off" autocapitalize="off" spellcheck="false"> ler as letras pequenas da bula.</div><div class="gap-line"><span class="q-num">2.</span>Hoje eu <input class="gap" type="text" size="18" data-ans="não posso|nao posso" data-label="Exercício 2A · 2.1" autocomplete="off" autocapitalize="off" spellcheck="false"> ir à academia: tenho que buscar meu filho na escola às seis.</div><div class="gap-line"><span class="q-num">3.</span>Na biblioteca da universidade, os alunos <input class="gap" type="text" size="18" data-ans="não podem|nao podem" data-label="Exercício 2A · 3.1" autocomplete="off" autocapitalize="off" spellcheck="false"> entrar com comida.</div><div class="gap-line"><span class="q-num">4.</span>Fiquei duas horas tentando, mas <input class="gap" type="text" size="18" data-ans="não consegui|nao consegui" data-label="Exercício 2A · 4.1" autocomplete="off" autocapitalize="off" spellcheck="false"> abrir o arquivo que o cliente mandou.</div><div class="gap-line"><span class="q-num">5.</span>A médica disse que, por enquanto, meu pai <input class="gap" type="text" size="18" data-ans="não pode|nao pode" data-label="Exercício 2A · 5.1" autocomplete="off" autocapitalize="off" spellcheck="false"> carregar peso.</div><div class="gap-line"><span class="q-num">6.</span>Depois de três noites mal dormidas, o Pedro estava tão cansado que <input class="gap" type="text" size="18" data-ans="não conseguia|nao conseguia" data-label="Exercício 2A · 6.1" autocomplete="off" autocapitalize="off" spellcheck="false"> manter os olhos abertos na reunião.</div><button class="check-btn" onclick="checkSec('e2')">✓ Check answers</button><button class="rst-btn" onclick="resetSec('e2')">Reiniciar</button><div class="ex-score" id="sc_e2"></div><p style="font-size:15px;margin:30px 0 6px"><strong>Parte B.</strong> As duas frases de cada par estão corretas, mas dizem coisas diferentes. Explique por escrito, em uma ou duas linhas, a diferença de sentido.</p><div class="q-item"><span class="q-num">a)</span><em>Não posso dormir até tarde. × Não consigo dormir até tarde.</em><textarea class="q-textarea" id="e2b_a" data-label="Exercício 2B · a" placeholder="Explique a diferença aqui…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e2b_a')">Ver resposta possível</button><div class="modelo-box" id="modelo-e2b_a"><em>Não posso</em>: um compromisso ou uma obrigação exige acordar cedo (trabalho, filhos, um horário fixo). <em>Não consigo</em>: a pessoa até teria a chance, mas acorda cedo de qualquer jeito e não pega no sono de novo.</div></div><div class="q-item"><span class="q-num">b)</span><em>Não posso falar agora. × Não consigo falar agora.</em><textarea class="q-textarea" id="e2b_b" data-label="Exercício 2B · b" placeholder="Explique a diferença aqui…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e2b_b')">Ver resposta possível</button><div class="modelo-box" id="modelo-e2b_b"><em>Não posso</em>: a situação não permite (a pessoa está numa reunião, no cinema, dirigindo). <em>Não consigo</em>: a pessoa poderia falar, mas não é capaz naquele momento (está emocionada, chorando, sem voz).</div></div></div><p class="hint" style="margin:0 0 14px;font-style:italic">No quarto parágrafo, a Regina olha para trás e imagina como as coisas poderiam ter sido. Veja como ela constrói essas frases.</p><div class="ex-card"><div class="ex-header"><div class="ex-num">3</div><div><div class="ex-title">E se tivesse sido diferente?</div></div></div>
+<div class="note-box" style="margin-bottom:20px"><p><strong>Lembrete.</strong> Repare nesta frase do texto:</p>
+<p style="margin:6px 0"><em>Se eu não tivesse vendido tantas férias, teria conhecido o Nordeste com o meu marido.</em></p>
+<p>A Regina imagina um passado diferente do que aconteceu. A frase tem duas partes:</p>
+<ul><li><strong>a condição:</strong> se + <em>tivesse</em> + particípio → <em>se eu não tivesse vendido</em></li>
+<li><strong>a consequência:</strong> <em>teria</em> + particípio (futuro do pretérito composto) → <em>teria conhecido</em></li></ul>
+<p style="margin-top:10px"><strong>Formação:</strong> eu/você/ele/ela <strong>teria</strong> · nós <strong>teríamos</strong> · vocês/eles/elas <strong>teriam</strong> + particípio</p>
+<p style="margin-top:6px">Com verbos pronominais, no português brasileiro, o pronome fica entre os dois verbos: <em>nós teríamos <strong>nos</strong> aproximado</em>.</p></div>
+<p style="font-size:15px;margin-bottom:6px">Leia cada situação e reescreva-a imaginando o contrário do que aconteceu. Use as duas partes do quadro e escreva uma frase por situação. Veja o exemplo.</p>
+<p style="font-size:15px;margin-bottom:14px"><em>Exemplo:</em> A Bruna não conferiu a previsão do tempo e saiu sem guarda-chuva.<br>→ <em>Se a Bruna tivesse conferido a previsão do tempo, não teria saído sem guarda-chuva.</em></p><div class="q-item"><span class="q-num">1.</span>Nós não compramos os ingressos do show com antecedência e ficamos de fora.<textarea class="q-textarea" id="e3_1" data-label="Exercício 3 · 1" placeholder="Escreva a frase completa…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e3_1')">Ver resposta possível</button><div class="modelo-box" id="modelo-e3_1">Se nós tivéssemos comprado os ingressos do show com antecedência, não teríamos ficado de fora.</div></div><div class="q-item"><span class="q-num">2.</span>O Davi esqueceu o aniversário da sogra, e o almoço de domingo foi um silêncio só.<textarea class="q-textarea" id="e3_2" data-label="Exercício 3 · 2" placeholder="Escreva a frase completa…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e3_2')">Ver resposta possível</button><div class="modelo-box" id="modelo-e3_2">Se o Davi não tivesse esquecido o aniversário da sogra, o almoço de domingo não teria sido um silêncio só.</div></div><div class="q-item"><span class="q-num">3.</span>A Teresa não regou as plantas durante a onda de calor, e metade delas morreu.<textarea class="q-textarea" id="e3_3" data-label="Exercício 3 · 3" placeholder="Escreva a frase completa…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e3_3')">Ver resposta possível</button><div class="modelo-box" id="modelo-e3_3">Se a Teresa tivesse regado as plantas durante a onda de calor, metade delas não teria morrido.</div></div><div class="q-item"><span class="q-num">4.</span>Os vizinhos não avisaram sobre a festa, e o prédio inteiro reclamou no grupo do condomínio.<textarea class="q-textarea" id="e3_4" data-label="Exercício 3 · 4" placeholder="Escreva a frase completa…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e3_4')">Ver resposta possível</button><div class="modelo-box" id="modelo-e3_4">Se os vizinhos tivessem avisado sobre a festa, o prédio inteiro não teria reclamado no grupo do condomínio.</div></div><div class="q-item"><span class="q-num">5.</span>O Henrique saiu atrasado e perdeu o voo para Salvador.<textarea class="q-textarea" id="e3_5" data-label="Exercício 3 · 5" placeholder="Escreva a frase completa…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e3_5')">Ver resposta possível</button><div class="modelo-box" id="modelo-e3_5">Se o Henrique não tivesse saído atrasado, não teria perdido o voo para Salvador. <br><span class="hint">Também vale inverter a ordem (consequência + se…): O Henrique não teria perdido o voo para Salvador se não tivesse saído atrasado.</span></div></div><div class="q-item"><span class="q-num">6.</span>A minha irmã foi estudar em Recife e conheceu o marido lá.<textarea class="q-textarea" id="e3_6" data-label="Exercício 3 · 6" placeholder="Escreva a frase completa…" rows="2"></textarea><button class="modelo-btn" onclick="toggleModelo('e3_6')">Ver resposta possível</button><div class="modelo-box" id="modelo-e3_6">Se a minha irmã não tivesse ido estudar em Recife, não teria conhecido o marido.</div></div></div><p class="hint" style="margin:0 0 14px;font-style:italic">Lembra da colega mais nova que diz que não pode tirar férias? Agora é a sua vez de escrever para ela.</p><div class="ex-card"><div class="ex-header"><div class="ex-num">4</div><div><div class="ex-title">Um e-mail para a Camila</div><div class="ex-instruction">Escreva um e-mail de 150 a 200 palavras como se você fosse a Regina. O e-mail é para a Camila, a colega mais nova do último parágrafo do texto. Use o depoimento da Regina como base.</div></div></div>
+<div class="note-box" style="margin-bottom:16px"><p><strong>A situação:</strong> a Camila tem 29 anos e está há dois anos sem ter férias. Ela diz que não pode sair porque é a única pessoa do setor que sabe fechar o relatório mensal.</p></div>
+<p style="font-size:15px;margin-bottom:6px"><strong>No e-mail:</strong></p>
+<ul style="margin:0 0 14px 22px;font-size:15px;line-height:1.8"><li>retome a conversa que vocês tiveram;</li><li>mostre a ela o que esses dois anos sem férias custaram e como poderiam ter sido diferentes;</li><li>proponha um plano concreto para ela ter férias no próximo verão: quem pode aprender a fechar o relatório e quando avisar a diretoria;</li><li>termine com um convite para um programa fora do trabalho.</li></ul>
+<textarea class="q-textarea" id="e4" data-label="Exercício 4 · E-mail para a Camila" placeholder="Escreva seu e-mail aqui…" rows="14"></textarea><div class="wc" id="a5-wc">0 palavras (meta: 150 a 200)</div>
+<p style="font-size:15px;margin:18px 0 8px">Quando terminar, releia o e-mail e marque cada item:</p>
+<div style="font-size:15px;line-height:2">
+<label><input type="checkbox"> Tem entre 150 e 200 palavras, com saudação e despedida.</label><br>
+<label><input type="checkbox"> Cobre os quatro pontos da lista.</label><br>
+<label><input type="checkbox"> Usa <em>não consigo</em> e <em>não posso</em>, cada um de acordo com a causa.</label><br>
+<label><input type="checkbox"> Tem pelo menos duas frases com <em>se + tivesse + particípio</em> e <em>teria + particípio</em>.</label><br>
+<label><input type="checkbox"> Usa pelo menos cinco expressões do quadro <em>Expressões em foco</em>.</label></div>
+</div>
+
+  <div class="send-box">📩 Quando terminar, envie suas respostas para a professora. Ela vai ler com atenção e comentar na próxima aula.</div>
+  <div style="max-width:700px;margin:0 auto;padding:0 0 48px;">
+  <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function normAns(s) { return s.toLowerCase().trim().replace(/\s+/g,' ').replace(/[.!?,;]+$/,''); }
+function okAns(inp) {
+  var v = normAns(inp.value);
+  if (!v) return false;
+  return inp.getAttribute('data-ans').split('|').some(function(a){ return normAns(a) === v; });
+}
+function score(id, ok, tot) {
+  var el = document.getElementById('sc_' + id);
+  el.className = 'ex-score show ' + (ok === tot ? 'pass' : 'partial');
+  el.textContent = ok === tot ? '✓ ' + ok + ' de ' + tot + ' corretas!' : ok + ' de ' + tot + ' corretas. As respostas corretas aparecem em verde ao lado dos campos.';
+}
+function checkSec(id) {
+  var sec = document.getElementById(id), ins = sec.querySelectorAll('input.gap'), ok = 0;
+  ins.forEach(function(inp) {
+    if (inp.nextSibling && inp.nextSibling.className === 'fix') inp.parentNode.removeChild(inp.nextSibling);
+    var good = okAns(inp);
+    inp.classList.remove('correct','wrong');
+    if (good) { inp.classList.add('correct'); ok++; }
+    else {
+      inp.classList.add('wrong');
+      var f = document.createElement('span'); f.className = 'fix';
+      f.textContent = '→ ' + inp.getAttribute('data-ans').split('|')[0];
+      inp.parentNode.insertBefore(f, inp.nextSibling);
+    }
+  });
+  score(id, ok, ins.length);
+}
+function resetSec(id) {
+  var sec = document.getElementById(id);
+  sec.querySelectorAll('input.gap').forEach(function(inp) { inp.value = ''; inp.classList.remove('correct','wrong'); });
+  sec.querySelectorAll('.fix').forEach(function(f) { f.parentNode.removeChild(f); });
+  var el = document.getElementById('sc_' + id); el.className = 'ex-score'; el.textContent = '';
+}
+function checkMatch() {
+  var sels = document.querySelectorAll('#a3 select.msel'), ok = 0;
+  sels.forEach(function(s) {
+    var row = s.parentNode, old = row.querySelector('.fix'); if (old) row.removeChild(old);
+    s.classList.remove('correct','wrong');
+    if (s.value === s.getAttribute('data-ans')) { s.classList.add('correct'); ok++; }
+    else { s.classList.add('wrong'); var f = document.createElement('span'); f.className = 'fix'; f.textContent = '→ ' + s.getAttribute('data-ans') + ')'; row.appendChild(f); }
+  });
+  score('a3', ok, sels.length);
+}
+function resetMatch() {
+  document.querySelectorAll('#a3 select.msel').forEach(function(s) { s.value = ''; s.classList.remove('correct','wrong'); });
+  document.querySelectorAll('#a3 .fix').forEach(function(f) { f.parentNode.removeChild(f); });
+  var el = document.getElementById('sc_a3'); el.className = 'ex-score'; el.textContent = '';
+}
+function toggleModelo(n) { document.getElementById('modelo-' + n).classList.toggle('show'); }
+function countWords() {
+  var t = document.getElementById('e4').value.trim(), n = t ? t.split(/\s+/).length : 0, el = document.getElementById('a5-wc');
+  el.textContent = n + (n === 1 ? ' palavra' : ' palavras') + ' (meta: 150 a 200)';
+  el.className = 'wc' + (n >= 150 && n <= 200 ? ' ok' : '');
+}
+document.addEventListener('DOMContentLoaded', function(){ document.getElementById('e4').addEventListener('input', countWords); });
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  nameEl.style.borderColor = '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  function add(tag, val) {
+    var has = val && val.trim() !== '';
+    var shown = has ? esc(val.trim()) : '(sem resposta)';
+    summaryLines.push('<strong>' + tag + ':</strong> ' + (has ? shown : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>' + tag + ':</strong> ' + shown + '</p>';
+  }
+  var boxes = document.querySelectorAll('textarea[data-label], input.gap, select.msel');
+  for (var i = 0; i < boxes.length; i++) add(boxes[i].getAttribute('data-label'), boxes[i].value);
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
