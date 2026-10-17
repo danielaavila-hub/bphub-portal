@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Família — Titãs | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--cobalto:#265B8B;--cobalto-light:#EBF1F8;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--cobalto)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--cobalto);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--cobalto);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.8rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalto);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .lyric-block{background:var(--giz);border-radius:8px;padding:20px 24px;margin:12px 0;font-size:.95rem;line-height:2.1;font-family:'Trirong',serif}
+  .lyric-stanza{margin-bottom:18px}
+  .lyric-stanza:last-child{margin-bottom:0}
+  .lyric-highlight{border-left:3px solid var(--cobalto);padding-left:14px;border-radius:0 4px 4px 0}
+  .lyric-ellipsis{color:#bbb;font-style:italic;font-size:.85rem;margin:6px 0 12px}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo)}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--cobalto);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--cobalto)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--cobalto);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalto);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--cobalto);color:var(--cobalto)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--cobalto);color:#fff;border-color:var(--cobalto)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--cobalto);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:140px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--cobalto)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  .word-bank{background:var(--baunilha);border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .word-bank strong{color:var(--musgo);margin-right:4px}
+  .wb-word{background:#fff;border:1.5px solid var(--pitomba);border-radius:4px;padding:2px 10px;font-size:.85rem;font-family:'Manrope',sans-serif;color:var(--nanquim)}
+  .prod-item{margin-bottom:18px;font-size:.93rem}
+  .prod-item p{margin-bottom:4px;line-height:1.5}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:70px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--cobalto)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--cobalto);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none;max-height:260px;overflow-y:auto}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+
+  .opt-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .opt{border:1.5px solid var(--light-gray);background:#fff;border-radius:8px;padding:7px 14px;font-family:'Manrope',sans-serif;font-size:.88rem;cursor:pointer;transition:all .15s;text-align:left}
+  .opt:hover{border-color:var(--cobalto)}
+  .opt.selected{border-color:var(--cobalto);background:var(--cobalto-light);color:var(--cobalto);font-weight:700}
+  .opt.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .opt.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .mc-item{padding:12px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .mc-item:last-of-type{border-bottom:none}
+  .gl{display:block;font-size:.8rem;color:#999;font-style:italic;margin-top:2px}
+  .part-title{font-weight:800;color:var(--cobalto);font-size:.85rem;margin:16px 0 2px;text-transform:uppercase;letter-spacing:.08em}
+  select.fs{border:1.5px solid var(--light-gray);border-radius:6px;padding:3px 8px;font-family:'Manrope',sans-serif;font-size:.9rem;background:#fff}
+  select.fs.ok{border-color:#2e7d32;color:#2e7d32}
+  select.fs.err{border-color:#c62828;color:#c62828}
+  .res-list{font-weight:400;margin-top:8px}
+  .res-list div{margin-bottom:6px}
+  .model-box{background:var(--baunilha);border-radius:8px;padding:12px 16px;font-size:.9rem;margin-bottom:16px}
+  .cl{display:block;font-size:.88rem;margin:4px 0}
+  .cl input{margin-right:8px}
+  .parts-box{background:var(--giz);border-radius:8px;padding:12px 16px;font-size:.9rem;margin-bottom:12px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">A2</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+<div class="level-bar">
+  <span class="badge">Rock Brasileiro</span>
+  <span class="badge">Titãs</span>
+  <span class="badge">1986</span>
+</div>
+
+<div class="container">
+
+  <div class="card intro-card">
+    <h1>Família</h1>
+    <p class="fonte">Titãs · "Família" (Tony Bellotto and Arnaldo Antunes), from the album <em>Cabeça Dinossauro</em>, 1986 · Recording: <em>Acústico MTV</em> version, 1997</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">The family in the Titãs song and the verb <strong>ficar</strong> to talk about how we feel. <strong>Ficar + adjective · Talking about feelings and reactions · Brazilian rock of the 80s</strong></p>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Cultural note</p>
+    <div class="cult-box">
+      Titãs is a rock band formed in São Paulo in 1982. In 1986, the band released the album <em>Cabeça Dinossauro</em>, with songs that criticize institutions such as the church, the police and the State, and also the family. "Família" was written by Tony Bellotto and Arnaldo Antunes and released as a single in 1987. The lyrics show everyday problems of an ordinary family.
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Language note — papai, mamãe, vovô, vovó</p>
+    <p class="instr" style="margin-bottom:8px">In the song, the family appears with affectionate words:</p>
+    <div class="gram-box"><strong>papai</strong> (pai) · <strong>mamãe</strong> (mãe) · <strong>titia</strong> (tia) · <strong>vovô</strong> (avô) · <strong>vovó</strong> (avó) · <strong>nenê</strong> (bebê)<br>
+    Children use these forms a lot, and adults use them too, with affection. <span style="color:#999">(Affectionate forms, like "daddy", "mommy", "grandpa", "grandma".)</span><br><br>
+    ⚠️ <strong>Pronunciation:</strong> <em>vovô</em> has a closed <strong>ô</strong> (grandpa) and <em>vovó</em> has an open <strong>ó</strong> (grandma). The same happens with <em>avô</em> and <em>avó</em>.</div>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Vocabulary</p>
+    <p class="instr">Read the table before you listen to the song.</p>
+    <table class="vocab-table"><tr><th>Português</th><th>English</th></tr>
+      <tr><td class="vocab-pt">junto(a)</td><td>together</td></tr>
+      <tr><td class="vocab-pt">todo dia</td><td>every day</td></tr>
+      <tr><td class="vocab-pt">a mania</td><td>habit, quirk</td></tr>
+      <tr><td class="vocab-pt">fugir de casa</td><td>to run away from home</td></tr>
+      <tr><td class="vocab-pt">descolar (informal)</td><td>to get, to land (something)</td></tr>
+      <tr><td class="vocab-pt">o ganha-pão</td><td>a way to earn a living</td></tr>
+      <tr><td class="vocab-pt">casar</td><td>to get married</td></tr>
+      <tr><td class="vocab-pt">o tostão</td><td>penny (an old coin)</td></tr>
+      <tr><td class="vocab-pt">a sobrinha</td><td>niece</td></tr>
+      <tr><td class="vocab-pt">jantar</td><td>to have dinner</td></tr>
+      <tr><td class="vocab-pt">doente</td><td>sick</td></tr>
+      <tr><td class="vocab-pt">a farmácia de plantão</td><td>24-hour pharmacy</td></tr>
+      <tr><td class="vocab-pt">o choro</td><td>crying</td></tr>
+      <tr><td class="vocab-pt">estridente</td><td>shrill, piercing</td></tr>
+      <tr><td class="vocab-pt">não dá pra...</td><td>you can't..., it's not possible to...</td></tr>
+      <tr><td class="vocab-pt">a galinha</td><td>hen</td></tr>
+      <tr><td class="vocab-pt">a barata</td><td>cockroach</td></tr>
+      <tr><td class="vocab-pt">o ladrão</td><td>thief</td></tr>
+      <tr><td class="vocab-pt">jogar inseticida</td><td>to spray insecticide</td></tr>
+      <tr><td class="vocab-pt">botar (informal)</td><td>to put</td></tr>
+      <tr><td class="vocab-pt">o cadeado</td><td>padlock</td></tr>
+      <tr><td class="vocab-pt">o portão</td><td>gate</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Listen to the song</p>
+    <p class="card-title">Família</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/GJRT4_be0CI"
+        title="Família — Titãs" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+    <p class="fonte">Titãs, "Família" (1986) · Recording: Titãs, <em>Acústico MTV</em> (1997)</p>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Before listening</p>
+    <p class="ex-title">Antes de ouvir</p>
+    <p class="ex-instr">Answer in Portuguese.</p>
+    <div class="prod-item"><p><strong>1.</strong> Leia o título da canção: <em>Família</em>. Que problemas de família você imagina que a canção vai mostrar? Escreva duas ideias.</p><span class="gl">(What family problems do you think the song will show? Write two ideas.)</span>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="prod-item"><p><strong>2.</strong> Que hábito a sua família tem todo dia ou toda semana? Escreva uma frase.</p><span class="gl">(What habit does your family have every day or every week? Write one sentence.)</span>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui..."></textarea></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Exercise 1</p>
+    <p class="ex-title">Primeira escuta</p>
+    <p class="ex-instr">Listen to the whole song once, without pausing. Then choose the right answer. Listen again if you need to.</p>
+    <div class="parts-box">The song has three parts. Each part starts with <em>Família, família</em> and a list of names:<br>
+      <strong>Part 1:</strong> papai, mamãe, titia · <strong>Part 2:</strong> vovô, vovó, sobrinha · <strong>Part 3:</strong> cachorro, gato, galinha</div>
+    <div class="part-title">Parte 1</div>
+    <div class="mc-item" data-q="1"><strong>1.</strong> Que refeição a família come junto todo dia?<span class="gl">(Which meal does the family eat together every day?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,1)">a) o almoço</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,1)">b) o café da manhã</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,1)">c) o jantar</button></div></div>
+    <div class="mc-item" data-q="2"><strong>2.</strong> A filha quer fugir de casa. O que ela precisa arranjar?<span class="gl">(What does she need to get?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,2)">a) um namorado</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,2)">b) uma casa nova</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,2)">c) um trabalho</button></div></div>
+    <div class="mc-item" data-q="3"><strong>3.</strong> Os pais dão dinheiro para a filha?<span class="gl">(Do the parents give her money?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,3)">a) Sim, sempre.</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,3)">b) Sim, se ela estuda.</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,3)">c) Não, se ela não se casar.</button></div></div>
+    <div class="part-title">Parte 2</div>
+    <div class="mc-item" data-q="4"><strong>4.</strong> E agora, que refeição a família come junto todo dia?<span class="gl">(And now, which meal?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,4)">a) o café da manhã</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,4)">b) o jantar</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,4)">c) o almoço</button></div></div>
+    <div class="mc-item" data-q="5"><strong>5.</strong> Quando o nenê fica doente, a família...<span class="gl">(When the baby gets sick, the family...)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,5)">a) procura uma farmácia aberta.</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,5)">b) chama um médico.</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,5)">c) vai para o hospital.</button></div></div>
+    <div class="mc-item" data-q="6"><strong>6.</strong> Por que não dá para ver televisão?<span class="gl">(Why can't they watch TV?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,6)">a) Porque a TV quebrou.</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,6)">b) Porque a família está na farmácia.</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,6)">c) Porque o nenê chora alto.</button></div></div>
+    <div class="part-title">Parte 3</div>
+    <div class="mc-item" data-q="7"><strong>7.</strong> De que a mãe tem medo? E o pai?<span class="gl">(What is the mother afraid of? And the father?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,7)">a) mãe: barata / pai: ladrão</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,7)">b) mãe: rato / pai: cachorro</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,7)">c) mãe: escuro / pai: barata</button></div></div>
+    <div class="mc-item" data-q="8"><strong>8.</strong> Por causa do medo, o que a família coloca no portão?<span class="gl">(Because of the fear, what does the family put on the gate?)</span><div class="opt-row"><button type="button" class="opt" data-v="0" onclick="selOpt(this,8)">a) uma placa</button><button type="button" class="opt" data-v="1" onclick="selOpt(this,8)">b) um cadeado</button><button type="button" class="opt" data-v="2" onclick="selOpt(this,8)">c) uma câmera</button></div></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkMC()">✓ Check answers</button><button class="btn btn-reset" onclick="resetMC()">Try again</button></div>
+    <div class="result-msg" id="mc-msg"></div>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Grammar</p>
+    <p class="card-title">Como a gente fica</p>
+    <p style="font-size:.93rem;margin-bottom:10px">Na parte 2, o nenê <strong>fica</strong> doente: antes ele estava bem, agora está doente. <em>Ficar</em> mostra uma <strong>mudança</strong>.</p><span class="gl">(Ficar shows a change: "to get" or "to become". O nenê fica doente = the baby gets sick.)</span>
+    <div class="gram-box"><strong>1. ficar + adjetivo</strong>
+      <table><tr><th>Português</th><th>English</th></tr>
+      <tr><td>ficar doente</td><td>to get sick</td></tr><tr><td>ficar bravo(a)</td><td>to get angry</td></tr><tr><td>ficar triste</td><td>to get sad</td></tr><tr><td>ficar nervoso(a)</td><td>to get nervous</td></tr><tr><td>ficar preocupado(a)</td><td>to get worried</td></tr><tr><td>ficar feliz</td><td>to get happy</td></tr></table>
+      <p style="margin-top:10px">O adjetivo concorda com a pessoa: <em>O papai <strong>fica</strong> bravo. A mamãe <strong>fica</strong> brava. Os pais <strong>ficam</strong> preocupados.</em></p></div>
+    <div class="gram-box"><strong>2. estar ou ficar?</strong>
+      <p style="margin-top:8px"><strong>está</strong> = como a pessoa está agora, ou desde quando: <em>O nenê <strong>está</strong> doente desde ontem.</em> (is sick)</p>
+      <p style="margin-top:6px"><strong>fica</strong> = a mudança, muitas vezes com <em>quando</em> ou <em>toda vez que</em>: <em>O nenê <strong>fica</strong> doente toda vez que toma chuva.</em> (gets sick)</p></div>
+    <div class="gram-box"><strong>3. ficar com + substantivo</strong>
+      <table><tr><th>Português</th><th>English</th></tr>
+      <tr><td>ficar com medo</td><td>to get scared</td></tr><tr><td>ficar com fome</td><td>to get hungry</td></tr><tr><td>ficar com sono</td><td>to get sleepy</td></tr><tr><td>ficar com raiva</td><td>to get mad</td></tr><tr><td>ficar com vergonha</td><td>to get embarrassed</td></tr></table>
+      <p style="margin-top:10px"><em>Quando a mamãe vê uma barata, ela <strong>fica com medo</strong>.</em></p></div>
+    <div class="gram-box"><strong>4. Expressões com medo</strong>
+      <table><tr><th>Português</th><th>English</th></tr>
+      <tr><td><strong>ter medo de</strong></td><td>to be afraid of: <em>O papai tem medo de ladrão.</em></td></tr>
+      <tr><td><strong>viver com medo de</strong></td><td>sempre com medo (always afraid)</td></tr>
+      <tr><td><strong>morrer de medo de</strong></td><td>muito medo (scared to death)</td></tr></table>
+      <p style="margin-top:10px">Depois de <em>medo</em>, use sempre <strong>de</strong>: <em>medo de barata</em>, <em>medo do escuro</em>, <em>medo de dirigir</em>.</p></div>
+    <div class="gram-box"><strong>5. morrer de... para exagerar</strong>
+      <p style="margin-top:8px"><em>morrer de medo · morrer de fome · morrer de sono · morrer de rir · morrer de saudade</em></p>
+      <p style="margin-top:6px;color:#999">(Morrer de + noun = a very strong feeling. Nobody really dies!)</p></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Exercise 2</p>
+    <p class="ex-title">Fica ou está?</p>
+    <p class="ex-instr">Mudança ou estado. Choose the right form.</p>
+    <div class="gap-row"><span class="gap-num">1.</span><span>O nenê <select class="fs" id="fe1" data-sub><option value="">—</option><option value="fica">fica</option><option value="está">está</option></select> doente desde ontem.</span></div>
+    <div class="gap-row"><span class="gap-num">2.</span><span>O nenê <select class="fs" id="fe2" data-sub><option value="">—</option><option value="fica">fica</option><option value="está">está</option></select> doente toda vez que toma chuva.</span></div>
+    <div class="gap-row"><span class="gap-num">3.</span><span>A mamãe <select class="fs" id="fe3" data-sub><option value="">—</option><option value="fica">fica</option><option value="está">está</option></select> triste toda vez que a filha fala em sair de casa.</span></div>
+    <div class="gap-row"><span class="gap-num">4.</span><span>A titia <select class="fs" id="fe4" data-sub><option value="">—</option><option value="fica">fica</option><option value="está">está</option></select> cansada agora: ela trabalhou o dia inteiro.</span></div>
+    <div class="gap-row"><span class="gap-num">5.</span><span>O papai <select class="fs" id="fe5" data-sub><option value="">—</option><option value="fica">fica</option><option value="está">está</option></select> nervoso toda vez que escuta um barulho no portão.</span></div>
+    <div class="gap-row"><span class="gap-num">6.</span><span>Hoje o vovô <select class="fs" id="fe6" data-sub><option value="">—</option><option value="fica">fica</option><option value="está">está</option></select> bravo: o cachorro comeu o almoço dele.</span></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkFE()">✓ Check answers</button><button class="btn btn-reset" onclick="resetFE()">Try again</button></div>
+    <div class="result-msg" id="fe-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Exercise 3</p>
+    <p class="ex-title">Ficar com...</p>
+    <p class="ex-instr">Reações da família. Complete with <strong>ficar com</strong> and a word from the box. Attention: <em>fica</em> or <em>ficam</em>? Use each word once.</p>
+    <div class="word-bank"><strong>Word bank:</strong><span class="wb-word">medo</span><span class="wb-word">fome</span><span class="wb-word">sono</span><span class="wb-word">raiva</span><span class="wb-word">vergonha</span></div>
+    <div class="gap-row"><span class="gap-num">1.</span><span>Quando a mamãe vê uma barata, ela</span><input class="gap-input" style="width:170px" id="fc1" data-sub autocomplete="off"><span>.</span></div>
+    <div class="gap-row"><span class="gap-num">2.</span><span>Quando o almoço atrasa, a família toda</span><input class="gap-input" style="width:170px" id="fc2" data-sub autocomplete="off"><span>.</span></div>
+    <div class="gap-row"><span class="gap-num">3.</span><span>Quando o nenê chora a noite inteira, o papai e a mamãe</span><input class="gap-input" style="width:170px" id="fc3" data-sub autocomplete="off"><span> no dia seguinte.</span></div>
+    <div class="gap-row"><span class="gap-num">4.</span><span>Quando o cachorro come a comida da galinha, a vovó</span><input class="gap-input" style="width:170px" id="fc4" data-sub autocomplete="off"><span>.</span></div>
+    <div class="gap-row"><span class="gap-num">5.</span><span>Quando a titia canta alto no almoço de domingo, os sobrinhos</span><input class="gap-input" style="width:170px" id="fc5" data-sub autocomplete="off"><span>.</span></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkFC()">✓ Check answers</button><button class="btn btn-reset" onclick="resetFC()">Try again</button></div>
+    <div class="result-msg" id="fc-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Exercise 4</p>
+    <p class="ex-title">Muito medo, sempre medo</p>
+    <p class="ex-instr">De volta à canção. Listen to part 3 again (the part with the dog, the cat and the hen) and answer.</p>
+    <div class="prod-item"><p><strong>a)</strong> A mãe tem um pouco de medo ou muito medo de barata? Que expressão de <em>medo</em> a canção usa?</p><span class="gl">(Is the mother a little afraid or very afraid of cockroaches? Which expression with medo does the song use?)</span>
+      <textarea class="prod" id="m4a" data-sub placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="prod-item"><p><strong>b)</strong> O pai tem medo de ladrão às vezes ou o tempo todo? Que expressão com <em>medo</em> a canção usa?</p><span class="gl">(Is the father afraid of thieves sometimes or all the time? Which expression with medo does the song use?)</span>
+      <textarea class="prod" id="m4b" data-sub placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkM4()">✓ Check answers</button></div>
+    <div class="result-msg" id="m4-msg"></div>
+    <p class="ex-instr" style="margin-top:20px">Agora complete com <strong>morrer de</strong> e a palavra entre parênteses.</p>
+    <div class="gap-row"><span class="gap-num">1.</span><span>A titia conta piadas ótimas: no almoço de domingo, todo mundo</span><input class="gap-input" style="width:150px" id="mo1" data-sub autocomplete="off"><span style="color:var(--cobalto)">(rir)</span></div>
+    <div class="gap-row"><span class="gap-num">2.</span><span>O vovô mora em outra cidade, e a vovó</span><input class="gap-input" style="width:150px" id="mo2" data-sub autocomplete="off"><span style="color:var(--cobalto)">(saudade)</span></div>
+    <div class="gap-row"><span class="gap-num">3.</span><span>A família só janta às dez da noite, e o nenê</span><input class="gap-input" style="width:150px" id="mo3" data-sub autocomplete="off"><span style="color:var(--cobalto)">(fome)</span></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkMO()">✓ Check answers</button><button class="btn btn-reset" onclick="resetMO()">Try again</button></div>
+    <div class="result-msg" id="mo-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Exercise 5</p>
+    <p class="ex-title">E a sua família?</p>
+    <p class="ex-instr">Responda a cada pergunta com uma ou duas frases completas. Use <em>ficar</em>, <em>ficar com</em> ou uma expressão com <em>medo</em>.</p>
+    <div class="model-box"><strong>Modelo</strong><br>Quem fica com sono primeiro na sua família?<br>→ O meu pai. Ele fica com sono às nove da noite, no sofá.</div>
+    <div class="prod-item"><p><strong>1.</strong> Quem fica bravo com mais facilidade na sua família? Quando isso acontece?</p><span class="gl">(Who gets angry most easily in your family? When does it happen?)</span>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="prod-item"><p><strong>2.</strong> Quando você fica com vergonha?</p><span class="gl">(When do you get embarrassed?)</span>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="prod-item"><p><strong>3.</strong> Do que alguém da sua família tem medo?</p><span class="gl">(What is someone in your family afraid of?)</span>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="prod-item"><p><strong>4.</strong> Que mania a sua família nunca perde?</p><span class="gl">(What habit does your family never break?)</span>
+      <textarea class="prod" placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <p style="font-size:.85rem;font-weight:700;margin:10px 0 4px">Before you finish, check:</p>
+    <label class="cl"><input type="checkbox"> After <em>ficar</em>, the adjective agrees with the person: o pai fica bravo, a mãe fica brava.</label>
+    <label class="cl"><input type="checkbox"> After <em>medo</em>, you used <em>de</em>.</label>
+  </div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim()}
+var mcKey=[0,2,2,1,0,2,0,1];
+var mcText=[['o almoço','o café da manhã','o jantar'],['um namorado','uma casa nova','um trabalho'],['Sim, sempre.','Sim, se ela estuda.','Não, se ela não casa.'],['o café da manhã','o jantar','o almoço'],['procura uma farmácia aberta','chama um médico','vai para o hospital'],['Porque a TV quebrou.','Porque a família está na farmácia.','Porque o nenê chora alto.'],['mãe: barata / pai: ladrão','mãe: rato / pai: cachorro','mãe: escuro / pai: barata'],['uma placa','um cadeado','uma câmera']];
+var mcSel={};
+function selOpt(btn,q){
+  var item=document.querySelector('.mc-item[data-q="'+q+'"]');
+  item.querySelectorAll('.opt').forEach(function(b){b.classList.remove('selected','right','wrong');});
+  btn.classList.add('selected'); mcSel[q]=parseInt(btn.dataset.v);
+}
+function panel(id,ok,tot,html){
+  var m=document.getElementById(id);
+  m.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  m.innerHTML=(ok===tot?'✓ All '+tot+' correct!':ok+' of '+tot+' correct — model answers:')+'<div class="res-list">'+html+'</div>';
+}
+function line(i,good,txt){return '<div><strong>'+i+'.</strong> '+(good?'<span style="color:#2e7d32">✓</span>':'<span style="color:#c62828">✗</span>')+' '+txt+'</div>';}
+function checkMC(){
+  var ok=0,html='';
+  mcKey.forEach(function(k,i){
+    var q=i+1,item=document.querySelector('.mc-item[data-q="'+q+'"]');
+    var good=mcSel[q]===k;
+    item.querySelectorAll('.opt').forEach(function(b){
+      b.classList.remove('selected','right','wrong');
+      var v=parseInt(b.dataset.v);
+      if(v===k)b.classList.add('right'); else if(v===mcSel[q])b.classList.add('wrong');
+    });
+    if(good)ok++;
+    html+=line(q,good,'<strong>'+'abc'[k]+')</strong> '+mcText[i][k]);
+  });
+  panel('mc-msg',ok,mcKey.length,html);
+}
+function resetMC(){
+  mcSel={};
+  document.querySelectorAll('.mc-item .opt').forEach(function(b){b.classList.remove('selected','right','wrong');});
+  var m=document.getElementById('mc-msg');m.className='result-msg';m.innerHTML='';
+}
+var feKey=['está','fica','fica','está','fica','está'];
+function checkFE(){
+  var ok=0,html='';
+  feKey.forEach(function(k,i){
+    var el=document.getElementById('fe'+(i+1));
+    var good=el.value===k;
+    el.classList.remove('ok','err');
+    if(el.value)el.classList.add(good?'ok':'err');
+    if(good)ok++;
+    html+=line(i+1,good,'<strong>'+k+'</strong>');
+  });
+  panel('fe-msg',ok,feKey.length,html);
+}
+function resetFE(){
+  feKey.forEach(function(k,i){var el=document.getElementById('fe'+(i+1));el.value='';el.classList.remove('ok','err');});
+  var m=document.getElementById('fe-msg');m.className='result-msg';m.innerHTML='';
+}
+function gapCheck(prefix,key,msgId){
+  var ok=0,html='';
+  key.forEach(function(k,i){
+    var el=document.getElementById(prefix+(i+1));
+    var good=el.value.trim()!==''&&norm(el.value)===norm(k);
+    el.classList.remove('ok','err');
+    if(el.value.trim())el.classList.add(good?'ok':'err');
+    if(good)ok++;
+    html+=line(i+1,good,'<strong>'+k+'</strong>');
+  });
+  panel(msgId,ok,key.length,html);
+}
+function gapReset(prefix,key,msgId){
+  key.forEach(function(k,i){var el=document.getElementById(prefix+(i+1));el.value='';el.classList.remove('ok','err');});
+  var m=document.getElementById(msgId);m.className='result-msg';m.innerHTML='';
+}
+var fcKey=['fica com medo','fica com fome','ficam com sono','fica com raiva','ficam com vergonha'];
+function checkFC(){gapCheck('fc',fcKey,'fc-msg');}
+function resetFC(){gapReset('fc',fcKey,'fc-msg');}
+var moKey=['morre de rir','morre de saudade','morre de fome'];
+function checkMO(){gapCheck('mo',moKey,'mo-msg');}
+function resetMO(){gapReset('mo',moKey,'mo-msg');}
+function checkM4(){
+  var a=norm(document.getElementById('m4a').value),b=norm(document.getElementById('m4b').value);
+  var ga=a.indexOf('morre de medo')>-1,gb=b.indexOf('vive com medo')>-1;
+  var ok=(ga?1:0)+(gb?1:0);
+  panel('m4-msg',ok,2,line('a',ga,'Muito medo: <strong>morre de medo</strong>.')+line('b',gb,'O tempo todo: <strong>vive com medo</strong>.'));
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('select[data-sub], input.gap-input').forEach(function(el){
+    var v = el.value.trim();
+    var safe = v ? v.replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + el.id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + el.id + ':</strong> ' + (v ? safe : '(sem resposta)') + '</p>';
+  });
+  Object.keys(mcSel).forEach(function(q){
+    summaryLines.push('<strong>Ex.1 · ' + q + ':</strong> ' + 'abc'[mcSel[q]]);
+    answersHtml += '<p><strong>Ex.1 · ' + q + ':</strong> ' + 'abc'[mcSel[q]] + '</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
