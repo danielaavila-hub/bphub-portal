@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eu e Jimmy — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--telha); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--telha); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--telha); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--telha); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--telha); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--telha); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    select.vf { border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 8px 10px; font-family: 'Manrope', sans-serif; font-size: 14px; background: white; font-weight: 700; }
+    select.vf.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    select.vf.wrong { border-color: var(--telha); background: #FBF0EC; }
+    .vf-item { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; }
+    .vf-item .vf-top { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+    .vf-item .vf-top .q-text { flex: 1; min-width: 220px; margin: 0; }
+    .vf-item input[type=text] { margin-top: 10px; }
+    .rw-item { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
+    .rw-item .q-text { margin-bottom: 8px; }
+    .rw-prefix { font-weight: 600; color: var(--telha); margin-bottom: 6px; font-size: 14.5px; }
+    details.resp { margin-top: 10px; font-size: 13.5px; }
+    details.resp summary { cursor: pointer; font-weight: 700; color: var(--telha); font-size: 13px; }
+    details.resp div { background: var(--baunilha2); border-radius: 10px; padding: 12px 14px; margin-top: 8px; line-height: 1.7; }
+    .counter { font-size: 12.5px; color: #888; margin-top: 6px; }
+    .counter.ok { color: #2E7D52; font-weight: 700; }
+    .cl { font-size: 14px; margin: 4px 0; display: block; }
+    .cl input { margin-right: 8px; }
+    .model-box { background: var(--off-white); border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.75; margin: 14px 0; }
+    .verb-bank { background: var(--off-white); border-radius: 10px; padding: 12px 18px; margin-bottom: 16px; font-weight: 700; text-align: center; font-size: 14.5px; }
+    .gap-line { font-size: 15px; margin-bottom: 14px; }
+    .gap-line input[type=text] { width: 150px; display: inline-block; margin: 0 4px; padding: 6px 10px; }
+  </style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../contos/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Conto com Áudio</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Eu e Jimmy <span style="color:rgba(255,255,255,0.5); font-weight:300;">·</span> <em>Clarice Lispector</em></h1>
+  <div class="hero-sub">BPHub Conta um Conto — contos brasileiros de verdade, no seu nível. Ouça o conto e pratique o <span style="color:var(--ouro); font-weight:600;">discurso indireto</span>, a estrutura que a narradora usa para contar a briga com Jimmy.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Conto · Clarice Lispector · 1940</span>
+    <span class="hero-tag">Foco linguístico: discurso indireto</span>
+    <span class="hero-tag">Contar o que alguém disse</span>
+  </div>
+  <div class="hero-note">🎧 Ouça o conto e complete as atividades abaixo</div>
+</div>
+
+<div class="main">
+
+  <p style="font-size:15px;">Nesta ficha, você vai ouvir um conto de Clarice Lispector e praticar a estrutura que a narradora usa para contar a briga com Jimmy: o discurso indireto. No final da ficha, você encontra a referência do conto, para procurar o texto completo depois de todas as atividades, se sentir necessidade.</p>
+
+  <section style="margin-top:32px;">
+    <div class="sec-label">Nota cultural — Clarice Lispector</div>
+    <div class="info-box">
+      Clarice Lispector (1920–1977) nasceu na Ucrânia, numa família judia que fugia da perseguição, e chegou ao Brasil com pouco mais de um ano. Passou a infância em Maceió e no Recife e, aos 14 anos, mudou-se para o Rio de Janeiro, onde estudou Direito. Em 1943, publicou o primeiro romance, <i>Perto do coração selvagem</i>, narrado a partir da consciência da protagonista. Depois vieram livros como <i>Laços de família</i> (1960), <i>A paixão segundo G.H.</i> (1964) e <i>A hora da estrela</i> (1977). Os livros dela foram traduzidos para vários idiomas.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota de contexto — uma estudante em 1940</div>
+    <div class="info-box">
+      “Eu e Jimmy” foi publicado em 1940 na revista <i>Vamos Lêr!</i>, quando Clarice tinha cerca de 20 anos e, como a narradora, estudava Direito. Naquela época, as brasileiras votavam havia poucos anos (o voto feminino é de 1932) e ainda eram minoria nas universidades. O conto pode ser lido como uma brincadeira com esse momento: a narradora fala de liberdade, mas acaba seguindo as ideias dos homens que admira. Para parecer sofisticada, ela usa termos do filósofo alemão Hegel, como <i>síntese</i> e <i>lei das contradições</i>. Esse vocabulário de sala de aula faz parte da ironia do conto.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota linguística — o português literário dos anos 1940</div>
+    <div class="info-box">
+      O conto usa formas que hoje aparecem mais na escrita formal e na literatura do que na fala:
+      <br><br>
+      <b>Pronome depois do verbo.</b> <i>Lembro-me de Jimmy</i> = eu me lembro de Jimmy. <i>Perguntou-me</i> = me perguntou. <i>Acariciava-lhe os cabelos</i> = acariciava os cabelos dele.
+      <br><br>
+      <b>Mais-que-perfeito simples, terminado em -ra.</b> <i>Eu previra</i> = eu tinha previsto. <i>Evoluíra</i> = tinha evoluído. <i>Entendera</i> = tinha entendido. Na fala, os brasileiros usam a forma com <i>tinha</i>.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Antes de ouvir</div>
+    <p style="font-size:13.5px;color:#888;">Responda em duas ou três frases.</p>
+    <div class="q">
+      <div class="q-text">Na sua opinião, nossas ideias mudam por causa das pessoas que admiramos ou amamos? Dê um exemplo.</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">O quadro é longo. Leia antes de ouvir o conto. Não é preciso decorar as palavras: volte a ele sempre que precisar.</p>
+    <p style="font-weight:700;margin:14px 0 6px;">Jimmy e as ideias dele</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>despenteado</td><td>com o cabelo desarrumado</td></tr>
+      <tr><td>o crânio</td><td>o osso da cabeça</td></tr>
+      <tr><td>alongado</td><td>comprido, mais longo do que largo</td></tr>
+      <tr><td>rebelde nato</td><td>pessoa que é contra as regras desde sempre, por natureza</td></tr>
+      <tr><td>o cabotinismo</td><td>comportamento de quem se exibe para impressionar os outros</td></tr>
+      <tr><td>a espuma</td><td>(aqui) algo leve e sem substância</td></tr>
+      <tr><td>de cabeça erguida</td><td>com orgulho, sem vergonha</td></tr>
+      <tr><td>imbuído de</td><td>tomado, cheio de (uma ideia ou um sentimento)</td></tr>
+      <tr><td>perturbar-se</td><td>ficar nervoso ou confuso</td></tr>
+      <tr><td>repreender-se</td><td>criticar a si mesmo</td></tr>
+      <tr><td>corar</td><td>ficar vermelho de vergonha</td></tr>
+      <tr><td>difuso</td><td>pouco claro, vago</td></tr>
+    </table>
+    <p style="font-weight:700;margin:14px 0 6px;">A família da narradora</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>a predominância</td><td>fato de algo ser o mais forte ou o mais frequente</td></tr>
+      <tr><td>ser um foguete</td><td>ser uma pessoa agitada, cheia de energia e de temperamento</td></tr>
+      <tr><td>ruiva tempestuosa</td><td>mulher de cabelo ruivo e temperamento explosivo</td></tr>
+      <tr><td>coser</td><td>costurar</td></tr>
+      <tr><td>bordar</td><td>fazer desenhos no tecido com agulha e linha</td></tr>
+      <tr><td>a parte acessória / a parte essencial</td><td>termos jurídicos: o que é secundário / o que é principal</td></tr>
+    </table>
+    <p style="font-weight:700;margin:14px 0 6px;">O beijo, o examinador e a briga</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>as delongas</td><td>demoras, rodeios</td></tr>
+      <tr><td>o aproveitamento</td><td>desempenho de um aluno nos estudos</td></tr>
+      <tr><td>aplicado(a)</td><td>estudioso, dedicado</td></tr>
+      <tr><td>o examinador</td><td>professor que aplica ou corrige um exame</td></tr>
+      <tr><td>áspero</td><td>duro, desagradável</td></tr>
+      <tr><td>morno</td><td>nem quente, nem frio</td></tr>
+      <tr><td>o crepúsculo</td><td>fim da tarde, quando o sol se põe</td></tr>
+      <tr><td>jimiesco</td><td>palavra inventada pela narradora: “próprio de Jimmy”</td></tr>
+      <tr><td>a digressão</td><td>desvio do assunto principal</td></tr>
+      <tr><td>os desaforos</td><td>ofensas, insultos</td></tr>
+      <tr><td>borboleta</td><td>(aqui) pessoa que muda de interesse o tempo todo</td></tr>
+      <tr><td>inconstante</td><td>que muda sempre de ideia ou de sentimento</td></tr>
+      <tr><td>a eloquência</td><td>habilidade de falar bem e convencer</td></tr>
+      <tr><td>desfeito</td><td>muito abalado, destruído emocionalmente</td></tr>
+      <tr><td>mandar para o diabo / ao inferno</td><td>mandar alguém embora, com raiva</td></tr>
+      <tr><td>retrucar</td><td>responder com firmeza, contrariando o outro</td></tr>
+      <tr><td>o êxito</td><td>sucesso, bom resultado</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Ouça o conto</div>
+    <p style="font-size:13.5px;color:#888;">Ouça o conto duas vezes, sem ler. Se sentir necessidade, procure o texto completo só depois de terminar todas as atividades.</p>
+    <div class="audio-box">
+      <audio controls preload="none">
+        <source src="eu-e-jimmy-c1.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 1 — Verdadeiro ou falso?</div>
+    <p style="font-size:13.5px;color:#888;">Compreensão do conto. Marque V (verdadeiro) ou F (falso). Se a frase for falsa, corrija-a no campo abaixo. Se não tiver certeza, ouça o conto de novo.</p>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">1.</span>Jimmy acredita que, se duas pessoas se gostam, não há por que complicar as coisas.</div>
+      <select class="vf" id="vf-1" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-1" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">2.</span>A narradora aceita as ideias de Jimmy desde o primeiro dia, sem nenhuma dúvida.</div>
+      <select class="vf" id="vf-2" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-2" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">3.</span>Antes de se casar, a mãe da narradora tinha ideias próprias sobre a liberdade das mulheres.</div>
+      <select class="vf" id="vf-3" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-3" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">4.</span>Hoje, a mãe acredita que a mulher deve seguir o marido.</div>
+      <select class="vf" id="vf-4" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-4" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">5.</span>O primeiro beijo de Jimmy pega a narradora completamente de surpresa.</div>
+      <select class="vf" id="vf-5" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-5" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">6.</span>A narradora conhece o examinador durante as férias de verão.</div>
+      <select class="vf" id="vf-6" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-6" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">7.</span>Assim que começa a se encontrar com o examinador, a narradora conta tudo a Jimmy.</div>
+      <select class="vf" id="vf-7" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-7" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">8.</span>Jimmy ouve a explicação com calma e aceita a decisão da narradora.</div>
+      <select class="vf" id="vf-8" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-8" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">9.</span>Segundo a avó, os homens criam teorias para si e outras para as mulheres.</div>
+      <select class="vf" id="vf-9" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-9" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">10.</span>Na manhã seguinte, a narradora acorda triste e arrependida.</div>
+      <select class="vf" id="vf-10" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-10" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <button class="check-btn" onclick="checkVF()">Verificar respostas</button>
+    <div class="result-msg" id="vf-result"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 2 — Interpretação</div>
+    <p style="font-size:13.5px;color:#888;">Para pensar sobre o conto. Responda em duas ou três frases. Se precisar, ouça o conto de novo. Depois de responder, compare com a resposta possível.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Por que a narradora aceita ideias do Jimmy que ela não aceitaria de outra pessoa?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>Porque ela gosta de Jimmy: o crânio, os dentes claros e o sorriso servem de desculpa. Na verdade, ela procurava um motivo para gostar dele e seguir as ideias dele.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Que relação a narradora estabelece entre a história da mãe e a dela?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>A mãe tinha ideias próprias, mas passou a seguir as do marido. A narradora repete o padrão: primeiro segue Jimmy, depois o examinador, como se a mulher sempre acabasse seguindo o homem.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Para justificar a mudança, a narradora usa as próprias teorias de Jimmy. Por que esse argumento deixa Jimmy tão irritado?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>Porque a teoria dele (amar é natural e simples) se volta contra ele. Jimmy defendia a teoria em geral, mas não aceita quando ela é aplicada para deixá-lo.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>O que a avó quer dizer quando afirma que os homens são uns animais? Por que essa frase leva a narradora a pensar que voltou ao ponto de partida?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>Quer dizer que os homens agem por instinto e interesse, não pelas teorias que criam. A frase confirma, sem querer, a ideia de Jimmy de que somos simples animais; por isso a narradora sente que voltou ao ponto de partida.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O conto termina com a narradora dizendo que a teoria é tão boa. Essa frase é sincera ou irônica? Justifique.</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>Pode ser lida como irônica: a teoria é atraente, mas o próprio Jimmy não consegue viver de acordo com ela. A narradora, de bom humor, continua intrigada com a contradição. (Resposta pessoal: aceitar outra leitura, se for bem justificada.)</div></details></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Foco gramatical — “Disse-me que eu não passava de uma mulher”</div>
+    <h2>O discurso indireto</h2>
+    <div class="grammar-box">
+      Na briga, quase ninguém fala com as próprias palavras. A narradora conta o que Jimmy disse, o que ela respondeu e o que a avó explicou. Isso é o <b>discurso indireto</b>: a fala entra numa oração com <i>que</i>, <i>se</i> ou uma palavra interrogativa, e mudam os tempos verbais, os pronomes e as referências de tempo e lugar.
+    </div>
+
+    <p style="font-weight:700;margin:18px 0 8px;">1. O que muda quando o verbo de dizer está no passado</p>
+    <table class="grammar">
+      <tr><th>Discurso direto</th><th>Discurso indireto</th></tr>
+      <tr><td><b>presente</b> → imperfeito: “Você <b>é</b> uma mulher inconstante.”</td><td>Disse que eu <b>era</b> uma mulher inconstante.</td></tr>
+      <tr><td><b>pretérito perfeito</b> → mais-que-perfeito: “Você não <b>entendeu</b> nada.”</td><td>Gritou que eu não <b>tinha entendido</b> (<b>entendera</b>) nada.</td></tr>
+      <tr><td><b>futuro</b> → futuro do pretérito: “Você <b>vai se arrepender</b>.”</td><td>Ameaçou que eu <b>ia me arrepender</b> (<b>me arrependeria</b>).</td></tr>
+      <tr><td><b>imperativo</b> → <i>que</i> + imperfeito do subjuntivo: “<b>Vá</b> para o diabo!”</td><td>Mandou que eu <b>fosse</b> para o diabo.</td></tr>
+      <tr><td><b>pergunta de sim ou não</b> → <i>se</i>: “Você mudou?”</td><td>Perguntou <b>se</b> eu tinha mudado.</td></tr>
+      <tr><td><b>pergunta com palavra interrogativa</b> → a palavra fica: “Por que você anda tão diferente?”</td><td>Perguntou <b>por que</b> eu andava tão diferente.</td></tr>
+    </table>
+    <p style="font-size:14px;margin-top:10px;">O <b>imperfeito</b> não muda: “Ela <b>era</b> um foguete.” → Tia Emília contou que mamãe <b>era</b> um foguete.</p>
+
+    <p style="font-weight:700;margin:18px 0 8px;">2. Pronomes e referências também mudam</p>
+    <div class="info-box"><i>eu / você</i> → <i>ele / ela / eu</i>, conforme quem conta; <i>hoje</i> → <i>naquele dia</i>; <i>amanhã</i> → <i>no dia seguinte</i>; <i>aqui</i> → <i>ali</i>, <i>lá</i>; <i>este</i> → <i>aquele</i>.</div>
+
+    <p style="font-weight:700;margin:18px 0 8px;">3. Verdades gerais podem ficar no presente</p>
+    <div class="info-box">A avó não relata um fato daquele dia: ela fala de como os homens são sempre. Por isso, a narradora conta que a avó explicou que os homens <b>costumam</b> construir teorias para si e outras para as mulheres. O presente mostra que, para a avó, isso continua verdadeiro.</div>
+
+    <p style="font-weight:700;margin:18px 0 8px;">4. Os verbos de dizer mostram a atitude</p>
+    <div class="info-box"><i>Dizer</i> é neutro. O conto usa verbos que mostram como a pessoa fala:<br>
+      <i>perguntar</i>, <i>responder</i>, <i>explicar</i>, <i>acrescentar</i>: explicar, completar;<br>
+      <i>gritar</i>, <i>ameaçar</i>, <i>exigir</i>, <i>retrucar</i>: brigar, responder com força.</div>
+
+    <div class="grammar-box" style="margin-top:16px;">
+      <b>Observe:</b> quando Jimmy ameaça a narradora, Clarice mistura as duas vozes. A frase fica na voz da narradora (<i>eu</i>), mas mantém o futuro da fala de Jimmy. Ouvimos Jimmy dentro da narração. Esse recurso literário se chama <b>discurso indireto livre</b>.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 3 — O que eles disseram</div>
+    <p style="font-size:13.5px;color:#888;">Do discurso direto ao indireto. Complete as frases em discurso indireto, a partir do começo indicado. As cenas são do conto, mas as falas são novas.</p>
+    <div class="rw-item"><div class="q-text"><span class="q-num">1.</span>Jimmy, na esquina: “Hoje eu estou muito feliz.”</div>
+      <div class="rw-prefix">→ Jimmy disse que</div>
+      <input type="text" id="rw-1" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">2.</span>A narradora, para uma colega: “Eu não entendi a aula sobre Hegel.”</div>
+      <div class="rw-prefix">→ A narradora confessou que</div>
+      <input type="text" id="rw-2" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">3.</span>O examinador: “Amanhã eu vou explicar a lei das contradições.”</div>
+      <div class="rw-prefix">→ O examinador prometeu que</div>
+      <input type="text" id="rw-3" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">4.</span>Jimmy: “Quem é esse D.?”</div>
+      <div class="rw-prefix">→ Jimmy perguntou</div>
+      <input type="text" id="rw-4" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">5.</span>Jimmy: “Você vai sentir falta de mim.”</div>
+      <div class="rw-prefix">→ Jimmy garantiu que</div>
+      <input type="text" id="rw-5" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">6.</span>A narradora: “Não grite comigo!”</div>
+      <div class="rw-prefix">→ A narradora pediu que Jimmy</div>
+      <input type="text" id="rw-6" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">7.</span>Tia Emília: “A sua mãe era muito independente.”</div>
+      <div class="rw-prefix">→ Tia Emília contou que</div>
+      <input type="text" id="rw-7" data-sub placeholder="Continue a frase..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">8.</span>A avó: “Os homens são assim mesmo.”</div>
+      <div class="rw-prefix">→ A avó explicou que</div>
+      <input type="text" id="rw-8" data-sub placeholder="Continue a frase..."></div>
+    <button class="check-btn" onclick="checkRW()">Verificar respostas</button>
+    <div class="result-msg" id="rw-result"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 4 — Como foi dito?</div>
+    <p style="font-size:13.5px;color:#888;">Os verbos de dizer. Complete com o verbo de dizer mais adequado do quadro. Use cada verbo uma vez.</p>
+    <div class="verb-bank">ameaçou &nbsp;·&nbsp; exigiu &nbsp;·&nbsp; acrescentou &nbsp;·&nbsp; retrucou &nbsp;·&nbsp; confessou &nbsp;·&nbsp; perguntou</div>
+    <div class="gap-line"><span class="q-num">1.</span>“Você ainda vai chorar por mim!” → Jimmy <input type="text" id="vb-1" data-sub autocomplete="off"> que ela ainda ia chorar por ele.</div>
+    <div class="gap-line"><span class="q-num">2.</span>“Responda agora!” → A narradora <input type="text" id="vb-2" data-sub autocomplete="off"> que Jimmy respondesse naquele momento.</div>
+    <div class="gap-line"><span class="q-num">3.</span>“E tem mais: eles esquecem essas teorias na hora de agir.” → Depois de uma pausa, a avó <input type="text" id="vb-3" data-sub autocomplete="off"> que eles esqueciam aquelas teorias na hora de agir.</div>
+    <div class="gap-line"><span class="q-num">4.</span>“Mas isso não é um argumento, vovó!” → A neta <input type="text" id="vb-4" data-sub autocomplete="off"> que aquilo não era um argumento.</div>
+    <div class="gap-line"><span class="q-num">5.</span>“É verdade, eu gosto de outra pessoa.” → A narradora <input type="text" id="vb-5" data-sub autocomplete="off"> que gostava de outra pessoa.</div>
+    <div class="gap-line"><span class="q-num">6.</span>“Você ainda gosta de mim?” → Jimmy <input type="text" id="vb-6" data-sub autocomplete="off"> se ela ainda gostava dele.</div>
+    <button class="check-btn" onclick="checkVB()">Verificar respostas</button>
+    <div class="result-msg" id="vb-result"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 5 — Contar uma conversa</div>
+    <p style="font-size:13.5px;color:#888;">Produção escrita · 80 a 120 palavras</p>
+    <p style="font-size:14.5px;margin-bottom:8px;">Pense numa conversa que você quer contar. Pode ser uma conversa que você teve ou ouviu, uma cena de outro conto, livro ou filme, ou uma situação inventada.</p>
+    <p style="font-size:14.5px;margin-bottom:8px;">Conte essa conversa em um parágrafo, sem travessões, com todas as falas em discurso indireto. O seu parágrafo precisa ter:</p>
+    <ul style="font-size:14px;margin:0 0 14px 20px;line-height:1.8;">
+      <li>uma ou duas frases para apresentar quem conversou, onde e quando;</li>
+      <li>pelo menos quatro falas em discurso indireto, entre elas uma pergunta e um pedido ou uma ordem;</li>
+      <li>pelo menos quatro verbos de dizer diferentes, de acordo com a atitude de quem fala;</li>
+      <li>uma frase final contando como a conversa acabou.</li>
+    </ul>
+    <details class="resp"><summary>Ver modelo</summary><div><i>(Texto elaborado para fins didáticos)</i><br><br>Na semana passada, ouvi uma conversa curiosa na padaria. Uma senhora perguntou ao padeiro se o pão era daquele dia. Ele garantiu que tinha saído do forno às seis horas. Desconfiada, ela exigiu que ele cortasse um pedaço para ela provar. O padeiro retrucou que não podia cortar um pão para cada cliente, mas acabou cedendo. A senhora provou, pensou um pouco e confessou que estava ótimo. Depois, perguntou por que ele não abria mais cedo. Ele explicou que já acordava às quatro e acrescentou, rindo, que padeiro também precisa dormir. Ela levou dez pães.</div></details>
+    <div class="q" style="margin-top:14px;">
+      <div class="q-text">Seu parágrafo</div>
+      <textarea id="prod" style="min-height:200px;" placeholder="Escreva seu parágrafo aqui..." oninput="countWords()"></textarea>
+      <div class="counter" id="prod-count">0 palavras (meta: 80 a 120)</div>
+    </div>
+    <p style="font-size:14px;font-weight:700;margin:14px 0 4px;">Antes de terminar, confira:</p>
+    <label class="cl"><input type="checkbox"> Não ficou nenhum travessão: todas as falas estão em discurso indireto.</label>
+    <label class="cl"><input type="checkbox"> Os tempos verbais mudaram (ou ficaram no presente, se for uma verdade geral).</label>
+    <label class="cl"><input type="checkbox"> Os pronomes estão de acordo com quem conta.</label>
+  </section>
+
+  <section>
+    <div class="sec-label">O conto: referência</div>
+    <p style="font-size:14.5px;">Como o conto ainda está protegido por direitos autorais, o texto completo não está disponível aqui no portal. Se sentir necessidade, depois de terminar todas as atividades, procure o texto na referência abaixo ou peça orientação à professora.</p>
+    <p class="source-note" style="color:#777;font-size:13.5px;">LISPECTOR, Clarice. Eu e Jimmy. In: <i>Todos os contos</i>. Rio de Janeiro: Rocco, 2016. Publicado originalmente na revista <i>Vamos Lêr!</i>, 1940.</p>
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[í]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:“”"]/g,'').replace(/\s+/g,' ').trim();
+}
+function show(resId, allOk, summary, html) {
+  var res = document.getElementById(resId);
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + summary + '</div>' + html;
+  res.style.display = 'block';
+}
+var vfKey = [
+  ['V',''],
+  ['F','Ela se perturbava, se repreendia e procurava uma desculpa para gostar dele.'],
+  ['V',''],['V',''],
+  ['F','Ela já tinha previsto a situação.'],
+  ['F','Ela conhece o examinador nos exames.'],
+  ['F','Ela se esquece de contar e só explica quando Jimmy pergunta.'],
+  ['F','Jimmy fica nervoso, diz desaforos e a manda para o diabo.'],
+  ['V',''],
+  ['F','Ela dorme triste, mas acorda feliz.']
+];
+function checkVF() {
+  var ok = 0, html = '';
+  vfKey.forEach(function(k, i) {
+    var el = document.getElementById('vf-' + (i + 1));
+    var good = el.value === k[0];
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', !good && el.value !== '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> '
+      + (good ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+      + ' ' + k[0] + (k[1] ? ' — ' + k[1] : '') + '</div>';
+  });
+  show('vf-result', ok === vfKey.length, ok === vfKey.length ? '✓ Todas as 10 corretas!' : ok + ' de 10 corretas — correção:', html);
+}
+var rwKey = [
+  { p: 'Jimmy disse que', k: ['naquele dia estava muito feliz', 'estava muito feliz naquele dia', 'estava muito feliz'] },
+  { p: 'A narradora confessou que', k: ['não tinha entendido a aula sobre Hegel', 'não entendera a aula sobre Hegel'] },
+  { p: 'O examinador prometeu que', k: ['no dia seguinte ia explicar a lei das contradições', 'no dia seguinte iria explicar a lei das contradições', 'no dia seguinte explicaria a lei das contradições'] },
+  { p: 'Jimmy perguntou', k: ['quem era aquele D', 'quem era esse D'] },
+  { p: 'Jimmy garantiu que', k: ['ela ia sentir falta dele', 'eu ia sentir falta dele', 'ela iria sentir falta dele', 'eu iria sentir falta dele', 'ela sentiria falta dele', 'eu sentiria falta dele', 'a narradora ia sentir falta dele', 'a narradora sentiria falta dele'] },
+  { p: 'A narradora pediu que Jimmy', k: ['não gritasse com ela', 'não gritasse com a narradora'] },
+  { p: 'Tia Emília contou que', k: ['a mãe dela era muito independente', 'a mãe da narradora era muito independente', 'minha mãe era muito independente'] },
+  { p: 'A avó explicou que', k: ['os homens eram assim mesmo', 'os homens são assim mesmo'] }
+];
+function checkRW() {
+  var ok = 0, html = '';
+  rwKey.forEach(function(a, i) {
+    var el = document.getElementById('rw-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var good = filled && a.k.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', filled && !good);
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> '
+      + (good ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+      + ' ' + a.p + ' ' + a.k.slice(0, 2).join(' / ' + a.p + ' ') + '</div>';
+  });
+  show('rw-result', ok === rwKey.length, ok === rwKey.length ? '✓ Todas as 8 corretas!' : ok + ' de 8 corretas — modelo (outras formas equivalentes também são possíveis):', html);
+}
+var vbKey = ['ameaçou', 'exigiu', 'acrescentou', 'retrucou', 'confessou', 'perguntou'];
+function checkVB() {
+  var ok = 0, html = '';
+  vbKey.forEach(function(k, i) {
+    var el = document.getElementById('vb-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var good = filled && norm(el.value) === norm(k);
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', filled && !good);
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> '
+      + (good ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+      + ' ' + k + '</div>';
+  });
+  show('vb-result', ok === vbKey.length, ok === vbKey.length ? '✓ Todas as 6 corretas!' : ok + ' de 6 corretas — modelo:', html);
+}
+function countWords() {
+  var t = document.getElementById('prod').value.trim();
+  var n = t ? t.split(/\s+/).length : 0;
+  var c = document.getElementById('prod-count');
+  c.textContent = n + ' palavras (meta: 80 a 120)';
+  c.className = 'counter' + (n >= 80 && n <= 120 ? ' ok' : '');
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  Array.prototype.map.call(document.querySelectorAll('[data-sub]'), function(e){ return e.id; }).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
