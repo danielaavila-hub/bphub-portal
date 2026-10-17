@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pernambuco, Terra do Frevo — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --baunilha:   #FCF5EB;
+      --baunilha2:  #FDE7C4;
+      --off-white:  #F2F0E3;
+      --light-gray: #EDEDE2;
+      --nanquim:    #1E1D1C;
+      --rosa-cha:   #FFD8C5;
+      --floresta:   #4E551D;
+      --erva-doce:  #A6B28A;
+      --marrom:     #967E63;
+      --marrom-light: #F3EFE9;
+      --pitomba:    #D36D29;
+      --ouro:       #FFB94A;
+      --texto:      #3C3C21;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--baunilha);
+      color: var(--texto);
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Trirong', serif;
+      font-weight: 300;
+      color: var(--marrom);
+      line-height: 1.25;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar { height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--baunilha); border-bottom:1px solid var(--light-gray); position:sticky; top:0; z-index:50; }
+    .topbar > a img { height: 40px; width: auto; display:block; }
+    .topbar-student { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .topbar-avatar { width:30px; height:30px; border-radius:50%; background:var(--marrom); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; }
+    .topbar-name { font-size:13px; font-weight:500; }
+    .topbar-back { font-size:12px; color:#aaa; text-decoration:none; transition:color .2s; }
+    .topbar-back:hover { color:var(--marrom); }
+
+    /* HERO */
+    .page-hero { background: #265B8B; padding: 60px 48px 52px; }
+    .page-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .page-hero h1 { font-size: clamp(28px, 4vw, 44px); color: white; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.88); max-width: 580px; line-height: 1.75; }
+    .student-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .meta-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: white; }
+    .meta-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ouro); }
+
+    /* MAIN */
+    .main { max-width: 900px; margin: 0 auto; padding: 52px 48px 20px; }
+
+    .sec-header { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+    .sec-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .icon-gram  { background: var(--marrom-light); }
+    .icon-photo { background: #EFF3EA; }
+    .icon-video { background: var(--baunilha2); }
+    .icon-ex    { background: #E8F0E0; }
+    .icon-write { background: var(--rosa-cha); }
+    .sec-header h2 { font-size: 22px; }
+    .sec-header p  { font-size: 13px; color: #888; margin-top: 3px; }
+    .sec-divider { border: none; border-top: 1px solid var(--light-gray); margin: 52px 0; }
+
+    /* INTRO TEXT */
+    .intro-text { font-size: 15px; line-height: 1.85; color: var(--texto); margin-bottom: 10px; }
+    .intro-text strong { color: var(--marrom); }
+
+    /* GRAMMAR NOTE */
+    .lang-note { background: var(--marrom-light); border: 1.5px solid rgba(150,126,99,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .lang-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--marrom); margin-bottom: 10px; }
+    .lang-note p { font-size: 14px; line-height: 1.8; color: var(--texto); margin-bottom: 12px; }
+    .lang-note p:last-child { margin-bottom: 0; }
+    .lang-note em { color: var(--marrom); font-style: italic; }
+    .lang-note strong { color: var(--marrom); }
+
+    /* ATTRACTION CARDS */
+    .attraction-card { background: white; border-radius: 14px; overflow: hidden; margin-bottom: 26px; border: 1px solid var(--light-gray); box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    .attraction-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--light-gray); }
+    .attraction-credit { font-size: 11px; color: #aaa; padding: 8px 22px 0; font-style: italic; }
+    .attraction-body { padding: 16px 22px 22px; }
+    .attraction-title { font-family: 'Trirong', serif; font-weight: 500; font-size: 19px; color: var(--nanquim); margin-bottom: 8px; }
+    .attraction-text { font-size: 14.5px; line-height: 1.8; color: var(--texto); }
+    .attraction-text strong { color: var(--marrom); }
+
+    /* VIDEO */
+    .video-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .video-wrap { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+    .video-title { font-family: 'Trirong', serif; font-size: 18px; color: var(--nanquim); margin-bottom: 4px; }
+    .video-meta { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+    /* vocab table */
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .vocab-table th { background: var(--marrom); color: white; padding: 8px 14px; text-align: left; font-weight: 700; }
+    .vocab-table td { padding: 8px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--marrom); white-space: nowrap; }
+    .vocab-note { font-size: 13px; color: #888; font-style: italic; margin-bottom: 14px; }
+
+    /* cultural note */
+    .cult-note { background: #EFF3EA; border-left: 3px solid var(--floresta); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 20px; font-size: 13px; color: var(--texto); line-height: 1.7; }
+    .cult-note strong { color: var(--floresta); }
+
+    /* EXERCISE BLOCK */
+    .exercise-block { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 32px 36px; margin-bottom: 20px; }
+    .ex-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--light-gray); }
+    .ex-num { width: 30px; height: 30px; border-radius: 50%; background: var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+    .ex-header h3 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--nanquim); }
+    .ex-header p { font-size: 12px; color: #999; margin-top: 2px; }
+    .ex-instruction { font-size: 14px; color: #666; font-style: italic; margin-bottom: 22px; line-height: 1.7; }
+
+    /* open textarea */
+    .open-textarea { width: 100%; background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 16px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--texto); resize: vertical; min-height: 90px; outline: none; line-height: 1.65; transition: border-color 0.2s; display: block; margin-bottom: 14px; }
+    .open-textarea:focus { border-color: var(--marrom); }
+    .open-textarea::placeholder { color: #bbb; }
+
+    /* blanks list */
+    .blanks-list { list-style: none; }
+    .blanks-list li { font-size: 15px; color: var(--texto); padding: 14px 0; border-bottom: 1px solid var(--light-gray); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6; }
+    .blanks-list li:last-child { border-bottom: none; }
+    .item-num { font-size: 12px; font-weight: 700; color: #bbb; min-width: 22px; }
+    .blank-input { display: inline-block; border: none; border-bottom: 2px solid var(--ouro); background: transparent; padding: 3px 8px; font-family: 'Manrope', sans-serif; font-size: 15px; color: var(--nanquim); min-width: 110px; outline: none; transition: border-color 0.2s; }
+    .blank-input:focus { border-bottom-color: var(--marrom); }
+    .blank-input.correct-input { border-bottom-color: var(--floresta); color: var(--floresta); }
+    .blank-input.wrong-input   { border-bottom-color: var(--pitomba);  color: var(--pitomba); }
+    .blank-hint { font-size: 12px; color: #aaa; font-style: italic; }
+
+    /* example box */
+    .example-box { background: var(--marrom-light); border: 1px solid rgba(150,126,99,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--texto); margin-bottom: 20px; line-height: 1.7; }
+    .example-box strong { color: var(--marrom); }
+
+    /* model text box */
+    .model-text-box { background: var(--off-white); border: 1.5px dashed var(--light-gray); border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .model-text-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-name { font-weight: 700; font-size: 14px; color: var(--marrom); margin-bottom: 8px; }
+    .model-text-box p { font-size: 14px; color: var(--texto); line-height: 1.8; }
+
+    .writing-questions { list-style: none; margin: 16px 0 20px; }
+    .writing-questions li { font-size: 14px; color: var(--texto); padding: 6px 0; padding-left: 18px; position: relative; }
+    .writing-questions li::before { content: '→'; position: absolute; left: 0; color: var(--marrom); font-weight: 700; }
+
+    /* check button */
+    .check-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 10px 22px; border-radius: 8px; background: var(--marrom); color: white; border: none; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .check-btn:hover { opacity: 0.85; }
+    .result-msg { display: none; margin-top: 14px; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+    .result-msg.good { background: rgba(78,85,29,0.08); border: 1px solid rgba(78,85,29,0.25); color: var(--floresta); }
+    .result-msg.try-again { background: rgba(211,109,41,0.08); border: 1px solid rgba(211,109,41,0.25); color: var(--pitomba); }
+
+    /* contact box */
+    .contact-box { background: var(--baunilha2); border: 1px solid rgba(211,109,41,0.20); border-radius: 12px; padding: 28px 32px; }
+    .contact-box p { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+    .personal-note { background: rgba(150,126,99,.1); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--marrom); font-style: italic; margin-top: 4px; }
+
+    @media (max-width: 700px) {
+      .topbar, .page-hero, .main { padding-left: 20px; padding-right: 20px; }
+      .exercise-block { padding: 24px 20px; }
+    }
+  
+    .tl{display:inline-block;background:var(--baunilha2);border-radius:6px;padding:1px 8px;font-size:12px;font-weight:700;color:var(--marrom);margin-right:6px;white-space:nowrap}
+    .q-item{margin-bottom:20px}
+    .q-item label{font-size:14px;font-weight:600;color:var(--texto);display:block;margin-bottom:6px}
+    .q-item .open-textarea{min-height:70px}
+    .res-box{display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.7;max-height:260px;overflow-y:auto;background:rgba(78,85,29,0.08);border:1px solid rgba(78,85,29,0.25);color:var(--floresta)}
+    .res-box.try-again{background:rgba(211,109,41,0.08);border-color:rgba(211,109,41,0.25);color:var(--nanquim)}
+    .res-box .ri{margin-bottom:8px;font-weight:400}
+    .res-box .head{font-weight:700;margin-bottom:8px}
+    .ok{color:var(--floresta);font-weight:700}.no{color:var(--pitomba);font-weight:700}
+    .gt{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 14px;background:white;border-radius:10px;overflow:hidden}
+    .gt th{background:var(--marrom);color:white;text-align:left;padding:8px 12px;font-weight:700}
+    .gt td{padding:8px 12px;border-bottom:1px solid var(--light-gray);vertical-align:top}
+    .gbox{background:white;border:1px solid var(--light-gray);border-radius:10px;padding:12px 16px;font-size:14px;margin:8px 0 14px;line-height:1.8}
+    .cl{display:block;font-size:14px;margin:4px 0}.cl input{margin-right:8px}
+    .counter{font-size:12.5px;color:#888;margin-top:6px}.counter.good{color:var(--floresta);font-weight:700}
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;width:auto;"></a>
+  <div class="topbar-student">
+    <div class="topbar-avatar">B1</div>
+    <span class="topbar-name">Intermediário I</span>
+  </div>
+  <a href="../viajando-pelo-brasil/index.html" class="topbar-back" style="margin-left:18px;">← Viajando pelo Brasil</a>
+</div>
+
+  <div class="page-hero">
+    <div class="page-eyebrow">Materials Portal</div>
+    <h1>Pernambuco <span style="color:rgba(255,255,255,0.5); font-weight:300;">&middot;</span> <em style="font-family:'Trirong',serif; font-weight:300; color:#FFB94A;">Terra do Frevo</em></h1>
+    <p>A YouTuber presents Pernambuco, the state he calls the best in Brazil, through its history, festivals and beaches. In this activity, you’ll learn to describe places the way he does: saying who built them, when they were founded, and how people see them.</p>
+    <div class="student-meta">
+      <span class="meta-pill"><span class="dot"></span>Particípio</span>
+      <span class="meta-pill"><span class="dot"></span>Contar a história de um lugar</span>
+      <span class="meta-pill"><span class="dot"></span>Recife, Olinda, Noronha e Caruaru</span>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🗺️</div>
+      <div><h2>Sobre o Estado</h2><p>Read this short introduction before you start</p></div>
+    </div>
+    <p class="intro-text">Pernambuco fica no Nordeste do Brasil e vai do litoral, com praias de água morna, até o sertão, a parte mais seca do estado. O arquipélago de Fernando de Noronha, no meio do Atlântico, também é pernambucano. A capital é o Recife, e quem nasce no estado é <strong>pernambucano</strong>. Os pernambucanos chamam o estado de <strong>Leão do Norte</strong>, um apelido cheio de orgulho. Neste material, você vai conhecer Pernambuco pelo olhar de um youtuber que tem uma opinião bem clara: para ele, este é o melhor estado do Brasil.</p>
+
+    <div class="cult-note">
+      <strong>Nota cultural — Orgulho de ser daqui:</strong> No Brasil, muita gente tem um grande orgulho do próprio estado ou da própria cidade. Os brasileiros chamam esse orgulho de <em>bairrismo</em>, e os pernambucanos são famosos por ele. O vídeo deste material é um bom exemplo: o narrador elogia Pernambuco o tempo todo e provoca outros lugares com bom humor. Depois da lista de comidas típicas, por exemplo, ele diz “Chupa, churrasco!”, como quem diz que a comida pernambucana ganha do churrasco, o prato mais famoso do Sul. “Chupa!” é uma provocação muito informal, comum entre amigos e entre torcedores de futebol. Não use em situações formais.<br><br>O bairrismo também aparece nas festas. Caruaru, em Pernambuco, e Campina Grande, na Paraíba, disputam há décadas o título de maior São João do mundo, e cada cidade garante que o título é dela.
+    </div>
+
+    <div class="lang-note" style="margin-top:24px;">
+      <div class="lang-note-label">💬 Nota linguística — de Pernambuco, no Recife</div>
+      <p>Em 0:36, o narrador dá uma regra: diga <em>“estado <strong>de</strong> Pernambuco”</em>, nunca <em>“do Pernambuco”</em>. Em português, alguns nomes de lugar têm artigo (<em>o</em>, <em>a</em>) e outros não, e o nome não mostra isso. Os cinco vizinhos de Pernambuco, citados em 0:21, mostram os dois grupos:</p>
+      <table class="gt"><tr><th>Com artigo</th><th>Sem artigo</th></tr>
+        <tr><td><strong>a</strong> Paraíba → <strong>na</strong> Paraíba, <strong>da</strong> Paraíba</td><td>Pernambuco → <strong>em</strong> Pernambuco, <strong>de</strong> Pernambuco</td></tr>
+        <tr><td><strong>o</strong> Ceará → <strong>no</strong> Ceará, <strong>do</strong> Ceará</td><td>Alagoas → <strong>em</strong> Alagoas, <strong>de</strong> Alagoas</td></tr>
+        <tr><td><strong>a</strong> Bahia → <strong>na</strong> Bahia, <strong>da</strong> Bahia</td><td></td></tr>
+        <tr><td><strong>o</strong> Piauí → <strong>no</strong> Piauí, <strong>do</strong> Piauí</td><td></td></tr></table>
+      <p>A capital tem artigo: quem é do Recife diz <em>“<strong>o</strong> Recife”</em>, ou seja, <em>“no Recife”</em> e <em>“do Recife”</em>. Em outras partes do Brasil, você também vai ouvir <em>em Recife</em>.</p>
+      <p>⚠️ Até os brasileiros hesitam aqui. No Exercício 1, você vai pegar o narrador quebrando a própria regra.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">🔤</div>
+      <div><h2>Vocabulário</h2><p>Read the vocabulary before you watch the video. You don’t need to memorize it: come back whenever you need.</p></div>
+    </div>
+    <table class="vocab-table"><thead><tr><th>Português</th><th>English</th></tr></thead><tbody>
+      <tr><td class="vocab-pt">a divisa</td><td>border (between states)</td></tr>
+      <tr><td class="vocab-pt">a fenda</td><td>crack, split</td></tr>
+      <tr><td class="vocab-pt">furado(a)</td><td>with a hole in it</td></tr>
+      <tr><td class="vocab-pt">a barreira de corais</td><td>coral reef</td></tr>
+      <tr><td class="vocab-pt">a galera</td><td>people, the guys (informal)</td></tr>
+      <tr><td class="vocab-pt">pirar</td><td>to go crazy (informal)</td></tr>
+      <tr><td class="vocab-pt">ocupar</td><td>to occupy</td></tr>
+      <tr><td class="vocab-pt">a batalha</td><td>battle</td></tr>
+      <tr><td class="vocab-pt">brigar</td><td>to fight</td></tr>
+      <tr><td class="vocab-pt">Êta!</td><td>Wow! (informal, common in the Northeast)</td></tr>
+      <tr><td class="vocab-pt">a aldeia de pescadores</td><td>fishing village</td></tr>
+      <tr><td class="vocab-pt">não à toa</td><td>no wonder</td></tr>
+      <tr><td class="vocab-pt">de grande porte</td><td>large, large-scale</td></tr>
+      <tr><td class="vocab-pt">grudado(a)</td><td>stuck (to something)</td></tr>
+      <tr><td class="vocab-pt">o mosteiro</td><td>monastery</td></tr>
+      <tr><td class="vocab-pt">o teto</td><td>ceiling</td></tr>
+      <tr><td class="vocab-pt">a baleia</td><td>whale</td></tr>
+      <tr><td class="vocab-pt">a casca</td><td>peel, skin (of a fruit)</td></tr>
+      <tr><td class="vocab-pt">o arquipélago</td><td>archipelago</td></tr>
+      <tr><td class="vocab-pt">financiar</td><td>to fund</td></tr>
+      <tr><td class="vocab-pt">disputar</td><td>to fight over, to compete for</td></tr>
+      <tr><td class="vocab-pt">o presídio</td><td>prison</td></tr>
+      <tr><td class="vocab-pt">o forró</td><td>forró (music and dance from the Northeast)</td></tr>
+      <tr><td class="vocab-pt">o São João</td><td>June festivals (Saint John's Day)</td></tr>
+      <tr><td class="vocab-pt">a feira ao ar livre</td><td>open-air market</td></tr>
+      <tr><td class="vocab-pt">tombar</td><td>to list as official heritage (to protect by law)</td></tr>
+      <tr><td class="vocab-pt">o patrimônio imaterial</td><td>intangible heritage</td></tr>
+      <tr><td class="vocab-pt">o artesanato de barro</td><td>clay handicrafts</td></tr>
+      <tr><td class="vocab-pt">a ladeira</td><td>steep street</td></tr>
+      <tr><td class="vocab-pt">o boneco gigante</td><td>giant puppet (Olinda carnival)</td></tr>
+      <tr><td class="vocab-pt">o confete e a serpentina</td><td>confetti and streamers</td></tr>
+      <tr><td class="vocab-pt">a maré baixa</td><td>low tide</td></tr>
+    </tbody></table>
+
+    <hr class="sec-divider">
+
+    <div class="sec-header">
+      <div class="sec-icon icon-video">🎬</div>
+      <div><h2>O Vídeo</h2><p>You don’t need to watch the whole video: Exercises 1 and 2 tell you exactly which parts to watch</p></div>
+    </div>
+    <div class="video-card">
+      <div class="video-title">Por que PERNAMBUCO é o MELHOR ESTADO do BRASIL?</div>
+      <div class="video-meta">Canal Elzinga · YouTube · 16 min</div>
+      <div class="video-wrap">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3l50wZEUyNU" title="Por que PERNAMBUCO é o MELHOR ESTADO do BRASIL? — Canal Elzinga" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block"></iframe>
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <div class="sec-header">
+      <div class="sec-icon icon-ex">✏️</div>
+      <div><h2>Exercícios</h2><p>Complete the exercises and send your answers to your teacher</p></div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header"><div class="ex-num">1</div><div><h3>Pernambuco em seis trechos</h3><p>Video comprehension</p></div></div>
+      <p class="ex-instruction">Watch only the parts indicated below. Watch each part once, without subtitles, and answer. Short answers are enough. If you can’t answer, watch the part again with Portuguese subtitles.</p>
+      <div class="q-item"><label><span class="tl">0:16 – 0:50</span> 1. Segundo a teoria mais aceita, o que quer dizer o nome “Pernambuco”? Por que o estado tem esse nome?</label><textarea class="open-textarea" id="q1-1" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label><span class="tl">1:22 – 2:10</span> 2. Quem lutou na Batalha dos Guararapes, e quem venceu? O que aconteceu com Pernambuco por 75 dias, em 1817?</label><textarea class="open-textarea" id="q1-2" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label><span class="tl">4:18 – 4:40</span> 3. Por que o Recife tem o apelido de “Veneza Brasileira”?</label><textarea class="open-textarea" id="q1-3" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label><span class="tl">7:28 – 8:10</span> 4. Olinda e o Recife estão “grudadas uma na outra”. Segundo o vídeo, o que mais as duas cidades têm em comum?</label><textarea class="open-textarea" id="q1-4" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label><span class="tl">8:10 – 8:48</span> 5. Fernando de Noronha nem sempre foi um destino turístico. Que outros usos o arquipélago já teve?</label><textarea class="open-textarea" id="q1-5" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label><span class="tl">12:21 – 13:07</span> 6. Por que Caruaru é famosa? Cite duas razões.</label><textarea class="open-textarea" id="q1-6" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label><span class="tl">8:26 – 8:37 e 12:21 – 12:27</span> 7. Escute de novo estes dois trechos e complete com a palavra que o narrador usa:</label>
+        <div style="font-size:15px;margin-bottom:6px;">a) “...em 1988 foi integrado <input class="blank-input" id="q1-7a" data-answer="ao" style="min-width:60px;width:70px" autocomplete="off"> Pernambuco.”</div>
+        <div style="font-size:15px;margin-bottom:12px;">b) “...a cidade mais importante do interior <input class="blank-input" id="q1-7b" data-answer="do" style="min-width:60px;width:70px" autocomplete="off"> Pernambuco...”</div>
+        <label style="font-weight:600">O narrador segue a regra que ele mesmo deu em 0:36? Explique.</label>
+        <textarea class="open-textarea" id="q1-7c" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;"><button class="check-btn" onclick="checkEx1()">✓ Check answers</button></div>
+      <div id="ex1-result" class="res-box"></div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header"><div class="ex-num">2</div><div><h3>Caça aos particípios</h3><p>Listening for details</p></div></div>
+      <p class="ex-instruction">Watch the same parts again, now with Portuguese subtitles if you want. Complete each sentence with the word you hear. All the missing words describe a place, a thing or an event.</p>
+      <ul class="blanks-list" id="ex2-blanks">
+        <li><span class="item-num">1.</span><span><span class="tl">1:22 – 1:33</span> “...entre 1630 e 1654 a região foi</span><input class="blank-input" data-answer="ocupada" placeholder="___________"><span>pelos holandeses.”</span></li>
+        <li><span class="item-num">2.</span><span><span class="tl">4:24 – 4:34</span> “Não à toa, pela quantidade de água e de pontes, é</span><input class="blank-input" data-answer="conhecida" placeholder="___________"><span>como a Veneza Brasileira.”</span></li>
+        <li><span class="item-num">3.</span><span><span class="tl">4:29 – 4:40</span> “A Ponte Maurício de Nassau [...] foi a primeira ponte de grande porte da América Latina,</span><input class="blank-input" data-answer="construída" placeholder="___________"><span>em 1643.”</span></li>
+        <li><span class="item-num">4.</span><span><span class="tl">7:28 – 7:39</span> “[Olinda] foi</span><input class="blank-input" data-answer="fundada" placeholder="___________"><span>em 1535 e é a cidade mais antiga do Brasil</span><input class="blank-input" data-answer="declarada" placeholder="___________" style="min-width:110px"><span>Patrimônio Histórico e Cultural da Humanidade pela UNESCO.”</span></li>
+        <li><span class="item-num">5.</span><span><span class="tl">7:50 – 7:58</span> “...com o teto</span><input class="blank-input" data-answer="pintado" placeholder="___________"><span>com sangue de boi, óleo de baleia e casca de banana.”</span></li>
+        <li><span class="item-num">6.</span><span><span class="tl">8:15 – 8:26</span> “[Fernando de Noronha] foi</span><input class="blank-input" data-answer="descoberto" placeholder="___________"><span>por Américo Vespúcio numa expedição</span><input class="blank-input" data-answer="financiada" placeholder="___________"><span>por Fernão de Noronha.”</span></li>
+        <li><span class="item-num">7.</span><span><span class="tl">12:36 – 12:47</span> “...a Feira de Caruaru,</span><input class="blank-input" data-answer="fundada" placeholder="___________"><span>em 1871, [...]</span><input class="blank-input" data-answer="tombada" placeholder="___________"><span>pelo IPHAN como Patrimônio Imaterial do Brasil.”</span></li>
+      </ul>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkFillList('ex2-blanks','ex2-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetFillList('ex2-blanks','ex2-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex2-result" class="res-box"></div>
+
+      <p style="font-size:14px;font-weight:700;margin:26px 0 10px;">Agora observe as suas respostas e responda:</p>
+      <div class="q-item"><label>a) No item 6, <em>descoberto</em> termina em <strong>-o</strong> e <em>financiada</em> termina em <strong>-a</strong>. O que essas palavras descrevem no vídeo?</label><textarea class="open-textarea" id="q2-a" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div class="q-item"><label>b) No item 7, o que foi fundado em 1871 e tombado pelo IPHAN: a feira ou a cidade de Caruaru?</label><textarea class="open-textarea" id="q2-b" placeholder="Escreva sua resposta aqui..."></textarea></div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;"><button class="check-btn" onclick="checkEx2b()">✓ Check answers</button></div>
+      <div id="ex2b-result" class="res-box"></div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <div class="sec-header">
+      <div class="sec-icon icon-gram">📘</div>
+      <div><h2>Gramática</h2><p>O que você encontrou no vídeo</p></div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 1. O particípio que descreve</div>
+      <p>O particípio (<em>fundado</em>, <em>construído</em>, <em>conhecido</em>) funciona como um adjetivo: ele descreve um substantivo e conta o que aconteceu com ele. Guias de viagem e textos de história usam o particípio o tempo todo para apresentar um lugar: quando ele foi fundado, quem construiu, que título ele recebeu.</p>
+      <div class="gbox">a Feira de Caruaru, <strong>fundada</strong> em 1871<br>o Forte Orange, <strong>construído</strong> em 1631 pelos holandeses</div>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 2. Como formar</div>
+      <table class="gt"><tr><td>-ar → <strong>-ado</strong></td><td>fundar → fundado · pintar → pintado · tombar → tombado</td></tr>
+        <tr><td>-er / -ir → <strong>-ido</strong></td><td>conhecer → conhecido · construir → construído</td></tr></table>
+      <p>⚠️ <em>Construído</em> tem acento no <em>í</em>.</p>
+      <p>Formas irregulares comuns em textos sobre lugares:</p>
+      <table class="gt">
+        <tr><td>abrir → <strong>aberto</strong></td><td>o maior teatro a céu <strong>aberto</strong> do mundo</td></tr>
+        <tr><td>descobrir → <strong>descoberto</strong></td><td></td></tr>
+        <tr><td>eleger → <strong>eleito</strong></td><td>a Baía do Sancho, <strong>eleita</strong> a melhor praia do Brasil</td></tr>
+        <tr><td>escrever → <strong>escrito</strong></td><td></td></tr>
+        <tr><td>cobrir → <strong>coberto</strong></td><td></td></tr>
+        <tr><td>ver → <strong>visto</strong></td><td></td></tr></table>
+      <p>Alguns verbos têm dois particípios: um regular (<em>aceitado</em>, <em>elegido</em>) e um curto (<em>aceito</em>, <em>eleito</em>). Para descrever um substantivo, use o curto: <em>a teoria mais <strong>aceita</strong></em>, <em>a praia <strong>eleita</strong> a melhor do Brasil</em>.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 3. Concordância — o ponto principal</div>
+      <p>O particípio concorda com o substantivo que ele descreve, em gênero e número, como qualquer adjetivo. Em inglês, <em>built</em> nunca muda. Em português, o particípio tem quatro formas:</p>
+      <table class="gt"><tr><th></th><th>singular</th><th>plural</th></tr>
+        <tr><td><strong>masculino</strong></td><td>o forte <strong>construído</strong></td><td>os fortes <strong>construídos</strong></td></tr>
+        <tr><td><strong>feminino</strong></td><td>a ponte <strong>construída</strong></td><td>as pontes <strong>construídas</strong></td></tr></table>
+      <p>⚠️ Procure o substantivo que o particípio descreve, e não a palavra que vem logo antes dele. Em <em>“o Forte Orange, construído pelos holandeses”</em>, o particípio concorda com <em>“forte”</em>, e não com <em>“holandeses”</em>.</p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 4. Quem realizou a ação? → por</div>
+      <div class="gbox"><strong>tombada pelo</strong> IPHAN · <strong>construído pelos</strong> holandeses · <strong>financiada por</strong> Fernão de Noronha</div>
+      <p>por + o = <strong>pelo</strong> · por + a = <strong>pela</strong> · por + os = <strong>pelos</strong> · por + as = <strong>pelas</strong></p>
+    </div>
+
+    <div class="lang-note">
+      <div class="lang-note-label">📌 5. Duas posições na frase</div>
+      <p>Depois do substantivo: <em>Olinda, <strong>fundada</strong> em 1535, é...</em></p>
+      <p>No começo da frase, com uma vírgula depois da informação (muito comum em guias de viagem): <em><strong>Fundada</strong> em 1535, Olinda é Patrimônio da Humanidade.</em></p>
+      <p>O particípio continua concordando com o substantivo: <em>Olinda</em> → <em>fundada</em>. Com <em>“foi”</em> (<em>foi fundada</em>, <em>foi descoberto</em>), a regra é a mesma.</p>
+    </div>
+
+    <hr class="sec-divider">
+
+    <div class="exercise-block">
+      <div class="ex-header"><div class="ex-num">3</div><div><h3>Concordância</h3><p>Mais sobre Pernambuco</p></div></div>
+      <p class="ex-instruction">Complete each sentence with the participle of the verb in parentheses. First, find the noun the participle describes. Then check gender and number.</p>
+      <ul class="blanks-list" id="ex3-blanks">
+        <li><span class="item-num">1.</span><span>O Paço do Frevo,</span><input class="blank-input" data-answer="criado" placeholder="___________"><span class="blank-hint">(criar)</span><span>para manter o frevo vivo, fica no Bairro do Recife.</span></li>
+        <li><span class="item-num">2.</span><span>As tapiocas do Alto da Sé, em Olinda, são</span><input class="blank-input" data-answer="preparadas" placeholder="___________"><span class="blank-hint">(preparar)</span><span>na hora, na frente do cliente.</span></li>
+        <li><span class="item-num">3.</span><span>Os bonecos gigantes de Olinda,</span><input class="blank-input" data-answer="carregados" placeholder="___________"><span class="blank-hint">(carregar)</span><span>por uma pessoa que fica dentro deles, podem ter mais de três metros.</span></li>
+        <li><span class="item-num">4.</span><span>A Casa da Cultura,</span><input class="blank-input" data-answer="instalada" placeholder="___________"><span class="blank-hint">(instalar)</span><span>num antigo presídio, hoje tem lojas de artesanato.</span></li>
+        <li><span class="item-num">5.</span><span>Os livros de Paulo Freire,</span><input class="blank-input" data-answer="escritos" placeholder="___________"><span class="blank-hint">(escrever)</span><span>em português, foram</span><input class="blank-input" data-answer="traduzidos" placeholder="___________"><span class="blank-hint">(traduzir)</span><span>para dezenas de línguas.</span></li>
+        <li><span class="item-num">6.</span><span>Durante o carnaval, as ladeiras de Olinda ficam</span><input class="blank-input" data-answer="cobertas" placeholder="___________"><span class="blank-hint">(cobrir)</span><span>de confete e serpentina.</span></li>
+        <li><span class="item-num">7.</span><span>As piscinas naturais de Porto de Galinhas só podem ser</span><input class="blank-input" data-answer="vistas" placeholder="___________"><span class="blank-hint">(ver)</span><span>na maré baixa.</span></li>
+        <li><span class="item-num">8.</span><span>O frevo foi</span><input class="blank-input" data-answer="reconhecido" placeholder="___________"><span class="blank-hint">(reconhecer)</span><span>pela UNESCO como Patrimônio Imaterial da Humanidade em 2012.</span></li>
+      </ul>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+        <button class="check-btn" onclick="checkFillList('ex3-blanks','ex3-result')">✓ Check answers</button>
+        <button class="check-btn" onclick="resetFillList('ex3-blanks','ex3-result')" style="background:transparent; color:var(--marrom); border:1.5px solid var(--marrom);">↺ Reiniciar</button>
+      </div>
+      <div id="ex3-result" class="res-box"></div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header"><div class="ex-num">4</div><div><h3>Dois fatos, uma frase</h3><p>Write like a travel guide</p></div></div>
+      <p class="ex-instruction">Join the two sentences into one. Start with the participle and put a comma after the information it introduces. Check the agreement.</p>
+      <div class="example-box"><strong>Modelo</strong><br>O Mercado de São José foi inaugurado em 1875. Hoje ele vende artesanato e comidas típicas.<br>→ <strong>Inaugurado</strong> em 1875, o Mercado de São José hoje vende artesanato e comidas típicas.</div>
+      <div class="q-item"><label>1. O Galo da Madrugada foi fundado em 1978. Hoje, ele reúne mais de um milhão de pessoas no sábado de Carnaval.</label><textarea class="open-textarea" id="q4-1" placeholder="Escreva a frase completa..."></textarea></div>
+      <div class="q-item"><label>2. Clarice Lispector nasceu na Ucrânia em 1920. Ela passou a infância no Recife.</label><textarea class="open-textarea" id="q4-2" placeholder="Escreva a frase completa..."></textarea></div>
+      <div class="q-item"><label>3. A Torre Malakoff foi construída no século XIX. Hoje ela é um centro cultural.</label><textarea class="open-textarea" id="q4-3" placeholder="Escreva a frase completa..."></textarea></div>
+      <div class="q-item"><label>4. O Instituto Ricardo Brennand foi aberto ao público em 2002. Ele tem um castelo e uma grande coleção de arte.</label><textarea class="open-textarea" id="q4-4" placeholder="Escreva a frase completa..."></textarea></div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;"><button class="check-btn" onclick="checkEx4()">✓ Check answers</button></div>
+      <div id="ex4-result" class="res-box"></div>
+      <div class="q-item" style="margin-top:22px"><label>5. Agora escreva uma frase como essas sobre um lugar famoso da sua cidade.</label><textarea class="open-textarea" id="q4-5" placeholder="Escreva sua resposta aqui..."></textarea></div>
+    </div>
+
+    <div class="exercise-block">
+      <div class="ex-header"><div class="ex-num">5</div><div><h3>O melhor lugar do país</h3><p>80–100 words</p></div></div>
+      <p class="ex-instruction">Write the script of a short video like the one you watched. Present your city, your state or your region to Brazilians.</p>
+      <div class="model-text-box">
+        <div class="model-text-label">Modelo (texto construído)</div>
+        <div class="model-text-name">Por que Boston é a melhor cidade dos Estados Unidos?</div>
+        <p>Oi, pessoal! Hoje vamos conhecer Boston, a capital de Massachusetts. <strong>Fundada</strong> em 1630 por colonos ingleses, Boston é uma das cidades mais antigas do país. Lá você encontra a Freedom Trail, uma trilha de quatro quilômetros <strong>marcada</strong> por uma linha vermelha no chão, que passa por dezesseis lugares históricos. Não deixe de visitar o Boston Common, <strong>criado</strong> em 1634: é o parque público mais antigo do país. E para quem gosta de esporte, o Fenway Park, <strong>inaugurado</strong> em 1912, é o estádio de beisebol mais antigo da liga. Convencido? Então se inscreve no canal e até a próxima!</p>
+      </div>
+      <p style="font-size:14px;margin-bottom:6px;">O seu roteiro precisa ter:</p>
+      <ul class="writing-questions">
+        <li>pelo menos dois lugares, com informações sobre a história deles: quando foram fundados, construídos ou abertos e, se você souber, quem construiu;</li>
+        <li>pelo menos quatro particípios;</li>
+        <li>uma frase final para o seu público.</li>
+      </ul>
+      <textarea class="open-textarea" id="prod" style="min-height:220px;" placeholder="Escreva seu roteiro aqui..." oninput="countWords()"></textarea>
+      <div class="counter" id="prod-count">0 palavras (meta: 80 a 100)</div>
+      <p style="font-size:14px;font-weight:700;margin:16px 0 4px">Antes de terminar, leia o seu texto mais uma vez e confira:</p>
+      <label class="cl"><input type="checkbox"> Cada particípio concorda com o substantivo que ele descreve (gênero e número).</label>
+      <label class="cl"><input type="checkbox"> Para dizer quem realizou a ação, você usou <em>por</em>, <em>pelo</em>, <em>pela</em>, <em>pelos</em> ou <em>pelas</em>.</label>
+      <label class="cl"><input type="checkbox"> O seu texto tem de 80 a 100 palavras.</label>
+    </div>
+
+    <div class="contact-box">
+      <p>When you’re done, <strong>send your answers to your teacher.</strong> She will read your text carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further.</p>
+    </div>
+
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 60px;">
+<div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+  <div style="font-size:12px;font-weight:700;color:#967E63;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+    <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+    <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+  </div>
+</div>
+<div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+  <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+  <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+  <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+</div>
+<div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div><!-- /form-wrapper -->
+
+    <p style="font-size:12.5px;color:#999;margin-top:24px;">Vídeo: “Por que PERNAMBUCO é o MELHOR ESTADO do BRASIL?”, Canal Elzinga, YouTube. Trechos citados apenas para fins didáticos.</p>
+
+  </div>
+
+<script>
+function norm(s){return (s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();}
+function hit(text,k){
+  var t=norm(text),kk=norm(k);
+  if(kk.indexOf(' ')>-1) return t.indexOf(kk)>-1;
+  var toks=t.split(' ');
+  return toks.some(function(w){return kk.length>=5 ? w.indexOf(kk)===0 : w===kk;});
+}
+function concepts(text,groups){var n=0;groups.forEach(function(g){if(g.some(function(k){return hit(text,k);}))n++;});return n;}
+function panel(id,ok,tot,html,msg){
+  var r=document.getElementById(id);
+  r.className='res-box'+(ok===tot?'':' try-again');
+  r.innerHTML='<div class="head">'+(ok===tot?'✓ '+msg[0]:ok+' of '+tot+' '+msg[1])+'</div>'+html;
+  r.style.display='block';
+}
+function ri(i,good,txt){return '<div class="ri"><strong>'+i+'.</strong> '+(good?'<span class="ok">✓</span>':'<span class="no">✗</span>')+' '+txt+'</div>';}
+var q1Key=[{"model": "“Fenda do mar” ou “mar furado”. O nome vem do tupi e se refere às barreiras de corais do litoral.", "g": [["fenda", "furado", "rachadura", "buraco"], ["coral", "corais", "barreira", "recife", "tupi"]], "min": 2}, {"model": "Holandeses contra portugueses; os portugueses venceram. Por 75 dias, Pernambuco se tornou um país independente.", "g": [["holandes", "holandeses"], ["portugues", "portugueses"], ["independente", "pais", "republica", "livre"]], "min": 3}, {"model": "Por causa da quantidade de água (rios, ilhas, penínsulas) e de pontes.", "g": [["agua", "rios", "ilhas", "peninsulas", "canais"], ["ponte", "pontes"]], "min": 2}, {"model": "As duas cidades comemoram o aniversário no mesmo dia.", "g": [["aniversario", "parabens", "comemoram", "festejam", "data"]], "min": 1}, {"model": "Foi presídio político e depois território federal. Antes disso, foi disputado por portugueses, holandeses e franceses.", "g": [["presidio", "prisao", "prisioneiros", "territorio", "disputado"]], "min": 1}, {"model": "Duas destas: é a capital do forró; tem o maior São João do mundo; tem a Feira de Caruaru; tem o artesanato de barro do Mestre Vitalino.", "g": [["forro"], ["joao", "sao"], ["feira"], ["artesanato", "barro", "vitalino"]], "min": 2}];
+function checkEx1(){
+  var ok=0,html='';
+  q1Key.forEach(function(k,i){
+    var v=document.getElementById('q1-'+(i+1)).value;
+    var good=v.trim()!=='' && concepts(v,k.g)>=k.min;
+    if(good)ok++;
+    html+=ri(i+1,good,k.model);
+  });
+  ['a','b'].forEach(function(l,j){
+    var el=document.getElementById('q1-7'+l),ans=['ao','do'][j];
+    var good=norm(el.value)===ans;
+    el.classList.toggle('correct-input',good);el.classList.toggle('wrong-input',!good&&el.value.trim()!=='');
+    if(good)ok++;
+    html+=ri('7'+l,good,'<em>'+ans+'</em> ('+(l==='a'?'a + o':'de + o')+')');
+  });
+  var v=document.getElementById('q1-7c').value;
+  var g7=v.trim()!=='' && concepts(v,[['nao'],['artigo','ao','do','o ']])>=2;
+  if(g7)ok++;
+  html+=ri('7c',g7,'Não: nos dois trechos ele usa o artigo. Pela regra que ele deu, seria “integrado a Pernambuco” e “do interior de Pernambuco”.');
+  panel('ex1-result',ok,9,html,['Todas as 9 respostas conferem com o modelo!','corretas — modelo (outras formulações também podem estar certas):']);
+}
+function checkFillList(listId,resId){
+  var inputs=document.getElementById(listId).querySelectorAll('.blank-input'),ok=0,html='';
+  inputs.forEach(function(inp,i){
+    var good=norm(inp.value)===norm(inp.dataset.answer);
+    inp.classList.toggle('correct-input',good);inp.classList.toggle('wrong-input',!good&&inp.value.trim()!=='');
+    if(good)ok++;
+    html+=ri(i+1,good,'<strong>'+inp.dataset.answer+'</strong>');
+  });
+  panel(resId,ok,inputs.length,html,['Perfect! All '+inputs.length+' correct.','correct — model answers:']);
+}
+function resetFillList(listId,resId){
+  document.getElementById(listId).querySelectorAll('.blank-input').forEach(function(inp){inp.value='';inp.classList.remove('correct-input','wrong-input');});
+  var r=document.getElementById(resId);r.style.display='none';r.innerHTML='';
+}
+function checkEx2b(){
+  var a=document.getElementById('q2-a').value,b=document.getElementById('q2-b').value;
+  var ga=a.trim()!==''&&concepts(a,[['noronha','fernando','arquipelago','ilha'],['expedicao','viagem']])>=2;
+  var gb=b.trim()!==''&&hit(b,'feira')&&!/^\s*(a\s+)?cidade/.test(norm(b));
+  panel('ex2b-result',(ga?1:0)+(gb?1:0),2,ri('a',ga,'<em>Descoberto</em> descreve Fernando de Noronha (masculino); <em>financiada</em> descreve a expedição (feminino).')+ri('b',gb,'A feira.'),['Todas conferem com o modelo!','corretas — modelo:']);
+}
+var q4Key=[
+ {first:'fundado',has:['galo','madrugada','milhao'],model:'Fundado em 1978, o Galo da Madrugada hoje reúne mais de um milhão de pessoas no sábado de carnaval.'},
+ {first:'nascida',has:['clarice','lispector','ucrania','1920','infancia','recife'],model:'Nascida na Ucrânia em 1920, Clarice Lispector passou a infância no Recife.'},
+ {first:'construida',has:['torre','malakoff','seculo','xix','centro','cultural'],model:'Construída no século XIX, a Torre Malakoff hoje é um centro cultural.'},
+ {first:'aberto',has:['instituto','ricardo','brennand','2002','castelo','colecao','arte'],model:'Aberto ao público em 2002, o Instituto Ricardo Brennand tem um castelo e uma grande coleção de arte.'}
+];
+function checkEx4(){
+  var ok=0,html='';
+  q4Key.forEach(function(k,i){
+    var v=document.getElementById('q4-'+(i+1)).value,n=norm(v);
+    var good=n!==''&&n.split(' ')[0]===k.first&&k.has.every(function(w){return n.indexOf(w)>-1;});
+    if(good)ok++;
+    html+=ri(i+1,good,k.model);
+  });
+  panel('ex4-result',ok,4,html,['Todas as 4 frases conferem com o modelo!','corretas — modelo (outras formas equivalentes também podem estar certas):']);
+}
+function countWords(){
+  var t=document.getElementById('prod').value.trim(),n=t?t.split(/\s+/).length:0,c=document.getElementById('prod-count');
+  c.textContent=n+' palavras (meta: 80 a 100)';c.className='counter'+(n>=80&&n<=100?' good':'');
+}
+</script>
+
+<script>
+// BREVO SUBMIT
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea, input.blank-input').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q-item, li, .exercise-block');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,input,button,.check-btn,.reset-btn,.res-box').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#967E63;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+</body>
+</html>
