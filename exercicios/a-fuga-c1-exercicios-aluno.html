@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A fuga — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--telha); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--telha); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--telha); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--telha); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--telha); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--telha); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    select.vf { border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 8px 10px; font-family: 'Manrope', sans-serif; font-size: 14px; background: white; font-weight: 700; }
+    select.vf.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    select.vf.wrong { border-color: var(--telha); background: #FBF0EC; }
+    .vf-item { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; }
+    .vf-item .vf-top { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+    .vf-item .vf-top .q-text { flex: 1; min-width: 220px; margin: 0; }
+    .vf-item input[type=text] { margin-top: 10px; }
+    .rw-item { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
+    .rw-item .q-text { margin-bottom: 8px; }
+    .rw-prefix { font-weight: 600; color: var(--telha); margin-bottom: 6px; font-size: 14.5px; }
+    details.resp { margin-top: 10px; font-size: 13.5px; }
+    details.resp summary { cursor: pointer; font-weight: 700; color: var(--telha); font-size: 13px; }
+    details.resp div { background: var(--baunilha2); border-radius: 10px; padding: 12px 14px; margin-top: 8px; line-height: 1.7; }
+    .counter { font-size: 12.5px; color: #888; margin-top: 6px; }
+    .counter.ok { color: #2E7D52; font-weight: 700; }
+    .cl { font-size: 14px; margin: 4px 0; display: block; }
+    .cl input { margin-right: 8px; }
+    .model-box { background: var(--off-white); border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.75; margin: 14px 0; }
+    .verb-bank { background: var(--off-white); border-radius: 10px; padding: 12px 18px; margin-bottom: 16px; font-weight: 700; text-align: center; font-size: 14.5px; }
+    .gap-line { font-size: 15px; margin-bottom: 14px; }
+    .gap-line input[type=text] { width: 150px; display: inline-block; margin: 0 4px; padding: 6px 10px; }
+  </style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../contos/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Conto com Áudio</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>A fuga <span style="color:rgba(255,255,255,0.5); font-weight:300;">·</span> <em>Clarice Lispector</em></h1>
+  <div class="hero-sub">BPHub Conta um Conto — contos brasileiros de verdade, no seu nível. Ouça o conto e pratique o <span style="color:var(--ouro); font-weight:600;">mais-que-perfeito simples</span>, a forma que a narradora usa para contar o que aconteceu antes da fuga.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Conto · Clarice Lispector · 1940</span>
+    <span class="hero-tag">Foco linguístico: mais-que-perfeito simples</span>
+    <span class="hero-tag">tomara × tomará</span>
+  </div>
+  <div class="hero-note">🎧 Ouça o conto e complete as atividades abaixo</div>
+</div>
+
+<div class="main">
+
+  <p style="font-size:15px;">Nesta ficha, você vai ouvir o conto “A fuga”, de Clarice Lispector, uma das maiores escritoras da língua portuguesa. Clarice escreveu este conto muito jovem, antes de publicar o primeiro livro, e nele já aparece a marca da autora: o mergulho no pensamento da personagem. Numa tarde de chuva no Rio de Janeiro, uma mulher anda sozinha pela cidade e tenta decidir o seu destino.</p>
+
+  <section style="margin-top:32px;">
+    <div class="sec-label">Nota cultural — Clarice Lispector</div>
+    <div class="info-box">
+      Clarice Lispector (1920–1977) nasceu na Ucrânia, em uma família judia que fugiu da violência contra os judeus e chegou ao Brasil quando ela tinha pouco mais de um ano. Cresceu em Maceió e no Recife. Na adolescência, mudou-se para o Rio de Janeiro, onde estudou Direito e trabalhou como jornalista. Em 1943, aos 23 anos, publicou o primeiro romance, <i>Perto do Coração Selvagem</i>, que surpreendeu a crítica. No mesmo ano, casou-se com um diplomata e passou cerca de quinze anos fora do Brasil, na Europa e nos Estados Unidos. Depois da separação, em 1959, voltou para o Rio com os dois filhos.
+      <br><br>
+      Escreveu romances como <i>A Paixão segundo G.H.</i> (1964) e <i>A Hora da Estrela</i> (1977), livros de contos como <i>Laços de Família</i> (1960) e crônicas para o <i>Jornal do Brasil</i>. Sua escrita acompanha de perto o pensamento das personagens. Muitas vezes são mulheres que, em um momento banal do dia a dia, passam a ver a própria vida de outra forma. Hoje é uma das escritoras brasileiras mais traduzidas e lidas no mundo.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota de contexto — uma mulher casada no Rio de 1940</div>
+    <div class="info-box">
+      “A fuga” foi escrito em 1940, quando Clarice tinha cerca de 20 anos e ainda era solteira, mas só foi reunido em livro em 1979, depois da morte da autora, em <i>A Bela e a Fera</i>.
+      <br><br>
+      A história se passa no Rio de Janeiro, então capital do país. A personagem mora na Tijuca, bairro residencial da Zona Norte. Ela vai de ônibus até a Glória, perto da Baía de Guanabara, e caminha pela orla até passar pelo Morro da Viúva, no Flamengo. Em 1940, o Aterro do Flamengo ainda não existia, e o mar batia direto na mureta da avenida. Na época, também era comum as casas terem nome, escrito numa placa na fachada. A casa da personagem se chama “Lar Elvira”.
+      <br><br>
+      Para entender a personagem, vale lembrar a situação da mulher casada naquele tempo. Pelo Código Civil de 1916, ela precisava da autorização do marido para trabalhar fora de casa. Também não existia divórcio. Havia só o desquite, uma separação que não permitia um novo casamento e deixava a mulher malvista. O divórcio só foi aprovado no Brasil em 1977.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Antes de ouvir</div>
+    <p style="font-size:13.5px;color:#888;">Responda em duas ou três frases.</p>
+    <div class="q">
+      <div class="q-text">Muita gente já teve vontade de largar tudo e recomeçar em outro lugar. Na sua opinião, o que leva uma pessoa a sentir isso? E o que costuma impedir que ela vá embora de verdade?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">O quadro é longo. Leia antes de ouvir o conto. Não é preciso decorar as palavras: volte a ele sempre que precisar.</p>
+    <p style="font-weight:700;margin:14px 0 6px;">A cidade na chuva</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>sem tréguas</td><td>sem parar, sem descanso</td></tr>
+      <tr><td>deslizar</td><td>mover-se suavemente sobre uma superfície</td></tr>
+      <tr><td>o transeunte</td><td>pessoa que passa a pé pela rua</td></tr>
+      <tr><td>saltar (do ônibus)</td><td>descer do ônibus (uso ainda comum no Rio)</td></tr>
+      <tr><td>o passeio (hoje: a calçada)</td><td>parte da rua reservada a quem anda a pé</td></tr>
+      <tr><td>a murada</td><td>muro baixo que protege a beira do mar</td></tr>
+      <tr><td>revolver-se (o mar)</td><td>agitar-se, mexer-se com força</td></tr>
+      <tr><td>salpicar</td><td>molhar com pequenos pingos</td></tr>
+    </table>
+    <p style="font-weight:700;margin:14px 0 6px;">A casa e o casamento</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>tolhido, tolhida</td><td>impedido de agir, limitado, preso</td></tr>
+      <tr><td>o bom senso</td><td>capacidade de julgar com equilíbrio e prudência</td></tr>
+      <tr><td>saber de cor</td><td>saber de memória</td></tr>
+      <tr><td>o chumbo</td><td>metal pesado e cinzento, símbolo de peso</td></tr>
+      <tr><td>a criada (hoje: a empregada)</td><td>mulher que trabalha nos serviços da casa</td></tr>
+      <tr><td>em ponto</td><td>exatamente na hora marcada (<i>às sete em ponto</i>)</td></tr>
+      <tr><td>torcer o comutador (hoje: apagar a luz)</td><td>girar o interruptor antigo, que se torcia para acender e apagar a luz</td></tr>
+    </table>
+    <p style="font-weight:700;margin:14px 0 6px;">A tarde da tempestade</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>a viração</td><td>vento fresco que sopra do mar</td></tr>
+      <tr><td>estraçalhar</td><td>despedaçar com violência</td></tr>
+      <tr><td>o estrondo</td><td>barulho forte, como o do trovão</td></tr>
+      <tr><td>o tamborilar</td><td>som leve e repetido, como o da chuva batendo</td></tr>
+      <tr><td>ofegante</td><td>respirando com dificuldade, sem fôlego</td></tr>
+    </table>
+    <p style="font-weight:700;margin:14px 0 6px;">O que ela sente e imagina</p>
+    <table class="vocab"><tr><th>Palavra ou expressão</th><th>Significado</th></tr>
+      <tr><td>apaziguar-se</td><td>acalmar-se</td></tr>
+      <tr><td>o turbilhão</td><td>movimento rápido e desordenado (de vento, de água ou de pensamentos)</td></tr>
+      <tr><td>aspirar</td><td>puxar o ar para dentro, respirar fundo</td></tr>
+      <tr><td>apalpar-se / beliscar-se</td><td>tocar o próprio corpo ou apertar a pele para ter certeza de que está acordado</td></tr>
+      <tr><td>desperto, desperta</td><td>acordado, atento</td></tr>
+      <tr><td>ao cabo de</td><td>depois de, no fim de</td></tr>
+      <tr><td>restituir</td><td>devolver</td></tr>
+      <tr><td>o aposento</td><td>cômodo da casa, quarto (formal)</td></tr>
+      <tr><td>esvoaçar</td><td>voar de leve, agitando as asas ou o tecido</td></tr>
+      <tr><td>a gaivota</td><td>ave marinha de plumagem branca e cinza</td></tr>
+      <tr><td>o casco</td><td>parte externa e inferior de um navio</td></tr>
+      <tr><td>enxugar</td><td>secar</td></tr>
+      <tr><td>ajeitar-se</td><td>acomodar-se, arrumar-se para ficar confortável</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-label">Ouça o conto</div>
+    <p style="font-size:13.5px;color:#888;">Ouça o conto uma vez, do começo ao fim, sem ler. Não se preocupe com as palavras que você não entender. Acompanhe a história e tente descobrir para onde a mulher quer ir.</p>
+    <div class="audio-box">
+      <iframe src="https://drive.google.com/file/d/1BMdR5rWi87T__Rhc2iGtjx92tfZNeAwe/preview" width="100%" height="90" style="border:0;border-radius:10px;" allow="autoplay" title="Áudio do conto A fuga"></iframe>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 1 — Verdadeiro ou falso?</div>
+    <p style="font-size:13.5px;color:#888;">Compreensão do conto. Leia as frases, ouça o conto novamente e marque V (verdadeiro) ou F (falso). Se a frase for falsa, corrija-a no campo abaixo. Se não tiver certeza, ouça o conto de novo.</p>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">1.</span>A história acontece numa tarde de sol, no Rio de Janeiro.</div>
+      <select class="vf" id="vf-1" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-1" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">2.</span>A mulher é casada há doze anos.</div>
+      <select class="vf" id="vf-2" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-2" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">3.</span>Ela pegou o ônibus na Glória e desceu na Tijuca.</div>
+      <select class="vf" id="vf-3" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-3" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">4.</span>Na escola, ela inventou a história de um homem que caía para fora da Terra e nunca parava de cair.</div>
+      <select class="vf" id="vf-4" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-4" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">5.</span>Segundo a mulher, o marido sabe responder a perguntas práticas, como o horário dos trens.</div>
+      <select class="vf" id="vf-5" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-5" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">6.</span>Antes de sair, ela pegou todo o dinheiro que havia em casa.</div>
+      <select class="vf" id="vf-6" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-6" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">7.</span>Ela compra uma passagem de navio, mas desiste da viagem no porto.</div>
+      <select class="vf" id="vf-7" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-7" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <div class="vf-item"><div class="vf-top"><div class="q-text"><span class="q-num">8.</span>Em casa, ela conta ao marido a verdade sobre a tarde.</div>
+      <select class="vf" id="vf-8" data-sub><option value="">—</option><option value="V">V</option><option value="F">F</option></select></div>
+      <input type="text" id="vfc-8" data-sub placeholder="Se for falso, escreva a correção aqui..."></div>
+    <button class="check-btn" onclick="checkVF()">Verificar respostas</button>
+    <div class="result-msg" id="vf-result"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 2 — Interpretação</div>
+    <p style="font-size:13.5px;color:#888;">Para pensar sobre o conto. Responda em duas ou três frases cada. Se precisar, ouça o conto mais uma vez. Depois de responder, compare com a resposta possível.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Depois de duas horas na rua, ela descobre que “as coisas ainda existem” e acha isso extraordinário. Por que uma descoberta tão simples tem tanto valor para ela?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>Em doze anos de casamento, a vida dela parou. Ela vivia atrás da janela, repetindo a mesma cena todos os dias, e a presença do marido prendia até os seus pensamentos. Poucas horas de liberdade bastam para ela voltar a perceber o mundo e a si mesma, como quem acorda depois de muito tempo.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Na tarde da fuga, o ar estava quente e parado, e, de repente, caiu uma tempestade. Que relação há entre o clima e o que acontece dentro da mulher?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>O clima acompanha o que ela sente. O calor parado e o céu baixo são a sufocação dos doze anos. A tempestade é a explosão: ela rasga a roupa e, com a chuva e o vento fresco, se acalma e vai embora. Quando a chuva para, ela sente frio, mas um frio bom, de alívio.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Como o conto descreve o marido? Que relação a mulher vê entre ele e o bom senso?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>O marido é sólido, bom e nunca erra. Sabe de cor informações práticas, como o horário dos trens e o jornal de maior circulação. Para ela, ele é o bom senso, que afasta desejos e fantasias como uma luz acesa afasta fantasmas. Há ironia na descrição: tudo o que ele sabe é prático e sem imaginação.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Na parte em que ela imagina o restaurante, o hotel e a viagem de navio, tudo parece perfeito. Logo depois, ela lista motivos para não ir e, então, diz que tudo isso é mentira. Quais são os motivos? E qual é, para ela, a verdade?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>Ela diz que não tem dinheiro suficiente, que as passagens são caras e que está com frio. Diz também que os hotéis do Rio não são próprios para uma mulher sozinha e que poderia encontrar conhecidos do marido e prejudicar os negócios dele. A verdade é que os doze anos pesam demais: o hábito e o cansaço a prendem, e ela não consegue mudar de vida.</div></details></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O conto termina com um navio que se afasta no silêncio da noite. Se a mulher está em casa, na cama, que navio é esse? Como você entende esse final?</div>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+      <details class="resp"><summary>Ver resposta possível</summary><div>É o navio que ela imaginou, o seu sonho de liberdade. Ele parte sem ela, e a fuga real fracassa. Mas a imagem continua viva dentro dela: o luar que ela imaginou no quarto de hotel cobre-a na própria cama. O final pode ser lido como perda ou como um desejo que sobrevive.</div></details></div>
+  </section>
+
+  <p style="font-size:14.5px;font-style:italic;color:#666;margin:-10px 0 40px;">Até aqui, você acompanhou a tarde da fuga. Agora, vamos olhar para a forma como o conto conta o que aconteceu antes dela.</p>
+
+  <section>
+    <div class="sec-label">Foco gramatical — O mais-que-perfeito simples: “ela tomara o ônibus”</div>
+    <h2>O mais-que-perfeito simples</h2>
+    <div class="grammar-box">
+      O conto começa no meio da fuga, com a mulher já na rua, na chuva, sem saber para onde ir. Só aos poucos descobrimos o que aconteceu antes: a tarde abafada, a tempestade, a saída de casa, o ônibus. Para contar esses fatos anteriores, o conto usa o pretérito mais-que-perfeito simples: <i>decidira</i>, <i>tomara</i>, <i>saltara</i>, <i>vestira</i>.
+    </div>
+    <div class="info-box">O mais-que-perfeito indica uma ação passada que ocorreu antes de outro momento também passado. No conto, há dois planos:</div>
+    <table class="grammar" style="margin-top:14px;">
+      <tr><th>Plano</th><th>Tempo verbal</th><th>Exemplo do conto</th></tr>
+      <tr><td>A fuga (na rua, na chuva)</td><td>pretérito perfeito e imperfeito</td><td>Atravessou o passeio e encostou-se à murada.</td></tr>
+      <tr><td>O que aconteceu antes (em casa, no ônibus)</td><td><b>mais-que-perfeito simples</b></td><td>Ela <b>tomara</b> o ônibus na Tijuca e <b>saltara</b> na Glória.</td></tr>
+    </table>
+
+    <p style="font-weight:700;margin:18px 0 8px;">Como se forma</p>
+    <div class="info-box">
+      1. Pegue a forma de <i>eles/elas</i> no pretérito perfeito e tire o <i>-m</i> final: <i>tomaram → tomara</i>, <i>decidiram → decidira</i>, <i>trouxeram → trouxera</i>.
+      <br><br>
+      2. Essa é a forma de <i>eu</i> e de <i>ele/ela/você</i>. Para <i>nós</i>, acrescente <i>-mos</i> e acentue: <i>tomáramos</i>, <i>decidíramos</i>, <i>trouxéramos</i>. Para <i>eles/elas/vocês</i>, a forma é igual à do pretérito perfeito: <i>tomaram</i>.
+      <br><br>
+      Os verbos irregulares seguem a mesma regra: <i>tiveram → tivera</i>, <i>foram → fora</i> (<i>ir</i> e <i>ser</i>), <i>disseram → dissera</i>.
+    </div>
+
+    <p style="font-weight:700;margin:18px 0 8px;">Na fala e na escrita</p>
+    <div class="info-box">Na fala do dia a dia, quase ninguém usa o mais-que-perfeito simples. Usa-se <i>tinha</i> + particípio. A forma simples aparece na literatura e em textos formais, como o jornalismo. Você precisa reconhecê-la para ler e ouvir textos literários. Para falar, prefira <i>tinha</i> + particípio.
+      <br><br><b>Na literatura:</b> Ela <b>tomara</b> o ônibus na Tijuca.<br><b>Na fala:</b> Ela <b>tinha tomado</b> o ônibus na Tijuca.</div>
+
+    <p style="font-weight:700;margin:18px 0 8px;">Atenção ao ouvir: tomara × tomará</p>
+    <div class="grammar-box">No mais-que-perfeito, a sílaba tônica é a penúltima (to-<b>MA</b>-ra). No futuro do presente, é a última (to-ma-<b>RÁ</b>). No conto, as duas formas aparecem. O mais-que-perfeito conta o que já aconteceu (<i>decidira ir embora</i>). O futuro conta o que ela imagina para a noite e para o dia seguinte (<i>entrará em um restaurante</i>, <i>pedirá café</i>). Na escuta, só a sílaba tônica separa o passado do sonho.</div>
+
+    <p style="font-weight:700;margin:18px 0 8px;">Você já conhece essa forma</p>
+    <div class="info-box">Três formas do mais-que-perfeito sobrevivem na fala do dia a dia, como expressões fixas:
+      <br><br>• <b>Tomara</b> que pare de chover! (= espero muito que)
+      <br>• <b>Quem me dera</b> ter uma manhã livre! (= eu gostaria muito de)
+      <br>• — Ela chorou a noite inteira. — Também, <b>pudera</b>! (= não é de admirar)</div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 3 — A versão da criada</div>
+    <p style="font-size:13.5px;color:#888;">No dia seguinte, a criada conta a uma vizinha o que aconteceu na casa. Ela fala como se fala no dia a dia, com <i>tinha</i> + particípio. Reescreva cada frase no estilo do conto: troque <i>tinha</i> + particípio pelo mais-que-perfeito simples e mantenha o resto da frase igual. Na fala da criada, <i>a patroa</i> e <i>o patrão</i> são a dona e o dono da casa.</p>
+    <div class="model-box"><i>Ex.:</i> Ela <b>tinha passado</b> a tarde inteira fora. → Ela <b>passara</b> a tarde inteira fora.</div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">1.</span>Quando o patrão chegou, a patroa já tinha saído.</div>
+      <input type="text" id="rw-1" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">2.</span>Ela não tinha dito nada a ninguém.</div>
+      <input type="text" id="rw-2" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">3.</span>Em cima da cama, ela tinha deixado um vestido rasgado.</div>
+      <input type="text" id="rw-3" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">4.</span>Às oito, eu e a cozinheira ainda não tínhamos servido o jantar.</div>
+      <input type="text" id="rw-4" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">5.</span>O patrão acreditou que ela tinha ido visitar a Rosinha.</div>
+      <input type="text" id="rw-5" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">6.</span>Ela tinha posto na bolsa todo o dinheiro da casa.</div>
+      <input type="text" id="rw-6" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <div class="rw-item"><div class="q-text"><span class="q-num">7.</span>Os vizinhos tinham visto a patroa no ponto de ônibus.</div>
+      <input type="text" id="rw-7" data-sub placeholder="Escreva a frase reescrita..."></div>
+    <button class="check-btn" onclick="checkRW()">Verificar respostas</button>
+    <div class="result-msg" id="rw-result"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 4 — O diário</div>
+    <p style="font-size:13.5px;color:#888;">No dia seguinte à fuga, a mulher escreve no diário. Complete o texto com os verbos entre parênteses. Use o mais-que-perfeito simples para o que aconteceu antes de outro fato passado. Use o futuro do presente simples para o que ainda vai acontecer. Atenção ao acento: <i>prometera</i> ≠ <i>prometerá</i>.</p>
+    <div class="info-box" style="line-height:2.3;"><b><i>Sábado</i></b><br>Acordei o meu marido às sete em ponto, como (1. prometer) <input type="text" id="dg-1" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;">. Ele tomou o café, leu o jornal e saiu sem desconfiar de nada: a criada não (2. reparar) <input type="text" id="dg-2" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> na minha ausência, e só a chuva (3. saber) <input type="text" id="dg-3" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> da minha fuga. Na véspera, antes de me deitar, eu (4. devolver) <input type="text" id="dg-4" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> o dinheiro à gaveta.<br><br>Amanhã é domingo. Eu (5. acordar) <input type="text" id="dg-5" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> o meu marido às sete em ponto, como sempre. Ele (6. ler) <input type="text" id="dg-6" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> o jornal na mesa do café. Eu (7. ficar) <input type="text" id="dg-7" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> à janela, com um livro na mão. Mas um dia, quem sabe, eu (8. tomar) <input type="text" id="dg-8" data-sub autocomplete="off" spellcheck="false" style="width:130px;margin:0 4px;display:inline-block;padding:4px 8px;"> um navio.<br><br><i>Tomara.</i></div>
+    <button class="check-btn" onclick="checkDG()">Verificar respostas</button>
+    <div class="result-msg" id="dg-result"></div>
+  </section>
+
+  <p style="font-size:14.5px;font-style:italic;color:#666;margin:-10px 0 40px;">Para terminar, volte à pergunta do início da ficha.</p>
+
+  <section>
+    <div class="sec-label">Exercício 5 — Sua leitura do conto</div>
+    <p style="font-size:13.5px;color:#888;">Produção escrita · 80 a 120 palavras</p>
+    <p style="font-size:14.5px;margin-bottom:8px;">Escreva um parágrafo com a sua leitura do conto. Use as perguntas abaixo como guia e inclua pelo menos uma frase com o mais-que-perfeito simples.</p>
+    <ul style="font-size:14px;margin:0 0 14px 20px;line-height:1.8;">
+      <li>Para você, a fuga fracassou? Ou alguma coisa mudou na mulher depois daquela tarde?</li>
+      <li>Por que ela voltou para casa?</li>
+      <li>Volte à sua resposta de “Antes de ouvir”. Depois de ouvir o conto, você pensa da mesma forma?</li>
+    </ul>
+    <div class="q" style="margin-top:14px;">
+      <div class="q-text">Seu parágrafo</div>
+      <textarea id="prod" style="min-height:200px;" placeholder="Escreva seu parágrafo aqui..." oninput="countWords()"></textarea>
+      <div class="counter" id="prod-count">0 palavras (meta: 80 a 120)</div>
+    </div>
+    <p style="font-size:14px;font-weight:700;margin:14px 0 4px;">Antes de terminar, confira:</p>
+    <label class="cl"><input type="checkbox"> Respondi às três perguntas do guia.</label>
+    <label class="cl"><input type="checkbox"> Usei pelo menos uma frase com o mais-que-perfeito simples (<i>decidira</i>, <i>tomara</i>…).</label>
+    <label class="cl"><input type="checkbox"> Conferi o acento: <i>-ara</i> (passado) ou <i>-ará</i> (futuro).</label>
+  </section>
+
+  <section>
+    <div class="sec-label">O conto: referência</div>
+    <p style="font-size:14.5px;">Como o conto ainda está protegido por direitos autorais, o texto completo não está disponível aqui no portal. Se sentir necessidade, depois de terminar todas as atividades, procure o texto na referência abaixo ou peça orientação à professora.</p>
+    <p class="source-note" style="color:#777;font-size:13.5px;">LISPECTOR, Clarice. A fuga. In: ___. <i>A bela e a fera</i>. Rio de Janeiro: Nova Fronteira, 1979. Escrito em 1940.</p>
+  </section>
+
+<div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[í]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?;:“”"]/g,'').replace(/\s+/g,' ').trim();
+}
+function show(resId, allOk, summary, html) {
+  var res = document.getElementById(resId);
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + summary + '</div>' + html;
+  res.style.display = 'block';
+}
+var vfKey = [["F", "A história acontece numa tarde de chuva. Chove sem parar e começa a escurecer."], ["V", ""], ["F", "Ela pegou o ônibus na Tijuca e desceu na Glória."], ["V", ""], ["V", ""], ["V", ""], ["F", "Ela não compra a passagem: não tem dinheiro suficiente e volta para casa."], ["F", "Ela inventa uma desculpa: diz que Rosinha esteve doente e pergunta se ele não recebeu o recado dela."]];
+function mark(good){ return good ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>'; }
+function checkVF() {
+  var ok = 0, html = '';
+  vfKey.forEach(function(k, i) {
+    var el = document.getElementById('vf-' + (i + 1));
+    var good = el.value === k[0];
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', !good && el.value !== '');
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> ' + mark(good) + ' ' + k[0] + (k[1] ? ' — ' + k[1] : '') + '</div>';
+  });
+  show('vf-result', ok === vfKey.length, ok === vfKey.length ? '✓ Todas as ' + vfKey.length + ' corretas!' : ok + ' de ' + vfKey.length + ' corretas — correção:', html);
+}
+var rwKey = [["Quando o patrão chegou, a patroa já saíra."], ["Ela não dissera nada a ninguém."], ["Em cima da cama, ela deixara um vestido rasgado."], ["Às oito, eu e a cozinheira ainda não servíramos o jantar."], ["O patrão acreditou que ela fora visitar a Rosinha."], ["Ela pusera na bolsa todo o dinheiro da casa."], ["Os vizinhos viram a patroa no ponto de ônibus."]];
+function checkRW() {
+  var ok = 0, html = '';
+  rwKey.forEach(function(keys, i) {
+    var el = document.getElementById('rw-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var good = filled && keys.some(function(k){ return normA(el.value) === normA(k); });
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', filled && !good);
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> ' + mark(good) + ' ' + keys[0] + '</div>';
+  });
+  show('rw-result', ok === rwKey.length, ok === rwKey.length ? '✓ Todas as ' + rwKey.length + ' corretas!' : ok + ' de ' + rwKey.length + ' corretas — modelo:', html);
+}
+var dgKey = ["prometera", "reparara", "soubera", "devolvera", "acordarei", "lerá", "ficarei", "tomarei"];
+function checkDG() {
+  var ok = 0, html = '';
+  dgKey.forEach(function(k, i) {
+    var el = document.getElementById('dg-' + (i + 1));
+    var filled = el.value.trim().length > 0;
+    var good = filled && normA(el.value) === normA(k);
+    el.classList.toggle('correct', good);
+    el.classList.toggle('wrong', filled && !good);
+    if (good) ok++;
+    html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> ' + mark(good) + ' ' + k + '</div>';
+  });
+  show('dg-result', ok === dgKey.length, ok === dgKey.length ? '✓ Todas as ' + dgKey.length + ' corretas!' : ok + ' de ' + dgKey.length + ' corretas — modelo (atenção ao acento):', html);
+}
+function normA(s) { return (s || '').toLowerCase().trim().replace(/[.,!?;:“”"]/g,'').replace(/\s+/g,' ').trim(); }
+function countWords() {
+  var t = document.getElementById('prod').value.trim();
+  var n = t ? t.split(/\s+/).length : 0;
+  var c = document.getElementById('prod-count');
+  c.textContent = n + ' palavras (meta: 80 a 120)';
+  c.className = 'counter' + (n >= 80 && n <= 120 ? ' ok' : '');
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  Array.prototype.map.call(document.querySelectorAll('[data-sub]'), function(e){ return e.id; }).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
