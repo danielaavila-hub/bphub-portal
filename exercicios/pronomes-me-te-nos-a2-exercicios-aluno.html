@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Me, te, nos: convites e recados — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #265B8B;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .ref-table th { text-align: left; padding: 8px 12px; background: rgba(38,91,139,0.07); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--cobalto); }
+    .ref-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; text-align: left; }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+    .example-line { background: var(--off-white); border-radius: 8px; padding: 10px 16px; margin: 8px 0; font-size: 14.5px; }
+    .example-line strong { color: var(--cobalto); }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+
+    /* WHATSAPP MOCKUP */
+    .wa-wrap { background: #E5DDD5; border-radius: 14px; padding: 20px 16px; }
+    .wa-header { display: flex; align-items: center; gap: 10px; background: var(--floresta); color: white; border-radius: 10px 10px 0 0; padding: 10px 16px; margin: -20px -16px 14px; }
+    .wa-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .wa-name { font-size: 14.5px; font-weight: 700; }
+    .wa-status { font-size: 11.5px; color: rgba(255,255,255,0.75); }
+    .wa-msg { max-width: 78%; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 14.5px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+    .wa-msg.in { background: white; border-top-left-radius: 2px; }
+    .wa-msg.out { background: #DCF8C6; margin-left: auto; border-top-right-radius: 2px; }
+    .wa-time { display: block; text-align: right; font-size: 10.5px; color: #999; margin-top: 3px; }
+    mark.lv { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 130px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .base-hint { font-size: 12.5px; color: #999; font-style: italic; }
+    .gap-input { display: inline-block; width: 70px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--cobalto); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--cobalto); }
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .mc-item { margin-bottom: 16px; }
+    .mc-question { font-size: 15px; margin-bottom: 8px; }
+    .mc-options { display: flex; flex-direction: column; gap: 6px; }
+    .mc-option { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid var(--light-gray); cursor: pointer; font-size: 14.5px; }
+    .mc-option:hover { border-color: var(--erva-doce); background: var(--off-white); }
+    .mc-option.correct { border-color: #2E7D52; background: #EAF5EE; font-weight: 600; }
+    .mc-option.wrong { border-color: var(--pitomba); background: #FBEFE6; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--cobalto); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+
+    select.gap-select { border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; font-weight: 600; background: white; margin: 0 4px; }
+    select.gap-select.correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    select.gap-select.wrong { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+    input.rw-input { width: 100%; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; margin-top: 6px; }
+    input.rw-input:focus { border-color: var(--cobalto); }
+    .gap-input.wide { width: 90px; }
+    .chk { font-size: 13.5px; color: #666; line-height: 1.9; margin-top: 10px; }
+    .chk .done { color: #2E7D52; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+    <a href="../a2/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para os materiais A2</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Me, te, nos <em>antes do verbo</em></h1>
+  <div class="hero-sub">"Ele <strong>me</strong> convidou", "eu <strong>te</strong> falei", "ele <strong>nos</strong> convidou" — how Brazilians say who invited, called or told whom, in a WhatsApp chat about a birthday party.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">me · te · nos</span>
+    <span class="hero-tag">convites e recados</span>
+    <span class="hero-tag">ele nos convidou · eles nos convidaram</span>
+    <span class="hero-tag">A2 · Gramática</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Language Reference</p>
+  <div class="gram-ref">
+    <h3>Me, te, nos — antes do verbo</h3>
+    <p>When someone does something <em>to</em> you, <em>for</em> you or <em>with</em> you, Brazilians put <strong>me</strong>, <strong>te</strong> or <strong>nos</strong> <strong>before</strong> the verb: <em>Ele me convidou. Eu te falei. Ele nos convidou.</em></p>
+    <table class="ref-table">
+      <tr><th>Pronome</th><th>Quem?</th><th>Exemplos</th></tr>
+      <tr><td><strong>me</strong></td><td>eu</td><td>Ele <strong>me</strong> convidou. · Ela <strong>me</strong> ligou ontem.</td></tr>
+      <tr><td><strong>te</strong></td><td>você</td><td>Eu <strong>te</strong> falei. · Eu <strong>te</strong> vi na festa.</td></tr>
+      <tr><td><strong>nos</strong></td><td>nós</td><td>Ele <strong>nos</strong> convidou. · Eles <strong>nos</strong> chamaram.</td></tr>
+    </table>
+    <div class="ref-note"><strong>Same pronoun, different verbs.</strong> <em>Me, te</em> and <em>nos</em> work with verbs like <em>convidar, ligar, chamar, ajudar, ver, esperar</em> and also with <em>falar, dizer, mandar, contar, dar, perguntar</em>. You do not need to choose: the pronoun is the same.</div>
+    <div class="ref-note"><strong>The verb agrees with who does the action, not with nos.</strong><br>
+      <em>Ele nos convidou.</em> (one person) · <em>Eles nos convidaram.</em> (more than one) · <em>Quem nos convidou?</em> (<em>quem</em> is always singular)</div>
+    <div class="ref-note"><strong>Negative and questions.</strong> <em>Não</em> comes before the pronoun: <em>Ele não me ligou.</em> Questions keep the same order: <em>Quem te falou? Ela te ligou?</em></div>
+    <div class="ref-note"><strong>With <em>vou / vai</em> + infinitive,</strong> the pronoun goes before the second verb: <em>Vou te ligar. Ela vai nos ajudar. Você vai me esperar?</em> In speech, people also say <em>Me liga depois!</em> (= Call me later!).</div>
+    <div class="ref-note"><strong>And a gente?</strong> In everyday speech, many Brazilians say <em>ele convidou a gente</em>. <em>Nos</em> is very common in writing, stories and more careful speech, so you will read and hear it often.</div>
+  </div>
+
+  <p class="sec-label">Texto</p>
+  <div class="card">
+    <div class="wa-wrap">
+      <div class="wa-header">
+        <div class="wa-avatar">B</div>
+        <div>
+          <div class="wa-name">Bia</div>
+          <div class="wa-status">online</div>
+        </div>
+      </div>
+      <div class="wa-msg in">Oi, Lia! Você vai à festa da Carla?<span class="wa-time">18:02</span></div>
+      <div class="wa-msg out">Vou! Ela <mark class="lv">me</mark> convidou ontem.<span class="wa-time">18:03</span></div>
+      <div class="wa-msg in">Ela não <mark class="lv">me</mark> ligou! Quem <mark class="lv">te</mark> falou da festa?<span class="wa-time">18:03</span></div>
+      <div class="wa-msg out">Eu <mark class="lv">te</mark> mandei o convite no domingo. Lembra?<span class="wa-time">18:04</span></div>
+      <div class="wa-msg in">Ah, verdade! Desculpa, eu não vi.<span class="wa-time">18:04</span></div>
+      <div class="wa-msg out">Tudo bem! O Davi e a Carla também <mark class="lv">nos</mark> convidaram para o almoço de domingo, eu e o Rui. Eles <mark class="lv">nos</mark> esperam às 13h.<span class="wa-time">18:05</span></div>
+      <div class="wa-msg in">Que legal! Vou <mark class="lv">te</mark> ligar mais tarde, tá?<span class="wa-time">18:06</span></div>
+      <div class="wa-msg out">Tá! <mark class="lv">Me</mark> liga depois das sete.<span class="wa-time">18:06</span></div>
+    </div>
+    <p class="fonte" style="margin-top:16px;">[Diálogo elaborado para fins didáticos]</p>
+  </div>
+
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <table class="vocab-table">
+      <tbody>
+        <tr><td class="vocab-pt">convidar</td><td>to invite</td></tr>
+        <tr><td class="vocab-pt">o convite</td><td>invitation</td></tr>
+        <tr><td class="vocab-pt">ligar</td><td>to call (by phone)</td></tr>
+        <tr><td class="vocab-pt">mandar</td><td>to send</td></tr>
+        <tr><td class="vocab-pt">esperar</td><td>to wait for</td></tr>
+        <tr><td class="vocab-pt">o aniversário</td><td>birthday</td></tr>
+        <tr><td class="vocab-pt">o almoço</td><td>lunch</td></tr>
+        <tr><td class="vocab-pt">Lembra?</td><td>Remember? (informal)</td></tr>
+        <tr><td class="vocab-pt">tá?</td><td>okay? (informal, short for <em>está bem</em>)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="sec-label">Part 1 — Compreensão</p>
+  <div class="ex-card">
+    <h2>Understand the chat</h2>
+    <p class="ex-instr">Read the conversation and answer in Portuguese.</p>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Quem convidou a Lia para a festa? <em style="color:#999;font-size:13px;">(Who invited Lia to the party?)</em></p><textarea id="c1" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> A Carla ligou para a Bia? <em style="color:#999;font-size:13px;">(Did Carla call Bia?)</em></p><textarea id="c2" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Quem são “nós” em “O Davi e a Carla também <strong>nos</strong> convidaram”? <em style="color:#999;font-size:13px;">(Who is “nos”?)</em></p><textarea id="c3" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <button class="check-btn" onclick="checkComp()">✓ Check answers</button>
+    <div id="comp-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 2 — Prática Controlada</p>
+  <div class="ex-card">
+    <h2>Exercise 1 — Complete com me, te ou nos</h2>
+    <p class="ex-instr">Complete each sentence with the right pronoun. The word in parentheses tells you who it refers to.</p>
+    <div class="sent"><span class="q-num">1.</span> Ontem o Davi <input class="gap-input" id="g1" data-sub autocomplete="off"> convidou para jantar. (eu)</div>
+    <div class="sent"><span class="q-num">2.</span> Eu <input class="gap-input" id="g2" data-sub autocomplete="off"> falei sobre o show. (você)</div>
+    <div class="sent"><span class="q-num">3.</span> Eles <input class="gap-input" id="g3" data-sub autocomplete="off"> chamaram para a festa. (nós)</div>
+    <div class="sent"><span class="q-num">4.</span> Quem <input class="gap-input" id="g4" data-sub autocomplete="off"> ensinou a dançar? (você)</div>
+    <div class="sent"><span class="q-num">5.</span> A Carla <input class="gap-input" id="g5" data-sub autocomplete="off"> ajudou muito. (nós)</div>
+    <div class="sent"><span class="q-num">6.</span> Por que você não <input class="gap-input" id="g6" data-sub autocomplete="off"> ligou ontem? (eu)</div>
+    <div class="sent"><span class="q-num">7.</span> Eu <input class="gap-input" id="g7" data-sub autocomplete="off"> vi no mercado ontem. (você)</div>
+    <div class="sent"><span class="q-num">8.</span> O professor <input class="gap-input" id="g8" data-sub autocomplete="off"> explicou a lição. (nós)</div>
+    <button class="check-btn" onclick="checkGaps()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetGaps()">Refazer</button>
+    <div id="gap-result" class="result-msg"></div>
+  </div>
+  <div class="ex-card">
+    <h2>Exercise 2 — Ele nos convidou ou eles nos convidaram?</h2>
+    <p class="ex-instr">Choose the verb form. Remember: the verb agrees with who does the action, not with <strong>nos</strong>, <strong>me</strong> or <strong>te</strong>.</p>
+    <div class="sent"><span class="q-num">1.</span> A Carla nos <select class="gap-select" id="s1" data-sub><option value="">…</option><option value="0">convidou</option><option value="1">convidaram</option></select> para o almoço.</div>
+    <div class="sent"><span class="q-num">2.</span> A Carla e o Davi nos <select class="gap-select" id="s2" data-sub><option value="">…</option><option value="0">convidou</option><option value="1">convidaram</option></select> para o almoço.</div>
+    <div class="sent"><span class="q-num">3.</span> Os meus pais me <select class="gap-select" id="s3" data-sub><option value="">…</option><option value="0">ligou</option><option value="1">ligaram</option></select> ontem.</div>
+    <div class="sent"><span class="q-num">4.</span> O meu irmão te <select class="gap-select" id="s4" data-sub><option value="">…</option><option value="0">mandou</option><option value="1">mandaram</option></select> uma mensagem?</div>
+    <div class="sent"><span class="q-num">5.</span> Os vizinhos nos <select class="gap-select" id="s5" data-sub><option value="">…</option><option value="0">chamou</option><option value="1">chamaram</option></select> para o churrasco.</div>
+    <div class="sent"><span class="q-num">6.</span> Quem me <select class="gap-select" id="s6" data-sub><option value="">…</option><option value="0">esperou</option><option value="1">esperaram</option></select> na porta?</div>
+    <button class="check-btn" onclick="checkSel()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetSel()">Refazer</button>
+    <div id="sel-result" class="result-msg"></div>
+  </div>
+  <div class="ex-card">
+    <h2>Exercise 3 — Reescreva com me, te ou nos</h2>
+    <p class="ex-instr">Rewrite each sentence, replacing the words in parentheses with <strong>me</strong>, <strong>te</strong> or <strong>nos</strong> before the verb.</p>
+    <div class="example-line"><em>Ex.:</em> Ela ajudou (a mim). → Ela <strong>me</strong> ajudou.</div>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Ele convidou (a mim) para a festa.</p><input type="text" class="rw-input" id="r1" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> Ela ligou (para você) ontem?</p><input type="text" class="rw-input" id="r2" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Eles chamaram (a nós) para jantar.</p><input type="text" class="rw-input" id="r3" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">4.</span> Ele não ligou (para mim).</p><input type="text" class="rw-input" id="r4" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">5.</span> Vou ligar (para você) amanhã.</p><input type="text" class="rw-input" id="r5" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">6.</span> Quem falou (para você) da festa?</p><input type="text" class="rw-input" id="r6" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <button class="check-btn" onclick="checkRW()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetRW()">Refazer</button>
+    <div id="rw-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 3 — Produção Escrita</p>
+  <div class="ex-card">
+    <h2>Convide um amigo</h2>
+    <p class="ex-instr">Write a short WhatsApp-style exchange (6–8 lines) between two friends. One of them was invited to a party or a lunch and tells the other about it. Use <strong>me</strong>, <strong>te</strong> and <strong>nos</strong> at least once each.</p>
+    <textarea class="prod" id="producao" placeholder="Oi! Você vai à festa?…" oninput="prodCheck()"></textarea>
+    <div class="chk" id="chk"><span id="k-me">○ me</span> &nbsp; <span id="k-te">○ te</span> &nbsp; <span id="k-nos">○ nos</span></div>
+  </div>
+
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+</div>
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' '); }
+function hasAny(s, keys) { var n = norm(s); return keys.some(function(k){ return n.indexOf(norm(k)) !== -1; }); }
+function mk(ok){ return ok ? '<span style="color:#2E7D52;font-weight:700;">✓</span>' : '<span style="color:var(--pitomba,#D36D29);font-weight:700;">✗</span>'; }
+function out(id, correct, total, html){
+  var res = document.getElementById(id);
+  res.className = 'result-msg show ' + (correct === total ? 'good' : 'try-again');
+  res.innerHTML = '<strong>' + correct + ' / ' + total + (correct === total ? ' — perfeito!' : ' corretas.') + '</strong><div style="margin-top:8px;">' + html + '</div>';
+}
+var compKeys = {
+  c1: { keys: ['carla'], model: 'A Carla convidou a Lia.' },
+  c2: { keys: ['nao'], model: 'Não, a Carla não ligou para a Bia.' },
+  c3: { keys: ['rui'], model: 'A Lia e o Rui.' }
+};
+function checkComp() {
+  var html = '';
+  Object.keys(compKeys).forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var ok = el.value.trim().length > 0 && hasAny(el.value, compKeys[id].keys);
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' Resposta modelo: ' + compKeys[id].model + '</div>';
+  });
+  var res = document.getElementById('comp-result');
+  res.className = 'result-msg show good'; res.innerHTML = html;
+}
+var gapKey = ["me", "te", "nos", "te", "nos", "me", "te", "nos"];
+var gapFull = ["Ontem o Davi me convidou para jantar.", "Eu te falei sobre o show.", "Eles nos chamaram para a festa.", "Quem te ensinou a dançar?", "A Carla nos ajudou muito.", "Por que você não me ligou ontem?", "Eu te vi no mercado ontem.", "O professor nos explicou a lição."];
+function checkGaps() {
+  var c = 0, html = '';
+  gapKey.forEach(function(k, i) {
+    var inp = document.getElementById('g' + (i+1));
+    inp.classList.remove('correct','wrong');
+    var ok = norm(inp.value) === k;
+    if (ok) { inp.classList.add('correct'); c++; } else if (inp.value.trim()) { inp.classList.add('wrong'); }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + gapFull[i] + '</div>';
+  });
+  out('gap-result', c, gapKey.length, html);
+}
+function resetGaps() { gapKey.forEach(function(k, i){ var inp = document.getElementById('g'+(i+1)); inp.value=''; inp.classList.remove('correct','wrong'); }); document.getElementById('gap-result').className='result-msg'; }
+var selKey = [0, 1, 1, 0, 1, 0];
+var selFull = ["A Carla nos <strong>convidou</strong> para o almoço. — One person (A Carla): convidou.", "A Carla e o Davi nos <strong>convidaram</strong> para o almoço. — Two people (A Carla e o Davi): convidaram.", "Os meus pais me <strong>ligaram</strong> ontem. — More than one person (os meus pais): ligaram.", "O meu irmão te <strong>mandou</strong> uma mensagem? — One person (o meu irmão): mandou.", "Os vizinhos nos <strong>chamaram</strong> para o churrasco. — More than one person (os vizinhos): chamaram.", "Quem me <strong>esperou</strong> na porta? — Quem is always singular: esperou."];
+function checkSel() {
+  var c = 0, html = '';
+  selKey.forEach(function(k, i) {
+    var el = document.getElementById('s' + (i+1));
+    el.classList.remove('correct','wrong');
+    var ok = el.value !== '' && parseInt(el.value, 10) === k;
+    if (ok) { el.classList.add('correct'); c++; } else if (el.value !== '') { el.classList.add('wrong'); }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + selFull[i] + '</div>';
+  });
+  out('sel-result', c, selKey.length, html);
+}
+function resetSel() { selKey.forEach(function(k, i){ var el = document.getElementById('s'+(i+1)); el.value=''; el.classList.remove('correct','wrong'); }); document.getElementById('sel-result').className='result-msg'; }
+var rwKey = [["Ele me convidou para a festa."], ["Ela te ligou ontem?"], ["Eles nos chamaram para jantar."], ["Ele não me ligou."], ["Vou te ligar amanhã."], ["Quem te falou da festa?"]];
+function checkRW() {
+  var c = 0, html = '';
+  rwKey.forEach(function(keys, i) {
+    var el = document.getElementById('r' + (i+1));
+    el.classList.remove('correct','wrong');
+    var ok = el.value.trim() !== '' && keys.some(function(k){ return norm(el.value) === norm(k); });
+    if (ok) { el.classList.add('correct'); c++; } else if (el.value.trim()) { el.classList.add('wrong'); }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + keys[0] + '</div>';
+  });
+  out('rw-result', c, rwKey.length, html);
+}
+function resetRW() { rwKey.forEach(function(k, i){ var el = document.getElementById('r'+(i+1)); el.value=''; el.classList.remove('correct','wrong'); }); document.getElementById('rw-result').className='result-msg'; }
+function prodCheck() {
+  var n = ' ' + norm(document.getElementById('producao').value) + ' ';
+  ['me','te','nos'].forEach(function(p){
+    var e = document.getElementById('k-' + p), ok = n.indexOf(' ' + p + ' ') !== -1;
+    e.className = ok ? 'done' : ''; e.textContent = (ok ? '✓ ' : '○ ') + p;
+  });
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('[data-sub]').forEach(function(el) {
+    var raw = (el.tagName==='SELECT') ? (el.selectedIndex>0 ? el.options[el.selectedIndex].text : '') : el.value.trim();
+    answersHtml += '<p><strong>'+el.id+':</strong> '+(raw ? raw.replace(/</g,'&lt;') : '(sem resposta)')+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
