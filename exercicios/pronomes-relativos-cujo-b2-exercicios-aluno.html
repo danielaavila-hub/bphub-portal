@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronomes Relativos e o Pronome Cujo — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #D36D29;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .ref-table th { text-align: left; padding: 8px 12px; background: rgba(38,91,139,0.07); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--cobalto); }
+    .ref-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; text-align: left; }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+    .example-line { background: var(--off-white); border-radius: 8px; padding: 10px 16px; margin: 8px 0; font-size: 14.5px; }
+    .example-line strong { color: var(--cobalto); }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+
+    /* WHATSAPP MOCKUP */
+    .wa-wrap { background: #E5DDD5; border-radius: 14px; padding: 20px 16px; }
+    .wa-header { display: flex; align-items: center; gap: 10px; background: var(--floresta); color: white; border-radius: 10px 10px 0 0; padding: 10px 16px; margin: -20px -16px 14px; }
+    .wa-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .wa-name { font-size: 14.5px; font-weight: 700; }
+    .wa-status { font-size: 11.5px; color: rgba(255,255,255,0.75); }
+    .wa-msg { max-width: 78%; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 14.5px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+    .wa-msg.in { background: white; border-top-left-radius: 2px; }
+    .wa-msg.out { background: #DCF8C6; margin-left: auto; border-top-right-radius: 2px; }
+    .wa-time { display: block; text-align: right; font-size: 10.5px; color: #999; margin-top: 3px; }
+    mark.lv { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 130px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .base-hint { font-size: 12.5px; color: #999; font-style: italic; }
+    .gap-input { display: inline-block; width: 70px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--cobalto); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--cobalto); }
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .mc-item { margin-bottom: 16px; }
+    .mc-question { font-size: 15px; margin-bottom: 8px; }
+    .mc-options { display: flex; flex-direction: column; gap: 6px; }
+    .mc-option { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid var(--light-gray); cursor: pointer; font-size: 14.5px; }
+    .mc-option:hover { border-color: var(--erva-doce); background: var(--off-white); }
+    .mc-option.correct { border-color: #2E7D52; background: #EAF5EE; font-weight: 600; }
+    .mc-option.wrong { border-color: var(--pitomba); background: #FBEFE6; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--cobalto); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+
+    select.gap-select { border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; font-weight: 600; background: white; margin: 0 4px; }
+    select.gap-select.correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    select.gap-select.wrong { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+    input.rw-input { width: 100%; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; margin-top: 6px; }
+    input.rw-input:focus { border-color: var(--cobalto); }
+
+    .pron-box { background: #F4F8FC; border: 1.5px solid #CFE0EF; border-left: 5px solid var(--cobalto); border-radius: 12px; padding: 18px 22px; margin: 14px 0; }
+    .pron-title { font-family: 'Trirong', serif; font-weight: 700; font-size: 18px; color: var(--nanquim); margin-bottom: 10px; }
+    .pron-pills { display: flex; gap: 8px; margin-bottom: 6px; }
+    .pill { display: inline-block; font-weight: 800; font-size: 17px; padding: 3px 16px; border-radius: 20px; color: white; }
+    .pill-me { background: #265B8B; } .pill-te { background: #D36D29; } .pill-nos { background: #2E7D52; }
+    .pron-lead { font-size: 14.5px !important; margin: 6px 0 12px !important; }
+    .pron-group { background: white; border-radius: 10px; padding: 12px 16px; margin-top: 10px; }
+    .pron-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8672; margin-bottom: 8px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: var(--off-white); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 3px 12px; font-weight: 700; font-size: 14.5px; color: var(--nanquim); }
+    .pron-ex { margin-top: 10px; font-size: 14px; color: #555; }
+    .pron-ex strong:nth-child(1) { color: #265B8B; } .pron-ex strong:nth-child(2) { color: #D36D29; } .pron-ex strong:nth-child(3) { color: #2E7D52; }
+
+    .rule { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 14px 18px; margin: 12px 0; }
+    .rule-t { font-size: 15px; color: var(--nanquim); margin-bottom: 8px; display: flex; gap: 10px; align-items: baseline; }
+    .rule-t strong { font-weight: 800; }
+    .rule-n { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--cobalto); color: white; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; }
+    .rule-ex { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; background: var(--off-white); border-radius: 8px; padding: 8px 14px; margin: 6px 0; font-size: 15px; }
+    .rule-ex .rs { font-weight: 600; }
+    .rule-ex .rg { color: #7a7766; font-size: 13px; font-style: italic; align-self: center; }
+    b.pn { color: #265B8B; font-weight: 800; }
+    .rule-note { margin-top: 8px; font-size: 13.5px; color: #666; background: rgba(255,185,74,0.14); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; padding: 8px 12px; }
+    .gap-input.wide { width: 90px; }
+    .chk { font-size: 13.5px; color: #666; line-height: 1.9; margin-top: 10px; }
+    .chk .done { color: #2E7D52; font-weight: 700; }
+
+    .vt td, .vt th { text-align: left; }
+    .vt td strong { color: var(--cobalto); }
+    .neg-box { background: #FDF3E8; border-left: 5px solid var(--pitomba); border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 14.5px; }
+    .neg-box .rs { font-weight: 600; }
+    .pairs { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 15px; }
+    .pairs td { padding: 8px 12px; border-bottom: 1px solid var(--light-gray); }
+    .pairs td.arrow { text-align: center; color: #aaa; width: 40px; }
+    .pairs .pos { color: #265B8B; font-weight: 800; } .pairs .neg { color: #D36D29; font-weight: 800; }
+    .dlg { background: var(--off-white); border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; line-height: 2.1; font-size: 15.5px; }
+    .dlg .gap-input { width: 110px; }
+    .sent .gap-input { width: 110px; }
+
+    .rel-grid { width: 100%; border-collapse: collapse; font-size: 15px; margin: 10px 0; }
+    .rel-grid th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--level); padding: 8px 12px; border-bottom: 2px solid var(--light-gray); }
+    .rel-grid td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .rel-grid td strong { color: #265B8B; }
+    .eqn { background: var(--off-white); border-radius: 10px; padding: 12px 16px; margin: 8px 0; font-size: 15px; line-height: 1.9; }
+    .eqn .plus { color: #aaa; margin: 0 6px; }
+    .eqn .res { font-weight: 700; }
+    .eqn .rel { color: #D36D29; font-weight: 800; }
+    .sent .gap-input, .dlg .gap-input { width: 90px; }
+    .formal { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--baunilha2); color: #8a5a00; border-radius: 6px; padding: 2px 8px; margin-left: 6px; }
+    .rule.hl { border-color: var(--pitomba); border-width: 2px; background: #FFFBF6; }
+    .rule.hl .rule-n { background: var(--pitomba); }
+    .rule.hl b.pn { color: var(--pitomba); }
+    .cujo-grid { width: 100%; border-collapse: collapse; font-size: 15px; margin: 10px 0; }
+    .cujo-grid th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--level); padding: 8px 12px; border-bottom: 2px solid var(--light-gray); }
+    .cujo-grid td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .cujo-grid td strong { color: var(--pitomba); }
+    .nope { color: #B0392B; font-weight: 700; text-decoration: line-through; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+    <a href="../b2/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para os materiais B2</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Pronomes relativos <em>e o cujo</em></h1>
+  <div class="hero-sub">Revise <strong>que, quem, onde</strong> e <strong>preposição + relativo</strong> e aprenda a usar <strong>cujo, cuja, cujos, cujas</strong> (<em>whose</em>) para ligar frases com elegância na escrita e na fala formal.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">que · quem · onde</span>
+    <span class="hero-tag">preposição + relativo</span>
+    <span class="hero-tag">o qual · os quais</span>
+    <span class="hero-tag">cujo · cuja · cujos · cujas</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Referência gramatical</p>
+  <div class="gram-ref">
+    <h3>Pronomes relativos</h3>
+    <p>O pronome relativo retoma uma pessoa, uma coisa ou um lugar já mencionado (o <strong>antecedente</strong>). Ele liga duas orações numa só e evita a repetição do substantivo.</p>
+    <div class="eqn"><span>Conheci um rapaz.</span><span class="plus">+</span><span>O rapaz trabalha no Rio.</span><br>→ <span class="res">Conheci um rapaz <span class="rel">que</span> trabalha no Rio.</span></div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">1</span><strong>que</strong> — pessoas, coisas e lugares</div>
+    <div class="rule-ex"><span class="rs">O livro <b class="pn">que</b> li era ótimo.</span><span class="rg">coisa</span></div>
+    <div class="rule-ex"><span class="rs">A moça <b class="pn">que</b> trabalha aqui é minha prima.</span><span class="rg">pessoa</span></div>
+    <div class="rule-ex"><span class="rs">A praça <b class="pn">que</b> fica no centro é linda.</span><span class="rg">lugar</span></div>
+    <div class="rule-note">É o relativo mais comum e o único de que você precisa quando não há preposição.</div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">2</span><strong>quem</strong> — só para pessoas, depois de preposição</div>
+    <div class="rule-ex"><span class="rs">A professora com <b class="pn">quem</b> estudo é carioca.</span><span class="rg">with whom</span></div>
+    <div class="rule-ex"><span class="rs">O amigo de <b class="pn">quem</b> falei chega hoje.</span><span class="rg">of whom</span></div>
+    <div class="rule-ex"><span class="rs">A moça para <b class="pn">quem</b> liguei não atendeu.</span><span class="rg">to whom</span></div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">3</span><strong>onde</strong> — só para lugares</div>
+    <div class="rule-ex"><span class="rs">A cidade <b class="pn">onde</b> nasci fica no Sul.</span><span class="rg">where</span></div>
+    <div class="rule-ex"><span class="rs">O café <b class="pn">onde</b> a gente se encontra abre cedo.</span><span class="rg">where</span></div>
+    <div class="rule-note"><strong>onde = em que.</strong> <em>O restaurante onde jantamos = O restaurante em que jantamos.</em> Use <em>onde</em> apenas para lugares físicos.</div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">4</span>Preposição + relativo</div>
+    <p style="font-size:14px;margin-bottom:6px;">Quando o verbo pede preposição, ela vem <strong>antes</strong> do relativo.</p>
+    <table class="rel-grid">
+      <tr><th>Coisas (que)</th><th>Pessoas (quem)</th></tr>
+      <tr><td>O filme <strong>de que</strong> gostei</td><td>O amigo <strong>de quem</strong> falei</td></tr>
+      <tr><td>A casa <strong>em que</strong> moro</td><td>A colega <strong>com quem</strong> trabalho</td></tr>
+      <tr><td>O curso <strong>para que</strong> me inscrevi</td><td>O professor <strong>para quem</strong> escrevi</td></tr>
+      <tr><td>A festa <strong>a que</strong> fomos</td><td>O homem <strong>a quem</strong> perguntei</td></tr>
+    </table>
+    <div class="rule-note"><strong>Na fala do dia a dia</strong>, muita gente omite a preposição: <em>o filme que eu gostei, o amigo que eu falei</em>. Na escrita e em situações formais, mantenha-a: <em>o filme de que gostei, o amigo de quem falei</em>.</div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">5</span><strong>o qual, a qual, os quais, as quais</strong> <span class="formal">formal · reconhecer</span></div>
+    <table class="rel-grid">
+      <tr><th>masc. sing.</th><th>fem. sing.</th><th>masc. pl.</th><th>fem. pl.</th></tr>
+      <tr><td><strong>o qual</strong></td><td><strong>a qual</strong></td><td><strong>os quais</strong></td><td><strong>as quais</strong></td></tr>
+    </table>
+    <div class="rule-ex"><span class="rs">O teste para <b class="pn">o qual</b> estudei foi difícil.</span><span class="rg">= para que</span></div>
+    <div class="rule-ex"><span class="rs">Os amigos de <b class="pn">quem</b> falei = os amigos dos <b class="pn">quais</b> falei.</span><span class="rg">= de quem</span></div>
+    <div class="rule-note">Concordam em gênero e número com o antecedente e aparecem depois de preposição. Você os encontra em notícias e textos formais; na fala, <em>que</em> e <em>quem</em> são bem mais comuns.</div>
+  </div>
+
+  <div class="rule hl"><div class="rule-t"><span class="rule-n">6</span><strong>cujo, cuja, cujos, cujas</strong> — posse (<em>whose</em>)</div>
+    <p style="font-size:14.5px;margin-bottom:8px;"><strong>Cujo</strong> expressa posse: equivale a <em>de quem</em>, <em>do qual</em> ou <em>dele/dela</em>. Ele liga o possuidor (o antecedente) ao que ele possui.</p>
+    <div class="eqn"><span>Moro com uma amiga.</span><span class="plus">+</span><span>A irmã <strong>da amiga</strong> é médica.</span><br>→ <span class="res">Moro com uma amiga <span class="rel">cuja</span> irmã é médica.</span></div>
+    <table class="cujo-grid">
+      <tr><th>masc. sing.</th><th>fem. sing.</th><th>masc. pl.</th><th>fem. pl.</th></tr>
+      <tr><td><strong>cujo</strong></td><td><strong>cuja</strong></td><td><strong>cujos</strong></td><td><strong>cujas</strong></td></tr>
+    </table>
+    <div class="rule-ex"><span class="rs">Li um romance <b class="pn">cujo</b> autor nasceu em Recife.</span><span class="rg">whose author</span></div>
+    <div class="rule-ex"><span class="rs">Tenho uma amiga <b class="pn">cuja</b> irmã mora em Paris.</span><span class="rg">whose sister</span></div>
+    <div class="rule-ex"><span class="rs">Visitamos uma cidade <b class="pn">cujas</b> praias são desertas.</span><span class="rg">whose beaches</span></div>
+    <div class="rule-ex"><span class="rs">O professor <b class="pn">cujos</b> alunos passaram ficou feliz.</span><span class="rg">whose students</span></div>
+    <div class="rule-note"><strong>Concordância:</strong> <em>cujo</em> concorda com a coisa possuída (o substantivo que vem <strong>depois</strong> dele), e não com o possuidor. Por isso: <em>uma amiga cujo irmão…</em> (o irmão é masculino), <em>um homem cujas filhas…</em> (as filhas são femininas).</div>
+    <div class="rule-note"><strong>Sem artigo:</strong> nunca use artigo depois de <em>cujo</em>. <span class="nope">cuja a irmã</span> → <strong>cuja irmã</strong>; <span class="nope">cujos os alunos</span> → <strong>cujos alunos</strong>.</div>
+    <p style="font-size:14px;margin:12px 0 6px;"><strong>Com preposição</strong> — a preposição vem antes de <em>cujo</em> e a regência é a do verbo:</p>
+    <div class="rule-ex"><span class="rs">A empresa <b class="pn">em cujo</b> escritório trabalho é pequena.</span><span class="rg">in whose office</span></div>
+    <div class="rule-ex"><span class="rs">O autor <b class="pn">de cujo</b> livro falamos nasceu em Minas.</span><span class="rg">of whose book</span></div>
+    <div class="rule-ex"><span class="rs">A casa <b class="pn">a cuja</b> porta bati estava vazia.</span><span class="rg">at whose door</span></div>
+    <div class="rule-note"><strong>Registro:</strong> <em>cujo</em> é próprio da escrita e da fala formal. No dia a dia, usa-se <em>que</em> + <em>dele/dela</em>: <em>uma amiga que a irmã dela mora em Paris</em>. Em textos, provas e apresentações, prefira <em>cujo</em>.</div>
+  </div>
+
+  <p class="sec-label">Texto</p>
+  <div class="card">
+    <p class="fonte">Post de blog: um fim de semana em Paraty</p>
+    <p style="font-size:15.5px;line-height:1.9;">Passei o fim de semana em Paraty, uma cidade <mark class="lv">cujas</mark> ruas de pedra parecem guardar séculos de história. Ficamos numa pousada <mark class="lv">cuja</mark> dona, dona Marta, nos recebeu com bolo de milho e café fresco.<br><br>
+    No sábado, ela nos apresentou a um barqueiro <mark class="lv">em cujo</mark> barco fizemos um passeio pelas ilhas. À tarde, conhecemos um artista plástico <mark class="lv">cujas</mark> telas retratam o mar e <mark class="lv">em cujo</mark> ateliê passamos horas conversando.<br><br>
+    O que mais me marcou foi uma livraria pequena <mark class="lv">onde</mark> encontrei um romance <mark class="lv">de que</mark> meu pai sempre falava e <mark class="lv">cujo</mark> autor eu nunca tinha lido. Volto lá assim que puder.</p>
+    <p class="fonte" style="margin-top:16px;">[Texto elaborado para fins didáticos]</p>
+  </div>
+
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <table class="vocab-table"><tbody>
+      <tr><td class="vocab-pt">a pousada</td><td>inn, guesthouse</td></tr>
+      <tr><td class="vocab-pt">o barqueiro</td><td>boatman</td></tr>
+      <tr><td class="vocab-pt">a tela</td><td>canvas, painting</td></tr>
+      <tr><td class="vocab-pt">o ateliê</td><td>artist's studio</td></tr>
+      <tr><td class="vocab-pt">retratar</td><td>to depict, to portray</td></tr>
+      <tr><td class="vocab-pt">guardar</td><td>to keep, to hold</td></tr>
+      <tr><td class="vocab-pt">marcar</td><td>to leave a mark on, to impress</td></tr>
+      <tr><td class="vocab-pt">assim que puder</td><td>as soon as I can</td></tr>
+    </tbody></table>
+  </div>
+
+  <p class="sec-label">Parte 1 — Compreensão</p>
+  <div class="ex-card">
+    <h2>Compreenda o texto</h2>
+    <p class="ex-instr">Leia o post e responda em português, com frases completas.</p>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Como são as ruas de Paraty, segundo o autor?</p><textarea id="c1" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> Quem é dona Marta e como ela recebeu os hóspedes?</p><textarea id="c2" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> O que o autor encontrou na livraria e por que isso foi especial?</p><textarea id="c3" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <button class="check-btn" onclick="checkComp()">✓ Verificar respostas</button>
+    <div id="comp-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Parte 2 — Prática controlada</p>
+  <div class="ex-card">
+    <h2>Exercício 1 — Que, quem, onde ou cujo?</h2>
+    <p class="ex-instr">Complete cada frase com <strong>uma palavra</strong>: <em>que, quem, onde, cujo, cuja, cujos</em> ou <em>cujas</em>.</p>
+    <div class="sent"><span class="q-num">1.</span> O escritor <input class="gap-input" id="g1" data-sub autocomplete="off" spellcheck="false"> livro li ontem nasceu em Minas.</div>
+    <div class="sent"><span class="q-num">2.</span> A casa <input class="gap-input" id="g2" data-sub autocomplete="off" spellcheck="false"> passamos as férias é do meu tio.</div>
+    <div class="sent"><span class="q-num">3.</span> Tenho uma colega <input class="gap-input" id="g3" data-sub autocomplete="off" spellcheck="false"> filhas estudam em Londres.</div>
+    <div class="sent"><span class="q-num">4.</span> O médico com <input class="gap-input" id="g4" data-sub autocomplete="off" spellcheck="false"> me consultei é excelente.</div>
+    <div class="sent"><span class="q-num">5.</span> Moro num prédio <input class="gap-input" id="g5" data-sub autocomplete="off" spellcheck="false"> elevador vive quebrado.</div>
+    <div class="sent"><span class="q-num">6.</span> Os alunos <input class="gap-input" id="g6" data-sub autocomplete="off" spellcheck="false"> notas foram altas ganharam um prêmio.</div>
+    <div class="sent"><span class="q-num">7.</span> A peça <input class="gap-input" id="g7" data-sub autocomplete="off" spellcheck="false"> vimos ontem foi emocionante.</div>
+    <div class="sent"><span class="q-num">8.</span> Conheço uma empresa <input class="gap-input" id="g8" data-sub autocomplete="off" spellcheck="false"> funcionários trabalham de casa.</div>
+    <button class="check-btn" onclick="checkG()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetG()">Refazer</button>
+    <div id="g-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercício 2 — Corrija o erro</h2>
+    <p class="ex-instr">Cada frase tem um erro no uso de <strong>cujo</strong> (artigo desnecessário ou concordância). Reescreva a frase corretamente.</p>
+    <div class="example-line"><em>Ex.:</em> Tenho uma tia cuja a casa fica na praia. → <strong>Tenho uma tia cuja casa fica na praia.</strong></div>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Tenho um amigo cujo o pai é pianista.</p><input type="text" class="rw-input" id="f1" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> Visitei uma escola cujas as salas são enormes.</p><input type="text" class="rw-input" id="f2" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Admiro o professor cujos os alunos nunca faltam.</p><input type="text" class="rw-input" id="f3" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">4.</span> Gosto de uma cantora cujo voz é muito suave.</p><input type="text" class="rw-input" id="f4" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">5.</span> Moro numa rua cujos casas são antigas.</p><input type="text" class="rw-input" id="f5" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">6.</span> Li um artigo cuja conclusões me surpreenderam.</p><input type="text" class="rw-input" id="f6" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <button class="check-btn" onclick="checkF()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetF()">Refazer</button>
+    <div id="f-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercício 3 — Ligue as duas frases com cujo</h2>
+    <p class="ex-instr">Una as duas frases numa só, usando <strong>cujo, cuja, cujos</strong> ou <strong>cujas</strong> (com preposição, quando necessário). Atenção: <em>dele, dela, deles</em> e <em>da empresa</em> desaparecem na frase nova.</p>
+    <div class="example-line"><em>Ex.:</em> Conheço um rapaz. A mãe dele é advogada. → <strong>Conheço um rapaz cuja mãe é advogada.</strong></div>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Tenho uma amiga. A irmã dela é cantora.</p><input type="text" class="rw-input" id="j1" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> Li um livro. O autor do livro nasceu em Recife.</p><input type="text" class="rw-input" id="j2" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Trabalho numa empresa. Os funcionários da empresa são muito jovens.</p><input type="text" class="rw-input" id="j3" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">4.</span> Visitamos uma cidade. As praias da cidade são desertas.</p><input type="text" class="rw-input" id="j4" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">5.</span> Conheço um rapaz. Os pais dele moram em Lisboa.</p><input type="text" class="rw-input" id="j5" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">6.</span> Esse é o escritor. Falamos do livro dele na aula.</p><input type="text" class="rw-input" id="j6" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">7.</span> Entrevistei um artista. Passei a tarde no ateliê dele.</p><input type="text" class="rw-input" id="j7" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">8.</span> Estes são os vizinhos. Os cachorros deles latem toda noite.</p><input type="text" class="rw-input" id="j8" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <button class="check-btn" onclick="checkJ()">✓ Verificar respostas</button>
+    <button class="reset-btn" onclick="resetJ()">Refazer</button>
+    <div id="j-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Parte 3 — Produção escrita</p>
+  <div class="ex-card">
+    <h2>Um lugar, uma pessoa, uma história</h2>
+    <p class="ex-instr">Escreva um texto curto (6 a 8 linhas) sobre uma viagem, uma pessoa interessante ou um lugar que você conhece bem. Use <strong>pelo menos quatro</strong> pronomes relativos, sendo <strong>pelo menos dois</strong> com <em>cujo, cuja, cujos</em> ou <em>cujas</em>.</p>
+    <textarea class="prod" id="producao" placeholder="Passei uma semana em…, uma cidade cujas…" oninput="prodCheck()"></textarea>
+    <div class="chk" id="chk"><span id="k-que">○ que</span> &nbsp; <span id="k-quem">○ quem / onde</span> &nbsp; <span id="k-cujo">○ cujo(a)(s) ×2</span> &nbsp; <span id="k-prep">○ preposição + relativo</span></div>
+  </div>
+
+  <div class="send-box">
+    📩 Quando terminar, envie seus exercícios para a professora. Ela vai ler com atenção e dar um retorno personalizado, mostrando o que você fez bem e ajudando você a melhorar ainda mais o seu português. Essa troca é uma das partes mais importantes do aprendizado!
+  </div>
+
+</div>
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' '); }
+function normA(s) { return s.toLowerCase().trim().replace(/[.,!?;:“”"]/g,'').replace(/\s+/g,' '); }
+function hasAny(s, keys) { var n = norm(s); return keys.some(function(k){ return n.indexOf(norm(k)) !== -1; }); }
+function mk(ok){ return ok ? '<span style="color:#2E7D52;font-weight:700;">✓</span>' : '<span style="color:var(--pitomba,#D36D29);font-weight:700;">✗</span>'; }
+function out(id, correct, total, html){
+  var res = document.getElementById(id);
+  res.className = 'result-msg show ' + (correct === total ? 'good' : 'try-again');
+  res.innerHTML = '<strong>' + correct + ' / ' + total + (correct === total ? ' — perfeito!' : ' corretas.') + '</strong><div style="margin-top:8px;">' + html + '</div>';
+}
+var compKeys = {
+  c1: { keys: ['pedra','historia'], model: 'São ruas de pedra que parecem guardar séculos de história.' },
+  c2: { keys: ['dona','pousada'], model: 'Dona Marta é a dona da pousada e recebeu os hóspedes com bolo de milho e café fresco.' },
+  c3: { keys: ['romance','pai'], model: 'Encontrou um romance de que seu pai sempre falava, escrito por um autor que ele nunca tinha lido.' }
+};
+function checkComp() {
+  var html = '';
+  Object.keys(compKeys).forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var ok = el.value.trim().length > 0 && hasAny(el.value, compKeys[id].keys);
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' Resposta modelo: ' + compKeys[id].model + '</div>';
+  });
+  var res = document.getElementById('comp-result'); res.className = 'result-msg show good'; res.innerHTML = html;
+}
+function checkList(prefix, keys, notes, resId) {
+  var c = 0, html = '';
+  keys.forEach(function(ks, i) {
+    var el = document.getElementById(prefix + (i+1)); el.classList.remove('correct','wrong');
+    var ok = el.value.trim() !== '' && ks.some(function(k){ return normA(el.value) === normA(k); });
+    if (ok) { el.classList.add('correct'); c++; } else if (el.value.trim()) { el.classList.add('wrong'); }
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + ks[0] + (ks.length>1 ? ' <em style="color:#999">ou</em> ' + ks.slice(1).join(' <em style="color:#999">ou</em> ') : '') + (notes[i] ? '<br><span style="color:#777;font-size:13px;">' + notes[i] + '</span>' : '') + '</div>';
+  });
+  out(resId, c, keys.length, html);
+}
+function resetList(prefix, n, resId) { for (var i = 1; i <= n; i++) { var el = document.getElementById(prefix + i); el.value=''; el.classList.remove('correct','wrong'); } document.getElementById(resId).className='result-msg'; }
+var gKey = [["cujo"],["onde","em que"],["cujas"],["quem"],["cujo"],["cujas"],["que"],["cujos"]],
+ gNotes = ["O livro do escritor → cujo livro (livro é masculino singular).","Lugar físico: onde = em que.","As filhas da colega → cujas filhas (feminino plural).","Pessoa depois de preposição: com quem.","O elevador do prédio → cujo elevador.","As notas dos alunos → cujas notas.","Sem posse e sem preposição: que (a peça que vimos).","Os funcionários da empresa → cujos funcionários."];
+function checkG() { checkList('g', gKey, gNotes, 'g-result'); }
+function resetG() { resetList('g', gKey.length, 'g-result'); }
+var fKey = [["Tenho um amigo cujo pai é pianista."],["Visitei uma escola cujas salas são enormes."],["Admiro o professor cujos alunos nunca faltam."],["Gosto de uma cantora cuja voz é muito suave."],["Moro numa rua cujas casas são antigas."],["Li um artigo cujas conclusões me surpreenderam."]],
+ fNotes = ["Nunca use artigo depois de cujo.","Nunca use artigo depois de cujo.","Nunca use artigo depois de cujo.","Concordância: voz é feminino → cuja.","Concordância: casas é feminino plural → cujas.","Concordância: conclusões é feminino plural → cujas."];
+function checkF() { checkList('f', fKey, fNotes, 'f-result'); }
+function resetF() { resetList('f', fKey.length, 'f-result'); }
+var jKey = [["Tenho uma amiga cuja irmã é cantora."],["Li um livro cujo autor nasceu em Recife."],["Trabalho numa empresa cujos funcionários são muito jovens."],["Visitamos uma cidade cujas praias são desertas."],["Conheço um rapaz cujos pais moram em Lisboa."],["Esse é o escritor de cujo livro falamos na aula.","Esse é o escritor de cujo livro nós falamos na aula."],["Entrevistei um artista em cujo ateliê passei a tarde.","Entrevistei um artista em cujo ateliê eu passei a tarde."],["Estes são os vizinhos cujos cachorros latem toda noite."]],
+ jNotes = ["Irmã é feminino singular → cuja.","Autor é masculino singular → cujo.","Funcionários → cujos.","Praias → cujas.","Pais → cujos.","Falar de → de cujo livro.","Passar a tarde em → em cujo ateliê.","Cachorros → cujos."];
+function checkJ() { checkList('j', jKey, jNotes, 'j-result'); }
+function resetJ() { resetList('j', jKey.length, 'j-result'); }
+function prodCheck() {
+  var raw = document.getElementById('producao').value, n = ' ' + norm(raw) + ' ';
+  function mark(id, ok, txt){ var e = document.getElementById(id); e.className = ok ? 'done' : ''; e.textContent = (ok ? '✓ ' : '○ ') + txt; }
+  var cj = n.match(/ cuj(o|a|os|as) /g) || [];
+  mark('k-que', / que /.test(n), 'que');
+  mark('k-quem', / (quem|onde) /.test(n), 'quem / onde');
+  mark('k-cujo', cj.length >= 2, 'cujo(a)(s) ×2');
+  mark('k-prep', /\b(em|de|com|para|a|por|sobre) (que|quem|cujo|cuja|cujos|cujas|o qual|a qual|os quais|as quais)\b/.test(n), 'preposição + relativo');
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('[data-sub]').forEach(function(el) {
+    var raw = (el.tagName==='SELECT') ? (el.selectedIndex>0 ? el.options[el.selectedIndex].text : '') : el.value.trim();
+    answersHtml += '<p><strong>'+el.id+':</strong> '+(raw ? raw.replace(/</g,'&lt;') : '(sem resposta)')+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
