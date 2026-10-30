@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tão ou Tanto? — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --level: #265B8B;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 0 48px 100px; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--level); margin-bottom: 10px; margin-top: 40px; }
+    .sec-label:first-child { margin-top: 40px; }
+
+    .gram-ref { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 24px 28px; margin: 16px 0 28px; }
+    .gram-ref h3 { font-size: 17px; color: var(--nanquim); margin-bottom: 10px; }
+    .gram-ref p { font-size: 14.5px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+    .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .ref-table th { text-align: left; padding: 8px 12px; background: rgba(38,91,139,0.07); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--cobalto); }
+    .ref-table td { padding: 10px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; text-align: left; }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-note { margin-top: 14px; font-size: 13px; color: #666; background: rgba(255,185,74,0.12); border-left: 3px solid var(--ouro); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+    .example-line { background: var(--off-white); border-radius: 8px; padding: 10px 16px; margin: 8px 0; font-size: 14.5px; }
+    .example-line strong { color: var(--cobalto); }
+
+    .card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 2px 14px rgba(30,29,28,.06); }
+    .fonte { font-size: 13px; color: #8a8672; font-style: italic; margin-bottom: 18px; }
+
+    /* WHATSAPP MOCKUP */
+    .wa-wrap { background: #E5DDD5; border-radius: 14px; padding: 20px 16px; }
+    .wa-header { display: flex; align-items: center; gap: 10px; background: var(--floresta); color: white; border-radius: 10px 10px 0 0; padding: 10px 16px; margin: -20px -16px 14px; }
+    .wa-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .wa-name { font-size: 14.5px; font-weight: 700; }
+    .wa-status { font-size: 11.5px; color: rgba(255,255,255,0.75); }
+    .wa-msg { max-width: 78%; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 14.5px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+    .wa-msg.in { background: white; border-top-left-radius: 2px; }
+    .wa-msg.out { background: #DCF8C6; margin-left: auto; border-top-right-radius: 2px; }
+    .wa-time { display: block; text-align: right; font-size: 10.5px; color: #999; margin-top: 3px; }
+    mark.lv { background: rgba(211,109,41,.16); color: var(--pitomba); font-weight: 700; border-radius: 3px; padding: 1px 4px; }
+
+    .vocab-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .vocab-table th { background: var(--nanquim); color: #fff; padding: 8px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--light-gray); }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .vocab-table tr:nth-child(even) td { background: var(--off-white); }
+    .vocab-pt { font-weight: 700; color: var(--nanquim); white-space: nowrap; }
+
+    .ex-card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+    .ex-card h2 { font-size: 22px; color: var(--nanquim); margin-bottom: 6px; }
+    .ex-instr { font-size: 14px; color: #8a8672; margin-bottom: 18px; font-style: italic; }
+
+    .q-block { margin-bottom: 18px; }
+    .q-block .q { font-size: 15.5px; margin-bottom: 8px; }
+    .q-num { font-weight: 700; color: var(--cobalto); margin-right: 4px; }
+    textarea { width: 100%; min-height: 56px; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; line-height: 1.6; color: var(--texto); resize: vertical; outline: none; background: #fff; }
+    textarea:focus { border-color: var(--cobalto); }
+    textarea.prod { min-height: 130px; }
+
+    .sent { font-size: 15.5px; margin-bottom: 14px; line-height: 2.1; }
+    .base-hint { font-size: 12.5px; color: #999; font-style: italic; }
+    .gap-input { display: inline-block; width: 70px; padding: 4px 8px; border: none; border-bottom: 2px solid var(--erva-doce); background: transparent; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--cobalto); text-align: center; outline: none; }
+    .gap-input:focus { border-bottom-color: var(--cobalto); }
+    .correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    .wrong   { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+
+    .mc-item { margin-bottom: 16px; }
+    .mc-question { font-size: 15px; margin-bottom: 8px; }
+    .mc-options { display: flex; flex-direction: column; gap: 6px; }
+    .mc-option { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid var(--light-gray); cursor: pointer; font-size: 14.5px; }
+    .mc-option:hover { border-color: var(--erva-doce); background: var(--off-white); }
+    .mc-option.correct { border-color: #2E7D52; background: #EAF5EE; font-weight: 600; }
+    .mc-option.wrong { border-color: var(--pitomba); background: #FBEFE6; }
+
+    .check-btn { background: var(--nanquim); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .check-btn:hover { background: #3a3835; }
+    .reset-btn { background: var(--off-white); color: var(--cobalto); border: 1.5px solid var(--erva-doce); border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; margin-left: 10px; }
+
+    .result-msg { display: none; margin-top: 16px; border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; max-height: 260px; overflow-y: auto; }
+    .result-msg.show { display: block; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FBEFE6; color: var(--texto); }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .card, .ex-card, .gram-ref { padding: 22px 20px; }
+    }
+
+    select.gap-select { border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 6px 10px; font-family: 'Manrope', sans-serif; font-size: 14.5px; font-weight: 600; background: white; margin: 0 4px; }
+    select.gap-select.correct { border-color: #2E7D52 !important; background: #EAF5EE !important; }
+    select.gap-select.wrong { border-color: var(--pitomba) !important; background: #FBEFE6 !important; }
+    input.rw-input { width: 100%; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; margin-top: 6px; }
+    input.rw-input:focus { border-color: var(--cobalto); }
+
+    .pron-box { background: #F4F8FC; border: 1.5px solid #CFE0EF; border-left: 5px solid var(--cobalto); border-radius: 12px; padding: 18px 22px; margin: 14px 0; }
+    .pron-title { font-family: 'Trirong', serif; font-weight: 700; font-size: 18px; color: var(--nanquim); margin-bottom: 10px; }
+    .pron-pills { display: flex; gap: 8px; margin-bottom: 6px; }
+    .pill { display: inline-block; font-weight: 800; font-size: 17px; padding: 3px 16px; border-radius: 20px; color: white; }
+    .pill-me { background: #265B8B; } .pill-te { background: #D36D29; } .pill-nos { background: #2E7D52; }
+    .pron-lead { font-size: 14.5px !important; margin: 6px 0 12px !important; }
+    .pron-group { background: white; border-radius: 10px; padding: 12px 16px; margin-top: 10px; }
+    .pron-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8672; margin-bottom: 8px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: var(--off-white); border: 1.5px solid var(--erva-doce); border-radius: 8px; padding: 3px 12px; font-weight: 700; font-size: 14.5px; color: var(--nanquim); }
+    .pron-ex { margin-top: 10px; font-size: 14px; color: #555; }
+    .pron-ex strong:nth-child(1) { color: #265B8B; } .pron-ex strong:nth-child(2) { color: #D36D29; } .pron-ex strong:nth-child(3) { color: #2E7D52; }
+
+    .rule { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 14px 18px; margin: 12px 0; }
+    .rule-t { font-size: 15px; color: var(--nanquim); margin-bottom: 8px; display: flex; gap: 10px; align-items: baseline; }
+    .rule-t strong { font-weight: 800; }
+    .rule-n { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--cobalto); color: white; font-weight: 800; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; }
+    .rule-ex { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; background: var(--off-white); border-radius: 8px; padding: 8px 14px; margin: 6px 0; font-size: 15px; }
+    .rule-ex .rs { font-weight: 600; }
+    .rule-ex .rg { color: #7a7766; font-size: 13px; font-style: italic; align-self: center; }
+    b.pn { color: #265B8B; font-weight: 800; }
+    .rule-note { margin-top: 8px; font-size: 13.5px; color: #666; background: rgba(255,185,74,0.14); border-left: 3px solid var(--ouro); border-radius: 0 8px 8px 0; padding: 8px 12px; }
+    .gap-input.wide { width: 90px; }
+    .chk { font-size: 13.5px; color: #666; line-height: 1.9; margin-top: 10px; }
+    .chk .done { color: #2E7D52; font-weight: 700; }
+
+    .vt td, .vt th { text-align: left; }
+    .vt td strong { color: var(--cobalto); }
+    .neg-box { background: #FDF3E8; border-left: 5px solid var(--pitomba); border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 14.5px; }
+    .neg-box .rs { font-weight: 600; }
+    .pairs { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 15px; }
+    .pairs td { padding: 8px 12px; border-bottom: 1px solid var(--light-gray); }
+    .pairs td.arrow { text-align: center; color: #aaa; width: 40px; }
+    .pairs .pos { color: #265B8B; font-weight: 800; } .pairs .neg { color: #D36D29; font-weight: 800; }
+    .dlg { background: var(--off-white); border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; line-height: 2.1; font-size: 15.5px; }
+    .dlg .gap-input { width: 110px; }
+    .sent .gap-input { width: 110px; }
+
+    .rel-grid { width: 100%; border-collapse: collapse; font-size: 15px; margin: 10px 0; }
+    .rel-grid th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--level); padding: 8px 12px; border-bottom: 2px solid var(--light-gray); }
+    .rel-grid td { padding: 9px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    .rel-grid td strong { color: #265B8B; }
+    .eqn { background: var(--off-white); border-radius: 10px; padding: 12px 16px; margin: 8px 0; font-size: 15px; line-height: 1.9; }
+    .eqn .plus { color: #aaa; margin: 0 6px; }
+    .eqn .res { font-weight: 700; }
+    .eqn .rel { color: #D36D29; font-weight: 800; }
+    .sent .gap-input, .dlg .gap-input { width: 90px; }
+    .formal { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--baunilha2); color: #8a5a00; border-radius: 6px; padding: 2px 8px; margin-left: 6px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+    <a href="../a2/index.html" style="font-size:12px;color:#aaa;text-decoration:none;">&#8592; Voltar para os materiais A2</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Tão <em>ou</em> tanto?</h1>
+  <div class="hero-sub">Two small words that add intensity. <strong>Tão</strong> = <em>so</em> (+ adjective or adverb). <strong>Tanto, tanta, tantos, tantas</strong> = <em>so much, so many</em> (+ noun, or after a verb). Let's clear it up!</div>
+  <div class="hero-tags">
+    <span class="hero-tag">tão = so</span>
+    <span class="hero-tag">tanto = so much</span>
+    <span class="hero-tag">tanta · tantos · tantas</span>
+    <span class="hero-tag">expressões com tanto</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <p class="sec-label">Language Reference</p>
+  <div class="gram-ref">
+    <h3>Tão or tanto? Start here</h3>
+    <p>Both words intensify something, but they work with <strong>different types of words</strong>. Look at the word that comes next and choose:</p>
+    <table class="rel-grid">
+      <tr><th>Word</th><th>Used with</th><th>English</th></tr>
+      <tr><td><strong>tão</strong></td><td>adjective or adverb</td><td>so</td></tr>
+      <tr><td><strong>tanto</strong></td><td>verb (after it)</td><td>so much</td></tr>
+      <tr><td><strong>tanto, tanta, tantos, tantas</strong></td><td>noun (before it)</td><td>so much, so many</td></tr>
+    </table>
+    <div class="rule-note">Don't worry if <em>adjective, adverb</em> and <em>noun</em> are not your favorite words. Just focus on the examples and their translations.</div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">1</span><strong>tão</strong> = so — with adjectives and adverbs</div>
+    <div class="rule-ex"><span class="rs">João é <b class="pn">tão</b> alto!</span><span class="rg">John is so tall!</span></div>
+    <div class="rule-ex"><span class="rs">Este café está <b class="pn">tão</b> bom!</span><span class="rg">This coffee is so good!</span></div>
+    <div class="rule-ex"><span class="rs">Ana fala <b class="pn">tão</b> rápido!</span><span class="rg">Ana speaks so fast!</span></div>
+    <div class="rule-ex"><span class="rs">Eu acordei <b class="pn">tão</b> cedo hoje.</span><span class="rg">I woke up so early today.</span></div>
+    <div class="rule-note"><strong>Tão</strong> never changes and always comes <strong>before</strong> the word it modifies. It is an adverb of intensity.</div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">2</span><strong>tanto</strong> = so much — with verbs</div>
+    <div class="rule-ex"><span class="rs">Ana fala <b class="pn">tanto</b>.</span><span class="rg">Ana talks so much.</span></div>
+    <div class="rule-ex"><span class="rs">Joana estuda <b class="pn">tanto</b>!</span><span class="rg">Joana studies so much!</span></div>
+    <div class="rule-ex"><span class="rs">Léo comeu <b class="pn">tanto</b> na festa!</span><span class="rg">Léo ate so much at the party!</span></div>
+    <div class="rule-ex"><span class="rs">Eu ri <b class="pn">tanto</b> que minha barriga doeu.</span><span class="rg">I laughed so much that my belly hurt.</span></div>
+    <div class="rule-note">With verbs, <strong>tanto</strong> <strong>never changes</strong> (no <em>tanta, tantos, tantas</em>) and usually comes <strong>after</strong> the verb. You can add <em>que</em> to say the result: <em>tanto que…</em></div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">3</span><strong>tanto, tanta, tantos, tantas</strong> — with nouns</div>
+    <p style="font-size:14px;margin-bottom:6px;">Before a noun, <strong>tanto</strong> agrees in gender and number with it. Use the singular for things you can't count (<em>so much</em>) and the plural for things you can count (<em>so many</em>).</p>
+    <table class="rel-grid">
+      <tr><th></th><th>singular (so much)</th><th>plural (so many)</th></tr>
+      <tr><td>masculine</td><td><strong>tanto</strong> açúcar</td><td><strong>tantos</strong> livros</td></tr>
+      <tr><td>feminine</td><td><strong>tanta</strong> paciência</td><td><strong>tantas</strong> roupas</td></tr>
+    </table>
+    <div class="rule-ex"><span class="rs">Eu coloquei <b class="pn">tanto</b> açúcar no café.</span><span class="rg">so much sugar</span></div>
+    <div class="rule-ex"><span class="rs">Carina tem <b class="pn">tanta</b> paciência com todo mundo.</span><span class="rg">so much patience</span></div>
+    <div class="rule-ex"><span class="rs">Clara tem <b class="pn">tantos</b> livros.</span><span class="rg">so many books</span></div>
+    <div class="rule-ex"><span class="rs">Maria tem <b class="pn">tantas</b> roupas.</span><span class="rg">so many clothes</span></div>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">4</span>Same idea, different word: <strong>tão</strong> × <strong>tanto</strong></div>
+    <table class="rel-grid">
+      <tr><th>tanto + noun / verb</th><th>tão + adjective / adverb</th></tr>
+      <tr><td>Mariana tem <strong>tanta</strong> sorte.<br><em style="color:#7a7766;font-size:13px;">so much luck</em></td><td>Mariana é <strong>tão</strong> sortuda.<br><em style="color:#7a7766;font-size:13px;">so lucky</em></td></tr>
+      <tr><td>Tiago tem <strong>tanto</strong> talento.<br><em style="color:#7a7766;font-size:13px;">so much talent</em></td><td>Tiago é <strong>tão</strong> talentoso.<br><em style="color:#7a7766;font-size:13px;">so talented</em></td></tr>
+      <tr><td>Ana fala <strong>tanto</strong>.<br><em style="color:#7a7766;font-size:13px;">talks so much</em></td><td>Ana fala <strong>tão</strong> alto.<br><em style="color:#7a7766;font-size:13px;">talks so loudly</em></td></tr>
+    </table>
+  </div>
+
+  <div class="rule"><div class="rule-t"><span class="rule-n">5</span>Useful expressions with <strong>tanto</strong> <span class="formal">recognize</span></div>
+    <div class="rule-ex"><span class="rs">Tem <b class="pn">tanta</b> gente aqui!</span><span class="rg">There are so many people here!</span></div>
+    <div class="rule-ex"><span class="rs">Ela tem trinta e <b class="pn">tantos</b> anos.</span><span class="rg">She is thirty-something (probably 35+).</span></div>
+    <div class="rule-ex"><span class="rs">Quarenta e <b class="pn">tantas</b> pessoas vieram.</span><span class="rg">Over forty people came.</span></div>
+    <div class="rule-ex"><span class="rs">Lá pelas <b class="pn">tantas</b>, as pessoas começaram a ir embora.</span><span class="rg">At some point (late), people started to leave.</span></div>
+    <div class="rule-ex"><span class="rs">Eu tomei um susto <b class="pn">e tanto</b>.</span><span class="rg">I got quite a scare.</span></div>
+    <div class="rule-ex"><span class="rs">Foi uma festa <b class="pn">e tanto</b>!</span><span class="rg">It was a great party!</span></div>
+    <div class="rule-note"><strong>Number + e tanto(s):</strong> <em>trinta e tantos</em> = a bit more than thirty. <strong>Noun + e tanto:</strong> <em>uma festa e tanto</em> = a really great (or big) one.</div>
+  </div>
+
+  <p class="sec-label">Texto</p>
+  <div class="card">
+    <p class="fonte">Conversa de WhatsApp: depois da festa</p>
+    <div class="wa-wrap">
+      <div class="wa-header"><div class="wa-avatar">L</div><div><div class="wa-name">Léo</div><div class="wa-status">online</div></div></div>
+      <div class="wa-msg in">Oi, Léo! A festa da Marina foi uma festa <mark class="lv">e tanto</mark>!<span class="wa-time">10:02</span></div>
+      <div class="wa-msg out">Foi mesmo! Tinha <mark class="lv">tanta</mark> gente e <mark class="lv">tanta</mark> comida!<span class="wa-time">10:03 ✓✓</span></div>
+      <div class="wa-msg in">Eu dancei <mark class="lv">tanto</mark> que meus pés doem até agora.<span class="wa-time">10:03</span></div>
+      <div class="wa-msg out">Eu comi <mark class="lv">tanto</mark> bolo! Mas a música estava <mark class="lv">tão</mark> alta que a gente quase não conversou.<span class="wa-time">10:04 ✓✓</span></div>
+      <div class="wa-msg in">Verdade. A Marina estava <mark class="lv">tão</mark> feliz! Ela tem <mark class="lv">tantos</mark> amigos.<span class="wa-time">10:05</span></div>
+      <div class="wa-msg out">Tinha quarenta e <mark class="lv">tantas</mark> pessoas, né?<span class="wa-time">10:05 ✓✓</span></div>
+      <div class="wa-msg in">Isso! E lá pelas <mark class="lv">tantas</mark>, o pai dela cantou. Ele canta <mark class="lv">tão</mark> bem!<span class="wa-time">10:06</span></div>
+      <div class="wa-msg out">Adorei. Vamos repetir logo!<span class="wa-time">10:07 ✓✓</span></div>
+    </div>
+    <p class="fonte" style="margin-top:16px;">[Texto elaborado para fins didáticos]</p>
+  </div>
+
+  <p class="sec-label">Vocabulário</p>
+  <div class="card">
+    <table class="vocab-table"><tbody>
+      <tr><td class="vocab-pt">a festa</td><td>party</td></tr>
+      <tr><td class="vocab-pt">dançar</td><td>to dance</td></tr>
+      <tr><td class="vocab-pt">doer</td><td>to hurt</td></tr>
+      <tr><td class="vocab-pt">alto</td><td>loud; tall</td></tr>
+      <tr><td class="vocab-pt">quase não</td><td>hardly, almost not</td></tr>
+      <tr><td class="vocab-pt">ir embora</td><td>to leave</td></tr>
+      <tr><td class="vocab-pt">logo</td><td>soon</td></tr>
+      <tr><td class="vocab-pt">né?</td><td>right? (informal)</td></tr>
+    </tbody></table>
+  </div>
+
+  <p class="sec-label">Part 1 — Compreensão</p>
+  <div class="ex-card">
+    <h2>Understand the text</h2>
+    <p class="ex-instr">Read the conversation and answer in Portuguese.</p>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Como foi a festa da Marina? <em style="color:#999;font-size:13px;">(How was Marina's party?)</em></p><textarea id="c1" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> O que o Léo comeu muito? <em style="color:#999;font-size:13px;">(What did Léo eat a lot of?)</em></p><textarea id="c2" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Quem cantou na festa? Como ele canta? <em style="color:#999;font-size:13px;">(Who sang? How does he sing?)</em></p><textarea id="c3" placeholder="Escreva sua resposta aqui…"></textarea></div>
+    <button class="check-btn" onclick="checkComp()">✓ Check answers</button>
+    <div id="comp-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 2 — Prática Controlada</p>
+  <div class="ex-card">
+    <h2>Exercise 1 — Tão, tanto, tanta, tantos or tantas?</h2>
+    <p class="ex-instr">Complete each sentence with <strong>one word</strong>. Look at the word that comes next (or comes before).</p>
+    <div class="sent"><span class="q-num">1.</span> Meu irmão é <input class="gap-input" id="g1" data-sub autocomplete="off" spellcheck="false"> engraçado!</div>
+    <div class="sent"><span class="q-num">2.</span> Hoje tem <input class="gap-input" id="g2" data-sub autocomplete="off" spellcheck="false"> trânsito!</div>
+    <div class="sent"><span class="q-num">3.</span> Tem <input class="gap-input" id="g3" data-sub autocomplete="off" spellcheck="false"> turistas na praia!</div>
+    <div class="sent"><span class="q-num">4.</span> Ele dirige <input class="gap-input" id="g4" data-sub autocomplete="off" spellcheck="false"> devagar.</div>
+    <div class="sent"><span class="q-num">5.</span> Minha mãe cozinhou <input class="gap-input" id="g5" data-sub autocomplete="off" spellcheck="false"> ontem!</div>
+    <div class="sent"><span class="q-num">6.</span> Você tem <input class="gap-input" id="g6" data-sub autocomplete="off" spellcheck="false"> energia!</div>
+    <div class="sent"><span class="q-num">7.</span> Comprei <input class="gap-input" id="g7" data-sub autocomplete="off" spellcheck="false"> frutas na feira!</div>
+    <div class="sent"><span class="q-num">8.</span> Esse bolo está <input class="gap-input" id="g8" data-sub autocomplete="off" spellcheck="false"> gostoso!</div>
+    <button class="check-btn" onclick="checkG()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetG()">Refazer</button>
+    <div id="g-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 2 — Say it in Portuguese</h2>
+    <p class="ex-instr">Write each sentence in Portuguese, using <strong>tão</strong> or the right form of <strong>tanto</strong>.</p>
+    <div class="example-line"><em>Ex.:</em> She sings so well. → <strong>Ela canta tão bem.</strong></div>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> He is so tall.</p><input type="text" class="rw-input" id="f1" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> She studied so much!</p><input type="text" class="rw-input" id="f2" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> We have so many friends.</p><input type="text" class="rw-input" id="f3" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">4.</span> It's so late!</p><input type="text" class="rw-input" id="f4" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">5.</span> I have so much work.</p><input type="text" class="rw-input" id="f5" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">6.</span> She has so many clothes.</p><input type="text" class="rw-input" id="f6" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <button class="check-btn" onclick="checkF()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetF()">Refazer</button>
+    <div id="f-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 3 — Same idea, different word</h2>
+    <p class="ex-instr">Each pair uses the same idea. Choose <strong>tão</strong> or the right form of <strong>tanto</strong>.</p>
+    <div class="sent"><span class="q-num">1.</span> Pedro tem <input class="gap-input" id="j1" data-sub autocomplete="off" spellcheck="false"> coragem.</div>
+    <div class="sent"><span class="q-num">2.</span> Pedro é <input class="gap-input" id="j2" data-sub autocomplete="off" spellcheck="false"> corajoso.</div>
+    <div class="sent"><span class="q-num">3.</span> Bia dança <input class="gap-input" id="j3" data-sub autocomplete="off" spellcheck="false">.</div>
+    <div class="sent"><span class="q-num">4.</span> Bia dança <input class="gap-input" id="j4" data-sub autocomplete="off" spellcheck="false"> bem.</div>
+    <div class="sent"><span class="q-num">5.</span> Meus vizinhos têm <input class="gap-input" id="j5" data-sub autocomplete="off" spellcheck="false"> cachorros.</div>
+    <div class="sent"><span class="q-num">6.</span> Meus vizinhos são <input class="gap-input" id="j6" data-sub autocomplete="off" spellcheck="false"> simpáticos.</div>
+    <button class="check-btn" onclick="checkJ()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetJ()">Refazer</button>
+    <div id="j-result" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <h2>Exercise 4 — Expressions with tanto</h2>
+    <p class="ex-instr">Complete each expression with <strong>tanto, tanta, tantos</strong> or <strong>tantas</strong>.</p>
+    <div class="sent"><span class="q-num">1.</span> Ela tem quarenta e <input class="gap-input" id="k1" data-sub autocomplete="off" spellcheck="false"> anos.</div>
+    <div class="sent"><span class="q-num">2.</span> Foi um jantar e <input class="gap-input" id="k2" data-sub autocomplete="off" spellcheck="false">!</div>
+    <div class="sent"><span class="q-num">3.</span> Lá pelas <input class="gap-input" id="k3" data-sub autocomplete="off" spellcheck="false"> da noite, todo mundo foi embora.</div>
+    <div class="sent"><span class="q-num">4.</span> Tomei um susto e <input class="gap-input" id="k4" data-sub autocomplete="off" spellcheck="false">.</div>
+    <div class="sent"><span class="q-num">5.</span> Tem <input class="gap-input" id="k5" data-sub autocomplete="off" spellcheck="false"> gente aqui hoje!</div>
+    <div class="sent"><span class="q-num">6.</span> Cinquenta e <input class="gap-input" id="k6" data-sub autocomplete="off" spellcheck="false"> pessoas vieram.</div>
+    <button class="check-btn" onclick="checkK()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetK()">Refazer</button>
+    <div id="k-result" class="result-msg"></div>
+  </div>
+
+  <p class="sec-label">Part 3 — Produção Escrita</p>
+  <div class="ex-card">
+    <h2>Conte sobre uma festa ou uma viagem</h2>
+    <p class="ex-instr">Write 5–6 lines about a party, a trip or a city you know. Use <strong>at least four</strong> sentences with <em>tão</em> and <em>tanto, tanta, tantos, tantas</em>.</p>
+    <textarea class="prod" id="producao" placeholder="Domingo eu fui a uma festa e tanto! Tinha tanta gente…" oninput="prodCheck()"></textarea>
+    <div class="chk" id="chk"><span id="k-tao">○ tão</span> &nbsp; <span id="k-tanto">○ tanto (after a verb)</span> &nbsp; <span id="k-tanta">○ tanta / tantos / tantas</span> &nbsp; <span id="k-etanto">○ e tanto / lá pelas tantas</span></div>
+  </div>
+
+  <div class="send-box">
+    📩 When you're done, send your exercises to your teacher. She will read carefully and give you personalized feedback — pointing out what you did well and helping you improve your Portuguese even further. This exchange is one of the most important parts of the learning process!
+  </div>
+
+</div>
+<script>
+function norm(s) { return s.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' '); }
+function normA(s) { return s.toLowerCase().trim().replace(/[.,!?;:“”"]/g,'').replace(/\s+/g,' '); }
+function hasAny(s, keys) { var n = norm(s); return keys.some(function(k){ return n.indexOf(norm(k)) !== -1; }); }
+function mk(ok){ return ok ? '<span style="color:#2E7D52;font-weight:700;">✓</span>' : '<span style="color:var(--pitomba,#D36D29);font-weight:700;">✗</span>'; }
+function out(id, correct, total, html){
+  var res = document.getElementById(id);
+  res.className = 'result-msg show ' + (correct === total ? 'good' : 'try-again');
+  res.innerHTML = '<strong>' + correct + ' / ' + total + (correct === total ? ' — perfeito!' : ' corretas.') + '</strong><div style="margin-top:8px;">' + html + '</div>';
+}
+var compKeys = {
+  c1: { keys: ['festa e tanto','otima','boa','legal','muita gente'], model: 'Foi uma festa e tanto! Tinha muita gente e muita comida.' },
+  c2: { keys: ['bolo'], model: 'Ele comeu muito bolo.' },
+  c3: { keys: ['pai'], model: 'O pai da Marina cantou. Ele canta muito bem.' }
+};
+function checkComp() {
+  var html = '';
+  Object.keys(compKeys).forEach(function(id, i) {
+    var el = document.getElementById(id);
+    var ok = el.value.trim().length > 0 && hasAny(el.value, compKeys[id].keys);
+    html += '<div style="margin-bottom:10px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' Model answer: ' + compKeys[id].model + '</div>';
+  });
+  var res = document.getElementById('comp-result'); res.className = 'result-msg show good'; res.innerHTML = html;
+}
+function checkList(prefix, keys, notes, resId) {
+  var c = 0, html = '';
+  keys.forEach(function(ks, i) {
+    var el = document.getElementById(prefix + (i+1)); el.classList.remove('correct','wrong');
+    var ok = el.value.trim() !== '' && ks.some(function(k){ return normA(el.value) === normA(k); });
+    if (ok) { el.classList.add('correct'); c++; } else if (el.value.trim()) { el.classList.add('wrong'); }
+    html += '<div style="margin-bottom:8px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + ks[0] + (ks.length>1 ? ' <em style="color:#999">ou</em> ' + ks.slice(1).join(' <em style="color:#999">ou</em> ') : '') + (notes[i] ? '<br><span style="color:#777;font-size:13px;">' + notes[i] + '</span>' : '') + '</div>';
+  });
+  out(resId, c, keys.length, html);
+}
+function resetList(prefix, n, resId) { for (var i = 1; i <= n; i++) { var el = document.getElementById(prefix + i); el.value=''; el.classList.remove('correct','wrong'); } document.getElementById(resId).className='result-msg'; }
+var gKey = [["tão"],["tanto"],["tantos"],["tão"],["tanto"],["tanta"],["tantas"],["tão"]],
+ gNotes = ["Before an adjective (engraçado) → tão.","Before a noun (trânsito, masculine singular) → tanto.","Before a plural masculine noun (turistas) → tantos.","Before an adverb (devagar) → tão.","After a verb (cozinhou) → tanto, never changes.","Before a feminine noun (energia) → tanta.","Before a plural feminine noun (frutas) → tantas.","Before an adjective (gostoso) → tão."];
+function checkG() { checkList('g', gKey, gNotes, 'g-result'); }
+function resetG() { resetList('g', gKey.length, 'g-result'); }
+var fKey = [["Ele é tão alto."],["Ela estudou tanto!","Ela estudou tanto."],["Nós temos tantos amigos.","Temos tantos amigos.","Nós temos tantos amigos!"],["É tão tarde!","Está tão tarde!","É tão tarde.","Está tão tarde."],["Eu tenho tanto trabalho.","Tenho tanto trabalho.","Eu tenho tanto trabalho!","Tenho tanto trabalho!"],["Ela tem tantas roupas.","Ela tem tantas roupas!"]],
+ fNotes = ["Adjective (alto) → tão.","Verb (estudar) → tanto, after the verb.","Plural masculine noun (amigos) → tantos.","Adjective/adverb (tarde) → tão.","Masculine singular noun (trabalho) → tanto.","Plural feminine noun (roupas) → tantas."];
+function checkF() { checkList('f', fKey, fNotes, 'f-result'); }
+function resetF() { resetList('f', fKey.length, 'f-result'); }
+var jKey = [["tanta"],["tão"],["tanto"],["tão"],["tantos"],["tão"]],
+ jNotes = ["Noun (coragem, feminine) → tanta.","Adjective (corajoso) → tão.","Verb (dançar) → tanto.","Adverb (bem) → tão.","Plural masculine noun (cachorros) → tantos.","Adjective (simpáticos) → tão."];
+function checkJ() { checkList('j', jKey, jNotes, 'j-result'); }
+function resetJ() { resetList('j', jKey.length, 'j-result'); }
+var kKey = [["tantos"],["tanto"],["tantas"],["tanto"],["tanta"],["tantas"]],
+ kNotes = ["trinta/quarenta e tantos anos: a bit more than forty (anos is masculine plural).","um jantar e tanto: a really great dinner.","lá pelas tantas: late, at some point (always feminine plural).","um susto e tanto: quite a scare.","Tem tanta gente: so many people (gente is feminine singular).","cinquenta e tantas pessoas: over fifty (pessoas is feminine plural)."];
+function checkK() { checkList('k', kKey, kNotes, 'k-result'); }
+function resetK() { resetList('k', kKey.length, 'k-result'); }
+function prodCheck() {
+  var raw = document.getElementById('producao').value, n = ' ' + norm(raw) + ' ';
+  function mark(id, ok, txt){ var e = document.getElementById(id); e.className = ok ? 'done' : ''; e.textContent = (ok ? '✓ ' : '○ ') + txt; }
+  mark('k-tao', / tao /.test(n), 'tão');
+  mark('k-tanto', /[a-z]{3,} tanto( |$)/.test(n) && !/ tanto [a-z]/.test(n) || / (estudei|falei|comi|dancei|trabalhei|ri|chorei|corri|andei|viajei|bebi|gostei) tanto /.test(n), 'tanto (after a verb)');
+  mark('k-tanta', / (tanta|tantos|tantas) /.test(n), 'tanta / tantos / tantas');
+  mark('k-etanto', / e tanto| e tantos| e tantas|la pelas tantas/.test(n), 'e tanto / lá pelas tantas');
+}
+</script>
+
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('[data-sub]').forEach(function(el) {
+    var raw = (el.tagName==='SELECT') ? (el.selectedIndex>0 ? el.options[el.selectedIndex].text : '') : el.value.trim();
+    answersHtml += '<p><strong>'+el.id+':</strong> '+(raw ? raw.replace(/</g,'&lt;') : '(sem resposta)')+'</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:email,name:name}],
+        templateId:1,
+        params:{nome:name,material:material,data:today}
+      })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:820px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:8px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
