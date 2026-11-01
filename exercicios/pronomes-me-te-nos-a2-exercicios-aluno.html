@@ -220,6 +220,18 @@
       <div class="rule-ex"><span class="rs">Ele <b class="pn">nos</b> convidou.</span><span class="rg">writing, stories, careful speech</span></div>
       <div class="rule-note">You will read and hear both, so learn to recognize <strong>nos</strong>.</div>
     </div>
+    <div class="rule"><div class="rule-t"><span class="rule-n">6</span>Two correct ways: <strong>before the verb</strong> or <strong>after it with a preposition</strong></div>
+      <p style="font-size:14px;margin-bottom:8px;">You can use <strong>me, te, nos</strong> before the verb, or put the person <strong>after</strong> the verb with <strong>para</strong> (or <em>pra</em> in speech). <strong>Both are correct. The choice is yours.</strong></p>
+      <table class="ref-table">
+        <tr><th>Before the verb</th><th>After the verb, with a preposition</th></tr>
+        <tr><td>Você <b class="pn">me</b> explicou.</td><td>Você explicou <b class="pn">para mim</b> (<em>pra mim</em>).</td></tr>
+        <tr><td>Eu <b class="pn">te</b> expliquei.</td><td>Eu expliquei <b class="pn">para você</b> (<em>pra você</em>).</td></tr>
+        <tr><td>Eles <b class="pn">nos</b> explicaram.</td><td>Eles explicaram <b class="pn">para nós</b> / <b class="pn">pra gente</b>.</td></tr>
+      </table>
+      <div class="rule-note"><strong>Which one should I use?</strong> Whichever feels natural to you. <em>Ele me explicou</em> is the most common, simple choice. The version with <em>para</em> is also very common and is often used to give emphasis or contrast: <em>Ele explicou pra mim, não pra você.</em></div>
+      <div class="rule-note"><strong>After a preposition:</strong> use <em>mim</em>, never <em>eu</em>: <em>para mim</em>. (The exception: <em>para eu + verb</em>, as in <em>Ele deixou o livro para eu ler.</em>) <strong>Para nós</strong> is a bit more formal; <strong>pra gente</strong> is everyday speech.</div>
+      <div class="rule-note"><strong>And “pra ti”?</strong> <em>Eu expliquei pra ti</em> is also correct. You will hear it in southern Brazil and in Portugal. In most of Brazil, people who say <em>você</em> use <em>te</em> or <em>pra você</em>.</div>
+    </div>
   </div>
 
   <p class="sec-label">Texto</p>
@@ -316,6 +328,21 @@
     <div id="rw-result" class="result-msg"></div>
   </div>
 
+  <div class="ex-card">
+    <h2>Exercise 4 — Two ways to say it</h2>
+    <p class="ex-instr">Rewrite each sentence with the person <strong>after</strong> the verb, using <strong>para</strong> or <strong>pra</strong> (<em>mim, você, nós, a gente</em>). Several answers are correct.</p>
+    <div class="example-line"><em>Ex.:</em> Ele me ligou. → Ele ligou <strong>para mim</strong>.</div>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Você me explicou a lição.</p><input type="text" class="rw-input" id="p1" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> Eu te expliquei o problema.</p><input type="text" class="rw-input" id="p2" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Eles nos explicaram o caminho.</p><input type="text" class="rw-input" id="p3" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">4.</span> Ela me mandou uma mensagem.</p><input type="text" class="rw-input" id="p4" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">5.</span> Ele te deu um presente?</p><input type="text" class="rw-input" id="p5" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">6.</span> Ele nos mostrou a casa.</p><input type="text" class="rw-input" id="p6" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <button class="check-btn" onclick="checkPR()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetPR()">Refazer</button>
+    <div id="pr-result" class="result-msg"></div>
+  </div>
+
   <p class="sec-label">Part 3 — Produção Escrita</p>
   <div class="ex-card">
     <h2>Convide um amigo</h2>
@@ -394,6 +421,19 @@ function checkRW() {
   out('rw-result', c, rwKey.length, html);
 }
 function resetRW() { rwKey.forEach(function(k, i){ var el = document.getElementById('r'+(i+1)); el.value=''; el.classList.remove('correct','wrong'); }); document.getElementById('rw-result').className='result-msg'; }
+var prKey = [["Você explicou a lição para mim.", "Você explicou a lição pra mim."], ["Eu expliquei o problema para você.", "Eu expliquei o problema pra você.", "Eu expliquei o problema para ti.", "Eu expliquei o problema pra ti."], ["Eles explicaram o caminho para nós.", "Eles explicaram o caminho pra gente.", "Eles explicaram o caminho para a gente."], ["Ela mandou uma mensagem para mim.", "Ela mandou uma mensagem pra mim."], ["Ele deu um presente para você?", "Ele deu um presente pra você?", "Ele deu um presente para ti?", "Ele deu um presente pra ti?"], ["Ele mostrou a casa para nós.", "Ele mostrou a casa pra gente.", "Ele mostrou a casa para a gente."]];
+function checkPR() {
+  var c = 0, html = '';
+  prKey.forEach(function(keys, i) {
+    var el = document.getElementById('p' + (i+1));
+    el.classList.remove('correct','wrong');
+    var ok = el.value.trim() !== '' && keys.some(function(k){ return norm(el.value) === norm(k); });
+    if (ok) { el.classList.add('correct'); c++; } else if (el.value.trim()) { el.classList.add('wrong'); }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + keys[0] + (keys.length > 1 ? ' <em style="color:#999">ou</em> ' + keys[1] : '') + '</div>';
+  });
+  out('pr-result', c, prKey.length, html);
+}
+function resetPR() { prKey.forEach(function(k, i){ var el = document.getElementById('p'+(i+1)); el.value=''; el.classList.remove('correct','wrong'); }); document.getElementById('pr-result').className='result-msg'; }
 function prodCheck() {
   var n = ' ' + norm(document.getElementById('producao').value) + ' ';
   ['me','te','nos'].forEach(function(p){
