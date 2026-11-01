@@ -259,6 +259,15 @@
     <div class="rule-note"><strong>Number + e tanto(s):</strong> <em>trinta e tantos</em> = a bit more than thirty. <strong>Noun + e tanto:</strong> <em>uma festa e tanto</em> = a really great (or big) one.</div>
   </div>
 
+  <div class="rule"><div class="rule-t"><span class="rule-n">6</span>Emphasis: stretch the word!</div>
+    <p style="font-size:14px;margin-bottom:8px;">In speech, <strong>tão</strong> and <strong>tanto</strong> are often <strong>stressed</strong> to show strong feeling. We make the word <strong>longer</strong> and raise our voice on it. In chat messages, people write the stretched vowel with extra letters.</p>
+    <div class="rule-ex"><span class="rs">Hoje eu tenho <b class="pn">taaantas</b> coisas pra fazer!</span><span class="rg">I have SO many things to do today!</span></div>
+    <div class="rule-ex"><span class="rs">Esse bolo está <b class="pn">tããão</b> bom!</span><span class="rg">This cake is SO good!</span></div>
+    <div class="rule-ex"><span class="rs">Eu estudei <b class="pn">taaanto</b>!</span><span class="rg">I studied SO much!</span></div>
+    <div class="rule-ex"><span class="rs">Tem <b class="pn">taaanta</b> gente aqui!</span><span class="rg">There are SO many people here!</span></div>
+    <div class="rule-note"><strong>Tip:</strong> try saying the normal sentence first (<em>Hoje eu tenho tantas coisas pra fazer.</em>), then stretch the stressed vowel (<em>taaantas</em>) and let your voice go up. The longer the word, the stronger the feeling: tired, excited, surprised or annoyed. In writing, use an exclamation mark and repeat the vowel (<em>tãããão</em>), mostly in informal messages.</div>
+  </div>
+
   <p class="sec-label">Texto</p>
   <div class="card">
     <p class="fonte">Conversa de WhatsApp: depois da festa</p>
@@ -361,6 +370,19 @@
     <div id="k-result" class="result-msg"></div>
   </div>
 
+  <div class="ex-card">
+    <h2>Exercise 5 — Make it emphatic</h2>
+    <p class="ex-instr">Rewrite each sentence as you would <strong>say it with strong feeling</strong> or write it in a chat: <strong>stretch</strong> <em>tão / tanto</em> by repeating the <strong>a</strong> (<em>taaanto, tããão</em>).</p>
+    <div class="example-line"><em>Ex.:</em> Estou tão cansada! → <strong>Estou tããããão cansada!</strong></div>
+    <div class="q-block"><p class="q"><span class="q-num">1.</span> Hoje eu tenho tanto trabalho!</p><input type="text" class="rw-input" id="e1" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">2.</span> Essa música é tão boa!</p><input type="text" class="rw-input" id="e2" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">3.</span> Ela falou tanto!</p><input type="text" class="rw-input" id="e3" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <div class="q-block"><p class="q"><span class="q-num">4.</span> Tem tantas pessoas aqui!</p><input type="text" class="rw-input" id="e4" data-sub autocomplete="off" placeholder="Escreva a frase…"></div>
+    <button class="check-btn" onclick="checkE()">✓ Check answers</button>
+    <button class="reset-btn" onclick="resetE()">Refazer</button>
+    <div id="e-result" class="result-msg"></div>
+  </div>
+
   <p class="sec-label">Part 3 — Produção Escrita</p>
   <div class="ex-card">
     <h2>Conte sobre uma festa ou uma viagem</h2>
@@ -425,6 +447,20 @@ var kKey = [["tantos"],["tanto"],["tantas"],["tanto"],["tanta"],["tantas"]],
  kNotes = ["trinta/quarenta e tantos anos: a bit more than forty (anos is masculine plural).","um jantar e tanto: a really great dinner.","lá pelas tantas: late, at some point (always feminine plural).","um susto e tanto: quite a scare.","Tem tanta gente: so many people (gente is feminine singular).","cinquenta e tantas pessoas: over fifty (pessoas is feminine plural)."];
 function checkK() { checkList('k', kKey, kNotes, 'k-result'); }
 function resetK() { resetList('k', kKey.length, 'k-result'); }
+var eModel = ["Hoje eu tenho taaanto trabalho!","Essa música é tããão boa!","Ela falou taaanto!","Tem taaantas pessoas aqui!"];
+function checkE() {
+  var c = 0, html = '';
+  eModel.forEach(function(m, i) {
+    var el = document.getElementById('e' + (i+1)); el.classList.remove('correct','wrong');
+    var n = el.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var ok = /ta{2,}(nt|o)/.test(n);
+    ok = ok && el.value.trim().length > 8;
+    if (ok) { el.classList.add('correct'); c++; } else if (el.value.trim()) { el.classList.add('wrong'); }
+    html += '<div style="margin-bottom:6px;"><strong>' + (i+1) + '.</strong> ' + mk(ok) + ' ' + m + '</div>';
+  });
+  out('e-result', c, eModel.length, html);
+}
+function resetE() { eModel.forEach(function(m, i){ var el = document.getElementById('e'+(i+1)); el.value=''; el.classList.remove('correct','wrong'); }); document.getElementById('e-result').className='result-msg'; }
 function prodCheck() {
   var raw = document.getElementById('producao').value, n = ' ' + norm(raw) + ' ';
   function mark(id, ok, txt){ var e = document.getElementById(id); e.className = ok ? 'done' : ''; e.textContent = (ok ? '✓ ' : '○ ') + txt; }
