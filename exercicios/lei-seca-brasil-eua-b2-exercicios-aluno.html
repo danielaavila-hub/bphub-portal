@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lei Seca: Brasil × Estados Unidos — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #D36D29; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #D36D29; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 640px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .watch-box { background: var(--baunilha2); border: 1.5px solid rgba(211,109,41,0.25); border-left: 4px solid var(--pitomba); border-radius: 0 16px 16px 0; padding: 26px 32px; margin: 8px 0 32px; }
+    .watch-box p { color: var(--nanquim); font-size: 14px; margin-bottom: 16px; line-height: 1.7; }
+    .watch-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; padding: 13px 26px; border-radius: 10px; text-decoration: none; }
+    .watch-meta { margin-top: 14px; font-size: 12px; color: #8a8a78; }
+
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin-bottom: 28px; }
+    .card h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 6px; }
+    .card .instrucao { font-size: 13.5px; color: #8a8a78; margin-bottom: 20px; }
+
+    .texto-box { font-family: 'Trirong', serif; font-size: 16px; line-height: 1.95; color: var(--nanquim); }
+    .texto-box p { margin-bottom: 16px; }
+    .texto-box .fala { border-left: 3px solid var(--pitomba); padding-left: 16px; font-style: italic; margin: 18px 0; }
+    .texto-box .autor { display: block; font-style: normal; font-family: 'Manrope', sans-serif; font-size: 12.5px; color: var(--pitomba); margin-top: 6px; font-weight: 600; }
+    .fonte-cita { font-size: 12.5px; color: #999; margin-top: 18px; font-family: 'Manrope', sans-serif; }
+
+    .cult-box { background: var(--baunilha2); border-left: 4px solid var(--erva-doce); border-radius: 0 10px 10px 0; padding: 18px 22px; margin: 18px 0; font-size: 14.5px; line-height: 1.75; }
+    .cult-box strong { color: var(--floresta); }
+    .cult-box p { margin-bottom: 12px; }
+    .cult-box p:last-child { margin-bottom: 0; }
+
+    .legal-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 0 10px 10px 0; padding: 20px 24px; margin: 8px 0; font-size: 14.5px; line-height: 1.8; }
+    .legal-box strong { color: var(--cobalto); }
+    .legal-box p { margin-bottom: 14px; }
+    .legal-box p:last-child { margin-bottom: 0; }
+
+    .update-box { background: #FCF0E6; border: 1.5px solid rgba(211,109,41,0.3); border-left: 4px solid var(--pitomba); border-radius: 0 10px 10px 0; padding: 20px 24px; margin: 18px 0 8px; font-size: 14.5px; line-height: 1.8; }
+    .update-box .update-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .update-box strong { color: var(--pitomba); }
+    .update-box p { margin-bottom: 12px; }
+    .update-box p:last-child { margin-bottom: 0; }
+    .legal-compare { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+    .legal-term { flex: 1; min-width: 220px; background: white; border: 1.5px solid rgba(38,91,139,0.2); border-radius: 10px; padding: 14px 18px; }
+    .legal-term-label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 6px; }
+    .legal-term p { font-size: 13.5px; margin-bottom: 0; }
+
+    .aspect-list { margin: 14px 0; }
+    .aspect-item { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; }
+    .aspect-item:last-child { margin-bottom: 0; }
+    .aspect-name { font-weight: 700; color: var(--pitomba); font-size: 14.5px; margin-bottom: 4px; }
+    .aspect-item p { font-size: 13.5px; margin: 0; }
+    .aspect-item em { color: var(--floresta); font-style: normal; font-weight: 600; }
+
+    .item { margin-bottom: 16px; }
+    .item label { display: block; font-size: 15px; margin-bottom: 6px; }
+    .item input[type="text"] {
+      width: 100%; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px;
+      font-family: 'Manrope', sans-serif; font-size: 14px; outline: none;
+    }
+    .item input.correct { border-color: var(--floresta); background: #F1F5EA; }
+    .item input.wrong { border-color: var(--pitomba); background: #FCEFE6; }
+
+    textarea {
+      width: 100%; min-height: 90px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2);
+      border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none; resize: vertical;
+    }
+
+    .vf-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .vf-row:last-child { border-bottom: none; }
+    .vf-text { font-size: 15px; flex: 1; }
+    .vf-opts { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-opts button {
+      padding: 7px 16px; border-radius: 8px; border: 1.5px solid rgba(30,29,28,0.2); background: white;
+      font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--nanquim);
+    }
+    .vf-opts button.selected-v { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .vf-opts button.selected-f { background: var(--pitomba); color: white; border-color: var(--pitomba); }
+
+    .match-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .match-term { min-width: 210px; flex-shrink: 0; font-weight: 600; font-size: 14.5px; }
+    .match-select { flex: 1; min-width: 0; max-width: 100%; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; }
+    .match-select.correct { border-color: var(--floresta); }
+    .match-select.wrong { border-color: var(--pitomba); }
+
+    .check-btn { background: var(--pitomba); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 18px; padding: 16px 18px; border-radius: 10px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; }
+    .result-msg.try-again { background: #FDF3E9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .vf-row { flex-direction: column; align-items: flex-start; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+      .match-term { min-width: auto; }
+      .legal-compare { flex-direction: column; }
+    }
+
+    .video-wrap { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background: #1E1D1C; margin: 14px 0 12px; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0 6px; }
+    .photo-fig { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .photo-fig img { display: block; width: 100%; height: 230px; object-fit: cover; }
+    .photo-fig figcaption { padding: 12px 16px; font-size: 13px; line-height: 1.55; color: var(--texto); }
+    .photo-fig figcaption strong { color: var(--pitomba); display: block; margin-bottom: 2px; }
+    .photo-fig .credit { display: block; margin-top: 4px; font-size: 11.5px; color: #999; }
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0 4px; }
+    .cmp-table th { text-align: left; padding: 10px 14px; background: var(--pitomba); color: white; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cmp-table th:first-child { background: var(--nanquim); border-radius: 10px 0 0 0; }
+    .cmp-table th:last-child { border-radius: 0 10px 0 0; }
+    .cmp-table td { padding: 11px 14px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.55; }
+    .cmp-table td:first-child { font-weight: 700; color: var(--nanquim); background: var(--off-white); width: 22%; }
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin-top: 12px; }
+    .vocab-item { font-size: 14px; line-height: 1.5; padding: 8px 0; border-bottom: 1px solid var(--light-gray); }
+    .vocab-item b { color: var(--pitomba); }
+    .vocab-item span { color: #8a8a78; font-size: 13px; }
+    .vocab-sub { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--floresta); margin: 22px 0 4px; }
+    .vf-text em { color: #8a8a78; font-style: normal; font-size: 13px; }
+    select.sel { width: 100%; max-width: 100%; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; margin-top: 6px; }
+    select.sel.correct { border-color: var(--floresta); background: #F1F5EA; }
+    select.sel.wrong { border-color: var(--pitomba); background: #FCEFE6; }
+    .qitem { margin-bottom: 18px; }
+    .qitem > div { font-size: 15px; }
+    @media (max-width: 700px) { .photo-grid, .vocab-grid { grid-template-columns: 1fr; } .cmp-table td:first-child { width: auto; } }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Lei Seca <em>Brasil × Estados Unidos</em></h1>
+  <div class="hero-sub">Como o Brasil e os Estados Unidos tratam quem bebe e dirige? Vídeo, fotos, texto e vocabulário de regras de trânsito: bafômetro, blitz, multa, suspensão da CNH. Compare as duas leis e discuta qual abordagem funciona melhor.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Lei Seca (Lei nº 11.705/2008)</span>
+    <span class="hero-tag">vocabulário de trânsito</span>
+    <span class="hero-tag">Brasil × Estados Unidos</span>
+    <span class="hero-tag">vídeo + fotos + texto</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="card">
+    <div class="sec-label">Aquecimento</div>
+    <h2>Antes de começar</h2>
+    <div class="instrucao">Converse com a professora e, se quiser, anote suas ideias.</div>
+    <div class="item">
+      <label>1. No seu país, é permitido dirigir depois de beber uma taça de vinho ou uma cerveja? Qual é o limite legal?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+    <div class="item">
+      <label>2. Você já passou por uma blitz de trânsito? Como foi a experiência?</label>
+      <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+    </div>
+
+  </div>
+
+  <div class="watch-box">
+    <p><strong>Vídeo (2 min).</strong> Assista à reportagem sobre as novas regras de fiscalização da Lei Seca aprovadas pelo Contran em agosto de 2026. Depois, faça o Exercício 1.</p>
+    <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/MPUmPUsGxLU" title="Contran atualiza a Lei Seca com reteste de bafômetro e drogômetro — Metrópoles" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+    <a class="watch-btn" href="https://www.youtube.com/watch?v=MPUmPUsGxLU" target="_blank" rel="noopener">▶ Abrir no YouTube (caso o vídeo não carregue)</a>
+    <div class="watch-meta">Metrópoles · "Contran atualiza a Lei Seca com reteste de bafômetro e 'drogômetro'" · agosto de 2026</div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Fotos</div>
+    <h2>Duas fiscalizações, dois países</h2>
+    <div class="instrucao">Observe as imagens e descreva o que você vê. O que as duas situações têm em comum? E o que muda?</div>
+    <div class="photo-grid">
+      <figure class="photo-fig">
+        <img src="https://imagens.ebc.com.br/nhBRKzVpnviwqxg5lQhHnHDf46U=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/vac_abr_0890240719rj.jpg?itok=CQgMisKY" alt="Agente da Polícia Rodoviária Federal segura um bafômetro" loading="lazy">
+        <figcaption><strong>Brasil</strong>Agente da Polícia Rodoviária Federal com um bafômetro (teste passivo), na Ponte Rio-Niterói (BR-101).<span class="credit">Foto: Tânia Rêgo/Agência Brasil (CC BY 3.0 BR)</span></figcaption>
+      </figure>
+      <figure class="photo-fig">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Field_sobriety_test_(3834505031).jpg" alt="Policial rodoviário aplica um teste de coordenação ocular em uma motorista" loading="lazy">
+        <figcaption><strong>Estados Unidos</strong>Policial aplica um teste de sobriedade em campo (field sobriety test): a motorista segue uma caneta com os olhos.<span class="credit">Foto: Oregon Department of Transportation, via Wikimedia Commons</span></figcaption>
+      </figure>
+    </div>
+    <div class="item">
+      <label>Descreva as duas fotos em 3 ou 4 frases. Que teste cada agente está aplicando? Por que alguém poderia se recusar a fazê-lo?</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:90px;"></textarea>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Texto 1</div>
+    <h2>Lei Seca: como funciona no Brasil</h2>
+    <div class="texto-box">
+      <p>A chamada <strong>Lei Seca</strong> (Lei nº 11.705/2008) endureceu as regras para quem bebe e dirige no Brasil. Na prática, vale a <strong>tolerância (quase) zero</strong>: qualquer quantidade de álcool detectada pelo etilômetro, descontada a margem de erro do aparelho, já é uma <strong>infração gravíssima</strong> de trânsito.</p>
+      <p>O motorista flagrado numa <strong>blitz</strong> recebe uma <strong>multa de R$ 2.934,70</strong>, tem o direito de dirigir <strong>suspenso por 12 meses</strong>, e pode ter a CNH recolhida e o veículo retido no local. Se a concentração de álcool for alta (a partir de 0,34 mg/L de ar expelido), há ainda <strong>crime de trânsito</strong> (art. 306 do Código de Trânsito Brasileiro), com pena de detenção de seis meses a três anos.</p>
+      <p>Ninguém é obrigado a soprar o bafômetro, mas <strong>a recusa também gera as penalidades administrativas</strong> (art. 165-A do CTB), e o agente pode registrar os <strong>sinais de alteração da capacidade psicomotora</strong>: fala arrastada, odor de álcool, desequilíbrio.</p>
+      <p>Em agosto de 2026, o Contran aprovou novas regras de fiscalização. O governo informou que <strong>não foi criada nenhuma nova infração</strong>: houve apenas a atualização de procedimentos em vigor desde 2013. Entre as mudanças, está a <strong>triagem</strong>, uma verificação inicial (pré-teste ou teste passivo) com caráter apenas orientativo, que isoladamente <strong>não pode fundamentar a autuação</strong>. Também foram definidos os casos de <strong>reteste</strong>, por exemplo, quando o motorista alega ter usado enxaguante bucal ou comido bombom de licor, o que pode deixar álcool residual na boca. Ao lavrar o auto de infração, o agente precisa anotar <strong>pelo menos dois sinais</strong> de alteração psicomotora. Por fim, passam a ser admitidos equipamentos certificados pelo Inmetro para detectar outras <strong>substâncias psicoativas</strong> (o “drogômetro”).</p>
+      <div class="fonte-cita">[Texto elaborado para fins didáticos] Com base em: Alex Rodrigues, “Contran aprova novas regras para fiscalização da Lei Seca”, <a href="https://agenciabrasil.ebc.com.br/geral/noticia/2026-08/contran-aprova-novas-regras-para-fiscalizacao-da-lei-seca" target="_blank" rel="noopener">Agência Brasil</a>, 18/08/2026; e na legislação de trânsito (CTB). Confira os valores atualizados nos órgãos de trânsito.</div>
+    </div>
+    <div class="cult-box" style="margin-top:20px;">
+      <p><strong>Curiosidade linguística.</strong> Nos Estados Unidos, “Lei Seca” é também o nome que se dá, em português, à <em>Prohibition</em> (1920–1933), período em que era proibido fabricar e vender bebidas alcoólicas no país. No Brasil, o apelido passou a designar a lei de 2008, que <u>não proíbe beber</u>, mas sim <u>dirigir depois de beber</u>.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Texto 2</div>
+    <h2>E nos Estados Unidos?</h2>
+    <div class="texto-box">
+      <p>Nos Estados Unidos, não existe uma lei federal única para dirigir sob efeito de álcool: <strong>cada estado tem a sua</strong>. Mesmo assim, o limite é praticamente o mesmo em todo o país. É ilegal dirigir com <strong>0,08 g/dL</strong> de álcool no sangue ou mais, em todos os 50 estados, no Distrito de Colúmbia e em Porto Rico, exceto em Utah, onde o limite é de <strong>0,05</strong>. Para os motoristas com menos de 21 anos, vale a <strong>tolerância zero</strong>: qualquer álcool detectável pode levar à suspensão da licença.</p>
+      <p>A agência federal de segurança viária (NHTSA) lembra que <strong>até pequenas quantidades afetam a direção</strong>: em 2024, 2.028 pessoas morreram em acidentes em que o motorista tinha entre 0,01 e 0,07 g/dL. No total, foram <strong>11.904 mortes</strong> em acidentes com motoristas alcoolizados naquele ano, o equivalente a uma morte a cada 44 minutos.</p>
+      <p>As punições vão da <strong>contravenção</strong> (<em>misdemeanor</em>) ao <strong>crime grave</strong> (<em>felony</em>) e podem incluir revogação da licença, multas e prisão. Um primeiro caso pode custar <strong>mais de US$ 10 mil</strong> entre multas e custos legais. Muitos estados exigem ainda que o condenado instale, por conta própria, um <strong>dispositivo de bloqueio de ignição</strong>: o carro só liga se o motorista soprar e o resultado estiver abaixo de um limite baixo, geralmente 0,02 g/dL.</p>
+      <div class="fonte-cita">[Texto elaborado para fins didáticos] Dados: NHTSA, “<a href="https://www.nhtsa.gov/risky-driving/drunk-driving" target="_blank" rel="noopener">Drunk Driving</a>” (órgão do governo dos EUA).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Comparação</div>
+    <h2>Brasil × Estados Unidos em resumo</h2>
+    <table class="cmp-table">
+      <tr><th>Critério</th><th>Brasil</th><th>Estados Unidos</th></tr>
+      <tr><td>Limite</td><td>Tolerância (quase) zero: qualquer álcool acima da margem de erro do aparelho</td><td>0,08 g/dL (0,05 em Utah); tolerância zero para menores de 21 anos</td></tr>
+      <tr><td>Punição administrativa</td><td>Multa de R$ 2.934,70 + suspensão da CNH por 12 meses</td><td>Multa e suspensão ou revogação da licença; varia conforme o estado</td></tr>
+      <tr><td>Crime</td><td>A partir de 0,34 mg/L: detenção de 6 meses a 3 anos (art. 306)</td><td>De contravenção a crime grave, conforme o estado e a reincidência</td></tr>
+      <tr><td>Fiscalização</td><td>Blitz da Lei Seca com etilômetro; agora também triagem e “drogômetro”</td><td>Patrulhamento e testes de sobriedade em campo; blitz de sobriedade em vários estados</td></tr>
+      <tr><td>Recusa ao teste</td><td>Mesmas penalidades administrativas (art. 165-A)</td><td>Em muitos estados, a recusa também leva à suspensão da licença</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Vocabulário</div>
+    <h2>Vocabulário de trânsito e Lei Seca</h2>
+    <div class="instrucao">Estude as palavras e expressões. As traduções em inglês ajudam na memorização; depois tente explicar cada termo em português.</div>
+    <div class="vocab-sub">Álcool e fiscalização</div>
+    <div class="vocab-grid">
+      <div class="vocab-item"><b>bafômetro / etilômetro</b> <span>— breathalyzer</span></div>
+      <div class="vocab-item"><b>blitz</b> <span>— police checkpoint</span></div>
+      <div class="vocab-item"><b>Lei Seca</b> <span>— law against drinking and driving</span></div>
+      <div class="vocab-item"><b>soprar o bafômetro</b> <span>— to take the breath test</span></div>
+      <div class="vocab-item"><b>recusa</b> <span>— refusal</span></div>
+      <div class="vocab-item"><b>reteste</b> <span>— retest</span></div>
+      <div class="vocab-item"><b>triagem</b> <span>— screening</span></div>
+      <div class="vocab-item"><b>sinais de alteração da capacidade psicomotora</b> <span>— signs of impairment</span></div>
+      <div class="vocab-item"><b>embriaguez ao volante</b> <span>— drunk driving</span></div>
+      <div class="vocab-item"><b>dirigir sob efeito de álcool</b> <span>— to drive under the influence</span></div>
+    </div>
+    <div class="vocab-sub">Penalidades</div>
+    <div class="vocab-grid">
+      <div class="vocab-item"><b>infração gravíssima</b> <span>— most serious category of violation</span></div>
+      <div class="vocab-item"><b>multa</b> <span>— fine</span></div>
+      <div class="vocab-item"><b>pontos na carteira</b> <span>— demerit points</span></div>
+      <div class="vocab-item"><b>suspensão do direito de dirigir</b> <span>— license suspension</span></div>
+      <div class="vocab-item"><b>recolhimento da CNH</b> <span>— license confiscation</span></div>
+      <div class="vocab-item"><b>retenção do veículo</b> <span>— vehicle held at the scene</span></div>
+      <div class="vocab-item"><b>auto de infração / autuação</b> <span>— citation / to cite</span></div>
+      <div class="vocab-item"><b>reincidente</b> <span>— repeat offender</span></div>
+      <div class="vocab-item"><b>detenção</b> <span>— detention (jail term)</span></div>
+      <div class="vocab-item"><b>recorrer da multa</b> <span>— to appeal a fine</span></div>
+    </div>
+    <div class="vocab-sub">Regras de trânsito</div>
+    <div class="vocab-grid">
+      <div class="vocab-item"><b>CNH (Carteira Nacional de Habilitação)</b> <span>— driver’s license</span></div>
+      <div class="vocab-item"><b>condutor / motorista habilitado</b> <span>— licensed driver</span></div>
+      <div class="vocab-item"><b>agente de trânsito</b> <span>— traffic officer</span></div>
+      <div class="vocab-item"><b>semáforo / sinal vermelho</b> <span>— traffic light / red light</span></div>
+      <div class="vocab-item"><b>faixa de pedestres</b> <span>— crosswalk</span></div>
+      <div class="vocab-item"><b>acostamento</b> <span>— road shoulder</span></div>
+      <div class="vocab-item"><b>limite de velocidade</b> <span>— speed limit</span></div>
+      <div class="vocab-item"><b>radar (“pardal”)</b> <span>— speed camera</span></div>
+      <div class="vocab-item"><b>cinto de segurança</b> <span>— seat belt</span></div>
+      <div class="vocab-item"><b>ultrapassagem proibida</b> <span>— no passing</span></div>
+      <div class="vocab-item"><b>via preferencial</b> <span>— right-of-way road</span></div>
+      <div class="vocab-item"><b>placa de “Pare”</b> <span>— stop sign</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 1</div>
+    <h2>Vídeo e texto: verdadeiro ou falso</h2>
+    <div class="instrucao">Com base no vídeo e no Texto 1, marque V (verdadeiro) ou F (falso).</div>
+    <div class="vf-row">
+      <div class="vf-text">1. O Contran criou uma nova infração de trânsito relacionada ao álcool.</div>
+      <div class="vf-opts">
+        <button onclick="setVF('v1',1,this)" data-v="V">V</button>
+        <button onclick="setVF('v1',1,this)" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">2. As novas regras permitem repetir o teste do bafômetro quando algo pode ter interferido no resultado.</div>
+      <div class="vf-opts">
+        <button onclick="setVF('v1',2,this)" data-v="V">V</button>
+        <button onclick="setVF('v1',2,this)" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">3. O chamado “drogômetro” serve para detectar substâncias psicoativas.</div>
+      <div class="vf-opts">
+        <button onclick="setVF('v1',3,this)" data-v="V">V</button>
+        <button onclick="setVF('v1',3,this)" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">4. Com as novas regras, o bafômetro deixa de ser usado.</div>
+      <div class="vf-opts">
+        <button onclick="setVF('v1',4,this)" data-v="V">V</button>
+        <button onclick="setVF('v1',4,this)" data-v="F">F</button>
+      </div>
+    </div>
+    <div class="vf-row">
+      <div class="vf-text">5. O resultado da triagem, sozinho, já é suficiente para multar o motorista.</div>
+      <div class="vf-opts">
+        <button onclick="setVF('v1',5,this)" data-v="V">V</button>
+        <button onclick="setVF('v1',5,this)" data-v="F">F</button>
+      </div>
+    </div>
+    <button class="check-btn" onclick="checkVF('v1')">✓ Verificar respostas</button>
+    <div id="v1-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 2</div>
+    <h2>Vocabulário essencial</h2>
+    <div class="instrucao">Relacione cada termo ao seu significado.</div>
+    <div class="match-row">
+      <div class="match-term">etilômetro</div>
+      <select class="match-select" id="v1"><option value="">Escolha...</option><option value="a">o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões</option><option value="b">operação em que agentes param veículos para fiscalizar os motoristas</option><option value="c">registro formal de uma infração de trânsito pelo agente</option><option value="d">pessoa que repete a mesma infração ou o mesmo crime</option><option value="e">faixa lateral da estrada, usada para paradas de emergência</option><option value="f">retirada do documento de habilitação do motorista pelo agente</option></select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">blitz</div>
+      <select class="match-select" id="v2"><option value="">Escolha...</option><option value="a">o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões</option><option value="b">operação em que agentes param veículos para fiscalizar os motoristas</option><option value="c">registro formal de uma infração de trânsito pelo agente</option><option value="d">pessoa que repete a mesma infração ou o mesmo crime</option><option value="e">faixa lateral da estrada, usada para paradas de emergência</option><option value="f">retirada do documento de habilitação do motorista pelo agente</option></select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">autuação</div>
+      <select class="match-select" id="v3"><option value="">Escolha...</option><option value="a">o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões</option><option value="b">operação em que agentes param veículos para fiscalizar os motoristas</option><option value="c">registro formal de uma infração de trânsito pelo agente</option><option value="d">pessoa que repete a mesma infração ou o mesmo crime</option><option value="e">faixa lateral da estrada, usada para paradas de emergência</option><option value="f">retirada do documento de habilitação do motorista pelo agente</option></select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">reincidente</div>
+      <select class="match-select" id="v4"><option value="">Escolha...</option><option value="a">o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões</option><option value="b">operação em que agentes param veículos para fiscalizar os motoristas</option><option value="c">registro formal de uma infração de trânsito pelo agente</option><option value="d">pessoa que repete a mesma infração ou o mesmo crime</option><option value="e">faixa lateral da estrada, usada para paradas de emergência</option><option value="f">retirada do documento de habilitação do motorista pelo agente</option></select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">acostamento</div>
+      <select class="match-select" id="v5"><option value="">Escolha...</option><option value="a">o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões</option><option value="b">operação em que agentes param veículos para fiscalizar os motoristas</option><option value="c">registro formal de uma infração de trânsito pelo agente</option><option value="d">pessoa que repete a mesma infração ou o mesmo crime</option><option value="e">faixa lateral da estrada, usada para paradas de emergência</option><option value="f">retirada do documento de habilitação do motorista pelo agente</option></select>
+    </div>
+    <div class="match-row">
+      <div class="match-term">recolhimento da CNH</div>
+      <select class="match-select" id="v6"><option value="">Escolha...</option><option value="a">o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões</option><option value="b">operação em que agentes param veículos para fiscalizar os motoristas</option><option value="c">registro formal de uma infração de trânsito pelo agente</option><option value="d">pessoa que repete a mesma infração ou o mesmo crime</option><option value="e">faixa lateral da estrada, usada para paradas de emergência</option><option value="f">retirada do documento de habilitação do motorista pelo agente</option></select>
+    </div>
+    <button class="check-btn" onclick="checkVocab()">✓ Verificar respostas</button>
+    <div id="vocab-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 3</div>
+    <h2>Compreensão dos textos</h2>
+    <div class="instrucao">Escolha a alternativa correta, com base nos Textos 1 e 2.</div>
+    <div class="qitem"><div>1. Por que o resultado da triagem não basta, sozinho, para aplicar a multa?</div><select class="sel" id="c1"><option value="">Escolha...</option><option value="a">Porque é só orientativo; a autuação exige outras avaliações previstas na norma.</option><option value="b">Porque o aparelho da triagem não funciona em blitz.</option><option value="c">Porque só a polícia federal pode usar esse teste.</option></select></div>
+    <div class="qitem"><div>2. O que deve acontecer se o motorista disser que usou enxaguante bucal ou comeu um bombom de licor?</div><select class="sel" id="c2"><option value="">Escolha...</option><option value="a">Ele é multado imediatamente, sem direito a nova avaliação.</option><option value="b">Uma nova avaliação deve ser feita depois, antes de qualquer conclusão.</option><option value="c">Ele fica isento de qualquer teste de álcool.</option></select></div>
+    <div class="qitem"><div>3. Quantos sinais de alteração da capacidade psicomotora o agente deve registrar, no mínimo, ao lavrar o auto de infração?</div><select class="sel" id="c3"><option value="">Escolha...</option><option value="a">Pelo menos um.</option><option value="b">Pelo menos dois.</option><option value="c">Pelo menos cinco.</option></select></div>
+    <div class="qitem"><div>4. Segundo o texto, qual é o limite de álcool no sangue para dirigir na maior parte dos estados americanos?</div><select class="sel" id="c4"><option value="">Escolha...</option><option value="a">0,08 g/dL (exceto em Utah, onde é 0,05).</option><option value="b">Zero, como no Brasil.</option><option value="c">0,20 g/dL em todos os estados.</option></select></div>
+    <div class="qitem"><div>5. Nos Estados Unidos, o que vale para motoristas com menos de 21 anos?</div><select class="sel" id="c5"><option value="">Escolha...</option><option value="a">Podem beber uma taça de vinho sem problema.</option><option value="b">Têm tolerância zero: qualquer álcool detectável pode levar à suspensão da licença.</option><option value="c">Estão isentos de fiscalização.</option></select></div>
+    <button class="check-btn" onclick="checkMC()">✓ Verificar respostas</button>
+    <div id="mc-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 4</div>
+    <h2>Brasil, Estados Unidos ou os dois?</h2>
+    <div class="instrucao">A que país (ou a quais países) cada afirmação se aplica?</div>
+    <div class="qitem"><div>1. Qualquer quantidade de álcool acima da margem de erro do aparelho já é infração de trânsito.</div><select class="sel" id="b1"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <div class="qitem"><div>2. O limite geral é de 0,08 g/dL em quase todo o país.</div><select class="sel" id="b2"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <div class="qitem"><div>3. Existe uma regra específica de tolerância zero para motoristas jovens (menores de 21 anos).</div><select class="sel" id="b3"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <div class="qitem"><div>4. Os agentes podem usar o bafômetro para medir o álcool no ar expelido.</div><select class="sel" id="b4"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <div class="qitem"><div>5. Dirigir sob efeito de álcool pode ser crime, dependendo do caso.</div><select class="sel" id="b5"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <div class="qitem"><div>6. A penalidade administrativa padrão é multa de R$ 2.934,70 e suspensão da CNH por 12 meses.</div><select class="sel" id="b6"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <div class="qitem"><div>7. Uma primeira condenação pode custar mais de US$ 10 mil entre multas e custos legais.</div><select class="sel" id="b7"><option value="">Escolha...</option><option value="br">Brasil</option><option value="eua">Estados Unidos</option><option value="ambos">Os dois</option></select></div>
+    <button class="check-btn" onclick="checkBR()">✓ Verificar respostas</button>
+    <div id="br-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 5</div>
+    <h2>Complete com o vocabulário de trânsito</h2>
+    <div class="instrucao">Escolha a palavra ou expressão adequada para cada lacuna. Há palavras que não serão usadas.</div>
+    <div class="qitem"><div>1. Na <strong>_____</strong>, os agentes pararam todos os carros e pediram que os motoristas soprassem o bafômetro.</div><select class="sel" id="g1"><option value="">Escolha...</option><option value="blitz">blitz</option><option value="auto">auto de infração</option><option value="acost">acostamento</option><option value="reinc">reincidente</option><option value="etil">etilômetro</option><option value="faixa">faixa de pedestres</option><option value="cinto">cinto de segurança</option><option value="pardal">radar</option></select></div>
+    <div class="qitem"><div>2. O motorista recebeu um <strong>_____</strong> por dirigir alcoolizado e teve a CNH recolhida.</div><select class="sel" id="g2"><option value="">Escolha...</option><option value="blitz">blitz</option><option value="auto">auto de infração</option><option value="acost">acostamento</option><option value="reinc">reincidente</option><option value="etil">etilômetro</option><option value="faixa">faixa de pedestres</option><option value="cinto">cinto de segurança</option><option value="pardal">radar</option></select></div>
+    <div class="qitem"><div>3. Em caso de pane, pare o carro no <strong>_____</strong> e ligue o pisca-alerta.</div><select class="sel" id="g3"><option value="">Escolha...</option><option value="blitz">blitz</option><option value="auto">auto de infração</option><option value="acost">acostamento</option><option value="reinc">reincidente</option><option value="etil">etilômetro</option><option value="faixa">faixa de pedestres</option><option value="cinto">cinto de segurança</option><option value="pardal">radar</option></select></div>
+    <div class="qitem"><div>4. Quem comete a mesma infração várias vezes é chamado de <strong>_____</strong> e pode receber penas mais duras.</div><select class="sel" id="g4"><option value="">Escolha...</option><option value="blitz">blitz</option><option value="auto">auto de infração</option><option value="acost">acostamento</option><option value="reinc">reincidente</option><option value="etil">etilômetro</option><option value="faixa">faixa de pedestres</option><option value="cinto">cinto de segurança</option><option value="pardal">radar</option></select></div>
+    <div class="qitem"><div>5. O <strong>_____</strong> mede a quantidade de álcool no ar expelido pelos pulmões do condutor.</div><select class="sel" id="g5"><option value="">Escolha...</option><option value="blitz">blitz</option><option value="auto">auto de infração</option><option value="acost">acostamento</option><option value="reinc">reincidente</option><option value="etil">etilômetro</option><option value="faixa">faixa de pedestres</option><option value="cinto">cinto de segurança</option><option value="pardal">radar</option></select></div>
+    <div class="qitem"><div>6. O motorista deve parar na <strong>_____</strong> para o pedestre atravessar com segurança.</div><select class="sel" id="g6"><option value="">Escolha...</option><option value="blitz">blitz</option><option value="auto">auto de infração</option><option value="acost">acostamento</option><option value="reinc">reincidente</option><option value="etil">etilômetro</option><option value="faixa">faixa de pedestres</option><option value="cinto">cinto de segurança</option><option value="pardal">radar</option></select></div>
+    <button class="check-btn" onclick="checkGap()">✓ Verificar respostas</button>
+    <div id="gap-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 6</div>
+    <h2>Discussão e produção pessoal</h2>
+    <div class="instrucao">Responda em português. Use o vocabulário do material.</div>
+    <div class="item">
+      <label>1. O Brasil adota a tolerância (quase) zero; a maior parte dos estados americanos aceita até 0,08 g/dL. Qual abordagem lhe parece mais eficaz para reduzir acidentes? Justifique e use pelo menos três termos do vocabulário.</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:110px;"></textarea>
+    </div>
+    <div class="item">
+      <label>2. Você está numa blitz da Lei Seca no Rio de Janeiro e disse ao agente que usou enxaguante bucal antes de dirigir. Escreva um diálogo de pelo menos seis falas entre você e o agente (CNH, bafômetro, reteste).</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:130px;"></textarea>
+    </div>
+    <div class="item">
+      <label>3. Um amigo americano vai alugar um carro no Brasil e costuma tomar uma cerveja no almoço. Escreva uma mensagem de WhatsApp explicando as regras brasileiras e a principal diferença em relação às dos Estados Unidos.</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:110px;"></textarea>
+    </div>
+    <div class="item">
+      <label>4. Além das multas e da fiscalização, o que governos e empresas podem fazer para reduzir os acidentes causados pelo álcool (transporte público, aplicativos de carona, campanhas)? Dê a sua opinião.</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:110px;"></textarea>
+    </div>
+    <div class="item">
+      <label>5. Como é a lei sobre álcool e direção no seu país? Compare com o Brasil e com os Estados Unidos.</label>
+      <textarea placeholder="Escreva sua resposta aqui..." style="min-height:110px;"></textarea>
+    </div>
+
+  </div>
+
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <div class="send-box" style="margin-top:24px;">
+    📩 Depois de enviar, a professora vai ler com atenção e te dar um retorno personalizado — apontando o que você fez bem e ajudando a melhorar ainda mais o seu português. Essa troca é uma das partes mais importantes do processo de aprendizagem!
+  </div>
+
+</div>
+
+<script>
+  var vfAnswers = {"v1": {"1": "F", "2": "V", "3": "V", "4": "F", "5": "F"}};
+  var vfTexts = {"v1": {"1": "O Contran criou uma nova infração de trânsito relacionada ao álcool. → Falso (apenas atualizou procedimentos em vigor desde 2013)", "2": "As novas regras permitem repetir o teste do bafômetro quando algo pode ter interferido. → Verdadeiro", "3": "O “drogômetro” serve para detectar substâncias psicoativas. → Verdadeiro", "4": "O bafômetro deixa de ser usado. → Falso (o etilômetro continua sendo usado)", "5": "O resultado da triagem, sozinho, já é suficiente para multar. → Falso (é só orientativo)"}};
+  var vfSelected = {};
+  function setVF(g, n, btn) {
+    var chosen = btn.getAttribute('data-v');
+    vfSelected[g] = vfSelected[g] || {};
+    vfSelected[g][n] = chosen;
+    btn.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.remove('selected-v','selected-f'); });
+    btn.classList.add(chosen === 'V' ? 'selected-v' : 'selected-f');
+  }
+  function render(resId, rows, total, correct) {
+    var allOk = correct === total;
+    var res = document.getElementById(resId);
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + total + ' corretas — respostas certas:') + '</div>' + rows;
+    res.style.display = 'block';
+  }
+  function mark(ok) { return '<span style="color:' + (ok ? 'var(--floresta)' : 'var(--pitomba)') + ';font-weight:700;">' + (ok ? '✓' : '✗') + '</span>'; }
+  function checkVF(g) {
+    var ans = vfAnswers[g], html = '', correct = 0, total = 0;
+    Object.keys(ans).forEach(function(n) {
+      total++;
+      var ok = (vfSelected[g] || {})[n] === ans[n];
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;">' + mark(ok) + ' ' + vfTexts[g][n] + '</div>';
+    });
+    render(g + '-result', html, total, correct);
+  }
+  function checkSelects(answers, labels, questions, resId) {
+    var html = '', correct = 0, total = 0;
+    Object.keys(answers).forEach(function(id) {
+      total++;
+      var el = document.getElementById(id);
+      var ok = el.value === answers[id];
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', el.value !== '' && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;">' + mark(ok) + ' ' + (questions ? questions[id] + ' → ' : '') + '<strong>' + labels[id] + '</strong></div>';
+    });
+    render(resId, html, total, correct);
+  }
+  var vocabAnswers = {"v1": "a", "v2": "b", "v3": "c", "v4": "d", "v5": "e", "v6": "f"}, vocabLabels = {"v1": "etilômetro → o aparelho que mede a quantidade de álcool no ar expelido pelos pulmões", "v2": "blitz → operação em que agentes param veículos para fiscalizar os motoristas", "v3": "autuação → registro formal de uma infração de trânsito pelo agente", "v4": "reincidente → pessoa que repete a mesma infração ou o mesmo crime", "v5": "acostamento → faixa lateral da estrada, usada para paradas de emergência", "v6": "recolhimento da CNH → retirada do documento de habilitação do motorista pelo agente"};
+  function checkVocab() { checkSelects(vocabAnswers, vocabLabels, null, 'vocab-result'); }
+  var mcAnswers = {"c1": "a", "c2": "b", "c3": "b", "c4": "a", "c5": "b"}, mcLabels = {"c1": "Porque é só orientativo; a autuação exige outras avaliações previstas na norma.", "c2": "Uma nova avaliação deve ser feita depois, antes de qualquer conclusão.", "c3": "Pelo menos dois.", "c4": "0,08 g/dL (exceto em Utah, onde é 0,05).", "c5": "Têm tolerância zero: qualquer álcool detectável pode levar à suspensão da licença."}, mcQ = {"c1": "Por que o resultado da triagem não basta, sozinho, para aplicar a multa?", "c2": "O que deve acontecer se o motorista disser que usou enxaguante bucal ou comeu um bombom de licor?", "c3": "Quantos sinais de alteração da capacidade psicomotora o agente deve registrar, no mínimo, ao lavrar o auto de infração?", "c4": "Segundo o texto, qual é o limite de álcool no sangue para dirigir na maior parte dos estados americanos?", "c5": "Nos Estados Unidos, o que vale para motoristas com menos de 21 anos?"};
+  function checkMC() { checkSelects(mcAnswers, mcLabels, mcQ, 'mc-result'); }
+  var brAnswers = {"b1": "br", "b2": "eua", "b3": "eua", "b4": "ambos", "b5": "ambos", "b6": "br", "b7": "eua"}, brLabels = {"b1": "Brasil", "b2": "Estados Unidos", "b3": "Estados Unidos", "b4": "Os dois", "b5": "Os dois", "b6": "Brasil", "b7": "Estados Unidos"}, brQ = {"b1": "Qualquer quantidade de álcool acima da margem de erro do aparelho já é infração de trânsito.", "b2": "O limite geral é de 0,08 g/dL em quase todo o país.", "b3": "Existe uma regra específica de tolerância zero para motoristas jovens (menores de 21 anos).", "b4": "Os agentes podem usar o bafômetro para medir o álcool no ar expelido.", "b5": "Dirigir sob efeito de álcool pode ser crime, dependendo do caso.", "b6": "A penalidade administrativa padrão é multa de R$ 2.934,70 e suspensão da CNH por 12 meses.", "b7": "Uma primeira condenação pode custar mais de US$ 10 mil entre multas e custos legais."};
+  function checkBR() { checkSelects(brAnswers, brLabels, brQ, 'br-result'); }
+  var gapAnswers = {"g1": "blitz", "g2": "auto", "g3": "acost", "g4": "reinc", "g5": "etil", "g6": "faixa"}, gapLabels = {"g1": "blitz", "g2": "auto de infração", "g3": "acostamento", "g4": "reincidente", "g5": "etilômetro", "g6": "faixa de pedestres"}, gapQ = {"g1": "Na ___, os agentes pararam todos os carros e pediram que os motoristas soprassem o bafômetro.", "g2": "O motorista recebeu um ___ por dirigir alcoolizado e teve a CNH recolhida.", "g3": "Em caso de pane, pare o carro no ___ e ligue o pisca-alerta.", "g4": "Quem comete a mesma infração várias vezes é chamado de ___ e pode receber penas mais duras.", "g5": "O ___ mede a quantidade de álcool no ar expelido pelos pulmões do condutor.", "g6": "O motorista deve parar na ___ para o pedestre atravessar com segurança."};
+  function checkGap() { checkSelects(gapAnswers, gapLabels, gapQ, 'gap-result'); }
+
+  // ── BREVO SUBMIT ──
+  function bphubSubmit() {
+    var btn = document.getElementById('bphub-submit-btn');
+    var nameEl = document.getElementById('bphub-student-name');
+    var emailEl = document.getElementById('bphub-student-email');
+    var name = nameEl ? nameEl.value.trim() : '';
+    if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+    if (nameEl) nameEl.style.borderColor='';
+    var email = emailEl ? emailEl.value.trim() : '';
+    var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+    var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+    var summaryLines = []; var answersHtml = '';
+    document.querySelectorAll('textarea').forEach(function(ta, idx) {
+      var label = '';
+      var parent = ta.closest('.item') || ta.closest('[class]');
+      if (parent) {
+        var clone = parent.cloneNode(true);
+        clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+        label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+      }
+      if (!label) label = 'Campo ' + (idx+1);
+      var val = ta.value.trim() || '(sem resposta)';
+      summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+      answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+    });
+    document.querySelectorAll('.item input[type="text"]').forEach(function(inp) {
+      var val = inp.value.trim() || '(sem resposta)';
+      answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+    });
+
+    btn.disabled = true;
+    btn.textContent = 'A enviar…';
+
+    var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+    var calls = [];
+    if (email) {
+      calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+        method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+        body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+      }));
+    }
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+        sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+        subject:'📝 '+name+' — '+material,
+        htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+      })
+    }));
+
+    Promise.all(calls)
+    .then(function() {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    })
+    .catch(function() {
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+      document.getElementById('bphub-error').style.display = 'block';
+    });
+  }
+</script>
+
+</body>
+</html>
