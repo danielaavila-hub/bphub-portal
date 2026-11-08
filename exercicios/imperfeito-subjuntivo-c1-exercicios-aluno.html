@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Se a história fosse outra — Imperfeito do subjuntivo — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .topbar img { height: 40px; width: auto; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: #A1441D; color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: #A1441D; padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { display: block; font-style: italic; color: var(--ouro); font-size: 0.72em; margin-top: 4px; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 640px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+    .main { max-width: 920px; margin: 0 auto; padding: 52px 48px 100px; }
+
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+
+    .watch-box { background: var(--baunilha2); border: 1.5px solid rgba(211,109,41,0.25); border-left: 4px solid var(--pitomba); border-radius: 0 16px 16px 0; padding: 26px 32px; margin: 8px 0 32px; }
+    .watch-box p { color: var(--nanquim); font-size: 14px; margin-bottom: 16px; line-height: 1.7; }
+    .watch-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--pitomba); color: white; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700; padding: 13px 26px; border-radius: 10px; text-decoration: none; }
+    .watch-meta { margin-top: 14px; font-size: 12px; color: #8a8a78; }
+
+    .card { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 28px 30px; margin-bottom: 28px; }
+    .card h2 { font-size: 20px; color: var(--nanquim); margin-bottom: 6px; }
+    .card .instrucao { font-size: 13.5px; color: #8a8a78; margin-bottom: 20px; }
+
+    .texto-box { font-family: 'Trirong', serif; font-size: 16px; line-height: 1.95; color: var(--nanquim); }
+    .texto-box p { margin-bottom: 16px; }
+    .texto-box .fala { border-left: 3px solid var(--pitomba); padding-left: 16px; font-style: italic; margin: 18px 0; }
+    .texto-box .autor { display: block; font-style: normal; font-family: 'Manrope', sans-serif; font-size: 12.5px; color: var(--pitomba); margin-top: 6px; font-weight: 600; }
+    .fonte-cita { font-size: 12.5px; color: #999; margin-top: 18px; font-family: 'Manrope', sans-serif; }
+
+    .cult-box { background: var(--baunilha2); border-left: 4px solid var(--erva-doce); border-radius: 0 10px 10px 0; padding: 18px 22px; margin: 18px 0; font-size: 14.5px; line-height: 1.75; }
+    .cult-box strong { color: var(--floresta); }
+    .cult-box p { margin-bottom: 12px; }
+    .cult-box p:last-child { margin-bottom: 0; }
+
+    .legal-box { background: var(--cobalto-light); border-left: 4px solid var(--cobalto); border-radius: 0 10px 10px 0; padding: 20px 24px; margin: 8px 0; font-size: 14.5px; line-height: 1.8; }
+    .legal-box strong { color: var(--cobalto); }
+    .legal-box p { margin-bottom: 14px; }
+    .legal-box p:last-child { margin-bottom: 0; }
+
+    .update-box { background: #FCF0E6; border: 1.5px solid rgba(211,109,41,0.3); border-left: 4px solid var(--pitomba); border-radius: 0 10px 10px 0; padding: 20px 24px; margin: 18px 0 8px; font-size: 14.5px; line-height: 1.8; }
+    .update-box .update-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 8px; }
+    .update-box strong { color: var(--pitomba); }
+    .update-box p { margin-bottom: 12px; }
+    .update-box p:last-child { margin-bottom: 0; }
+    .legal-compare { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+    .legal-term { flex: 1; min-width: 220px; background: white; border: 1.5px solid rgba(38,91,139,0.2); border-radius: 10px; padding: 14px 18px; }
+    .legal-term-label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cobalto); margin-bottom: 6px; }
+    .legal-term p { font-size: 13.5px; margin-bottom: 0; }
+
+    .aspect-list { margin: 14px 0; }
+    .aspect-item { background: white; border: 1.5px solid var(--light-gray); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; }
+    .aspect-item:last-child { margin-bottom: 0; }
+    .aspect-name { font-weight: 700; color: var(--pitomba); font-size: 14.5px; margin-bottom: 4px; }
+    .aspect-item p { font-size: 13.5px; margin: 0; }
+    .aspect-item em { color: var(--floresta); font-style: normal; font-weight: 600; }
+
+    .item { margin-bottom: 16px; }
+    .item label { display: block; font-size: 15px; margin-bottom: 6px; }
+    .item input[type="text"] {
+      width: 100%; padding: 10px 14px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px;
+      font-family: 'Manrope', sans-serif; font-size: 14px; outline: none;
+    }
+    .item input.correct { border-color: var(--floresta); background: #F1F5EA; }
+    .item input.wrong { border-color: var(--pitomba); background: #FCEFE6; }
+
+    textarea {
+      width: 100%; min-height: 90px; padding: 12px 14px; border: 1.5px solid rgba(30,29,28,0.2);
+      border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none; resize: vertical;
+    }
+
+    .vf-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .vf-row:last-child { border-bottom: none; }
+    .vf-text { font-size: 15px; flex: 1; }
+    .vf-opts { display: flex; gap: 8px; flex-shrink: 0; }
+    .vf-opts button {
+      padding: 7px 16px; border-radius: 8px; border: 1.5px solid rgba(30,29,28,0.2); background: white;
+      font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--nanquim);
+    }
+    .vf-opts button.selected-v { background: var(--floresta); color: white; border-color: var(--floresta); }
+    .vf-opts button.selected-f { background: var(--pitomba); color: white; border-color: var(--pitomba); }
+
+    .match-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .match-term { min-width: 210px; flex-shrink: 0; font-weight: 600; font-size: 14.5px; }
+    .match-select { flex: 1; min-width: 0; max-width: 100%; padding: 9px 12px; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 14px; }
+    .match-select.correct { border-color: var(--floresta); }
+    .match-select.wrong { border-color: var(--pitomba); }
+
+    .check-btn { background: var(--pitomba); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 18px; padding: 16px 18px; border-radius: 10px; font-size: 14px; max-height: 260px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; }
+    .result-msg.try-again { background: #FDF3E9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .vf-row { flex-direction: column; align-items: flex-start; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+      .match-term { min-width: auto; }
+      .legal-compare { flex-direction: column; }
+    }
+
+    input.gap { width: 118px; padding: 4px 8px; border: none; border-bottom: 2px solid rgba(30,29,28,0.35); background: rgba(161,68,29,0.06); border-radius: 4px 4px 0 0; font-family: 'Manrope', sans-serif; font-size: 15px; outline: none; text-align: center; }
+    input.gap:focus { border-bottom-color: var(--pitomba); }
+    input.gap.correct { border-bottom-color: var(--floresta); background: #F1F5EA; }
+    input.gap.wrong { border-bottom-color: var(--pitomba); background: #FCEFE6; }
+    .gap-text { font-size: 16px; line-height: 2.2; }
+    .gap-text p { margin-bottom: 14px; }
+    .gap-n { font-size: 11px; font-weight: 700; color: var(--pitomba); vertical-align: super; margin-right: 2px; }
+    .rule-list { margin: 10px 0 14px 22px; }
+    .rule-list li { margin-bottom: 8px; }
+    .rule-ex { font-family: 'Trirong', serif; font-style: italic; }
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin-top: 12px; }
+    .vocab-item { font-size: 14px; line-height: 1.5; padding: 8px 0; border-bottom: 1px solid var(--light-gray); }
+    .vocab-item b { color: var(--pitomba); }
+    .vocab-item span { color: #8a8a78; font-size: 13px; }
+    .ex-q { margin-bottom: 22px; }
+    .ex-q > .qtxt { font-size: 15px; margin-bottom: 8px; }
+    .ex-example { background: var(--baunilha2); border-left: 4px solid var(--pitomba); border-radius: 0 10px 10px 0; padding: 14px 18px; font-size: 14.5px; margin: 10px 0 20px; }
+    .model-box { display: none; margin-top: 8px; padding: 12px 16px; background: #EAF5EE; border-radius: 8px; font-size: 14px; }
+    .wc { font-size: 12.5px; color: #8a8a78; margin-top: 6px; }
+    .wc.ok { color: var(--floresta); font-weight: 700; }
+    .wc.bad { color: var(--pitomba); font-weight: 700; }
+    @media (max-width: 700px) { .vocab-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Exercícios Interativos</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Se a história fosse outra <em>Imperfeito do subjuntivo nas hipóteses</em></h1>
+  <div class="hero-sub">Como imaginar situações diferentes da realidade, usando “Eduardo e Mônica”, o Censo 2022 e as famílias brasileiras de hoje: se + imperfeito do subjuntivo e a consequência no futuro do pretérito.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">se + imperfeito do subjuntivo</span>
+    <span class="hero-tag">futuro do pretérito (simples e composto)</span>
+    <span class="hero-tag">famílias e Censo 2022</span>
+    <span class="hero-tag">Eduardo e Mônica</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="cult-box">
+    <p><strong>Nota cultural — “Eduardo e Mônica” no cinema.</strong> Lançada pela Legião Urbana em 1986, no disco <em>Dois</em>, a canção de Renato Russo virou filme em 2022. O diretor, René Sampaio, já tinha levado ao cinema outra canção da banda, “Faroeste Caboclo”. O longa se passa em Brasília, nos anos 1980, com Gabriel Leone e Alice Braga nos papéis de Eduardo e Mônica. Segundo os atores, foi preciso ampliar a história: a letra dá pistas sobre o relacionamento, mas não conta tudo o que acontece entre um verso e outro.</p>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Nota linguística</div>
+    <h2>O imperfeito do subjuntivo nas hipóteses</h2>
+    <div class="legal-box">
+      <p>Para imaginar uma situação diferente da real, usamos <strong>se + imperfeito do subjuntivo</strong>. A consequência vem no <strong>futuro do pretérito</strong>:</p>
+      <ul class="rule-list">
+        <li><strong>simples</strong>, quando a consequência é no presente ou em geral: <span class="rule-ex">Se Eduardo <strong>tivesse</strong> a idade de Mônica, os dois <strong>seriam</strong> menos diferentes.</span></li>
+        <li><strong>composto</strong> (<em>teria</em> + particípio), quando a consequência é no passado: <span class="rule-ex">Se as mulheres não <strong>vivessem</strong> mais do que os homens, o Censo não <strong>teria encontrado</strong> tantas idosas morando sozinhas.</span></li>
+      </ul>
+      <p><strong>Formação:</strong> parta da forma <em>eles</em> do pretérito perfeito, tire o <em>-ram</em> e acrescente <em>-sse</em>:</p>
+      <ul class="rule-list">
+        <li>quiseram → <strong>quisesse</strong></li>
+        <li>tiveram → <strong>tivesse</strong></li>
+        <li>ouviram → <strong>ouvisse</strong></li>
+      </ul>
+      <p>Quando a frase está no passado ou é hipotética, o imperfeito do subjuntivo também aparece depois de <strong>como se</strong>, <strong>embora</strong>, <strong>sem que</strong>, <strong>talvez</strong> e <strong>seria bom que</strong>.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Vocabulário</div>
+    <h2>Vocabulário</h2>
+    <div class="instrucao">Leia as palavras e expressões. Elas aparecem nos exercícios.</div>
+    <div class="vocab-grid">
+      <div class="vocab-item"><b>o responsável pela casa</b> <span>— pessoa que responde pelo domicílio e é reconhecida como chefe da família no recenseamento</span></div>
+      <div class="vocab-item"><b>o morador</b> <span>— quem mora em determinado lugar</span></div>
+      <div class="vocab-item"><b>ao acaso</b> <span>— sem escolha prévia, sem planejamento</span></div>
+      <div class="vocab-item"><b>previsível</b> <span>— que se pode antecipar; sem surpresas</span></div>
+      <div class="vocab-item"><b>homoafetivo(a)</b> <span>— relativo a um casal formado por pessoas do mesmo sexo</span></div>
+      <div class="vocab-item"><b>reconhecer</b> <span>— admitir como real ou legítimo</span></div>
+      <div class="vocab-item"><b>o julgamento</b> <span>— avaliação feita por alguém sobre uma pessoa ou uma situação</span></div>
+      <div class="vocab-item"><b>o bem-estar</b> <span>— estado de conforto, saúde e tranquilidade</span></div>
+      <div class="vocab-item"><b>a rede de apoio</b> <span>— pessoas que ajudam alguém no dia a dia</span></div>
+      <div class="vocab-item"><b>sobrecarregado(a)</b> <span>— com mais tarefas ou responsabilidades do que consegue suportar</span></div>
+      <div class="vocab-item"><b>o parente</b> <span>— pessoa da mesma família, por laços de sangue ou de casamento</span></div>
+      <div class="vocab-item"><b>virar de cabeça para baixo</b> <span>— mudar completamente, ficar totalmente desorganizado</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 1</div>
+    <h2>Imperfeito do subjuntivo ou futuro do pretérito?</h2>
+    <div class="instrucao">Complete as lacunas com os verbos entre parênteses no <strong>imperfeito do subjuntivo</strong> ou no <strong>futuro do pretérito</strong>.</div>
+    <div class="gap-text"><p>Os números do Censo 2022 ajudam a imaginar o Brasil de hoje. Se alguém <span class="gap-n">1</span><input type="text" class="gap" id="e1_1" autocomplete="off"> <em>(bater)</em> à porta de cinco casas brasileiras escolhidas ao acaso, <span class="gap-n">2</span><input type="text" class="gap" id="e1_2" autocomplete="off"> <em>(encontrar)</em>, em média, quase uma com um único morador. E, se <span class="gap-n">3</span><input type="text" class="gap" id="e1_3" autocomplete="off"> <em>(querer)</em> saber quem é o responsável pela casa, <span class="gap-n">4</span><input type="text" class="gap" id="e1_4" autocomplete="off"> <em>(ouvir)</em> o nome de uma mulher em quase metade das vezes.</p><p>Na canção da Legião Urbana, quem gosta de novela é Eduardo, e quem ouve os Mutantes é Mônica. Se Mônica <span class="gap-n">5</span><input type="text" class="gap" id="e1_5" autocomplete="off"> <em>(gostar)</em> de novela e Eduardo <span class="gap-n">6</span><input type="text" class="gap" id="e1_6" autocomplete="off"> <em>(ouvir)</em> os Mutantes, a canção <span class="gap-n">7</span><input type="text" class="gap" id="e1_7" autocomplete="off"> <em>(contar)</em> uma história bem mais previsível. Se Renato Russo <span class="gap-n">8</span><input type="text" class="gap" id="e1_8" autocomplete="off"> <em>(preferir)</em> um casal perfeito, não <span class="gap-n">9</span><input type="text" class="gap" id="e1_9" autocomplete="off"> <em>(haver)</em> espaço para as brigas. E, se a história <span class="gap-n">10</span><input type="text" class="gap" id="e1_10" autocomplete="off"> <em>(ter)</em> fim no primeiro encontro, ninguém saberia dos gêmeos.</p></div>
+    <button class="check-btn" onclick="checkGaps('e1_',ans1,'e1-result')">✓ Verificar respostas</button>
+    <div id="e1-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 2</div>
+    <h2>Famílias em transformação</h2>
+    <div class="instrucao">Complete o texto com <strong>uma única palavra</strong> em cada lacuna.</div>
+    <div class="gap-text"><p>O conceito de família sempre mudou ao longo do tempo. Hoje, reconhecemos <span class="gap-n">1</span><input type="text" class="gap" id="e2_1" autocomplete="off"> existem diferentes formas de viver em conjunto. Mães solo, casais homoafetivos e famílias reconstituídas mostram <span class="gap-n">2</span><input type="text" class="gap" id="e2_2" autocomplete="off"> vínculos podem surgir em diversas situações. Esses arranjos, que <span class="gap-n">3</span><input type="text" class="gap" id="e2_3" autocomplete="off"> vezes enfrentam preconceito, revelam também força e resiliência. A convivência <span class="gap-n">4</span><input type="text" class="gap" id="e2_4" autocomplete="off"> respeito mútuo é fundamental para <span class="gap-n">5</span><input type="text" class="gap" id="e2_5" autocomplete="off"> todos se sintam acolhidos e tenham direitos garantidos.</p></div>
+    <button class="check-btn" onclick="checkGaps('e2_',ans2,'e2-result')">✓ Verificar respostas</button>
+    <div id="e2-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 3</div>
+    <h2>O impacto do preconceito</h2>
+    <div class="instrucao">Complete as lacunas transformando a palavra entre parênteses. Em alguns casos, você vai mudar a classe da palavra (de adjetivo para substantivo, por exemplo); em outros, vai conjugar um verbo no imperfeito do subjuntivo. Use uma palavra por lacuna.</div>
+    <div class="gap-text"><p>Muitas famílias não tradicionais relatam <span class="gap-n">1</span><input type="text" class="gap" id="e3_1" autocomplete="off"> <em>(DIFÍCIL)</em> em lidar com julgamentos externos. Se a sociedade não as <span class="gap-n">2</span><input type="text" class="gap" id="e3_2" autocomplete="off"> <em>(REJEIÇÃO)</em>, adultos e crianças teriam mais bem-estar. Pesquisas mostram que a <span class="gap-n">3</span><input type="text" class="gap" id="e3_3" autocomplete="off"> <em>(ACEITAR)</em> social contribui para uma convivência mais saudável. Por isso, seria bom que as escolas <span class="gap-n">4</span><input type="text" class="gap" id="e3_4" autocomplete="off"> <em>(INCLUSÃO)</em> diferentes modelos familiares nas suas atividades. Essa é uma <span class="gap-n">5</span><input type="text" class="gap" id="e3_5" autocomplete="off"> <em>(NECESSÁRIO)</em> de qualquer sociedade justa e democrática.</p></div>
+    <button class="check-btn" onclick="checkGaps('e3_',ans3,'e3-result')">✓ Verificar respostas</button>
+    <div id="e3-result" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Exercício 4</div>
+    <h2>Reescreva como hipótese</h2>
+    <div class="instrucao">Reescreva as frases como hipóteses, com <strong>se + imperfeito do subjuntivo</strong>, mantendo o sentido original. Se a consequência estiver no passado, use o futuro do pretérito composto (<em>teria</em> + particípio).</div>
+    <div class="ex-example"><strong>Exemplo</strong><br>Eles viajaram para a Índia porque tinham curiosidade.<br>→ <em>Eles não teriam viajado para a Índia se não tivessem curiosidade.</em></div>
+    <div class="ex-q"><div class="qtxt"><strong>1.</strong> Eduardo e Mônica construíram uma vida juntos porque se respeitavam.</div>
+      <textarea placeholder="Reescreva a frase como hipótese..." style="min-height:64px;"></textarea>
+      <div class="model-box" id="m4_1"><strong>Modelo:</strong> Eduardo e Mônica não teriam construído uma vida juntos se não se respeitassem.</div></div>
+    <div class="ex-q"><div class="qtxt"><strong>2.</strong> A canção emociona tanta gente porque mostra um amor possível entre pessoas muito diferentes.</div>
+      <textarea placeholder="Reescreva a frase como hipótese..." style="min-height:64px;"></textarea>
+      <div class="model-box" id="m4_2"><strong>Modelo:</strong> A canção não emocionaria tanta gente se não mostrasse um amor possível entre pessoas muito diferentes.</div></div>
+    <div class="ex-q"><div class="qtxt"><strong>3.</strong> Muitas mães solo se sentem sobrecarregadas porque não contam com uma rede de apoio.</div>
+      <textarea placeholder="Reescreva a frase como hipótese..." style="min-height:64px;"></textarea>
+      <div class="model-box" id="m4_3"><strong>Modelo:</strong> Muitas mães solo não se sentiriam (tão) sobrecarregadas se contassem com uma rede de apoio.</div></div>
+    <div class="ex-q"><div class="qtxt"><strong>4.</strong> Para o IBGE, dois amigos que dividem um apartamento não formam uma família porque não são parentes.</div>
+      <textarea placeholder="Reescreva a frase como hipótese..." style="min-height:64px;"></textarea>
+      <div class="model-box" id="m4_4"><strong>Modelo:</strong> Para o IBGE, dois amigos que dividem um apartamento formariam uma família se fossem parentes.</div></div>
+    <div class="ex-q"><div class="qtxt"><strong>5.</strong> A vida de Cassandra, em <em>Manhãs de Setembro</em>, vira de cabeça para baixo porque ela descobre que tem um filho.</div>
+      <textarea placeholder="Reescreva a frase como hipótese..." style="min-height:64px;"></textarea>
+      <div class="model-box" id="m4_5"><strong>Modelo:</strong> A vida de Cassandra não viraria de cabeça para baixo se ela não descobrisse que tem (tinha) um filho.</div></div>
+    <button class="check-btn" onclick="showModels()">✓ Ver modelos de resposta</button>
+    <div class="instrucao" style="margin-top:10px;">As respostas podem variar. Compare a sua com o modelo.</div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">Produção escrita</div>
+    <h2>A história de uma família no cinema</h2>
+    <div class="instrucao">A história de Eduardo e Mônica virou filme. A história de uma família também poderia virar.</div>
+    <div class="aspect-list">
+      <div class="aspect-item"><div class="aspect-name">1. Leia o modelo.</div></div>
+      <div class="aspect-item"><div class="aspect-name">2. Escolha a sua família ou uma família que você conhece.</div></div>
+      <div class="aspect-item"><div class="aspect-name">3. Escreva um texto de 120 a 150 palavras imaginando como seria esse filme.</div>
+        <p>No seu texto, conte: quem seriam os protagonistas; onde e em que época o filme se passaria; que diferença, desafio ou surpresa estaria no centro da história; como o filme terminaria.</p></div>
+    </div>
+    <p style="font-size:14.5px;margin:14px 0;">Use pelo menos <strong>quatro hipóteses</strong> com <strong>se + imperfeito do subjuntivo</strong>. Ao terminar, sublinhe essas hipóteses e confira se a consequência de cada uma está no futuro do pretérito.</p>
+    <div class="texto-box" style="background:var(--baunilha2);border-left:4px solid var(--pitomba);border-radius:0 10px 10px 0;padding:18px 22px;font-size:15px;line-height:1.85;">
+      <strong style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--pitomba);">Modelo</strong>
+      <p style="margin-top:8px;">Se um diretor <strong>quisesse</strong> filmar a história da minha família, eu <strong>sugeriria</strong> começar pelos meus avós. O filme se <strong>passaria</strong> numa cidade pequena de Minas Gerais, nos anos 1960, e <strong>mostraria</strong> um casal que ninguém esperava ver junto: ela era professora e lia sem parar; ele mal tinha terminado a escola e só pensava em futebol. Se eu <strong>pudesse</strong> escolher os atores, ela <strong>seria</strong> interpretada por alguém de olhar firme, e ele, por alguém de riso fácil. Se o roteiro <strong>fosse</strong> fiel à realidade, <strong>haveria</strong> muitas brigas, muita música e pouco dinheiro. E, se o diretor me <strong>ouvisse</strong>, o filme <strong>terminaria</strong> com a família inteira em volta da mesa, numa casa bem mais cheia e barulhenta do que as dos comerciais de TV.</p>
+    </div>
+    <div class="item" style="margin-top:20px;">
+      <label>Seu texto (120 a 150 palavras)</label>
+      <textarea id="prod" placeholder="Escreva seu texto aqui..." style="min-height:240px;" oninput="wordCount()"></textarea>
+      <div class="wc" id="wc">0 palavras</div>
+    </div>
+    <div class="cult-box" style="margin-top:14px;">
+      <p><strong>Antes de enviar, confira se o texto:</strong> tem entre 120 e 150 palavras; responde aos quatro pontos (protagonistas, lugar e época, diferença ou desafio, final); traz pelo menos quatro hipóteses com <em>se</em> + imperfeito do subjuntivo, com a consequência no futuro do pretérito (simples ou composto).</p>
+    </div>
+  </div>
+  <div id="bphub-form-area" style="margin-top:40px;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <div class="send-box" style="margin-top:24px;">
+    📩 Depois de enviar, a professora vai ler com atenção e te dar um retorno personalizado — apontando o que você fez bem e ajudando a melhorar ainda mais o seu português. Essa troca é uma das partes mais importantes do processo de aprendizagem!
+  </div>
+
+
+</div>
+
+<script>
+  var ans1 = [["batesse"], ["encontraria"], ["quisesse"], ["ouviria"], ["gostasse"], ["ouvisse"], ["contaria"], ["preferisse"], ["haveria"], ["tivesse"]];
+  var ans2 = [["que"], ["como"], ["muitas", "várias", "às", "algumas"], ["com"], ["que"]];
+  var ans3 = [["dificuldade", "dificuldades"], ["rejeitasse"], ["aceitação", "aceitacao"], ["incluíssem", "incluissem"], ["necessidade"]];
+  function norm(s) {
+    return s.toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e').replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u').replace(/ç/g,'c').replace(/\s+/g,' ');
+  }
+  function checkGaps(prefix, answers, resId) {
+    var html = '', correct = 0;
+    answers.forEach(function(opts, i) {
+      var el = document.getElementById(prefix + (i + 1));
+      var v = norm(el.value);
+      var ok = opts.some(function(o) { return norm(o) === v; });
+      el.classList.toggle('correct', ok);
+      el.classList.toggle('wrong', el.value.trim() !== '' && !ok);
+      if (ok) correct++;
+      html += '<div style="margin-bottom:8px;"><strong>' + (i + 1) + '.</strong> ' + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--pitomba);font-weight:700;">✗</span>') + ' <strong>' + opts[0] + '</strong>' + (opts.length > 1 && prefix === 'e3_' && i === 0 ? ' (ou: dificuldades)' : '') + '</div>';
+    });
+    var res = document.getElementById(resId);
+    var allOk = correct === answers.length;
+    res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+    res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">' + (allOk ? '✓ Tudo certo!' : correct + ' de ' + answers.length + ' corretas — respostas certas:') + '</div>' + html;
+    res.style.display = 'block';
+  }
+  function showModels() {
+    document.querySelectorAll('.model-box').forEach(function(m) { m.style.display = 'block'; });
+  }
+  function wordCount() {
+    var t = document.getElementById('prod').value.trim();
+    var n = t ? t.split(/\s+/).length : 0;
+    var el = document.getElementById('wc');
+    el.textContent = n + ' palavras';
+    el.className = 'wc ' + (n >= 120 && n <= 150 ? 'ok' : (n > 0 ? 'bad' : ''));
+  }
+
+  // ── BREVO SUBMIT ──
+  function bphubSubmit() {
+    var btn = document.getElementById('bphub-submit-btn');
+    var nameEl = document.getElementById('bphub-student-name');
+    var emailEl = document.getElementById('bphub-student-email');
+    var name = nameEl ? nameEl.value.trim() : '';
+    if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+    if (nameEl) nameEl.style.borderColor='';
+    var email = emailEl ? emailEl.value.trim() : '';
+    var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+    var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+    var summaryLines = []; var answersHtml = '';
+    document.querySelectorAll('textarea').forEach(function(ta, idx) {
+      var label = '';
+      var parent = ta.closest('.item') || ta.closest('[class]');
+      if (parent) {
+        var clone = parent.cloneNode(true);
+        clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+        label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 80);
+      }
+      if (!label) label = 'Campo ' + (idx+1);
+      var val = ta.value.trim() || '(sem resposta)';
+      summaryLines.push('<strong>R' + (idx+1) + ':</strong> ' + (ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+      answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+    });
+    document.querySelectorAll('.item input[type="text"]').forEach(function(inp) {
+      var val = inp.value.trim() || '(sem resposta)';
+      answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+    });
+
+    btn.disabled = true;
+    btn.textContent = 'A enviar…';
+
+    var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+    var calls = [];
+    if (email) {
+      calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+        method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+        body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+      }));
+    }
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({
+        to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+        sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+        subject:'📝 '+name+' — '+material,
+        htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+      })
+    }));
+
+    Promise.all(calls)
+    .then(function() {
+      document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+      document.getElementById('bphub-success').style.display = 'block';
+      document.getElementById('bphub-form-area').style.display = 'none';
+      document.getElementById('bphub-error').style.display = 'none';
+      var slug = location.pathname.split('/').pop().replace('.html','');
+      try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+      document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+    })
+    .catch(function() {
+      btn.disabled = false; btn.textContent = 'Enviar respostas';
+      document.getElementById('bphub-error').style.display = 'block';
+    });
+  }
+</script>
+
+</body>
+</html>
