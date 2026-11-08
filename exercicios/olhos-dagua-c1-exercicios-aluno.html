@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olhos d’água — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--telha); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--telha); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--telha); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--telha); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--telha); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--telha); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../contos/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Conto com Áudio</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Olhos d’água <span style="color:rgba(255,255,255,0.5); font-weight:300;">·</span> <em>Conceição Evaristo</em></h1>
+  <div class="hero-sub">BPHub Conta um Conto — contos brasileiros de verdade, no seu nível, em até 15 minutos. Ouça o conto e pratique o <span style="color:var(--ouro); font-weight:600;">futuro do pretérito de suposição</span>.</div>
+  <div class="hero-tags">
+    <span class="hero-tag">Conto · Conceição Evaristo</span>
+    <span class="hero-tag">Foco linguístico: eram ou seriam?</span>
+  </div>
+  <div class="hero-note">🎧 Ouça o episódio e complete as atividades abaixo</div>
+</div>
+
+<div class="main">
+
+  <p style="font-size:15px;">Nesta ficha, você vai ouvir “Olhos d’água”, de Conceição Evaristo, uma das vozes mais importantes da literatura brasileira contemporânea. Uma noite, uma mulher acorda com uma pergunta que não sai da cabeça: de que cor eram os olhos da mãe? Você vai acompanhar a busca da narradora pelas lembranças da infância. Também vai praticar a forma verbal que o conto usa para expressar dúvida sobre o passado. No final da ficha, você encontra uma observação sobre como ler o texto completo do conto. Consulte-o depois de todas as atividades, se sentir necessidade.</p>
+
+  <section>
+    <div class="sec-label">Nota cultural — Conceição Evaristo</div>
+    <div class="info-box">
+      Conceição Evaristo nasceu em 29 de novembro de 1946, em Belo Horizonte, Minas Gerais, numa favela da zona sul da cidade. Filha de uma lavadeira, trabalhou como empregada doméstica na juventude. Em 1973, mudou-se para o Rio de Janeiro, onde foi professora da rede pública. Concluiu o mestrado na PUC-Rio e o doutorado em Literatura Comparada na Universidade Federal Fluminense.
+      <br><br>
+      Estreou na literatura em 1990, nos <i>Cadernos Negros</i>, série de antologias de autores negros publicada pelo coletivo paulistano Quilombhoje desde 1978. Seu primeiro romance, <i>Ponciá Vicêncio</i>, saiu em 2003. Para falar da própria obra, criou o conceito de <i>escrevivência</i>: uma escrita que nasce da vivência, sobretudo da experiência das mulheres negras.
+      <br><br>
+      O livro <i>Olhos d’água</i> reúne 15 contos e abre com o conto desta ficha. Em 2015, ganhou o Prêmio Jabuti na categoria de contos e crônicas. Em 2026, ano em que completa 80 anos, a escritora foi homenageada pela escola de samba Império Serrano no Carnaval do Rio.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota de contexto — Os santos, os orixás e as águas</div>
+    <div class="info-box">
+      O conto mistura duas tradições religiosas muito presentes no Brasil. Nas tempestades, a mãe reza para Santa Bárbara, santa católica invocada contra raios e trovões. Nas religiões de matriz africana, como o candomblé e a umbanda, Santa Bárbara corresponde a Iansã, orixá dos ventos e das tempestades. Esse encontro entre santos católicos e orixás se chama <i>sincretismo</i>.
+      <br><br>
+      Os orixás são divindades trazidas ao Brasil por africanos escravizados, sobretudo do povo iorubá. Oxum é a orixá das águas doces (rios, cachoeiras, nascentes) e está ligada à maternidade e ao amor. <i>Yabá</i> é o nome dado às orixás femininas, como Oxum, Iemanjá e Iansã. No conto, a narradora chama assim as mulheres da própria família.
+      <br><br>
+      No jogo da Rainha, as filhas deitam no chão e “batem cabeça” para a mãe. É o gesto de respeito com que, nos terreiros, se saúdam os orixás e a mãe de santo.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Nota linguística — O título e as repetições</div>
+    <div class="info-box">
+      Um <i>olho-d’água</i> é uma nascente, o lugar onde a água brota do chão. O título junta duas imagens: olhos cheios d’água, de lágrimas, e uma fonte que não seca.
+      <br><br>
+      Repare também nas repetições. Elas marcam o ritmo do conto e dão a ideia de algo que não acaba. Por exemplo: o <i>lava-lava</i> e o <i>passa-passa</i> da roupa que a mãe lava para outras famílias, ou <i>rimos e rimos e rimos</i>.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Antes de ouvir</div>
+    <p style="font-size:13.5px;color:#888;">Responda em duas ou três frases.</p>
+    <p style="font-size:15px;margin-bottom:12px;">Pense em uma pessoa da sua família ou em alguém importante da sua infância. Sem olhar uma foto, você saberia dizer de que cor são (ou eram) os olhos dessa pessoa? De que outros detalhes você se lembra: um gesto, uma voz, um cheiro, uma brincadeira?</p>
+    <div class="q"><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">Este quadro é longo, então leia antes de ouvir o conto. Os grupos seguem a ordem da história. Não é preciso decorar as palavras: volte ao quadro sempre que precisar.</p>
+    <table class="vocab"><tr><th colspan="2">A noite da pergunta</th></tr><tr><td>bruscamente</td><td>de repente, de modo súbito</td></tr><tr><td>atordoado, atordoada</td><td>confuso, sem conseguir pensar com clareza</td></tr><tr><td>custar (a) + infinitivo</td><td>ter dificuldade para fazer algo</td></tr><tr><td>martelar</td><td>(aqui) repetir-se na cabeça, com insistência</td></tr><tr><td>a indagação</td><td>a pergunta; a dúvida que se quer esclarecer</td></tr><tr><td>pegar-se pensando</td><td>perceber, de repente, que está pensando em algo</td></tr></table>
+<table class="vocab"><tr><th colspan="2">O corpo da mãe</th></tr><tr><td>decifrar</td><td>ler algo difícil; descobrir o sentido</td></tr><tr><td>o prenúncio</td><td>sinal de que algo vai acontecer</td></tr><tr><td>a unha encravada</td><td>unha que cresce para dentro da pele</td></tr><tr><td>o dedo mindinho (do pé)</td><td>o menor dedo do pé</td></tr><tr><td>a verruga</td><td>pequena saliência na pele</td></tr><tr><td>a cabeleira crespa</td><td>cabelo volumoso, de fios muito enrolados</td></tr><tr><td>o couro cabeludo</td><td>a pele da cabeça, onde crescem os cabelos</td></tr><tr><td>o carrapato</td><td>pequeno parasita que se prende à pele</td></tr><tr><td>cochilar</td><td>dormir por pouco tempo, sem querer</td></tr><tr><td>as roupagens alheias</td><td>as roupas de outras pessoas</td></tr></table>
+<table class="vocab"><tr><th colspan="2">A fome e as brincadeiras</th></tr><tr><td>o barraco</td><td>casa muito simples, feita com materiais precários, comum nas favelas</td></tr><tr><td>a labareda</td><td>chama alta e forte</td></tr><tr><td>debochar de</td><td>zombar de; fazer troça de</td></tr><tr><td>parco, parca</td><td>escasso, pouco</td></tr><tr><td>assentar-se (= sentar-se)</td><td>sentar-se (uso antigo ou regional)</td></tr><tr><td>bater cabeça</td><td>saudar com respeito, tocando a cabeça no chão (veja a nota de contexto)</td></tr><tr><td>a soleira (da porta)</td><td>a parte do chão na entrada da porta</td></tr><tr><td>espichar (o braço)</td><td>esticar, estender</td></tr><tr><td>o algodão-doce</td><td>doce feito de açúcar em fios leves, vendido em feiras e festas</td></tr><tr><td>esvaecer-se</td><td>desaparecer aos poucos</td></tr></table>
+<table class="vocab"><tr><th colspan="2">A chuva</th></tr><tr><td>o temor</td><td>medo forte</td></tr><tr><td>alagado, alagada</td><td>coberto de água (aqui: cheio de lágrimas)</td></tr><tr><td>o pranto</td><td>choro</td></tr><tr><td>balbuciar</td><td>falar baixo e com dificuldade</td></tr><tr><td>desabar</td><td>cair, vir abaixo</td></tr></table>
+<table class="vocab"><tr><th colspan="2">A volta</th></tr><tr><td>a cidade natal</td><td>a cidade onde a pessoa nasceu</td></tr><tr><td>entoar cantos de louvor</td><td>cantar músicas para homenagear ou agradecer</td></tr><tr><td>arar a terra</td><td>preparar a terra para plantar</td></tr><tr><td>aflito, aflita</td><td>angustiado, muito preocupado</td></tr><tr><td>extasiado, extasiada</td><td>encantado, fora de si de tanta emoção</td></tr><tr><td>caudaloso</td><td>(rio) com muita água</td></tr><tr><td>a correnteza</td><td>movimento da água de um rio</td></tr><tr><td>úmido, úmida</td><td>ligeiramente molhado</td></tr><tr><td>sussurrar</td><td>falar muito baixinho</td></tr></table>
+
+  </section>
+
+  <section>
+    <div class="sec-label">Ouça o conto</div>
+    <p style="font-size:13.5px;color:#888;">Ouça o conto uma vez, do começo ao fim, sem ler. Não se preocupe com as palavras que você não entender. Preste atenção a uma pergunta que a narradora repete muitas vezes. Ela encontra a resposta?</p>
+    <div class="audio-box">
+      <audio controls>
+        <source src="olhos-dagua-c1.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 1 — As lembranças da narradora</div>
+    <p style="font-size:13.5px;color:#888;">Leia as cenas abaixo. Depois, ouça o conto de novo e numere as cenas de 1 a 8, na ordem em que aparecem.</p>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">a)</span>A mãe colhe uma nuvem no céu, divide-a em pedacinhos e põe um pedaço na boca de cada filha.</div><input type="text" id="ex1-a" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">b)</span>A narradora acorda no meio da noite, sem reconhecer o quarto, com uma pergunta na boca.</div><input type="text" id="ex1-b" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">c)</span>Abraçada às filhas em cima da cama, a mãe reza durante uma tempestade.</div><input type="text" id="ex1-c" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">d)</span>As filhas penteiam a mãe e encontram uma bolinha no couro cabeludo dela.</div><input type="text" id="ex1-d" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">e)</span>A narradora resolve deixar tudo e voltar à cidade onde nasceu.</div><input type="text" id="ex1-e" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">f)</span>Numa brincadeira, a mãe vira Rainha, e as filhas a enfeitam com flores.</div><input type="text" id="ex1-f" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">g)</span>A filha da narradora toca o rosto dela e sussurra uma pergunta.</div><input type="text" id="ex1-g" maxlength="1" placeholder="?"></div></div>
+    <div class="q"><div class="match-row"><div class="match-text"><span class="q-num">h)</span>A mãe chora e sorri ao mesmo tempo, e a narradora entende a cor dos olhos dela.</div><input type="text" id="ex1-h" maxlength="1" placeholder="?"></div></div>
+
+    <button class="check-btn" onclick="checkEx1()">✓ Conferir respostas</button>
+    <div id="ex1-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 2 — Interpretação</div>
+    <p style="font-size:13.5px;color:#888;">Responda às perguntas em duas ou três frases cada. Se precisar, ouça o conto mais uma vez.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>No começo, a pergunta era só um pensamento que aparecia entre uma tarefa e outra. Naquela noite, ganha um tom de acusação. De que a narradora se acusa? Ela se lembra de tantos detalhes do corpo da mãe. Por que esquecer justamente a cor dos olhos pesa tanto?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Nos dias de pouca ou nenhuma comida, a mãe brincava mais com as filhas. Por quê? E o que a narradora, mesmo criança, já entendia sobre essas brincadeiras? Como você entende o sorriso “molhado” da mãe?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Nos dias de tempestade, a narradora diz que os olhos da mãe se confundiam com os olhos da natureza. Que relação o conto cria entre a chuva e a mãe? Como essa imagem prepara o final?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Quando finalmente olha nos olhos da mãe, a narradora vê só lágrimas, mas a mãe sorri feliz. Qual é, afinal, a cor desses olhos? Por que a narradora os liga às águas de Oxum? O que existe por baixo da superfície dessa mulher?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O conto não termina no reencontro com a mãe. Termina com a narradora e a filha dela. O que mudou na pergunta? Por que você acha que o conto termina assim?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+
+    <button class="check-btn" onclick="toggleEx2()">💡 Ver sugestões de resposta</button>
+    <div id="ex2-result" class="result-msg good" style="display:none;">
+      <div style="font-weight:700;margin-bottom:10px;">Sugestões de resposta (são respostas abertas — a sua pode ser diferente e igualmente válida):</div>
+      <div style="margin-bottom:10px;"><strong>1.</strong> Ela se acusa de ter esquecido a mãe, ou de nunca a ter olhado de verdade. Lembra-se de detalhes pequenos do corpo, mas não do olhar, que é por onde se vê a pessoa por dentro. Depois de tantos anos longe, esquecer os olhos é como perder o contato com quem a mãe é.</div>
+      <div style="margin-bottom:10px;"><strong>2.</strong> As brincadeiras serviam para distrair a fome das filhas. A narradora já sabia disso desde criança, e mesmo assim a fome se distraía. O sorriso molhado mostra que, por trás da brincadeira, a mãe sofria: sorria para as filhas, mas conhecia a fome e a pobreza.</div>
+      <div style="margin-bottom:10px;"><strong>3.</strong> Nas tempestades, a mãe chorava de medo de o barraco desabar, e o choro se misturava ao barulho da chuva. A água da chuva e a água dos olhos viram uma coisa só. Essa imagem prepara o final, em que a cor dos olhos da mãe é a cor da água.</div>
+      <div style="margin-bottom:10px;"><strong>4.</strong> Os olhos da mãe têm a cor de “olhos d’água”: a cor das lágrimas, de uma nascente que não seca. São lágrimas de alegria e de uma vida inteira de dor. A narradora os liga a Oxum, orixá das águas doces e da maternidade. São rios calmos por fora, mas profundos: por baixo da serenidade, a mãe guarda sofrimento, força e sabedoria que não se veem na superfície.</div>
+      <div style="margin-bottom:10px;"><strong>5.</strong> Agora é a filha que procura a cor dos olhos da mãe, e a pergunta passa para mais uma geração. A menina já pressente a resposta, porque pergunta pela cor “tão úmida” desses olhos. A narradora herdou os olhos d’água da mãe. O conto termina assim para mostrar que a história continua: a memória e a força das mulheres passam de mãe para filha.</div>
+    </div>
+    <p style="font-size:13.5px;color:#888;margin-top:16px;"><i>Até aqui, você acompanhou a busca da narradora. Agora, vamos olhar para a forma como ela formula a pergunta.</i></p>
+  </section>
+
+  <section>
+    <div class="sec-label">Foco gramatical — Eram ou seriam? O futuro do pretérito de suposição</div>
+    <div class="grammar-box">
+      A pergunta que atravessa o conto aparece de duas formas. Às vezes, a narradora pergunta de forma direta: <i>de que cor eram os olhos de minha mãe?</i> Outras vezes, conta que se pegava pensando, ou que não conseguia lembrar, <i>de que cor seriam</i> esses olhos.
+      <br><br>
+      A diferença está no grau de certeza:
+      <ul style="margin:8px 0 0 20px;">
+        <li>Com o <b>pretérito imperfeito</b> (<i>eram</i>), a cor dos olhos é um fato do passado. A narradora deveria saber a resposta, por isso a pergunta soa como acusação.</li>
+        <li>Com o <b>futuro do pretérito</b> (<i>seriam</i>), ela só supõe. A pergunta vira dúvida, e a narradora tenta imaginar a resposta.</li>
+      </ul>
+    </div>
+    <p style="font-size:14.5px;">Quando falamos do agora, o futuro do presente tem o mesmo valor de suposição:</p>
+    <table class="grammar">
+      <tr><th></th><th>Fato</th><th>Suposição</th></tr>
+      <tr><td><b>No presente</b></td><td>De que cor <b>são</b> os olhos dela?</td><td>De que cor <b>serão</b> os olhos dela?</td></tr>
+      <tr><td><b>No passado</b></td><td>De que cor <b>eram</b> os olhos dela?</td><td>De que cor <b>seriam</b> os olhos dela?</td></tr>
+    </table>
+    <p style="font-size:14.5px;margin-top:16px;">A suposição também aparece em frases afirmativas, muitas vezes com números aproximados:</p>
+    <ul style="font-size:14.5px;margin:0 0 16px 20px;">
+      <li><b>Seriam</b> umas três da manhã quando ela acordou.</li>
+      <li>A mãe <b>teria</b> uns vinte anos quando a primeira filha nasceu.</li>
+    </ul>
+    <div class="grammar-box">
+      <b>Com que verbos?</b><br>
+      A suposição funciona sobretudo com verbos de estado, como <i>ser</i>, <i>estar</i>, <i>ter</i>, <i>haver</i>, <i>saber</i> e <i>poder</i>, e com <i>estar</i> + gerúndio (<i>em que ela estaria pensando?</i>). Com verbos de ação, o futuro do pretérito costuma indicar condição: <i>Ela voltaria para casa</i> (se pudesse).
+    </div>
+    <div class="grammar-box">
+      <b>Na fala e na escrita</b><br>
+      Na fala do dia a dia, a suposição sobre o passado costuma vir com <i>“será que”</i> + imperfeito ou com <i>“devia”</i> + infinitivo. O futuro do pretérito é mais comum na literatura e na fala mais cuidada.
+      <ul style="margin:8px 0 0 20px;">
+        <li>Na literatura: De que cor <b>seriam</b> os olhos dela? → Na fala: De que cor <b>será que eram</b> os olhos dela?</li>
+        <li>Na literatura: A mãe <b>teria</b> uns vinte anos. → Na fala: A mãe <b>devia ter</b> uns vinte anos.</li>
+      </ul>
+    </div>
+    <div class="grammar-box">
+      <b>Atenção ao ouvir</b><br>
+      No conto, a pergunta direta, com <i>“eram”</i>, volta muitas vezes, como um refrão. Já <i>seriam</i> aparece quando a narradora conta que pensava na pergunta ou que não conseguia lembrar a resposta. Na próxima escuta, repare na diferença.
+    </div>
+    <p style="font-size:13.5px;color:#888;"><i>Agora é a sua vez de transformar certezas em dúvidas.</i></p>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 3 — A noite da pergunta</div>
+    <p style="font-size:13.5px;color:#888;">Naquela noite, outras dúvidas sobre a infância aparecem na cabeça da narradora. Reescreva cada pergunta como suposição. Troque o verbo em negrito pelo futuro do pretérito e mantenha o resto da frase igual.</p>
+    <p style="font-size:13.5px;color:#888;"><i>Ex.: Que horas</i> <b>eram</b> <i>quando eu acordei? → Que horas seriam quando eu acordei?</i></p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Quantos barracos <b>havia</b> em volta do nosso?</div><input type="text" id="ex3-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Por que a mãe <b>estava</b> tão calada nos dias difíceis?</div><input type="text" id="ex3-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Ela <b>sabia</b> que eu entendia os silêncios dela?</div><input type="text" id="ex3-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>O nosso barraco <b>podia</b> mesmo desabar com a chuva?</div><input type="text" id="ex3-4" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Como <b>eram</b> as minhas bisavós, que eu nunca conheci?</div><input type="text" id="ex3-5" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>De quem <b>era</b> o banquinho de madeira que servia de trono?</div><input type="text" id="ex3-6" placeholder="Escreva a frase completa..."></div>
+
+    <button class="check-btn" onclick="checkEx3()">✓ Conferir respostas</button>
+    <div id="ex3-result" class="result-msg"></div>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 4 — Os olhos da avó</div>
+    <p style="font-size:13.5px;color:#888;">Anos depois, a filha da narradora, já adulta, escreve sobre a avó. Complete o texto com os verbos entre parênteses:</p>
+    <ul style="font-size:13.5px;color:#888;margin:0 0 12px 20px;">
+      <li><i>pretérito imperfeito</i> para o que ela sabe com certeza;</li>
+      <li><i>futuro do pretérito</i> para o que ela só imagina ou se pergunta.</li>
+    </ul>
+    <div class="q" style="line-height:2.3;font-size:15px;">
+      <p style="margin-bottom:14px;">Conheci pouco a minha avó. Ela morava longe, no interior de Minas, e nós a visitávamos só em algumas férias.</p>
+      <p style="margin-bottom:14px;">Algumas coisas eu sei com certeza, porque a minha mãe sempre conta: a avó (1. ser) <input type="text" id="ex4-1" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 1"> lavadeira, (2. ter) <input type="text" id="ex4-2" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 2"> sete filhas e (3. saber) <input type="text" id="ex4-3" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 3"> transformar a fome em brincadeira.</p>
+      <p style="margin-bottom:14px;">Outras coisas eu só imagino. Ela (4. ter) <input type="text" id="ex4-4" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 4"> uns dezoito anos quando a minha mãe nasceu. Nas tardes em que se sentava na soleira da porta, em que ela (5. estar) <input type="text" id="ex4-5" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 5"> pensando? (6. Haver) <input type="text" id="ex4-6" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 6"> alguém para cuidar dela, nos dias em que ela cuidava de todas?</p>
+      <p>De uma coisa eu me lembro bem: os olhos dela (7. estar) <input type="text" id="ex4-7" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 7"> sempre molhados, mesmo quando ela sorria. Hoje eu fico pensando: de que cor (8. ser) <input type="text" id="ex4-8" style="width:130px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 8"> aqueles olhos, por baixo de tanta água?</p>
+    </div>
+
+    <button class="check-btn" onclick="checkEx4()">✓ Conferir respostas</button>
+    <div id="ex4-result" class="result-msg"></div>
+    <p style="font-size:13.5px;color:#888;margin-top:16px;"><i>Para terminar, volte à pergunta do início da ficha.</i></p>
+  </section>
+
+  <section>
+    <div class="sec-label">Exercício 5 — Sua escrevivência</div>
+    <p style="font-size:14.5px;margin-bottom:10px;">Escreva um texto de 100 a 150 palavras sobre a pessoa em quem você pensou em “Antes de ouvir” (ou sobre outra pessoa importante na sua vida). Use o texto do Exercício 4 como modelo: separe o que você sabe com certeza do que você só imagina. Inclua pelo menos duas suposições com o futuro do pretérito.</p>
+    <ul style="font-size:13.5px;color:#888;margin:0 0 12px 18px;">
+      <li>Quem é essa pessoa? O que você sabe com certeza sobre ela?</li>
+      <li>De que detalhes você se lembra bem: um gesto, uma voz, uma brincadeira?</li>
+      <li>O que você só pode imaginar? Que perguntas sobre essa pessoa ficaram sem resposta?</li>
+    </ul>
+    <div class="q">
+      <textarea id="ex5-text" style="min-height:200px;" placeholder="Escreva seu texto aqui..." oninput="countEx5()"></textarea>
+      <div id="ex5-count" style="font-size:12.5px;color:#999;margin-top:6px;">0 palavras</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">O conto: texto integral</div>
+    <p style="font-size:14.5px;">Se sentir necessidade, depois de terminar todas as atividades, leia o texto completo do conto que você ouviu. Peça à professora a referência ou o link da edição.</p>
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Fonte: EVARISTO, Conceição. Olhos d’água. In: ___. <i>Olhos d’água</i>. Rio de Janeiro: Pallas; Fundação Biblioteca Nacional, 2014.</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+var ex1Answers = [
+  { id: 'ex1-a', key: '4' },
+  { id: 'ex1-b', key: '1' },
+  { id: 'ex1-c', key: '5' },
+  { id: 'ex1-d', key: '2' },
+  { id: 'ex1-e', key: '6' },
+  { id: 'ex1-f', key: '3' },
+  { id: 'ex1-g', key: '8' },
+  { id: 'ex1-h', key: '7' }
+];
+function checkEx1() { return checkFill(ex1Answers, 'ex1-result'); }
+
+function toggleEx2() {
+  var el = document.getElementById('ex2-result');
+  var btn = event.target;
+  var showing = el.style.display === 'block';
+  el.style.display = showing ? 'none' : 'block';
+  btn.textContent = showing ? '💡 Ver sugestões de resposta' : '🙈 Esconder sugestões';
+  if (!showing) el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+var ex3Answers = [
+  { id: 'ex3-1', key: 'Quantos barracos haveria em volta do nosso?' },
+  { id: 'ex3-2', key: 'Por que a mãe estaria tão calada nos dias difíceis?' },
+  { id: 'ex3-3', key: 'Ela saberia que eu entendia os silêncios dela?' },
+  { id: 'ex3-4', key: 'O nosso barraco poderia mesmo desabar com a chuva?' },
+  { id: 'ex3-5', key: 'Como seriam as minhas bisavós, que eu nunca conheci?' },
+  { id: 'ex3-6', key: 'De quem seria o banquinho de madeira que servia de trono?' }
+];
+function checkEx3() { return checkFill(ex3Answers, 'ex3-result'); }
+
+var ex4Answers = [
+  { id: 'ex4-1', key: 'era' },
+  { id: 'ex4-2', key: 'tinha' },
+  { id: 'ex4-3', key: 'sabia' },
+  { id: 'ex4-4', key: 'teria' },
+  { id: 'ex4-5', key: 'estaria' },
+  { id: 'ex4-6', key: 'Haveria' },
+  { id: 'ex4-7', key: 'estavam' },
+  { id: 'ex4-8', key: 'seriam' }
+];
+function checkEx4() { return checkFill(ex4Answers, 'ex4-result'); }
+
+function countEx5() {
+  var t = document.getElementById('ex5-text').value.trim();
+  var n = t ? t.split(/\s+/).length : 0;
+  var el = document.getElementById('ex5-count');
+  el.textContent = n + (n === 1 ? ' palavra' : ' palavras') + ' (meta: 100 a 150)';
+  el.style.color = (n >= 100 && n <= 150) ? '#2E7D52' : '#999';
+}
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['ex1-a','ex1-b','ex1-c','ex1-d','ex1-e','ex1-f','ex1-g','ex1-h','ex3-1','ex3-2','ex3-3','ex3-4','ex3-5','ex3-6','ex4-1','ex4-2','ex4-3','ex4-4','ex4-5','ex4-6','ex4-7','ex4-8'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
