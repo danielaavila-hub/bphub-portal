@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posição, origem e passagem — B1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --level: #967E63; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--level); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--level); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--level); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    .scene-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; margin-bottom:18px; }
+    .sc { background:white; border:1.5px solid var(--light-gray); border-radius:12px; padding:12px; }
+    .sc .sc-q { font-size:14px; margin:10px 0 8px; line-height:1.5; }
+    .sc .sc-cap { font-size:13.5px; margin-top:10px; line-height:1.5; }
+    .sc .sc-cap b { color: var(--level); font-size:15px; }
+    .sc .sc-cap i { color:#666; }
+    select { width:100%; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; padding:9px 10px; font-family:'Manrope',sans-serif; font-size:14.5px; background:white; }
+    select.inl { width:auto; display:inline-block; padding:5px 8px; margin:0 3px; font-size:14px; }
+    select.correct, input.correct { border-color:#4E9A6A; background:#F3FBF5; }
+    select.wrong, input.wrong { border-color:var(--level); background:#FBF0EC; }
+    .fig { max-width:520px; margin:0 auto 16px; }
+    .fig-cap { font-size:11.5px; color:#999; text-align:center; margin-top:6px; }
+    .expr-list { font-size:13px; color:#888; margin-top:8px; line-height:1.9; }
+    .expr-list span.on { color:#2E7D52; font-weight:700; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../b1/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B1</span>
+    <span class="badge badge-type">Gramática · Imagens</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Onde fica? <em>Posição, origem e passagem</em></h1>
+  <div class="hero-sub">Em frente a × na frente de, ao redor de, no meio de, por cima de… Choose the right expression and describe a place precisely.</div>
+  <div class="hero-tags"><span class="hero-tag">em frente a × na frente de</span><span class="hero-tag">ao redor · no meio de</span><span class="hero-tag">em cima × de cima × por cima</span></div>
+  <div class="hero-note">🖼️ Look at the pictures, then practice</div>
+</div>
+
+<div class="main">
+  <p style="font-size:15px;">You already know <i>em cima, embaixo, ao lado, atrás, entre</i>. Now it is time to choose between <b>similar expressions</b> (<i>em frente a × na frente de</i>, <i>em cima × de cima × por cima</i>) and to describe a place precisely.</p>
+  <section>
+    <div class="sec-label">Look and learn — new expressions</div>
+    <p style="font-size:13.5px;color:#888;">Pictures and examples for the expressions that are new at this level.</p>
+    <div class="scene-grid"><div class="sc"><svg viewBox="0 0 250 200" role="img" aria-label="street map: Farmácia, Padaria and Banco on one side; Escola, Mercado and Praça on the other" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><rect x="0" y="95" width="250" height="30" fill="#8A8A86"/><line x1="0" y1="110" x2="250" y2="110" stroke="#fff" stroke-width="2" stroke-dasharray="8 6"/><rect x="15" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="50" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Farmácia</text><rect x="95" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="130" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Padaria</text><rect x="175" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="210" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Banco</text><rect x="15" y="125" width="70" height="65" fill="#E8B27A" stroke="#A1441D" stroke-width="2"/><text x="50" y="162" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Escola</text><rect x="95" y="125" width="70" height="65" fill="#E8B27A" stroke="#A1441D" stroke-width="2"/><text x="130" y="162" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Mercado</text><rect x="175" y="125" width="70" height="65" fill="#B8D3A0" stroke="#4E551D" stroke-width="2"/><circle cx="210" cy="150" r="14" fill="#4E551D"/><rect x="207" y="160" width="6" height="14" fill="#967E63"/><text x="210" y="186" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Praça</text></svg><div class="sc-cap"><b>em frente a</b><br>A farmácia fica <b>em frente à</b> escola, do outro lado da rua.<br><i>Across from, facing.</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="balls around the box" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar35" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="80" y="70" width="40" height="55" rx="3" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="45" cy="105" r="10" fill="#D36D29"/><circle cx="41.5" cy="101.5" r="2.8000000000000003" fill="#fff" opacity=".35"/><circle cx="60" cy="60" r="10" fill="#D36D29"/><circle cx="56.5" cy="56.5" r="2.8000000000000003" fill="#fff" opacity=".35"/><circle cx="100" cy="38" r="10" fill="#D36D29"/><circle cx="96.5" cy="34.5" r="2.8000000000000003" fill="#fff" opacity=".35"/><circle cx="140" cy="60" r="10" fill="#D36D29"/><circle cx="136.5" cy="56.5" r="2.8000000000000003" fill="#fff" opacity=".35"/><circle cx="155" cy="105" r="10" fill="#D36D29"/><circle cx="151.5" cy="101.5" r="2.8000000000000003" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>ao redor de / em volta de</b><br>As bolas estão <b>ao redor da</b> caixa.<br><i>Around.</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball in the middle of a ring of blue circles" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar36" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><circle cx="55" cy="70" r="11" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="100" cy="50" r="11" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="145" cy="70" r="11" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="145" cy="108" r="11" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="100" cy="118" r="11" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="55" cy="108" r="11" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="100" cy="84" r="14" fill="#D36D29"/><circle cx="95.1" cy="79.1" r="3.9200000000000004" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>no meio de</b><br>A bola está <b>no meio dos</b> círculos.<br><i>In the middle of a group.</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball right against the box" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar37" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="55" y="75" width="50" height="50" rx="3" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="121" cy="109" r="16" fill="#D36D29"/><circle cx="115.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>junto de / colado em</b><br>A bola está <b>junto da</b> caixa.<br><i>Touching or very close.</i></div></div></div>
+  </section>
+  <section>
+    <div class="sec-label">Grammar — choosing the right expression</div>
+    <div class="grammar-box">
+      <b>Em frente a × na frente de × diante de</b><br>
+      <b>em frente a</b> → on the opposite side, facing: <i>A farmácia fica <b>em frente à</b> escola</i> (across the street).<br>
+      <b>na frente de</b> → ahead of / in front of something or someone: <i>Ele está <b>na frente da</b> fila.</i><br>
+      <b>diante de</b> → face to face with, in the presence of (more formal): <i>O professor ficou <b>diante dos</b> alunos.</i>
+    </div>
+    <div class="grammar-box">
+      <b>Acima de / abaixo de</b> → above / below in a scale or a vertical line, without touching: <i>temperatura <b>acima de</b> 30 graus; o apartamento <b>abaixo do</b> meu</i>. They are more formal than <i>em cima de / embaixo de</i>.
+    </div>
+    <div class="grammar-box">
+      <b>Remember</b> (review): <b>em cima de</b> / <b>embaixo de</b> = position · <b>de cima de</b> / <b>de baixo de</b> = origin or “who is above/below” · <b>por cima de</b> / <b>por baixo de</b> = path.<br>
+      <i>entre</i> needs two reference points: <i>entre a padaria e o banco</i>. For a group, use <b>no meio de</b> / <b>ao redor de</b>.
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 1 — The street</div>
+    <p style="font-size:13.5px;color:#888;">Look at the map. Read each sentence and choose <b>True</b> or <b>False</b>.</p>
+    <div class="fig"><svg viewBox="0 0 250 200" role="img" aria-label="street map: Farmácia, Padaria and Banco on one side; Escola, Mercado and Praça on the other" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><rect x="0" y="95" width="250" height="30" fill="#8A8A86"/><line x1="0" y1="110" x2="250" y2="110" stroke="#fff" stroke-width="2" stroke-dasharray="8 6"/><rect x="15" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="50" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Farmácia</text><rect x="95" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="130" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Padaria</text><rect x="175" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="210" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Banco</text><rect x="15" y="125" width="70" height="65" fill="#E8B27A" stroke="#A1441D" stroke-width="2"/><text x="50" y="162" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Escola</text><rect x="95" y="125" width="70" height="65" fill="#E8B27A" stroke="#A1441D" stroke-width="2"/><text x="130" y="162" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Mercado</text><rect x="175" y="125" width="70" height="65" fill="#B8D3A0" stroke="#4E551D" stroke-width="2"/><circle cx="210" cy="150" r="14" fill="#4E551D"/><rect x="207" y="160" width="6" height="14" fill="#967E63"/><text x="210" y="186" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Praça</text></svg><div class="fig-cap">O quarteirão: de um lado da rua e do outro.</div></div>    <div class="q"><div class="q-text"><span class="q-num">1.</span>A farmácia fica em frente à escola. &nbsp; <select class="inl" id="b1e1-1"><option value="">—</option><option value="True">True</option><option value="False">False</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A padaria fica ao lado da farmácia. &nbsp; <select class="inl" id="b1e1-2"><option value="">—</option><option value="True">True</option><option value="False">False</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>A padaria fica entre a farmácia e o banco. &nbsp; <select class="inl" id="b1e1-3"><option value="">—</option><option value="True">True</option><option value="False">False</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>A praça fica em frente à padaria. &nbsp; <select class="inl" id="b1e1-4"><option value="">—</option><option value="True">True</option><option value="False">False</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O mercado fica em frente à padaria. &nbsp; <select class="inl" id="b1e1-5"><option value="">—</option><option value="True">True</option><option value="False">False</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>A escola fica ao lado do banco. &nbsp; <select class="inl" id="b1e1-6"><option value="">—</option><option value="True">True</option><option value="False">False</option></select></div></div>
+    <button class="check-btn" onclick="checkMC(b1e1,'b1e1-result')">✓ Check answers</button>
+    <div id="b1e1-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 2 — Choose the best expression</div>
+    <p style="font-size:13.5px;color:#888;">Choose the option that fits the context.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>A criançada fez uma roda <select class="inl" id="b1e2-1"><option value="">—</option><option value="ao redor da">ao redor da</option><option value="em frente da">em frente da</option><option value="de cima da">de cima da</option></select> professora.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A casa dela fica <select class="inl" id="b1e2-2"><option value="">—</option><option value="no meio da">no meio da</option><option value="entre a">entre a</option><option value="por cima da">por cima da</option></select> quadra.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>A farmácia fica <select class="inl" id="b1e2-3"><option value="">—</option><option value="em frente ao">em frente ao</option><option value="na frente do">na frente do</option><option value="de cima do">de cima do</option></select> banco, do outro lado da rua.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Quem chegou primeiro está <select class="inl" id="b1e2-4"><option value="">—</option><option value="em frente da">em frente da</option><option value="na frente da">na frente da</option><option value="ao redor da">ao redor da</option></select> fila.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O professor ficou <select class="inl" id="b1e2-5"><option value="">—</option><option value="diante dos">diante dos</option><option value="ao redor dos">ao redor dos</option><option value="por baixo dos">por baixo dos</option></select> alunos e começou a falar.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>As nuvens passaram <select class="inl" id="b1e2-6"><option value="">—</option><option value="de cima da">de cima da</option><option value="por cima da">por cima da</option><option value="em cima da">em cima da</option></select> cidade e foram embora.</div></div>
+    <button class="check-btn" onclick="checkMC(b1e2,'b1e2-result')">✓ Check answers</button>
+    <div id="b1e2-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 3 — Find and fix the mistake</div>
+    <p style="font-size:13.5px;color:#888;">Each sentence has one mistake. Rewrite the whole sentence correctly.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>O livro está encima da mesa.</div><input type="text" id="b1e3-1" placeholder="Escreva a frase corrigida..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A farmácia fica em frente de banco.</div><input type="text" id="b1e3-2" placeholder="Escreva a frase corrigida..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Ele tirou o livro em cima da mesa.</div><input type="text" id="b1e3-3" placeholder="Escreva a frase corrigida..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>O meu vizinho em cima faz muito barulho.</div><input type="text" id="b1e3-4" placeholder="Escreva a frase corrigida..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O avião passou em cima da cidade.</div><input type="text" id="b1e3-5" placeholder="Escreva a frase corrigida..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>O cachorro está entre da mesa e da cadeira.</div><input type="text" id="b1e3-6" placeholder="Escreva a frase corrigida..."></div>
+    <button class="check-btn" onclick="checkMC(b1e3,'b1e3-result')">✓ Check answers</button>
+    <div id="b1e3-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 4 — Where is it?</div>
+    <p style="font-size:13.5px;color:#888;">Answer the questions using the map. Write the expression with the article (<i>à, ao, da…</i>).</p>
+<div class="fig"><svg viewBox="0 0 250 200" role="img" aria-label="street map: Farmácia, Padaria and Banco on one side; Escola, Mercado and Praça on the other" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><rect x="0" y="95" width="250" height="30" fill="#8A8A86"/><line x1="0" y1="110" x2="250" y2="110" stroke="#fff" stroke-width="2" stroke-dasharray="8 6"/><rect x="15" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="50" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Farmácia</text><rect x="95" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="130" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Padaria</text><rect x="175" y="30" width="70" height="65" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><text x="210" y="67" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#fff">Banco</text><rect x="15" y="125" width="70" height="65" fill="#E8B27A" stroke="#A1441D" stroke-width="2"/><text x="50" y="162" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Escola</text><rect x="95" y="125" width="70" height="65" fill="#E8B27A" stroke="#A1441D" stroke-width="2"/><text x="130" y="162" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Mercado</text><rect x="175" y="125" width="70" height="65" fill="#B8D3A0" stroke="#4E551D" stroke-width="2"/><circle cx="210" cy="150" r="14" fill="#4E551D"/><rect x="207" y="160" width="6" height="14" fill="#967E63"/><text x="210" y="186" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#1E1D1C">Praça</text></svg><div class="fig-cap">O quarteirão</div></div>    <div class="q"><div class="q-text"><span class="q-num">1.</span>— Onde fica a farmácia?<br>— Fica ______ escola.</div><input type="text" id="b1e4-1" placeholder="Expressão + artigo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>— Onde fica a padaria?<br>— Fica ______ a farmácia e o banco.</div><input type="text" id="b1e4-2" placeholder="Expressão + artigo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>— Onde fica o mercado?<br>— Fica ______ padaria.</div><input type="text" id="b1e4-3" placeholder="Expressão + artigo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>— Onde fica a praça?<br>— Fica ______ banco.</div><input type="text" id="b1e4-4" placeholder="Expressão + artigo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>— Onde fica o banco?<br>— Fica ______ padaria.</div><input type="text" id="b1e4-5" placeholder="Expressão + artigo..."></div>
+    <button class="check-btn" onclick="checkMC(b1e4,'b1e4-result')">✓ Check answers</button>
+    <div id="b1e4-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 5 — Explain it to a visitor</div>
+    <p style="font-size:13.5px;color:#888;">A visitor is coming to your neighborhood or building. Explain where things are (100 to 150 words). Use at least 6 different expressions, including one with <i>de cima / de baixo</i> or <i>por cima / por baixo</i>.</p>
+    <div class="q"><textarea id="b1-write" style="min-height:220px;" placeholder="Na minha rua, a padaria fica…" oninput="wc('b1-write','b1-wc',100,150);exprCheck('b1-write','b1-expr',EXPR_b1_write);"></textarea><div id="b1-wc" style="font-size:12.5px;color:#999;margin-top:6px;">0 words</div><div id="b1-expr" class="expr-list"></div></div>
+
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Ilustrações: BPHUB (criadas para fins didáticos).</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+var b1e1 = [
+  {"id": "b1e1-1", "key": "True", "show": "A farmácia fica em frente à escola. → <b>True</b>", "note": "Both are at the left end, on opposite sides of the street."},
+  {"id": "b1e1-2", "key": "True", "show": "A padaria fica ao lado da farmácia. → <b>True</b>", "note": "Farmácia and Padaria are neighbors on the same side."},
+  {"id": "b1e1-3", "key": "True", "show": "A padaria fica entre a farmácia e o banco. → <b>True</b>", "note": "Farmácia – Padaria – Banco, in this order."},
+  {"id": "b1e1-4", "key": "False", "show": "A praça fica em frente à padaria. → <b>False</b>", "note": "The praça is in front of the banco; the mercado is in front of the padaria."},
+  {"id": "b1e1-5", "key": "True", "show": "O mercado fica em frente à padaria. → <b>True</b>", "note": "Padaria and Mercado are on opposite sides, in the middle."},
+  {"id": "b1e1-6", "key": "False", "show": "A escola fica ao lado do banco. → <b>False</b>", "note": "The escola is far from the banco; the mercado is next to the escola."}
+];
+var b1e2 = [
+  {"id": "b1e2-1", "key": "ao redor da", "show": "A criançada fez uma roda <b>ao redor da</b> professora.", "note": ""},
+  {"id": "b1e2-2", "key": "no meio da", "show": "A casa dela fica <b>no meio da</b> quadra.", "note": "<i>entre</i> needs two reference points."},
+  {"id": "b1e2-3", "key": "em frente ao", "show": "A farmácia fica <b>em frente ao</b> banco, do outro lado da rua.", "note": "Across the street → em frente a."},
+  {"id": "b1e2-4", "key": "na frente da", "show": "Quem chegou primeiro está <b>na frente da</b> fila.", "note": "Ahead in a line → na frente de."},
+  {"id": "b1e2-5", "key": ["diante dos", "na frente dos"], "show": "O professor ficou <b>diante dos</b> alunos e começou a falar.", "note": "Face to face with → diante de (na frente de also works)."},
+  {"id": "b1e2-6", "key": "por cima da", "show": "As nuvens passaram <b>por cima da</b> cidade e foram embora.", "note": "Path → por cima."}
+];
+var b1e3 = [
+  {"id": "b1e3-1", "key": "O livro está em cima da mesa.", "show": "O livro está em cima da mesa.", "note": "“Em cima” is always two words."},
+  {"id": "b1e3-2", "key": "A farmácia fica em frente ao banco.", "show": "A farmácia fica em frente ao banco.", "note": "em frente a + o = ao."},
+  {"id": "b1e3-3", "key": "Ele tirou o livro de cima da mesa.", "show": "Ele tirou o livro de cima da mesa.", "note": "Starting point → de cima."},
+  {"id": "b1e3-4", "key": "O meu vizinho de cima faz muito barulho.", "show": "O meu vizinho de cima faz muito barulho.", "note": "Who is above → de cima."},
+  {"id": "b1e3-5", "key": "O avião passou por cima da cidade.", "show": "O avião passou por cima da cidade.", "note": "Path → por cima."},
+  {"id": "b1e3-6", "key": "O cachorro está entre a mesa e a cadeira.", "show": "O cachorro está entre a mesa e a cadeira.", "note": "No “de” after entre."}
+];
+var b1e4 = [
+  {"id": "b1e4-1", "key": ["em frente à"], "show": "Fica <b>em frente à</b> escola."},
+  {"id": "b1e4-2", "key": ["entre"], "show": "Fica <b>entre</b> a farmácia e o banco."},
+  {"id": "b1e4-3", "key": ["em frente à"], "show": "Fica <b>em frente à</b> padaria."},
+  {"id": "b1e4-4", "key": ["em frente ao"], "show": "Fica <b>em frente ao</b> banco."},
+  {"id": "b1e4-5", "key": ["ao lado da"], "show": "Fica <b>ao lado da</b> padaria."}
+];
+var EXPR_b1_write = [["em cima de / embaixo de", ["em cima", "embaixo", "debaixo"]], ["de cima / de baixo", ["de cima", "de baixo"]], ["por cima / por baixo", ["por cima", "por baixo"]], ["em frente a", ["em frente"]], ["na frente de / atrás de", ["na frente", "atras"]], ["ao lado de", ["ao lado"]], ["entre", ["entre"]], ["ao redor de / no meio de", ["ao redor", "em volta", "no meio"]], ["perto de / longe de", ["perto", "longe"]]];
+
+function checkMC(items, rid) {
+  var html='', ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id); var v=el.value;
+    var keys=Array.isArray(a.key)?a.key:[a.key];
+    var ok=v.trim().length>0 && keys.some(function(k){return norm(v)===norm(k);});
+    el.classList.toggle('correct',ok); el.classList.toggle('wrong',v.trim().length>0 && !ok);
+    if(ok) ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '+(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+(a.note?'<br><span style="color:#777;font-size:12.5px;">'+a.note+'</span>':'')+'</div>';
+  });
+  var res=document.getElementById(rid); var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ All '+items.length+' correct!':ok_n+' of '+items.length+' correct — model answers:')+'</div>'+html;
+  res.style.display='block';
+}
+function exprCheck(tid, bid, exprs) {
+  var t=norm(document.getElementById(tid).value), n=0, h='';
+  exprs.forEach(function(e){ var on=e[1].some(function(s){return t.indexOf(norm(s))>-1;}); if(on) n++; h+='<span class="'+(on?'on':'')+'">'+(on?'✓ ':'○ ')+e[0]+'</span> &nbsp; '; });
+  document.getElementById(bid).innerHTML=h+'<br><b>'+n+'</b> expression'+(n===1?'':'s')+' used';
+}
+function wc(tid,cid,lo,hi){ var t=document.getElementById(tid).value.trim(); var n=t?t.split(/\s+/).length:0; var el=document.getElementById(cid); el.textContent=n+' words'+(lo?' (goal: '+lo+'–'+hi+')':''); el.style.color=(lo&&n>=lo&&n<=hi)?'#2E7D52':'#999'; }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['b1e1-1','b1e1-2','b1e1-3','b1e1-4','b1e1-5','b1e1-6','b1e2-1','b1e2-2','b1e2-3','b1e2-4','b1e2-5','b1e2-6','b1e3-1','b1e3-2','b1e3-3','b1e3-4','b1e3-5','b1e3-6','b1e4-1','b1e4-2','b1e4-3','b1e4-4','b1e4-5'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>

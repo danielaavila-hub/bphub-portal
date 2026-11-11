@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Em cima ou de cima? Embaixo ou de baixo? — A2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --level: #265B8B; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--level); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--level); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--level); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    .scene-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; margin-bottom:18px; }
+    .sc { background:white; border:1.5px solid var(--light-gray); border-radius:12px; padding:12px; }
+    .sc .sc-q { font-size:14px; margin:10px 0 8px; line-height:1.5; }
+    .sc .sc-cap { font-size:13.5px; margin-top:10px; line-height:1.5; }
+    .sc .sc-cap b { color: var(--level); font-size:15px; }
+    .sc .sc-cap i { color:#666; }
+    select { width:100%; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; padding:9px 10px; font-family:'Manrope',sans-serif; font-size:14.5px; background:white; }
+    select.inl { width:auto; display:inline-block; padding:5px 8px; margin:0 3px; font-size:14px; }
+    select.correct, input.correct { border-color:#4E9A6A; background:#F3FBF5; }
+    select.wrong, input.wrong { border-color:var(--level); background:#FBF0EC; }
+    .fig { max-width:520px; margin:0 auto 16px; }
+    .fig-cap { font-size:11.5px; color:#999; text-align:center; margin-top:6px; }
+    .expr-list { font-size:13px; color:#888; margin-top:8px; line-height:1.9; }
+    .expr-list span.on { color:#2E7D52; font-weight:700; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../a2/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">A2</span>
+    <span class="badge badge-type">Gramática · Imagens</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Em cima <em>ou</em> de cima?</h1>
+  <div class="hero-sub">Position, origin and path: em cima × de cima, embaixo × de baixo, por cima × por baixo — explained with pictures.</div>
+  <div class="hero-tags"><span class="hero-tag">em cima × de cima</span><span class="hero-tag">embaixo × de baixo</span><span class="hero-tag">por cima · por baixo</span></div>
+  <div class="hero-note">🖼️ Look at the pictures, then practice</div>
+</div>
+
+<div class="main">
+  <p style="font-size:15px;">Do we say <i>em cima</i> or <i>de cima</i>? <i>Embaixo</i> or <i>de baixo</i>? The difference is easy to see in pictures: one is about <b>where something is</b>, the other about <b>where it comes from</b>.</p>
+  <section>
+    <div class="sec-label">Look and learn — position, origin, path</div>
+    <p style="font-size:13.5px;color:#888;">Each picture has a sentence. Notice what the ball is doing.</p>
+    <div class="scene-grid"><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball on top of the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar21" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="100" cy="44" r="16" fill="#D36D29"/><circle cx="94.4" cy="38.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>em cima de</b><br>A bola está <b>em cima da</b> mesa.<br><i>Position: where is it?</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball taken from the top of the table to the floor" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar22" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="100" cy="44" r="16" fill="none" stroke="#D36D29" stroke-width="2" stroke-dasharray="4 3"/><path d="M115,40 Q190,30 178,100" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar22)"/><circle cx="178" cy="109" r="16" fill="#D36D29"/><circle cx="172.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>de cima de</b><br>Ele tirou a bola <b>de cima da</b> mesa.<br><i>Origin: where does it come from?</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball under the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar23" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="100" cy="107" r="16" fill="#D36D29"/><circle cx="94.4" cy="101.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>embaixo de / debaixo de</b><br>A bola está <b>embaixo da</b> mesa.<br><i>Position: where is it?</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball coming out from under the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar24" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="85" cy="107" r="16" fill="none" stroke="#D36D29" stroke-width="2" stroke-dasharray="4 3"/><path d="M102,110 L160,110" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar24)"/><circle cx="178" cy="109" r="16" fill="#D36D29"/><circle cx="172.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-cap"><b>de baixo de</b><br>A bola saiu <b>de baixo da</b> mesa.<br><i>Origin: where does it come from?</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball passing over the box" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar25" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="75" y="75" width="50" height="50" rx="3" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="25" cy="109" r="16" fill="#D36D29"/><circle cx="19.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/><path d="M45,100 Q100,10 160,100" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar25)"/></svg><div class="sc-cap"><b>por cima de</b><br>A bola passou <b>por cima da</b> caixa.<br><i>Passing over.</i></div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball passing under the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar26" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="20" cy="107" r="16" fill="#D36D29"/><circle cx="14.4" cy="101.4" r="4.48" fill="#fff" opacity=".35"/><path d="M40,107 L175,107" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar26)"/></svg><div class="sc-cap"><b>por baixo de</b><br>A bola passou <b>por baixo da</b> mesa.<br><i>Passing under.</i></div></div></div>
+  </section>
+  <section>
+    <div class="sec-label">Grammar — which one do I use?</div>
+    <div class="grammar-box">
+      <b>Position or movement?</b> The question changes the expression.<br>
+      <b>Where is it?</b> → <b>em cima de</b> · <b>embaixo de</b> (position)<br>
+      <b>Where does it come from?</b> → <b>de cima de</b> · <b>de baixo de</b> (origin / starting point)<br>
+      <b>Where does it pass?</b> → <b>por cima de</b> · <b>por baixo de</b> (path)
+    </div>
+    <table class="grammar">
+      <tr><th>Question</th><th>Answer</th></tr>
+      <tr><td>Onde está a chave?</td><td>Está <b>em cima da</b> mesa.</td></tr>
+      <tr><td>De onde você tirou a chave?</td><td>Tirei <b>de cima da</b> mesa.</td></tr>
+      <tr><td>Onde está o gato?</td><td>Está <b>embaixo da</b> cama.</td></tr>
+      <tr><td>De onde o gato saiu?</td><td>Saiu <b>de baixo da</b> cama.</td></tr>
+    </table>
+    <div class="grammar-box" style="margin-top:16px;">
+      <b>De cima / de baixo</b> also describe <b>who or what is above or below</b>: <i>o vizinho <b>de cima</b>, o andar <b>de baixo</b></i>.
+    </div>
+    <p style="font-size:13px;color:#888;"><i>Remember: <b>de + o = do</b>, <b>de + a = da</b>. Never write “encima”.</i></p>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 1 — Position, origin or path?</div>
+    <p style="font-size:13.5px;color:#888;">Look at each picture and choose the correct expression.</p>
+    <div class="scene-grid"><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball on top of the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar27" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="100" cy="44" r="16" fill="#D36D29"/><circle cx="94.4" cy="38.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-q">A bola está <select class="inl" id="a2e1-1"><option value="">—</option><option value="em cima">em cima</option><option value="de cima">de cima</option><option value="embaixo">embaixo</option><option value="de baixo">de baixo</option><option value="por cima">por cima</option><option value="por baixo">por baixo</option></select> da mesa.</div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball taken from the top of the table to the floor" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar28" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="100" cy="44" r="16" fill="none" stroke="#D36D29" stroke-width="2" stroke-dasharray="4 3"/><path d="M115,40 Q190,30 178,100" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar28)"/><circle cx="178" cy="109" r="16" fill="#D36D29"/><circle cx="172.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-q">Ele tirou a bola <select class="inl" id="a2e1-2"><option value="">—</option><option value="em cima">em cima</option><option value="de cima">de cima</option><option value="embaixo">embaixo</option><option value="de baixo">de baixo</option><option value="por cima">por cima</option><option value="por baixo">por baixo</option></select> da mesa.</div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball under the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar29" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="100" cy="107" r="16" fill="#D36D29"/><circle cx="94.4" cy="101.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-q">A bola está <select class="inl" id="a2e1-3"><option value="">—</option><option value="em cima">em cima</option><option value="de cima">de cima</option><option value="embaixo">embaixo</option><option value="de baixo">de baixo</option><option value="por cima">por cima</option><option value="por baixo">por baixo</option></select> da mesa.</div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball coming out from under the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar30" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="85" cy="107" r="16" fill="none" stroke="#D36D29" stroke-width="2" stroke-dasharray="4 3"/><path d="M102,110 L160,110" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar30)"/><circle cx="178" cy="109" r="16" fill="#D36D29"/><circle cx="172.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/></svg><div class="sc-q">A bola saiu <select class="inl" id="a2e1-4"><option value="">—</option><option value="em cima">em cima</option><option value="de cima">de cima</option><option value="embaixo">embaixo</option><option value="de baixo">de baixo</option><option value="por cima">por cima</option><option value="por baixo">por baixo</option></select> da mesa.</div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball passing over the box" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar31" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="75" y="75" width="50" height="50" rx="3" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><circle cx="25" cy="109" r="16" fill="#D36D29"/><circle cx="19.4" cy="103.4" r="4.48" fill="#fff" opacity=".35"/><path d="M45,100 Q100,10 160,100" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar31)"/></svg><div class="sc-q">A bola passou <select class="inl" id="a2e1-5"><option value="">—</option><option value="em cima">em cima</option><option value="de cima">de cima</option><option value="embaixo">embaixo</option><option value="de baixo">de baixo</option><option value="por cima">por cima</option><option value="por baixo">por baixo</option></select> da caixa.</div></div><div class="sc"><svg viewBox="0 0 200 140" role="img" aria-label="ball passing under the table" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar32" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="40" y="60" width="120" height="9" rx="2" fill="#967E63"/><rect x="48" y="69" width="7" height="56" fill="#967E63"/><rect x="145" y="69" width="7" height="56" fill="#967E63"/><circle cx="20" cy="107" r="16" fill="#D36D29"/><circle cx="14.4" cy="101.4" r="4.48" fill="#fff" opacity=".35"/><path d="M40,107 L175,107" fill="none" stroke="#1E1D1C" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar32)"/></svg><div class="sc-q">A bola passou <select class="inl" id="a2e1-6"><option value="">—</option><option value="em cima">em cima</option><option value="de cima">de cima</option><option value="embaixo">embaixo</option><option value="de baixo">de baixo</option><option value="por cima">por cima</option><option value="por baixo">por baixo</option></select> da mesa.</div></div></div>    <button class="check-btn" onclick="checkMC(a2e1,'a2e1-result')">✓ Check answers</button>
+    <div id="a2e1-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 2 — The neighbors</div>
+    <p style="font-size:13.5px;color:#888;">Ana lives on the top floor, Pedro on the ground floor, and you live in the middle. Complete the sentences from <b>your</b> point of view (unless the sentence says otherwise).</p>
+    <div class="fig"><svg viewBox="0 0 200 140" role="img" aria-label="building with three floors: Ana on top, you in the middle, Pedro on the bottom" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:10px;background:#F6EBD9;"><defs><marker id="ar33" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E1D1C"/></marker></defs><rect x="0" y="125" width="200" height="15" fill="#E4D6BC"/><rect x="55" y="10" width="90" height="38" fill="#F4D9A8" stroke="#265B8B" stroke-width="2"/><text x="100" y="33" font-family="Manrope,Arial,sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1E1D1C">Ana</text><rect x="55" y="50" width="90" height="38" fill="#BFD6EA" stroke="#265B8B" stroke-width="2"/><text x="100" y="73" font-family="Manrope,Arial,sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1E1D1C">Você</text><rect x="55" y="90" width="90" height="38" fill="#F4D9A8" stroke="#265B8B" stroke-width="2"/><text x="100" y="113" font-family="Manrope,Arial,sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1E1D1C">Pedro</text></svg><div class="fig-cap">O prédio da Ana, do Pedro… e o seu apartamento (andar do meio).</div></div>    <div class="q"><div class="q-text"><span class="q-num">1.</span>Eu moro no segundo andar. A Ana é a minha vizinha <select class="inl" id="a2e2-1"><option value="">—</option><option value="de cima">de cima</option><option value="de baixo">de baixo</option><option value="em cima">em cima</option><option value="embaixo">embaixo</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>O Pedro é o vizinho <select class="inl" id="a2e2-2"><option value="">—</option><option value="de cima">de cima</option><option value="de baixo">de baixo</option><option value="em cima">em cima</option><option value="embaixo">embaixo</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>O barulho vem do apartamento <select class="inl" id="a2e2-3"><option value="">—</option><option value="de cima">de cima</option><option value="de baixo">de baixo</option><option value="em cima">em cima</option><option value="embaixo">embaixo</option></select>. É a Ana que está dançando!</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>O Pedro mora no andar <select class="inl" id="a2e2-4"><option value="">—</option><option value="de cima">de cima</option><option value="de baixo">de baixo</option><option value="em cima">em cima</option><option value="embaixo">embaixo</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>A Ana reclama: “O meu vizinho <select class="inl" id="a2e2-5"><option value="">—</option><option value="de cima">de cima</option><option value="de baixo">de baixo</option><option value="em cima">em cima</option><option value="embaixo">embaixo</option></select> toca violão a noite inteira!”</div></div>
+    <button class="check-btn" onclick="checkMC(a2e2,'a2e2-result')">✓ Check answers</button>
+    <div id="a2e2-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 3 — Choose the correct option</div>
+    <p style="font-size:13.5px;color:#888;">Ask yourself: is it a position, a starting point, or a path?</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Tire o livro <select class="inl" id="a2e3-1"><option value="">—</option><option value="em cima da">em cima da</option><option value="de cima da">de cima da</option></select> mesa.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>O livro está <select class="inl" id="a2e3-2"><option value="">—</option><option value="em cima da">em cima da</option><option value="de cima da">de cima da</option></select> mesa.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>O gato saiu <select class="inl" id="a2e3-3"><option value="">—</option><option value="embaixo da">embaixo da</option><option value="de baixo da">de baixo da</option></select> cama.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Meu sapato está <select class="inl" id="a2e3-4"><option value="">—</option><option value="embaixo do">embaixo do</option><option value="de baixo do">de baixo do</option></select> sofá.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O avião passou <select class="inl" id="a2e3-5"><option value="">—</option><option value="em cima da">em cima da</option><option value="por cima da">por cima da</option></select> cidade.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>O rio passa <select class="inl" id="a2e3-6"><option value="">—</option><option value="embaixo da">embaixo da</option><option value="por baixo da">por baixo da</option></select> ponte.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>Minha chave caiu <select class="inl" id="a2e3-7"><option value="">—</option><option value="embaixo do">embaixo do</option><option value="de baixo do">de baixo do</option></select> sofá.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>Pegue o casaco <select class="inl" id="a2e3-8"><option value="">—</option><option value="em cima da">em cima da</option><option value="de cima da">de cima da</option></select> cadeira.</div></div>
+    <button class="check-btn" onclick="checkMC(a2e3,'a2e3-result')">✓ Check answers</button>
+    <div id="a2e3-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 4 — Complete the sentences</div>
+    <p style="font-size:13.5px;color:#888;">Write the expression with the article. Example: <i>em cima <b>da</b> mesa</i>.</p>
+    <div class="fig"><svg viewBox="0 0 400 260" role="img" aria-label="living room: sofa with a cat on it, a picture above the sofa, a lamp to the left, a small table to the right with a vase on top and a ball under it, and a plant in the far left corner" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:12px;"><rect width="400" height="170" fill="#F6EBD9"/><rect y="170" width="400" height="90" fill="#E0D3BC"/><rect x="165" y="35" width="70" height="50" fill="#fff" stroke="#967E63" stroke-width="4"/><circle cx="200" cy="60" r="12" fill="#A6B28A"/><rect x="120" y="105" width="160" height="45" rx="6" fill="#5B8DB8" stroke="#265B8B" stroke-width="2"/><rect x="110" y="140" width="180" height="50" rx="6" fill="#6F9CC6" stroke="#265B8B" stroke-width="2"/><ellipse cx="200" cy="130" rx="24" ry="13" fill="#E8A04A"/><circle cx="224" cy="120" r="10" fill="#E8A04A"/><path d="M218,112 l3,-9 l5,8 z M227,112 l4,-8 l3,9 z" fill="#E8A04A"/><rect x="87" y="110" width="5" height="80" fill="#555"/><path d="M72,110 L107,110 L100,85 L79,85 z" fill="#F2C94C" stroke="#B8902A" stroke-width="2"/><rect x="75" y="188" width="30" height="5" rx="2" fill="#555"/><rect x="315" y="180" width="80" height="9" rx="2" fill="#967E63"/><rect x="322" y="189" width="7" height="45" fill="#967E63"/><rect x="380" y="189" width="7" height="45" fill="#967E63"/><path d="M345,180 l-4,-26 h22 l-4,26 z" fill="#A1441D"/><path d="M352,154 q-8,-18 -2,-26 M352,154 q9,-14 6,-24" stroke="#4E551D" stroke-width="3" fill="none"/><circle cx="355" cy="217" r="14" fill="#D36D29"/><path d="M12,225 h30 l-4,-30 h-22 z" fill="#A1441D"/><path d="M27,195 q-14,-24 -6,-40 M27,195 q14,-22 8,-38 M27,195 q0,-30 0,-44" stroke="#4E551D" stroke-width="4" fill="none"/></svg><div class="fig-cap">A sala (items 2 and 4 are not in the picture)</div></div>    <div class="q"><div class="q-text"><span class="q-num">1.</span>O gato está dormindo ______ sofá.</div><input type="text" id="a2e4-1" placeholder="Expression + article (do, da…)"></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Tire o vaso ______ mesa, por favor.</div><input type="text" id="a2e4-2" placeholder="Expression + article (do, da…)"></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>A bola está ______ mesa.</div><input type="text" id="a2e4-3" placeholder="Expression + article (do, da…)"></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>O cachorro passou ______ mesa e saiu correndo.</div><input type="text" id="a2e4-4" placeholder="Expression + article (do, da…)"></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O quadro está pendurado ______ sofá.</div><input type="text" id="a2e4-5" placeholder="Expression + article (do, da…)"></div>
+    <button class="check-btn" onclick="checkMC(a2e4,'a2e4-result')">✓ Check answers</button>
+    <div id="a2e4-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercise 5 — Your home</div>
+    <p style="font-size:13.5px;color:#888;">Write 6 sentences about your home: 4 about where things are, and 2 about movement (<i>de cima, de baixo, por cima, por baixo</i>). Example: <i>Eu tirei o casaco de cima da cadeira.</i></p>
+    <div class="q"><textarea id="a2-write" style="min-height:200px;" placeholder="Na minha casa, o sofá está…" oninput="wc('a2-write','a2-wc',0,0);exprCheck('a2-write','a2-expr',EXPR_a2_write);"></textarea><div id="a2-wc" style="font-size:12.5px;color:#999;margin-top:6px;">0 words</div><div id="a2-expr" class="expr-list"></div></div>
+
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Ilustrações: BPHUB (criadas para fins didáticos).</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+var a2e1 = [
+  {"id": "a2e1-1", "key": "em cima", "show": "A bola está <b>em cima</b> da mesa."},
+  {"id": "a2e1-2", "key": "de cima", "show": "Ele tirou a bola <b>de cima</b> da mesa."},
+  {"id": "a2e1-3", "key": "embaixo", "show": "A bola está <b>embaixo</b> da mesa."},
+  {"id": "a2e1-4", "key": "de baixo", "show": "A bola saiu <b>de baixo</b> da mesa."},
+  {"id": "a2e1-5", "key": "por cima", "show": "A bola passou <b>por cima</b> da caixa."},
+  {"id": "a2e1-6", "key": "por baixo", "show": "A bola passou <b>por baixo</b> da mesa."}
+];
+var a2e2 = [
+  {"id": "a2e2-1", "key": "de cima", "show": "A Ana é a minha vizinha <b>de cima</b>."},
+  {"id": "a2e2-2", "key": "de baixo", "show": "O Pedro é o vizinho <b>de baixo</b>."},
+  {"id": "a2e2-3", "key": "de cima", "show": "O barulho vem do apartamento <b>de cima</b>."},
+  {"id": "a2e2-4", "key": "de baixo", "show": "O Pedro mora no andar <b>de baixo</b>."},
+  {"id": "a2e2-5", "key": "de baixo", "show": "A Ana reclama: “O meu vizinho <b>de baixo</b> toca violão a noite inteira!” (Ana mora em cima; o vizinho dela mora embaixo.)"}
+];
+var a2e3 = [
+  {"id": "a2e3-1", "key": "de cima da", "show": "Tire o livro <b>de cima da</b> mesa.", "note": "Movement away from the top → de cima."},
+  {"id": "a2e3-2", "key": "em cima da", "show": "O livro está <b>em cima da</b> mesa.", "note": "Position → em cima."},
+  {"id": "a2e3-3", "key": "de baixo da", "show": "O gato saiu <b>de baixo da</b> cama.", "note": "Movement from below → de baixo."},
+  {"id": "a2e3-4", "key": "embaixo do", "show": "Meu sapato está <b>embaixo do</b> sofá.", "note": "Position → embaixo."},
+  {"id": "a2e3-5", "key": "por cima da", "show": "O avião passou <b>por cima da</b> cidade.", "note": "Path → por cima."},
+  {"id": "a2e3-6", "key": "por baixo da", "show": "O rio passa <b>por baixo da</b> ponte.", "note": "Path → por baixo."},
+  {"id": "a2e3-7", "key": "embaixo do", "show": "Minha chave caiu <b>embaixo do</b> sofá.", "note": "Position after falling → embaixo."},
+  {"id": "a2e3-8", "key": "de cima da", "show": "Pegue o casaco <b>de cima da</b> cadeira.", "note": "Take it from the top → de cima."}
+];
+var a2e4 = [
+  {"id": "a2e4-1", "key": ["em cima do"], "show": "O gato está dormindo <b>em cima do</b> sofá."},
+  {"id": "a2e4-2", "key": ["de cima da"], "show": "Tire o vaso <b>de cima da</b> mesa, por favor."},
+  {"id": "a2e4-3", "key": ["embaixo da", "debaixo da"], "show": "A bola está <b>embaixo da</b> mesa."},
+  {"id": "a2e4-4", "key": ["por baixo da"], "show": "O cachorro passou <b>por baixo da</b> mesa e saiu correndo."},
+  {"id": "a2e4-5", "key": ["em cima do", "acima do"], "show": "O quadro está pendurado <b>em cima do</b> (ou acima do) sofá."}
+];
+var EXPR_a2_write = [["em cima de", ["em cima"]], ["embaixo / debaixo de", ["embaixo", "debaixo"]], ["de cima / de baixo", ["de cima", "de baixo"]], ["por cima / por baixo", ["por cima", "por baixo"]], ["ao lado de", ["ao lado"]], ["na frente de / atrás de", ["na frente", "atras"]], ["entre", ["entre"]]];
+
+function checkMC(items, rid) {
+  var html='', ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id); var v=el.value;
+    var keys=Array.isArray(a.key)?a.key:[a.key];
+    var ok=v.trim().length>0 && keys.some(function(k){return norm(v)===norm(k);});
+    el.classList.toggle('correct',ok); el.classList.toggle('wrong',v.trim().length>0 && !ok);
+    if(ok) ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '+(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+(a.note?'<br><span style="color:#777;font-size:12.5px;">'+a.note+'</span>':'')+'</div>';
+  });
+  var res=document.getElementById(rid); var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ All '+items.length+' correct!':ok_n+' of '+items.length+' correct — model answers:')+'</div>'+html;
+  res.style.display='block';
+}
+function exprCheck(tid, bid, exprs) {
+  var t=norm(document.getElementById(tid).value), n=0, h='';
+  exprs.forEach(function(e){ var on=e[1].some(function(s){return t.indexOf(norm(s))>-1;}); if(on) n++; h+='<span class="'+(on?'on':'')+'">'+(on?'✓ ':'○ ')+e[0]+'</span> &nbsp; '; });
+  document.getElementById(bid).innerHTML=h+'<br><b>'+n+'</b> expression'+(n===1?'':'s')+' used';
+}
+function wc(tid,cid,lo,hi){ var t=document.getElementById(tid).value.trim(); var n=t?t.split(/\s+/).length:0; var el=document.getElementById(cid); el.textContent=n+' words'+(lo?' (goal: '+lo+'–'+hi+')':''); el.style.color=(lo&&n>=lo&&n<=hi)?'#2E7D52':'#999'; }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['a2e1-1','a2e1-2','a2e1-3','a2e1-4','a2e1-5','a2e1-6','a2e2-1','a2e2-2','a2e2-3','a2e2-4','a2e2-5','a2e3-1','a2e3-2','a2e3-3','a2e3-4','a2e3-5','a2e3-6','a2e3-7','a2e3-8','a2e4-1','a2e4-2','a2e4-3','a2e4-4','a2e4-5'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
