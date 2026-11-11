@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esteja e estiver — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --level: #A1441D; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--level); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--level); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--level); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    select { width:100%; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; padding:9px 10px; font-family:'Manrope',sans-serif; font-size:14.5px; background:white; }
+    select.inl { width:auto; display:inline-block; padding:5px 8px; margin:0 3px; font-size:14px; }
+    select.correct, input.correct { border-color:#4E9A6A; background:#F3FBF5; }
+    select.wrong, input.wrong { border-color:var(--level); background:#FBF0EC; }
+    .expr-list { font-size:13px; color:#888; margin-top:8px; line-height:1.9; }
+    .expr-list span.on { color:#2E7D52; font-weight:700; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../c1/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Esteja <em>e</em> estiver</h1>
+  <div class="hero-sub">Presente e futuro do subjuntivo do verbo estar: conjugação, usos e prática a partir de um comunicado profissional.</div>
+  <div class="hero-tags"><span class="hero-tag">Subjuntivo · estar</span><span class="hero-tag">esteja × estiver</span><span class="hero-tag">se × caso</span></div>
+  <div class="hero-note">📖 Leia o texto e pratique</div>
+</div>
+
+<div class="main">
+  <p style="font-size:15px;">Nesta ficha curta, você vai praticar duas formas do verbo <i>estar</i> que costumam causar dúvida: <b>esteja</b> e <b>estiver</b>. Leia o texto, observe as formas em destaque e depois faça os exercícios.</p>
+  <section>
+    <div class="sec-label">Leia o texto</div>
+    <p style="font-size:13.5px;color:#888;">Observe as formas em destaque. Qual delas aparece depois de <i>quando, se, assim que, enquanto</i>? E depois de <i>embora, caso, onde quer que</i>?</p>
+    <div class="info-box" style="line-height:1.9;">
+      <p style="font-size:12.5px;color:#999;margin-bottom:10px;">[Texto elaborado para fins didáticos]</p>
+      <p><b>Assunto:</b> Trabalho híbrido — o que muda a partir de segunda-feira</p><br>
+      <p>Prezados colegas,</p><br>
+      <p>A partir de segunda-feira, o trabalho passa a ser híbrido. Quem <b style="color:var(--level);">estiver</b> em um projeto crítico poderá combinar os dias de presença com a gestão. Embora a empresa não <b style="color:var(--level);">esteja</b> exigindo presença integral, é importante que a equipe <b style="color:var(--level);">esteja</b> reunida às quartas-feiras.</p><br>
+      <p>Caso você <b style="color:var(--level);">esteja</b> com algum impedimento de saúde ou familiar, avise o RH com antecedência. Assim que o seu pedido <b style="color:var(--level);">estiver</b> aprovado, você receberá uma confirmação por e-mail.</p><br>
+      <p>Quando <b style="color:var(--level);">estiver</b> no escritório, reserve a sua mesa pelo aplicativo. Se a sala <b style="color:var(--level);">estiver</b> cheia, procure a recepção. Onde quer que você <b style="color:var(--level);">esteja</b> trabalhando, mantenha a agenda atualizada, para que todos saibam se você <i>está</i> disponível.</p><br>
+      <p>Talvez ainda haja dúvidas. Enquanto o manual não <b style="color:var(--level);">estiver</b> pronto, escreva para o RH.</p><br>
+      <p>Atenciosamente,<br>Equipe de Pessoas</p>
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Conjugação</div>
+    <table class="grammar">
+      <tr><th>Pessoa</th><th>Presente do indicativo<br><span style="font-weight:300;">(fato)</span></th><th>Presente do subjuntivo<br><span style="font-weight:300;">esteja…</span></th><th>Futuro do subjuntivo<br><span style="font-weight:300;">estiver…</span></th></tr>
+      <tr><td>eu</td><td>estou</td><td><b>esteja</b></td><td><b>estiver</b></td></tr>
+      <tr><td>tu <span style="font-weight:300;">(regional)</span></td><td>estás</td><td><b>estejas</b></td><td><b>estiveres</b></td></tr>
+      <tr><td>ele / ela / você / a gente</td><td>está</td><td><b>esteja</b></td><td><b>estiver</b></td></tr>
+      <tr><td>nós</td><td>estamos</td><td><b>estejamos</b></td><td><b>estivermos</b></td></tr>
+      <tr><td>eles / elas / vocês</td><td>estão</td><td><b>estejam</b></td><td><b>estiverem</b></td></tr>
+    </table>
+    <p style="font-size:13px;color:#888;margin-top:10px;"><i>A gente:</i> na fala do dia a dia, <i>a gente</i> substitui <i>nós</i> e usa a mesma forma de <i>ele / você</i>: <i>Quando a gente <b>estiver</b> pronto, a gente avisa.</i> <i>Espero que a gente <b>esteja</b> de acordo.</i><br><br><i>Como se forma:</i> o presente do subjuntivo vem da 1ª pessoa do presente (<i>estou</i> → <i>esteja</i>), mas o verbo <i>estar</i> é irregular e ganha <b>-j-</b>. O futuro do subjuntivo vem do pretérito perfeito, na forma de <i>eles</i> (<i>estiveram</i> → <b>estiver</b>).</p>
+  </section>
+  <section>
+    <div class="sec-label">Quando usar cada uma?</div>
+    <div class="grammar-box">
+      <b>Esteja</b> (presente do subjuntivo) aparece depois de expressões que indicam desejo, dúvida, opinião ou concessão:<br>
+      <i>É importante que a equipe <b>esteja</b> reunida.</i> · <i>Talvez ele <b>esteja</b> em casa.</i> · <i>Embora ela <b>esteja</b> cansada, continua trabalhando.</i> · <i>Onde quer que você <b>esteja</b>, me escreva.</i> · <i>Caso você <b>esteja</b> doente, avise.</i>
+    </div>
+    <div class="grammar-box">
+      <b>Estiver</b> (futuro do subjuntivo) aparece depois de <i>se, quando, assim que, enquanto, quem, sempre que</i>, quando se fala de uma situação possível ou futura:<br>
+      <i>Se a sala <b>estiver</b> cheia, procure a recepção.</i> · <i>Quando <b>estiver</b> no escritório, reserve a mesa.</i> · <i>Quem <b>estiver</b> interessado deve se inscrever.</i> · <i>Enquanto o manual não <b>estiver</b> pronto, escreva para o RH.</i>
+    </div>
+    <table class="grammar">
+      <tr><th>Se / quando / enquanto…</th><th>Caso / talvez / embora…</th></tr>
+      <tr><td>Se você <b>estiver</b> doente, avise o RH.</td><td>Caso você <b>esteja</b> doente, avise o RH.</td></tr>
+      <tr><td>Quando ela <b>estiver</b> livre, ligue para ela.</td><td>Talvez ela <b>esteja</b> livre agora.</td></tr>
+    </table>
+    <p style="font-size:13px;color:#888;margin-top:10px;"><i>Atenção:</i> <b>caso</b> pede o presente do subjuntivo (<i>caso esteja</i>), enquanto <b>se</b> pede o futuro (<i>se estiver</i>). Para uma situação imaginária no presente, o verbo muda de novo: <i>se eu <b>estivesse</b> lá…</i> (imperfeito do subjuntivo).</p>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 1 — Compreensão</div>
+    <p style="font-size:13.5px;color:#888;">Leia o texto de novo e escolha <b>Verdadeiro</b> ou <b>Falso</b>.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>A empresa exige presença integral no escritório. &nbsp; <select class="inl" id="c1e0-1"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A equipe deve estar reunida às quartas-feiras. &nbsp; <select class="inl" id="c1e0-2"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Depois que o pedido for aprovado, o funcionário recebe uma confirmação por e-mail. &nbsp; <select class="inl" id="c1e0-3"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>As mesas são reservadas pelo RH, por telefone. &nbsp; <select class="inl" id="c1e0-4"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <button class="check-btn" onclick="checkMC(c1e0,'c1e0-result')">✓ Conferir respostas</button>
+    <div id="c1e0-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 2 — Esteja ou estiver?</div>
+    <p style="font-size:13.5px;color:#888;">Escolha a forma correta. Cada item pede a pessoa certa: eu, nós, eles…</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Quando você <select class="inl" id="c1e1-1"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> no escritório, reserve uma mesa.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Embora ele <select class="inl" id="c1e1-2"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> cansado, terminou o relatório.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>É importante que todos <select class="inl" id="c1e1-3"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> presentes na reunião.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Se vocês <select class="inl" id="c1e1-4"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> com dúvidas, perguntem.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Espero que nós <select class="inl" id="c1e1-5"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> prontos até sexta.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>Assim que nós <select class="inl" id="c1e1-6"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> de acordo, assinamos o contrato.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>Onde quer que você <select class="inl" id="c1e1-7"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select>, me mande notícias.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>Quem <select class="inl" id="c1e1-8"><option value="">—</option><option value="esteja">esteja</option><option value="estejam">estejam</option><option value="estejamos">estejamos</option><option value="estiver">estiver</option><option value="estiverem">estiverem</option><option value="estivermos">estivermos</option></select> interessado deve se inscrever até hoje.</div></div>
+    <button class="check-btn" onclick="checkMC(c1e1,'c1e1-result')">✓ Conferir respostas</button>
+    <div id="c1e1-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 3 — Conjugue o verbo</div>
+    <p style="font-size:13.5px;color:#888;">Escreva o verbo <i>estar</i> no presente ou no futuro do subjuntivo.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Talvez eles não (estar) ______ em casa agora.</div><input type="text" id="c1e2-1" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Enquanto ela (estar) ______ viajando, eu cuido de tudo.</div><input type="text" id="c1e2-2" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Mesmo que tu (estar) ______ ocupado, preciso falar contigo.</div><input type="text" id="c1e2-3" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Quando vocês (estar) ______ prontos, avisem.</div><input type="text" id="c1e2-4" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Não creio que nós (estar) ______ preparados.</div><input type="text" id="c1e2-5" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>Se eu (estar) ______ atrasada, comecem sem mim.</div><input type="text" id="c1e2-6" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>Sempre que a gente (estar) ______ junto, a conversa rende.</div><input type="text" id="c1e2-7" placeholder="Escreva a forma do verbo..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>Por mais que eles (estar) ______ cansados, não desistem.</div><input type="text" id="c1e2-8" placeholder="Escreva a forma do verbo..."></div>
+    <button class="check-btn" onclick="checkMC(c1e2,'c1e2-result')">✓ Conferir respostas</button>
+    <div id="c1e2-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 4 — Se ou caso?</div>
+    <p style="font-size:13.5px;color:#888;">Reescreva as frases trocando a palavra indicada. Atenção ao verbo!</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Se você estiver doente, avise o RH. <span style="color:#888;font-size:13px;">(reescreva com <b>caso</b>)</span></div><input type="text" id="c1e3-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Se a sala estiver cheia, procure a recepção. <span style="color:#888;font-size:13px;">(reescreva com <b>caso</b>)</span></div><input type="text" id="c1e3-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Caso ele esteja atrasado, comece sem ele. <span style="color:#888;font-size:13px;">(reescreva com <b>se</b>)</span></div><input type="text" id="c1e3-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Caso vocês estejam de acordo, assinem aqui. <span style="color:#888;font-size:13px;">(reescreva com <b>se</b>)</span></div><input type="text" id="c1e3-4" placeholder="Escreva a frase completa..."></div>
+    <button class="check-btn" onclick="checkMC(c1e3,'c1e3-result')">✓ Conferir respostas</button>
+    <div id="c1e3-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 5 — Produção escrita</div>
+    <p style="font-size:13.5px;color:#888;">Você vai tirar férias e um colega vai assumir o seu trabalho. Escreva um recado com orientações (6 a 8 frases). Use pelo menos duas frases com <i>esteja / estejam</i> e duas com <i>estiver / estiverem</i>. Exemplo: <i>Enquanto eu estiver fora, escreva para a Marina.</i></p>
+    <div class="q"><textarea id="c1-write" style="min-height:200px;" placeholder="Olá! Enquanto eu estiver de férias…" oninput="wc('c1-write','c1-wc',0,0);exprCheck('c1-write','c1-expr',EXPR_c1_write);"></textarea><div id="c1-wc" style="font-size:12.5px;color:#999;margin-top:6px;">0 palavras</div><div id="c1-expr" class="expr-list"></div></div>
+
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Texto elaborado para fins didáticos (BPHUB).</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+var c1e0 = [
+  {"id": "c1e0-1", "key": "Falso", "show": "A empresa exige presença integral no escritório. → <b>Falso</b>", "note": "A empresa não exige presença integral; é importante estar reunida só às quartas."},
+  {"id": "c1e0-2", "key": "Verdadeiro", "show": "A equipe deve estar reunida às quartas-feiras. → <b>Verdadeiro</b>", "note": "“É importante que a equipe esteja reunida às quartas-feiras.”"},
+  {"id": "c1e0-3", "key": "Verdadeiro", "show": "Depois que o pedido for aprovado, o funcionário recebe uma confirmação por e-mail. → <b>Verdadeiro</b>", "note": "“Assim que o seu pedido estiver aprovado…”"},
+  {"id": "c1e0-4", "key": "Falso", "show": "As mesas são reservadas pelo RH, por telefone. → <b>Falso</b>", "note": "A reserva é feita pelo aplicativo."}
+];
+var c1e1 = [
+  {"id": "c1e1-1", "key": "estiver", "show": "Quando você <b>estiver</b> no escritório…", "note": "Quando + situação futura → futuro do subjuntivo."},
+  {"id": "c1e1-2", "key": "esteja", "show": "Embora ele <b>esteja</b> cansado…", "note": "Embora → presente do subjuntivo."},
+  {"id": "c1e1-3", "key": "estejam", "show": "É importante que todos <b>estejam</b> presentes…", "note": "Opinião + que → presente do subjuntivo (3ª pessoa do plural)."},
+  {"id": "c1e1-4", "key": "estiverem", "show": "Se vocês <b>estiverem</b> com dúvidas…", "note": "Se + situação possível → futuro do subjuntivo."},
+  {"id": "c1e1-5", "key": "estejamos", "show": "Espero que nós <b>estejamos</b> prontos…", "note": "Esperar que → presente do subjuntivo."},
+  {"id": "c1e1-6", "key": "estivermos", "show": "Assim que nós <b>estivermos</b> de acordo…", "note": "Assim que + situação futura → futuro do subjuntivo."},
+  {"id": "c1e1-7", "key": "esteja", "show": "Onde quer que você <b>esteja</b>…", "note": "Onde quer que → presente do subjuntivo."},
+  {"id": "c1e1-8", "key": "estiver", "show": "Quem <b>estiver</b> interessado…", "note": "Quem (indefinido) + situação possível → futuro do subjuntivo."}
+];
+var c1e2 = [
+  {"id": "c1e2-1", "key": ["estejam"], "show": "Talvez eles não <b>estejam</b> em casa agora."},
+  {"id": "c1e2-2", "key": ["estiver"], "show": "Enquanto ela <b>estiver</b> viajando, eu cuido de tudo."},
+  {"id": "c1e2-3", "key": ["estejas"], "show": "Mesmo que tu <b>estejas</b> ocupado…"},
+  {"id": "c1e2-4", "key": ["estiverem"], "show": "Quando vocês <b>estiverem</b> prontos, avisem."},
+  {"id": "c1e2-5", "key": ["estejamos"], "show": "Não creio que nós <b>estejamos</b> preparados."},
+  {"id": "c1e2-6", "key": ["estiver"], "show": "Se eu <b>estiver</b> atrasada, comecem sem mim."},
+  {"id": "c1e2-7", "key": ["estiver"], "show": "Sempre que a gente <b>estiver</b> junto…"},
+  {"id": "c1e2-8", "key": ["estejam"], "show": "Por mais que eles <b>estejam</b> cansados…"}
+];
+var c1e3 = [
+  {"id": "c1e3-1", "key": "Caso você esteja doente, avise o RH.", "show": "Caso você esteja doente, avise o RH.", "note": "Caso → presente do subjuntivo."},
+  {"id": "c1e3-2", "key": "Caso a sala esteja cheia, procure a recepção.", "show": "Caso a sala esteja cheia, procure a recepção.", "note": "Caso → presente do subjuntivo."},
+  {"id": "c1e3-3", "key": "Se ele estiver atrasado, comece sem ele.", "show": "Se ele estiver atrasado, comece sem ele.", "note": "Se → futuro do subjuntivo."},
+  {"id": "c1e3-4", "key": "Se vocês estiverem de acordo, assinem aqui.", "show": "Se vocês estiverem de acordo, assinem aqui.", "note": "Se → futuro do subjuntivo."}
+];
+var EXPR_c1_write = [["esteja · estejas · estejamos · estejam", ["esteja", "estejas", "estejamos", "estejam"]], ["estiver · estiveres · estivermos · estiverem", ["estiver"]]];
+
+function checkMC(items, rid) {
+  var html='', ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id); var v=el.value;
+    var keys=Array.isArray(a.key)?a.key:[a.key];
+    var ok=v.trim().length>0 && keys.some(function(k){return norm(v)===norm(k);});
+    el.classList.toggle('correct',ok); el.classList.toggle('wrong',v.trim().length>0 && !ok);
+    if(ok) ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '+(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+(a.note?'<br><span style="color:#777;font-size:12.5px;">'+a.note+'</span>':'')+'</div>';
+  });
+  var res=document.getElementById(rid); var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ Todas as '+items.length+' corretas!':ok_n+' de '+items.length+' corretas — modelo:')+'</div>'+html;
+  res.style.display='block';
+}
+function exprCheck(tid, bid, exprs) {
+  var t=norm(document.getElementById(tid).value), n=0, h='';
+  exprs.forEach(function(e){ var on=e[1].some(function(s){return t.indexOf(norm(s))>-1;}); if(on) n++; h+='<span class="'+(on?'on':'')+'">'+(on?'✓ ':'○ ')+e[0]+'</span><br>'; });
+  document.getElementById(bid).innerHTML=h;
+}
+function wc(tid,cid,lo,hi){ var t=document.getElementById(tid).value.trim(); var n=t?t.split(/\s+/).length:0; var el=document.getElementById(cid); el.textContent=n+' palavras'+(lo?' (meta: '+lo+'–'+hi+')':''); el.style.color=(lo&&n>=lo&&n<=hi)?'#2E7D52':'#999'; }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['c1e0-1','c1e0-2','c1e0-3','c1e0-4','c1e1-1','c1e1-2','c1e1-3','c1e1-4','c1e1-5','c1e1-6','c1e1-7','c1e1-8','c1e2-1','c1e2-2','c1e2-3','c1e2-4','c1e2-5','c1e2-6','c1e2-7','c1e2-8','c1e3-1','c1e3-2','c1e3-3','c1e3-4'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
