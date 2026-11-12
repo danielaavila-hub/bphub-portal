@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como Eu Quero — Kid Abelha | Brazilian Portuguese Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --giz:#FCF5EB;--baunilha:#FDE7C4;--musgo:#3C3C21;--floresta:#4E551D;
+    --erva-doce:#A6B28A;--terracota:#D36D29;--telha:#A1441D;
+    --ouro:#FFB94A;--rosa-cha:#FFD8C5;--goiaba:#FCA290;--pitomba:#967E63;
+    --nanquim:#2B2B1E;--light-gray:#E8E4DE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--giz);color:var(--nanquim);line-height:1.6}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid #E8E4DE;background:var(--giz);position:sticky;top:0;z-index:50}
+  .topbar-logo img{height:40px;width:auto}
+  .topbar-back{font-size:12px;color:#aaa;text-decoration:none;transition:color .2s}
+  .topbar-back:hover{color:var(--pitomba)}
+  .topbar-right{display:flex;align-items:center;gap:10px}
+  .topbar-level-badge{font-size:11px;font-weight:800;letter-spacing:.08em;background:var(--musgo);color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase}
+  .level-bar{padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:var(--erva-doce);color:#fff}
+  .badge{border-radius:4px;padding:2px 8px;font-size:11px;font-weight:800;letter-spacing:.1em;background:rgba(255,255,255,.2);color:#fff}
+  .container{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .intro-card{padding:28px 32px}
+  .intro-card h1{font-family:'Trirong',serif;font-size:1.9rem;color:var(--musgo);font-weight:700;margin-bottom:6px}
+  .fonte{font-size:.78rem;color:var(--pitomba);margin-top:4px}
+  .section-label{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .card-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:14px}
+  .instr{font-size:.88rem;color:var(--pitomba);margin-bottom:14px;line-height:1.55}
+  .vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+  .vocab-table th{background:var(--musgo);color:#fff;padding:7px 12px;text-align:left;font-weight:700}
+  .vocab-table td{padding:7px 12px;border-bottom:1px solid var(--light-gray)}
+  .vocab-table tr:last-child td{border-bottom:none}
+  .vocab-table tr:nth-child(even) td{background:var(--baunilha)}
+  .vocab-pt{font-weight:700;color:var(--musgo);white-space:nowrap}
+  .gram-box{background:var(--baunilha);border-left:4px solid var(--terracota);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .gram-box strong{color:var(--telha)}
+  .gram-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+  .gram-box th{background:var(--terracota);color:#fff;padding:6px 10px;text-align:left;font-weight:700}
+  .gram-box td{padding:6px 10px;border-bottom:1px solid rgba(0,0,0,.07)}
+  .gram-box tr:last-child td{border-bottom:none}
+  .gram-box tr:nth-child(even) td{background:rgba(255,255,255,.5)}
+  .cult-box{background:#f0f4e8;border-left:4px solid var(--erva-doce);border-radius:0 8px 8px 0;padding:14px 18px;margin:12px 0;font-size:.88rem}
+  .cult-box strong{color:var(--musgo)}
+  .ex-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .ex-num{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ex-title{font-weight:800;font-size:1rem;color:var(--musgo);margin-bottom:6px}
+  .ex-instr{font-size:.85rem;color:var(--pitomba);margin-bottom:16px;line-height:1.5}
+  .tf-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem}
+  .tf-item:last-child{border-bottom:none}
+  .tf-item span{flex:1;line-height:1.5}
+  .tf-btn{border:1.5px solid var(--light-gray);background:#fff;border-radius:5px;padding:4px 10px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .tf-btn:hover{border-color:var(--terracota);color:var(--terracota)}
+  .tf-btn.sel-T{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .tf-btn.sel-F{background:var(--telha);color:#fff;border-color:var(--telha)}
+  .tf-btn.right{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .tf-btn.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .gap-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--light-gray);font-size:.93rem;line-height:1.8}
+  .gap-row:last-of-type{border-bottom:none}
+  .gap-num{font-weight:700;color:var(--terracota);min-width:20px}
+  .gap-input{border:none;border-bottom:2px solid var(--pitomba);background:transparent;font-family:'Manrope',sans-serif;font-size:.93rem;color:var(--nanquim);padding:1px 4px;width:110px;outline:none;transition:border-color .2s}
+  .gap-input:focus{border-color:var(--terracota)}
+  .gap-input.ok{border-color:#2e7d32;color:#2e7d32}
+  .gap-input.err{border-color:#c62828;color:#c62828}
+  textarea.prod{width:100%;border:1.5px solid var(--light-gray);border-radius:6px;font-family:'Manrope',sans-serif;font-size:.9rem;padding:10px 12px;color:var(--nanquim);background:var(--baunilha);resize:vertical;min-height:80px;margin-top:4px;outline:none}
+  textarea.prod:focus{border-color:var(--terracota)}
+  .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{border:none;border-radius:6px;padding:9px 20px;font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-check{background:var(--terracota);color:#fff}
+  .btn-reset{background:var(--light-gray);color:var(--nanquim)}
+  .result-msg{font-size:.85rem;font-weight:700;margin-top:10px;padding:6px 12px;border-radius:5px;display:none}
+  .result-msg.show{display:block}
+  .result-ok{background:#e8f5e9;color:#2e7d32}
+  .result-err{background:#ffebee;color:#c62828}
+  .see-answers-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:transparent;border:1.5px solid var(--terracota);color:var(--terracota);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:background .2s,color .2s}
+  .see-answers-btn:hover{background:var(--terracota);color:#fff}
+  .model-answers-block{display:none;margin-top:14px}
+  .model-answers-block.visible{display:block}
+  .model-answer-item{margin-bottom:8px;background:var(--baunilha);border-left:3px solid var(--terracota);border-radius:0 6px 6px 0;padding:8px 12px}
+  .model-answer-item:last-child{margin-bottom:0}
+  .model-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--telha);margin-bottom:2px}
+  .model-answer-item p{font-size:.85rem;color:var(--nanquim);line-height:1.6;margin:0}
+
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:6px 8px;border-radius:6px;font-size:.92rem;cursor:pointer}
+  .opt input{margin-top:5px}
+  .opt.right{background:#e8f5e9}.opt.wrong{background:#ffebee}
+  .q-label{font-size:.9rem;font-weight:700;color:var(--musgo);margin:14px 0 4px}
+  .tf-note{display:none;font-size:.78rem;color:var(--pitomba);width:100%;padding-left:92px;margin-top:-4px}
+  .tf-note.show{display:block}
+  .gap-input.wide{width:150px}
+  .chk-line{font-size:.88rem;margin:6px 0;display:flex;gap:8px;align-items:flex-start}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .chip{border:1.5px solid var(--light-gray);background:#fff;border-radius:20px;padding:6px 16px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif}
+  .chip.sel{background:var(--musgo);color:#fff;border-color:var(--musgo)}
+  .chip.right{background:#2e7d32;color:#fff;border-color:#2e7d32}.chip.wrong{background:#c62828;color:#fff;border-color:#c62828}
+  .oa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin:10px 0}
+  .oa-grid div{background:var(--baunilha);border-radius:8px;padding:10px;text-align:center;font-weight:800}
+  .oa-grid select{display:block;width:100%;margin-top:8px;border:1.5px solid var(--light-gray);border-radius:6px;padding:6px;font-family:'Manrope',sans-serif}
+  .oa-grid select.ok{border-color:#2e7d32;background:#e8f5e9}.oa-grid select.err{border-color:#c62828;background:#ffebee}
+  .res-list div{margin:4px 0;font-weight:500}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="../musicas/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB"></a>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level-badge">B1</span>
+    <a href="../musicas/index.html" class="topbar-back">&#8592; Músicas</a>
+  </div>
+</div>
+
+
+<div class="level-bar">
+  <span class="badge">Rock brasileiro</span>
+  <span class="badge">Kid Abelha</span>
+  <span class="badge">1984</span>
+</div>
+
+<div class="container">
+
+  <div class="card intro-card">
+    <h1>Como Eu Quero</h1>
+    <p class="fonte">Kid Abelha · do álbum <em>Seu Espião</em>, 1984</p>
+    <p style="margin-top:12px;font-size:.9rem;line-height:1.65;">Nesta ficha, você vai ouvir uma das músicas mais famosas do rock brasileiro dos anos 1980 e praticar o <strong>imperativo da conversa</strong>: as ordens que a gente dá no dia a dia, como <em>tira</em>, <em>diz</em> e <em>vem</em>.</p>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Ouça a música</p>
+    <p class="card-title">Como Eu Quero — Kid Abelha</p>
+    <p class="instr">Ouça a canção inteira uma vez, sem parar, e depois faça a Atividade 1.</p>
+    <div style="margin:14px 0;border-radius:10px;overflow:hidden;aspect-ratio:16/9">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/mWynalx323E"
+        title="Como Eu Quero — Kid Abelha" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen style="display:block"></iframe>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Contexto cultural e linguístico</p>
+    <div class="cult-box">
+      <strong>🎸 Nota cultural</strong><br>
+      O Kid Abelha foi uma das bandas mais populares do rock brasileiro dos anos 1980, a década de grupos como Legião Urbana, Titãs e Paralamas do Sucesso. A banda era do Rio de Janeiro e, no começo, se chamava Kid Abelha e os Abóboras Selvagens. A voz era de Paula Toller.<br><br>
+      “Como Eu Quero” foi composta por Paula Toller e Leoni, que também tocava na banda, e saiu em 1984 no primeiro disco do grupo, <em>Seu Espião</em>. A canção chegou ao primeiro lugar nas paradas, ganhou disco de ouro e virou uma das músicas mais conhecidas do Kid Abelha.
+    </div>
+    <div class="cult-box">
+      <strong>🗣️ Nota linguística</strong><br>
+      Na canção, você vai ouvir formas típicas da fala informal: <strong>cê</strong> (= você), <strong>tá</strong> (= está), <strong>pra</strong> (= para).<br>
+      <em>In the song, you’ll hear typical informal spoken forms: <strong>cê</strong> (= você), <strong>tá</strong> (= está), <strong>pra</strong> (= para).</em>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Vocabulário</p>
+    <p class="card-title">Palavras e expressões da música</p>
+    <table class="vocab-table">
+      <thead><tr><th>Português</th><th>Meaning</th></tr></thead>
+      <tbody><tr><td class="vocab-pt">arte final</td><td>final artwork (the finished version, ready to print)</td></tr><tr><td class="vocab-pt">bem melhor</td><td>much better</td></tr><tr><td class="vocab-pt">bermuda</td><td>shorts (knee-length)</td></tr><tr><td class="vocab-pt">cada um por si</td><td>every man for himself</td></tr><tr><td class="vocab-pt">cara de mistério</td><td>a mysterious look</td></tr><tr><td class="vocab-pt">cilada</td><td>trap, setup</td></tr><tr><td class="vocab-pt">conquistar (alguém)</td><td>to win (someone) over</td></tr><tr><td class="vocab-pt">de mal a pior</td><td>from bad to worse</td></tr><tr><td class="vocab-pt">domínio</td><td>control, domain</td></tr><tr><td class="vocab-pt">ficar mudo / muda</td><td>to go quiet, to say nothing</td></tr><tr><td class="vocab-pt">mundo particular</td><td>private world</td></tr><tr><td class="vocab-pt">não tem jeito</td><td>there’s no way out</td></tr><tr><td class="vocab-pt">rascunho</td><td>draft, rough sketch</td></tr><tr><td class="vocab-pt">retoque</td><td>touch-up</td></tr><tr><td class="vocab-pt">sério / séria</td><td>serious</td></tr><tr><td class="vocab-pt">solo de guitarra</td><td>guitar solo</td></tr><tr><td class="vocab-pt">trama</td><td>plot, scheme</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Atividade 1</p>
+    <p class="ex-title">Primeira escuta</p>
+    <p class="ex-instr">Ouça a canção uma vez, do começo ao fim, sem pausar. Depois, marque a alternativa certa.</p>
+    <p class="q-label">1. Quem fala com quem?</p>
+    <label class="opt" id="a1o-0-0"><input type="radio" name="a1q0" value="0"> <span>a) Uma mulher fala com as amigas sobre um homem.</span></label>
+    <label class="opt" id="a1o-0-1"><input type="radio" name="a1q0" value="1"> <span>b) Uma mulher fala diretamente com um homem.</span></label>
+    <label class="opt" id="a1o-0-2"><input type="radio" name="a1q0" value="2"> <span>c) Um homem fala com a namorada.</span></label>
+    <p class="q-label">2. O que ela quer?</p>
+    <label class="opt" id="a1o-1-0"><input type="radio" name="a1q1" value="0"> <span>a) Ela gosta do homem do jeito que ele é.</span></label>
+    <label class="opt" id="a1o-1-1"><input type="radio" name="a1q1" value="1"> <span>b) Ela quer mudar o homem por completo.</span></label>
+    <label class="opt" id="a1o-1-2"><input type="radio" name="a1q1" value="2"> <span>c) Ela quer terminar com o homem.</span></label>
+    <p class="q-label">3. Segundo ela, o homem tem saída?</p>
+    <label class="opt" id="a1o-2-0"><input type="radio" name="a1q2" value="0"> <span>a) Sim, ele pode ir embora a qualquer momento.</span></label>
+    <label class="opt" id="a1o-2-1"><input type="radio" name="a1q2" value="1"> <span>b) Não, ele não tem saída.</span></label>
+    <label class="opt" id="a1o-2-2"><input type="radio" name="a1q2" value="2"> <span>c) Sim, mas só depois de mudar.</span></label>
+
+    <div class="btn-row"><button class="btn btn-check" onclick="checkA1()">Verificar respostas</button></div>
+    <div id="a1-msg" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Atividade 2</p>
+    <p class="ex-title">Segunda escuta</p>
+    <p class="ex-instr">Leia as frases abaixo. Depois, ouça a canção mais uma vez. Você pode pausar. Marque <strong>V</strong> (verdadeiro) ou <strong>F</strong> (falso).</p>
+    <div id="tf-area">
+      <div class="tf-item" data-id="1">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,1,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,1,'F')">F</button>
+        </div>
+        <span>Ela não gosta da roupa que ele está usando.</span>
+        <div class="tf-note" id="tfn-1">Ela quer trocar a roupa dele.</div>
+      </div>
+      <div class="tf-item" data-id="2">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,2,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,2,'F')">F</button>
+        </div>
+        <span>Para ela, ele precisa ser mais sério.</span>
+        <div class="tf-note" id="tfn-2"></div>
+      </div>
+      <div class="tf-item" data-id="3">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,3,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,3,'F')">F</button>
+        </div>
+        <span>Os solos de guitarra dele conquistam a mulher.</span>
+        <div class="tf-note" id="tfn-3">Ela diz que os solos de guitarra não funcionam com ela.</div>
+      </div>
+      <div class="tf-item" data-id="4">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,4,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,4,'F')">F</button>
+        </div>
+        <span>Para ela, ele precisa só de pequenas mudanças.</span>
+        <div class="tf-note" id="tfn-4">Para ela, a mudança precisa ser total.</div>
+      </div>
+      <div class="tf-item" data-id="5">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,5,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,5,'F')">F</button>
+        </div>
+        <span>Ela compara o homem a um desenho que ainda não está pronto.</span>
+        <div class="tf-note" id="tfn-5">Rascunho × arte final.</div>
+      </div>
+      <div class="tf-item" data-id="6">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,6,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,6,'F')">F</button>
+        </div>
+        <span>Longe dela, a vida dele fica melhor.</span>
+        <div class="tf-note" id="tfn-6">Longe dela, ele piora.</div>
+      </div>
+      <div class="tf-item" data-id="7">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,7,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,7,'F')">F</button>
+        </div>
+        <span>Ela se oferece para ensinar o homem a ser melhor.</span>
+        <div class="tf-note" id="tfn-7"></div>
+      </div>
+      <div class="tf-item" data-id="8">
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          <button class="tf-btn" data-val="T" onclick="selectTF(this,8,'T')">V</button>
+          <button class="tf-btn" data-val="F" onclick="selectTF(this,8,'F')">F</button>
+        </div>
+        <span>Ela pede para ele ficar em silêncio.</span>
+        <div class="tf-note" id="tfn-8">É ela quem fica em silêncio: ela pede para ele dizer a ela “Fica quieta!”.</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTF()">Verificar respostas</button>
+      <button class="btn btn-reset" onclick="resetTF()">Refazer</button>
+    </div>
+    <div id="tf-msg" class="result-msg"></div>
+  </div>
+
+  <div class="card">
+    <p class="section-label">Gramática</p>
+    <p class="card-title">O imperativo da conversa</p>
+    <div class="gram-box">
+      Na canção, a mulher dá ordens com <strong>tira</strong>, <strong>diz</strong> e <strong>vem</strong>. Ela trata o homem por <em>você</em>, mas não usa <em>tire</em>, <em>diga</em>, <em>venha</em>. Na fala informal de muitas regiões do Brasil, como no Rio de Janeiro, o imperativo tem <strong>a mesma forma do presente com ele/você</strong>.
+      <table>
+        <thead><tr><th>Presente (ele/você)</th><th>Imperativo da conversa</th><th>Imperativo formal</th></tr></thead>
+        <tbody>
+          <tr><td>ele tira</td><td><strong>Tira!</strong></td><td>Tire!</td></tr>
+          <tr><td>ele diz</td><td><strong>Diz!</strong></td><td>Diga!</td></tr>
+          <tr><td>ele vem</td><td><strong>Vem!</strong></td><td>Venha!</td></tr>
+        </tbody>
+      </table>
+      <br>Formal, com verbos regulares: -ar → <strong>-e</strong> (tirar → tire); -er/-ir → <strong>-a</strong> (escolher → escolha; abrir → abra).
+      <br><br><strong>Quando usar</strong>
+      <ul style="margin:6px 0 0 20px;">
+        <li><strong>Conversa:</strong> com amigos, família, namorado(a); em conversas e mensagens informais.</li>
+        <li><strong>Formal:</strong> em placas, anúncios, sites e instruções, como as desta ficha (<em>ouça, marque, complete</em>), e com desconhecidos em situações formais. Na fala de algumas regiões, como o Nordeste, essa forma também é comum no dia a dia.</li>
+      </ul>
+      <br><strong>Atenção</strong>
+      <ul style="margin:6px 0 0 20px;">
+        <li>ser → <strong>Seja!</strong>, também na conversa: <em>Seja sincero!</em></li>
+        <li>estar → na conversa, usamos <strong>ficar</strong>: <em>Fica tranquilo!</em></li>
+        <li><strong>Ordem ou afirmação?</strong> A forma é a mesma. Na ordem, normalmente não há sujeito antes do verbo: <em>Vai ao mercado!</em> (ordem) × <em>Você vai ao mercado.</em> (afirmação)</li>
+        <li>Na negativa também: <em>Não tira!</em> (conversa) × <em>Não tire!</em> (formal)</li>
+      </ul>
+      <br><em style="font-size:.82rem;">In the song, the singer gives orders with forms like tira, diz, and vem, even though she addresses the man as você. In informal speech in many parts of Brazil, the imperative uses the same form as the present tense for ele/você. The “textbook” forms (tire, diga, venha) are used in signs, ads, websites, instructions, and formal situations, and are also common in everyday speech in some regions, such as the Northeast. Exceptions: ser → seja; estar → in conversation, use ficar. To tell an order from a statement, look for a subject: an order usually has none.</em>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Atividade 3</p>
+    <p class="ex-title">O retoque total</p>
+    <p class="ex-instr">A mulher da canção começou o “retoque total” do namorado. Complete o que ela diz a ele. Use o <strong>imperativo da conversa</strong> do verbo entre parênteses. Atenção: um dos verbos é exceção (veja o quadro de gramática).</p>
+    <div class="gap-row"><span class="gap-num">1.</span><input class="gap-input" id="g3-1" type="text"><span>(trocar) essa camiseta velha por uma camisa nova.</span></div><div class="gap-row"><span class="gap-num">2.</span><input class="gap-input" id="g3-2" type="text"><span>(pôr) o sapato preto, não o tênis.</span></div><div class="gap-row"><span class="gap-num">3.</span><input class="gap-input" id="g3-3" type="text"><span>(cortar) esse cabelo antes da festa.</span></div><div class="gap-row"><span class="gap-num">4.</span><input class="gap-input" id="g3-4" type="text"><span>(ir) comigo ao shopping no sábado.</span></div><div class="gap-row"><span class="gap-num">5.</span><input class="gap-input" id="g3-5" type="text"><span>(desligar) essa guitarra e</span><input class="gap-input" id="g3-6" type="text"><span>(escutar) o que eu digo.</span></div><div class="gap-row"><span class="gap-num">6.</span><input class="gap-input" id="g3-7" type="text"><span>(ter) paciência: o retoque ainda não acabou.</span></div><div class="gap-row"><span class="gap-num">7.</span><input class="gap-input" id="g3-8" type="text"><span>(ser) mais romântico!</span></div><div class="gap-row"><span class="gap-num">8.</span><input class="gap-input" id="g3-9" type="text"><span>(ler) este livro: é sobre boas maneiras.</span></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkGap('g3',g3Key,'g3-msg')">Verificar respostas</button><button class="btn btn-reset" onclick="resetGap(g3Key,'g3-msg')">Refazer</button></div>
+    <div id="g3-msg" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Atividade 4</p>
+    <p class="ex-title">Na loja: placa ou conversa?</p>
+    <p class="ex-instr">No sábado, o casal vai a uma loja de roupas. Veja quem fala ou onde está cada frase. Complete com o imperativo da conversa (ex.: <em>tira</em>) ou com o imperativo formal (ex.: <em>tire</em>). Todos os verbos são regulares.</p>
+    <div class="gap-row"><span class="gap-num">1.</span><span><strong>Placa no provador:</strong></span><input class="gap-input" id="g4-1" type="text"><span>(levar) no máximo três peças.</span></div><div class="gap-row"><span class="gap-num">2.</span><span><strong>A mulher, no caixa:</strong></span><input class="gap-input" id="g4-2" type="text"><span>(esperar) aqui um minutinho.</span></div><div class="gap-row"><span class="gap-num">3.</span><span><strong>Site da loja:</strong></span><input class="gap-input" id="g4-3" type="text"><span>(escolher) a forma de pagamento.</span></div><div class="gap-row"><span class="gap-num">4.</span><span><strong>A mulher, no provador:</strong></span><input class="gap-input" id="g4-4" type="text"><span>(levar) a calça azul também!</span></div><div class="gap-row"><span class="gap-num">5.</span><span><strong>E-mail da loja, no dia seguinte:</strong></span><input class="gap-input" id="g4-5" type="text"><span>(voltar) sempre!</span></div><div class="gap-row"><span class="gap-num">6.</span><span><strong>A mulher, na vitrine:</strong></span><input class="gap-input" id="g4-6" type="text"><span>(escolher) uma cor mais discreta!</span></div><div class="gap-row"><span class="gap-num">7.</span><span><strong>Placa no caixa:</strong></span><input class="gap-input" id="g4-7" type="text"><span>(esperar) a sua vez na fila.</span></div><div class="gap-row"><span class="gap-num">8.</span><span><strong>A mulher, na saída:</strong></span><input class="gap-input" id="g4-8" type="text"><span>(olhar) pra mim, quero tirar uma foto!</span></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkGap('g4',g4Key,'g4-msg')">Verificar respostas</button><button class="btn btn-reset" onclick="resetGap(g4Key,'g4-msg')">Refazer</button></div>
+    <div id="g4-msg" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Atividade 5</p>
+    <p class="ex-title">De volta à canção</p>
+    <p class="ex-instr">Ouça a canção mais uma vez, do começo ao fim. As palavras abaixo aparecem nela. Para cada uma, marque <strong>O</strong> se, na canção, ela é uma ordem, ou <strong>A</strong> se é uma afirmação. Dica: veja se há sujeito antes do verbo.</p>
+    <div class="oa-grid"><div>tira<select id="oa-1"><option value="">—</option><option value="O">O (ordem)</option><option value="A">A (afirmação)</option></select></div><div>precisa<select id="oa-2"><option value="">—</option><option value="O">O (ordem)</option><option value="A">A (afirmação)</option></select></div><div>vem<select id="oa-3"><option value="">—</option><option value="O">O (ordem)</option><option value="A">A (afirmação)</option></select></div><div>tá<select id="oa-4"><option value="">—</option><option value="O">O (ordem)</option><option value="A">A (afirmação)</option></select></div><div>diz<select id="oa-5"><option value="">—</option><option value="O">O (ordem)</option><option value="A">A (afirmação)</option></select></div><div>vai<select id="oa-6"><option value="">—</option><option value="O">O (ordem)</option><option value="A">A (afirmação)</option></select></div></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkOA()">Verificar respostas</button></div>
+    <div id="oa-msg" class="result-msg"></div>
+    <p class="q-label" style="margin-top:18px;">Na canção, <strong>vai</strong> não é uma ordem. Como você sabe?</p>
+    <textarea class="prod" rows="2"></textarea>
+    <button class="see-answers-btn" onclick="toggleAnswers('oa-answers', this)">👁 Ver resposta modelo</button>
+    <div class="model-answers-block" id="oa-answers">
+      <div class="model-answer-item"><p>Na canção, antes de <em>vai</em> vem <em>cê</em> (= você). Há sujeito, então é uma afirmação.</p></div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Pronúncia</p>
+    <p class="ex-title">t e d antes de i</p>
+    <div class="gram-box" style="margin-top:0;">
+      Ouça como a cantora pronuncia <em>tira</em> e <em>diz</em>. Antes do som de <strong>i</strong>, o <strong>t</strong> soa como <strong>tch</strong> e o <strong>d</strong> soa como <strong>dj</strong>. O <strong>e</strong> final sem acento também soa como <em>i</em>: <em>arte</em> → [ar-tchi]; <em>de</em> → [dji].<br>
+      <em style="font-size:.82rem;">Before an “i” sound, t sounds like the ch in cheese and d like the j in jeans. Unstressed final -e usually sounds like i, so it triggers the change too: arte sounds like “AR-chee”; de sounds like “jee.”</em>
+    </div>
+    <p class="ex-instr" style="margin-top:14px;">Ouça a canção e marque as palavras em que você ouve <strong>tch</strong> ou <strong>dj</strong>:</p>
+    <div class="chips"><button class="chip" onclick="togChip(this)">bermuda</button><button class="chip" onclick="togChip(this)">particular</button><button class="chip" onclick="togChip(this)">total</button><button class="chip" onclick="togChip(this)">arte</button><button class="chip" onclick="togChip(this)">domínio</button><button class="chip" onclick="togChip(this)">mistério</button></div>
+    <div class="btn-row"><button class="btn btn-check" onclick="checkChips()">Verificar respostas</button></div>
+    <div id="chip-msg" class="result-msg"></div>
+  </div>
+
+  <div class="ex-card">
+    <p class="ex-num">Atividade 6</p>
+    <p class="ex-title">Agora é a vez dele</p>
+    <p class="ex-instr">Imagine que você é o namorado da canção. Ele também tem exigências. Escreva uma mensagem de WhatsApp para a namorada, com <strong>60 a 80 palavras</strong>. Leia primeiro o texto-modelo: ele mostra como é uma mensagem com pedidos informais.</p>
+    <div class="gram-box" style="font-size:.88rem;">
+      <strong>Texto-modelo</strong> <em>(texto construído)</em><br><br>
+      Oi, Bia! Amanhã cedo eu viajo e o apartamento fica com você. Rega as plantas da varanda dia sim, dia não. Põe comida pro gato de manhã e à noite, e não esquece de trocar a água dele. O porteiro vai entregar umas encomendas minhas: pega e guarda no meu quarto. Ah, usa à vontade o que tem na geladeira! Qualquer problema, me liga. Beijo, Lara
+    </div>
+    <p style="font-size:.88rem;margin:10px 0 4px;">Na sua mensagem:</p>
+    <ul style="font-size:.88rem;margin:0 0 10px 20px;">
+      <li>responda ao “retoque total” (você aceita? em parte?);</li>
+      <li>peça duas ou três mudanças nela;</li>
+      <li>diga uma coisa que você não vai mudar de jeito nenhum;</li>
+      <li>termine com uma despedida.</li>
+    </ul>
+    <p style="font-size:.88rem;"><strong>Use pelo menos quatro verbos diferentes no imperativo da conversa.</strong></p>
+    <textarea class="prod" id="a6" rows="9" oninput="wc6()"></textarea>
+    <div id="a6-wc" style="font-size:.8rem;color:#999;margin-top:4px;">0 palavras (meta: 60 a 80)</div>
+    <p class="q-label">Confira:</p>
+    <label class="chk-line"><input type="checkbox"> Usei pelo menos quatro verbos diferentes no imperativo da conversa.</label>
+    <label class="chk-line"><input type="checkbox"> Nas ordens, não coloquei sujeito antes do verbo.</label>
+    <label class="chk-line"><input type="checkbox"> Com <em>ser</em>, usei <em>seja</em>.</label>
+    <label class="chk-line"><input type="checkbox"> Minha mensagem tem entre 60 e 80 palavras.</label>
+    <button class="see-answers-btn" onclick="toggleAnswers('a6-answers', this)">👁 Ver exemplo de resposta</button>
+    <div class="model-answers-block" id="a6-answers">
+      <div class="model-answer-item"><div class="model-label">Resposta pessoal — exemplo</div><p>Oi, amor! Tudo bem, aceito o retoque, mas é uma troca. Desliga o celular quando a gente janta junto. Chega no horário pelo menos uma vez por semana! E escuta as minhas músicas sem reclamar. A guitarra fica: essa eu não vou deixar de jeito nenhum. Vem aqui hoje à noite e a gente conversa. Beijo!</p></div>
+    </div>
+  </div>
+
+  <div style="font-size:.72rem;color:#aaa;margin:4px 0 8px;line-height:1.6;">Composição: Paula Toller e Leoni. Letra não reproduzida neste material.</div>
+
+</div>
+
+<script>
+function norm(s){return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,'').trim()}
+var a1Key=[1,1,1];
+function checkA1(){
+  var ok=0;
+  a1Key.forEach(function(k,qi){
+    var sel=document.querySelector('input[name="a1q'+qi+'"]:checked');
+    for(var oi=0;oi<3;oi++){var l=document.getElementById('a1o-'+qi+'-'+oi);l.classList.remove('right','wrong');}
+    document.getElementById('a1o-'+qi+'-'+k).classList.add('right');
+    if(sel){ if(+sel.value===k) ok++; else document.getElementById('a1o-'+qi+'-'+sel.value).classList.add('wrong'); }
+  });
+  var msg=document.getElementById('a1-msg');msg.className='result-msg show '+(ok===3?'result-ok':'result-err');msg.textContent=ok+' / 3 correto(s)';
+}
+var tfKey={"1": "T", "2": "T", "3": "F", "4": "F", "5": "T", "6": "F", "7": "T", "8": "F"};
+var tfSel={};
+function selectTF(btn,id,val){
+  var item=document.querySelector('.tf-item[data-id="'+id+'"]');
+  item.querySelectorAll('.tf-btn').forEach(function(b){b.className='tf-btn'});
+  btn.classList.add('sel-'+val);tfSel[id]=val;
+}
+function checkTF(){
+  var ok=0,tot=Object.keys(tfKey).length,answered=0;
+  for(var id in tfKey){
+    var item=document.querySelector('.tf-item[data-id="'+id+'"]');
+    item.querySelectorAll('.tf-btn').forEach(function(b){b.classList.remove('right','wrong','sel-T','sel-F')});
+    if(tfSel[id]){answered++;var correct=tfSel[id]===tfKey[id];if(correct)ok++;item.querySelectorAll('.tf-btn').forEach(function(b){if(b.dataset.val===tfKey[id])b.classList.add('right');else if(b.dataset.val===tfSel[id]&&!correct)b.classList.add('wrong');});var n=document.getElementById('tfn-'+id);if(n.textContent.trim())n.classList.add('show');}
+  }
+  var msg=document.getElementById('tf-msg');
+  msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.textContent=ok+' / '+tot+' correto(s)'+(answered<tot?' — responda todos os itens primeiro':'');
+}
+function resetTF(){
+  for(var id in tfKey){document.querySelector('.tf-item[data-id="'+id+'"]').querySelectorAll('.tf-btn').forEach(function(b){b.className='tf-btn'});delete tfSel[id];document.getElementById('tfn-'+id).classList.remove('show');}
+  var msg=document.getElementById('tf-msg');msg.className='result-msg';msg.textContent='';
+}
+var g3Key={"g3-1": ["Troca", ["troca"]], "g3-2": ["Põe", ["poe"]], "g3-3": ["Corta", ["corta"]], "g3-4": ["Vai", ["vai"]], "g3-5": ["Desliga", ["desliga"]], "g3-6": ["Escuta", ["escuta"]], "g3-7": ["Tem", ["tem"]], "g3-8": ["Seja", ["seja"]], "g3-9": ["Lê", ["le"]]};
+var g4Key={"g4-1": ["Leve", ["leve"]], "g4-2": ["Espera", ["espera"]], "g4-3": ["Escolha", ["escolha"]], "g4-4": ["Leva", ["leva"]], "g4-5": ["Volte", ["volte"]], "g4-6": ["Escolhe", ["escolhe"]], "g4-7": ["Espere", ["espere"]], "g4-8": ["Olha", ["olha"]]};
+function checkGap(pre,key,mid){
+  var ok=0,tot=0,html='';
+  for(var id in key){
+    tot++;var inp=document.getElementById(id);var val=norm(inp.value);
+    var correct=key[id][1].some(function(a){return val===norm(a)});
+    inp.classList.remove('ok','err');inp.classList.add(correct?'ok':'err');if(correct)ok++;
+    html+='<div>'+(correct?'✓':'✗')+' '+id.split('-')[1]+'. '+key[id][0]+'</div>';
+  }
+  var msg=document.getElementById(mid);msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');
+  msg.innerHTML=ok+' / '+tot+' correto(s)<div class="res-list" style="margin-top:6px;">'+html+'</div>';
+}
+function resetGap(key,mid){for(var id in key){var i=document.getElementById(id);i.value='';i.classList.remove('ok','err');}var m=document.getElementById(mid);m.className='result-msg';m.textContent='';}
+var oaKey={"oa-1": "O", "oa-2": "A", "oa-3": "O", "oa-4": "A", "oa-5": "O", "oa-6": "A"};
+function checkOA(){
+  var ok=0,tot=0;
+  for(var id in oaKey){tot++;var s=document.getElementById(id);var c=s.value===oaKey[id];s.classList.remove('ok','err');s.classList.add(c?'ok':'err');if(c)ok++;}
+  var msg=document.getElementById('oa-msg');msg.className='result-msg show '+(ok===tot?'result-ok':'result-err');msg.textContent=ok+' / '+tot+' correto(s)';
+}
+var chipKey=['particular','arte'];
+function togChip(b){b.classList.toggle('sel');}
+function checkChips(){
+  var ok=0,bad=0;
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.classList.remove('right','wrong');var want=chipKey.indexOf(c.textContent)>-1,sel=c.classList.contains('sel');
+    if(want&&sel){c.classList.add('right');ok++;}else if(want&&!sel){c.classList.add('right');c.style.opacity='.6';bad++;}else if(!want&&sel){c.classList.add('wrong');bad++;}
+  });
+  var msg=document.getElementById('chip-msg');msg.className='result-msg show '+(bad===0?'result-ok':'result-err');
+  msg.textContent=bad===0?'✓ Isso mesmo: particular e arte.':'As palavras com tch ou dj são: particular (ti → tchi) e arte (te → tchi).';
+}
+function wc6(){var t=document.getElementById('a6').value.trim();var n=t?t.split(/\s+/).length:0;var el=document.getElementById('a6-wc');el.textContent=n+' palavras (meta: 60 a 80)';el.style.color=(n>=60&&n<=80)?'#2E7D52':'#999';}
+function toggleAnswers(id,btn){
+  var block=document.getElementById(id);var visible=block.classList.toggle('visible');
+  btn.textContent=visible?'🙈 Esconder':'👁 Ver resposta modelo';
+}
+</script>
+<script>
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ [|—]\s*(BPHUB|Brazilian Portuguese Hub).*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  var summaryLines = []; var answersHtml = '';
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('[class]');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea,button,.check-btn,.reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g,' ').trim().substring(0,80);
+    }
+    if (!label) label = 'Campo '+(idx+1);
+    var val = ta.value.trim() || '(sem resposta)';
+    summaryLines.push('<strong>R'+(idx+1)+':</strong> '+(ta.value.trim() ? ta.value.trim().replace(/</g,'&lt;').replace(/>/g,'&gt;') : '<em style="color:#999">sem resposta</em>'));
+    answersHtml += '<p><strong>R'+(idx+1)+' — '+label+':</strong><br>'+val+'</p>';
+  });
+  document.querySelectorAll('.oa-grid select').forEach(function(s,i){ var val=s.value||'(sem resposta)'; answersHtml += '<p><strong>Atividade 5 — item '+(i+1)+':</strong> '+val+'</p>'; });
+  document.querySelectorAll('.gap-input').forEach(function(inp) {
+    var val = inp.value.trim() || '(sem resposta)';
+    answersHtml += '<p><strong>Campo '+inp.id+':</strong> '+val+'</p>';
+  });
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    var slug = location.pathname.split('/').pop().replace('.html','');
+    try { localStorage.setItem('bphub_done_' + slug, '1'); } catch(e) {}
+    document.getElementById('bphub-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+
+<div style="max-width:760px;margin:0 auto;padding:0 16px 48px">
+  <div id="bphub-form-area" style="margin-top:0;padding:24px 28px;background:#F2F0E3;border-radius:14px;border:1.5px solid #EDEDE2;">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;"><button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">Sua professora vai conferir suas respostas e fazer a revisão contigo na próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+</div>
+
+</body>
+</html>
