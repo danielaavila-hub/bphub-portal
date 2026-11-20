@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paredes que conversam — C1 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --level: #A1441D; --musgo: #3C3C21;
+      --telha: #A1441D;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--level); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--level); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--level); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    select { width:100%; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; padding:9px 10px; font-family:'Manrope',sans-serif; font-size:14.5px; background:white; }
+    select.inl { width:auto; display:inline-block; padding:5px 8px; margin:0 3px; font-size:14px; }
+    select.correct, input.correct { border-color:#4E9A6A; background:#F3FBF5; }
+    select.wrong, input.wrong { border-color:var(--level); background:#FBF0EC; }
+    .expr-list { font-size:13px; color:#888; margin-top:8px; line-height:1.9; }
+    .expr-list span.on { color:#2E7D52; font-weight:700; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../c1/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">C1</span>
+    <span class="badge badge-type">Gramática + Texto</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Paredes <em>que conversam</em></h1>
+  <div class="hero-sub">Uma entrevista com uma muralista, o vocabulário da arte urbana e a diferença entre por que e porque, com um desafio de escrita no fim.</div>
+  <div class="hero-tags"><span class="hero-tag">Arte urbana e muralismo</span><span class="hero-tag">por que × porque</span><span class="hero-tag">Entrevista</span></div>
+  <div class="hero-note">📖 Leia a entrevista e pratique</div>
+</div>
+
+<div class="main">
+  <p style="font-size:15px;margin-bottom:34px;">Nesta ficha, você vai ler uma entrevista com uma muralista, ampliar o vocabulário da arte urbana, praticar a diferença entre <i>por que</i> e <i>porque</i> e escrever uma mensagem defendendo uma proposta.</p>
+  <section>
+    <div class="sec-label">Nota cultural — Está escrito na lata</div>
+    <div class="info-box">
+      Toda lata de tinta spray vendida no Brasil traz um aviso impresso: <i>“Pichação é crime (art. 65 da Lei nº 9.605/98). Proibida a venda a menores de 18 anos.”</i> A frase existe desde a Lei nº 12.408, de 2011, que mudou o modo como a legislação trata a arte de rua.
+      <br><br>
+      Antes dela, pichação e grafite constavam no mesmo artigo da Lei de Crimes Ambientais. A partir de 2011, o grafite deixou de ser crime quando tem o objetivo de valorizar o imóvel por meio de uma manifestação artística e conta com o consentimento do proprietário. No caso de bens públicos, é necessária a autorização do órgão responsável.
+      <br><br>
+      A pichação continua sendo crime, com pena de três meses a um ano de detenção, além de multa. Aos olhos da lei, portanto, o que separa o grafite da pichação não é só a estética: é a autorização.
+      <br><br><span style="font-size:13px;color:#888;"><i>Fonte: Lei nº 12.408, de 25 de maio de 2011.</i></span>
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Nota linguística — por que × porque</div>
+    <table class="grammar">
+      <tr><th>POR QUE (separado)</th><th>PORQUE (junto)</th></tr>
+      <tr><td><i>= por qual motivo</i> ou <i>pelo qual / pela qual / pelos quais / pelas quais</i><br><br>
+        <b>1. Em perguntas diretas</b><br><i>Por que a artista escolheu essa empena?</i><br><br>
+        <b>2. Em perguntas indiretas</b>, depois de verbos como <i>perguntar, saber, entender, explicar</i> (sem ponto de interrogação)<br><i>Ela quer entender por que o projeto foi recusado.</i><br><br>
+        <b>3. Depois de um substantivo</b>, com o sentido de <i>pelo qual</i> e variações (registro formal)<br><i>Estas são as razões por que o projeto foi recusado.</i> (= pelas quais)
+      </td><td><i>= pois</i> ou <i>já que</i><br><br>
+        <b>Para explicar ou justificar</b><br><i>O projeto foi recusado porque não tinha autorização do condomínio.</i>
+      </td></tr>
+    </table>
+    <div class="grammar-box" style="margin-top:16px;">
+      <b>Atenção:</b> pergunta nem sempre pede <i>por que</i>. Quando quem pergunta já propõe uma causa e espera “sim” ou “não”, usa-se <b>porque</b>:<br>
+      <i>O projeto foi recusado porque não tinha autorização do condomínio?</i><br>
+      <i>— Foi.</i> &nbsp;/&nbsp; <i>— Não, foi por causa do orçamento.</i>
+    </div>
+    <div class="grammar-box">
+      <b>Teste rápido:</b> se der para trocar por <i>por qual motivo</i> ou <i>pelo qual</i>, use <b>por que</b>. Se der para trocar por <i>pois</i> ou <i>já que</i>, use <b>porque</b>.
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Texto</div>
+    <p style="font-size:13.5px;color:#888;">Leia a entrevista com atenção. Observe como <i>por que</i> e <i>porque</i> aparecem nas perguntas e nas respostas.</p>
+    <div class="info-box" style="line-height:1.85;">
+      <p style="font-size:12.5px;color:#999;margin-bottom:6px;"><i>Texto construído para fins didáticos. A entrevistada é uma personagem fictícia.</i></p>
+      <p style="font-family:'Trirong',serif;font-size:19px;margin-bottom:10px;">“Uma empena é vista pela cidade inteira”</p>
+      <p><i>Taís Monteiro aprendeu a gostar de arte olhando para os muros das ruas por que passava a caminho da escola, na periferia de Belo Horizonte. Começou no grafite aos 16 anos e hoje, aos 38, assina murais de até 50 metros de altura em empenas de prédios. Nesta entrevista, ela fala sobre escala, patrocínio e o que acontece quando uma obra desaparece.</i></p>
+      <p style="margin-top:16px;"><b>Por que você trocou os muros pelas empenas?</b></p>
+      <p>Eu não troquei. Continuo pintando muros, porque é na altura da calçada que eu converso com quem passa a pé. A empena me atraiu por outro motivo: ela muda a escala da obra. Um muro a gente vê de perto, quase encosta nele. Uma empena é vista do ônibus, do viaduto, da janela do prédio em frente. É vista pela cidade inteira.</p>
+      <p style="margin-top:16px;"><b>Muita gente diz que o grafite perde a força de protesto quando ganha autorização e patrocínio. Você concorda?</b></p>
+      <p>Entendo por que as pessoas pensam assim. O grafite nasceu na rua, primo da pichação: o artista chegava de madrugada, pintava e ia embora antes que alguém aparecesse. Num mural, existe contrato, projeto aprovado, reunião de condomínio. Mas eu não acho que uma obra perca a força só porque alguém assinou uma autorização. O que enfraquece a obra é o artista pintar o que o patrocinador quer ver.</p>
+      <p style="margin-top:16px;"><b>E o que o patrocinador quer ver?</b></p>
+      <p>Em geral, nada que incomode. Já recusei trabalho porque a empresa queria aprovar cada cor e cada rosto. Uma vez me pediram para trocar o rosto de uma moradora do bairro pelo de uma modelo, porque a moradora “não combinava com a marca”. Eu perguntei por que uma mulher real não combinava com uma marca que vende para mulheres reais. Ninguém soube me responder. Mantive a moradora e perdi o patrocínio.</p>
+      <p style="margin-top:16px;"><b>Como os moradores reagem quando um mural começa a aparecer no prédio deles?</b></p>
+      <p>No começo, desconfiam. Pintar uma empena leva semanas, às vezes um mês, e eu passo os dias pendurada num balancim. As pessoas olham para cima e querem saber o que vai surgir ali. Eu gosto de descer e conversar. Sempre tem um senhor que vem conferir o andamento todas as manhãs. No fim, a obra é mais deles do que minha, porque são eles que vão conviver com ela todos os dias.</p>
+      <p style="margin-top:16px;"><b>Você se incomoda quando um mural seu é apagado porque o prédio precisa de reforma?</b></p>
+      <p>Me incomodo, claro, mas aprendi a aceitar. Mural não é estátua de bronze: o sol desbota a tinta, a chuva descasca a parede, o prédio muda de dono. O que me revolta é outra coisa: quando o poder público cobre uma obra de cinza sem explicar por que tomou essa decisão. Aí não é o tempo agindo, é uma escolha. E escolhas sobre a paisagem de uma cidade deviam ser discutidas com quem mora nela.</p>
+      <p style="margin-top:16px;"><b>Nos seus murais aparecem muitos rostos de moradores. Por que essa escolha?</b></p>
+      <p>Porque as cidades estão cheias de estátuas de gente que ninguém mais reconhece. Eu prefiro pintar a costureira da esquina, o porteiro, a professora aposentada. Quando o bairro se reconhece numa parede de 40 metros, alguma coisa muda. As pessoas começam a perguntar por que aquela senhora está ali, quem ela é, o que ela viveu. Pronto: a parede virou conversa. Esse é o motivo por que eu continuo subindo no balancim.</p>
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Quadro de vocabulário</div>
+<table class="vocab"><tr><th>Palavra</th><th>Significado</th></tr><tr><td>empena</td><td>parede lateral de um prédio, sem janelas</td></tr><tr><td>encostar em</td><td>tocar em algo; apoiar-se nele</td></tr><tr><td>viaduto</td><td>ponte construída sobre uma rua, uma avenida ou uma linha de trem</td></tr><tr><td>patrocínio / patrocinador</td><td>apoio financeiro a um projeto / quem dá esse apoio</td></tr><tr><td>pichação</td><td>escrita feita em muros e fachadas sem autorização</td></tr><tr><td>reunião de condomínio</td><td>encontro dos moradores de um prédio para decidir assuntos comuns</td></tr><tr><td>enfraquecer</td><td>tirar a força de algo; tornar mais fraco</td></tr><tr><td>recusar</td><td>não aceitar</td></tr><tr><td>combinar com</td><td>ser adequado a; ficar bem ao lado de</td></tr><tr><td>desconfiar</td><td>não confiar; ficar com suspeita</td></tr><tr><td>balancim</td><td>plataforma suspensa por cabos, usada para trabalhar em fachadas altas</td></tr><tr><td>andamento</td><td>progresso; o desenvolvimento de um trabalho</td></tr><tr><td>conviver com</td><td>viver junto de; ter contato diário com</td></tr><tr><td>desbotar</td><td>perder a cor</td></tr><tr><td>descascar</td><td>soltar-se em pedaços, como a casca de uma fruta</td></tr><tr><td>poder público</td><td>o governo e seus órgãos (prefeitura, estado, União)</td></tr><tr><td>costureira / porteiro</td><td>mulher que faz roupas / pessoa que controla a entrada de um prédio</td></tr><tr><td>assinar (uma obra)</td><td>colocar o nome ou a marca do autor nela</td></tr></table>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 1 — Compreensão</div>
+    <p style="font-size:13.5px;color:#888;">Releia a entrevista e responda com suas palavras.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Segundo Taís, o que diferencia a experiência de ver um muro da de ver uma empena?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Para Taís, o que realmente enfraquece uma obra autorizada?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>O que levou Taís a perder um patrocínio?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Taís menciona dois tipos de desaparecimento de um mural. Quais são eles, e como ela reage a cada um?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O que Taís espera que aconteça quando o bairro se reconhece num mural?</div><textarea placeholder="Escreva sua resposta aqui..."></textarea></div>
+    <button class="check-btn" onclick="toggleBox('sug-result',this,'💡 Ver sugestões de resposta','🙈 Esconder sugestões')">💡 Ver sugestões de resposta</button>
+    <div id="sug-result" class="result-msg good"><div style="font-weight:700;margin-bottom:10px;">Sugestões (são respostas abertas: a sua pode ser diferente e igualmente válida):</div><div style="margin-bottom:10px;"><strong>1.</strong> O muro é visto de perto, na altura da calçada, por quem passa a pé. A empena é vista de longe, do ônibus, do viaduto ou das janelas, ou seja, pela cidade inteira.</div><div style="margin-bottom:10px;"><strong>2.</strong> Não é a autorização em si: é o artista pintar o que o patrocinador quer ver.</div><div style="margin-bottom:10px;"><strong>3.</strong> A empresa pediu que ela trocasse o rosto de uma moradora pelo de uma modelo. Ela recusou e manteve a moradora.</div><div style="margin-bottom:10px;"><strong>4.</strong> O primeiro é o desgaste natural (sol, chuva, reforma, venda do prédio): ela se incomoda, mas aceita. O segundo é a decisão do poder público de cobrir a obra sem explicação: isso a revolta, porque é uma escolha que deveria ser discutida com os moradores.</div><div style="margin-bottom:10px;"><strong>5.</strong> Que as pessoas comecem a perguntar quem é a pessoa retratada e o que ela viveu, isto é, que a parede vire conversa.</div></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 2 — Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">Complete o aviso com palavras do quadro de vocabulário. Cada palavra aparece uma vez só. Adapte a forma quando necessário (plural, tempo verbal).</p>
+    <div class="q" style="line-height:2.3;font-size:15px;">
+      <p style="margin-bottom:12px;">Prezados moradores,</p>
+      <p style="margin-bottom:12px;">O mural da <input type="text" id="px2-1" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 1"> (1) do nosso prédio foi pintado há oito anos e já <input type="text" id="px2-2" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 2"> (2): as cores estão pálidas e, no alto da parede, a tinta começou a <input type="text" id="px2-3" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 3"> (3). Na última <input type="text" id="px2-4" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 4"> (4), os moradores decidiram procurar a artista que <input type="text" id="px2-5" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 5"> (5) a obra. Ela aceitou restaurar o painel, mas vai trabalhar pendurada num <input type="text" id="px2-6" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 6"> (6) por cerca de três semanas, já que a parede tem 30 metros de altura. Uma padaria do bairro ofereceu <input type="text" id="px2-7" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 7"> (7) em troca de um agradecimento na entrada do prédio. Quem quiser acompanhar o <input type="text" id="px2-8" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 8"> (8) da restauração pode pedir informações ao <input type="text" id="px2-9" style="width:170px;display:inline-block;padding:4px 8px;margin:0 2px;" aria-label="lacuna 9"> (9), na portaria.</p>
+      <p><i>A administração</i></p>
+    </div>    <button class="check-btn" onclick="checkMC(px2,'px2-result')">✓ Conferir respostas</button>
+    <div id="px2-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 3 — Por que ou porque?</div>
+    <p style="font-size:13.5px;color:#888;">Complete cada frase com <b>por que</b> ou <b>porque</b>. Se tiver dúvida, use o teste rápido da nota linguística.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span><select class="inl" id="px3-1"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> a prefeitura exige autorização para pintar uma empena?</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A artista pediu mais prazo <select class="inl" id="px3-2"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> choveu quase todos os dias da primeira semana.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>O zelador perguntou <select class="inl" id="px3-3"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> a calçada vai ficar interditada durante a pintura.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>— A síndica votou contra o patrocínio <select class="inl" id="px3-4"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> a empresa queria colocar a logomarca no mural?<br>— Isso, foi exatamente esse o motivo.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Os turistas sempre perguntam <select class="inl" id="px3-5"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> há tantos murais no centro de Belo Horizonte.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>Estes são os bairros <select class="inl" id="px3-6"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> passa o roteiro de arte urbana.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>O mural chama a atenção de longe <select class="inl" id="px3-7"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> ocupa os dez andares do prédio.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>A professora pediu aos alunos que explicassem <select class="inl" id="px3-8"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> escolheram aquele mural para a pesquisa.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">9.</span>Até hoje não se sabe o motivo <select class="inl" id="px3-9"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> a obra foi assinada só com as iniciais da artista.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">10.</span>— <select class="inl" id="px3-10"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> a tinta desbota tão rápido nesta parede?<br>— <select class="inl" id="px3-11"><option value="">—</option><option value="por que">por que</option><option value="porque">porque</option></select> ela recebe sol a tarde inteira.</div></div>
+    <button class="check-btn" onclick="checkMC(px3,'px3-result')">✓ Conferir respostas</button>
+    <div id="px3-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 4 — Reescrita</div>
+    <p style="font-size:13.5px;color:#888;">Reescreva cada item usando <b>por que</b> ou <b>porque</b>. Siga a indicação entre parênteses e adapte o que for necessário.</p>
+    <div class="q"><div class="q-text"><span class="q-num">a.</span>Os vizinhos querem saber qual é o motivo de o mural estar demorando tanto.<br><span style="font-size:13px;color:#888;">(Use <i>por que</i> no lugar de “qual é o motivo de”.)</span></div><input type="text" id="px4-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">b.</span>A artista escolheu tons de azul. A fachada fica de frente para o mar.<br><span style="font-size:13px;color:#888;">(Junte as duas frases.)</span></div><input type="text" id="px4-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">c.</span>Esta é a praça pela qual o artista passava todos os dias na infância.<br><span style="font-size:13px;color:#888;">(Troque “pela qual”.)</span></div><input type="text" id="px4-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">d.</span>A curadora não explicou o motivo da escolha daquele muro.<br><span style="font-size:13px;color:#888;">(Use um verbo no lugar de “escolha”.)</span></div><input type="text" id="px4-4" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">e.</span>O artista pintou de madrugada. Durante o dia, o trânsito na avenida é intenso.<br><span style="font-size:13px;color:#888;">(Transforme em uma pergunta de sim ou não.)</span></div><input type="text" id="px4-5" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">f.</span>Já que o prédio é tombado, o projeto do mural precisa de aprovação do patrimônio histórico.<br><span style="font-size:13px;color:#888;">(Comece com “O projeto do mural…”. <i>tombado = protegido por lei como patrimônio histórico</i>)</span></div><input type="text" id="px4-6" placeholder="Escreva a frase completa..."></div>
+    <button class="check-btn" onclick="checkReq(px4,'px4-result')">✓ Conferir respostas</button>
+    <div id="px4-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 5 — Produção escrita</div>
+    <p style="font-size:14.5px;"><b>A situação:</b> o mural da empena do seu prédio foi pintado há dez anos e está desbotado. Na reunião de condomínio, surgiram três propostas:</p>
+    <ol style="font-size:14.5px;margin:0 0 14px 22px;line-height:1.8;"><li>chamar o artista original para restaurar a obra;</li><li>abrir um concurso para um mural novo;</li><li>pintar a parede de cinza, que custa menos.</li></ol>
+    <p style="font-size:14.5px;margin-bottom:8px;"><b>Leia a mensagem que uma vizinha mandou no grupo do condomínio:</b></p>
+    <div class="info-box" style="font-size:14.5px;line-height:1.8;">Boa noite, vizinhos! Sobre a reunião de ontem: voto a favor do concurso para um mural novo. Sei que muita gente tem carinho pelo painel atual e entendo <b>por que</b> a restauração agrada. Mas o artista que assinou a obra hoje mora em Portugal e cobra em euros, o que deixa a restauração cara demais para o nosso caixa. Prefiro o concurso <b>porque</b> ele pode revelar artistas do próprio bairro, e a prefeitura tem um edital que cobre parte do custo. Quanto à tinta cinza, sou contra, <b>porque</b> seria trocar uma obra que todo mundo conhece por uma parede que ninguém vai notar. O Seu Antônio perguntou no grupo <b>por que</b> não esperamos pela reforma da fachada para decidir. Minha resposta: as duas coisas podem andar juntas, <b>já que</b> o balancim vai ser montado de qualquer jeito. Proponho que a síndica consulte a prefeitura sobre o edital até a próxima reunião.<br>Abraços,<br><i>Renata (apto 802)</i></div>
+    <p style="font-size:14.5px;margin-top:16px;"><b>Sua tarefa:</b> escreva a sua mensagem para o grupo, com <b>120 a 180 palavras</b>, defendendo a proposta 1 ou a proposta 3. A proposta 2 já foi defendida pela Renata. Inclua os itens abaixo e, ao terminar, marque cada um para conferir:</p>
+    <label style="display:flex;gap:8px;margin:6px 0;font-size:14.5px;"><input type="checkbox" style="margin-top:6px;"><span>qual proposta você defende e por qual motivo</span></label>
+    <label style="display:flex;gap:8px;margin:6px 0;font-size:14.5px;"><input type="checkbox" style="margin-top:6px;"><span>por que você descarta as outras duas</span></label>
+    <label style="display:flex;gap:8px;margin:6px 0;font-size:14.5px;"><input type="checkbox" style="margin-top:6px;"><span>uma resposta à pergunta que a Dona Lúcia deixou no grupo: <i>“Por que gastar dinheiro com mural se o elevador vive quebrado?”</i></span></label>
+    <label style="display:flex;gap:8px;margin:6px 0;font-size:14.5px;"><input type="checkbox" style="margin-top:6px;"><span>um pedido concreto à síndica ou ao grupo</span></label>
+    <label style="display:flex;gap:8px;margin:6px 0;font-size:14.5px;"><input type="checkbox" style="margin-top:6px;"><span><i>por que</i> pelo menos duas vezes, uma delas em pergunta indireta</span></label>
+    <label style="display:flex;gap:8px;margin:6px 0;font-size:14.5px;"><input type="checkbox" style="margin-top:6px;"><span><i>porque</i> pelo menos duas vezes para justificar</span></label>
+    <div class="q" style="margin-top:14px;"><textarea id="px-write" style="min-height:240px;" placeholder="Oi, pessoal! ..." oninput="wc('px-write','px-wc',120,180);pqCheck()"></textarea><div id="px-wc" style="font-size:12.5px;color:#999;margin-top:6px;"></div><div id="px-chk" class="expr-list"></div></div>
+    <button class="check-btn" onclick="toggleBox('model-result',this,'💡 Ver exemplo de resposta','🙈 Esconder exemplo')">💡 Ver exemplo de resposta</button>
+    <div id="model-result" class="result-msg good"><div style="font-weight:700;margin-bottom:10px;">Resposta pessoal — exemplo:</div><p>Oi, pessoal! Voto pela restauração do mural atual, porque o painel já virou parte da identidade do prédio: até os entregadores usam o desenho como referência para achar a nossa entrada. Entendo a preocupação da Renata com o custo, mas ninguém explicou ainda por que só o próprio artista poderia restaurar a obra. Ele pode indicar alguém daqui para executar o serviço seguindo o projeto original. A parede cinza, para mim, está fora de questão, porque deixaria a rua mais triste e chamaria pichação. Quanto à pergunta da Dona Lúcia, não vejo por que escolher entre uma coisa e outra: o elevador é prioridade, sem dúvida, mas o dinheiro do mural pode vir do edital da prefeitura, e não do nosso caixa. Peço à síndica que pergunte ao artista se ele aceita supervisionar a restauração a distância.<br>Abraços,<br><i>Paulo (apto 403)</i></p></div>
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Texto construído para fins didáticos (BPHUB). Nota cultural: Lei nº 12.408, de 25 de maio de 2011.</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+var px2 = [
+  {"id": "px2-1", "key": "empena", "show": "(1) empena", "note": ""},
+  {"id": "px2-2", "key": "desbotou", "show": "(2) desbotou", "note": ""},
+  {"id": "px2-3", "key": "descascar", "show": "(3) descascar", "note": ""},
+  {"id": "px2-4", "key": "reunião de condomínio", "show": "(4) reunião de condomínio", "note": ""},
+  {"id": "px2-5", "key": "assinou", "show": "(5) assinou", "note": ""},
+  {"id": "px2-6", "key": "balancim", "show": "(6) balancim", "note": ""},
+  {"id": "px2-7", "key": "patrocínio", "show": "(7) patrocínio", "note": ""},
+  {"id": "px2-8", "key": "andamento", "show": "(8) andamento", "note": ""},
+  {"id": "px2-9", "key": "porteiro", "show": "(9) porteiro", "note": ""}
+];
+var px3 = [
+  {"id": "px3-1", "key": "por que", "show": "(1) por que — Pergunta direta.", "note": ""},
+  {"id": "px3-2", "key": "porque", "show": "(2) porque — Causa (= pois).", "note": ""},
+  {"id": "px3-3", "key": "por que", "show": "(3) por que — Pergunta indireta.", "note": ""},
+  {"id": "px3-4", "key": "porque", "show": "(4) porque — Pergunta de sim ou não que já propõe a causa.", "note": ""},
+  {"id": "px3-5", "key": "por que", "show": "(5) por que — Pergunta indireta.", "note": ""},
+  {"id": "px3-6", "key": "por que", "show": "(6) por que — = pelos quais.", "note": ""},
+  {"id": "px3-7", "key": "porque", "show": "(7) porque — Causa.", "note": ""},
+  {"id": "px3-8", "key": "por que", "show": "(8) por que — Pergunta indireta.", "note": ""},
+  {"id": "px3-9", "key": "por que", "show": "(9) por que — = pelo qual.", "note": ""},
+  {"id": "px3-10", "key": "por que", "show": "(10a) por que", "note": ""},
+  {"id": "px3-11", "key": "porque", "show": "(10b) porque", "note": ""}
+];
+var px4 = [
+  {"id": "px4-1", "req": ["por que", "demorando", "mural", "vizinhos"], "extra": null, "show": "Os vizinhos querem saber por que o mural está demorando tanto."},
+  {"id": "px4-2", "req": ["porque", "tons de azul", "fachada", "mar"], "extra": null, "show": "A artista escolheu tons de azul porque a fachada fica de frente para o mar."},
+  {"id": "px4-3", "req": ["praca por que o artista passava", "todos os dias", "infancia"], "extra": null, "show": "Esta é a praça por que o artista passava todos os dias na infância."},
+  {"id": "px4-4", "req": ["curadora", "nao explicou", "por que escolheu", "aquele muro"], "extra": null, "show": "A curadora não explicou por que escolheu aquele muro."},
+  {"id": "px4-5", "req": ["porque", "madrugada", "transito", "avenida", "intenso"], "extra": "?", "show": "O artista pintou de madrugada porque, durante o dia, o trânsito na avenida é intenso?"},
+  {"id": "px4-6", "req": ["o projeto do mural", "porque", "tombado", "aprovacao", "patrimonio historico"], "extra": "first", "show": "O projeto do mural precisa de aprovação do patrimônio histórico porque o prédio é tombado."}
+];
+function toggleBox(id,b,t1,t2){var el=document.getElementById(id);var s=el.style.display==='block';el.style.display=s?'none':'block';b.textContent=s?t1:t2;}
+function checkReq(items,rid){
+  var html='',ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id),raw=el.value,v=norm(raw);
+    var good=v.length>0 && a.req.every(function(r){return v.indexOf(r)>-1;});
+    if(good&&a.extra==='?') good=raw.indexOf('?')>-1;
+    if(good&&a.extra==='first') good=v.indexOf('o projeto do mural')===0;
+    el.classList.toggle('correct',good);el.classList.toggle('wrong',v.length>0&&!good);
+    if(good)ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+'abcdef'[i]+')</strong> '+(good?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+'</div>';
+  });
+  var res=document.getElementById(rid);var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ Todas as '+items.length+' conferem com o modelo!':ok_n+' de '+items.length+' conferem — modelo (outras formulações equivalentes também podem estar certas):')+'</div>'+html;
+  res.style.display='block';
+}
+function pqCheck(){
+  var t=norm(document.getElementById('px-write').value);
+  var a=(t.match(/\bpor que\b/g)||[]).length, b=(t.match(/\bporque\b/g)||[]).length;
+  document.getElementById('px-chk').innerHTML='<span class="'+(a>=2?'on':'')+'">'+(a>=2?'✓ ':'○ ')+'por que: '+a+' / 2</span><br><span class="'+(b>=2?'on':'')+'">'+(b>=2?'✓ ':'○ ')+'porque: '+b+' / 2</span>';
+}
+pqCheck();
+function checkMC(items, rid) {
+  var html='', ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id); var v=el.value;
+    var keys=Array.isArray(a.key)?a.key:[a.key];
+    var ok=v.trim().length>0 && keys.some(function(k){return norm(v)===norm(k);});
+    el.classList.toggle('correct',ok); el.classList.toggle('wrong',v.trim().length>0 && !ok);
+    if(ok) ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '+(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+(a.note?'<br><span style="color:#777;font-size:12.5px;">'+a.note+'</span>':'')+'</div>';
+  });
+  var res=document.getElementById(rid); var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ Todas as '+items.length+' corretas!':ok_n+' de '+items.length+' corretas — modelo:')+'</div>'+html;
+  res.style.display='block';
+}
+function exprCheck(tid, bid, exprs) {
+  var t=norm(document.getElementById(tid).value), n=0, h='';
+  exprs.forEach(function(e){ var on=e[1].some(function(s){return t.indexOf(norm(s))>-1;}); if(on) n++; h+='<span class="'+(on?'on':'')+'">'+(on?'✓ ':'○ ')+e[0]+'</span><br>'; });
+  document.getElementById(bid).innerHTML=h;
+}
+function wc(tid,cid,lo,hi){ var t=document.getElementById(tid).value.trim(); var n=t?t.split(/\s+/).length:0; var el=document.getElementById(cid); el.textContent=n+' palavras'+(lo?' (meta: '+lo+'–'+hi+')':''); el.style.color=(lo&&n>=lo&&n<=hi)?'#2E7D52':'#999'; }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['px2-1','px2-2','px2-3','px2-4','px2-5','px2-6','px2-7','px2-8','px2-9','px3-1','px3-2','px3-3','px3-4','px3-5','px3-6','px3-7','px3-8','px3-9','px3-10','px3-11','px4-1','px4-2','px4-3','px4-4','px4-5','px4-6'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
