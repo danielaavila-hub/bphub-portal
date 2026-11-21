@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zumbi dos Palmares: memória e resistência — B2 | BPHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --baunilha: #FCF5EB; --baunilha2: #FDE7C4; --off-white: #F2F0E3;
+      --light-gray: #EDEDE2; --nanquim: #1E1D1C; --texto: #3C3C21;
+      --cobalto: #265B8B; --cobalto-light: #EBF1F8;
+      --pitomba: #D36D29; --ouro: #FFB94A;
+      --floresta: #4E551D; --erva-doce: #A6B28A;
+      --giz: #FCF5EB; --level: #D36D29; --musgo: #3C3C21;
+      --telha: #D36D29;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--baunilha); color: var(--texto); font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Trirong', serif; font-weight: 300; }
+    a { color: var(--cobalto); }
+
+    .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; background: var(--giz); border-bottom: 1px solid #E8E4DE; position: sticky; top: 0; z-index: 50; }
+    .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-level { background: var(--level); color: white; }
+    .badge-type  { background: rgba(30,29,28,0.1); color: var(--nanquim); }
+
+    .hero { background: var(--level); padding: 52px 48px 46px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--floresta), var(--erva-doce), var(--ouro), var(--pitomba)); }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 44px); color: white; margin-bottom: 12px; line-height: 1.2; }
+    .hero h1 em { font-style: italic; color: var(--ouro); }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .hero-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .hero-note { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,74,0.15); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ouro); font-weight: 600; }
+
+    .main { max-width: 920px; padding: 52px 48px 100px; margin: 0 auto; }
+    .sec-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pitomba); margin-bottom: 10px; }
+    section { margin-bottom: 44px; }
+    section > h2 { font-size: 24px; margin-bottom: 14px; }
+    section > p { margin-bottom: 12px; }
+
+    .info-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 20px 24px; font-size: 14.5px; line-height: 1.75; }
+    .info-box + .info-box { margin-top: 16px; }
+
+    audio { width: 100%; margin-top: 6px; }
+    .audio-box { background: white; border: 1.5px solid var(--light-gray); border-radius: 14px; padding: 22px 24px; }
+
+    table.vocab { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 14.5px; }
+    table.vocab th { text-align: left; font-family: 'Trirong', serif; font-weight: 400; font-size: 13px; color: var(--pitomba); padding: 8px 10px; border-bottom: 1.5px solid var(--light-gray); }
+    table.vocab td { padding: 8px 10px; border-bottom: 1px solid var(--light-gray); vertical-align: top; }
+    table.vocab td:first-child { font-weight: 600; white-space: nowrap; }
+
+    textarea, input[type=text] { width: 100%; border: 1.5px solid rgba(30,29,28,0.2); border-radius: 8px; padding: 10px 12px; font-family: 'Manrope', sans-serif; font-size: 14.5px; outline: none; background: white; }
+    textarea:focus, input[type=text]:focus { border-color: var(--level); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .q { background: white; border: 1.5px solid var(--light-gray); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    .q .q-text { font-size: 15px; margin-bottom: 10px; }
+    .q .q-num { color: var(--level); font-weight: 700; margin-right: 4px; }
+
+    .check-btn { background: var(--level); color: white; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .result-msg { display: none; margin-top: 14px; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+    .result-msg.good { background: #EAF5EE; color: #2E7D52; }
+    .result-msg.try-again { background: #FDF3E8; color: var(--nanquim); }
+    input.correct { border-color: #4E9A6A; background: #F3FBF5; }
+    input.wrong { border-color: var(--level); background: #FBF0EC; }
+
+    .grammar-box { background: var(--baunilha2); border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
+    .grammar-box b { color: var(--nanquim); }
+    table.grammar { width: 100%; border-collapse: collapse; font-size: 13.5px; background: white; border-radius: 10px; overflow: hidden; }
+    table.grammar th { text-align: left; background: var(--off-white); padding: 10px 12px; font-family: 'Trirong', serif; font-weight: 400; }
+    table.grammar td { padding: 10px 12px; border-top: 1px solid var(--light-gray); vertical-align: top; }
+
+    .match-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .match-row .match-text { flex: 1; min-width: 220px; font-size: 15px; }
+    .match-row input[type=text] { max-width: 70px; text-align: center; font-weight: 700; }
+    .match-desc-list { font-size: 14px; color: var(--nanquim); background: var(--off-white); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; line-height: 1.9; }
+
+    .send-box { background: var(--baunilha2); border-radius: 14px; padding: 24px 28px; margin-top: 8px; font-size: 15px; color: var(--nanquim); line-height: 1.75; }
+    .photo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; margin:16px 0 8px; }
+    .photo-card { background:white; border:1px solid var(--light-gray); border-radius:12px; overflow:hidden; }
+    .photo-card img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--light-gray); }
+    .photo-card .pc-t { font-family:'Trirong',serif; font-size:16px; padding:10px 14px 2px; color:var(--nanquim); }
+    .photo-card .pc-c { font-size:11.5px; color:#999; padding:0 14px 12px; font-style:italic; }
+    .video-box { position:relative; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000; margin:12px 0 6px; }
+    .video-box iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .source-note { font-size: 12.5px; color: #999; margin-top: 30px; }
+
+    @media (max-width: 700px) {
+      .topbar, .hero, .main { padding-left: 20px; padding-right: 20px; }
+      .match-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    select { width:100%; border:1.5px solid rgba(30,29,28,0.2); border-radius:8px; padding:9px 10px; font-family:'Manrope',sans-serif; font-size:14.5px; background:white; }
+    select.inl { width:auto; display:inline-block; padding:5px 8px; margin:0 3px; font-size:14px; }
+    select.correct, input.correct { border-color:#4E9A6A; background:#F3FBF5; }
+    select.wrong, input.wrong { border-color:var(--level); background:#FBF0EC; }
+    .expr-list { font-size:13px; color:#888; margin-top:8px; line-height:1.9; }
+    .expr-list span.on { color:#2E7D52; font-weight:700; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../b2/index.html"><img src="https://brazilianportuguesehub.com/wp-content/uploads/2024/12/nova-logo-bph-scaled.png" alt="BPHUB" style="height:40px;"></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge badge-level">B2</span>
+    <span class="badge badge-type">Cultura + Gramática</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Materials Portal</div>
+  <h1>Zumbi dos Palmares <em>memória e resistência</em></h1>
+  <div class="hero-sub">A história de Zumbi e do Quilombo dos Palmares, o Dia da Consciência Negra e uma visita ao Parque Memorial na Serra da Barriga, com foco em conectivos de causa e consequência.</div>
+  <div class="hero-tags"><span class="hero-tag">Zumbi e Palmares</span><span class="hero-tag">20 de novembro</span><span class="hero-tag">Causa e consequência</span><span class="hero-tag">Parque Memorial</span></div>
+  <div class="hero-note">📖 Leia, assista e pratique</div>
+</div>
+
+<div class="main">
+  <p style="font-size:15px;margin-bottom:34px;">Neste material, você vai conhecer a história de Zumbi e do Quilombo dos Palmares, entender como o 20 de novembro virou o Dia da Consciência Negra, planejar uma visita ao Parque Memorial na Serra da Barriga e praticar conectivos de causa e consequência.</p>
+  <section>
+    <div class="sec-label">Texto</div>
+    <p style="font-size:13.5px;color:#888;">Leia o texto. Observe os conectivos destacados: eles mostram a relação entre os fatos.</p>
+    <div class="info-box" style="line-height:1.9;">
+      <p style="font-size:12.5px;color:#999;margin-bottom:6px;"><i>Texto elaborado para fins didáticos, com base em fontes públicas (Fundação Cultural Palmares e Wikipédia). Os conectivos de causa e consequência estão destacados.</i></p>
+      <p style="font-family:'Trirong',serif;font-size:20px;margin-bottom:10px;">Palmares: a república dos quilombolas</p>
+      <p>No final do século XVI, africanos escravizados que fugiam dos engenhos de açúcar de Pernambuco começaram a se reunir na Serra da Barriga, hoje em União dos Palmares, em Alagoas. <b style="color:var(--level);">Como</b> a região era de mata fechada e de difícil acesso, os fugitivos conseguiam se proteger, e o Quilombo dos Palmares cresceu. No século XVII, chegou a ter entre 11 mil e 20 mil habitantes, <b style="color:var(--level);">de modo que</b> se tornou o maior quilombo da história do Brasil colonial.</p>
+      <p>Palmares não era apenas um refúgio: os moradores plantavam milho, mandioca e feijão, faziam cestos e cerâmica e vendiam o excedente aos povoados vizinhos. <b style="color:var(--level);">Por isso</b>, a comunidade incomodava as autoridades coloniais, <b style="color:var(--level);">já que</b> mostrava que era possível viver sem o regime escravista. Entre 1680 e 1686, pelo menos seis expedições foram enviadas para destruí-la, mas todas fracassaram.</p>
+      <p>Por volta de 1680, Zumbi assumiu a liderança <b style="color:var(--level);">porque</b> recusou o acordo de paz que Ganga Zumba aceitou: ele não admitia que alguns fossem libertados e outros continuassem escravizados. Em 1694, tropas lideradas pelo bandeirante Domingos Jorge Velho destruíram o principal mocambo, a Cerca do Macaco. Zumbi, ferido, conseguiu fugir, mas foi traído por um antigo companheiro e morto numa emboscada em 20 de novembro de 1695. <b style="color:var(--level);">Como</b> muitos acreditavam que ele era imortal, as autoridades expuseram a sua cabeça em praça pública, em Recife.</p>
+      <p><b style="color:var(--level);">Por causa dessa história</b>, o 20 de novembro virou símbolo de resistência. <b style="color:var(--level);">Graças à</b> luta do Movimento Negro, uma lei de 2011 instituiu o Dia Nacional de Zumbi e da Consciência Negra e, em 2023, outra lei tornou a data feriado nacional. Desde 2024, <b style="color:var(--level);">portanto</b>, o país inteiro para para lembrar a memória de Palmares.</p>
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Nota cultural — O Dia da Consciência Negra</div>
+    <div class="info-box">
+      <b>Dia da Consciência Negra: como a data chegou ao calendário</b><br><br>
+      A escolha do dia 20 de novembro se deve à morte de Zumbi, em 1695. A data foi consolidada pelo Movimento Negro, que, em assembleia nacional em 1978, aprovou o 20 de novembro como Dia Nacional da Consciência Negra. Em 2003, a história e a cultura afro-brasileira passaram a ser obrigatórias nas escolas e, em 2011, a Lei nº 12.519 instituiu oficialmente o Dia Nacional de Zumbi e da Consciência Negra. Como a lei de 2011 não criava um feriado nacional, a decisão ficava com estados e municípios. Isso mudou com a Lei nº 14.759, de 21 de dezembro de 2023, que declarou o 20 de novembro feriado nacional. Em 2024, o dia foi, pela primeira vez, feriado em todo o Brasil.
+      <br><br><span style="font-size:13px;color:#888;"><i>Fontes: Fundação Cultural Palmares; Wikipédia; imprensa brasileira.</i></span>
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Nota gramatical — causa e consequência</div>
+    <table class="grammar">
+      <tr><th>CAUSA (o motivo)</th><th>CONSEQUÊNCIA (o resultado)</th></tr>
+      <tr><td>
+        <b>porque</b> · <b>já que</b> · <b>visto que</b> · <b>uma vez que</b> · <b>como</b> (no início da frase)<br>
+        <i>Zumbi é lembrado porque resistiu até o fim.</i><br>
+        <i>Como o quilombo crescia, as autoridades decidiram atacá-lo.</i><br><br>
+        <b>devido a</b> · <b>por causa de</b> · <b>em razão de</b> · <b>graças a</b> (+ substantivo)<br>
+        <i>Graças à luta do Movimento Negro, a data virou feriado.</i> <span style="color:#888;font-size:13px;">(causa positiva)</span><br>
+        <i>O quilombo caiu devido à superioridade militar das tropas.</i>
+      </td><td>
+        <b>por isso</b> · <b>portanto</b> · <b>logo</b> · <b>então</b><br>
+        <i>A região era de difícil acesso; por isso, os fugitivos se protegiam bem.</i><br><br>
+        <b>de modo que</b> · <b>de forma que</b> · <b>tanto que</b><br>
+        <i>O quilombo cresceu, de modo que se tornou o maior do Brasil colonial.</i><br><br>
+        <b>tão / tanto … que</b><br>
+        <i>A serra é tão alta que do mirante se vê toda a região.</i> <span style="color:#888;font-size:13px;">(= the hill is so high that…)</span>
+      </td></tr>
+    </table>
+    <div class="grammar-box" style="margin-top:16px;">
+      <b>Atenção à ordem:</b> a oração de causa pode vir antes ou depois (<i>Como chovia, ficamos em casa</i> / <i>Ficamos em casa porque chovia</i>), mas <b>como</b> causal só aparece no início. <b>Por isso</b>, <b>portanto</b> e <b>logo</b> vêm depois da causa e costumam ficar entre vírgulas ou depois de ponto e vírgula.
+    </div>
+    <div class="grammar-box">
+      <b>Teste rápido:</b> se a oração diz <i>o motivo</i>, é causa (<i>porque, já que, graças a</i>). Se diz <i>o resultado</i>, é consequência (<i>por isso, de modo que, tão… que</i>).
+    </div>
+  </section>
+  <section>
+    <div class="sec-label">Quadro de vocabulário</div>
+<table class="vocab"><tr><th>Palavra</th><th>Significado</th></tr><tr><td>quilombo</td><td>comunidade formada por pessoas que fugiram da escravidão</td></tr><tr><td>mocambo</td><td>povoação dentro de um quilombo</td></tr><tr><td>engenho</td><td>fazenda onde se produzia açúcar</td></tr><tr><td>refúgio</td><td>lugar onde alguém se protege</td></tr><tr><td>excedente</td><td>o que sobra, depois de atender às necessidades</td></tr><tr><td>fracassar</td><td>não ter sucesso</td></tr><tr><td>emboscada</td><td>ataque surpresa, preparado em segredo</td></tr><tr><td>trair</td><td>enganar alguém que confia em você</td></tr><tr><td>imortal</td><td>que nunca morre</td></tr><tr><td>tombar</td><td>proteger oficialmente um bem como patrimônio, por lei</td></tr><tr><td>platô</td><td>área plana no alto de uma serra</td></tr><tr><td>atalaia</td><td>ponto alto de onde se vigia ou se observa a paisagem</td></tr><tr><td>quilombola</td><td>pessoa que vive ou descende de um quilombo</td></tr><tr><td>pau a pique</td><td>técnica de construção com paredes de varas e barro</td></tr></table>
+  </section>
+  <section>
+    <div class="sec-label">Vídeo</div>
+    <p style="font-size:13.5px;color:#888;">Veja o vídeo com atenção. Depois, faça as atividades do Exercício 6.</p>
+    <div class="video-box"><iframe src="https://www.youtube.com/embed/xhes6GSvhVE" title="Serra da Barriga, Memorial em homenagem a Zumbi dos Palmares e ao povo afro-brasileiro" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <p style="font-size:12.5px;color:#999;">Vídeo: “Serra da Barriga, Memorial em homenagem a Zumbi dos Palmares e ao povo afro-brasileiro”, canal Allan Lima, YouTube.</p>
+  </section>
+  <section>
+    <div class="sec-label">Visitar o parque</div>
+    <p style="font-size:13.5px;color:#888;">Leia o texto e observe as fotos do parque.</p>
+    <div class="info-box" style="line-height:1.9;">
+      <p style="font-size:12.5px;color:#999;margin-bottom:6px;"><i>Texto elaborado para fins didáticos, com base no site da Fundação Cultural Palmares.</i></p>
+      <p style="font-family:'Trirong',serif;font-size:20px;margin-bottom:10px;">Como visitar o Parque Memorial Quilombo dos Palmares</p>
+      <p>O Parque Memorial Quilombo dos Palmares fica no alto da Serra da Barriga, em União dos Palmares, a cerca de 76 km de Maceió. Foi implantado em 2007 num platô da serra e é administrado pela Fundação Cultural Palmares. <b>Como</b> o local foi tombado pelo Iphan, o espaço é protegido por lei. Não se trata de um parque nacional de natureza, e sim de um <b>parque memorial</b>: um espaço dedicado à memória e à cultura negra.</p>
+      <p>No parque, foram reconstruídas, em tamanho natural, algumas das principais edificações do quilombo, com paredes de pau a pique e inscrições em línguas africanas: o Onjó (casa de farinha), o Oxile das ervas (terreiro das ervas), ocas indígenas e a Muxima de Palmares, o “coração de Palmares”. Há ainda pontos de áudio, com música e textos em quatro idiomas (português, inglês, espanhol e italiano), <b>de modo que</b> visitantes estrangeiros também acompanham a história. Do alto das atalaias, vê-se toda a região, e a paisagem é <b>tão</b> bonita <b>que</b> vale a pena levar a câmera. O parque tem ainda um restaurante de culinária afro-brasileira e um palco para apresentações culturais.</p>
+      <p><b>Por isso</b>, vale reservar um dia inteiro. Em novembro, <b>por causa do</b> Dia da Consciência Negra, a programação é especial e o parque recebe milhares de visitantes, <b>já que</b> a Fundação Cultural Palmares organiza as celebrações no alto da serra. Confirme dias e horários de funcionamento e eventuais avisos no site da Fundação antes de ir. Há também excursões que saem de Maceió.</p>
+    </div><div class="photo-grid"><div class="photo-card"><img src="https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/serra-da-barriga-1/parque-memorial-quilombo-dos-palmares/@@govbr.institucional.banner/ab9550be-fd27-4d06-9c1c-94b1ea71b3b7/@@images/e696982d-a160-4204-8057-f6f3c2bed926.jpeg" alt="Muxima de Palmares, Parque Memorial Quilombo dos Palmares" loading="lazy"><div class="pc-t">Muxima de Palmares</div><div class="pc-c">“Coração de Palmares” · Foto: Fundação Cultural Palmares (gov.br), CC BY-ND 3.0</div></div><div class="photo-card"><img src="https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/serra-da-barriga-1/parque-memorial-quilombo-dos-palmares/@@govbr.institucional.banner/a31f027b-eb3d-496b-8d63-accbcce4b1b7/@@images/26bb4b10-9126-4cb1-a8fd-d866ac578264.jpeg" alt="Atalaia (mirante), Parque Memorial Quilombo dos Palmares" loading="lazy"><div class="pc-t">Atalaia (mirante)</div><div class="pc-c">Ponto de observação da serra · Foto: Fundação Cultural Palmares (gov.br), CC BY-ND 3.0</div></div><div class="photo-card"><img src="https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/serra-da-barriga-1/parque-memorial-quilombo-dos-palmares/@@govbr.institucional.banner/eff35998-a284-43d6-8fcd-238f72114b45/@@images/4f45e30a-decd-49e3-846e-a5b071a0ba90.jpeg" alt="Oxile das ervas, Parque Memorial Quilombo dos Palmares" loading="lazy"><div class="pc-t">Oxile das ervas</div><div class="pc-c">Terreiro das ervas · Foto: Fundação Cultural Palmares (gov.br), CC BY-ND 3.0</div></div><div class="photo-card"><img src="https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/serra-da-barriga-1/parque-memorial-quilombo-dos-palmares/@@govbr.institucional.banner/aa0ccce4-f083-4e66-90bb-afaaf1307462/@@images/580a84e7-3b55-447b-b10d-c5189f1c1aa7.jpeg" alt="Onjó, Parque Memorial Quilombo dos Palmares" loading="lazy"><div class="pc-t">Onjó</div><div class="pc-c">Casa de farinha · Foto: Fundação Cultural Palmares (gov.br), CC BY-ND 3.0</div></div></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 1 — Compreensão</div>
+    <p style="font-size:13.5px;color:#888;">Leia novamente o texto “Palmares: a república dos quilombolas” e escolha <b>Verdadeiro</b> ou <b>Falso</b>.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>O Quilombo dos Palmares ficava na Serra da Barriga. <select class="inl" id="zp1-1"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A região era de difícil acesso, o que ajudava a proteger os fugitivos. <select class="inl" id="zp1-2"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Palmares chegou a ter menos de mil habitantes. <select class="inl" id="zp1-3"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Os moradores de Palmares viviam apenas de atacar os engenhos vizinhos. <select class="inl" id="zp1-4"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>As seis primeiras expedições contra Palmares destruíram o quilombo. <select class="inl" id="zp1-5"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>Zumbi assumiu a liderança depois de recusar o acordo de paz. <select class="inl" id="zp1-6"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>Zumbi morreu em 20 de novembro de 1695, depois de ser traído. <select class="inl" id="zp1-7"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>O 20 de novembro é feriado nacional desde 2024. <select class="inl" id="zp1-8"><option value="">—</option><option value="Verdadeiro">Verdadeiro</option><option value="Falso">Falso</option></select></div></div>
+    <button class="check-btn" onclick="checkMC(zp1,'zp1-result')">✓ Conferir respostas</button>
+    <div id="zp1-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 2 — Vocabulário</div>
+    <p style="font-size:13.5px;color:#888;">Complete as frases com palavras do banco. Adapte a forma quando necessário.</p>
+<div class="example-box" style="background:#F3EFE9;border-radius:8px;padding:10px 14px;font-size:14px;margin-bottom:12px;"><b>Banco de palavras:</b> atalaia · emboscada · engenhos · excedente · fracassaram · refúgio · tombada · traiu</div>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>Os africanos escravizados fugiam dos <input type="text" id="zp2-1" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;"> de açúcar de Pernambuco.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>A Serra da Barriga serviu de <input type="text" id="zp2-2" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;"> para quem escapava da escravidão.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span>Todas as primeiras expedições contra Palmares <input type="text" id="zp2-3" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;">.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Zumbi foi morto numa <input type="text" id="zp2-4" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;"> preparada pelas tropas coloniais.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>Um antigo companheiro <input type="text" id="zp2-5" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;"> Zumbi, revelando o seu esconderijo.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>Os moradores vendiam o <input type="text" id="zp2-6" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;"> da colheita aos povoados vizinhos.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>A Serra da Barriga foi <input type="text" id="zp2-7" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;"> pelo Iphan como patrimônio.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>Do alto da <input type="text" id="zp2-8" style="width:150px;display:inline-block;padding:4px 8px;margin:0 3px;">, o visitante vê toda a paisagem da serra.</div></div>
+    <button class="check-btn" onclick="checkMC(zp2,'zp2-result')">✓ Conferir respostas</button>
+    <div id="zp2-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 3 — Causa ou consequência?</div>
+    <p style="font-size:13.5px;color:#888;">Leia cada frase e indique se o conectivo destacado introduz uma <b>causa</b> ou uma <b>consequência</b>.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>A região era de difícil acesso; <b>por isso</b>, os fugitivos conseguiam se proteger.<br>O conectivo destacado introduz a <select class="inl" id="zp3-1"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Palmares incomodava as autoridades, <b>já que</b> mostrava que era possível viver sem escravidão.<br>O conectivo destacado introduz a <select class="inl" id="zp3-2"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span><b>Como</b> o quilombo crescia rápido, as autoridades decidiram atacá-lo.<br>O conectivo destacado introduz a <select class="inl" id="zp3-3"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>Zumbi era muito respeitado, <b>de modo que</b> muitos o consideravam imortal.<br>O conectivo destacado introduz a <select class="inl" id="zp3-4"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O parque é protegido <b>devido ao</b> valor histórico da serra.<br>O conectivo destacado introduz a <select class="inl" id="zp3-5"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span>Choveu muito na véspera; <b>portanto</b>, a trilha estava escorregadia.<br>O conectivo destacado introduz a <select class="inl" id="zp3-6"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span><b>Graças à</b> luta do Movimento Negro, a data entrou no calendário nacional.<br>O conectivo destacado introduz a <select class="inl" id="zp3-7"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span>A visita é <b>tão</b> procurada em novembro <b>que</b> é preciso chegar cedo.<br>O conectivo destacado introduz a <select class="inl" id="zp3-8"><option value="">—</option><option value="causa">causa</option><option value="consequência">consequência</option></select>.</div></div>
+    <button class="check-btn" onclick="checkMC(zp3,'zp3-result')">✓ Conferir respostas</button>
+    <div id="zp3-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 4 — Escolha o conectivo</div>
+    <p style="font-size:13.5px;color:#888;">Escolha o conectivo mais adequado para cada frase.</p>
+    <div class="q"><div class="q-text"><span class="q-num">1.</span>O parque fica numa serra; <select class="inl" id="zp4-1"><option value="">—</option><option value="por isso">por isso</option><option value="porque">porque</option><option value="já que">já que</option><option value="embora">embora</option></select> o caminho até lá é de subida.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">2.</span>Zumbi é lembrado <select class="inl" id="zp4-2"><option value="">—</option><option value="porque">porque</option><option value="por isso">por isso</option><option value="de modo que">de modo que</option><option value="portanto">portanto</option></select> resistiu até o fim.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">3.</span><select class="inl" id="zp4-3"><option value="">—</option><option value="Já que">Já que</option><option value="Por isso">Por isso</option><option value="Tanto que">Tanto que</option><option value="Logo">Logo</option></select> o 20 de novembro é feriado nacional, muitas escolas e empresas fecham.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">4.</span>A programação é intensa em novembro, <select class="inl" id="zp4-4"><option value="">—</option><option value="de modo que">de modo que</option><option value="porque">porque</option><option value="visto que">visto que</option><option value="como">como</option></select> convém reservar o passeio com antecedência.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">5.</span>O quilombo caiu <select class="inl" id="zp4-5"><option value="">—</option><option value="devido">devido</option><option value="apesar">apesar</option><option value="graças">graças</option><option value="em vez">em vez</option></select> à superioridade militar das tropas coloniais.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">6.</span><select class="inl" id="zp4-6"><option value="">—</option><option value="Graças">Graças</option><option value="Apesar">Apesar</option><option value="Embora">Embora</option><option value="Mesmo">Mesmo</option></select> à luta do Movimento Negro, a data é hoje reconhecida em todo o país.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">7.</span>O parque tem áudio em quatro idiomas, <select class="inl" id="zp4-7"><option value="">—</option><option value="de modo que">de modo que</option><option value="porque">porque</option><option value="já que">já que</option><option value="uma vez que">uma vez que</option></select> turistas estrangeiros também acompanham a visita.</div></div>
+    <div class="q"><div class="q-text"><span class="q-num">8.</span><select class="inl" id="zp4-8"><option value="">—</option><option value="Como">Como</option><option value="Por isso">Por isso</option><option value="Portanto">Portanto</option><option value="De modo que">De modo que</option></select> a estrada é longa, saia cedo de Maceió.</div></div>
+    <button class="check-btn" onclick="checkMC(zp4,'zp4-result')">✓ Conferir respostas</button>
+    <div id="zp4-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 5 — Reescrita</div>
+    <p style="font-size:13.5px;color:#888;">Una as frases usando o conectivo indicado e faça as adaptações necessárias.</p>
+    <div class="q"><div class="q-text"><span class="q-num">a.</span>Zumbi recusou o acordo. Ele não aceitava que só alguns fossem libertados.<br><span style="font-size:13px;color:#888;">(Use <i>porque</i>.)</span></div><input type="text" id="zp5-1" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">b.</span>O quilombo era de difícil acesso. Resistiu por décadas.<br><span style="font-size:13px;color:#888;">(Use <i>por isso</i>.)</span></div><input type="text" id="zp5-2" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">c.</span>O parque recebe muita gente em novembro. É melhor reservar o passeio.<br><span style="font-size:13px;color:#888;">(Comece com <i>Como</i>.)</span></div><input type="text" id="zp5-3" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">d.</span>A data virou feriado nacional. O Movimento Negro lutou muito por isso.<br><span style="font-size:13px;color:#888;">(Use <i>graças a</i>.)</span></div><input type="text" id="zp5-4" placeholder="Escreva a frase completa..."></div>
+    <div class="q"><div class="q-text"><span class="q-num">e.</span>A serra é alta. Do mirante, vê-se toda a região.<br><span style="font-size:13px;color:#888;">(Use <i>tão… que</i>.)</span></div><input type="text" id="zp5-5" placeholder="Escreva a frase completa..."></div>
+    <button class="check-btn" onclick="checkReq(zp5,'zp5-result')">✓ Conferir respostas</button>
+    <div id="zp5-result" class="result-msg"></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 6 — Vídeo e reflexão</div>
+    <p style="font-size:13.5px;color:#888;">Respostas abertas. A professora vai ler e comentar.</p>
+    <p style="font-size:14.5px;"><b>Antes de assistir:</b> o que você espera ver num memorial dedicado a Zumbi? Escreva 2 ou 3 expectativas.</p>
+    <div class="q"><textarea id="zp6-1" placeholder="Eu espero ver..."></textarea></div>
+    <p style="font-size:14.5px;"><b>Depois de assistir:</b> anote três informações ou imagens do vídeo que não estavam no texto da seção “Visitar o parque”.</p>
+    <div class="q"><textarea id="zp6-2" placeholder="No vídeo, aparecem..."></textarea></div>
+    <p style="font-size:14.5px;"><b>Reflexão:</b> por que é importante que existam lugares de memória como esse? Responda em 3 ou 4 frases, usando pelo menos dois conectivos de causa ou consequência.</p>
+    <div class="q"><textarea id="zp6-3" placeholder="É importante que existam lugares de memória porque..."></textarea></div>
+  </section>
+  <section>
+    <div class="sec-label">Exercício 7 — Produção escrita</div>
+    <p style="font-size:14.5px;">Você vai visitar o Parque Memorial Quilombo dos Palmares em novembro. Escreva um e-mail a um amigo, com <b>150 a 200 palavras</b>, convidando-o para ir com você. Explique <b>por que</b> a visita vale a pena (a história de Zumbi e de Palmares), o que vocês vão ver no parque e como se organizar (como chegar, quando ir, o que confirmar antes). Use pelo menos <b>três conectivos de causa</b> e <b>três de consequência</b>.</p>
+    <div class="q"><textarea id="zp-write" style="min-height:260px;" placeholder="Oi, [nome]! ..." oninput="wc('zp-write','zp-wc',150,200);zpCheck()"></textarea><div id="zp-wc" style="font-size:12.5px;color:#999;margin-top:6px;"></div><div id="zp-chk" class="expr-list"></div></div>
+    <button class="check-btn" onclick="toggleBox('zp-model',this,'💡 Ver exemplo de resposta','🙈 Esconder exemplo')">💡 Ver exemplo de resposta</button>
+    <div id="zp-model" class="result-msg good"><div style="font-weight:700;margin-bottom:10px;">Resposta pessoal — exemplo:</div><p>Oi, Marcos! Tudo bem? Você já sabe que estou planejando ir a Alagoas em novembro? Quero muito conhecer o Parque Memorial Quilombo dos Palmares, na Serra da Barriga, e queria que você fosse comigo. Vale a pena porque o parque conta, em tamanho natural, a história de Zumbi e do maior quilombo do Brasil colonial. Como o Dia da Consciência Negra é no dia 20, a programação é especial, de modo que vamos aprender muito e ainda ver apresentações culturais. O parque fica a cerca de 76 km de Maceió e, já que a estrada é longa, sugiro sairmos cedo. Também vi que há áudio em vários idiomas, por isso você, que está aprendendo, vai gostar. A serra é tão alta que o mirante deve ter uma vista incrível. Antes de ir, precisamos confirmar os horários no site da Fundação Palmares, porque os dias de visitação podem mudar. Graças às fotos que vi, já estou ansioso para o mirante! Topa? Um abraço, Ana.</p></div>
+  </section>
+
+  <div class="send-box" id="bphub-form-area">
+    <div style="font-size:12px;font-weight:700;color:#265B8B;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;">Enviar respostas para a professora</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
+      <input id="bphub-student-name" type="text" placeholder="Seu nome *" style="flex:1;min-width:150px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <input id="bphub-student-email" type="email" placeholder="Seu email (opcional — para receber uma cópia)" style="flex:2;min-width:200px;padding:10px 14px;border:1.5px solid rgba(30,29,28,0.2);border-radius:8px;font-family:'Manrope',sans-serif;font-size:14px;outline:none;" />
+      <button id="bphub-submit-btn" onclick="bphubSubmit()" style="background:#1E1D1C;color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Enviar respostas</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#999;">O email é opcional — se preencher, receberá uma cópia das suas respostas.</div>
+  </div>
+  <div id="bphub-success" style="display:none;margin-top:16px;background:#EAF5EE;border-radius:12px;padding:22px 26px;">
+    <div style="font-size:15px;font-weight:700;color:#2E7D52;margin-bottom:14px;">✓ Respostas enviadas com sucesso!</div>
+    <div id="bphub-answer-summary" style="font-size:13px;color:#3C3C21;line-height:1.9;"></div>
+    <div style="margin-top:14px;font-size:13px;color:#666;border-top:1px solid #c3e6d0;padding-top:12px;">A professora vai rever e dar feedback antes da próxima aula.</div>
+  </div>
+  <div id="bphub-error" style="display:none;margin-top:14px;background:#FAEAEA;border-radius:8px;padding:12px 16px;font-size:13px;color:#C0392B;">Ocorreu um erro. Tente novamente ou envie as respostas por email.</div>
+
+  <p class="source-note">Textos elaborados para fins didáticos (BPHUB), com base em fontes públicas: Fundação Cultural Palmares (gov.br: “Parque Memorial Quilombo dos Palmares” e “20 de novembro”, licença CC BY-ND 3.0) e Wikipédia (“Quilombo dos Palmares” e “Zumbi dos Palmares”). Vídeo do canal Allan Lima (YouTube).</p>
+
+</div>
+
+<script>
+function norm(s) {
+  return (s || '').toLowerCase().trim().replace(/[áàãâ]/g,'a').replace(/[éê]/g,'e')
+          .replace(/[íi]/g,'i').replace(/[óôõ]/g,'o').replace(/[ú]/g,'u')
+          .replace(/ç/g,'c').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkFill(answers, resultId) {
+  var html = '';
+  var correct = 0;
+  answers.forEach(function(a, i) {
+    var el = document.getElementById(a.id);
+    var filled = el.value.trim().length > 0;
+    var keys = Array.isArray(a.key) ? a.key : [a.key];
+    var ok = filled && keys.some(function(k){ return norm(el.value) === norm(k); });
+    el.classList.toggle('correct', ok);
+    el.classList.toggle('wrong', filled && !ok);
+    if (ok) correct++;
+    html += '<div style="margin-bottom:8px;">'
+          + '<strong>' + (i + 1) + '.</strong> '
+          + (ok ? '<span style="color:var(--floresta);font-weight:700;">✓</span>' : '<span style="color:var(--telha);font-weight:700;">✗</span>')
+          + ' ' + keys.join(' / ') + '</div>';
+  });
+  var res = document.getElementById(resultId);
+  var allOk = correct === answers.length;
+  res.className = 'result-msg ' + (allOk ? 'good' : 'try-again');
+  res.innerHTML = '<div style="font-weight:700;margin-bottom:10px;">'
+    + (allOk ? '✓ Todas as ' + answers.length + ' corretas!' : correct + ' de ' + answers.length + ' corretas — modelo:')
+    + '</div>' + html;
+  res.style.display = 'block';
+}
+
+var zp1 = [
+  {"id": "zp1-1", "key": "Verdadeiro", "show": "(1) Verdadeiro", "note": ""},
+  {"id": "zp1-2", "key": "Verdadeiro", "show": "(2) Verdadeiro", "note": ""},
+  {"id": "zp1-3", "key": "Falso", "show": "(3) Falso", "note": ""},
+  {"id": "zp1-4", "key": "Falso", "show": "(4) Falso", "note": ""},
+  {"id": "zp1-5", "key": "Falso", "show": "(5) Falso", "note": ""},
+  {"id": "zp1-6", "key": "Verdadeiro", "show": "(6) Verdadeiro", "note": ""},
+  {"id": "zp1-7", "key": "Verdadeiro", "show": "(7) Verdadeiro", "note": ""},
+  {"id": "zp1-8", "key": "Verdadeiro", "show": "(8) Verdadeiro", "note": ""}
+];
+var zp2 = [
+  {"id": "zp2-1", "key": "engenhos", "show": "(1) engenhos", "note": ""},
+  {"id": "zp2-2", "key": "refúgio", "show": "(2) refúgio", "note": ""},
+  {"id": "zp2-3", "key": "fracassaram", "show": "(3) fracassaram", "note": ""},
+  {"id": "zp2-4", "key": "emboscada", "show": "(4) emboscada", "note": ""},
+  {"id": "zp2-5", "key": "traiu", "show": "(5) traiu", "note": ""},
+  {"id": "zp2-6", "key": "excedente", "show": "(6) excedente", "note": ""},
+  {"id": "zp2-7", "key": "tombada", "show": "(7) tombada", "note": ""},
+  {"id": "zp2-8", "key": "atalaia", "show": "(8) atalaia", "note": ""}
+];
+var zp3 = [
+  {"id": "zp3-1", "key": "consequência", "show": "(1) consequência", "note": ""},
+  {"id": "zp3-2", "key": "causa", "show": "(2) causa", "note": ""},
+  {"id": "zp3-3", "key": "causa", "show": "(3) causa", "note": ""},
+  {"id": "zp3-4", "key": "consequência", "show": "(4) consequência", "note": ""},
+  {"id": "zp3-5", "key": "causa", "show": "(5) causa", "note": ""},
+  {"id": "zp3-6", "key": "consequência", "show": "(6) consequência", "note": ""},
+  {"id": "zp3-7", "key": "causa", "show": "(7) causa", "note": ""},
+  {"id": "zp3-8", "key": "consequência", "show": "(8) consequência", "note": ""}
+];
+var zp4 = [
+  {"id": "zp4-1", "key": "por isso", "show": "(1) por isso", "note": ""},
+  {"id": "zp4-2", "key": "porque", "show": "(2) porque", "note": ""},
+  {"id": "zp4-3", "key": "Já que", "show": "(3) Já que", "note": ""},
+  {"id": "zp4-4", "key": "de modo que", "show": "(4) de modo que", "note": ""},
+  {"id": "zp4-5", "key": "devido", "show": "(5) devido", "note": ""},
+  {"id": "zp4-6", "key": "Graças", "show": "(6) Graças", "note": ""},
+  {"id": "zp4-7", "key": "de modo que", "show": "(7) de modo que", "note": ""},
+  {"id": "zp4-8", "key": "Como", "show": "(8) Como", "note": ""}
+];
+var zp5 = [
+  {"id": "zp5-1", "req": ["zumbi", "recusou", "porque", "alguns"], "show": "Zumbi recusou o acordo porque não aceitava que só alguns fossem libertados."},
+  {"id": "zp5-2", "req": ["dificil acesso", "por isso", "resistiu"], "show": "O quilombo era de difícil acesso; por isso, resistiu por décadas."},
+  {"id": "zp5-3", "req": ["como", "recebe", "novembro", "reservar"], "show": "Como o parque recebe muita gente em novembro, é melhor reservar o passeio."},
+  {"id": "zp5-4", "req": ["gracas", "luta", "movimento negro", "feriado"], "show": "A data virou feriado nacional graças à luta do Movimento Negro."},
+  {"id": "zp5-5", "req": ["tao", "alta", "que", "mirante"], "show": "A serra é tão alta que, do mirante, vê-se toda a região."}
+];
+function toggleBox(id,b,t1,t2){var el=document.getElementById(id);var s=el.style.display==='block';el.style.display=s?'none':'block';b.textContent=s?t1:t2;}
+function checkReq(items,rid){
+  var html='',ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id),v=norm(el.value);
+    var good=v.length>0 && a.req.every(function(r){return v.indexOf(r)>-1;});
+    el.classList.toggle('correct',good);el.classList.toggle('wrong',v.length>0&&!good);
+    if(good)ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+'abcde'[i]+')</strong> '+(good?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+'</div>';
+  });
+  var res=document.getElementById(rid);var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ Todas as '+items.length+' conferem com o modelo!':ok_n+' de '+items.length+' conferem — modelo (outras formulações equivalentes também podem estar certas):')+'</div>'+html;
+  res.style.display='block';
+}
+var ZC=['porque','ja que','visto que','uma vez que','como','devido a','por causa','graças a','gracas a','em razao de'];
+var ZR=['por isso','portanto','logo','entao','de modo que','de forma que','tanto que','tao','tanto'];
+function zpCheck(){
+  var t=' '+norm(document.getElementById('zp-write').value)+' ';
+  function cnt(L){var n=0;L.forEach(function(x){var r=t.split(' '+x+' ').length-1;if(r>0)n+=r;});return n;}
+  var c=cnt(ZC),r=cnt(ZR);
+  document.getElementById('zp-chk').innerHTML='<span class="'+(c>=3?'on':'')+'">'+(c>=3?'✓ ':'○ ')+'conectivos de causa: '+c+' / 3</span><br><span class="'+(r>=3?'on':'')+'">'+(r>=3?'✓ ':'○ ')+'conectivos de consequência: '+r+' / 3</span>';
+}
+zpCheck();
+function checkMC(items, rid) {
+  var html='', ok_n=0;
+  items.forEach(function(a,i){
+    var el=document.getElementById(a.id); var v=el.value;
+    var keys=Array.isArray(a.key)?a.key:[a.key];
+    var ok=v.trim().length>0 && keys.some(function(k){return norm(v)===norm(k);});
+    el.classList.toggle('correct',ok); el.classList.toggle('wrong',v.trim().length>0 && !ok);
+    if(ok) ok_n++;
+    html+='<div style="margin-bottom:8px;"><strong>'+(i+1)+'.</strong> '+(ok?'<span style="color:var(--floresta);font-weight:700;">✓</span>':'<span style="color:var(--level);font-weight:700;">✗</span>')+' '+a.show+(a.note?'<br><span style="color:#777;font-size:12.5px;">'+a.note+'</span>':'')+'</div>';
+  });
+  var res=document.getElementById(rid); var all=ok_n===items.length;
+  res.className='result-msg '+(all?'good':'try-again');
+  res.innerHTML='<div style="font-weight:700;margin-bottom:10px;">'+(all?'✓ Todas as '+items.length+' corretas!':ok_n+' de '+items.length+' corretas — modelo:')+'</div>'+html;
+  res.style.display='block';
+}
+function exprCheck(tid, bid, exprs) {
+  var t=norm(document.getElementById(tid).value), n=0, h='';
+  exprs.forEach(function(e){ var on=e[1].some(function(s){return t.indexOf(norm(s))>-1;}); if(on) n++; h+='<span class="'+(on?'on':'')+'">'+(on?'✓ ':'○ ')+e[0]+'</span><br>'; });
+  document.getElementById(bid).innerHTML=h;
+}
+function wc(tid,cid,lo,hi){ var t=document.getElementById(tid).value.trim(); var n=t?t.split(/\s+/).length:0; var el=document.getElementById(cid); el.textContent=n+' palavras'+(lo?' (meta: '+lo+'–'+hi+')':''); el.style.color=(lo&&n>=lo&&n<=hi)?'#2E7D52':'#999'; }
+
+// ── BREVO SUBMIT ──
+function bphubSubmit() {
+  var btn = document.getElementById('bphub-submit-btn');
+  var nameEl = document.getElementById('bphub-student-name');
+  var emailEl = document.getElementById('bphub-student-email');
+  var name = nameEl ? nameEl.value.trim() : '';
+  if (!name) { nameEl.style.borderColor='#C0392B'; nameEl.focus(); return; }
+  if (nameEl) nameEl.style.borderColor='';
+
+  var email = emailEl ? emailEl.value.trim() : '';
+  var material = document.title.replace(/ \| BPHUB.*/, '').trim();
+  var today = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  var summaryLines = [];
+  var answersHtml = '';
+
+  document.querySelectorAll('textarea').forEach(function(ta, idx) {
+    var label = '';
+    var parent = ta.closest('.q');
+    if (parent) {
+      var clone = parent.cloneNode(true);
+      clone.querySelectorAll('textarea, button, .check-btn, .reset-btn').forEach(function(el){ el.remove(); });
+      label = clone.textContent.replace(/\s+/g, ' ').trim().substring(0, 90);
+    }
+    if (!label) label = 'Resposta ' + (idx + 1);
+    var val = ta.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + label + ':</strong><br>' + safe);
+    answersHtml += '<p><strong>' + label + ':</strong><br>' + safe + '</p>';
+  });
+
+  ['zp1-1','zp1-2','zp1-3','zp1-4','zp1-5','zp1-6','zp1-7','zp1-8','zp2-1','zp2-2','zp2-3','zp2-4','zp2-5','zp2-6','zp2-7','zp2-8','zp3-1','zp3-2','zp3-3','zp3-4','zp3-5','zp3-6','zp3-7','zp3-8','zp4-1','zp4-2','zp4-3','zp4-4','zp4-5','zp4-6','zp4-7','zp4-8','zp5-1','zp5-2','zp5-3','zp5-4','zp5-5','zp6-1','zp6-2','zp6-3','zp-write'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = el.value.trim() || '(sem resposta)';
+    var safe = val !== '(sem resposta)' ? val.replace(/</g,'&lt;') : '<em style="color:#999">sem resposta</em>';
+    summaryLines.push('<strong>' + id + ':</strong> ' + safe);
+    answersHtml += '<p><strong>' + id + ':</strong> ' + safe + '</p>';
+  });
+
+  btn.disabled = true; btn.textContent = 'A enviar…';
+  var BKEY=[120,107,101,121,115,105,98,45,51,53,55,49,49,98,101,55,54,97,101,56,97,100,102,55,49,49,102,52,102,52,51,98,52,50,50,51,54,52,51,54,48,99,102,52,48,48,98,49,98,57,48,98,48,48,99,55,100,49,100,51,98,56,98,56,50,55,101,100,55,100,102,101,45,54,88,117,115,84,80,86,117,114,55,56,114,122,81,70,103].map(function(c){return String.fromCharCode(c);}).join('');
+  var calls = [];
+  if (email) {
+    calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+      body: JSON.stringify({ to:[{email:email,name:name}], templateId:1, params:{nome:name,material:material,data:today} })
+    }));
+  }
+  calls.push(fetch('https://api.brevo.com/v3/smtp/email', {
+    method:'POST', headers:{'Content-Type':'application/json','api-key':BKEY},
+    body: JSON.stringify({
+      to:[{email:'daniela.avila@brazilianportuguesehub.com',name:'Daniela'}],
+      sender:{name:'Portal BPHUB',email:'daniela.avila@brazilianportuguesehub.com'},
+      subject:'📝 '+name+' — '+material,
+      htmlContent:'<h2 style="color:#265B8B;font-family:Arial,sans-serif">'+name+'</h2><p style="font-family:Arial,sans-serif"><strong>Material:</strong> '+material+'<br><strong>Data:</strong> '+today+'</p><hr>'+answersHtml
+    })
+  }));
+  Promise.all(calls)
+  .then(function() {
+    document.getElementById('bphub-answer-summary').innerHTML = summaryLines.join('<br>');
+    document.getElementById('bphub-success').style.display = 'block';
+    document.getElementById('bphub-form-area').style.display = 'none';
+    document.getElementById('bphub-error').style.display = 'none';
+    document.getElementById('bphub-success').scrollIntoView({ behavior:'smooth', block:'center' });
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar respostas';
+    document.getElementById('bphub-error').style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
